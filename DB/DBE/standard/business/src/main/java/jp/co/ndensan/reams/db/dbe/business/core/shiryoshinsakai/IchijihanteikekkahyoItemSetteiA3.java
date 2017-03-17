@@ -194,10 +194,9 @@ public class IchijihanteikekkahyoItemSetteiA3 {
             List<TiyosaKekka> 第４群リスト,
             List<TiyosaKekka> 第５群リスト,
             List<TiyosaKekka> 特別な医療リスト) {
-        SabisuJyoukyoA3 sbbisuJyoukyo = new SabisuJyoukyoA3();
         for (DbT5211NinteichosahyoChosaItemEntity 調査票調査項目 : 調査票調査項目情報) {
             INinteichosaKomokuMapping 認定調査項目マッピング = get認定調査項目マッピング(厚労省IF識別コード, 調査票調査項目);
-            TiyosaKekka 調査結果 = get調査結果(認定調査項目マッピング, 認定調査票_特記情報, 調査票調査項目.getResearchItem());
+            TiyosaKekka 調査結果 = get調査結果(認定調査項目マッピング, 認定調査票_特記情報, 調査票調査項目.getResearchItem(), 主治医意見書項目);
             if (第１群.equals(認定調査項目マッピング.get群番号())) {
                 第１群リスト.add(調査結果);
             } else if (第２群.equals(認定調査項目マッピング.get群番号())) {
@@ -212,17 +211,12 @@ public class IchijihanteikekkahyoItemSetteiA3 {
                 特別な医療リスト.add(調査結果);
             }
         }
-        sbbisuJyoukyo.set認定調査と主治医意見書比較_第１群(厚労省IF識別コード, 第１群リスト, 主治医意見書項目);
-        sbbisuJyoukyo.set認定調査と主治医意見書比較_第２群(厚労省IF識別コード, 第２群リスト, 主治医意見書項目);
-        sbbisuJyoukyo.set認定調査と主治医意見書比較_第３群(厚労省IF識別コード, 第３群リスト, 主治医意見書項目);
-        sbbisuJyoukyo.set認定調査と主治医意見書比較_第４群(厚労省IF識別コード, 第４群リスト, 主治医意見書項目);
-        sbbisuJyoukyo.set認定調査と主治医意見書比較_第５群(厚労省IF識別コード, 第５群リスト, 主治医意見書項目);
-        sbbisuJyoukyo.set特別な医療リスト認定調査と主治医意見書比較(厚労省IF識別コード, 特別な医療リスト, 主治医意見書項目);
     }
 
     private TiyosaKekka get調査結果(INinteichosaKomokuMapping 認定調査項目マッピング,
             List<DbT5205NinteichosahyoTokkijikoEntity> 認定調査票_特記情報,
-            RString 調査票調査結果) {
+            RString 調査票調査結果,
+            List<DbT5304ShujiiIkenshoIkenItemEntity> 主治医意見書項目) {
         TiyosaKekka 調査結果 = new TiyosaKekka();
         SabisuJyoukyoA3 sbbisuJyoukyo = new SabisuJyoukyoA3();
         AnswerPattern answerPattern = AnswerPattern.toValue(認定調査項目マッピング.getパターンNo());
@@ -234,81 +228,18 @@ public class IchijihanteikekkahyoItemSetteiA3 {
         } else {
             調査結果.set調査結果(RString.EMPTY);
         }
-//        ChosahyoIkenshoComparisonItem09B 調査票意見書比較項目;
-//        try {
-//            調査票意見書比較項目 = ChosahyoIkenshoComparisonItem09B.toValue_NinteiChosahyoItemRemban(認定調査項目マッピング.getコード());
-//        } catch (IllegalArgumentException e) {
-//            調査票意見書比較項目 = null;
-//        }
-//        if (調査票意見書比較項目 != null) {
-//            sbbisuJyoukyo.set認定調査と主治医意見書比較(厚労省IF識別コード, 第１群リスト, 主治医意見書項目);
-//        }
+        ChosahyoIkenshoComparisonItem09B 調査票意見書比較項目;
+        try {
+            調査票意見書比較項目 = ChosahyoIkenshoComparisonItem09B.toValue_NinteiChosahyoItemRemban(認定調査項目マッピング.getコード());
+        } catch (IllegalArgumentException e) {
+            調査票意見書比較項目 = null;
+        }
+        if (調査票意見書比較項目 != null) {
+            sbbisuJyoukyo.set認定調査と主治医意見書比較(調査票意見書比較項目, 認定調査項目マッピング, 調査結果, 主治医意見書項目);
+        }
         調査結果.set特記事項有無(get特記事項符号(認定調査項目マッピング, 認定調査票_特記情報));
         return 調査結果;
     }
-
-//    private boolean is調査票主治医意見書比較する(INinteichosaKomokuMapping 認定調査項目マッピング) {
-//        if (NinteichosaKomokuMapping09B.麻痺等_左上肢.getコード().equals(認定調査項目マッピング.getコード())) {
-//            return true;
-//        } else if (NinteichosaKomokuMapping09B.麻痺等_右上肢.getコード().equals(認定調査項目マッピング.getコード())) {
-//            return true;
-//        } else if (NinteichosaKomokuMapping09B.麻痺等_左下肢.getコード().equals(認定調査項目マッピング.getコード())) {
-//            return true;
-//        } else if (NinteichosaKomokuMapping09B.麻痺等_右下肢.getコード().equals(認定調査項目マッピング.getコード())) {
-//            return true;
-//        } else if (NinteichosaKomokuMapping09B.麻痺等_その他.getコード().equals(認定調査項目マッピング.getコード())) {
-//            return true;
-//        } else if (NinteichosaKomokuMapping09B.拘縮_肩関節.getコード().equals(認定調査項目マッピング.getコード())) {
-//            return true;
-//        } else if (NinteichosaKomokuMapping09B.拘縮_股関節.getコード().equals(認定調査項目マッピング.getコード())) {
-//            return true;
-//        } else if (NinteichosaKomokuMapping09B.拘縮_膝関節.getコード().equals(認定調査項目マッピング.getコード())) {
-//            return true;
-//        } else if (NinteichosaKomokuMapping09B.拘縮_その他.getコード().equals(認定調査項目マッピング.getコード())) {
-//            return true;
-//        } else if (NinteichosaKomokuMapping09B.食事摂取.getコード().equals(認定調査項目マッピング.getコード())) {
-//            return true;
-//        } else if (NinteichosaKomokuMapping09B.意思の伝達.getコード().equals(認定調査項目マッピング.getコード())) {
-//            return true;
-//        } else if (NinteichosaKomokuMapping09B.短期記憶.getコード().equals(認定調査項目マッピング.getコード())) {
-//            return true;
-//        } else if (NinteichosaKomokuMapping09B.常時の徘徊.getコード().equals(認定調査項目マッピング.getコード())) {
-//            return true;
-//        } else if (NinteichosaKomokuMapping09B.被害的.getコード().equals(認定調査項目マッピング.getコード())) {
-//            return true;
-//        } else if (NinteichosaKomokuMapping09B.昼夜逆転.getコード().equals(認定調査項目マッピング.getコード())) {
-//            return true;
-//        } else if (NinteichosaKomokuMapping09B.介護に抵抗.getコード().equals(認定調査項目マッピング.getコード())) {
-//            return true;
-//        } else if (NinteichosaKomokuMapping09B.日常の意思決定.getコード().equals(認定調査項目マッピング.getコード())) {
-//            return true;
-//        } else if (NinteichosaKomokuMapping09B.点滴の管理.getコード().equals(認定調査項目マッピング.getコード())) {
-//            return true;
-//        } else if (NinteichosaKomokuMapping09B.中心静脈栄養.getコード().equals(認定調査項目マッピング.getコード())) {
-//            return true;
-//        } else if (NinteichosaKomokuMapping09B.透析.getコード().equals(認定調査項目マッピング.getコード())) {
-//            return true;
-//        } else if (NinteichosaKomokuMapping09B.ストーマの処置.getコード().equals(認定調査項目マッピング.getコード())) {
-//            return true;
-//        } else if (NinteichosaKomokuMapping09B.酸素療法.getコード().equals(認定調査項目マッピング.getコード())) {
-//            return true;
-//        } else if (NinteichosaKomokuMapping09B.レスピレーター.getコード().equals(認定調査項目マッピング.getコード())) {
-//            return true;
-//        } else if (NinteichosaKomokuMapping09B.気管切開の処置.getコード().equals(認定調査項目マッピング.getコード())) {
-//            return true;
-//        } else if (NinteichosaKomokuMapping09B.疼痛の看護.getコード().equals(認定調査項目マッピング.getコード())) {
-//            return true;
-//        } else if (NinteichosaKomokuMapping09B.経管栄養.getコード().equals(認定調査項目マッピング.getコード())) {
-//            return true;
-//        } else if (NinteichosaKomokuMapping09B.モニター測定.getコード().equals(認定調査項目マッピング.getコード())) {
-//            return true;
-//        } else if (NinteichosaKomokuMapping09B.じょくそうの処置.getコード().equals(認定調査項目マッピング.getコード())) {
-//            return true;
-//        } else if (NinteichosaKomokuMapping09B.カテーテル.getコード().equals(認定調査項目マッピング.getコード())) {
-//            return true;
-//        }
-//        return false;
-//    }
 
     private void set前回調査結果(Code 前回厚労省IF識別コード,
             List<DbT5211NinteichosahyoChosaItemEntity> 前回調査票調査項目,

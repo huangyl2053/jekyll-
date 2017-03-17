@@ -1469,192 +1469,234 @@ public class SabisuJyoukyoA3 {
         }
         if ((ChosaAnser10.全介助.getコード().equals(今回結果コード) && IkenKomoku14.自立ないし何とか自分で食べられる.getコード().equals(主治医意見書コード))) {
             return NotesComparisonResultChosaIkensho.調査員が問題視.getCode();
-        } else if ((IkenKomoku14.全面介助.getコード().equals(主治医意見書コード) && (ChosaAnser10.一部介助.getコード().equals(今回結果コード)
-                || ChosaAnser10.見守り等.getコード().equals(今回結果コード) || ChosaAnser10.介助されていない.getコード().equals(今回結果コード)))
-                || (IkenKomoku14.自立ないし何とか自分で食べられる.getコード().equals(主治医意見書コード)
-                && (ChosaAnser10.一部介助.getコード().equals(今回結果コード) || ChosaAnser10.見守り等.getコード().equals(今回結果コード)))) {
+        } else if (IkenKomoku14.全面介助.getコード().equals(主治医意見書コード) && (ChosaAnser10.一部介助.getコード().equals(今回結果コード)
+                || ChosaAnser10.見守り等.getコード().equals(今回結果コード) || ChosaAnser10.介助されていない.getコード().equals(今回結果コード))) {
             return NotesComparisonResultChosaIkensho.主治医が問題視.getCode();
-        } else {
-            return RString.EMPTY;
         }
-    }
-
-    private boolean is意思の伝達認定調査と主治医意見書結果１(RString 今回結果コード, RString 主治医意見書コード) {
-        boolean is認定調査と主治医意見書結果悪 = false;
-        if (ChosaAnser14.できない.getコード().equals(今回結果コード) && (IkenKomoku06.具体的要求に限られる.getコード().equals(主治医意見書コード)
-                || IkenKomoku06.いくらか困難.getコード().equals(主治医意見書コード) || IkenKomoku06.伝えられる.getコード().equals(主治医意見書コード))) {
-            is認定調査と主治医意見書結果悪 = true;
+        if (IkenKomoku14.記載なし.getコード().equals(主治医意見書コード)) {
+            return NotesComparisonResultChosaIkensho.意見書が未記入.getCode();
         }
-        return is認定調査と主治医意見書結果悪;
-    }
-
-    private boolean is意思の伝達認定調査と主治医意見書結果２(RString 今回結果コード, RString 主治医意見書コード) {
-        boolean is認定調査と主治医意見書結果悪 = false;
-        if (ChosaAnser14.ほとんど伝達できない.getコード().equals(今回結果コード) && (IkenKomoku06.いくらか困難.getコード().equals(主治医意見書コード)
-                || IkenKomoku06.伝えられる.getコード().equals(主治医意見書コード))) {
-            is認定調査と主治医意見書結果悪 = true;
-        }
-        return is認定調査と主治医意見書結果悪;
-    }
-
-    private boolean is意思の伝達認定調査と主治医意見書比較１(RString 今回結果コード, RString 主治医意見書コード) {
-        boolean is認定調査と主治医意見書結果善 = false;
-        if (IkenKomoku06.伝えられない.getコード().equals(主治医意見書コード) && (ChosaAnser14.ほとんど伝達できない.getコード().equals(今回結果コード)
-                || ChosaAnser14.ときどき伝達できる.getコード().equals(今回結果コード) || ChosaAnser14.調査対象者が意思を他者に伝達できる.getコード().equals(今回結果コード))) {
-            is認定調査と主治医意見書結果善 = true;
-        }
-        return is認定調査と主治医意見書結果善;
-    }
-
-    private boolean is意思の伝達認定調査と主治医意見書比較２(RString 今回結果コード, RString 主治医意見書コード) {
-        boolean is認定調査と主治医意見書結果善 = false;
-        if (IkenKomoku06.具体的要求に限られる.getコード().equals(主治医意見書コード) && (ChosaAnser14.ときどき伝達できる.getコード().equals(今回結果コード)
-                || ChosaAnser14.調査対象者が意思を他者に伝達できる.getコード().equals(今回結果コード))) {
-            is認定調査と主治医意見書結果善 = true;
-        }
-        return is認定調査と主治医意見書結果善;
+        return RString.EMPTY;
     }
 
     private RString get意思の伝達認定調査と主治医意見書結果比(RString 今回結果コード, RString 主治医意見書コード) {
         if (!is調査意見書比較結果印字する) {
             return RString.EMPTY;
         }
-        if (is意思の伝達認定調査と主治医意見書結果１(今回結果コード, 主治医意見書コード)
-                || is意思の伝達認定調査と主治医意見書結果２(今回結果コード, 主治医意見書コード)
-                || (ChosaAnser14.ときどき伝達できる.getコード().equals(今回結果コード) && IkenKomoku06.伝えられる.getコード().equals(主治医意見書コード))) {
+        if (is意思の伝達_調査員問題視_できない(今回結果コード, 主治医意見書コード)
+                || is意思の伝達_調査員問題視_ほとんどできない(今回結果コード, 主治医意見書コード)
+                || ChosaAnser14.ときどき伝達できる.getコード().equals(今回結果コード) && IkenKomoku06.伝えられる.getコード().equals(主治医意見書コード)) {
             return NotesComparisonResultChosaIkensho.調査員が問題視.getCode();
-        } else if (is意思の伝達認定調査と主治医意見書比較１(今回結果コード, 主治医意見書コード)
-                || is意思の伝達認定調査と主治医意見書比較２(今回結果コード, 主治医意見書コード)
-                || (IkenKomoku06.いくらか困難.getコード().equals(主治医意見書コード) && ChosaAnser14.調査対象者が意思を他者に伝達できる.getコード().equals(今回結果コード))) {
+        } else if (is意思の伝達_主治医問題視_伝えられない(今回結果コード, 主治医意見書コード)
+                || is意思の伝達_主治医問題視_具体的要求(今回結果コード, 主治医意見書コード)
+                || IkenKomoku06.いくらか困難.getコード().equals(主治医意見書コード) && ChosaAnser14.調査対象者が意思を他者に伝達できる.getコード().equals(今回結果コード)) {
             return NotesComparisonResultChosaIkensho.主治医が問題視.getCode();
-        } else {
-            return RString.EMPTY;
         }
+        if (IkenKomoku06.記載なし.getコード().equals(主治医意見書コード)) {
+            return NotesComparisonResultChosaIkensho.意見書が未記入.getCode();
+        }
+        return RString.EMPTY;
+    }
+
+    private boolean is意思の伝達_調査員問題視_できない(RString 今回結果コード, RString 主治医意見書コード) {
+        boolean is調査員問題視 = false;
+        if (ChosaAnser14.できない.getコード().equals(今回結果コード) && (IkenKomoku06.具体的要求に限られる.getコード().equals(主治医意見書コード)
+                || IkenKomoku06.いくらか困難.getコード().equals(主治医意見書コード) || IkenKomoku06.伝えられる.getコード().equals(主治医意見書コード))) {
+            is調査員問題視 = true;
+        }
+        return is調査員問題視;
+    }
+
+    private boolean is意思の伝達_調査員問題視_ほとんどできない(RString 今回結果コード, RString 主治医意見書コード) {
+        boolean is調査員問題視 = false;
+        if (ChosaAnser14.ほとんど伝達できない.getコード().equals(今回結果コード) && (IkenKomoku06.いくらか困難.getコード().equals(主治医意見書コード)
+                || IkenKomoku06.伝えられる.getコード().equals(主治医意見書コード))) {
+            is調査員問題視 = true;
+        }
+        return is調査員問題視;
+    }
+
+    private boolean is意思の伝達_主治医問題視_伝えられない(RString 今回結果コード, RString 主治医意見書コード) {
+        boolean is主治医問題視 = false;
+        if (IkenKomoku06.伝えられない.getコード().equals(主治医意見書コード) && (ChosaAnser14.ほとんど伝達できない.getコード().equals(今回結果コード)
+                || ChosaAnser14.ときどき伝達できる.getコード().equals(今回結果コード) || ChosaAnser14.調査対象者が意思を他者に伝達できる.getコード().equals(今回結果コード))) {
+            is主治医問題視 = true;
+        }
+        return is主治医問題視;
+    }
+
+    private boolean is意思の伝達_主治医問題視_具体的要求(RString 今回結果コード, RString 主治医意見書コード) {
+        boolean is主治医問題視 = false;
+        if (IkenKomoku06.具体的要求に限られる.getコード().equals(主治医意見書コード) && (ChosaAnser14.ときどき伝達できる.getコード().equals(今回結果コード)
+                || ChosaAnser14.調査対象者が意思を他者に伝達できる.getコード().equals(今回結果コード))) {
+            is主治医問題視 = true;
+        }
+        return is主治医問題視;
     }
 
     private RString get短期記憶認定調査と主治医意見書結果比(RString 今回結果コード, RString 主治医意見書コード) {
         if (!is調査意見書比較結果印字する) {
             return RString.EMPTY;
         }
-        if (ChosaAnser15.できない.getコード().equals(今回結果コード) && IkenKomoku04.問題あり.getコード().equals(主治医意見書コード)) {
+        if (ChosaAnser15.できない.getコード().equals(今回結果コード) && IkenKomoku04.問題なし.getコード().equals(主治医意見書コード)) {
             return NotesComparisonResultChosaIkensho.調査員が問題視.getCode();
-        } else if (IkenKomoku04.問題なし.getコード().equals(主治医意見書コード) && ChosaAnser15.できる.getコード().equals(今回結果コード)) {
+        } else if (IkenKomoku04.問題あり.getコード().equals(主治医意見書コード) && ChosaAnser15.できる.getコード().equals(今回結果コード)) {
             return NotesComparisonResultChosaIkensho.主治医が問題視.getCode();
-        } else {
-            return RString.EMPTY;
         }
+        if (IkenKomoku04.記載なし.getコード().equals(主治医意見書コード)) {
+            return NotesComparisonResultChosaIkensho.意見書が未記入.getCode();
+        }
+        return RString.EMPTY;
     }
 
     private RString get徘徊認定調査と主治医意見書結果比(RString 今回結果コード, RString 主治医意見書コード) {
         if (!is調査意見書比較結果印字する) {
             return RString.EMPTY;
         }
-        if ((ChosaAnser16.ある.getコード().equals(今回結果コード) && IkenKomoku01.無.getコード().equals(主治医意見書コード))
-                || (ChosaAnser16.ときどきある.getコード().equals(今回結果コード) && IkenKomoku01.無.getコード().equals(主治医意見書コード))) {
+        if (IkenKomoku01.無.getコード().equals(主治医意見書コード) && (ChosaAnser16.ある.getコード().equals(今回結果コード)
+                || ChosaAnser16.ときどきある.getコード().equals(今回結果コード))) {
             return NotesComparisonResultChosaIkensho.調査員が問題視.getCode();
-        } else if (IkenKomoku01.有.getコード().equals(主治医意見書コード) && (ChosaAnser16.ときどきある.getコード().equals(今回結果コード)
-                || ChosaAnser16.ない.getコード().equals(今回結果コード))) {
+        } else if (ChosaAnser16.ない.getコード().equals(今回結果コード) && IkenKomoku01.有.getコード().equals(主治医意見書コード)) {
             return NotesComparisonResultChosaIkensho.主治医が問題視.getCode();
-        } else {
-            return RString.EMPTY;
         }
-    }
-
-    private boolean is日常の意思決定認定調査と主治医意見書結果１(RString 今回結果コード, RString 主治医意見書コード) {
-        boolean is認定調査と主治医意見書結果善 = false;
-        if ((ChosaAnser17.できない.getコード().equals(今回結果コード) && (IkenKomoku05.見守りが必要.getコード().equals(主治医意見書コード)
-                || IkenKomoku05.いくらか困難.getコード().equals(主治医意見書コード) || IkenKomoku05.自立.getコード().equals(主治医意見書コード)))
-                || (ChosaAnser17.日常的に困難.getコード().equals(今回結果コード) && (IkenKomoku05.いくらか困難.getコード().equals(主治医意見書コード)
-                || IkenKomoku05.自立.getコード().equals(主治医意見書コード)))) {
-            is認定調査と主治医意見書結果善 = true;
-        }
-        return is認定調査と主治医意見書結果善;
-    }
-
-    private boolean is日常の意思決定認定調査と主治医意見書結果２(RString 今回結果コード, RString 主治医意見書コード) {
-        boolean is認定調査と主治医意見書結果善 = false;
-        if (ChosaAnser17.特別な場合を除いてできる.getコード().equals(今回結果コード) && IkenKomoku05.自立.getコード().equals(主治医意見書コード)) {
-            is認定調査と主治医意見書結果善 = true;
-        }
-        return is認定調査と主治医意見書結果善;
-    }
-
-    private boolean is日常の意思決定認定調査と主治医意見書比較１(RString 今回結果コード, RString 主治医意見書コード) {
-        boolean is認定調査と主治医意見書結果悪 = false;
-        if ((IkenKomoku05.判断できない.getコード().equals(主治医意見書コード) && (ChosaAnser17.日常的に困難.getコード().equals(今回結果コード)
-                || ChosaAnser17.特別な場合を除いてできる.getコード().equals(今回結果コード) || ChosaAnser17.できる_特別な場合でもできる.getコード().equals(今回結果コード)))
-                || (IkenKomoku05.見守りが必要.getコード().equals(主治医意見書コード) && (ChosaAnser17.特別な場合を除いてできる.getコード().equals(今回結果コード)
-                || ChosaAnser17.できる_特別な場合でもできる.getコード().equals(今回結果コード)))) {
-            is認定調査と主治医意見書結果悪 = true;
-        }
-        return is認定調査と主治医意見書結果悪;
-    }
-
-    private boolean is日常の意思決定認定調査と主治医意見書比較２(RString 今回結果コード, RString 主治医意見書コード) {
-        boolean is認定調査と主治医意見書結果悪 = false;
-        if (IkenKomoku05.いくらか困難.getコード().equals(主治医意見書コード) && ChosaAnser17.できる_特別な場合でもできる.getコード().equals(今回結果コード)) {
-            is認定調査と主治医意見書結果悪 = true;
-        }
-        return is認定調査と主治医意見書結果悪;
+        return RString.EMPTY;
     }
 
     private RString get日常の意思決定認定調査と主治医意見書結果比(RString 今回結果コード, RString 主治医意見書コード) {
         if (!is調査意見書比較結果印字する) {
             return RString.EMPTY;
         }
-        if (is日常の意思決定認定調査と主治医意見書結果１(今回結果コード, 主治医意見書コード)
-                || is日常の意思決定認定調査と主治医意見書結果２(今回結果コード, 主治医意見書コード)) {
+        if (is日常の意思決定_調査員問題視_できない(今回結果コード, 主治医意見書コード)
+                || is日常の意思決定_調査員問題視_日常的に困難(今回結果コード, 主治医意見書コード)
+                || ChosaAnser17.特別な場合を除いてできる.getコード().equals(今回結果コード) && IkenKomoku06.伝えられる.getコード().equals(主治医意見書コード)) {
             return NotesComparisonResultChosaIkensho.調査員が問題視.getCode();
-        } else if (is日常の意思決定認定調査と主治医意見書比較１(今回結果コード, 主治医意見書コード)
-                || is日常の意思決定認定調査と主治医意見書比較２(今回結果コード, 主治医意見書コード)) {
+        } else if (is日常の意思決定_主治医問題視_伝えられない(今回結果コード, 主治医意見書コード)
+                || is日常の意思決定_主治医問題視_具体的要求(今回結果コード, 主治医意見書コード)
+                || IkenKomoku06.いくらか困難.getコード().equals(主治医意見書コード) && ChosaAnser17.できる_特別な場合でもできる.getコード().equals(今回結果コード)) {
             return NotesComparisonResultChosaIkensho.主治医が問題視.getCode();
-        } else {
-            return RString.EMPTY;
+        }
+        if (IkenKomoku06.記載なし.getコード().equals(主治医意見書コード)) {
+            return NotesComparisonResultChosaIkensho.意見書が未記入.getCode();
+        }
+        return RString.EMPTY;
+    }
+
+    private boolean is日常の意思決定_調査員問題視_できない(RString 今回結果コード, RString 主治医意見書コード) {
+        boolean is調査員問題視 = false;
+        if (ChosaAnser17.できない.getコード().equals(今回結果コード) && (IkenKomoku06.具体的要求に限られる.getコード().equals(主治医意見書コード)
+                || IkenKomoku06.いくらか困難.getコード().equals(主治医意見書コード) || IkenKomoku06.伝えられる.getコード().equals(主治医意見書コード))) {
+            is調査員問題視 = true;
+        }
+        return is調査員問題視;
+    }
+
+    private boolean is日常の意思決定_調査員問題視_日常的に困難(RString 今回結果コード, RString 主治医意見書コード) {
+        boolean is調査員問題視 = false;
+        if (ChosaAnser17.日常的に困難.getコード().equals(今回結果コード) && (IkenKomoku06.いくらか困難.getコード().equals(主治医意見書コード)
+                || IkenKomoku06.伝えられる.getコード().equals(主治医意見書コード))) {
+            is調査員問題視 = true;
+        }
+        return is調査員問題視;
+    }
+
+    private boolean is日常の意思決定_主治医問題視_伝えられない(RString 今回結果コード, RString 主治医意見書コード) {
+        boolean is主治医問題視 = false;
+        if (IkenKomoku06.伝えられない.getコード().equals(主治医意見書コード) && (ChosaAnser17.日常的に困難.getコード().equals(今回結果コード)
+                || ChosaAnser17.特別な場合を除いてできる.getコード().equals(今回結果コード) || ChosaAnser17.できる_特別な場合でもできる.getコード().equals(今回結果コード))) {
+            is主治医問題視 = true;
+        }
+        return is主治医問題視;
+    }
+
+    private boolean is日常の意思決定_主治医問題視_具体的要求(RString 今回結果コード, RString 主治医意見書コード) {
+        boolean is主治医問題視 = false;
+        if (IkenKomoku06.具体的要求に限られる.getコード().equals(主治医意見書コード) && (ChosaAnser17.特別な場合を除いてできる.getコード().equals(今回結果コード)
+                || ChosaAnser17.できる_特別な場合でもできる.getコード().equals(今回結果コード))) {
+            is主治医問題視 = true;
+        }
+        return is主治医問題視;
+    }
+
+    public void set認定調査と主治医意見書比較(ChosahyoIkenshoComparisonItem09B 調査票意見書比較項目,
+            INinteichosaKomokuMapping 認定調査項目マッピング,
+            TiyosaKekka 調査結果,
+            List<DbT5304ShujiiIkenshoIkenItemEntity> 主治医意見書項目) {
+        RString 主治医意見書連番;
+        RString 主治医意見書コード;
+        RString 比較結果;
+        for (DbT5304ShujiiIkenshoIkenItemEntity 主治医意見書 : 主治医意見書項目) {
+            主治医意見書連番 = new RString(主治医意見書.getRemban());
+            if (主治医意見書連番.equals(調査票意見書比較項目.get意見書項目連番())) {
+                if (is麻痺拘縮等項目Or特別な医療項目(調査票意見書比較項目.get意見書項目連番())) {
+                    主治医意見書コード = RString.isNullOrEmpty(主治医意見書.getIkenItem())
+                            ? RString.EMPTY : IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
+                    比較結果 = get麻痺認定調査と主治医意見書結果比(調査結果.get調査結果コード(), 主治医意見書コード);
+                    調査結果.set認定調査と主治医意見書の結果比較(比較結果);
+                } else if (IkenshoKomokuMapping09B.食事行為.getコード().equals(調査票意見書比較項目.get意見書項目連番())) {
+                    主治医意見書コード = RString.isNullOrEmpty(主治医意見書.getIkenItem())
+                            ? RString.EMPTY : IkenKomoku14.toValue(主治医意見書.getIkenItem()).getコード();
+                    比較結果 = get食事摂取認定調査と主治医意見書結果比(調査結果.get調査結果コード(), 主治医意見書コード);
+                    調査結果.set認定調査と主治医意見書の結果比較(比較結果);
+                } else if (IkenshoKomokuMapping09B.伝達能力.getコード().equals(調査票意見書比較項目.get意見書項目連番())) {
+                    if (NinteichosaKomokuMapping09B.意思の伝達.getコード().equals(調査票意見書比較項目.get認定調査票項目連番())) {
+                        主治医意見書コード = RString.isNullOrEmpty(主治医意見書.getIkenItem())
+                                ? RString.EMPTY : IkenKomoku06.toValue(主治医意見書.getIkenItem()).getコード();
+                        比較結果 = get意思の伝達認定調査と主治医意見書結果比(調査結果.get調査結果コード(), 主治医意見書コード);
+                        調査結果.set認定調査と主治医意見書の結果比較(比較結果);
+                    } else if (NinteichosaKomokuMapping09B.日常の意思決定.getコード().equals(調査票意見書比較項目.get認定調査票項目連番())) {
+                        主治医意見書コード = RString.isNullOrEmpty(主治医意見書.getIkenItem())
+                                ? RString.EMPTY : IkenKomoku05.toValue(主治医意見書.getIkenItem()).getコード();
+                        比較結果 = get日常の意思決定認定調査と主治医意見書結果比(調査結果.get調査結果コード(), 主治医意見書コード);
+                        調査結果.set認定調査と主治医意見書の結果比較(比較結果);
+                    }
+                } else if (IkenshoKomokuMapping09B.短期記憶.getコード().equals(調査票意見書比較項目.get意見書項目連番())) {
+                    主治医意見書コード = RString.isNullOrEmpty(主治医意見書.getIkenItem())
+                            ? RString.EMPTY : IkenKomoku04.toValue(主治医意見書.getIkenItem()).getコード();
+                    比較結果 = get短期記憶認定調査と主治医意見書結果比(調査結果.get調査結果コード(), 主治医意見書コード);
+                    調査結果.set認定調査と主治医意見書の結果比較(比較結果);
+                } else if (is認知症の周辺症状項目(調査票意見書比較項目.get意見書項目連番())) {
+                    主治医意見書コード = RString.isNullOrEmpty(主治医意見書.getIkenItem())
+                            ? RString.EMPTY : IkenKomoku01.toValue(主治医意見書.getIkenItem()).getコード();
+                    比較結果 = get徘徊認定調査と主治医意見書結果比(調査結果.get調査結果コード(), 主治医意見書コード);
+                    調査結果.set認定調査と主治医意見書の結果比較(比較結果);
+                }
+            }
         }
     }
 
-//    public void set認定調査と主治医意見書比較(ChosahyoIkenshoComparisonItem09B 調査票意見書比較項目,
-//            INinteichosaKomokuMapping 認定調査項目マッピング,
-//            TiyosaKekka 調査結果,
-//            List<DbT5304ShujiiIkenshoIkenItemEntity> 主治医意見書項目) {
-//        RString 主治医意見書連番;
-//        for (DbT5304ShujiiIkenshoIkenItemEntity 主治医意見書 : 主治医意見書項目) {
-//            主治医意見書連番 = new RString(主治医意見書.getRemban());
-//            if (主治医意見書連番.equals(調査票意見書比較項目.get意見書項目連番())) {
-//                if (IkenshoKomokuMapping09B.点滴の管理.getコード().equals(調査票意見書比較項目.get意見書項目連番())) {
-//                    set麻痺認定調査と主治医意見書結果比較(調査結果, 主治医意見書);
-//                } else if (IkenshoKomokuMapping09B.中心静脈栄養.getコード().equals(調査票意見書比較項目.get意見書項目連番())) {
-//
-//                }
-//            } else if (主治医意見書連番.equals(get主治医意見麻痺_右上肢(厚労省IF識別コード))) {
-//                調査結果 = 調査結果リスト.get(連番_1);
-//                set麻痺認定調査と主治医意見書結果比較(調査結果, 主治医意見書);
-//            } else if (主治医意見書連番.equals(get主治医意見麻痺_左下肢(厚労省IF識別コード))) {
-//                調査結果 = 調査結果リスト.get(連番_2);
-//                set麻痺認定調査と主治医意見書結果比較(調査結果, 主治医意見書);
-//            } else if (主治医意見書連番.equals(get主治医意見麻痺_右下肢(厚労省IF識別コード))) {
-//                調査結果 = 調査結果リスト.get(連番_3);
-//                set麻痺認定調査と主治医意見書結果比較(調査結果, 主治医意見書);
-//            } else if (主治医意見書連番.equals(get主治医意見麻痺_その他(厚労省IF識別コード))) {
-//                調査結果 = 調査結果リスト.get(連番_4);
-//                set麻痺認定調査と主治医意見書結果比較(調査結果, 主治医意見書);
-//            } else if (主治医意見書連番.equals(get主治医意見拘縮_肩関節(厚労省IF識別コード))) {
-//                調査結果 = 調査結果リスト.get(連番_5);
-//                set麻痺認定調査と主治医意見書結果比較(調査結果, 主治医意見書);
-//            }
-//        }
-//    }
-//
-//    private boolean is特別な医療項目(ChosahyoIkenshoComparisonItem09B 調査票意見書比較項目) {
-//        if (IkenshoKomokuMapping09B.点滴の管理.getコード().equals(調査票意見書比較項目.get意見書項目連番())
-//                || IkenshoKomokuMapping09B.中心静脈栄養.getコード().equals(調査票意見書比較項目.get意見書項目連番())) {
-//                || IkenshoKomokuMapping09B.透析.getコード().equals(調査票意見書比較項目.get意見書項目連番())) {
-//                || IkenshoKomokuMapping09B.ストーマの処置.getコード().equals(調査票意見書比較項目.get意見書項目連番())) {
-//                || IkenshoKomokuMapping09B.ストーマの処置.getコード().equals(調査票意見書比較項目.get意見書項目連番())) {
-//            return true;
-//        }
-//        return false;
-//    }
+    private boolean is麻痺拘縮等項目Or特別な医療項目(RString 意見書項目連番) {
+        if (IkenshoKomokuMapping09B.点滴の管理.getコード().equals(意見書項目連番)
+                || IkenshoKomokuMapping09B.中心静脈栄養.getコード().equals(意見書項目連番)
+                || IkenshoKomokuMapping09B.透析.getコード().equals(意見書項目連番)
+                || IkenshoKomokuMapping09B.ストーマの処置.getコード().equals(意見書項目連番)
+                || IkenshoKomokuMapping09B.酸素療法.getコード().equals(意見書項目連番)
+                || IkenshoKomokuMapping09B.レスピレーター.getコード().equals(意見書項目連番)
+                || IkenshoKomokuMapping09B.気管切開の処置.getコード().equals(意見書項目連番)
+                || IkenshoKomokuMapping09B.疼痛の看護.getコード().equals(意見書項目連番)
+                || IkenshoKomokuMapping09B.経管栄養.getコード().equals(意見書項目連番)
+                || IkenshoKomokuMapping09B.モニター測定.getコード().equals(意見書項目連番)
+                || IkenshoKomokuMapping09B.じょくそうの処置.getコード().equals(意見書項目連番)
+                || IkenshoKomokuMapping09B.カテーテル.getコード().equals(意見書項目連番)
+                || IkenshoKomokuMapping09B.麻痺_右上肢.getコード().equals(意見書項目連番)
+                || IkenshoKomokuMapping09B.麻痺_左上肢.getコード().equals(意見書項目連番)
+                || IkenshoKomokuMapping09B.麻痺_右下肢.getコード().equals(意見書項目連番)
+                || IkenshoKomokuMapping09B.麻痺_左下肢.getコード().equals(意見書項目連番)
+                || IkenshoKomokuMapping09B.麻痺_その他.getコード().equals(意見書項目連番)
+                || IkenshoKomokuMapping09B.関節の拘縮.getコード().equals(意見書項目連番)) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean is認知症の周辺症状項目(RString 意見書項目連番) {
+        if (IkenshoKomokuMapping09B.徘徊_認知症の周辺症状.getコード().equals(意見書項目連番)
+                || IkenshoKomokuMapping09B.妄想.getコード().equals(意見書項目連番)
+                || IkenshoKomokuMapping09B.昼夜逆転.getコード().equals(意見書項目連番)
+                || IkenshoKomokuMapping09B.介護への抵抗.getコード().equals(意見書項目連番)) {
+            return true;
+        }
+        return false;
+    }
 
     /**
      * 認定調査と主治医意見書比較設定する。
