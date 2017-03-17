@@ -527,7 +527,7 @@ public class ShujiiIkenshoBusiness {
         item.setRemban(new RString(String.valueOf(連番++)));
         item.setTitle(通知文Map.get(0));
         item.setTsuchibun1(通知文Map.get(1));
-        item.setShinseiKubun(NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分申請時コード()).get名称());
+        item.setShinseiKubun(NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分申請時コード()).get略称());
         RString hihokenshaNo = entity.get被保険者番号();
         if (!RString.isNullOrEmpty(hihokenshaNo) && INT10 <= hihokenshaNo.length()) {
             item.setHihokenshaNo1(hihokenshaNo.substring(0, 1));
