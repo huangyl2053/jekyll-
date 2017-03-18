@@ -406,13 +406,17 @@ public final class IchijihanteikekkahyoEntityEditor {
         RString 状況改善 = RString.EMPTY;
         RString 今回調査 = RString.EMPTY;
         RString 前回調査 = RString.EMPTY;
-        if (連番 < 調査項目.size() && !RString.isNullOrEmpty(調査項目.get(連番).get意見項目())) {
-            今回調査 = 調査項目.get(連番).get意見項目();
+        for (ShujiiIkenshoIkenItem item : 調査項目) {
+            if (連番 == item.get連番()) {
+                今回調査 = item.get意見項目();
+            }
         }
-        if (連番 < 前回調査項目.size()) {
-            int 前回連番 = change主治医差分連番(前回厚労省IF識別コード, 項目連番);
-            if (前回連番 != 0 && !RString.isNullOrEmpty(前回調査項目.get(前回連番).get意見項目())) {
-                前回調査 = 前回調査項目.get(前回連番).get意見項目();
+        int 前回連番 = change主治医差分連番(前回厚労省IF識別コード, 項目連番);
+        if (前回連番 != 0) {
+            for (ShujiiIkenshoIkenItem item : 前回調査項目) {
+                if (前回連番 == item.get連番()) {
+                    前回調査 = item.get意見項目();
+                }
             }
         }
         if (RString.isNullOrEmpty(前回調査) || 主事意見_記載なし.equals(今回調査)) {
@@ -474,13 +478,17 @@ public final class IchijihanteikekkahyoEntityEditor {
             List<ShujiiIkenshoIkenItem> 前回調査項目, int 連番, int 項目連番, RString 前回厚労省IF識別コード) {
         RString 今回調査 = RString.EMPTY;
         RString 前回調査 = RString.EMPTY;
-        if (連番 < 調査項目.size() && !RString.isNullOrEmpty(調査項目.get(連番).get意見項目())) {
-            今回調査 = 調査項目.get(連番).get意見項目();
+        for (ShujiiIkenshoIkenItem item : 調査項目) {
+            if (連番 == item.get連番()) {
+                今回調査 = item.get意見項目();
+            }
         }
-        if (連番 < 前回調査項目.size()) {
-            int 前回連番 = change主治医差分連番(前回厚労省IF識別コード, 項目連番);
-            if (前回連番 != 0 && !RString.isNullOrEmpty(前回調査項目.get(前回連番).get意見項目())) {
-                前回調査 = 前回調査項目.get(前回連番).get意見項目();
+        int 前回連番 = change主治医差分連番(前回厚労省IF識別コード, 項目連番);
+        if (前回連番 != 0) {
+            for (ShujiiIkenshoIkenItem item : 前回調査項目) {
+                if (前回連番 == item.get連番()) {
+                    前回調査 = item.get意見項目();
+                }
             }
         }
         if (RString.isNullOrEmpty(前回調査) || 今回調査.equals(前回調査) || 主事意見_記載なし.equals(今回調査)) {
@@ -500,54 +508,54 @@ public final class IchijihanteikekkahyoEntityEditor {
         if (印字する.equals(前回正常選択肢印刷有無)) {
             if (識別コード09B.equals(厚労省IF識別コード) || 識別コード09A.equals(厚労省IF識別コード)
                     || 識別コード06A.equals(厚労省IF識別コード)) {
-                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番13, 連番1, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
-                        : get意見書名称03(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番13 : 連番14));
-                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番14, 連番2, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
-                        : get意見書名称04(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番14 : 連番15));
-                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番15, 連番3, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
-                        : get意見書名称05(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番15 : 連番16));
-                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番16, 連番4, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
-                        : get意見書名称06(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番16 : 連番17));
-                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番68, 連番5, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
-                        : get意見書名称14(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番68 : 連番18));
+                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番14, 連番1, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
+                        : get意見書名称03(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番14 : 連番15));
+                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番15, 連番2, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
+                        : get意見書名称04(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番15 : 連番16));
+                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番16, 連番3, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
+                        : get意見書名称05(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番16 : 連番17));
+                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番17, 連番4, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
+                        : get意見書名称06(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番17 : 連番18));
+                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番69, 連番5, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
+                        : get意見書名称14(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番69 : 連番19));
             }
             if (識別コード02A.equals(厚労省IF識別コード) || 識別コード99A.equals(厚労省IF識別コード)) {
-                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番14, 連番1, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
-                        : get意見書名称03(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番13 : 連番14));
-                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番15, 連番2, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
-                        : get意見書名称04(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番14 : 連番15));
-                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番16, 連番3, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
-                        : get意見書名称05(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番15 : 連番16));
-                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番17, 連番4, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
-                        : get意見書名称06(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番16 : 連番17));
-                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番18, 連番5, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
-                        : get意見書名称14(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番68 : 連番18));
+                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番15, 連番1, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
+                        : get意見書名称03(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番14 : 連番15));
+                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番16, 連番2, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
+                        : get意見書名称04(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番15 : 連番16));
+                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番17, 連番3, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
+                        : get意見書名称05(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番16 : 連番17));
+                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番18, 連番4, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
+                        : get意見書名称06(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番17 : 連番18));
+                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番19, 連番5, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
+                        : get意見書名称14(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番69 : 連番19));
             }
         } else {
             if (識別コード09B.equals(厚労省IF識別コード) || 識別コード09A.equals(厚労省IF識別コード)
                     || 識別コード06A.equals(厚労省IF識別コード)) {
-                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番13, 連番1, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
-                        : get意見書名称03_正常選択肢印刷無(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番13 : 連番14));
-                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番14, 連番2, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
-                        : get意見書名称04_正常選択肢印刷無(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番14 : 連番15));
-                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番15, 連番3, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
-                        : get意見書名称05_正常選択肢印刷無(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番15 : 連番16));
-                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番16, 連番4, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
-                        : get意見書名称06_正常選択肢印刷無(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番16 : 連番17));
-                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番68, 連番5, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
-                        : get意見書名称14_正常選択肢印刷無(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番68 : 連番18));
+                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番14, 連番1, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
+                        : get意見書名称03_正常選択肢印刷無(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番14 : 連番15));
+                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番15, 連番2, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
+                        : get意見書名称04_正常選択肢印刷無(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番15 : 連番16));
+                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番16, 連番3, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
+                        : get意見書名称05_正常選択肢印刷無(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番16 : 連番17));
+                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番17, 連番4, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
+                        : get意見書名称06_正常選択肢印刷無(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番17 : 連番18));
+                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番69, 連番5, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
+                        : get意見書名称14_正常選択肢印刷無(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番69 : 連番19));
             }
             if (識別コード02A.equals(厚労省IF識別コード) || 識別コード99A.equals(厚労省IF識別コード)) {
-                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番14, 連番1, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
-                        : get意見書名称03_正常選択肢印刷無(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番13 : 連番14));
-                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番15, 連番2, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
-                        : get意見書名称04_正常選択肢印刷無(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番14 : 連番15));
-                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番16, 連番3, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
-                        : get意見書名称05_正常選択肢印刷無(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番15 : 連番16));
-                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番17, 連番4, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
-                        : get意見書名称06_正常選択肢印刷無(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番16 : 連番17));
-                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番18, 連番5, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
-                        : get意見書名称14_正常選択肢印刷無(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番68 : 連番18));
+                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番15, 連番1, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
+                        : get意見書名称03_正常選択肢印刷無(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番14 : 連番15));
+                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番16, 連番2, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
+                        : get意見書名称04_正常選択肢印刷無(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番15 : 連番16));
+                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番17, 連番3, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
+                        : get意見書名称05_正常選択肢印刷無(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番16 : 連番17));
+                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番18, 連番4, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
+                        : get意見書名称06_正常選択肢印刷無(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番17 : 連番18));
+                主治医意見書項目4リスト.add(差分結果(意見書項目, dbt5304Entity, 連番19, 連番5, 前回厚労省IF識別コード).isEmpty() ? RString.EMPTY
+                        : get意見書名称14_正常選択肢印刷無(dbt5304Entity, is厚労省識別コードが09B_09A_06A(前回厚労省IF識別コード) ? 連番69 : 連番19));
             }
         }
         return 主治医意見書項目4リスト;
@@ -600,18 +608,33 @@ public final class IchijihanteikekkahyoEntityEditor {
     private static RString 差分結果(List<ShujiiIkenshoIkenItem> 意見書項目,
             List<ShujiiIkenshoIkenItem> 前回意見書項目, int 連番, int 項目連番, RString 前回厚労省IF識別コード) {
         RString 今回調査 = RString.EMPTY;
-        if (連番 < 意見書項目.size() && !RString.isNullOrEmpty(意見書項目.get(連番).get意見項目())) {
-            今回調査 = 意見書項目.get(連番).get意見項目();
+        for (ShujiiIkenshoIkenItem item : 意見書項目) {
+            if (連番 == item.get連番()) {
+                今回調査 = item.get意見項目();
+            }
         }
-        if (連番 < 前回意見書項目.size()) {
-            int 前回連番 = change主治医差分連番(前回厚労省IF識別コード, 項目連番);
-            if (前回連番 != 0 && !RString.isNullOrEmpty(前回意見書項目.get(前回連番).get意見項目())) {
-                RString 前回調査 = 前回意見書項目.get(前回連番).get意見項目();
-                if (!今回調査.equals(前回調査)) {
-                    return 前回調査;
+//        if (連番 < 意見書項目.size() && !RString.isNullOrEmpty(意見書項目.get(連番).get意見項目())) {
+//            今回調査 = 意見書項目.get(連番).get意見項目();
+//        }
+        int 前回連番 = change主治医差分連番(前回厚労省IF識別コード, 項目連番);
+        if (前回連番 != 0) {
+            for (ShujiiIkenshoIkenItem item : 前回意見書項目) {
+                if (前回連番 == item.get連番()) {
+                    if (!今回調査.equals(item.get意見項目())) {
+                        return item.get意見項目();
+                    }
                 }
             }
         }
+//        if (連番 < 前回意見書項目.size()) {
+//            int 前回連番 = change主治医差分連番(前回厚労省IF識別コード, 項目連番);
+//            if (前回連番 != 0 && !RString.isNullOrEmpty(前回意見書項目.get(前回連番).get意見項目())) {
+//                RString 前回調査 = 前回意見書項目.get(前回連番).get意見項目();
+//                if (!今回調査.equals(前回調査)) {
+//                    return 前回調査;
+//                }
+//            }
+//        }
         return RString.EMPTY;
     }
 
@@ -4016,18 +4039,6 @@ public final class IchijihanteikekkahyoEntityEditor {
         if (識別コード09B.equals(前回厚労省IF識別コード) || 識別コード09A.equals(前回厚労省IF識別コード)
                 || 識別コード06A.equals(前回厚労省IF識別コード)) {
             if (連番 == 連番1) {
-                return 連番13;
-            } else if (連番 == 連番2) {
-                return 連番14;
-            } else if (連番 == 連番3) {
-                return 連番15;
-            } else if (連番 == 連番4) {
-                return 連番16;
-            } else if (連番 == 連番5) {
-                return 連番68;
-            }
-        } else if (識別コード02A.equals(前回厚労省IF識別コード) || 識別コード99A.equals(前回厚労省IF識別コード)) {
-            if (連番 == 連番1) {
                 return 連番14;
             } else if (連番 == 連番2) {
                 return 連番15;
@@ -4036,7 +4047,19 @@ public final class IchijihanteikekkahyoEntityEditor {
             } else if (連番 == 連番4) {
                 return 連番17;
             } else if (連番 == 連番5) {
+                return 連番69;
+            }
+        } else if (識別コード02A.equals(前回厚労省IF識別コード) || 識別コード99A.equals(前回厚労省IF識別コード)) {
+            if (連番 == 連番1) {
+                return 連番15;
+            } else if (連番 == 連番2) {
+                return 連番16;
+            } else if (連番 == 連番3) {
+                return 連番17;
+            } else if (連番 == 連番4) {
                 return 連番18;
+            } else if (連番 == 連番5) {
+                return 連番19;
             }
         }
         return 0;
@@ -4536,18 +4559,18 @@ public final class IchijihanteikekkahyoEntityEditor {
         List<RString> 主治医意見書項目3リスト = new ArrayList<>();
         if (識別コード09B.equals(厚労省IF識別コード) || 識別コード09A.equals(厚労省IF識別コード)
                 || 識別コード06A.equals(厚労省IF識別コード)) {
-            主治医意見書項目3リスト.add(get意見書状況結果(意見書項目, 前回意見書項目, 連番13, 連番1, 前回厚労省IF識別コード));
-            主治医意見書項目3リスト.add(get意見書状況結果(意見書項目, 前回意見書項目, 連番14, 連番2, 前回厚労省IF識別コード));
-            主治医意見書項目3リスト.add(get意見書状況結果(意見書項目, 前回意見書項目, 連番15, 連番3, 前回厚労省IF識別コード));
-            主治医意見書項目3リスト.add(get意見書状況結果(意見書項目, 前回意見書項目, 連番16, 連番4, 前回厚労省IF識別コード));
-            主治医意見書項目3リスト.add(get意見書状況結果(意見書項目, 前回意見書項目, 連番68, 連番5, 前回厚労省IF識別コード));
-        }
-        if (識別コード02A.equals(厚労省IF識別コード) || 識別コード99A.equals(厚労省IF識別コード)) {
             主治医意見書項目3リスト.add(get意見書状況結果(意見書項目, 前回意見書項目, 連番14, 連番1, 前回厚労省IF識別コード));
             主治医意見書項目3リスト.add(get意見書状況結果(意見書項目, 前回意見書項目, 連番15, 連番2, 前回厚労省IF識別コード));
             主治医意見書項目3リスト.add(get意見書状況結果(意見書項目, 前回意見書項目, 連番16, 連番3, 前回厚労省IF識別コード));
             主治医意見書項目3リスト.add(get意見書状況結果(意見書項目, 前回意見書項目, 連番17, 連番4, 前回厚労省IF識別コード));
-            主治医意見書項目3リスト.add(get意見書状況結果(意見書項目, 前回意見書項目, 連番18, 連番5, 前回厚労省IF識別コード));
+            主治医意見書項目3リスト.add(get意見書状況結果(意見書項目, 前回意見書項目, 連番69, 連番5, 前回厚労省IF識別コード));
+        }
+        if (識別コード02A.equals(厚労省IF識別コード) || 識別コード99A.equals(厚労省IF識別コード)) {
+            主治医意見書項目3リスト.add(get意見書状況結果(意見書項目, 前回意見書項目, 連番15, 連番1, 前回厚労省IF識別コード));
+            主治医意見書項目3リスト.add(get意見書状況結果(意見書項目, 前回意見書項目, 連番16, 連番2, 前回厚労省IF識別コード));
+            主治医意見書項目3リスト.add(get意見書状況結果(意見書項目, 前回意見書項目, 連番17, 連番3, 前回厚労省IF識別コード));
+            主治医意見書項目3リスト.add(get意見書状況結果(意見書項目, 前回意見書項目, 連番18, 連番4, 前回厚労省IF識別コード));
+            主治医意見書項目3リスト.add(get意見書状況結果(意見書項目, 前回意見書項目, 連番19, 連番5, 前回厚労省IF識別コード));
         }
         return 主治医意見書項目3リスト;
     }
@@ -4557,18 +4580,18 @@ public final class IchijihanteikekkahyoEntityEditor {
         List<RString> 主治医意見書項目2リスト = new ArrayList<>();
         if (識別コード09B.equals(厚労省IF識別コード) || 識別コード09A.equals(厚労省IF識別コード)
                 || 識別コード06A.equals(厚労省IF識別コード)) {
-            主治医意見書項目2リスト.add(get状況改善(意見書項目, 前回意見書項目, 連番13, 連番1, 前回厚労省IF識別コード));
-            主治医意見書項目2リスト.add(get状況改善(意見書項目, 前回意見書項目, 連番14, 連番2, 前回厚労省IF識別コード));
-            主治医意見書項目2リスト.add(get状況改善(意見書項目, 前回意見書項目, 連番15, 連番3, 前回厚労省IF識別コード));
-            主治医意見書項目2リスト.add(get状況改善(意見書項目, 前回意見書項目, 連番16, 連番4, 前回厚労省IF識別コード));
-            主治医意見書項目2リスト.add(get状況改善(意見書項目, 前回意見書項目, 連番68, 連番5, 前回厚労省IF識別コード));
-        }
-        if (識別コード02A.equals(厚労省IF識別コード) || 識別コード99A.equals(厚労省IF識別コード)) {
             主治医意見書項目2リスト.add(get状況改善(意見書項目, 前回意見書項目, 連番14, 連番1, 前回厚労省IF識別コード));
             主治医意見書項目2リスト.add(get状況改善(意見書項目, 前回意見書項目, 連番15, 連番2, 前回厚労省IF識別コード));
             主治医意見書項目2リスト.add(get状況改善(意見書項目, 前回意見書項目, 連番16, 連番3, 前回厚労省IF識別コード));
             主治医意見書項目2リスト.add(get状況改善(意見書項目, 前回意見書項目, 連番17, 連番4, 前回厚労省IF識別コード));
-            主治医意見書項目2リスト.add(get状況改善(意見書項目, 前回意見書項目, 連番18, 連番5, 前回厚労省IF識別コード));
+            主治医意見書項目2リスト.add(get状況改善(意見書項目, 前回意見書項目, 連番69, 連番5, 前回厚労省IF識別コード));
+        }
+        if (識別コード02A.equals(厚労省IF識別コード) || 識別コード99A.equals(厚労省IF識別コード)) {
+            主治医意見書項目2リスト.add(get状況改善(意見書項目, 前回意見書項目, 連番15, 連番1, 前回厚労省IF識別コード));
+            主治医意見書項目2リスト.add(get状況改善(意見書項目, 前回意見書項目, 連番16, 連番2, 前回厚労省IF識別コード));
+            主治医意見書項目2リスト.add(get状況改善(意見書項目, 前回意見書項目, 連番17, 連番3, 前回厚労省IF識別コード));
+            主治医意見書項目2リスト.add(get状況改善(意見書項目, 前回意見書項目, 連番18, 連番4, 前回厚労省IF識別コード));
+            主治医意見書項目2リスト.add(get状況改善(意見書項目, 前回意見書項目, 連番19, 連番5, 前回厚労省IF識別コード));
         }
         return 主治医意見書項目2リスト;
     }
