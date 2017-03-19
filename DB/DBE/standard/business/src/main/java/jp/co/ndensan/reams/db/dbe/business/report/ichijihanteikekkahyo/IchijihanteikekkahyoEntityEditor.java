@@ -5386,11 +5386,18 @@ public final class IchijihanteikekkahyoEntityEditor {
     }
 
     private static RString get意見書名称05_正常選択肢印刷無(List<ShujiiIkenshoIkenItem> dbt5304Entity, int 連番) {
-        if (連番 < dbt5304Entity.size()
-                && !RString.isNullOrEmpty(dbt5304Entity.get(連番).get意見項目())
-                && !IkenKomoku05.自立.getコード().equals(dbt5304Entity.get(連番).get意見項目())) {
-            return IkenKomoku05.toValue(remove半角スペース(dbt5304Entity.get(連番).get意見項目())).get名称();
+        for (ShujiiIkenshoIkenItem item : dbt5304Entity) {
+            if (連番 == item.get連番()
+                    && !RString.isNullOrEmpty(item.get意見項目())
+                    && !IkenKomoku05.自立.getコード().equals(item.get意見項目())) {
+                return IkenKomoku05.toValue(remove半角スペース(item.get意見項目())).get名称();
+            }
         }
+//        if (連番 < dbt5304Entity.size()
+//                && !RString.isNullOrEmpty(dbt5304Entity.get(連番).get意見項目())
+//                && !IkenKomoku05.自立.getコード().equals(dbt5304Entity.get(連番).get意見項目())) {
+//            return IkenKomoku05.toValue(remove半角スペース(dbt5304Entity.get(連番).get意見項目())).get名称();
+//        }
         return RString.EMPTY;
     }
 

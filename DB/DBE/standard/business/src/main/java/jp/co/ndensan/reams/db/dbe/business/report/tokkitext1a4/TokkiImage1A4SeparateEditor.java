@@ -559,9 +559,8 @@ public final class TokkiImage1A4SeparateEditor {
     }
 
     private static RString get特記事項4(RString 特記事項番号, TokkiText1A4Entity ninteiEntity) {
-        RString imageName = RString.EMPTY;
+        RString imageName = get特記事項401(特記事項番号, ninteiEntity);
         RStringBuilder builder = new RStringBuilder();
-        builder.append(get特記事項401(特記事項番号, ninteiEntity));
         if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(ninteiEntity.get厚労省IF識別コード())) {
             if (特記事項番号_4011.equals(特記事項番号)) {
                 builder.append(new RString("C3042-"));
