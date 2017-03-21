@@ -9,8 +9,6 @@ import jp.co.ndensan.reams.db.dbe.business.core.renkeidatatorikomi.RenkeiDataTor
 import jp.co.ndensan.reams.db.dbe.definition.processprm.renkeidatatorikomi.RenkeiDataTorikomiProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5911ErrorTempEntity;
 import jp.co.ndensan.reams.db.dbe.entity.euc.renkeidatatorikomi.DbT5911ErrorTempEUCEntity;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -20,14 +18,12 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
@@ -63,7 +59,7 @@ public class DbT5911DensanErrorTempOutputProcess extends BatchProcessBase<DbT591
         eucCsvWriter = new CsvWriter.InstanceBuilder(eucFilePath).
                 setDelimiter(EUC_WRITER_DELIMITER).
                 setEnclosure(EUC_WRITER_ENCLOSURE).
-                setEncode(getEncode()).
+                setEncode(Encode.UTF_8withBOM).
                 setNewLine(NewLine.CRLF).
                 hasHeader(true).
                 build();
@@ -98,16 +94,5 @@ public class DbT5911DensanErrorTempOutputProcess extends BatchProcessBase<DbT591
                 new RenkeiDataTorikomiBusiness().get出力件数(new Decimal(eucCsvWriter.getCount())),
                 new RenkeiDataTorikomiBusiness().get出力条件(processParamter));
         OutputJokenhyoFactory.createInstance(item).print();
-    }
-
-    private Encode getEncode() {
-        RString 文字コード = DbBusinessConfig.get(ConfigNameDBE.連携文字コード, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        Encode encode = Encode.UTF_8withBOM;
-        if (new RString("1").equals(文字コード)) {
-            encode = Encode.SJIS;
-        } else if (new RString("2").equals(文字コード)) {
-            encode = Encode.UTF_8withBOM;
-        }
-        return encode;
     }
 }
