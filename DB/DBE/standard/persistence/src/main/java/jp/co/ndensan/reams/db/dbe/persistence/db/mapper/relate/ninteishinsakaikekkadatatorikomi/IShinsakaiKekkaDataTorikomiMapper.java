@@ -80,14 +80,6 @@ public interface IShinsakaiKekkaDataTorikomiMapper {
     DbT5105NinteiKanryoJohoEntity getNinteiKanryo(ShinseishoKanriNo 申請書管理番号);
 
     /**
-     * 検索条件より、要介護認定完了情報を検索する。
-     *
-     * @param 申請書管理番号 申請書管理番号
-     * @return DbT5105NinteiKanryoJohoEntity
-     */
-    DbT5501ShinsakaiKaisaiYoteiJohoEntity getShinsakaiKaisaiYotei(ShinseishoKanriNo 申請書管理番号);
-
-    /**
      * 検索条件より、要介護認定結果情報を検索する。
      *
      * @param param ShinsakaiKekkaDataTorikomiMybatisParameter
@@ -102,4 +94,12 @@ public interface IShinsakaiKekkaDataTorikomiMapper {
      * @return DbT5511ShinsakaiKaisaiKekkaJohoEntity
      */
     DbT5511ShinsakaiKaisaiKekkaJohoEntity getShinsakaiJoho(ShinsakaiKekkaDataTorikomiMybatisParameter param);
+
+    /**
+     * 検索条件より、要介護認定完了情報を検索する。
+     *
+     * @param param ShinsakaiKekkaDataTorikomiMybatisParameter
+     * @return DbT5105NinteiKanryoJohoEntity
+     */
+    DbT5501ShinsakaiKaisaiYoteiJohoEntity getShinsakaiKaisaiYotei(ShinsakaiKekkaDataTorikomiMybatisParameter param);
 }

@@ -296,12 +296,10 @@ public class DataTorikomiEdit {
     /**
      * DbT5501ShinsakaiKaisaiYoteiJohoEntityのupdateメッソドです。
      * 
-     * @param entity TempShinsakaiKekkaEntity
      * @param dbt5501Entity DbT5501ShinsakaiKaisaiYoteiJohoEntity
      * @return DbT5501ShinsakaiKaisaiYoteiJohoEntity
      */
-    public DbT5501ShinsakaiKaisaiYoteiJohoEntity editDbT5501Entity(TempShinsakaiKekkaEntity entity,
-                                                                    DbT5501ShinsakaiKaisaiYoteiJohoEntity dbt5501Entity) {
+    public DbT5501ShinsakaiKaisaiYoteiJohoEntity updateDbT5501Entity(DbT5501ShinsakaiKaisaiYoteiJohoEntity dbt5501Entity) {
         dbt5501Entity.setShinsakaiShinchokuJokyo(new Code(ShinsakaiShinchokuJokyo.完了.getコード()));
         return dbt5501Entity;
     }

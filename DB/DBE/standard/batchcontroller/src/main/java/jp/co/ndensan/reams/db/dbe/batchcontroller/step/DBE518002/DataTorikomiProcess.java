@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE518002;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinsakaikekkadatatorikomi.DataTorikomiEdit;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteishinsakaikekkadatatorikomi.ShinsakaiKekkaDataTorikomiMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteishinsakaikekkadatatorikomi.ShinsakaiKekkaDataTorikomiProcessParameter;
-import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5501ShinsakaiKaisaiYoteiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5510IchiGojiHanteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomimobile.TempShinsakaiKekkaEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteishinsakaikekkadatatorikomi.IShinsakaiKekkaDataTorikomiMapper;
@@ -47,8 +46,6 @@ public class DataTorikomiProcess extends BatchProcessBase<TempShinsakaiKekkaEnti
     BatchPermanentTableWriter<DbT5102NinteiKekkaJohoEntity> dbT5102Writer;
     @BatchWriter
     BatchPermanentTableWriter<DbT5105NinteiKanryoJohoEntity> dbT5105Writer;
-    @BatchWriter
-    BatchPermanentTableWriter<DbT5501ShinsakaiKaisaiYoteiJohoEntity> dbT5501Writer;
 
     @Override
     protected void beforeExecute() {
@@ -62,7 +59,6 @@ public class DataTorikomiProcess extends BatchProcessBase<TempShinsakaiKekkaEnti
         dbT5510Writer = new BatchPermanentTableWriter(DbT5510IchiGojiHanteiKekkaJohoEntity.class);
         dbT5102Writer = new BatchPermanentTableWriter(DbT5102NinteiKekkaJohoEntity.class);
         dbT5105Writer = new BatchPermanentTableWriter(DbT5105NinteiKanryoJohoEntity.class);
-        dbT5501Writer = new BatchPermanentTableWriter(DbT5501ShinsakaiKaisaiYoteiJohoEntity.class);
     }
 
     @Override
@@ -76,7 +72,6 @@ public class DataTorikomiProcess extends BatchProcessBase<TempShinsakaiKekkaEnti
             syoriDbT5510(entity);
             syoriDbT5102(entity);
             syoriDbT5105(entity);
-            syoriDbT5501(entity);
         }
     }
 
@@ -111,13 +106,6 @@ public class DataTorikomiProcess extends BatchProcessBase<TempShinsakaiKekkaEnti
         DbT5105NinteiKanryoJohoEntity dbt5105 = mapper.getNinteiKanryo(new ShinseishoKanriNo(entity.get申請書管理番号()));
         if (null != dbt5105) {
             dbT5105Writer.update(edit.editDbT5105Entity(entity, dbt5105));
-        }
-    }
-
-    private void syoriDbT5501(TempShinsakaiKekkaEntity entity) {
-        DbT5501ShinsakaiKaisaiYoteiJohoEntity dbt5501 = mapper.getShinsakaiKaisaiYotei(new ShinseishoKanriNo(entity.get申請書管理番号()));
-        if (null != dbt5501) {
-            dbT5501Writer.update(edit.editDbT5501Entity(entity, dbt5501));
         }
     }
 }
