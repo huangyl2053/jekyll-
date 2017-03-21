@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.util.DBEImageUtil;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakaishiryo.ChosahyoIkenshoComparisonItem09B;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA3Entity;
@@ -65,6 +67,10 @@ public class IchijihanteikekkahyoItemSetteiA3 {
     private static final RString 第４群 = new RString("4");
     private static final RString 第５群 = new RString("5");
     private static final RString 特別な医療群 = new RString("6");
+    private static final RString 厚労省IF識別コードエラー = new RString("Error");
+    private static final RString 印字対象外 = new RString("印字対象外");
+    private static final RString 主治医意見書項目結果コード = new RString("調査結果コード");
+    private static final RString 主治医意見書項目結果 = new RString("調査結果");
     private static final int INT_0 = 0;
     private static final int INT_5 = 5;
     private boolean is前回結果正常値印字 = false;
@@ -157,7 +163,7 @@ public class IchijihanteikekkahyoItemSetteiA3 {
         List<TiyosaKekka> 特別な医療リスト_前半 = new ArrayList<>();
         List<TiyosaKekka> 特別な医療リスト_後半 = new ArrayList<>();
         int 特別な医療調査結果_中間数 = 特別な医療リスト.size() / 2;
-        for (int index = 0; index < 特別な医療リスト.size() - 1; index++) {
+        for (int index = 0; index < 特別な医療リスト.size(); index++) {
             if (index < 特別な医療調査結果_中間数) {
                 特別な医療リスト_前半.add(特別な医療リスト.get(index));
             } else {
@@ -298,24 +304,12 @@ public class IchijihanteikekkahyoItemSetteiA3 {
             }
         }
         if (前回調査票調査項目 == null || 前回調査票調査項目.isEmpty()) {
-            for (TiyosaKekka 調査結果 : 第１群リスト) {
-                調査結果.set前回結果(ハイフン);
-            }
-            for (TiyosaKekka 調査結果 : 第２群リスト) {
-                調査結果.set前回結果(ハイフン);
-            }
-            for (TiyosaKekka 調査結果 : 第３群リスト) {
-                調査結果.set前回結果(ハイフン);
-            }
-            for (TiyosaKekka 調査結果 : 第４群リスト) {
-                調査結果.set前回結果(ハイフン);
-            }
-            for (TiyosaKekka 調査結果 : 第５群リスト) {
-                調査結果.set前回結果(ハイフン);
-            }
-            for (TiyosaKekka 調査結果 : 特別な医療リスト) {
-                調査結果.set前回結果(ハイフン);
-            }
+            前回値ハイフン設定(第１群リスト);
+            前回値ハイフン設定(第２群リスト);
+            前回値ハイフン設定(第３群リスト);
+            前回値ハイフン設定(第４群リスト);
+            前回値ハイフン設定(第５群リスト);
+            前回値ハイフン設定(特別な医療リスト);
         }
     }
 
@@ -332,6 +326,15 @@ public class IchijihanteikekkahyoItemSetteiA3 {
     }
 
     private RString get特記事項符号(INinteichosaKomokuMapping 認定調査項目マッピング, List<TokkijikoIchiranJohoRelateEntity> 認定調査票_特記情報) {
+        if (NinteichosaKomokuMapping09B.麻痺等_右上肢.getコード().equals(認定調査項目マッピング.getコード())
+                || NinteichosaKomokuMapping09B.麻痺等_左下肢.getコード().equals(認定調査項目マッピング.getコード())
+                || NinteichosaKomokuMapping09B.麻痺等_右下肢.getコード().equals(認定調査項目マッピング.getコード())
+                || NinteichosaKomokuMapping09B.麻痺等_その他.getコード().equals(認定調査項目マッピング.getコード())
+                || NinteichosaKomokuMapping09B.拘縮_股関節.getコード().equals(認定調査項目マッピング.getコード())
+                || NinteichosaKomokuMapping09B.拘縮_膝関節.getコード().equals(認定調査項目マッピング.getコード())
+                || NinteichosaKomokuMapping09B.拘縮_その他.getコード().equals(認定調査項目マッピング.getコード())) {
+            return RString.EMPTY;
+        }
         for (TokkijikoIchiranJohoRelateEntity 特記事項Entity : 認定調査票_特記情報) {
             if (特記事項Entity.get認定調査票特記事項Entity().getNinteichosaTokkijikoNo().equals(認定調査項目マッピング.get特記事項番号())) {
                 return is特記事項符号印字 ? 特記事項有 : RString.EMPTY;
@@ -358,7 +361,7 @@ public class IchijihanteikekkahyoItemSetteiA3 {
 
     private void set前回今回比較結果(Code 前回厚労省IF識別コード,
             INinteichosaKomokuMapping 認定調査項目マッピング,
-            RString 前回調査票調査結果,
+            RString 前回調査票調査結果コード,
             TiyosaKekka 調査結果) {
         if (KoroshoInterfaceShikibetsuCode.V99A.getCode().equals(前回厚労省IF識別コード.getColumnValue())
                 || KoroshoInterfaceShikibetsuCode.V02A.getCode().equals(前回厚労省IF識別コード.getColumnValue())
@@ -367,21 +370,21 @@ public class IchijihanteikekkahyoItemSetteiA3 {
             return;
         }
         AnswerPattern answerPattern = AnswerPattern.toValue(認定調査項目マッピング.getパターンNo());
-        if (is前回調査結果印字(前回調査票調査結果, 調査結果.get調査結果コード())) {
-            RString 前回調査結果名称 = answerPattern.get回答略称(getコード_半角スペース除去(前回調査票調査結果));
+        if (is前回調査結果印字(前回調査票調査結果コード, 調査結果.get調査結果コード())) {
+            RString 前回調査結果名称 = answerPattern.get回答略称(getコード_半角スペース除去(前回調査票調査結果コード));
             調査結果.set前回結果(前回調査結果名称);
         } else {
             調査結果.set前回結果(RString.EMPTY);
         }
-        set前回今回比較結果By回答パターン(調査結果, 前回調査票調査結果, answerPattern);
+        set前回今回比較結果By回答パターン(調査結果, 前回調査票調査結果コード, answerPattern);
     }
 
-    private boolean is前回調査結果印字(RString 前回調査票調査結果, RString 今回調査票調査結果) {
-        if (!今回調査票調査結果.equals(前回調査票調査結果)) {
+    private boolean is前回調査結果印字(RString 前回調査票調査結果コード, RString 今回調査票調査結果コード) {
+        if (!今回調査票調査結果コード.equals(前回調査票調査結果コード)) {
             if (is前回結果正常値印字) {
                 return true;
             } else {
-                if (調査結果_正常値.equals(前回調査票調査結果)) {
+                if (調査結果_正常値.equals(前回調査票調査結果コード)) {
                     return false;
                 } else {
                     return true;
@@ -433,167 +436,104 @@ public class IchijihanteikekkahyoItemSetteiA3 {
             List<DbT5304ShujiiIkenshoIkenItemEntity> 主治医意見書項目情報,
             List<DbT5304ShujiiIkenshoIkenItemEntity> 前主治医意見書項目情報,
             List<TiyosaKekka> 主治医意見書リスト) {
-        IchijihanteikekkahyoItemSetteiThreeA3 settei = new IchijihanteikekkahyoItemSetteiThreeA3();
         for (DbT5304ShujiiIkenshoIkenItemEntity 主治医意見書項目 : 主治医意見書項目情報) {
-            TiyosaKekka 主治医意見書 = null;
-            RString 調査結果;
-            RString 調査結果コード;
-            RString 主治医意見書項目連番 = new RString(主治医意見書項目.getRemban());
-            if (主治医意見書項目連番.equals(settei.get日常生活自立度(厚労省IF識別コード))) {
-                主治医意見書 = new TiyosaKekka();
-                主治医意見書.set連番(Integer.parseInt(主治医意見書項目連番.toString()));
-                調査結果 = RString.isNullOrEmpty(主治医意見書項目.getIkenItem()) ? RString.EMPTY
-                        : IkenKomoku03.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).get略称();
-                調査結果コード = RString.isNullOrEmpty(調査結果) ? RString.EMPTY
-                        : IkenKomoku03.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).getコード();
-                主治医意見書.set調査結果(調査結果);
-                主治医意見書.set調査結果コード(調査結果コード);
-            } else if (主治医意見書項目連番.equals(settei.get短期記憶意見書(厚労省IF識別コード))) {
-                主治医意見書 = new TiyosaKekka();
-                調査結果 = RString.isNullOrEmpty(主治医意見書項目.getIkenItem()) ? RString.EMPTY
-                        : IkenKomoku04.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).get略称();
-                調査結果コード = RString.isNullOrEmpty(調査結果) ? RString.EMPTY
-                        : IkenKomoku04.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).getコード();
-                主治医意見書.set調査結果(調査結果);
-                主治医意見書.set調査結果コード(調査結果コード);
-            } else if (主治医意見書項目連番.equals(settei.get認知能力(厚労省IF識別コード))) {
-                主治医意見書 = new TiyosaKekka();
-                調査結果 = RString.isNullOrEmpty(主治医意見書項目.getIkenItem()) ? RString.EMPTY
-                        : IkenKomoku05.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).get略称();
-                調査結果コード = RString.isNullOrEmpty(調査結果) ? RString.EMPTY
-                        : IkenKomoku05.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).getコード();
-                主治医意見書.set調査結果(調査結果);
-                主治医意見書.set調査結果コード(調査結果コード);
-            } else if (主治医意見書項目連番.equals(settei.get伝達能力(厚労省IF識別コード))) {
-                主治医意見書 = new TiyosaKekka();
-                調査結果 = RString.isNullOrEmpty(主治医意見書項目.getIkenItem()) ? RString.EMPTY
-                        : IkenKomoku06.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).get略称();
-                調査結果コード = RString.isNullOrEmpty(調査結果) ? RString.EMPTY
-                        : IkenKomoku06.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).getコード();
-                主治医意見書.set調査結果(調査結果);
-                主治医意見書.set調査結果コード(調査結果コード);
-            } else if (主治医意見書項目連番.equals(settei.get食事行為(厚労省IF識別コード))) {
-                主治医意見書 = new TiyosaKekka();
-                調査結果 = RString.isNullOrEmpty(主治医意見書項目.getIkenItem()) ? RString.EMPTY
-                        : IkenKomoku14.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).get略称();
-                調査結果コード = RString.isNullOrEmpty(調査結果) ? RString.EMPTY
-                        : IkenKomoku14.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).getコード();
-                主治医意見書.set調査結果(調査結果);
-                主治医意見書.set調査結果コード(調査結果コード);
+            TiyosaKekka 主治医意見書 = new TiyosaKekka();
+            Map<RString, RString> 主治医意見書Map = get主治医意見書項目結果(厚労省IF識別コード, 主治医意見書項目);
+            if (印字対象外.equals(主治医意見書Map.get(主治医意見書項目結果コード))) {
+                continue;
             }
-            if (主治医意見書 != null) {
-                主治医意見書リスト.add(主治医意見書);
-            }
+            主治医意見書.set連番(主治医意見書項目.getRemban());
+            主治医意見書.set調査結果(主治医意見書Map.get(主治医意見書項目結果));
+            主治医意見書.set調査結果コード(主治医意見書Map.get(主治医意見書項目結果コード));
+            set前回結果主治医意見書(前回厚労省IF識別コード, 前主治医意見書項目情報, 主治医意見書);
+            主治医意見書リスト.add(主治医意見書);
         }
-        set前回主治医意見書(前回厚労省IF識別コード, 前主治医意見書項目情報, 主治医意見書リスト);
         return 主治医意見書リスト;
     }
 
-    private void set前回主治医意見書(Code 前回厚労省IF識別コード,
+    private void set前回結果主治医意見書(Code 前回厚労省IF識別コード,
             List<DbT5304ShujiiIkenshoIkenItemEntity> 前回主治医意見書項目情報,
-            List<TiyosaKekka> 主治医意見書リスト) {
-        IchijihanteikekkahyoItemSetteiThreeA3 settei = new IchijihanteikekkahyoItemSetteiThreeA3();
-        IchijihanteikekkahyoKekka kekka = new IchijihanteikekkahyoKekka();
-        outSide:
+            TiyosaKekka 主治医意見書) {
+        Map<RString, RString> 主治医意見書Map;
+        RString 前回調査結果コード;
+        RString 前回調査結果;
         for (DbT5304ShujiiIkenshoIkenItemEntity 前回主治医意見書項目 : 前回主治医意見書項目情報) {
-            RString 前回調査結果コード;
-            RString 前回調査結果;
-            if (new RString(前回主治医意見書項目.getRemban()).equals(settei.get日常生活自立度(前回厚労省IF識別コード))) {
-                for (TiyosaKekka 主治医意見書 : 主治医意見書リスト) {
-                    if (主治医意見書.get連番() == 前回主治医意見書項目.getRemban()) {
-                        if (isFraud厚労省IF識別コード(前回厚労省IF識別コード)) {
-                            主治医意見書.set前回結果(ハイフン);
-                            continue outSide;
-                        }
-                        前回調査結果 = RString.isNullOrEmpty(前回主治医意見書項目.getIkenItem()) ? RString.EMPTY
-                                : IkenKomoku03.toValue(getコード_半角スペース除去(前回主治医意見書項目.getIkenItem())).get略称();
-                        前回調査結果コード = RString.isNullOrEmpty(前回調査結果) ? RString.EMPTY
-                                : IkenKomoku03.toValue(getコード_半角スペース除去(前回主治医意見書項目.getIkenItem())).getコード();
-                        if (is前回調査結果印字(前回調査結果, 主治医意見書.get調査結果コード())) {
-                            主治医意見書.set前回結果(前回調査結果);
-                        } else {
-                            主治医意見書.set前回結果(RString.EMPTY);
-                        }
-                        kekka.set日常生活自立度今回結果前回結果比(主治医意見書, 前回調査結果コード);
-                    }
+            if (前回主治医意見書項目.getRemban() == 主治医意見書.get連番()) {
+                主治医意見書Map = get主治医意見書項目結果(前回厚労省IF識別コード, 前回主治医意見書項目);
+                前回調査結果 = 主治医意見書Map.get(主治医意見書項目結果);
+                前回調査結果コード = 主治医意見書Map.get(主治医意見書項目結果コード);
+                if (is前回調査結果印字(前回調査結果コード, 主治医意見書.get調査結果コード())) {
+                    主治医意見書.set前回結果(前回調査結果);
+                } else {
+                    主治医意見書.set前回結果(RString.EMPTY);
                 }
-            } else if (new RString(前回主治医意見書項目.getRemban()).equals(settei.get短期記憶意見書(前回厚労省IF識別コード))) {
-                for (TiyosaKekka 主治医意見書 : 主治医意見書リスト) {
-                    if (主治医意見書.get連番() == 前回主治医意見書項目.getRemban()) {
-                        if (isFraud厚労省IF識別コード(前回厚労省IF識別コード)) {
-                            主治医意見書.set前回結果(ハイフン);
-                            continue outSide;
-                        }
-                        前回調査結果 = RString.isNullOrEmpty(前回主治医意見書項目.getIkenItem()) ? RString.EMPTY
-                                : IkenKomoku04.toValue(getコード_半角スペース除去(前回主治医意見書項目.getIkenItem())).get略称();
-                        前回調査結果コード = RString.isNullOrEmpty(前回調査結果) ? RString.EMPTY
-                                : IkenKomoku04.toValue(getコード_半角スペース除去(前回主治医意見書項目.getIkenItem())).getコード();
-                        if (is前回調査結果印字(前回調査結果, 主治医意見書.get調査結果コード())) {
-                            主治医意見書.set前回結果(前回調査結果);
-                        } else {
-                            主治医意見書.set前回結果(RString.EMPTY);
-                        }
-                        kekka.set短期記憶意見書今回結果前回結果比(主治医意見書, 前回調査結果コード);
-                    }
-                }
-            } else if (new RString(前回主治医意見書項目.getRemban()).equals(settei.get認知能力(前回厚労省IF識別コード))) {
-                for (TiyosaKekka 主治医意見書 : 主治医意見書リスト) {
-                    if (主治医意見書.get連番() == 前回主治医意見書項目.getRemban()) {
-                        if (isFraud厚労省IF識別コード(前回厚労省IF識別コード)) {
-                            主治医意見書.set前回結果(ハイフン);
-                            continue outSide;
-                        }
-                        前回調査結果 = RString.isNullOrEmpty(前回主治医意見書項目.getIkenItem()) ? RString.EMPTY
-                                : IkenKomoku05.toValue(getコード_半角スペース除去(前回主治医意見書項目.getIkenItem())).get略称();
-                        前回調査結果コード = RString.isNullOrEmpty(前回調査結果) ? RString.EMPTY
-                                : IkenKomoku05.toValue(getコード_半角スペース除去(前回主治医意見書項目.getIkenItem())).getコード();
-                        if (is前回調査結果印字(前回調査結果, 主治医意見書.get調査結果コード())) {
-                            主治医意見書.set前回結果(前回調査結果);
-                        } else {
-                            主治医意見書.set前回結果(RString.EMPTY);
-                        }
-                        kekka.set認知能力今回結果前回結果比(主治医意見書, 前回調査結果コード);
-                    }
-                }
-            } else if (new RString(前回主治医意見書項目.getRemban()).equals(settei.get伝達能力(前回厚労省IF識別コード))) {
-                for (TiyosaKekka 主治医意見書 : 主治医意見書リスト) {
-                    if (主治医意見書.get連番() == 前回主治医意見書項目.getRemban()) {
-                        if (isFraud厚労省IF識別コード(前回厚労省IF識別コード)) {
-                            主治医意見書.set前回結果(ハイフン);
-                            continue outSide;
-                        }
-                        前回調査結果 = RString.isNullOrEmpty(前回主治医意見書項目.getIkenItem()) ? RString.EMPTY
-                                : IkenKomoku06.toValue(getコード_半角スペース除去(前回主治医意見書項目.getIkenItem())).get略称();
-                        前回調査結果コード = RString.isNullOrEmpty(前回調査結果) ? RString.EMPTY
-                                : IkenKomoku06.toValue(getコード_半角スペース除去(前回主治医意見書項目.getIkenItem())).getコード();
-                        if (is前回調査結果印字(前回調査結果, 主治医意見書.get調査結果コード())) {
-                            主治医意見書.set前回結果(前回調査結果);
-                        } else {
-                            主治医意見書.set前回結果(RString.EMPTY);
-                        }
-                        kekka.set伝達能力今回結果前回結果比(主治医意見書, 前回調査結果コード);
-                    }
-                }
-            } else if (new RString(前回主治医意見書項目.getRemban()).equals(settei.get食事行為(前回厚労省IF識別コード))) {
-                for (TiyosaKekka 主治医意見書 : 主治医意見書リスト) {
-                    if (主治医意見書.get連番() == 前回主治医意見書項目.getRemban()) {
-                        if (isFraud厚労省IF識別コード(前回厚労省IF識別コード)) {
-                            主治医意見書.set前回結果(ハイフン);
-                            continue outSide;
-                        }
-                        前回調査結果 = RString.isNullOrEmpty(前回主治医意見書項目.getIkenItem()) ? RString.EMPTY
-                                : IkenKomoku14.toValue(getコード_半角スペース除去(前回主治医意見書項目.getIkenItem())).get略称();
-                        前回調査結果コード = RString.isNullOrEmpty(前回調査結果) ? RString.EMPTY
-                                : IkenKomoku14.toValue(getコード_半角スペース除去(前回主治医意見書項目.getIkenItem())).getコード();
-                        if (is前回調査結果印字(前回調査結果, 主治医意見書.get調査結果コード())) {
-                            主治医意見書.set前回結果(前回調査結果);
-                        } else {
-                            主治医意見書.set前回結果(RString.EMPTY);
-                        }
-                        kekka.set食事行為今回結果前回結果比(主治医意見書, 前回調査結果コード);
-                    }
-                }
+                set前回今回比較結果By主治医意見書(前回厚労省IF識別コード, 主治医意見書, 前回調査結果コード);
             }
+        }
+        if (前回主治医意見書項目情報 == null || 前回主治医意見書項目情報.isEmpty()) {
+            主治医意見書.set前回結果(ハイフン);
+        }
+    }
+
+    private Map<RString, RString> get主治医意見書項目結果(Code 厚労省IF識別コード,
+            DbT5304ShujiiIkenshoIkenItemEntity 主治医意見書項目) {
+        Map<RString, RString> 主治医意見書Map = new HashMap<>();
+        IchijihanteikekkahyoItemSetteiThreeA3 settei = new IchijihanteikekkahyoItemSetteiThreeA3();
+        RString 連番 = new RString(主治医意見書項目.getRemban());
+        RString 調査結果コード;
+        RString 調査結果 = RString.EMPTY;
+        if (isFraud厚労省IF識別コード(厚労省IF識別コード)) {
+            主治医意見書Map.put(主治医意見書項目結果コード, 厚労省IF識別コードエラー);
+            主治医意見書Map.put(主治医意見書項目結果, ハイフン);
+            return 主治医意見書Map;
+        }
+        if (連番.equals(settei.get日常生活自立度(厚労省IF識別コード))) {
+            調査結果 = RString.isNullOrEmpty(主治医意見書項目.getIkenItem()) ? RString.EMPTY
+                    : IkenKomoku03.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).get略称();
+            調査結果コード = RString.isNullOrEmpty(調査結果) ? RString.EMPTY
+                    : IkenKomoku03.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).getコード();
+        } else if (連番.equals(settei.get短期記憶意見書(厚労省IF識別コード))) {
+            調査結果 = RString.isNullOrEmpty(主治医意見書項目.getIkenItem()) ? RString.EMPTY
+                    : IkenKomoku04.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).get略称();
+            調査結果コード = RString.isNullOrEmpty(調査結果) ? RString.EMPTY
+                    : IkenKomoku04.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).getコード();
+        } else if (連番.equals(settei.get認知能力(厚労省IF識別コード))) {
+            調査結果 = RString.isNullOrEmpty(主治医意見書項目.getIkenItem()) ? RString.EMPTY
+                    : IkenKomoku05.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).get略称();
+            調査結果コード = RString.isNullOrEmpty(調査結果) ? RString.EMPTY
+                    : IkenKomoku05.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).getコード();
+        } else if (連番.equals(settei.get伝達能力(厚労省IF識別コード))) {
+            調査結果 = RString.isNullOrEmpty(主治医意見書項目.getIkenItem()) ? RString.EMPTY
+                    : IkenKomoku06.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).get略称();
+            調査結果コード = RString.isNullOrEmpty(調査結果) ? RString.EMPTY
+                    : IkenKomoku06.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).getコード();
+        } else if (連番.equals(settei.get食事行為(厚労省IF識別コード))) {
+            調査結果 = RString.isNullOrEmpty(主治医意見書項目.getIkenItem()) ? RString.EMPTY
+                    : IkenKomoku14.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).get略称();
+            調査結果コード = RString.isNullOrEmpty(調査結果) ? RString.EMPTY
+                    : IkenKomoku14.toValue(getコード_半角スペース除去(主治医意見書項目.getIkenItem())).getコード();
+        } else {
+            調査結果コード = 印字対象外;
+        }
+        主治医意見書Map.put(主治医意見書項目結果コード, 調査結果コード);
+        主治医意見書Map.put(主治医意見書項目結果, 調査結果);
+        return 主治医意見書Map;
+    }
+
+    private void set前回今回比較結果By主治医意見書(Code 前回厚労省IF識別コード, TiyosaKekka 主治医意見書, RString 前回調査結果コード) {
+        IchijihanteikekkahyoKekka 一次判定結果 = new IchijihanteikekkahyoKekka();
+        IchijihanteikekkahyoItemSetteiThreeA3 一次判定結果表項目設定 = new IchijihanteikekkahyoItemSetteiThreeA3();
+        RString 連番 = new RString(主治医意見書.get連番());
+        if (連番.equals(一次判定結果表項目設定.get日常生活自立度(前回厚労省IF識別コード))) {
+            一次判定結果.set日常生活自立度今回結果前回結果比(主治医意見書, 前回調査結果コード);
+        } else if (連番.equals(一次判定結果表項目設定.get短期記憶意見書(前回厚労省IF識別コード))) {
+            一次判定結果.set短期記憶意見書今回結果前回結果比(主治医意見書, 前回調査結果コード);
+        } else if (連番.equals(一次判定結果表項目設定.get認知能力(前回厚労省IF識別コード))) {
+            一次判定結果.set認知能力今回結果前回結果比(主治医意見書, 前回調査結果コード);
+        } else if (連番.equals(一次判定結果表項目設定.get伝達能力(前回厚労省IF識別コード))) {
+            一次判定結果.set伝達能力今回結果前回結果比(主治医意見書, 前回調査結果コード);
+        } else if (連番.equals(一次判定結果表項目設定.get食事行為(前回厚労省IF識別コード))) {
+            一次判定結果.set食事行為今回結果前回結果比(主治医意見書, 前回調査結果コード);
         }
     }
 
@@ -604,6 +544,12 @@ public class IchijihanteikekkahyoItemSetteiA3 {
             return true;
         }
         return false;
+    }
+
+    private void 前回値ハイフン設定(List<TiyosaKekka> 調査結果リスト) {
+        for (TiyosaKekka 調査結果 : 調査結果リスト) {
+            調査結果.set前回結果(ハイフン);
+        }
     }
 
     private void set凡例文言(IchijihanteikekkahyoA3Entity 項目) {

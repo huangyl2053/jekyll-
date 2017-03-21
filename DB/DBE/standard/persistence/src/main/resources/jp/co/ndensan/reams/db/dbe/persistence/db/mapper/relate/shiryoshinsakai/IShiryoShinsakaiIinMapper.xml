@@ -269,7 +269,7 @@
         SELECT
         dbt5205_MaxRemban.maxRemban as maxRemban,
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5205NinteichosahyoTokkijikoMapper.allColumns_DbT5205NinteichosahyoTokkijiko"/>
-        FROM <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5205NinteichosahyoTokkijikoMapper.noDeleted_DbT5205NinteichosahyoTokkijiko" /> AS dbt5205
+        FROM rgdb."DbT5205NinteichosahyoTokkijiko"
         LEFT JOIN (
           SELECT "shinseishoKanriNo"
           ,"ninteichosaRirekiNo"
@@ -284,37 +284,37 @@
           , "tokkijikoTextImageKubun"
           , "genponMaskKubun"
         ) dbt5205_MaxRemban
-        ON dbt5205_MaxRemban."shinseishoKanriNo" = dbt5205."shinseishoKanriNo"
-        AND dbt5205_MaxRemban."ninteichosaRirekiNo" = dbt5205."ninteichosaRirekiNo"
-        AND dbt5205_MaxRemban."ninteichosaTokkijikoNo" = dbt5205."ninteichosaTokkijikoNo"
-        AND dbt5205_MaxRemban."tokkijikoTextImageKubun" = dbt5205."tokkijikoTextImageKubun"
-        AND dbt5205_MaxRemban."genponMaskKubun" = dbt5205."genponMaskKubun"
-        WHERE dbt5205."shinseishoKanriNo" IN
+        ON dbt5205_MaxRemban."shinseishoKanriNo" = "DbT5205NinteichosahyoTokkijiko"."shinseishoKanriNo"
+        AND dbt5205_MaxRemban."ninteichosaRirekiNo" = "DbT5205NinteichosahyoTokkijiko"."ninteichosaRirekiNo"
+        AND dbt5205_MaxRemban."ninteichosaTokkijikoNo" = "DbT5205NinteichosahyoTokkijiko"."ninteichosaTokkijikoNo"
+        AND dbt5205_MaxRemban."tokkijikoTextImageKubun" = "DbT5205NinteichosahyoTokkijiko"."tokkijikoTextImageKubun"
+        AND dbt5205_MaxRemban."genponMaskKubun" = "DbT5205NinteichosahyoTokkijiko"."genponMaskKubun"
+        WHERE "DbT5205NinteichosahyoTokkijiko"."shinseishoKanriNo" IN
         <foreach collection="shinseishoKanriNoList" item="shinseishoKanriNo" open="(" separator="," close=")">#{shinseishoKanriNo}</foreach>
-        AND dbt5205."ninteichosaRirekiNo" IN
+        AND "DbT5205NinteichosahyoTokkijiko"."ninteichosaRirekiNo" IN
         <foreach collection="ninteichosaRirekiNoList" item="ninteichosaRirekiNo" open="(" separator="," close=")">#{ninteichosaRirekiNo}</foreach>
         AND NOT EXISTS (
           SELECT 'X'
           FROM rgdb."DbT5205NinteichosahyoTokkijiko" A1
-          WHERE A1."shinseishoKanriNo" = dbt5205."shinseishoKanriNo"
-          AND A1."ninteichosaRirekiNo" = dbt5205."ninteichosaRirekiNo"
-          AND dbt5205."ninteichosaTokkijikoNo" = A1."ninteichosaTokkijikoNo"
-          AND dbt5205."ninteichosaTokkijikoRemban" = A1."ninteichosaTokkijikoRemban"
-          AND dbt5205."ninteichosaRirekiNo" <![CDATA[<]]> A1."ninteichosaRirekiNo"
+          WHERE A1."shinseishoKanriNo" = "DbT5205NinteichosahyoTokkijiko"."shinseishoKanriNo"
+          AND A1."ninteichosaRirekiNo" = "DbT5205NinteichosahyoTokkijiko"."ninteichosaRirekiNo"
+          AND "DbT5205NinteichosahyoTokkijiko"."ninteichosaTokkijikoNo" = A1."ninteichosaTokkijikoNo"
+          AND "DbT5205NinteichosahyoTokkijiko"."ninteichosaTokkijikoRemban" = A1."ninteichosaTokkijikoRemban"
+          AND "DbT5205NinteichosahyoTokkijiko"."ninteichosaRirekiNo" <![CDATA[<]]> A1."ninteichosaRirekiNo"
         )
         AND NOT EXISTS (
           SELECT 'X'
           FROM rgdb."DbT5205NinteichosahyoTokkijiko" A2
-          WHERE A2."shinseishoKanriNo" = dbt5205."shinseishoKanriNo"
-          AND A2."ninteichosaRirekiNo" = dbt5205."ninteichosaRirekiNo"
-          AND dbt5205."ninteichosaTokkijikoNo" = A2."ninteichosaTokkijikoNo"
-          AND dbt5205."ninteichosaTokkijikoRemban" = A2."ninteichosaTokkijikoRemban"
-          AND dbt5205."tokkijikoTextImageKubun" = A2."tokkijikoTextImageKubun"
-          AND dbt5205."genponMaskKubun" <![CDATA[<]]> A2."genponMaskKubun"
+          WHERE A2."shinseishoKanriNo" = "DbT5205NinteichosahyoTokkijiko"."shinseishoKanriNo"
+          AND A2."ninteichosaRirekiNo" = "DbT5205NinteichosahyoTokkijiko"."ninteichosaRirekiNo"
+          AND "DbT5205NinteichosahyoTokkijiko"."ninteichosaTokkijikoNo" = A2."ninteichosaTokkijikoNo"
+          AND "DbT5205NinteichosahyoTokkijiko"."ninteichosaTokkijikoRemban" = A2."ninteichosaTokkijikoRemban"
+          AND "DbT5205NinteichosahyoTokkijiko"."tokkijikoTextImageKubun" = A2."tokkijikoTextImageKubun"
+          AND "DbT5205NinteichosahyoTokkijiko"."genponMaskKubun" <![CDATA[<]]> A2."genponMaskKubun"
         )
         ORDER BY
-        dbt5205."ninteichosaTokkijikoNo"
-        , dbt5205."ninteichosaTokkijikoRemban"
+        "DbT5205NinteichosahyoTokkijiko"."ninteichosaTokkijikoNo"
+        , "DbT5205NinteichosahyoTokkijiko"."ninteichosaTokkijikoRemban"
     </select>
     
     <resultMap id="Result_TokkijikoIchiranJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.TokkijikoIchiranJohoRelateEntity" autoMapping="true">
