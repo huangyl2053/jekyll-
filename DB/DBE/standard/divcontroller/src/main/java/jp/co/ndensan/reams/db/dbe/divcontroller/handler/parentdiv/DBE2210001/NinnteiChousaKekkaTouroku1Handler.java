@@ -306,6 +306,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
             div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getRadJutakuKaishu().setSelectedKey(住宅改修_無);
             div.getTabChosaBasho().setSelectedItem(new tplZaitakuDiv());
             div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoServiceJyokyo().setVisible(true);
+            div.getTabChosaShurui().getGaikyoTokkiInput().getTokki().setDisplayNone(true);
         }
         給付サービスの初期設定(申請書管理番号, 認定調査履歴番号);
         利用施設の初期設定(申請書管理番号, 認定調査履歴番号);
