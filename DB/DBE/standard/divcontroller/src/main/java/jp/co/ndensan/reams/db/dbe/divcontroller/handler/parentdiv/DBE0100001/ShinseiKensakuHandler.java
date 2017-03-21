@@ -702,26 +702,26 @@ public class ShinseiKensakuHandler {
                 ninteibi.setValue(new RDate(認定日.toString()));
                 row.setNinteibi(ninteibi);
             }
-
+            
             Code 介護度 = business.get二次判定要介護状態区分コード();
             Code 厚労省IF識別コード = business.get厚労省IF識別コード();
-            if (介護度 != null && 厚労省IF識別コード != null) {
+            if (介護度 != null && !Code.EMPTY.equals(介護度) && 厚労省IF識別コード != null && !Code.EMPTY.equals(厚労省IF識別コード)) {
                 RString kaigodo = get二次判定結果(厚労省IF識別コード.getColumnValue(), 介護度.getColumnValue());
                 if (!RString.isNullOrEmpty(kaigodo)) {
                     row.setKaigodo(kaigodo);
                 }
-
+                
             }
-
+            
             FlexibleDate 認定開始日 = business.get二次判定認定有効開始年月日();
-            if(認定開始日 != null && !認定開始日.isEmpty()){
+            if (認定開始日 != null && !FlexibleDate.EMPTY.equals(認定開始日)) {
                 TextBoxDate ninteiKaishibi = new TextBoxDate();
                 ninteiKaishibi.setValue(new RDate(認定開始日.toString()));
                 row.setNinteiKaishibi(ninteiKaishibi);
             }
             
             FlexibleDate 認定終了日 = business.get二次判定認定有効終了年月日();
-            if (認定終了日 != null && !認定終了日.isEmpty()) {
+            if (認定終了日 != null && !FlexibleDate.EMPTY.equals(認定終了日)) {
                 TextBoxDate ninteiShuryobi = new TextBoxDate();
                 ninteiShuryobi.setValue(new RDate(認定終了日.toString()));
                 row.setNinteiShuryobi(ninteiShuryobi);
