@@ -41,6 +41,7 @@ public class IImageinputMapperTest extends DbeTestDacBase {
         System.out.println("\t論削フラ：" + entity.is論理削除フラグ());
         System.out.println("\tmc申請日：" + entity.isMatches指定申請日());
         System.out.println("\t意作依日：" + entity.get主治医意見書作成依頼年月日());
+        System.out.println("\t作請区分：" + entity.get作成料請求区分());
         System.out.println("\t意依完日：" + entity.get意見書作成依頼完了日());
         System.out.println("\t仮一次区：" + entity.get仮一次判定区分());
         System.out.println("\tイメージ：" + entity.get意見書イメージ情報().isEmpty());

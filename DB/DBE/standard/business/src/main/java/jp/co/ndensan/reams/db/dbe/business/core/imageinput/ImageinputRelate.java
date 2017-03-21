@@ -10,12 +10,14 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import javax.annotation.CheckForNull;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IOcrData;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResults;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.TreatmentWhenIchijiHanteiZumi;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.imageinput.ImageinputRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.SakuseiryoSeikyuKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5302ShujiiIkenshoJohoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
@@ -162,6 +164,15 @@ public class ImageinputRelate extends RelatedDataBase {
      */
     public int get主治医意見書作成依頼履歴番号() {
         return entity.get主治医意見書作成依頼履歴番号();
+    }
+
+    /**
+     * @return 作成料請求区分
+     */
+    @CheckForNull
+    public SakuseiryoSeikyuKubun get作成料請求区分() {
+        RString code = entity.get作成料請求区分();
+        return SakuseiryoSeikyuKubun.existsCode(code) ? SakuseiryoSeikyuKubun.toValue(code) : null;
     }
 
     /**

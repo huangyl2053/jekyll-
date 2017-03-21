@@ -50,6 +50,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.IkenshoImageJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IIkenshoKomokuMapping;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKomokuMappings;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.SakuseiryoSeikyuKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5302ShujiiIkenshoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5305IkenshoImageJohoEntity;
@@ -524,6 +525,11 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         entity.setShindamMei1(RString.EMPTY);
         entity.setShindamMei2(RString.EMPTY);
         entity.setShindamMei3(RString.EMPTY);
+        SakuseiryoSeikyuKubun ssk = ir.get作成料請求区分();
+        if (ssk != null) {
+            entity.setIkenshoSakuseiKaisuKubun(new Code(ssk.as作成回数区分().getコード()));
+            entity.setZaitakuShisetsuKubun(ssk.as在宅施設区分().getCode());
+        }
         return entity;
     }
 
