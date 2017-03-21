@@ -391,44 +391,61 @@
         ORDER BY dbt5503."kaigoninteiShinsakaiGichoKubunCode" DESC
         , dbt5594."shinsakaiIinCode"
     </select>
-    <select id="get事務局特記情報" resultMap="Result_事務局特記情報"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter" fetchSize="500"  resultOrdered="true">
+    
+    <select id="get事務局特記情報" 
+            resultMap="Result_事務局特記情報"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter"
+            fetchSize="500"
+            resultOrdered="true">
         SELECT
-        dbt5205."shinseishoKanriNo",
-        dbt5205."ninteichosaRirekiNo",
-        dbt5205."ninteichosaTokkijikoNo",
-        dbt5205."ninteichosaTokkijikoRemban",
-        dbt5205."tokkijikoTextImageKubun",
-        dbt5205."tokkiJiko"
-        FROM
-        rgdb."DbT5205NinteichosahyoTokkijiko" AS dbt5205
+        dbt5205_MaxRemban.maxRemban as maxRemban,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5205NinteichosahyoTokkijikoMapper.allColumns_DbT5205NinteichosahyoTokkijiko"/>
+        FROM <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5205NinteichosahyoTokkijikoMapper.noDeleted_DbT5205NinteichosahyoTokkijiko" /> AS dbt5205
+        LEFT JOIN (
+          SELECT "shinseishoKanriNo"
+          ,"ninteichosaRirekiNo"
+          , "ninteichosaTokkijikoNo"
+          , "tokkijikoTextImageKubun"
+          , "genponMaskKubun"
+          , MAX("ninteichosaTokkijikoRemban") as maxRemban
+          FROM rgdb."DbT5205NinteichosahyoTokkijiko"
+          GROUP BY "shinseishoKanriNo"
+          , "ninteichosaRirekiNo"
+          , "ninteichosaTokkijikoNo"
+          , "tokkijikoTextImageKubun"
+          , "genponMaskKubun"
+        ) dbt5205_MaxRemban
+        ON dbt5205_MaxRemban."shinseishoKanriNo" = dbt5205."shinseishoKanriNo"
+        AND dbt5205_MaxRemban."ninteichosaRirekiNo" = dbt5205."ninteichosaRirekiNo"
+        AND dbt5205_MaxRemban."ninteichosaTokkijikoNo" = dbt5205."ninteichosaTokkijikoNo"
+        AND dbt5205_MaxRemban."tokkijikoTextImageKubun" = dbt5205."tokkijikoTextImageKubun"
+        AND dbt5205_MaxRemban."genponMaskKubun" = dbt5205."genponMaskKubun"
         WHERE
         dbt5205."shinseishoKanriNo" IN <foreach collection="shinseishoKanriNoList" item="shinseishoKanriNoList" open="(" separator="," close=")"> #{shinseishoKanriNoList} </foreach>
         AND dbt5205."ninteichosaRirekiNo" IN <foreach collection="ninteichosaRirekiNoList" item="ninteichosaRirekiNoList" open="(" separator="," close=")"> #{ninteichosaRirekiNoList} </foreach>
-        AND NOT EXISTS (SELECT 'X'
-        FROM
-        rgdb."DbT5205NinteichosahyoTokkijiko" AS B1
-        WHERE
-        dbt5205."shinseishoKanriNo" = B1."shinseishoKanriNo"
-        AND dbt5205."ninteichosaTokkijikoNo" = B1."ninteichosaTokkijikoNo"
-        AND dbt5205."ninteichosaTokkijikoRemban" = B1."ninteichosaTokkijikoRemban"
-        AND dbt5205."tokkijikoTextImageKubun" = B1."tokkijikoTextImageKubun"
-        AND dbt5205."genponMaskKubun" = B1."genponMaskKubun"
-        AND dbt5205."ninteichosaRirekiNo" <![CDATA[<]]> B1."ninteichosaRirekiNo"
+        AND NOT EXISTS (
+          SELECT 'X'
+          FROM
+          rgdb."DbT5205NinteichosahyoTokkijiko" AS B1
+          WHERE
+          dbt5205."shinseishoKanriNo" = B1."shinseishoKanriNo"
+          AND dbt5205."ninteichosaTokkijikoNo" = B1."ninteichosaTokkijikoNo"
+          AND dbt5205."ninteichosaTokkijikoRemban" = B1."ninteichosaTokkijikoRemban"
+          AND dbt5205."tokkijikoTextImageKubun" = B1."tokkijikoTextImageKubun"
+          AND dbt5205."genponMaskKubun" = B1."genponMaskKubun"
+          AND dbt5205."ninteichosaRirekiNo" <![CDATA[<]]> B1."ninteichosaRirekiNo"
         )
         AND dbt5205."genponMaskKubun" = #{genponMaskKubun}
         ORDER BY
         dbt5205."ninteichosaTokkijikoNo",
         dbt5205."ninteichosaTokkijikoRemban"
     </select>
-    <resultMap id="Result_事務局特記情報" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijikoEntity" autoMapping="true">
-        <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" />
-        <result property="ninteichosaRirekiNo" column="ninteichosaRirekiNo" />
-        <result property="ninteichosaTokkijikoNo" column="ninteichosaTokkijikoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="ninteichosaTokkijikoRemban" column="ninteichosaTokkijikoRemban" />
-        <result property="tokkijikoTextImageKubun" column="tokkijikoTextImageKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="tokkiJiko" column="tokkiJiko" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+    
+    <resultMap id="Result_事務局特記情報" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.TokkijikoIchiranJohoRelateEntity" autoMapping="true">
+        <result property="maxRemban" column="maxRemban" />
+        <association property="認定調査票特記事項Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5205NinteichosahyoTokkijikoMapper.ResultMap_DbT5205NinteichosahyoTokkijikoEntity" />
     </resultMap>
+    
     <select id="get予防給付" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJokyoEntity"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter" fetchSize="500"  resultOrdered="true">
         SELECT

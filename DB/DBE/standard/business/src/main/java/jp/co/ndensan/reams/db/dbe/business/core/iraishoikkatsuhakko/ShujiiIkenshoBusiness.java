@@ -668,7 +668,7 @@ public class ShujiiIkenshoBusiness {
                 提出期限 = entity.get主治医意見書作成依頼年月日() != null && !entity.get主治医意見書作成依頼年月日().isEmpty()
                         ? get和暦(new RString(entity.get主治医意見書作成依頼年月日().plusDay(期限日数).toString()), 年号フラグ) : RString.EMPTY;
             } else {
-                提出期限 = RString.isNullOrEmpty(entity.get認定申請年月日())
+                提出期限 = !RString.isNullOrEmpty(entity.get認定申請年月日())
                         ? get和暦(new RString(new FlexibleDate(entity.get認定申請年月日()).plusDay(期限日数).toString()), 年号フラグ) : RString.EMPTY;
             }
         } else if (文字列1.equals(processParamter.getTeishutsuKigen())) {

@@ -26,6 +26,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ItiziHanteiEn
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiTaiyosyaJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.TokkijikoIchiranJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jimushinsakaishiryoa3.JimuShinsakaishiryoA3ReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shiryoshinsakai.IJimuShiryoShinsakaiIinMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -216,16 +217,12 @@ public class JimuShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBas
                 } else {
                     サービス状況フラグ = mapper.get状況フラグ(myBatisParameter);
                 }
-                List<DbT5205NinteichosahyoTokkijikoEntity> 特記事項 = mapper.get特記事項(myBatisParameter);
                 List<DbT5304ShujiiIkenshoIkenItemEntity> 主治医意見書 = mapper.get主治医意見書(myBatisParameter);
                 List<DbT5211NinteichosahyoChosaItemEntity> 調査票調査項目 = mapper.get調査票項目(myBatisParameter);
                 List<DbT5211NinteichosahyoChosaItemEntity> 前回調査票調査項目 = mapper.get前回調査票項目(myBatisParameter);
                 List<DbT5304ShujiiIkenshoIkenItemEntity> 前回主治医意見書 = mapper.get前回主治医意見書(myBatisParameter);
                 ShinsakaiSiryoKyotsuEntity 審査会資料共通Entity = kumiawaseCommonBusiness.getCommonInfo(共通情報, entity.getShinseishoKanriNo(), true);
-                List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報 = new ArrayList<>();
-                if (審査会資料共通Entity != null) {
-                    特記情報 = get特記情報(審査会資料共通Entity);
-                }
+                List<TokkijikoIchiranJohoRelateEntity> 特記情報 = get特記情報(審査会資料共通Entity);
                 主治医意見書情報.addAll(主治医意見書);
                 IchijihanteikekkahyoItemSetteiA3 一次判定結果票Item = new IchijihanteikekkahyoItemSetteiA3();
                 IchijihanteikekkahyoA3Entity 一次判定結果票Entity = 一次判定結果票Item.set項目(
@@ -249,7 +246,7 @@ public class JimuShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBas
         return null;
     }
 
-    private List<DbT5205NinteichosahyoTokkijikoEntity> get特記情報(ShinsakaiSiryoKyotsuEntity entity) {
+    private List<TokkijikoIchiranJohoRelateEntity> get特記情報(ShinsakaiSiryoKyotsuEntity entity) {
         List<ShinseishoKanriNo> 申請書管理番号リスト = new ArrayList<>();
         List<Integer> 認定調査依頼履歴番号リスト = new ArrayList<>();
         申請書管理番号リスト.add(entity.getShinseishoKanriNo());

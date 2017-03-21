@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ItiziHanteiEn
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiTaiyosyaJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.TokkijikoIchiranJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijikoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJokyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity;
@@ -71,12 +72,12 @@ public interface IJimuShiryoShinsakaiIinMapper {
     List<ShinsakaiIinJohoEntity> get事務局委員氏名(JimuShinsakaiIinJohoMyBatisParameter parameter);
 
     /**
-     * 事務局特記情報を取得します。
+     * 事務局用特記事項一覧情報を取得する。
      *
-     * @param parameter JimuShinsakaiIinJohoMyBatisParameter
-     * @return List<DbT5205NinteichosahyoTokkijikoEntity> 事務局特記情報
+     * @param parameter IinTokkiJikouItiziHanteiMyBatisParameter
+     * @return List<TokkijikoIchiranJohoRelateEntity> 特記事項一覧情報
      */
-    List<DbT5205NinteichosahyoTokkijikoEntity> get事務局特記情報(JimuShinsakaiIinJohoMyBatisParameter parameter);
+    List<TokkijikoIchiranJohoRelateEntity> get事務局特記情報(JimuShinsakaiIinJohoMyBatisParameter parameter);
 
     /**
      * 予防給付サービス状況を取得します。
