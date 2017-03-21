@@ -86,6 +86,7 @@ public class NinteiShinseishaFinderHandler {
         if (parameter.get業務分類() != null) {
             div.getDdlHokenshaNumber().loadHokenshaList(parameter.get業務分類());
         }
+        set月例処理未完了(parameter.is月例処理未完了());
         setみなし2号申請チェック(parameter.isCheckedみなし2号申請());
         if (parameter.get証記載保険者番号() != null) {
             div.getDdlHokenshaNumber().setSelectedShoKisaiHokenshaNoIfExist(parameter.get証記載保険者番号());
@@ -571,7 +572,15 @@ public class NinteiShinseishaFinderHandler {
         }
         div.getChkMinashiFlag().setSelectedItemsByKey(selectedItems);
     }
-    
+
+    private void set月例処理未完了(boolean is月例処理未完了) {
+        if (is月例処理未完了 == true) {
+            List<RString> selectedkeyMikann = new ArrayList<>();
+            selectedkeyMikann.add(処理状態未完了);
+            div.getChkGetsureiShori().setSelectedItemsByKey(selectedkeyMikann);
+        }
+    }
+
     public void setDisabledKanryoJoho() {
         div.getChkIchijiHantei().setDisabled(true);
         div.getChkShinseiUketsuke().setDisabled(true);

@@ -191,9 +191,9 @@ public class GaikyoChosaDataOutputProcess extends BatchProcessBase<GaikyoChosaDa
         csvEntity.set特記(convert改行(entity.get特記()));
         csvEntity.set認定調査特記事項受付年月日(entity.get認定調査特記事項受付年月日());
         csvEntity.set認定調査特記事項受領年月日(entity.get認定調査特記事項受領年月日());
-        csvEntity.set住宅改修_改修箇所(convert改行(entity.get住宅改修_改修箇所()));
-        csvEntity.set市町村特別給付サービス種類名(convert改行(entity.get市町村特別給付サービス種類名()));
-        csvEntity.set介護保険給付以外の在宅サービス種類名(convert改行(entity.get介護保険給付以外の在宅サービス種類名()));
+        csvEntity.set住宅改修_改修箇所(entity.get住宅改修_改修箇所());
+        csvEntity.set市町村特別給付サービス種類名(entity.get市町村特別給付サービス種類名());
+        csvEntity.set介護保険給付以外の在宅サービス種類名(entity.get介護保険給付以外の在宅サービス種類名());
         csvEntity.set認定調査認知症高齢者の日常生活自立度コード(entity.get認定調査認知症高齢者の日常生活自立度コード());
         csvEntity.set認定調査認知症高齢者の日常生活自立度(
                 RString.isNullOrEmpty(entity.get認定調査認知症高齢者の日常生活自立度コード())
@@ -412,10 +412,10 @@ public class GaikyoChosaDataOutputProcess extends BatchProcessBase<GaikyoChosaDa
         for (DbT5209NinteichosahyoKinyuItemEntity 記入項目 : 記入項目リスト) {
             if (記入項目.getRemban() == 連番1) {
                 csvEntity.set記入項目連番01(記入項目.getRemban());
-                csvEntity.setサービスの状況記入01(記入項目.getServiceJokyoKinyu());
+                csvEntity.setサービスの状況記入01(convert改行(記入項目.getServiceJokyoKinyu()));
             } else if (記入項目.getRemban() == 連番2) {
                 csvEntity.set記入項目連番02(記入項目.getRemban());
-                csvEntity.setサービスの状況記入02(記入項目.getServiceJokyoKinyu());
+                csvEntity.setサービスの状況記入02(convert改行(記入項目.getServiceJokyoKinyu()));
             }
         }
         return csvEntity;

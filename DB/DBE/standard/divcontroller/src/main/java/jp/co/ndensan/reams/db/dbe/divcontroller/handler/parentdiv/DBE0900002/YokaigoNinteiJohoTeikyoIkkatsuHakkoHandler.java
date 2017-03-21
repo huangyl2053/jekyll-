@@ -290,8 +290,8 @@ public class YokaigoNinteiJohoTeikyoIkkatsuHakkoHandler {
         return new YokaigoNinteiJohoTeikyoIkkatsuHakkoParameter(
                 div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value(),
                 div.getRadKensakuKomoku().getSelectedKey().equals(二次判定日),
-                div.getTxtNijiHanteibi().getFromValue(),
-                div.getTxtNijiHanteibi().getToValue(),
+                div.getTxtNijiHanteibi().getFromValue().toDateString(),
+                div.getTxtNijiHanteibi().getToValue().toDateString(),
                 div.getRadKensakuKomoku().getSelectedKey().equals(被保険者番号),
                 div.getTxtHihokenshaNo().getValue(),
                 div.getChkDoiNashiFukumu().isAllSelected(),

@@ -58,6 +58,10 @@ public class ShinseiKensaku {
     private static final RString MENUID_DBEMN72001 = new RString("DBEMN72001");
     private static final RString MENUID_DBEMN71003 = new RString("DBEMN71003");
     private static final RString WORKFLOW_KEY_KANRYO = new RString("Kanryo");
+    private static final RString 認定日 = new RString("ninteibi");
+    private static final RString 介護度 = new RString("kaigodo");
+    private static final RString 認定開始日 = new RString("ninteiKaishibi");
+    private static final RString 認定終了日 = new RString("ninteiShuryobi");
 
     /**
      * 画面初期化処理です。

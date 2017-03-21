@@ -45,6 +45,7 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinseikensaku.ShinseiKensakuMapperParameter"
             fetchSize="500">
         <bind name="forList" value="true" />
+        <bind name="forNijiHantei" value="true" />
 
         SELECT
         <include refid="selectShinseiJoho"/>
@@ -61,6 +62,7 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinseikensaku.ShinseiKensakuMapperParameter"
             fetchSize="500">
         <bind name="forList" value="false" />
+        <bind name="forNijiHantei" value="false" />
 
         SELECT
         <include refid="selectShinseiJoho"/>
@@ -77,6 +79,7 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinseikensaku.ShinseiKensakuMapperParameter"
             fetchSize="500">
         <bind name="forList" value="false" />
+        <bind name="forNijiHantei" value="false" />
 
         SELECT
         <include refid="selectShinseiJoho"/>
@@ -111,6 +114,13 @@
         DbT7051KoseiShichosonMaster."shichosonMeisho",
         DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo",
         DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo",
+        <if test="forNijiHantei == true">
+            DbT5102NinteiKekkaJoho."nijiHanteiYokaigoJotaiKubunCode",
+            DbT5102NinteiKekkaJoho."nijiHanteiYMD",
+            DbT5102NinteiKekkaJoho."nijiHanteiNinteiYukoKikan",
+            DbT5102NinteiKekkaJoho."nijiHanteiNinteiYukoKaishiYMD",
+            DbT5102NinteiKekkaJoho."nijiHanteiNinteiYukoShuryoYMD",
+        </if>
         <if test="forList == false">
             zenkaiNinteiShinseiJoho."nijiHanteiYokaigoJotaiKubunCode" AS "zenkai_nijiHanteiYokaigoJotaiKubunCode",
             zenkaiNinteiShinseiJoho."nijiHanteiNinteiYukoKikan" AS "zenkai_nijiHanteiNinteiYukoKikan",

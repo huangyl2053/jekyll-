@@ -162,7 +162,7 @@ public class NinteiChosaTokusokujoBodyEditor implements INinteiChosaTokusokujoEd
     }
 
     private void edit宛名その他(NinteiChosaTokusokujoReportSource source) {
-        source.sonota = entity.getShoKisaiHokenshaNo();
+        source.sonota = entity.getHihokenshaNo();
     }
 
     private void edit宛名連番(NinteiChosaTokusokujoReportSource source) {

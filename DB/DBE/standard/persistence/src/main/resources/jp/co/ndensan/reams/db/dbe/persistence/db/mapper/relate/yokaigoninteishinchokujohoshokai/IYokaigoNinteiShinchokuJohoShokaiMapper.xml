@@ -152,7 +152,6 @@
         <where>
             DbT5101."logicalDeletedFlag" = False
             <if test="!kensakuOptionKey0">
-                AND DbT5101."shoriJotaiKubun" IN (#{tuujou}, #{ennki})
                 AND DbT5105."centerSoshinYMD" IS NULL
             </if> 
             <if test="radKensakuHohoKey0">
@@ -180,6 +179,7 @@
                 </if>
             </if>
             <if test="!kensakuOptionKey1">
+                AND DbT5101."shoriJotaiKubun" IN (#{tuujou}, #{ennki})
                 AND DbT5101."torisageKubunCode" = #{torisageKubunCode}
             </if>
         </where>
@@ -189,25 +189,25 @@
     <sql id="tablesWithParameter">
         <!-- FROM -->
         DbT5101
-        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
+        LEFT JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
         ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
-        INNER JOIN rgdb."DbT5105NinteiKanryoJoho" AS DbT5105
+        LEFT JOIN rgdb."DbT5105NinteiKanryoJoho" AS DbT5105
         ON DbT5105."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-        INNER JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS DbT5911
+        LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS DbT5911
         ON DbT5911."shujiiIryokikanCode"=DbT5101."shujiiIryokikanCode"
         AND DbT5911."shichosonCode" = DbT5101."shichosonCode"
-        INNER JOIN rgdb."DbT5912ShujiiJoho" AS DbT5912
+        LEFT JOIN rgdb."DbT5912ShujiiJoho" AS DbT5912
         ON DbT5912."shujiiIryokikanCode" = DbT5101."shujiiIryokikanCode"
         AND DbT5912."shujiiCode" = DbT5101."shujiiCode"
         AND DbT5912."shichosonCode" = DbT5101."shichosonCode"
-        INNER JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910
+        LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910
         ON DbT5910."ninteichosaItakusakiCode" = DbT5101."ninteiChosaItakusakiCode"
         AND DbT5910."shichosonCode" = DbT5101."shichosonCode"
-        INNER JOIN rgdb."DbT5913ChosainJoho" AS DbT5913
+        LEFT JOIN rgdb."DbT5913ChosainJoho" AS DbT5913
         ON DbT5913."ninteiChosaItakusakiCode" = DbT5101."ninteiChosaItakusakiCode"
         AND DbT5913."ninteiChosainCode" = DbT5101."ninteiChosainCode"
         AND DbT5913."shichosonCode" = DbT5101."shichosonCode"
-        INNER JOIN rgdb."DbT5201NinteichosaIraiJoho" DbT5201 
+        LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" DbT5201 
         ON DbT5101."shinseishoKanriNo" = DbT5201."shinseishoKanriNo" 
         AND NOT EXISTS ( 
         SELECT
@@ -218,7 +218,7 @@
         DbT5201."shinseishoKanriNo" = xDbT5201."shinseishoKanriNo" 
         AND DbT5201."ninteichosaIraiRirekiNo" <![CDATA[<]]> xDbT5201."ninteichosaIraiRirekiNo"
         ) 
-        INNER JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" DbT5301 
+        LEFT JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" DbT5301 
         ON DbT5101."shinseishoKanriNo" = DbT5301."shinseishoKanriNo" 
         AND NOT EXISTS ( 
         SELECT
@@ -229,7 +229,7 @@
         DbT5301."shinseishoKanriNo" = xDbT5301."shinseishoKanriNo" 
         AND DbT5301."ikenshoIraiRirekiNo" <![CDATA[<]]> xDbT5301."ikenshoIraiRirekiNo"
         ) 
-        INNER JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" DbT5202 
+        LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" DbT5202 
         ON DbT5101."shinseishoKanriNo" = DbT5202."shinseishoKanriNo" 
         AND NOT EXISTS ( 
         SELECT
@@ -240,7 +240,7 @@
         DbT5202."shinseishoKanriNo" = xDbT5202."shinseishoKanriNo" 
         AND DbT5202."ninteichosaRirekiNo" <![CDATA[<]]> xDbT5202."ninteichosaRirekiNo"
         ) 
-        INNER JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS DbT5302
+        LEFT JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS DbT5302
         ON DbT5302."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         AND DbT5302."ikenshoIraiRirekiNo" = DbT5301."ikenshoIraiRirekiNo"
         <where>

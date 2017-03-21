@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.ichijipanteisyori.IChiJiPanTeiSyo
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
@@ -165,6 +166,7 @@ public class IchijiHanteiHandler {
         div.getIchijiHanteiKensakuJoken().getTxtMaxCount().setValue(new Decimal(最大表示件数.toString()));
         div.getIchijiHanteiKensakuJoken().getTxtMaxCount().setMaxValue(new Decimal(最大上限.toString()));
         div.getIchijiHanteiKensakuJoken().getTxtHihokenshaNo().clearValue();
+        div.getIchijiHanteiKensakuJoken().getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
     }
 
     /**

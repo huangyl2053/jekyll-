@@ -147,9 +147,6 @@ public class NinnteiChousaKekkaTouroku1 {
         accessLog.store(new ShoKisaiHokenshaNo(証記載保険者番号), 被保険者番号, expandedInfo);
         accessLog.flushBy(AccessLogType.照会);
 
-        if (概況特記出力しない.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
-            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(new RString("btnGaikyoTokkiInput"), true);
-        }
         NinteichosahyoTokkijikoManager manager = InstanceProvider.create(NinteichosahyoTokkijikoManager.class);
         List<NinteichosahyoTokkijiko> 特記事項リスト = manager.get認定調査票_特記情報(申請書管理番号, 認定調査履歴番号);
         boolean isイメージ = false;
@@ -183,6 +180,17 @@ public class NinnteiChousaKekkaTouroku1 {
                 return ResponseData.of(div).addMessage(message).respond();
             }
         }
+
+        if (概況特記出力しない.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
+            if (UICONTAINERID_DBEUC20601.equals(ResponseHolder.getUIContainerId())) {
+                return ResponseData.of(div).setState(DBE2210001StateName.調査結果登録_基本運用_特記なし);
+            } else if (UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId())
+                    || UICONTAINERID_DBEUC40501.equals(ResponseHolder.getUIContainerId())) {
+                return ResponseData.of(div).setState(DBE2210001StateName.調査結果登録_マスキング_特記なし);
+            } else {
+                return ResponseData.of(div).setState(DBE2210001StateName.調査結果登録_特記なし);
+            }
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -194,7 +202,14 @@ public class NinnteiChousaKekkaTouroku1 {
      */
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onActive(NinnteiChousaKekkaTouroku1Div div) {
         if (概況特記出力しない.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
-            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(new RString("btnGaikyoTokkiInput"), true);
+            if (UICONTAINERID_DBEUC20601.equals(ResponseHolder.getUIContainerId())) {
+                return ResponseData.of(div).setState(DBE2210001StateName.調査結果登録_基本運用_特記なし);
+            } else if (UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId())
+                    || UICONTAINERID_DBEUC40501.equals(ResponseHolder.getUIContainerId())) {
+                return ResponseData.of(div).setState(DBE2210001StateName.調査結果登録_マスキング_特記なし);
+            } else {
+                return ResponseData.of(div).setState(DBE2210001StateName.調査結果登録_特記なし);
+            }
         }
         return ResponseData.of(div).respond();
     }

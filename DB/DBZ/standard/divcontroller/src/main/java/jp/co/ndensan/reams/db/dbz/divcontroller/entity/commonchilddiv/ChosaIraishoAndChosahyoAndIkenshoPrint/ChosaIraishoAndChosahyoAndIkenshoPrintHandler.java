@@ -1470,7 +1470,13 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 }
                 item.setSeikyuIryokikanName(business.get医療機関名称());
                 item.setSeikyuIryokikanDaihyoName(business.get代表者名());
-                item.setSeikyuIryokikanYubinNo(business.get医療機関郵便番号());
+                RString yubinNo;
+                if (!RString.isNullOrEmpty(business.get医療機関郵便番号())) {
+                    yubinNo = new YubinNo(business.get医療機関郵便番号()).getEditedYubinNo();
+                } else {
+                    yubinNo = RString.EMPTY;
+                }
+                item.setSeikyuIryokikanYubinNo(yubinNo);
                 item.setSeikyuIryokikanJusho(business.get医療機関住所());
                 item.setSeikyuIryokikanTel(business.get医療機関電話番号());
                 itemList.add(item);
