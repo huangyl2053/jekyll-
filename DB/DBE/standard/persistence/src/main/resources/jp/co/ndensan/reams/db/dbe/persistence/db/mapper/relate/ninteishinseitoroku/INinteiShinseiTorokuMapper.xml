@@ -327,6 +327,7 @@
         <result column = "shichosonCode" property="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result column = "kateiHomonFlag" property="家庭訪問の有無"/>
         <result column = "shikibetsuCode" property="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result column = "shoKisaiHokenshaNo" property="証記載保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result column = "renrakuJikoToChosain" property="調査員への連絡事項" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result column = "renrakuJikoToShujii" property="主治医への連絡事項" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result column = "shichosonRenrakuJiko" property="市町村連絡事項" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -426,6 +427,7 @@
         , T5101."enkiMikomiKaishiYMD"
         , T5101."enkiMikomiShuryoYMD"
         , T5101."shichosonCode"
+        , T5101."shoKisaiHokenshaNo"
         , T5101."shinsakaiYusenWaritsukeKubunCode"
         , T5101."jidoWariateJogaishaKubun"
         , T5101."minashiNigoEtcTaishoFlag"

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1010001;
 
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseitoroku.NinteiShinseiTorokuResult;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010001.NinteiShinseiTorokuDiv;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
@@ -190,15 +191,17 @@ public class NinteiShinseiTorokuValidationHandler {
      * 審査会割付データ存在チェック
      *
      * @param result NinteiShinseiTorokuResult
-     * @return ValidationMessageControlPairs
+     * @return boolean
      */
-    public ValidationMessageControlPairs 審査会割付データ存在チェック(NinteiShinseiTorokuResult result) {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if ((result.get判定結果コード() == null || result.get判定結果コード().isEmpty() || result.get認定審査会割当完了年月日() != null)
-                && result.get介護認定審査会割当年月日() != null) {
-            validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.審査会割当済のため処理不可));
-        }
-        return validationMessages;
+    public boolean 審査会割付データ存在チェック(NinteiShinseiTorokuResult result) {
+//        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+//        if ((result.get判定結果コード() == null || result.get判定結果コード().isEmpty() || result.get認定審査会割当完了年月日() != null)
+//                && result.get介護認定審査会割当年月日() != null) {
+//            validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.審査会割当済のため処理不可));
+//    }
+//        return validationMessages;
+        return (result.get判定結果コード() == null || result.get判定結果コード().isEmpty() || result.get認定審査会割当完了年月日() != null)
+                && result.get介護認定審査会割当年月日() != null;
     }
 
     /**
@@ -225,24 +228,19 @@ public class NinteiShinseiTorokuValidationHandler {
      * 依頼完了チェック
      *
      * @param result NinteiShinseiTorokuResult
-     * @return ValidationMessageControlPairs
+     * @return boolean
      */
-    public ValidationMessageControlPairs 依頼完了チェック(NinteiShinseiTorokuResult result) {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+    public boolean 依頼完了チェック(NinteiShinseiTorokuResult result) {
+//        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         boolean is転入申請 = NinteiShinseiShinseijiKubunCode.転入申請.getコード().equals(result.get認定申請区分申請時コード().value());
         boolean 認定調査依頼完了フラグ = result.get認定調査依頼完了年月日() != null && !result.get認定調査依頼完了年月日().isEmpty();
         boolean 主治医意見書作成依頼完了フラグ = result.get主治医意見書作成依頼完了年月日() != null && !result.get主治医意見書作成依頼完了年月日().isEmpty();
-        if (!is転入申請 && 認定調査依頼完了フラグ && 主治医意見書作成依頼完了フラグ) {
-            validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.認定調査と主治医意見書作成依頼済のため処理不可));
-            return validationMessages;
-        }
-        if (!is転入申請 && 認定調査依頼完了フラグ) {
-            validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.認定調査依頼済のため処理不可));
-        }
-        if (!is転入申請 && 主治医意見書作成依頼完了フラグ) {
-            validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.主治医意見書作成依頼済のため処理不可));
-        }
-        return validationMessages;
+        return !is転入申請 && (認定調査依頼完了フラグ || 主治医意見書作成依頼完了フラグ);
+//        if (!is転入申請 && (認定調査依頼完了フラグ || 主治医意見書作成依頼完了フラグ)) {
+//            validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.審査会割当済のため処理不可));
+//            return validationMessages;
+//        }
+//        return validationMessages;
     }
 
     private static enum NinteiShinseiTorokuMessages implements IValidationMessage {
@@ -256,8 +254,10 @@ public class NinteiShinseiTorokuValidationHandler {
         センタ送信データ出力完了更新不可(UrErrorMessages.更新不可, "センタ送信データ出力が完了している"),
         認定審査会割当完了更新不可(UrErrorMessages.更新不可, "認定審査会割当が完了している"),
         終了日が開始日以前(UrErrorMessages.終了日が開始日以前),
-        審査会割当済のため処理不可(DbeErrorMessages.審査会割当済のため処理不可),
-        認定調査依頼済のため処理不可(DbeErrorMessages.依頼済のため処理不可, "認定調査依頼"),
+        //審査会割当済のため処理不可(DbeErrorMessages.審査会割当済のため処理不可),
+        審査会割当済のため処理不可(DbeWarningMessages.審査会割当済のため処理不可),
+        //認定調査依頼済のため処理不可(DbeErrorMessages.依頼済のため処理不可, "認定調査依頼"),
+        依頼済のため処理不可(DbeWarningMessages.依頼済のため処理不可),
         主治医意見書作成依頼済のため処理不可(DbeErrorMessages.依頼済のため処理不可, "主治医意見書作成依頼"),
         認定調査と主治医意見書作成依頼済のため処理不可(DbeErrorMessages.依頼済のため処理不可, "認定調査依頼・主治医意見書作成依頼"),
         延期見込期間または延期理由必須(UrErrorMessages.未入力, "延期登録の場合、延期見込期間または延期理由"),

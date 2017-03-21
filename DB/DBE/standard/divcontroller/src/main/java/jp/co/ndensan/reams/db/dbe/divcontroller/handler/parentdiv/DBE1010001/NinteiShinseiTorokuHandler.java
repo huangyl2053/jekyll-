@@ -29,6 +29,8 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiT
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.TorisageKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiTodokedesha.NinteiShinseiTodokedesha.NinteiShinseiTodokedeshaDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.ChosaItakusakiAndChosainInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
@@ -64,7 +66,7 @@ public class NinteiShinseiTorokuHandler {
     private static final RString みなし２号対象 = new RString("みなし２号");
     private static final RString KEY1 = new RString("key1");
     private static final RString 四マスタ管理方法_構成市町村 = new RString("1");
-
+    private static final RString 単純照会状態 = new RString("SimpleShokaiMode");
     /**
      * コンストラクタです。
      *
@@ -92,8 +94,8 @@ public class NinteiShinseiTorokuHandler {
         div.getCcdShinseiSonotaJohoInput().initialize();
 
         if (result != null) {
-            if (result.get市町村コード() != null) {
-                div.getCcdShikakuInfo().initialize(result.get市町村コード().value(), 被保険者番号);
+            if (result.get証記載保険者番号() != null) {
+                div.getCcdShikakuInfo().initialize(result.get証記載保険者番号(), 被保険者番号);
             }
             setCommonDiv(result, 管理番号);
         } else {
@@ -596,6 +598,50 @@ public class NinteiShinseiTorokuHandler {
             ((ChoikiInputDiv) div.getCcdShinseiTodokedesha().getCcdChoikiInput()).setDisplayNone(ninteiTandokuDounyuFlag);
             div.getCcdShinseiTodokedesha().set状態(new RString(NinteiShinseiTodokedeshaDiv.DisplayType.管外.toString()));
         }
+    }
+    
+    /**
+     * 照会状態を設定します。
+     * 
+     */
+    public void setShokai() {
+        div.getRadMode().setDisabled(true);
+        div.getPnlShinseishaJoho().setReadOnly(true);
+        div.getPnlEnki().setReadOnly(true);
+        div.getPnlNinteiShinseiDetail().getCcdKaigoNinteiShinseiKihon().setReadOnly(true);
+        div.getPnlNinteiShinseiDetail().getCcdShinseiTodokedesha().setReadOnly(true);
+        div.getPnlNinteiShinseiDetail().getServiceDel().setReadOnly(true);
+        div.getPnlNinteiShinseiDetail().getSinseiTorisage().setReadOnly(true);
+        div.getPnlNinteiShinseiDetail().getCcdZenkaiNinteiKekkaJoho().setReadOnly(true);
+        div.getPnlNinteiShinseiDetail().getCcdNinteiInput().setReadOnly(true);
+        div.getPnlNinteiShinseiDetail().getCcdShinseiSonotaJohoInput().setReadOnly(true);
+        div.getPnlNinteiShinseiDetail().getHomonSaki().setReadOnly(true);
+        div.getPnlNinteiShinseiDetail().getShisetsuJoho().setReadOnly(true);
+        div.getPnlNinteiShinseiDetail().getChkNinteiTsuchishoDoi().setReadOnly(true);
+        div.getPnlNinteiShinseiDetail().getChkJohoTeikyoDoi().setReadOnly(true);
+        div.getPnlNinteiShinseiDetail().getDdlShinsakaiYusenKubun().setReadOnly(true);
+        div.getPnlNinteiShinseiDetail().getDdlWariateKubun().setReadOnly(true);
+        div.getPnlNinteiShinseiDetail().getCcdShujiiIryokikanAndShujiiInput().getBtnIryokikanGuide().setDisabled(true);
+        div.getPnlNinteiShinseiDetail().getCcdShujiiIryokikanAndShujiiInput().getBtnShujiiGuide().setDisabled(true);
+        div.getPnlNinteiShinseiDetail().getCcdShujiiIryokikanAndShujiiInput().getTxtIryoKikanCode().setDisabled(true);
+        div.getPnlNinteiShinseiDetail().getCcdShujiiIryokikanAndShujiiInput().getTxtIryoKikanName().setDisabled(true);
+        div.getPnlNinteiShinseiDetail().getCcdShujiiIryokikanAndShujiiInput().getTxtShujiiCode().setDisabled(true);
+        div.getPnlNinteiShinseiDetail().getCcdShujiiIryokikanAndShujiiInput().getTxtShujiiName().setDisabled(true);
+        ((ShujiiIryokikanAndShujiiInputDiv) div.getPnlNinteiShinseiDetail().getCcdShujiiIryokikanAndShujiiInput()).getBtnZenkaiIrokikanJoho().setDisabled(true);
+        ((ShujiiIryokikanAndShujiiInputDiv) div.getPnlNinteiShinseiDetail().getCcdShujiiIryokikanAndShujiiInput()).getBtnClear().setDisabled(true);
+        ((ShujiiIryokikanAndShujiiInputDiv) div.getPnlNinteiShinseiDetail().getCcdShujiiIryokikanAndShujiiInput()).getBtnShujiiRenrakuJiko().setDisabled(false);
+//        div.getPnlNinteiShinseiDetail().getCcdChodsItakusakiAndChosainInput().getBtnChosaItakusakiGuide().setDisabled(true);
+//        div.getPnlNinteiShinseiDetail().getCcdChodsItakusakiAndChosainInput().getBtnChosainGuide().setDisabled(true);
+//        div.getPnlNinteiShinseiDetail().getCcdChodsItakusakiAndChosainInput().getTxtChosaItakusakiCode().setDisabled(true);
+//        div.getPnlNinteiShinseiDetail().getCcdChodsItakusakiAndChosainInput().getTxtChosaItakusakiName().setDisabled(true);
+//        div.getPnlNinteiShinseiDetail().getCcdChodsItakusakiAndChosainInput().getTxtChosainCode().setDisabled(true);
+//        div.getPnlNinteiShinseiDetail().getCcdChodsItakusakiAndChosainInput().getTxtChosainName().setDisabled(true);
+//        ((ChosaItakusakiAndChosainInputDiv) div.getPnlNinteiShinseiDetail().getCcdChodsItakusakiAndChosainInput()).getBtnChosainRenrakuJiko().setDisabled(false);
+        div.getPnlNinteiShinseiDetail().getCcdChodsItakusakiAndChosainInput().initialize(単純照会状態);
+        ((ChosaItakusakiAndChosainInputDiv) div.getPnlNinteiShinseiDetail().getCcdChodsItakusakiAndChosainInput()).getBtnClear().setDisabled(false);
+        ((ChosaItakusakiAndChosainInputDiv) div.getPnlNinteiShinseiDetail().getCcdChodsItakusakiAndChosainInput()).getBtnZenkaiFukusha().setDisabled(false);
+        div.setHdnRenrakusakiReadOnly(new RString("1"));
+        div.setHdnJogaiMode(RString.EMPTY);
     }
 
     private RDate flexibleDateToRDate(FlexibleDate date) {

@@ -64,7 +64,7 @@ public class NinteiShinseiRenrakusakiJoho {
         getHandler(div).set連絡先入力の各項目をクリア();
         div.getBtnShinkiTsuika().setDisabled(true);
         div.getDgRenrakusakiIchiran().setReadOnly(true);
-        div.getBtnFukushaTsuika().setDisabled(false);
+        div.getBtnFukushaTsuika().setDisabled(true);
         div.getBtnKakutei().setDisabled(true);
         div.getDdlRenrakusakiKubun().setDisabled(false);
         div.getDdlTsuzukigara().setDisabled(false);
@@ -84,7 +84,7 @@ public class NinteiShinseiRenrakusakiJoho {
         div.setMode_ShoriType(NinteiShinseiRenrakusakiJohoDiv.ShoriType.InputMode);
         getHandler(div).set連絡先入力();
         getHandler(div).set画面項目の使用可();
-        div.getBtnShinkiTsuika().setDisabled(false);
+        div.getBtnShinkiTsuika().setDisabled(true);
         div.getDgRenrakusakiIchiran().setReadOnly(true);
         div.getBtnFukushaTsuika().setDisabled(true);
         return ResponseData.of(div).respond();
@@ -137,6 +137,8 @@ public class NinteiShinseiRenrakusakiJoho {
     public ResponseData<NinteiShinseiRenrakusakiJohoDiv> onClick_btnShusei(NinteiShinseiRenrakusakiJohoDiv div) {
         getHandler(div).set連絡先入力();
         div.setMode_ShoriType(NinteiShinseiRenrakusakiJohoDiv.ShoriType.KoshinMode);
+        div.getBtnShinkiTsuika().setDisabled(true);
+        div.getBtnFukushaTsuika().setDisabled(true);
         return ResponseData.of(div).respond();
     }
 

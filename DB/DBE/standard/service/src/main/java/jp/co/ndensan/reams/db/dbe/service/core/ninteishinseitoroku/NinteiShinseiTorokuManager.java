@@ -31,6 +31,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5120ShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5150RenrakusakiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1008IryohokenKanyuJokyoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5102NinteiKekkaJohoDac;
@@ -38,6 +40,8 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5105NinteiKanryoJohoDa
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5120ShinseitodokedeJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5121ShinseiRirekiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5150RenrakusakiJohoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5201NinteichosaIraiJohoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5301ShujiiIkenshoIraiJohoDac;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.ShikibetsuTaishoSearchEntityHolder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
@@ -76,6 +80,8 @@ public class NinteiShinseiTorokuManager {
     private final DbT5123NinteiKeikakuJohoDac dbt5123Dac;
     private final DbT5102NinteiKekkaJohoDac dbt5102Dac;
     private final DbT5105NinteiKanryoJohoDac dbt5105Dac;
+    private final DbT5201NinteichosaIraiJohoDac dbt5201Dac;
+    private final DbT5301ShujiiIkenshoIraiJohoDac dbt5301Dac;
 
     /**
      * コンストラクタです。
@@ -91,6 +97,8 @@ public class NinteiShinseiTorokuManager {
         this.dbt5123Dac = InstanceProvider.create(DbT5123NinteiKeikakuJohoDac.class);
         this.dbt5102Dac = InstanceProvider.create(DbT5102NinteiKekkaJohoDac.class);
         this.dbt5105Dac = InstanceProvider.create(DbT5105NinteiKanryoJohoDac.class);
+        this.dbt5201Dac = InstanceProvider.create(DbT5201NinteichosaIraiJohoDac.class);
+        this.dbt5301Dac = InstanceProvider.create(DbT5301ShujiiIkenshoIraiJohoDac.class);
     }
 
     /**
@@ -102,7 +110,8 @@ public class NinteiShinseiTorokuManager {
             DbT5590ShinsakaiIinJogaiJohoDac dbt5590Dac, DbT5101NinteiShinseiJohoDac dbt5101Dac,
             DbT5121ShinseiRirekiJohoDac dbt5121Dac, DbT1008IryohokenKanyuJokyoDac dbt1008Dac,
             DbT5120ShinseitodokedeJohoDac dbt5120Dac, DbT5102NinteiKekkaJohoDac dbt5102Dac,
-            DbT5123NinteiKeikakuJohoDac dbt5123Dac, DbT5105NinteiKanryoJohoDac dbt5105Dac) {
+            DbT5123NinteiKeikakuJohoDac dbt5123Dac, DbT5105NinteiKanryoJohoDac dbt5105Dac,
+            DbT5201NinteichosaIraiJohoDac dbt5201Dac, DbT5301ShujiiIkenshoIraiJohoDac dbt5301Dac) {
         this.mapperProvider = mapperProvider;
         this.dbt5150Dac = dbt5150Dac;
         this.dbt5590Dac = dbt5590Dac;
@@ -113,6 +122,8 @@ public class NinteiShinseiTorokuManager {
         this.dbt5123Dac = dbt5123Dac;
         this.dbt5102Dac = dbt5102Dac;
         this.dbt5105Dac = dbt5105Dac;
+        this.dbt5201Dac = dbt5201Dac;
+        this.dbt5301Dac = dbt5301Dac;
     }
 
     /**
@@ -478,4 +489,30 @@ public class NinteiShinseiTorokuManager {
                 被保険者番号, 認定申請年月日, 申請書区分, 認定申請区分_申請時_コード, 認定申請区分_法令_コード);
         return null != retList && !retList.isEmpty();
     }
+    
+    /**
+     * データ存在チェック
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return TRUE:有り FALSE:なし
+     */
+    public boolean has調査依頼データ(ShinseishoKanriNo 申請書管理番号) {
+        List<DbT5201NinteichosaIraiJohoEntity> retList = dbt5201Dac.selectBy申請書管理番号(申請書管理番号);
+        return null != retList && !retList.isEmpty();
+    }
+    
+    /**
+     * データ存在チェック
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return TRUE:有り FALSE:なし
+     */
+    public boolean has意見書依頼データ(ShinseishoKanriNo 申請書管理番号) {
+        List<DbT5301ShujiiIkenshoIraiJohoEntity> retList = dbt5301Dac.selectBy申請書管理番号(申請書管理番号);
+        return null != retList && !retList.isEmpty();
+    }
+    
+    
+    
+    
 }

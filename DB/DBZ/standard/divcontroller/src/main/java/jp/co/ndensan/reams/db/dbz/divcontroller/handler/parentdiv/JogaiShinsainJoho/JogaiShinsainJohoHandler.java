@@ -54,6 +54,8 @@ public class JogaiShinsainJohoHandler {
             div.getBtnShinkiTsuika().setDisabled(false);
         } else {
             div.getBtnShinkiTsuika().setDisabled(true);
+            div.getBtnKakutei().setDisabled(true);
+            div.getDgShinsakaiIinIchiran().setDisabled(true);
             if (div.getDgShinsakaiIinIchiran().getClickedItem() != null) {
                 div.getDgShinsakaiIinIchiran().getClickedItem().setDeleteButtonState(DataGridButtonState.Disabled);
             }
@@ -91,7 +93,7 @@ public class JogaiShinsainJohoHandler {
             row.setShozokuKikan(所属機関);
         }
     }
-
+    
     /**
      * 未入力のメッセージを定義します。
      */
