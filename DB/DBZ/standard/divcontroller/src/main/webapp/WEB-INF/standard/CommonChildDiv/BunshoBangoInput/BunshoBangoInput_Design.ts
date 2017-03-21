@@ -8,6 +8,10 @@ module DBZ {
 
         export class Events {
 
+            public static onBlur_txtBunshoNo(): string {
+                return "onBlur_txtBunshoNo";
+            }
+
             public static onClick_BtnGetBunshoNo(): string {
                 return "onClick_BtnGetBunshoNo";
             }
@@ -45,8 +49,8 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtBunshoHeader"));
             }
 
-            public txtBunshoNo(): UZA.TextBoxCode {
-                return new UZA.TextBoxCode(this.convFiledName("txtBunshoNo"));
+            public txtBunshoNo(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtBunshoNo"));
             }
 
             public txtBunshoFooter(): UZA.TextBox {

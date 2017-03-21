@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.Shuji
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.HokenshaDDLPattem;
+import jp.co.ndensan.reams.db.dbz.business.config.FourMasterConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujii;
 import jp.co.ndensan.reams.db.dbz.business.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanandshujiiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shujiiiryokikanandshujiiguide.ShujiiIryokikanAndShujiiGuideParameter;
@@ -35,6 +37,7 @@ public class ShujiiIryokikanAndShujiiGuide {
     private static final RString 状況フラグ_有効 = new RString("有効");
     private final ShujiiIryokikanAndShujiiGuideFinder finder;
     private static final RString 状況フラグ無効可 = new RString("状況フラグ無効可");
+    private static final RString 四マスタ管理方法_構成市町村 = new RString("1");
 
     /**
      * コンストラクタです。
@@ -59,12 +62,16 @@ public class ShujiiIryokikanAndShujiiGuide {
         ShujiiIryokikanandshujiiDataPassModel dataPassModel = DataPassingConverter.deserialize(
                 div.getHdnDataPass(), ShujiiIryokikanandshujiiDataPassModel.class);
         if (dataPassModel != null) {
-            RString 市町村コード;
-            if (RString.isNullOrEmpty(dataPassModel.get市町村コード())) {
-                市町村コード = div.getHokenshaList().getSelectedItem().get市町村コード().value();
+            if (四マスタ管理方法_構成市町村.equals(new FourMasterConfig().get四マスタ管理方法())) {
+                if (!RString.isNullOrEmpty(dataPassModel.get市町村コード())) {
+                    LasdecCode 市町村コード = new LasdecCode(dataPassModel.get市町村コード());
+                    if (!new RString("209732").equals(dataPassModel.get市町村コード())) {
+                        div.getHokenshaList().loadHokenshaList(GyomuBunrui.介護認定, 市町村コード);
+                    }
+                    div.getHokenshaList().setSelectedShichosonIfExist(市町村コード);
+                }
             } else {
-                市町村コード = dataPassModel.get市町村コード();
-                div.getHokenshaList().loadHokenshaList(GyomuBunrui.介護認定, new LasdecCode(市町村コード));
+                div.getHokenshaList().loadHokenshaList(GyomuBunrui.介護認定, HokenshaDDLPattem.広域保険者のみ);
             }
             div.getTxtIryoKikanCodeFrom().setValue(RString.EMPTY);
             div.getTxtIryoKikanCodeTo().setValue(RString.EMPTY);
@@ -81,7 +88,7 @@ public class ShujiiIryokikanAndShujiiGuide {
                     div.getRadShujiiJokyo().setDisabled(false);
                 }
             }
-            search主治医医療機関and主治医(div, dataPassModel, 市町村コード);
+            search主治医医療機関and主治医(div, dataPassModel, div.getHokenshaList().getSelectedItem().get市町村コード().value());
         }
         return ResponseData.of(div).respond();
     }
