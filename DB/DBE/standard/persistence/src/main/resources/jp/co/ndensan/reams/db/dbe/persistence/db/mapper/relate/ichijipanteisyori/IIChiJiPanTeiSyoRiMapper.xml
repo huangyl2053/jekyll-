@@ -144,6 +144,15 @@
         <include refid="ソート条件" />
     </select>
 
+    <select id="get一次判定結果情報_調査結果" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5116IchijiHanteiKekkaJohoMapper.ResultMap_DbT5116IchijiHanteiKekkaJohoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichijipanteisyori.IChiJiPanTeiSyoRiParameter"
+            resultOrdered="true" fetchSize="500">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5116IchijiHanteiKekkaJohoMapper.allColumns_DbT5116IchijiHanteiKekkaJoho" />
+        FROM
+        <include refid="検索条件_調査結果" />
+    </select>
+
     <sql id="検索条件">
         rgdb."DbT5101NinteiShinseiJoho" DbT5101
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" DbT7051
@@ -221,6 +230,14 @@
                 AND "DbT5116IchijiHanteiKekkaJoho"."kariIchijiHanteiKubun" = FALSE
             </if>
         </if>
+    </sql>
+    
+    <sql id="検索条件_調査結果">
+        rgdb."DbT5116IchijiHanteiKekkaJoho" "DbT5116IchijiHanteiKekkaJoho"
+            <if test = "申請書管理番号List != null and !申請書管理番号List.isEmpty()">
+                WHERE "DbT5116IchijiHanteiKekkaJoho"."shinseishoKanriNo" IN
+                <foreach collection="申請書管理番号List" item="code" open="(" separator="," close=")"> #{code} </foreach>
+            </if>
     </sql>
     
     <sql id="ソート条件">

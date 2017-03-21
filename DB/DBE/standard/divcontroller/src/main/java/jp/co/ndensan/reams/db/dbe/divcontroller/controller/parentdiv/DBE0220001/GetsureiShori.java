@@ -26,7 +26,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.GeTuReiSyoRiBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKaiBusiness;
-import jp.co.ndensan.reams.db.dbz.definition.core.config.DbeConfigKey;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
 import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.db.dbz.service.core.yokaigoninteitasklist.YokaigoNinteiTaskListFinder;
@@ -79,9 +78,7 @@ public class GetsureiShori {
     private static final RString EUC_ENTITY_ID = new RString("DBE202001");
     private static final RString KEY = new RString("key");
     private static final RString WORKFLOW_KEY_KANRYO = new RString("Kanryo");
-    private static final RString WORKFLOW_KEY_BATCH = new RString("Batch");
     private static final RString センター送信 = new RString("センター送信");
-    private static final RString センター送信_完了日登録方法_バッチ実行時 = new RString("1");
 
     /**
      * 完了処理・センター送信の初期化。(オンロード)<br/>
@@ -258,16 +255,6 @@ public class GetsureiShori {
         }
         if (new RString(DbeQuestionMessages.完了日登録確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-
-            RString センター送信_完了日登録方法 = DbBusinessConfig.get(DbeConfigKey.センター送信_完了日登録方法, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-            if (センター送信_完了日登録方法_バッチ実行時.equals(センター送信_完了日登録方法)) {
-                RString uiContainerID = ResponseHolder.getUIContainerId();
-                if (UICONTAINERID_DBEUC56101.equals(uiContainerID)) {
-                    FlowParameters fp = FlowParameters.of(KEY, WORKFLOW_KEY_BATCH);
-                    FlowParameterAccessor.merge(fp);
-                }
-                return ResponseData.of(div).setState(DBE0220001StateName.完了);
-            }
             List<dgNinteiTaskList_Row> rowList = div.getDgNinteiTaskList().getSelectedItems();
             DbAccessLogger accessLog = new DbAccessLogger();
             for (dgNinteiTaskList_Row row : rowList) {
@@ -280,7 +267,7 @@ public class GetsureiShori {
                     ninteiKanryoJoho = getHandler(div).要介護認定完了情報更新(ninteiKanryoJoho);
                     IkenshogetManager.createInstance().要介護認定完了情報更新(ninteiKanryoJoho);
                 }
-                
+
                 ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(row.getShoKisaiHokenshaNo());
                 ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), row.getShinseishoKanriNo());
                 accessLog.store(shoKisaiHokenshaNo, row.getHihoNumber(), expandedInfo);

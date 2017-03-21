@@ -6,11 +6,13 @@
 package jp.co.ndensan.reams.db.dbe.business.core.ninteishinsakaikekkadatatorikomi;
 
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.HanteiKekkaCode;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5501ShinsakaiKaisaiYoteiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5510IchiGojiHanteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomimobile.TempShinsaIinRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomimobile.TempShinsakaiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomimobile.TempShinsakaiKekkaEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5102NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5503ShinsakaiWariateIinJohoEntity;
@@ -290,6 +292,20 @@ public class DataTorikomiEdit {
             }
         return dbt5105Entity;
     }
+    
+    /**
+     * DbT5501ShinsakaiKaisaiYoteiJohoEntityのupdateメッソドです。
+     * 
+     * @param entity TempShinsakaiKekkaEntity
+     * @param dbt5501Entity DbT5501ShinsakaiKaisaiYoteiJohoEntity
+     * @return DbT5501ShinsakaiKaisaiYoteiJohoEntity
+     */
+    public DbT5501ShinsakaiKaisaiYoteiJohoEntity editDbT5501Entity(TempShinsakaiKekkaEntity entity,
+                                                                    DbT5501ShinsakaiKaisaiYoteiJohoEntity dbt5501Entity) {
+        dbt5501Entity.setShinsakaiShinchokuJokyo(new Code(ShinsakaiShinchokuJokyo.完了.getコード()));
+        return dbt5501Entity;
+    }
+    
     /**
      * 所要時間を計算します。終了時刻が開始時刻より後である前提で計算します。
      *

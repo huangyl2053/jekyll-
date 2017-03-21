@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Mar 02 21:51:48 JST 2017 
+ * Fri Mar 17 11:15:13 JST 2017 
  */
 
 
@@ -23,10 +23,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
  */
 
 public class dgShozokuKikanIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-13_05-12-42">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
 
     private Button deleteButton;
     private RString shokisaiHokenshaNo;
+    private RString jotai;
     private RString hokenshaName;
     private TextBoxCode ninteiItakusakiCode;
     private ButtonDialog ninteiChosaItakusakiGuide;
@@ -46,6 +47,7 @@ public class dgShozokuKikanIchiran_Row extends DataRow {
         super();
         this.deleteButton = new Button();
         this.shokisaiHokenshaNo = RString.EMPTY;
+        this.jotai = RString.EMPTY;
         this.hokenshaName = RString.EMPTY;
         this.ninteiItakusakiCode = new TextBoxCode();
         this.ninteiChosaItakusakiGuide = new ButtonDialog();
@@ -62,6 +64,7 @@ public class dgShozokuKikanIchiran_Row extends DataRow {
         this.hdnColumn = RString.EMPTY;
         this.setOriginalData("deleteButton", deleteButton);
         this.setOriginalData("shokisaiHokenshaNo", shokisaiHokenshaNo);
+        this.setOriginalData("jotai", jotai);
         this.setOriginalData("hokenshaName", hokenshaName);
         this.setOriginalData("ninteiItakusakiCode", ninteiItakusakiCode);
         this.setOriginalData("ninteiChosaItakusakiGuide", ninteiChosaItakusakiGuide);
@@ -78,10 +81,11 @@ public class dgShozokuKikanIchiran_Row extends DataRow {
         this.setOriginalData("hdnColumn", hdnColumn);
     }
 
-    public dgShozokuKikanIchiran_Row(Button deleteButton, RString shokisaiHokenshaNo, RString hokenshaName, TextBoxCode ninteiItakusakiCode, ButtonDialog ninteiChosaItakusakiGuide, RString ninteiChosainCode, TextBox ninteiChosaItakusakiName, TextBoxCode shujiiIryoKikanCode, ButtonDialog shujiiIryoKikanGuide, RString shujiiCode, TextBox shujiiIryoKikanName, TextBoxCode sonotaKikanCode, ButtonDialog sonotaKikanGuide, TextBox sonotaKikanName, RString shichosonCode, RString hdnColumn) {
+    public dgShozokuKikanIchiran_Row(Button deleteButton, RString shokisaiHokenshaNo, RString jotai, RString hokenshaName, TextBoxCode ninteiItakusakiCode, ButtonDialog ninteiChosaItakusakiGuide, RString ninteiChosainCode, TextBox ninteiChosaItakusakiName, TextBoxCode shujiiIryoKikanCode, ButtonDialog shujiiIryoKikanGuide, RString shujiiCode, TextBox shujiiIryoKikanName, TextBoxCode sonotaKikanCode, ButtonDialog sonotaKikanGuide, TextBox sonotaKikanName, RString shichosonCode, RString hdnColumn) {
         super();
         this.setOriginalData("deleteButton", deleteButton);
         this.setOriginalData("shokisaiHokenshaNo", shokisaiHokenshaNo);
+        this.setOriginalData("jotai", jotai);
         this.setOriginalData("hokenshaName", hokenshaName);
         this.setOriginalData("ninteiItakusakiCode", ninteiItakusakiCode);
         this.setOriginalData("ninteiChosaItakusakiGuide", ninteiChosaItakusakiGuide);
@@ -98,6 +102,7 @@ public class dgShozokuKikanIchiran_Row extends DataRow {
         this.setOriginalData("hdnColumn", hdnColumn);
         this.deleteButton = deleteButton;
         this.shokisaiHokenshaNo = shokisaiHokenshaNo;
+        this.jotai = jotai;
         this.hokenshaName = hokenshaName;
         this.ninteiItakusakiCode = ninteiItakusakiCode;
         this.ninteiChosaItakusakiGuide = ninteiChosaItakusakiGuide;
@@ -120,6 +125,10 @@ public class dgShozokuKikanIchiran_Row extends DataRow {
 
     public RString getShokisaiHokenshaNo() {
         return shokisaiHokenshaNo;
+    }
+
+    public RString getJotai() {
+        return jotai;
     }
 
     public RString getHokenshaName() {
@@ -186,6 +195,11 @@ public class dgShozokuKikanIchiran_Row extends DataRow {
     public void setShokisaiHokenshaNo(RString shokisaiHokenshaNo) {
         this.setOriginalData("shokisaiHokenshaNo", shokisaiHokenshaNo);
         this.shokisaiHokenshaNo = shokisaiHokenshaNo;
+    }
+
+    public void setJotai(RString jotai) {
+        this.setOriginalData("jotai", jotai);
+        this.jotai = jotai;
     }
 
     public void setHokenshaName(RString hokenshaName) {

@@ -63,10 +63,10 @@ public class IchijihanteikekkahyoKekka {
     /**
      * 麻痺今回結果前回結果を設定する。
      *
-     * @param 調査結果 調査結果
+     * @param 調査結果 TiyosaKekka
      * @param 前回調査結果コード 前回調査結果コード
      */
-    public void set前回今回比較結果_回答パターン１(TiyosaKekka 調査結果, RString 前回調査結果コード) {
+    public void set前回今回比較結果_回答パターン1(TiyosaKekka 調査結果, RString 前回調査結果コード) {
         RString 今回結果コード = 調査結果.get調査結果コード();
         if (is前回今回比較結果印字する) {
             if (ChosaAnser01.ある.getコード().equals(今回結果コード) && ChosaAnser01.ない.getコード().equals(前回調査結果コード)) {
@@ -88,10 +88,10 @@ public class IchijihanteikekkahyoKekka {
     /**
      * 寝返起き上今回結果前回結果を設定する。
      *
-     * @param 調査結果 調査結果
+     * @param 調査結果 TiyosaKekka
      * @param 前回調査結果コード 前回調査結果コード
      */
-    public void set前回今回比較結果_回答パターン２(TiyosaKekka 調査結果, RString 前回調査結果コード) {
+    public void set前回今回比較結果_回答パターン2(TiyosaKekka 調査結果, RString 前回調査結果コード) {
         RString 今回結果コード = 調査結果.get調査結果コード();
         if (is前回今回比較結果印字する) {
             if ((ChosaAnser02.できない.getコード().equals(今回結果コード) && (ChosaAnser02.つかまらないでできる.getコード().equals(前回調査結果コード)
@@ -117,10 +117,10 @@ public class IchijihanteikekkahyoKekka {
     /**
      * 座位保持今回結果前回結果を設定する。
      *
-     * @param 調査結果 調査結果
+     * @param 調査結果 TiyosaKekka
      * @param 前回調査結果コード 前回調査結果コード
      */
-    public void set前回今回比較結果_回答パターン３(TiyosaKekka 調査結果, RString 前回調査結果コード) {
+    public void set前回今回比較結果_回答パターン3(TiyosaKekka 調査結果, RString 前回調査結果コード) {
         RString 今回結果コード = 調査結果.get調査結果コード();
         if (is前回今回比較結果印字する) {
             if ((ChosaAnser03.できない.getコード().equals(今回結果コード) && (ChosaAnser03.支えが必要.getコード().equals(前回調査結果コード)
@@ -150,10 +150,10 @@ public class IchijihanteikekkahyoKekka {
     /**
      * 両足での立位今回結果前回結果を設定する。
      *
-     * @param 調査結果 調査結果
+     * @param 調査結果 TiyosaKekka
      * @param 前回調査結果コード 前回調査結果コード
      */
-    public void set前回今回比較結果_回答パターン４(TiyosaKekka 調査結果, RString 前回調査結果コード) {
+    public void set前回今回比較結果_回答パターン4(TiyosaKekka 調査結果, RString 前回調査結果コード) {
         RString 今回結果コード = 調査結果.get調査結果コード();
         if (is前回今回比較結果印字する) {
             if ((ChosaAnser04.できない.getコード().equals(今回結果コード) && (ChosaAnser04.何か支えがあればできる.getコード().equals(前回調査結果コード)
@@ -179,10 +179,10 @@ public class IchijihanteikekkahyoKekka {
     /**
      * 洗身今回結果前回結果を設定する。
      *
-     * @param 調査結果 調査結果
+     * @param 調査結果 TiyosaKekka
      * @param 前回調査結果コード 前回調査結果コード
      */
-    public void set前回今回比較結果_回答パターン６(TiyosaKekka 調査結果, RString 前回調査結果コード) {
+    public void set前回今回比較結果_回答パターン6(TiyosaKekka 調査結果, RString 前回調査結果コード) {
         RString 今回結果コード = 調査結果.get調査結果コード();
         if (is前回今回比較結果印字する) {
             if ((ChosaAnser06.行っていない.getコード().equals(今回結果コード) && (ChosaAnser06.全介助.getコード().equals(前回調査結果コード)
@@ -212,10 +212,10 @@ public class IchijihanteikekkahyoKekka {
     /**
      * つめ切り今回結果前回結果を設定する。
      *
-     * @param 調査結果 調査結果
+     * @param 調査結果 TiyosaKekka
      * @param 前回調査結果コード 前回調査結果コード
      */
-    public void set前回今回比較結果_回答パターン７(TiyosaKekka 調査結果, RString 前回調査結果コード) {
+    public void set前回今回比較結果_回答パターン7(TiyosaKekka 調査結果, RString 前回調査結果コード) {
         RString 今回結果コード = 調査結果.get調査結果コード();
         if (is前回今回比較結果印字する) {
             if ((ChosaAnser07.全介助.getコード().equals(今回結果コード) && (ChosaAnser07.一部介助.getコード().equals(前回調査結果コード)
@@ -241,10 +241,10 @@ public class IchijihanteikekkahyoKekka {
     /**
      * 視力今回結果前回結果を設定する。
      *
-     * @param 調査結果 調査結果
+     * @param 調査結果 TiyosaKekka
      * @param 前回調査結果コード 前回調査結果コード
      */
-    public void set前回今回比較結果_回答パターン８(TiyosaKekka 調査結果, RString 前回調査結果コード) {
+    public void set前回今回比較結果_回答パターン8(TiyosaKekka 調査結果, RString 前回調査結果コード) {
         RString 今回結果コード = 調査結果.get調査結果コード();
         if (is前回今回比較結果印字する) {
             if ((ChosaAnser08.見えているのか判断不能.getコード().equals(今回結果コード) && (ChosaAnser08.ほとんど見えない.getコード().equals(前回調査結果コード)
@@ -294,10 +294,10 @@ public class IchijihanteikekkahyoKekka {
     /**
      * 聴力今回結果前回結果を設定する。
      *
-     * @param 調査結果 調査結果
+     * @param 調査結果 TiyosaKekka
      * @param 前回調査結果コード 前回調査結果コード
      */
-    public void set前回今回比較結果_回答パターン９(TiyosaKekka 調査結果, RString 前回調査結果コード) {
+    public void set前回今回比較結果_回答パターン9(TiyosaKekka 調査結果, RString 前回調査結果コード) {
         RString 今回結果コード = 調査結果.get調査結果コード();
         if (is前回今回比較結果印字する) {
             if ((ChosaAnser09.聞こえているのか判断不能.getコード().equals(今回結果コード) && (ChosaAnser09.ほとんど聞こえない.getコード().equals(前回調査結果コード)
@@ -347,222 +347,267 @@ public class IchijihanteikekkahyoKekka {
     /**
      * 移乗今回結果前回結果を設定する。
      *
-     * @param 今回結果コード 今回結果コード
+     * @param 調査結果 TiyosaKekka
      * @param 前回調査結果コード 前回調査結果コード
-     * @param 第２群 第２群
      */
-    public void set移乗今回結果前回結果比(RString 今回結果コード, RString 前回調査結果コード, TiyosaKekka 第２群) {
-        if ((ChosaAnser10.全介助.getコード().equals(今回結果コード) && (ChosaAnser10.一部介助.getコード().equals(前回調査結果コード)
-                || ChosaAnser10.見守り等.getコード().equals(前回調査結果コード) || ChosaAnser10.介助されていない.getコード().equals(前回調査結果コード)))
-                || (ChosaAnser10.一部介助.getコード().equals(今回結果コード) && (ChosaAnser10.見守り等.getコード().equals(前回調査結果コード)
-                || ChosaAnser10.介助されていない.getコード().equals(前回調査結果コード))) || (ChosaAnser10.見守り等.getコード().equals(今回結果コード)
-                && ChosaAnser10.介助されていない.getコード().equals(前回調査結果コード))) {
-            第２群.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階悪化.getCode());
-            第２群.set段階改善値(new RString(Integer.parseInt(今回結果コード.toString()) - Integer.parseInt(前回調査結果コード.toString())));
-        } else if ((ChosaAnser10.全介助.getコード().equals(前回調査結果コード) && (ChosaAnser10.一部介助.getコード().equals(今回結果コード)
-                || ChosaAnser10.見守り等.getコード().equals(今回結果コード) || ChosaAnser10.介助されていない.getコード().equals(今回結果コード)))
-                || (ChosaAnser10.一部介助.getコード().equals(前回調査結果コード) && (ChosaAnser10.見守り等.getコード().equals(今回結果コード)
-                || ChosaAnser10.介助されていない.getコード().equals(今回結果コード))) || (ChosaAnser10.見守り等.getコード().equals(前回調査結果コード)
-                && ChosaAnser10.介助されていない.getコード().equals(今回結果コード))) {
-            第２群.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階改善.getCode());
-            第２群.set段階改善値(new RString(Integer.parseInt(前回調査結果コード.toString()) - Integer.parseInt(今回結果コード.toString())));
+    public void set前回今回比較結果_回答パターン10(TiyosaKekka 調査結果, RString 前回調査結果コード) {
+        RString 今回結果コード = 調査結果.get調査結果コード();
+        if (is前回今回比較結果印字する) {
+            if ((ChosaAnser10.全介助.getコード().equals(今回結果コード) && (ChosaAnser10.一部介助.getコード().equals(前回調査結果コード)
+                    || ChosaAnser10.見守り等.getコード().equals(前回調査結果コード) || ChosaAnser10.介助されていない.getコード().equals(前回調査結果コード)))
+                    || (ChosaAnser10.一部介助.getコード().equals(今回結果コード) && (ChosaAnser10.見守り等.getコード().equals(前回調査結果コード)
+                    || ChosaAnser10.介助されていない.getコード().equals(前回調査結果コード))) || (ChosaAnser10.見守り等.getコード().equals(今回結果コード)
+                    && ChosaAnser10.介助されていない.getコード().equals(前回調査結果コード))) {
+                調査結果.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階悪化.getCode());
+                調査結果.set段階改善値(new RString(Integer.parseInt(今回結果コード.toString()) - Integer.parseInt(前回調査結果コード.toString())));
+            } else if ((ChosaAnser10.全介助.getコード().equals(前回調査結果コード) && (ChosaAnser10.一部介助.getコード().equals(今回結果コード)
+                    || ChosaAnser10.見守り等.getコード().equals(今回結果コード) || ChosaAnser10.介助されていない.getコード().equals(今回結果コード)))
+                    || (ChosaAnser10.一部介助.getコード().equals(前回調査結果コード) && (ChosaAnser10.見守り等.getコード().equals(今回結果コード)
+                    || ChosaAnser10.介助されていない.getコード().equals(今回結果コード))) || (ChosaAnser10.見守り等.getコード().equals(前回調査結果コード)
+                    && ChosaAnser10.介助されていない.getコード().equals(今回結果コード))) {
+                調査結果.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階改善.getCode());
+                調査結果.set段階改善値(new RString(Integer.parseInt(前回調査結果コード.toString()) - Integer.parseInt(今回結果コード.toString())));
+            } else {
+                調査結果.set段階改善フラグ(RString.EMPTY);
+                調査結果.set段階改善値(RString.EMPTY);
+            }
         } else {
-            第２群.set段階改善フラグ(RString.EMPTY);
-            第２群.set段階改善値(RString.EMPTY);
+            調査結果.set段階改善フラグ(RString.EMPTY);
+            調査結果.set段階改善値(RString.EMPTY);
         }
     }
 
     /**
      * えん下今回結果前回結果を設定する。
      *
-     * @param 今回結果コード 今回結果コード
+     * @param 調査結果 TiyosaKekka
      * @param 前回調査結果コード 前回調査結果コード
-     * @param 第２群 第２群
      */
-    public void setえん下今回結果前回結果比(RString 今回結果コード, RString 前回調査結果コード, TiyosaKekka 第２群) {
-        if ((ChosaAnser11.できない.getコード().equals(今回結果コード) && (ChosaAnser11.見守り等.getコード().equals(前回調査結果コード)
-                || ChosaAnser11.できる.getコード().equals(前回調査結果コード))) || (ChosaAnser11.見守り等.getコード().equals(今回結果コード)
-                && ChosaAnser11.できる.getコード().equals(前回調査結果コード))) {
-            第２群.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階悪化.getCode());
-            第２群.set段階改善値(new RString(Integer.parseInt(今回結果コード.toString()) - Integer.parseInt(前回調査結果コード.toString())));
-        } else if ((ChosaAnser11.できない.getコード().equals(前回調査結果コード) && (ChosaAnser11.見守り等.getコード().equals(今回結果コード)
-                || ChosaAnser11.できる.getコード().equals(今回結果コード))) || (ChosaAnser11.見守り等.getコード().equals(前回調査結果コード)
-                && ChosaAnser11.できる.getコード().equals(今回結果コード))) {
-            第２群.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階改善.getCode());
-            第２群.set段階改善値(new RString(Integer.parseInt(前回調査結果コード.toString()) - Integer.parseInt(今回結果コード.toString())));
+    public void set前回今回比較結果_回答パターン11(TiyosaKekka 調査結果, RString 前回調査結果コード) {
+        RString 今回結果コード = 調査結果.get調査結果コード();
+        if (is前回今回比較結果印字する) {
+            if ((ChosaAnser11.できない.getコード().equals(今回結果コード) && (ChosaAnser11.見守り等.getコード().equals(前回調査結果コード)
+                    || ChosaAnser11.できる.getコード().equals(前回調査結果コード))) || (ChosaAnser11.見守り等.getコード().equals(今回結果コード)
+                    && ChosaAnser11.できる.getコード().equals(前回調査結果コード))) {
+                調査結果.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階悪化.getCode());
+                調査結果.set段階改善値(new RString(Integer.parseInt(今回結果コード.toString()) - Integer.parseInt(前回調査結果コード.toString())));
+            } else if ((ChosaAnser11.できない.getコード().equals(前回調査結果コード) && (ChosaAnser11.見守り等.getコード().equals(今回結果コード)
+                    || ChosaAnser11.できる.getコード().equals(今回結果コード))) || (ChosaAnser11.見守り等.getコード().equals(前回調査結果コード)
+                    && ChosaAnser11.できる.getコード().equals(今回結果コード))) {
+                調査結果.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階改善.getCode());
+                調査結果.set段階改善値(new RString(Integer.parseInt(前回調査結果コード.toString()) - Integer.parseInt(今回結果コード.toString())));
+            } else {
+                調査結果.set段階改善フラグ(RString.EMPTY);
+                調査結果.set段階改善値(RString.EMPTY);
+            }
         } else {
-            第２群.set段階改善フラグ(RString.EMPTY);
-            第２群.set段階改善値(RString.EMPTY);
+            調査結果.set段階改善フラグ(RString.EMPTY);
+            調査結果.set段階改善値(RString.EMPTY);
         }
     }
 
     /**
      * 口腔清潔今回結果前回結果を設定する。
      *
-     * @param 今回結果コード 今回結果コード
+     * @param 調査結果 TiyosaKekka
      * @param 前回調査結果コード 前回調査結果コード
-     * @param 第２群 第２群
      */
-    public void set口腔清潔今回結果前回結果比(RString 今回結果コード, RString 前回調査結果コード, TiyosaKekka 第２群) {
-        if ((ChosaAnser12.全介助.getコード().equals(今回結果コード) && (ChosaAnser12.一部介助.getコード().equals(前回調査結果コード)
-                || ChosaAnser12.介助されていない.getコード().equals(前回調査結果コード))) || (ChosaAnser12.一部介助.getコード().equals(今回結果コード)
-                && ChosaAnser12.介助されていない.getコード().equals(前回調査結果コード))) {
-            第２群.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階悪化.getCode());
-            第２群.set段階改善値(new RString(Integer.parseInt(今回結果コード.toString()) - Integer.parseInt(前回調査結果コード.toString())));
-        } else if ((ChosaAnser12.全介助.getコード().equals(前回調査結果コード) && (ChosaAnser12.一部介助.getコード().equals(今回結果コード)
-                || ChosaAnser12.介助されていない.getコード().equals(今回結果コード))) || (ChosaAnser12.一部介助.getコード().equals(前回調査結果コード)
-                && ChosaAnser12.介助されていない.getコード().equals(今回結果コード))) {
-            第２群.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階改善.getCode());
-            第２群.set段階改善値(new RString(Integer.parseInt(前回調査結果コード.toString()) - Integer.parseInt(今回結果コード.toString())));
+    public void set前回今回比較結果_回答パターン12(TiyosaKekka 調査結果, RString 前回調査結果コード) {
+        RString 今回結果コード = 調査結果.get調査結果コード();
+        if (is前回今回比較結果印字する) {
+            if ((ChosaAnser12.全介助.getコード().equals(今回結果コード) && (ChosaAnser12.一部介助.getコード().equals(前回調査結果コード)
+                    || ChosaAnser12.介助されていない.getコード().equals(前回調査結果コード))) || (ChosaAnser12.一部介助.getコード().equals(今回結果コード)
+                    && ChosaAnser12.介助されていない.getコード().equals(前回調査結果コード))) {
+                調査結果.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階悪化.getCode());
+                調査結果.set段階改善値(new RString(Integer.parseInt(今回結果コード.toString()) - Integer.parseInt(前回調査結果コード.toString())));
+            } else if ((ChosaAnser12.全介助.getコード().equals(前回調査結果コード) && (ChosaAnser12.一部介助.getコード().equals(今回結果コード)
+                    || ChosaAnser12.介助されていない.getコード().equals(今回結果コード))) || (ChosaAnser12.一部介助.getコード().equals(前回調査結果コード)
+                    && ChosaAnser12.介助されていない.getコード().equals(今回結果コード))) {
+                調査結果.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階改善.getCode());
+                調査結果.set段階改善値(new RString(Integer.parseInt(前回調査結果コード.toString()) - Integer.parseInt(今回結果コード.toString())));
+            } else {
+                調査結果.set段階改善フラグ(RString.EMPTY);
+                調査結果.set段階改善値(RString.EMPTY);
+            }
         } else {
-            第２群.set段階改善フラグ(RString.EMPTY);
-            第２群.set段階改善値(RString.EMPTY);
+            調査結果.set段階改善フラグ(RString.EMPTY);
+            調査結果.set段階改善値(RString.EMPTY);
         }
     }
 
     /**
      * 外出頻度今回結果前回結果を設定する。
      *
-     * @param 今回結果コード 今回結果コード
+     * @param 調査結果 TiyosaKekka
      * @param 前回調査結果コード 前回調査結果コード
-     * @param 第２群 第２群
      */
-    public void set外出頻度今回結果前回結果比(RString 今回結果コード, RString 前回調査結果コード, TiyosaKekka 第２群) {
-        if ((ChosaAnser13.月1回未満.getコード().equals(今回結果コード) && (ChosaAnser13.月1回以上.getコード().equals(前回調査結果コード)
-                || ChosaAnser13.週1回以上.getコード().equals(前回調査結果コード))) || (ChosaAnser13.月1回以上.getコード().equals(今回結果コード)
-                && ChosaAnser13.週1回以上.getコード().equals(前回調査結果コード))) {
-            第２群.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階悪化.getCode());
-            第２群.set段階改善値(new RString(Integer.parseInt(今回結果コード.toString()) - Integer.parseInt(前回調査結果コード.toString())));
-        } else if ((ChosaAnser13.月1回未満.getコード().equals(前回調査結果コード) && (ChosaAnser13.月1回以上.getコード().equals(今回結果コード)
-                || ChosaAnser13.週1回以上.getコード().equals(今回結果コード))) || (ChosaAnser13.月1回以上.getコード().equals(前回調査結果コード)
-                && ChosaAnser13.週1回以上.getコード().equals(今回結果コード))) {
-            第２群.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階改善.getCode());
-            第２群.set段階改善値(new RString(Integer.parseInt(前回調査結果コード.toString()) - Integer.parseInt(今回結果コード.toString())));
+    public void set前回今回比較結果_回答パターン13(TiyosaKekka 調査結果, RString 前回調査結果コード) {
+        RString 今回結果コード = 調査結果.get調査結果コード();
+        if (is前回今回比較結果印字する) {
+            if ((ChosaAnser13.月1回未満.getコード().equals(今回結果コード) && (ChosaAnser13.月1回以上.getコード().equals(前回調査結果コード)
+                    || ChosaAnser13.週1回以上.getコード().equals(前回調査結果コード))) || (ChosaAnser13.月1回以上.getコード().equals(今回結果コード)
+                    && ChosaAnser13.週1回以上.getコード().equals(前回調査結果コード))) {
+                調査結果.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階悪化.getCode());
+                調査結果.set段階改善値(new RString(Integer.parseInt(今回結果コード.toString()) - Integer.parseInt(前回調査結果コード.toString())));
+            } else if ((ChosaAnser13.月1回未満.getコード().equals(前回調査結果コード) && (ChosaAnser13.月1回以上.getコード().equals(今回結果コード)
+                    || ChosaAnser13.週1回以上.getコード().equals(今回結果コード))) || (ChosaAnser13.月1回以上.getコード().equals(前回調査結果コード)
+                    && ChosaAnser13.週1回以上.getコード().equals(今回結果コード))) {
+                調査結果.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階改善.getCode());
+                調査結果.set段階改善値(new RString(Integer.parseInt(前回調査結果コード.toString()) - Integer.parseInt(今回結果コード.toString())));
+            } else {
+                調査結果.set段階改善フラグ(RString.EMPTY);
+                調査結果.set段階改善値(RString.EMPTY);
+            }
         } else {
-            第２群.set段階改善フラグ(RString.EMPTY);
-            第２群.set段階改善値(RString.EMPTY);
+            調査結果.set段階改善フラグ(RString.EMPTY);
+            調査結果.set段階改善値(RString.EMPTY);
         }
     }
 
     /**
      * 意思の伝達今回結果前回結果を設定する。
      *
-     * @param 今回結果コード 今回結果コード
+     * @param 調査結果 TiyosaKekka
      * @param 前回調査結果コード 前回調査結果コード
-     * @param 第３群 第３群
      */
-    public void set意思の伝達今回結果前回結果比(RString 今回結果コード, RString 前回調査結果コード, TiyosaKekka 第３群) {
-        if ((ChosaAnser14.できない.getコード().equals(今回結果コード) && (ChosaAnser14.ほとんど伝達できない.getコード().equals(前回調査結果コード)
-                || ChosaAnser14.ときどき伝達できる.getコード().equals(前回調査結果コード) || ChosaAnser14.調査対象者が意思を他者に伝達できる.getコード().equals(前回調査結果コード)))
-                || (ChosaAnser14.ほとんど伝達できない.getコード().equals(今回結果コード) && (ChosaAnser14.ときどき伝達できる.getコード().equals(前回調査結果コード)
-                || ChosaAnser14.調査対象者が意思を他者に伝達できる.getコード().equals(前回調査結果コード))) || (ChosaAnser14.ときどき伝達できる.getコード().equals(今回結果コード)
-                && ChosaAnser14.調査対象者が意思を他者に伝達できる.getコード().equals(前回調査結果コード))) {
-            第３群.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階悪化.getCode());
-            第３群.set段階改善値(new RString(Integer.parseInt(今回結果コード.toString()) - Integer.parseInt(前回調査結果コード.toString())));
-        } else if ((ChosaAnser14.できない.getコード().equals(前回調査結果コード) && (ChosaAnser14.ほとんど伝達できない.getコード().equals(今回結果コード)
-                || ChosaAnser14.ときどき伝達できる.getコード().equals(今回結果コード) || ChosaAnser14.調査対象者が意思を他者に伝達できる.getコード().equals(今回結果コード)))
-                || (ChosaAnser14.ほとんど伝達できない.getコード().equals(前回調査結果コード) && (ChosaAnser14.ときどき伝達できる.getコード().equals(今回結果コード)
-                || ChosaAnser14.調査対象者が意思を他者に伝達できる.getコード().equals(今回結果コード))) || (ChosaAnser14.ときどき伝達できる.getコード().equals(前回調査結果コード)
-                && ChosaAnser14.調査対象者が意思を他者に伝達できる.getコード().equals(今回結果コード))) {
-            第３群.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階改善.getCode());
-            第３群.set段階改善値(new RString(Integer.parseInt(前回調査結果コード.toString()) - Integer.parseInt(今回結果コード.toString())));
+    public void set前回今回比較結果_回答パターン14(TiyosaKekka 調査結果, RString 前回調査結果コード) {
+        RString 今回結果コード = 調査結果.get調査結果コード();
+        if (is前回今回比較結果印字する) {
+            if ((ChosaAnser14.できない.getコード().equals(今回結果コード) && (ChosaAnser14.ほとんど伝達できない.getコード().equals(前回調査結果コード)
+                    || ChosaAnser14.ときどき伝達できる.getコード().equals(前回調査結果コード) || ChosaAnser14.調査対象者が意思を他者に伝達できる.getコード().equals(前回調査結果コード)))
+                    || (ChosaAnser14.ほとんど伝達できない.getコード().equals(今回結果コード) && (ChosaAnser14.ときどき伝達できる.getコード().equals(前回調査結果コード)
+                    || ChosaAnser14.調査対象者が意思を他者に伝達できる.getコード().equals(前回調査結果コード))) || (ChosaAnser14.ときどき伝達できる.getコード().equals(今回結果コード)
+                    && ChosaAnser14.調査対象者が意思を他者に伝達できる.getコード().equals(前回調査結果コード))) {
+                調査結果.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階悪化.getCode());
+                調査結果.set段階改善値(new RString(Integer.parseInt(今回結果コード.toString()) - Integer.parseInt(前回調査結果コード.toString())));
+            } else if ((ChosaAnser14.できない.getコード().equals(前回調査結果コード) && (ChosaAnser14.ほとんど伝達できない.getコード().equals(今回結果コード)
+                    || ChosaAnser14.ときどき伝達できる.getコード().equals(今回結果コード) || ChosaAnser14.調査対象者が意思を他者に伝達できる.getコード().equals(今回結果コード)))
+                    || (ChosaAnser14.ほとんど伝達できない.getコード().equals(前回調査結果コード) && (ChosaAnser14.ときどき伝達できる.getコード().equals(今回結果コード)
+                    || ChosaAnser14.調査対象者が意思を他者に伝達できる.getコード().equals(今回結果コード))) || (ChosaAnser14.ときどき伝達できる.getコード().equals(前回調査結果コード)
+                    && ChosaAnser14.調査対象者が意思を他者に伝達できる.getコード().equals(今回結果コード))) {
+                調査結果.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階改善.getCode());
+                調査結果.set段階改善値(new RString(Integer.parseInt(前回調査結果コード.toString()) - Integer.parseInt(今回結果コード.toString())));
+            } else {
+                調査結果.set段階改善フラグ(RString.EMPTY);
+                調査結果.set段階改善値(RString.EMPTY);
+            }
         } else {
-            第３群.set段階改善フラグ(RString.EMPTY);
-            第３群.set段階改善値(RString.EMPTY);
+            調査結果.set段階改善フラグ(RString.EMPTY);
+            調査結果.set段階改善値(RString.EMPTY);
         }
     }
 
     /**
      * 毎日の日課を理解今回結果前回結果を設定する。
      *
-     * @param 今回結果コード 今回結果コード
+     * @param 調査結果 TiyosaKekka
      * @param 前回調査結果コード 前回調査結果コード
-     * @param 第３群 第３群
      */
-    public void set毎日の日課を理解今回結果前回結果比(RString 今回結果コード, RString 前回調査結果コード, TiyosaKekka 第３群) {
-        if (ChosaAnser15.できない.getコード().equals(今回結果コード) && ChosaAnser15.できる.getコード().equals(前回調査結果コード)) {
-            第３群.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階悪化.getCode());
-            第３群.set段階改善値(new RString(Integer.parseInt(今回結果コード.toString()) - Integer.parseInt(前回調査結果コード.toString())));
-        } else if (ChosaAnser15.できない.getコード().equals(前回調査結果コード) && ChosaAnser15.できる.getコード().equals(今回結果コード)) {
-            第３群.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階改善.getCode());
-            第３群.set段階改善値(new RString(Integer.parseInt(前回調査結果コード.toString()) - Integer.parseInt(今回結果コード.toString())));
+    public void set前回今回比較結果_回答パターン15(TiyosaKekka 調査結果, RString 前回調査結果コード) {
+        RString 今回結果コード = 調査結果.get調査結果コード();
+        if (is前回今回比較結果印字する) {
+            if (ChosaAnser15.できない.getコード().equals(今回結果コード) && ChosaAnser15.できる.getコード().equals(前回調査結果コード)) {
+                調査結果.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階悪化.getCode());
+                調査結果.set段階改善値(new RString(Integer.parseInt(今回結果コード.toString()) - Integer.parseInt(前回調査結果コード.toString())));
+            } else if (ChosaAnser15.できない.getコード().equals(前回調査結果コード) && ChosaAnser15.できる.getコード().equals(今回結果コード)) {
+                調査結果.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階改善.getCode());
+                調査結果.set段階改善値(new RString(Integer.parseInt(前回調査結果コード.toString()) - Integer.parseInt(今回結果コード.toString())));
+            } else {
+                調査結果.set段階改善フラグ(RString.EMPTY);
+                調査結果.set段階改善値(RString.EMPTY);
+            }
         } else {
-            第３群.set段階改善フラグ(RString.EMPTY);
-            第３群.set段階改善値(RString.EMPTY);
+            調査結果.set段階改善フラグ(RString.EMPTY);
+            調査結果.set段階改善値(RString.EMPTY);
         }
     }
 
     /**
      * 徘徊今回結果前回結果を設定する。
      *
-     * @param 今回結果コード 今回結果コード
+     * @param 調査結果 TiyosaKekka
      * @param 前回調査結果コード 前回調査結果コード
-     * @param 第３群 第３群
      */
-    public void set徘徊今回結果前回結果比(RString 今回結果コード, RString 前回調査結果コード, TiyosaKekka 第３群) {
-        if ((ChosaAnser16.ある.getコード().equals(今回結果コード) && (ChosaAnser16.ときどきある.getコード().equals(前回調査結果コード)
-                || ChosaAnser16.ない.getコード().equals(前回調査結果コード))) || (ChosaAnser16.ときどきある.getコード().equals(今回結果コード)
-                && ChosaAnser16.ない.getコード().equals(前回調査結果コード))) {
-            第３群.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階悪化.getCode());
-            第３群.set段階改善値(new RString(Integer.parseInt(今回結果コード.toString()) - Integer.parseInt(前回調査結果コード.toString())));
-        } else if ((ChosaAnser16.ある.getコード().equals(前回調査結果コード) && (ChosaAnser16.ときどきある.getコード().equals(今回結果コード)
-                || ChosaAnser16.ない.getコード().equals(今回結果コード))) || (ChosaAnser16.ときどきある.getコード().equals(前回調査結果コード)
-                && ChosaAnser16.ない.getコード().equals(今回結果コード))) {
-            第３群.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階改善.getCode());
-            第３群.set段階改善値(new RString(Integer.parseInt(前回調査結果コード.toString()) - Integer.parseInt(今回結果コード.toString())));
+    public void set前回今回比較結果_回答パターン16(TiyosaKekka 調査結果, RString 前回調査結果コード) {
+        RString 今回結果コード = 調査結果.get調査結果コード();
+        if (is前回今回比較結果印字する) {
+            if ((ChosaAnser16.ある.getコード().equals(今回結果コード) && (ChosaAnser16.ときどきある.getコード().equals(前回調査結果コード)
+                    || ChosaAnser16.ない.getコード().equals(前回調査結果コード))) || (ChosaAnser16.ときどきある.getコード().equals(今回結果コード)
+                    && ChosaAnser16.ない.getコード().equals(前回調査結果コード))) {
+                調査結果.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階悪化.getCode());
+                調査結果.set段階改善値(new RString(Integer.parseInt(今回結果コード.toString()) - Integer.parseInt(前回調査結果コード.toString())));
+            } else if ((ChosaAnser16.ある.getコード().equals(前回調査結果コード) && (ChosaAnser16.ときどきある.getコード().equals(今回結果コード)
+                    || ChosaAnser16.ない.getコード().equals(今回結果コード))) || (ChosaAnser16.ときどきある.getコード().equals(前回調査結果コード)
+                    && ChosaAnser16.ない.getコード().equals(今回結果コード))) {
+                調査結果.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階改善.getCode());
+                調査結果.set段階改善値(new RString(Integer.parseInt(前回調査結果コード.toString()) - Integer.parseInt(今回結果コード.toString())));
+            } else {
+                調査結果.set段階改善フラグ(RString.EMPTY);
+                調査結果.set段階改善値(RString.EMPTY);
+            }
         } else {
-            第３群.set段階改善フラグ(RString.EMPTY);
-            第３群.set段階改善値(RString.EMPTY);
+            調査結果.set段階改善フラグ(RString.EMPTY);
+            調査結果.set段階改善値(RString.EMPTY);
         }
     }
 
     /**
      * 日常の意思決定今回結果前回結果を設定する。
      *
-     * @param 今回結果コード 今回結果コード
+     * @param 調査結果 TiyosaKekka
      * @param 前回調査結果コード 前回調査結果コード
-     * @param 第３群 第３群
      */
-    public void set日常の意思決定今回結果前回結果比(RString 今回結果コード, RString 前回調査結果コード, TiyosaKekka 第３群) {
-        if ((ChosaAnser17.できない.getコード().equals(今回結果コード) && (ChosaAnser17.日常的に困難.getコード().equals(前回調査結果コード)
-                || ChosaAnser17.特別な場合を除いてできる.getコード().equals(前回調査結果コード) || ChosaAnser17.できる_特別な場合でもできる.getコード().equals(前回調査結果コード)))
-                || (ChosaAnser17.日常的に困難.getコード().equals(今回結果コード) && (ChosaAnser17.特別な場合を除いてできる.getコード().equals(前回調査結果コード)
-                || ChosaAnser17.できる_特別な場合でもできる.getコード().equals(前回調査結果コード))) || (ChosaAnser17.特別な場合を除いてできる.getコード().equals(今回結果コード)
-                && ChosaAnser17.できる_特別な場合でもできる.getコード().equals(前回調査結果コード))) {
-            第３群.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階悪化.getCode());
-            第３群.set段階改善値(new RString(Integer.parseInt(今回結果コード.toString()) - Integer.parseInt(前回調査結果コード.toString())));
-        } else if ((ChosaAnser17.できない.getコード().equals(前回調査結果コード) && (ChosaAnser17.日常的に困難.getコード().equals(今回結果コード)
-                || ChosaAnser17.特別な場合を除いてできる.getコード().equals(今回結果コード) || ChosaAnser17.できる_特別な場合でもできる.getコード().equals(今回結果コード)))
-                || (ChosaAnser17.日常的に困難.getコード().equals(前回調査結果コード) && (ChosaAnser17.特別な場合を除いてできる.getコード().equals(今回結果コード)
-                || ChosaAnser17.できる_特別な場合でもできる.getコード().equals(今回結果コード))) || (ChosaAnser17.特別な場合を除いてできる.getコード().equals(前回調査結果コード)
-                && ChosaAnser17.できる_特別な場合でもできる.getコード().equals(今回結果コード))) {
-            第３群.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階改善.getCode());
-            第３群.set段階改善値(new RString(Integer.parseInt(前回調査結果コード.toString()) - Integer.parseInt(今回結果コード.toString())));
+    public void set前回今回比較結果_回答パターン17(TiyosaKekka 調査結果, RString 前回調査結果コード) {
+        RString 今回結果コード = 調査結果.get調査結果コード();
+        if (is前回今回比較結果印字する) {
+            if ((ChosaAnser17.できない.getコード().equals(今回結果コード) && (ChosaAnser17.日常的に困難.getコード().equals(前回調査結果コード)
+                    || ChosaAnser17.特別な場合を除いてできる.getコード().equals(前回調査結果コード) || ChosaAnser17.できる_特別な場合でもできる.getコード().equals(前回調査結果コード)))
+                    || (ChosaAnser17.日常的に困難.getコード().equals(今回結果コード) && (ChosaAnser17.特別な場合を除いてできる.getコード().equals(前回調査結果コード)
+                    || ChosaAnser17.できる_特別な場合でもできる.getコード().equals(前回調査結果コード))) || (ChosaAnser17.特別な場合を除いてできる.getコード().equals(今回結果コード)
+                    && ChosaAnser17.できる_特別な場合でもできる.getコード().equals(前回調査結果コード))) {
+                調査結果.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階悪化.getCode());
+                調査結果.set段階改善値(new RString(Integer.parseInt(今回結果コード.toString()) - Integer.parseInt(前回調査結果コード.toString())));
+            } else if ((ChosaAnser17.できない.getコード().equals(前回調査結果コード) && (ChosaAnser17.日常的に困難.getコード().equals(今回結果コード)
+                    || ChosaAnser17.特別な場合を除いてできる.getコード().equals(今回結果コード) || ChosaAnser17.できる_特別な場合でもできる.getコード().equals(今回結果コード)))
+                    || (ChosaAnser17.日常的に困難.getコード().equals(前回調査結果コード) && (ChosaAnser17.特別な場合を除いてできる.getコード().equals(今回結果コード)
+                    || ChosaAnser17.できる_特別な場合でもできる.getコード().equals(今回結果コード))) || (ChosaAnser17.特別な場合を除いてできる.getコード().equals(前回調査結果コード)
+                    && ChosaAnser17.できる_特別な場合でもできる.getコード().equals(今回結果コード))) {
+                調査結果.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階改善.getCode());
+                調査結果.set段階改善値(new RString(Integer.parseInt(前回調査結果コード.toString()) - Integer.parseInt(今回結果コード.toString())));
+            } else {
+                調査結果.set段階改善フラグ(RString.EMPTY);
+                調査結果.set段階改善値(RString.EMPTY);
+            }
         } else {
-            第３群.set段階改善フラグ(RString.EMPTY);
-            第３群.set段階改善値(RString.EMPTY);
+            調査結果.set段階改善フラグ(RString.EMPTY);
+            調査結果.set段階改善値(RString.EMPTY);
         }
     }
 
     /**
      * 日常生活自立度今回結果前回結果を設定する。
      *
-     * @param 今回結果コード 今回結果コード
+     * @param 調査結果 TiyosaKekka
      * @param 前回調査結果コード 前回調査結果コード
-     * @param 第２群 第２群
      */
-    public void set日常生活自立度今回結果前回結果比(RString 今回結果コード, RString 前回調査結果コード, TiyosaKekka 第２群) {
-        if (is日常生活自立度今回前回比１(今回結果コード, 前回調査結果コード) || is日常生活自立度今回前回比２(今回結果コード, 前回調査結果コード)
-                || is日常生活自立度今回前回比３(今回結果コード, 前回調査結果コード) || is日常生活自立度今回前回比４(今回結果コード, 前回調査結果コード)) {
-            第２群.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階悪化.getCode());
-            第２群.set段階改善値(new RString(Integer.parseInt(今回結果コード.toString()) - Integer.parseInt(前回調査結果コード.toString())));
-        } else if (is日常生活自立度前回今回比１(今回結果コード, 前回調査結果コード) || is日常生活自立度前回今回比２(今回結果コード, 前回調査結果コード)
-                || is日常生活自立度前回今回比３(今回結果コード, 前回調査結果コード) || is日常生活自立度前回今回比４(今回結果コード, 前回調査結果コード)) {
-            第２群.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階改善.getCode());
-            第２群.set段階改善値(new RString(Integer.parseInt(前回調査結果コード.toString()) - Integer.parseInt(今回結果コード.toString())));
+    public void set日常生活自立度今回結果前回結果比(TiyosaKekka 調査結果, RString 前回調査結果コード) {
+        RString 今回結果コード = 調査結果.get調査結果コード();
+        if (is前回今回比較結果印字する) {
+            if (is日常生活自立度今回前回比１(今回結果コード, 前回調査結果コード) || is日常生活自立度今回前回比２(今回結果コード, 前回調査結果コード)
+                    || is日常生活自立度今回前回比３(今回結果コード, 前回調査結果コード) || is日常生活自立度今回前回比４(今回結果コード, 前回調査結果コード)) {
+                調査結果.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階悪化.getCode());
+                調査結果.set段階改善値(new RString(Integer.parseInt(今回結果コード.toString()) - Integer.parseInt(前回調査結果コード.toString())));
+            } else if (is日常生活自立度前回今回比１(今回結果コード, 前回調査結果コード) || is日常生活自立度前回今回比２(今回結果コード, 前回調査結果コード)
+                    || is日常生活自立度前回今回比３(今回結果コード, 前回調査結果コード) || is日常生活自立度前回今回比４(今回結果コード, 前回調査結果コード)) {
+                調査結果.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階改善.getCode());
+                調査結果.set段階改善値(new RString(Integer.parseInt(前回調査結果コード.toString()) - Integer.parseInt(今回結果コード.toString())));
+            } else {
+                調査結果.set段階改善フラグ(RString.EMPTY);
+                調査結果.set段階改善値(RString.EMPTY);
+            }
         } else {
-            第２群.set段階改善フラグ(RString.EMPTY);
-            第２群.set段階改善値(RString.EMPTY);
+            調査結果.set段階改善フラグ(RString.EMPTY);
+            調査結果.set段階改善値(RString.EMPTY);
         }
     }
 
@@ -667,96 +712,116 @@ public class IchijihanteikekkahyoKekka {
     /**
      * 短期記憶意見書今回結果前回結果を設定する。
      *
-     * @param 今回結果コード 今回結果コード
+     * @param 調査結果 TiyosaKekka
      * @param 前回調査結果コード 前回調査結果コード
-     * @param 第２群 第２群
      */
-    public void set短期記憶意見書今回結果前回結果比(RString 今回結果コード, RString 前回調査結果コード, TiyosaKekka 第２群) {
-        if ((IkenKomoku04.問題あり.getコード().equals(今回結果コード) && IkenKomoku04.問題なし.getコード().equals(前回調査結果コード))) {
-            第２群.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階悪化.getCode());
-            第２群.set段階改善値(new RString(Integer.parseInt(今回結果コード.toString()) - Integer.parseInt(前回調査結果コード.toString())));
-        } else if ((IkenKomoku04.問題あり.getコード().equals(前回調査結果コード) && IkenKomoku04.問題なし.getコード().equals(今回結果コード))) {
-            第２群.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階改善.getCode());
-            第２群.set段階改善値(new RString(Integer.parseInt(前回調査結果コード.toString()) - Integer.parseInt(今回結果コード.toString())));
+    public void set短期記憶意見書今回結果前回結果比(TiyosaKekka 調査結果, RString 前回調査結果コード) {
+        RString 今回結果コード = 調査結果.get調査結果コード();
+        if (is前回今回比較結果印字する) {
+            if ((IkenKomoku04.問題あり.getコード().equals(今回結果コード) && IkenKomoku04.問題なし.getコード().equals(前回調査結果コード))) {
+                調査結果.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階悪化.getCode());
+                調査結果.set段階改善値(new RString(Integer.parseInt(今回結果コード.toString()) - Integer.parseInt(前回調査結果コード.toString())));
+            } else if ((IkenKomoku04.問題あり.getコード().equals(前回調査結果コード) && IkenKomoku04.問題なし.getコード().equals(今回結果コード))) {
+                調査結果.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階改善.getCode());
+                調査結果.set段階改善値(new RString(Integer.parseInt(前回調査結果コード.toString()) - Integer.parseInt(今回結果コード.toString())));
+            } else {
+                調査結果.set段階改善フラグ(RString.EMPTY);
+                調査結果.set段階改善値(RString.EMPTY);
+            }
         } else {
-            第２群.set段階改善フラグ(RString.EMPTY);
-            第２群.set段階改善値(RString.EMPTY);
+            調査結果.set段階改善フラグ(RString.EMPTY);
+            調査結果.set段階改善値(RString.EMPTY);
         }
     }
 
     /**
      * 認知能力今回結果前回結果を設定する。
      *
-     * @param 今回結果コード 今回結果コード
+     * @param 調査結果 TiyosaKekka
      * @param 前回調査結果コード 前回調査結果コード
-     * @param 第２群 第２群
      */
-    public void set認知能力今回結果前回結果比(RString 今回結果コード, RString 前回調査結果コード, TiyosaKekka 第２群) {
-        if ((IkenKomoku05.判断できない.getコード().equals(今回結果コード) && (IkenKomoku05.見守りが必要.getコード().equals(前回調査結果コード)
-                || IkenKomoku05.いくらか困難.getコード().equals(前回調査結果コード) || IkenKomoku05.自立.getコード().equals(前回調査結果コード)))
-                || (IkenKomoku05.見守りが必要.getコード().equals(今回結果コード) && (IkenKomoku05.いくらか困難.getコード().equals(前回調査結果コード)
-                || IkenKomoku05.自立.getコード().equals(前回調査結果コード))) || (IkenKomoku05.いくらか困難.getコード().equals(今回結果コード)
-                && IkenKomoku05.自立.getコード().equals(前回調査結果コード))) {
-            第２群.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階悪化.getCode());
-            第２群.set段階改善値(new RString(Integer.parseInt(今回結果コード.toString()) - Integer.parseInt(前回調査結果コード.toString())));
-        } else if ((IkenKomoku05.判断できない.getコード().equals(前回調査結果コード) && (IkenKomoku05.見守りが必要.getコード().equals(今回結果コード)
-                || IkenKomoku05.いくらか困難.getコード().equals(今回結果コード) || IkenKomoku05.自立.getコード().equals(今回結果コード)))
-                || (IkenKomoku05.見守りが必要.getコード().equals(前回調査結果コード) && (IkenKomoku05.いくらか困難.getコード().equals(今回結果コード)
-                || IkenKomoku05.自立.getコード().equals(今回結果コード))) || (IkenKomoku05.いくらか困難.getコード().equals(前回調査結果コード)
-                && IkenKomoku05.自立.getコード().equals(今回結果コード))) {
-            第２群.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階改善.getCode());
-            第２群.set段階改善値(new RString(Integer.parseInt(前回調査結果コード.toString()) - Integer.parseInt(今回結果コード.toString())));
+    public void set認知能力今回結果前回結果比(TiyosaKekka 調査結果, RString 前回調査結果コード) {
+        RString 今回結果コード = 調査結果.get調査結果コード();
+        if (is前回今回比較結果印字する) {
+            if ((IkenKomoku05.判断できない.getコード().equals(今回結果コード) && (IkenKomoku05.見守りが必要.getコード().equals(前回調査結果コード)
+                    || IkenKomoku05.いくらか困難.getコード().equals(前回調査結果コード) || IkenKomoku05.自立.getコード().equals(前回調査結果コード)))
+                    || (IkenKomoku05.見守りが必要.getコード().equals(今回結果コード) && (IkenKomoku05.いくらか困難.getコード().equals(前回調査結果コード)
+                    || IkenKomoku05.自立.getコード().equals(前回調査結果コード))) || (IkenKomoku05.いくらか困難.getコード().equals(今回結果コード)
+                    && IkenKomoku05.自立.getコード().equals(前回調査結果コード))) {
+                調査結果.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階悪化.getCode());
+                調査結果.set段階改善値(new RString(Integer.parseInt(今回結果コード.toString()) - Integer.parseInt(前回調査結果コード.toString())));
+            } else if ((IkenKomoku05.判断できない.getコード().equals(前回調査結果コード) && (IkenKomoku05.見守りが必要.getコード().equals(今回結果コード)
+                    || IkenKomoku05.いくらか困難.getコード().equals(今回結果コード) || IkenKomoku05.自立.getコード().equals(今回結果コード)))
+                    || (IkenKomoku05.見守りが必要.getコード().equals(前回調査結果コード) && (IkenKomoku05.いくらか困難.getコード().equals(今回結果コード)
+                    || IkenKomoku05.自立.getコード().equals(今回結果コード))) || (IkenKomoku05.いくらか困難.getコード().equals(前回調査結果コード)
+                    && IkenKomoku05.自立.getコード().equals(今回結果コード))) {
+                調査結果.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階改善.getCode());
+                調査結果.set段階改善値(new RString(Integer.parseInt(前回調査結果コード.toString()) - Integer.parseInt(今回結果コード.toString())));
+            } else {
+                調査結果.set段階改善フラグ(RString.EMPTY);
+                調査結果.set段階改善値(RString.EMPTY);
+            }
         } else {
-            第２群.set段階改善フラグ(RString.EMPTY);
-            第２群.set段階改善値(RString.EMPTY);
+            調査結果.set段階改善フラグ(RString.EMPTY);
+            調査結果.set段階改善値(RString.EMPTY);
         }
     }
 
     /**
      * 伝達能力今回結果前回結果を設定する。
      *
-     * @param 今回結果コード 今回結果コード
+     * @param 調査結果 TiyosaKekka
      * @param 前回調査結果コード 前回調査結果コード
-     * @param 第２群 第２群
      */
-    public void set伝達能力今回結果前回結果比(RString 今回結果コード, RString 前回調査結果コード, TiyosaKekka 第２群) {
-        if ((IkenKomoku06.伝えられない.getコード().equals(今回結果コード) && (IkenKomoku06.具体的要求に限られる.getコード().equals(前回調査結果コード)
-                || IkenKomoku06.いくらか困難.getコード().equals(前回調査結果コード) || IkenKomoku06.伝えられる.getコード().equals(前回調査結果コード)))
-                || (IkenKomoku06.具体的要求に限られる.getコード().equals(今回結果コード) && (IkenKomoku06.いくらか困難.getコード().equals(前回調査結果コード)
-                || IkenKomoku06.伝えられる.getコード().equals(前回調査結果コード))) || (IkenKomoku06.いくらか困難.getコード().equals(今回結果コード)
-                && IkenKomoku06.伝えられる.getコード().equals(前回調査結果コード))) {
-            第２群.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階悪化.getCode());
-            第２群.set段階改善値(new RString(Integer.parseInt(今回結果コード.toString()) - Integer.parseInt(前回調査結果コード.toString())));
-        } else if ((IkenKomoku06.伝えられない.getコード().equals(前回調査結果コード) && (IkenKomoku06.具体的要求に限られる.getコード().equals(今回結果コード)
-                || IkenKomoku06.いくらか困難.getコード().equals(今回結果コード) || IkenKomoku06.伝えられる.getコード().equals(今回結果コード)))
-                || (IkenKomoku06.具体的要求に限られる.getコード().equals(前回調査結果コード) && (IkenKomoku06.いくらか困難.getコード().equals(今回結果コード)
-                || IkenKomoku06.伝えられる.getコード().equals(今回結果コード))) || (IkenKomoku06.いくらか困難.getコード().equals(前回調査結果コード)
-                && IkenKomoku06.伝えられる.getコード().equals(今回結果コード))) {
-            第２群.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階改善.getCode());
-            第２群.set段階改善値(new RString(Integer.parseInt(前回調査結果コード.toString()) - Integer.parseInt(今回結果コード.toString())));
+    public void set伝達能力今回結果前回結果比(TiyosaKekka 調査結果, RString 前回調査結果コード) {
+        RString 今回結果コード = 調査結果.get調査結果コード();
+        if (is前回今回比較結果印字する) {
+            if ((IkenKomoku06.伝えられない.getコード().equals(今回結果コード) && (IkenKomoku06.具体的要求に限られる.getコード().equals(前回調査結果コード)
+                    || IkenKomoku06.いくらか困難.getコード().equals(前回調査結果コード) || IkenKomoku06.伝えられる.getコード().equals(前回調査結果コード)))
+                    || (IkenKomoku06.具体的要求に限られる.getコード().equals(今回結果コード) && (IkenKomoku06.いくらか困難.getコード().equals(前回調査結果コード)
+                    || IkenKomoku06.伝えられる.getコード().equals(前回調査結果コード))) || (IkenKomoku06.いくらか困難.getコード().equals(今回結果コード)
+                    && IkenKomoku06.伝えられる.getコード().equals(前回調査結果コード))) {
+                調査結果.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階悪化.getCode());
+                調査結果.set段階改善値(new RString(Integer.parseInt(今回結果コード.toString()) - Integer.parseInt(前回調査結果コード.toString())));
+            } else if ((IkenKomoku06.伝えられない.getコード().equals(前回調査結果コード) && (IkenKomoku06.具体的要求に限られる.getコード().equals(今回結果コード)
+                    || IkenKomoku06.いくらか困難.getコード().equals(今回結果コード) || IkenKomoku06.伝えられる.getコード().equals(今回結果コード)))
+                    || (IkenKomoku06.具体的要求に限られる.getコード().equals(前回調査結果コード) && (IkenKomoku06.いくらか困難.getコード().equals(今回結果コード)
+                    || IkenKomoku06.伝えられる.getコード().equals(今回結果コード))) || (IkenKomoku06.いくらか困難.getコード().equals(前回調査結果コード)
+                    && IkenKomoku06.伝えられる.getコード().equals(今回結果コード))) {
+                調査結果.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階改善.getCode());
+                調査結果.set段階改善値(new RString(Integer.parseInt(前回調査結果コード.toString()) - Integer.parseInt(今回結果コード.toString())));
+            } else {
+                調査結果.set段階改善フラグ(RString.EMPTY);
+                調査結果.set段階改善値(RString.EMPTY);
+            }
         } else {
-            第２群.set段階改善フラグ(RString.EMPTY);
-            第２群.set段階改善値(RString.EMPTY);
+            調査結果.set段階改善フラグ(RString.EMPTY);
+            調査結果.set段階改善値(RString.EMPTY);
         }
     }
 
     /**
      * 食事行為今回結果前回結果を設定する。
      *
-     * @param 今回結果コード 今回結果コード
+     * @param 調査結果 TiyosaKekka
      * @param 前回調査結果コード 前回調査結果コード
-     * @param 第２群 第２群
      */
-    public void set食事行為今回結果前回結果比(RString 今回結果コード, RString 前回調査結果コード, TiyosaKekka 第２群) {
-        if ((IkenKomoku14.全面介助.getコード().equals(今回結果コード) && IkenKomoku14.自立ないし何とか自分で食べられる.getコード().equals(前回調査結果コード))) {
-            第２群.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階悪化.getCode());
-            第２群.set段階改善値(new RString(Integer.parseInt(今回結果コード.toString()) - Integer.parseInt(前回調査結果コード.toString())));
-        } else if ((IkenKomoku14.全面介助.getコード().equals(前回調査結果コード) && IkenKomoku14.自立ないし何とか自分で食べられる.getコード().equals(今回結果コード))) {
-            第２群.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階改善.getCode());
-            第２群.set段階改善値(new RString(Integer.parseInt(前回調査結果コード.toString()) - Integer.parseInt(今回結果コード.toString())));
+    public void set食事行為今回結果前回結果比(TiyosaKekka 調査結果, RString 前回調査結果コード) {
+        RString 今回結果コード = 調査結果.get調査結果コード();
+        if (is前回今回比較結果印字する) {
+            if ((IkenKomoku14.全面介助.getコード().equals(今回結果コード) && IkenKomoku14.自立ないし何とか自分で食べられる.getコード().equals(前回調査結果コード))) {
+                調査結果.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階悪化.getCode());
+                調査結果.set段階改善値(new RString(Integer.parseInt(今回結果コード.toString()) - Integer.parseInt(前回調査結果コード.toString())));
+            } else if ((IkenKomoku14.全面介助.getコード().equals(前回調査結果コード) && IkenKomoku14.自立ないし何とか自分で食べられる.getコード().equals(今回結果コード))) {
+                調査結果.set段階改善フラグ(NotesComparisonResultBeforeAfter.前回よりn段階改善.getCode());
+                調査結果.set段階改善値(new RString(Integer.parseInt(前回調査結果コード.toString()) - Integer.parseInt(今回結果コード.toString())));
+            } else {
+                調査結果.set段階改善フラグ(RString.EMPTY);
+                調査結果.set段階改善値(RString.EMPTY);
+            }
         } else {
-            第２群.set段階改善フラグ(RString.EMPTY);
-            第２群.set段階改善値(RString.EMPTY);
+            調査結果.set段階改善フラグ(RString.EMPTY);
+            調査結果.set段階改善値(RString.EMPTY);
         }
     }
 
@@ -766,12 +831,12 @@ public class IchijihanteikekkahyoKekka {
      * @return 第１群リスト
      */
     public List<TiyosaKekka> get第１群リスト() {
-        List<TiyosaKekka> 第１群リスト = new ArrayList<>();
+        List<TiyosaKekka> 調査結果リスト = new ArrayList<>();
         for (int i = 0; i < INT_20; i++) {
             TiyosaKekka 第１群 = new TiyosaKekka();
-            第１群リスト.add(第１群);
+            調査結果リスト.add(第１群);
         }
-        return 第１群リスト;
+        return 調査結果リスト;
     }
 
     /**

@@ -82,11 +82,9 @@ public class NinteiChosainMaster {
      */
     public NinteiChosainMaster() {
         構成市町村マスタ市町村コード重複種別
-                = DbBusinessConfig.get(ConfigNameDBE.構成市町村マスタ市町村コード重複種別, new RDate("20000401"),
-                        SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("構成市町村マスタ市町村コード重複種別"));
+                = DbBusinessConfig.get(ConfigNameDBE.構成市町村マスタ市町村コード重複種別, new RDate("20000401"), SubGyomuCode.DBE認定支援);
         四マスタ優先表示市町村識別ID
-                = DbBusinessConfig.get(ConfigNameDBE.四マスタ優先表示市町村識別ID, new RDate("20000401"),
-                        SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("四マスタ優先表示市町村識別ID"));
+                = DbBusinessConfig.get(ConfigNameDBE.四マスタ優先表示市町村識別ID, new RDate("20000401"), SubGyomuCode.DBE認定支援);
     }
 
     /**
@@ -108,7 +106,8 @@ public class NinteiChosainMaster {
             div.getChosainSearch().getTxtSearchChosaItakusakiCodeFrom().setValue(認定調査委託先コード);
             div.getChosainSearch().getTxtSearchChosaItakusakiCodeTo().setValue(認定調査委託先コード);
             div.getChosainSearch().getHokenshaList().setSelectedShichosonIfExist(市町村コード);
-            searchChosainInfo(div);
+            List<jp.co.ndensan.reams.db.dbe.business.core.ninteichosainmaster.NinteiChosainMaster> 調査員情報List = searchChosainInfo(div);
+            getHandler(div).setChosainIchiran(調査員情報List);
             return ResponseData.of(div).setState(DBE9040001StateName.一覧_認定調査委託先マスタから遷移);
         }
         return ResponseData.of(div).setState(DBE9040001StateName.検索);
@@ -135,11 +134,13 @@ public class NinteiChosainMaster {
         if (ResponseHolder.isReRequest()) {
             return ResponseData.of(div).respond();
         }
-        searchChosainInfo(div);
-        if (div.getChosainIchiran().getDgChosainIchiran().getDataSource().isEmpty()) {
+        List<jp.co.ndensan.reams.db.dbe.business.core.ninteichosainmaster.NinteiChosainMaster> 調査員情報List = searchChosainInfo(div);
+        if (調査員情報List.isEmpty()) {
             div.getChosainSearch().setDisabled(false);
             div.getChosainIchiran().setDisabled(true);
             return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
+        } else {
+            getHandler(div).setChosainIchiran(調査員情報List);
         }
         return ResponseData.of(div).setState(DBE9040001StateName.一覧);
     }
@@ -169,19 +170,21 @@ public class NinteiChosainMaster {
             }
             if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                onLoad(div);
                 div.getChosainSearch().setDisabled(false);
                 return ResponseData.of(div).setState(DBE9040001StateName.検索);
             }
         } else {
-            onLoad(div);
+            if (!(DBE9040001StateName.一覧.toString().equals(ResponseHolder.getState().toString())
+                    || DBE9040001StateName.一覧_認定調査委託先マスタから遷移.toString().equals(ResponseHolder.getState().toString()))) {
+                onLoad(div);
+            }
             div.getChosainSearch().setDisabled(false);
             return ResponseData.of(div).setState(DBE9040001StateName.検索);
         }
         return ResponseData.of(div).respond();
     }
 
-    private void searchChosainInfo(NinteiChosainMasterDiv div) {
+    private List<jp.co.ndensan.reams.db.dbe.business.core.ninteichosainmaster.NinteiChosainMaster> searchChosainInfo(NinteiChosainMasterDiv div) {
         boolean chosainJokyo = false;
         if (div.getRadSearchChosainJokyo().getSelectedIndex() == 0) {
             chosainJokyo = true;
@@ -247,11 +250,11 @@ public class NinteiChosainMaster {
                         parameter).records();
         div.getChosainSearch().setDisabled(true);
         div.getChosainIchiran().setDisabled(false);
-        getHandler(div).setChosainIchiran(調査員情報List);
         List<ChosainJoho> 認定調査員マスタList = ninteiChosainMasterFinder.getChosainJohoList(parameter).records();
         ViewStateHolder.put(ViewStateKeys.認定調査員マスタ検索結果, Models.create(認定調査員マスタList));
         div.getChosainIchiran().getDgChosainIchiran().getGridSetting().setLimitRowCount(div.getTxtSaidaiHyojiKensu().getValue().intValue());
         div.getChosainIchiran().getDgChosainIchiran().getGridSetting().setSelectedRowCount(ninteiChosainMasterFinder.getChosainJohoIchiranListKensu(parameter));
+        return 調査員情報List;
     }
 
     /**
@@ -715,6 +718,7 @@ public class NinteiChosainMaster {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             div.getChosainSearch().setDisabled(false);
             div.getChosainIchiran().setDisabled(false);
+            onLoad(div);
             return ResponseData.of(div).setState(DBE9040001StateName.検索);
         }
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
@@ -725,6 +729,7 @@ public class NinteiChosainMaster {
             }
             return ResponseData.of(div).setState(DBE9040001StateName.詳細);
         }
+        onLoad(div);
         div.getChosainSearch().setDisabled(false);
         div.getChosainIchiran().setDisabled(false);
         return ResponseData.of(div).setState(DBE9040001StateName.検索);

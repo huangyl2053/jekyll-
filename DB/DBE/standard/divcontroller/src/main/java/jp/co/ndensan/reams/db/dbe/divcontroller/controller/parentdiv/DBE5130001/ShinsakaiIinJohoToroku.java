@@ -1,5 +1,6 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5130001;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinjoho.shinsakaiiinjoho.ShinsakaiIinJoho;
@@ -9,6 +10,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001.DBE5
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001.ShinsakaiIinTorokuCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001.KozaMitorokuShinsakaiIinCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001.ShinsakaiIinJohoTorokuDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001.ShozokuKikanIchiran;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001.dgShinsaInJohoIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5130001.ShinsakaiIinJohoTorokuHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5130001.ShinsakaiIinJohoTorokuValidationHandler;
@@ -240,7 +242,7 @@ public class ShinsakaiIinJohoToroku {
      * @return ResponseData
      */
     public ResponseData onClick_btnDeleteShozokuKikanIchiran(ShinsakaiIinJohoTorokuDiv div) {
-        div.getDgShozokuKikanIchiran().getDataSource().remove(div.getDgShozokuKikanIchiran().getActiveRow());
+        div.getDgShozokuKikanIchiran().getActiveRow().setJotai(状態_削除);
         return ResponseData.of(div).respond();
     }
 
@@ -382,6 +384,7 @@ public class ShinsakaiIinJohoToroku {
      * @return ResponseData
      */
     public ResponseData onClick_btnToroku(ShinsakaiIinJohoTorokuDiv div) {
+        RString 所属機関一覧 = RString.EMPTY;
         ValidationMessageControlPairs validationMessages
                 = getValidationHandler(div).審査会委員情報入力チェック(div.getShinsakaiIinJohoTorokuInput().getStatus());
         if (validationMessages.iterator().hasNext()) {
@@ -395,24 +398,32 @@ public class ShinsakaiIinJohoToroku {
             ShinsakaiIinJoho shinsakaiJoho = new ShinsakaiIinJoho(div.getTxtShinsainCode().getValue());
             shinsakaiJoho = createHandOf(div).setShinsakaiJoho(shinsakaiJoho);
             models.add(shinsakaiJoho);
+
+            所属機関一覧 = DataPassingConverter.serialize((Serializable) new ShozokuKikanIchiran(div.getDgShozokuKikanIchiran().getDataSource()).get所属機関());
+
         } else if (状態_修正.equals(イベント状態)) {
             jotai = div.getDgShinsaInJohoIchiran().getActiveRow().getStatus();
             ShinsakaiIinJohoIdentifier key = new ShinsakaiIinJohoIdentifier(div.getTxtShinsainCode().getValue());
             ShinsakaiIinJoho shinsakaiJoho = createHandOf(div).setShinsakaiJoho(models.get(key).modifiedModel());
             shinsakaiJoho = shinsakaiJoho.modifiedModel();
             models.add(shinsakaiJoho);
+
+            所属機関一覧 = DataPassingConverter.serialize((Serializable) new ShozokuKikanIchiran(div.getDgShozokuKikanIchiran().getDataSource()).get所属機関());
+
         } else if (状態_削除.equals(イベント状態)) {
             ShinsakaiIinJohoIdentifier key = new ShinsakaiIinJohoIdentifier(div.getTxtShinsainCode().getValue());
             jotai = div.getDgShinsaInJohoIchiran().getActiveRow().getStatus();
             if (状態_追加.equals(jotai)) {
                 models.deleteOrRemove(key);
+                所属機関一覧 = DataPassingConverter.serialize((Serializable) new ShozokuKikanIchiran(div.getDgShozokuKikanIchiran().getDataSource()).get所属機関());
             } else {
                 ShinsakaiIinJoho shinsakaiJoho = createHandOf(div).setShinsakaiJoho(models.get(key).deleted());
                 models.add(shinsakaiJoho);
+                所属機関一覧 = DataPassingConverter.serialize((Serializable) new ShozokuKikanIchiran(div.getDgShozokuKikanIchiran().getDataSource()).get所属機関());
             }
         }
         ViewStateHolder.put(ViewStateKeys.介護認定審査会委員情報更新, models);
-        createHandOf(div).setShinsakiToIchiran(イベント状態, jotai);
+        createHandOf(div).setShinsakiToIchiran(イベント状態, jotai, 所属機関一覧);
         return responseWithSettingState(div);
     }
 

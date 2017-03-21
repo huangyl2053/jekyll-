@@ -1274,7 +1274,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE230001.getReportId(), KamokuCode.EMPTY, 通知書定型文パターン番号);
                 item.setTitle(通知文Map.containsKey(0) ? 通知文Map.get(0) : RString.EMPTY);
                 item.setTsuchibun1(通知文Map.containsKey(1) ? 通知文Map.get(1) : RString.EMPTY);
-                item.setShinseiKubun(NinteiShinseiShinseijiKubunCode.toValue(business.get認定申請区分_申請時_コード()).get名称());
+                item.setShinseiKubun(NinteiShinseiShinseijiKubunCode.toValue(business.get認定申請区分_申請時_コード()).get略称());
 
                 List<RString> 被保険者番号リスト = get被保険者番号(business.get被保険者番号());
                 item.setHihokenshaNo1(被保険者番号リスト.get(0));

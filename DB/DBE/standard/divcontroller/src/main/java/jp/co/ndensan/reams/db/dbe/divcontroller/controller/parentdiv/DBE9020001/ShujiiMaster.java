@@ -103,7 +103,8 @@ public class ShujiiMaster {
             div.getShujiiSearch().getTxtSearchShujiiIryokikanCodeFrom().setValue(主治医医療機関コード);
             div.getShujiiSearch().getTxtSearchShujiiIryokikanCodeTo().setValue(主治医医療機関コード);
             div.getShujiiSearch().getCcdHokenshaList().setSelectedShichosonIfExist(市町村コード);
-            searchChosainInfo(div);
+            List<jp.co.ndensan.reams.db.dbe.business.core.shujiijoho.ShujiiMaster> 主治医情報List = searchChosainInfo(div);
+            getHandler(div).setShujiiIchiran(主治医情報List);
             return ResponseData.of(div).setState(DBE9020001StateName.主治医一覧_医療機関登録から遷移);
         }
         return ResponseData.of(div).setState(DBE9020001StateName.検索);
@@ -130,22 +131,26 @@ public class ShujiiMaster {
         if (ResponseHolder.isReRequest()) {
             return ResponseData.of(div).respond();
         }
-        searchChosainInfo(div);
-        boolean 検索条件初期値 = true;
-        if (!div.getTxtSearchShujiiIryokikanCodeFrom().getValue().isEmpty()
-                || !div.getTxtSearchShujiiIryokikanCodeTo().getValue().isEmpty()
-                || !div.getTxtSearchShujiiCodeFrom().getValue().isEmpty()
-                || !div.getTxtSearchShujiiCodeTo().getValue().isEmpty()
-                || !div.getTxtSearchShujiiIryokikanMeisho().getValue().isEmpty()
-                || !div.getTxtSearchShujiiIryokikanKanaMeisho().getValue().isEmpty()
-                || !div.getTxtSearchShujiiShimei().getValue().isEmpty()
-                || !div.getTxtSearchShujiiKanaShimei().getValue().isEmpty()) {
-            検索条件初期値 = false;
-        }
-        if (div.getShujiiIchiran().getDgShujiiIchiran().getDataSource().isEmpty() && !検索条件初期値) {
+        List<jp.co.ndensan.reams.db.dbe.business.core.shujiijoho.ShujiiMaster> 主治医情報List = searchChosainInfo(div);
+
+//        boolean 検索条件初期値 = true;
+//        if (!div.getTxtSearchShujiiIryokikanCodeFrom().getValue().isEmpty()
+//                || !div.getTxtSearchShujiiIryokikanCodeTo().getValue().isEmpty()
+//                || !div.getTxtSearchShujiiCodeFrom().getValue().isEmpty()
+//                || !div.getTxtSearchShujiiCodeTo().getValue().isEmpty()
+//                || !div.getTxtSearchShujiiIryokikanMeisho().getValue().isEmpty()
+//                || !div.getTxtSearchShujiiIryokikanKanaMeisho().getValue().isEmpty()
+//                || !div.getTxtSearchShujiiShimei().getValue().isEmpty()
+//                || !div.getTxtSearchShujiiKanaShimei().getValue().isEmpty()) {
+//            検索条件初期値 = false;
+//        }
+        if (主治医情報List.isEmpty() //                && !検索条件初期値
+                ) {
             div.getShujiiSearch().setDisabled(false);
             div.getShujiiIchiran().setDisabled(true);
             return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
+        } else {
+            getHandler(div).setShujiiIchiran(主治医情報List);
         }
         return ResponseData.of(div).setState(DBE9020001StateName.主治医一覧_保存ボタン非活性);
     }
@@ -174,10 +179,14 @@ public class ShujiiMaster {
         } else {
             div.getShujiiSearch().setDisplayNone(false);
             div.getShujiiSearch().setDisabled(false);
-            getHandler(div).load();
+            if (!(DBE9020001StateName.主治医一覧.toString().equals(ResponseHolder.getState().toString())
+                    || DBE9020001StateName.主治医一覧_保存ボタン非活性.toString().equals(ResponseHolder.getState().toString())
+                    || DBE9020001StateName.主治医一覧_医療機関登録から遷移.toString().equals(ResponseHolder.getState().toString()))) {
+                getHandler(div).load();
+            }
             return ResponseData.of(div).setState(DBE9020001StateName.検索);
         }
-        getHandler(div).load();
+
         return ResponseData.of(div).respond();
     }
 
@@ -190,7 +199,7 @@ public class ShujiiMaster {
         return false;
     }
 
-    private void searchChosainInfo(ShujiiMasterDiv div) {
+    private List<jp.co.ndensan.reams.db.dbe.business.core.shujiijoho.ShujiiMaster> searchChosainInfo(ShujiiMasterDiv div) {
         boolean jokyoFlag = false;
         if (div.getRadSearchJokyoFlag().getSelectedIndex() == 0) {
             jokyoFlag = true;
@@ -257,9 +266,9 @@ public class ShujiiMaster {
 
         div.getShujiiSearch().setDisabled(true);
         div.getShujiiIchiran().setDisabled(false);
-        getHandler(div).setShujiiIchiran(主治医情報List);
         List<ShujiiJoho> 主治医マスタList = shujiiMasterFinder.getShujiiJohoList(parameter).records();
         ViewStateHolder.put(ViewStateKeys.主治医マスタ検索結果, Models.create(主治医マスタList));
+        return 主治医情報List;
     }
 
     /**

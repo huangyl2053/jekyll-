@@ -24,4 +24,5 @@ public class TiyosaKekka {
     private RString 前回結果;
     private RString 認定調査と主治医意見書の結果比較;
     private RString 特記事項有無;
+    private int 連番;
 }

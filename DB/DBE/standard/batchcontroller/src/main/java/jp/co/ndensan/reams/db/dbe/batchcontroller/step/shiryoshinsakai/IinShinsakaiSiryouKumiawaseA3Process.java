@@ -223,11 +223,20 @@ public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase
                     特記情報 = get特記情報(審査会資料共通Entity);
                 }
                 IchijihanteikekkahyoItemSetteiA3 一次判定結果票Item = new IchijihanteikekkahyoItemSetteiA3();
-                IchijihanteikekkahyoA3Entity 一次判定結果票Entity = 一次判定結果票Item.set項目(entity, 特記事項,
-                                調査票調査項目, 前回調査票調査項目, 主治医意見書,
-                                前回主治医意見書, 予防給付サービス利用状況, 介護給付サービス利用状況, サービス状況フラグ, データ件数,
-                                審査会資料共通Entity, 主治医意見書, new RString(paramter.getGogitaiNo()),
-                                特記情報, batchReportWriter.getImageFolderPath());
+                IchijihanteikekkahyoA3Entity 一次判定結果票Entity = 一次判定結果票Item.set項目(entity,
+                                調査票調査項目,
+                                前回調査票調査項目,
+                                主治医意見書,
+                                前回主治医意見書,
+                                予防給付サービス利用状況,
+                                介護給付サービス利用状況,
+                                サービス状況フラグ,
+                                データ件数,
+                                審査会資料共通Entity,
+                                主治医意見書,
+                                new RString(paramter.getGogitaiNo()),
+                                特記情報,
+                                batchReportWriter.getImageFolderPath());
                 return new IchijihanteikekkahyoA3Business(一次判定結果票Entity, false);
             }
         }

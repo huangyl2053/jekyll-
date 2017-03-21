@@ -929,52 +929,14 @@
     <select id="getNinteiKanryoJoho"
             resultOrdered="true"
             resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.ResultMap_DbT5105NinteiKanryoJohoEntity"
-            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.centertransmission.CenterTransmissionUpdateMybitisParamter"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.centertransmission.CenterTransmissionMybitisParamter"
             fetchSize="500">
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5105NinteiKanryoJohoMapper.allColumns_DbT5105NinteiKanryoJoho" />
         FROM
         "SoshinDataSakuseiTaishoshaTemp"
         INNER JOIN
-        (
-        SELECT
-        "shinseishoKanriNo"
-        , "nijiHanteiYMD"
-        , "nijiHanteiYokaigoJotaiKubunCode"
-        , "nijiHanteiNinteiYukoKikan"
-        , "nijiHanteiNinteiYukoKaishiYMD"
-        , "nijiHanteiNinteiYukoShuryoYMD"
-        , "shinsakaiShiryoSakuseiYMD"
-        , "shinsakaiKaisaiNo"
-        , "shinsakaiIken"
-        , "ichijiHanteiKekkaHenkoRiyu"
-        , "yokaigoJotaizoReiCode"
-        , "ninteishinsakaiIkenShurui"
-        , "shinsakaiMemo"
-        , "nijiHanteiKekkaInputHoho"
-        , "nijiHanteiKekkaInputYMD" 
-        FROM
-        rgdb."DbT5129Tennyu" 
-        UNION ALL
-        SELECT
-        "shinseishoKanriNo"
-        , "nijiHanteiYMD"
-        , "nijiHanteiYokaigoJotaiKubunCode"
-        , "nijiHanteiNinteiYukoKikan"
-        , "nijiHanteiNinteiYukoKaishiYMD"
-        , "nijiHanteiNinteiYukoShuryoYMD"
-        , "shinsakaiShiryoSakuseiYMD"
-        , "shinsakaiKaisaiNo"
-        , "shinsakaiIken"
-        , "ichijiHanteiKekkaHenkoRiyu"
-        , "yokaigoJotaizoReiCode"
-        , "ninteishinsakaiIkenShurui"
-        , "shinsakaiMemo"
-        , "nijiHanteiKekkaInputHoho"
-        , "nijiHanteiKekkaInputYMD" 
-        FROM
-        rgdb."DbT5130Shibo"
-        ) AS "TennyuShiboTaishosha"
+        (<include refid="selectSoshonDataSakuseiTaishosha" />) AS "TennyuShiboTaishosha"
         ON "SoshinDataSakuseiTaishoshaTemp"."shinseishoKanriNo" = "TennyuShiboTaishosha"."shinseishoKanriNo"
         INNER JOIN 
         rgdb."DbT5105NinteiKanryoJoho" 

@@ -771,11 +771,11 @@ public class NinteiChosaBusiness {
         List<RString> 出力条件 = new ArrayList<>();
         RStringBuilder builder = new RStringBuilder();
         builder.append(SHOKISAIHOKENSHANO);
-        builder.append(ConvertDate(processParamter.getShoKisaiHokenshaNo()));
+        builder.append(processParamter.getShoKisaiHokenshaNo());
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(HOKENSHANAME);
-        builder.append(ConvertDate(processParamter.getHokenshaName()));
+        builder.append(processParamter.getHokenshaName());
         出力条件.add(builder.toRString());
         builder = new RStringBuilder();
         builder.append(IRAIFROMYMD);

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteishinsakaik
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteishinsakaikekkadatatorikomi.ShinsakaiKekkaDataTorikomiMybatisParameter;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5501ShinsakaiKaisaiYoteiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5510IchiGojiHanteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomimobile.TempShinsaIinRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomimobile.TempShinsakaiJohoRelateEntity;
@@ -77,6 +78,14 @@ public interface IShinsakaiKekkaDataTorikomiMapper {
      * @return DbT5105NinteiKanryoJohoEntity
      */
     DbT5105NinteiKanryoJohoEntity getNinteiKanryo(ShinseishoKanriNo 申請書管理番号);
+
+    /**
+     * 検索条件より、要介護認定完了情報を検索する。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return DbT5105NinteiKanryoJohoEntity
+     */
+    DbT5501ShinsakaiKaisaiYoteiJohoEntity getShinsakaiKaisaiYotei(ShinseishoKanriNo 申請書管理番号);
 
     /**
      * 検索条件より、要介護認定結果情報を検索する。

@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyotok
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyotokkijiko.NinteichosahyoTokkijikoBuilder;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJohoBuilder;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJohoIdentifier;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiShoriKekka;
 import jp.co.ndensan.reams.db.dbe.business.core.tokkijikoinput.TokkiJikoInputModel;
 import jp.co.ndensan.reams.db.dbe.business.core.util.DBEImageUtil;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImageFileItem;
@@ -28,6 +30,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouniteichosahyous
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyoukflg.GaikyoChosahyouServiceJyoukFlg09B;
 import jp.co.ndensan.reams.db.dbe.definition.core.kanri.ImageFileName;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichijipanteisyori.IChiJiPanTeiSyoRiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.NinnteiChousaKekkaTouroku1Div;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.dgRiyoServiceJyokyo_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.dgRiyoShisetsu_Row;
@@ -110,6 +113,11 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoFinder;
+import jp.co.ndensan.reams.db.dbe.service.core.ichijipanteisyori.IChiJiPanTeiSyoRiManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
+import jp.co.ndensan.reams.uz.uza.util.Models;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5105NinteiKanryoJohoDac;
 
 /**
  * 認定調査結果登録1のクラスです。
@@ -1696,6 +1704,127 @@ public class NinnteiChousaKekkaTouroku1Handler {
             NinteichosahyoServiceJokyoBuilder dbt5207Builder = dbt5207.createBuilderForEdit();
             dbt5207Manager.save認定調査票_概況調査_サービスの状況(dbt5207Builder.build());
         }
+    }
+
+    /**
+     * 対象者一覧を更新します。また、一次判定結果にエラーが出なかったデータのみ、ViewState上のデータも合わせて更新します。
+     *
+     * @param kekkaList 一次判定処理結果List
+     */
+    public void updateGridAndViewStateData(List<IchijiHanteiShoriKekka> kekkaList) {
+        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+        List<RString> shinseishoKanriNoList = new ArrayList<>();
+        shinseishoKanriNoList.add(申請書管理番号.value());
+        IChiJiPanTeiSyoRiParameter parameter = IChiJiPanTeiSyoRiParameter.
+                createParameterOf一次判定完了処理(
+                        ShoKisaiHokenshaNo.EMPTY,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        FlexibleDate.EMPTY,
+                        FlexibleDate.EMPTY,
+                        Decimal.ZERO,
+                        RString.EMPTY,
+                        shinseishoKanriNoList,
+                        RString.EMPTY);
+        IChiJiPanTeiSyoRiManager manager = IChiJiPanTeiSyoRiManager.createInstance();
+        List<IchijiHanteiKekkaJoho> kekkaJohoList = manager.get一次判定結果情報_調査結果(parameter).records();
+        Models<IchijiHanteiKekkaJohoIdentifier, IchijiHanteiKekkaJoho> models;
+        if (!kekkaJohoList.isEmpty()) {
+            models = Models.create(kekkaJohoList);
+        } else {
+            models = Models.create(new ArrayList<IchijiHanteiKekkaJoho>());
+        }
+        IchijiHanteiShoriKekka kekka = getKekka(kekkaList, 申請書管理番号);
+
+        if (!kekka.isError()) {
+            IchijiHanteiKekkaJoho joho = models.get(kekka.getHanteiKekka().identifier());
+            if (joho == null) {
+                models.add(get一次判定結果情報_仮一次判定区分編集(kekka.getHanteiKekka()));
+            } else {
+                joho = updateIchijiHanteiKekkaJoho(joho, get一次判定結果情報_仮一次判定区分編集(kekka.getHanteiKekka()));
+                models.add(joho);
+            }
+        }
+
+        List<IchijiHanteiKekkaJoho> torokuTaishoList = new ArrayList<>();
+        torokuTaishoList.addAll(models.values());
+        manager.save要介護認定一次判定結果情報List(torokuTaishoList);
+    }
+
+    private IchijiHanteiKekkaJoho get一次判定結果情報_仮一次判定区分編集(IchijiHanteiKekkaJoho ichijiHanteiKekkaJoho) {
+        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+        DbT5105NinteiKanryoJohoDac dbt5105Dac = InstanceProvider.create(DbT5105NinteiKanryoJohoDac.class);
+        DbT5105NinteiKanryoJohoEntity entity = dbt5105Dac.selectByShinseishoKanriNo(申請書管理番号);
+        IchijiHanteiKekkaJohoBuilder builder = ichijiHanteiKekkaJoho.createBuilderForEdit();
+        if (entity != null) {
+            if (entity.getNinteichosaKanryoYMD() == null || entity.getIkenshoTorokuKanryoYMD() == null) {
+                builder.set仮一次判定区分(Boolean.TRUE);
+            } else {
+                builder.set仮一次判定区分(Boolean.FALSE);
+            }
+        } else {
+            builder.set仮一次判定区分(Boolean.TRUE);
+        }
+        return builder.build();
+    }
+
+    private IchijiHanteiKekkaJoho updateIchijiHanteiKekkaJoho(IchijiHanteiKekkaJoho original, IchijiHanteiKekkaJoho updateData) {
+
+        IchijiHanteiKekkaJohoBuilder builder = original.createBuilderForEdit();
+        builder.set仮一次判定区分(updateData.get仮一次判定区分());
+        builder.set要介護認定一次判定年月日(new FlexibleDate(RDate.getNowDate().toDateString()));
+
+        builder.set要介護認定一次判定結果コード(updateData.get要介護認定一次判定結果コード());
+        builder.set要介護認定一次判定結果コード_認知症加算(updateData.get要介護認定一次判定結果コード_認知症加算());
+
+        builder.set要介護認定等基準時間(updateData.get要介護認定等基準時間());
+        builder.set要介護認定等基準時間_食事(updateData.get要介護認定等基準時間_食事());
+        builder.set要介護認定等基準時間_排泄(updateData.get要介護認定等基準時間_排泄());
+        builder.set要介護認定等基準時間_移動(updateData.get要介護認定等基準時間_移動());
+        builder.set要介護認定等基準時間_清潔保持(updateData.get要介護認定等基準時間_清潔保持());
+        builder.set要介護認定等基準時間_間接ケア(updateData.get要介護認定等基準時間_間接ケア());
+        builder.set要介護認定等基準時間_BPSD関連(updateData.get要介護認定等基準時間_BPSD関連());
+        builder.set要介護認定等基準時間_機能訓練(updateData.get要介護認定等基準時間_機能訓練());
+        builder.set要介護認定等基準時間_医療関連(updateData.get要介護認定等基準時間_医療関連());
+        builder.set要介護認定等基準時間_認知症加算(updateData.get要介護認定等基準時間_認知症加算());
+        builder.set中間評価項目得点第1群(updateData.get中間評価項目得点第1群());
+        builder.set中間評価項目得点第2群(updateData.get中間評価項目得点第2群());
+        builder.set中間評価項目得点第3群(updateData.get中間評価項目得点第3群());
+        builder.set中間評価項目得点第4群(updateData.get中間評価項目得点第4群());
+        builder.set中間評価項目得点第5群(updateData.get中間評価項目得点第5群());
+        builder.set中間評価項目得点第6群(updateData.get中間評価項目得点第6群());
+        builder.set中間評価項目得点第7群(updateData.get中間評価項目得点第7群());
+
+        builder.set要介護認定状態の安定性コード(updateData.get要介護認定状態の安定性コード());
+        builder.set認知症自立度Ⅱ以上の蓋然性(updateData.get認知症自立度Ⅱ以上の蓋然性());
+        builder.set認知機能及び状態安定性から推定される給付区分コード(updateData.get認知機能及び状態安定性から推定される給付区分コード());
+
+        builder.set運動能力の低下していない認知症高齢者の指標コード(Code.EMPTY);
+        builder.set日常生活自立度の組み合わせ_自立(0);
+        builder.set日常生活自立度の組み合わせ_要支援(0);
+        builder.set日常生活自立度の組み合わせ_要介護１(0);
+        builder.set日常生活自立度の組み合わせ_要介護２(0);
+        builder.set日常生活自立度の組み合わせ_要介護３(0);
+        builder.set日常生活自立度の組み合わせ_要介護４(0);
+        builder.set日常生活自立度の組み合わせ_要介護５(0);
+        builder.set認知症高齢者の日常生活自立度の蓋然性評価コード(Code.EMPTY);
+        builder.set認知症高齢者の日常生活自立度の蓋然性評価(0);
+        builder.set一次判定結果送付区分(RString.EMPTY);
+        builder.set一次判定結果送付年月日(FlexibleDate.EMPTY);
+        builder.setチャート(RString.EMPTY);
+        builder.set状態像(RString.EMPTY);
+
+        return builder.build();
+    }
+
+    private IchijiHanteiShoriKekka getKekka(List<IchijiHanteiShoriKekka> kekkaList, ShinseishoKanriNo shinseishoKanriNo) {
+        for (IchijiHanteiShoriKekka kekka : kekkaList) {
+            if (kekka.getShinseishoKanriNo().equals(shinseishoKanriNo)) {
+                return kekka;
+            }
+        }
+        return null;
     }
 
     private void 概況調査特記マスクの削除() {

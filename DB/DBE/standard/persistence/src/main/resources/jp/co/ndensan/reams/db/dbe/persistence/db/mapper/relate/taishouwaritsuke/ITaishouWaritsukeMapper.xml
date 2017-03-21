@@ -354,6 +354,7 @@
             rgdb."DbT5504ShinsakaiWariateJohoKenshu" AS DbT5504 
             WHERE 
             DbT5504."shinsakaiKaisaiNo" = #{kaisaiNo}
+            AND DbT5101."shinseishoKanriNo" = DbT5504."shinseishoKanriNo"
             )
         </if>
         <if test="isItijiHannteiAto">
