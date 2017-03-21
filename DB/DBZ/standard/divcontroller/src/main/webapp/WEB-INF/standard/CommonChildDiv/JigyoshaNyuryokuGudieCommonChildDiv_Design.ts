@@ -24,10 +24,6 @@ module DBZ {
                 return "onclick_BtnClear";
             }
 
-            public static close_Dialog(): string {
-                return "close_Dialog";
-            }
-
             public static select_BtnSenTaKu(): string {
                 return "select_BtnSenTaKu";
             }
@@ -38,6 +34,10 @@ module DBZ {
 
             public static select_BtnSakujo(): string {
                 return "select_BtnSakujo";
+            }
+
+            public static close_Dialog(): string {
+                return "close_Dialog";
             }
 
         }
@@ -137,16 +137,16 @@ module DBZ {
                 return new UZA.Button(this.convFiledName("btnClear"));
             }
 
-            public btnYameru(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnYameru"));
-            }
-
             public JigyoshaItirann(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("JigyoshaItirann"));
             }
 
             public dgJigyoshaItiran(): UZA.DataGrid {
                 return new UZA.DataGrid(this.convFiledName("dgJigyoshaItiran"));
+            }
+
+            public btnYameru(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnYameru"));
             }
 
         }

@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @reamsid_L DBA-0140-010 houtianpeng
  */
 public class TaishoJigyoshaKensakuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -32,8 +32,6 @@ public class TaishoJigyoshaKensakuDiv extends Panel {
     private Button btnTaishoJigyoshaKensaku;
     @JsonProperty("btnClear")
     private Button btnClear;
-    @JsonProperty("btnYameru")
-    private Button btnYameru;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -129,24 +127,6 @@ public class TaishoJigyoshaKensakuDiv extends Panel {
     @JsonProperty("btnClear")
     public void setBtnClear(Button btnClear) {
         this.btnClear = btnClear;
-    }
-
-    /*
-     * getbtnYameru
-     * @return btnYameru
-     */
-    @JsonProperty("btnYameru")
-    public Button getBtnYameru() {
-        return btnYameru;
-    }
-
-    /*
-     * setbtnYameru
-     * @param btnYameru btnYameru
-     */
-    @JsonProperty("btnYameru")
-    public void setBtnYameru(Button btnYameru) {
-        this.btnYameru = btnYameru;
     }
 
     /*
