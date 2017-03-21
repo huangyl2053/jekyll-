@@ -80,7 +80,7 @@
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE5510001",
      "toLayoutTitle": "要介護認定進捗状況照会",
-     "toState": "default"
+     "toState": "進捗状況一覧"
     },
     {
      "id": "7",

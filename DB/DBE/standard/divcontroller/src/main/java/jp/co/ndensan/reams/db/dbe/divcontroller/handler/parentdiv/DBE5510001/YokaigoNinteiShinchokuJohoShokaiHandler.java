@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteishinchokujohoshokai.YokaigoNinteiShinchokuJoho;
 import jp.co.ndensan.reams.db.dbe.business.report.dbe521002.NiteiGyomuShinchokuJokyoIchiranhyoBodyItem;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5510001.DBE5510001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5510001.YokaigoNinteiShinchokuJohoShokaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5510001.dgShinseiJoho_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
@@ -78,13 +79,14 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
      */
     public void onload() {
         div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定, HokenshaDDLPattem.全市町村以外);
+        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
+        div.getCcdHokenshaList().setSelectedShichosonIfExist(市町村セキュリティ情報.get市町村情報().get市町村コード());
         div.getRadKensakuHoho().setSelectedKey(KensakuHoho.被保険者から検索する場合.key);
         div.getShinseiJohoIchiran().setIsOpen(false);
         div.getRadHizukeHani().setSelectedKey(DATE_SOURCE_KEY0);
         div.getTxtShiteiHizukeRange().setDisabled(true);
         div.getSerchFromHohokensha().setDisplayNone(false);
         div.getSerchFromShinchokuJokyo().setDisplayNone(true);
-        set検索条件切替(false);
         init最大表示件数();
         setDisable();
         set広域用切替();
@@ -99,14 +101,6 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         if (Decimal.canConvert(データ出力件数閾値)) {
             div.getTxtMaximumDisplayNumber().setValue(new Decimal(データ出力件数閾値.toString()));
         }
-    }
-
-    public void set検索条件切替(boolean is検索結果表示) {
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnSearch"), !is検索結果表示);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(BTNPRINT, is検索結果表示);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(BTNRESEARCH, is検索結果表示);
-        div.getKensakuJoken().setDisplayNone(is検索結果表示);
-        div.getShinseiJohoIchiran().setDisplayNone(!is検索結果表示);
     }
 
     /**
@@ -174,7 +168,6 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         for (YokaigoNinteiShinchokuJoho joho : searchResult.records()) {
             dg_row.add(setRow(joho));
         }
-        set検索条件切替(true);
         div.getDgShinseiJoho().setDataSource(dg_row);
         div.getDgShinseiJoho().getGridSetting().setLimitRowCount(get最大取得件数());
         div.getDgShinseiJoho().getGridSetting().setSelectedRowCount(searchResult.totalCount());

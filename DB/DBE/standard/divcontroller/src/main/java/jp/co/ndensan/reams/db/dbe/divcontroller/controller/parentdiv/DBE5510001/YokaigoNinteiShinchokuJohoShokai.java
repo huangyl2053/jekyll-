@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteishinchokujohoshokai
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteishinchokujohoshokai.YokaigoNinteiShinchokuJoho;
 import jp.co.ndensan.reams.db.dbe.business.report.dbe521002.NiteiGyomuShinchokuJokyoIchiranhyoJoho;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteishinchokujohoshokai.YokaigoNinteiParamter;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5510001.DBE5510001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5510001.YokaigoNinteiShinchokuJohoShokaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5510001.YokaigoNinteiShinchokuJohoShokaiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5510001.YokaigoNinteiShinchokuJohoShokaiValidationHandler;
@@ -53,7 +54,6 @@ public class YokaigoNinteiShinchokuJohoShokai {
      * @return ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv>
      */
     public ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv> onActive(YokaigoNinteiShinchokuJohoShokaiDiv div) {
-        getHandler(div).set検索条件切替(false);
         RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
         RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
         NinteiShinseiJoho ninteiShinseiJoho = null;
@@ -157,7 +157,7 @@ public class YokaigoNinteiShinchokuJohoShokai {
             return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
         }
         div.getShinseiJohoIchiran().setIsOpen(true);
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBE5510001StateName.進捗状況一覧);
     }
     
     /**
@@ -167,8 +167,7 @@ public class YokaigoNinteiShinchokuJohoShokai {
      * @return {@code ResponseData}
      */
     public ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv> btnReSearch(YokaigoNinteiShinchokuJohoShokaiDiv div) {
-        getHandler(div).set検索条件切替(false);
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBE5510001StateName.Default);
     }
 
     /**
@@ -220,7 +219,7 @@ public class YokaigoNinteiShinchokuJohoShokai {
     
     private YokaigoNinteiParamter get検索パラメータ(YokaigoNinteiShinchokuJohoShokaiDiv div) {
         return YokaigoNinteiParamter.createParamter(
-                div.getCcdHokenshaList().getSelectedItem().get市町村コード().getColumnValue(),
+                div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().getColumnValue(),
                 div.getRadKensakuHoho().getSelectedKey(),
                 div.getTxtShiteiHizukeRange().getFromValue() == null ? RString.EMPTY : div.getTxtShiteiHizukeRange().getFromValue().toDateString(),
                 div.getTxtShiteiHizukeRange().getToValue() == null ? RString.EMPTY : div.getTxtShiteiHizukeRange().getToValue().toDateString(),

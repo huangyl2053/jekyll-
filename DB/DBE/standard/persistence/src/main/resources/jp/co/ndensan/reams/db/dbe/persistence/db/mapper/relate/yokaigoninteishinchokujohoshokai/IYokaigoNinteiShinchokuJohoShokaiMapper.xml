@@ -244,8 +244,8 @@
         ON DbT5302."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         AND DbT5302."ikenshoIraiRirekiNo" = DbT5301."ikenshoIraiRirekiNo"
         <where>
-            <if test="shichosonCodeFlag">
-                AND DbT5101."shichosonCode" = #{shichosonCode}
+            <if test="shoKisaiHokenshaNoFlag">
+                AND DbT5101."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
             </if>
             <if test="radKensakuHohoKey1">
                 <choose>
