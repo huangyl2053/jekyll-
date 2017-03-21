@@ -496,9 +496,11 @@ public class NinnteiChousaKekkaTouroku1 {
      */
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onClick_btnZenkaiCopy(NinnteiChousaKekkaTouroku1Div div) {
         RString 認定調査依頼区分コード = ViewStateHolder.get(ViewStateKeys.認定調査依頼区分コード, RString.class);
+        ShinseishoKanriNo 前回申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号2, ShinseishoKanriNo.class);
         if (!NinteichosaIraiKubun.再調査.getCode().equals(認定調査依頼区分コード)) {
             boolean 前回基本調査項目値あり = ViewStateHolder.get(ViewStateKeys.前回基本調査項目値あり, Boolean.class);
-            if (!前回基本調査項目値あり) {
+            if (!前回基本調査項目値あり
+                    && (前回申請書管理番号 == null || 前回申請書管理番号.isEmpty())) {
                 throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("前回値"));
             }
         }
