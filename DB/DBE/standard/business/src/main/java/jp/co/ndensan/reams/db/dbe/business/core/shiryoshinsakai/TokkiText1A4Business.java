@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.TokkijikoIchiranJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitexta4.TokkiA4Entity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -53,7 +54,7 @@ public class TokkiText1A4Business {
     private static final int SIZE_5 = 5;
     private static final int 最大ページ = 6;
     private static final int 最大連番 = 10;
-    private final List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List;
+    private final List<TokkijikoIchiranJohoRelateEntity> 特記情報List;
     private final ShinsakaiSiryoKyotsuEntity kyotsuEntity;
     private final RString path;
     private final RString 特記パターン;
@@ -68,7 +69,7 @@ public class TokkiText1A4Business {
      * @param 特記情報List List<DbT5205NinteichosahyoTokkijikoEntity>
      * @param ファイルパス ファイルパス
      */
-    public TokkiText1A4Business(ShinsakaiSiryoKyotsuEntity entity, List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List, RString ファイルパス) {
+    public TokkiText1A4Business(ShinsakaiSiryoKyotsuEntity entity, List<TokkijikoIchiranJohoRelateEntity> 特記情報List, RString ファイルパス) {
         this.特記パターン = DbBusinessConfig.get(ConfigNameDBE.審査会資料調査特記パターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         this.最大文字数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.特記事項行最大文字数, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString());
         this.ページ最大表示行数 = Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.特記事項最大表示行数, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString());
@@ -197,18 +198,21 @@ public class TokkiText1A4Business {
     public List<TokkiA4Entity> get短冊情報リスト() {
         List<TokkiA4Entity> 短冊情報リスト = new ArrayList<>();
         if (!テキスト全面イメージ.equals(特記パターン)) {
-            for (DbT5205NinteichosahyoTokkijikoEntity entity : 特記情報List) {
+            for (TokkijikoIchiranJohoRelateEntity entity : 特記情報List) {
                 TokkiA4Entity 短冊情報 = new TokkiA4Entity();
                 短冊情報.set事項番号(get項目番号(kyotsuEntity.getKoroshoIfShikibetsuCode(),
-                        entity.getNinteichosaTokkijikoNo(), entity.getNinteichosaTokkijikoRemban()));
-                短冊情報.set項目名称(get項目名称(kyotsuEntity.getKoroshoIfShikibetsuCode(), entity.getNinteichosaTokkijikoNo()));
+                        entity.get認定調査票特記事項Entity().getNinteichosaTokkijikoNo(),
+                        entity.get認定調査票特記事項Entity().getNinteichosaTokkijikoRemban()));
+                短冊情報.set項目名称(get項目名称(kyotsuEntity.getKoroshoIfShikibetsuCode(), 
+                        entity.get認定調査票特記事項Entity().getNinteichosaTokkijikoNo()));
                 if (TokkijikoTextImageKubun.テキスト.getコード().equals(get特記事項テキスト_イメージ区分())) {
-                    短冊情報.set特記事項テキスト_イメージ(entity.getTokkiJiko());
+                    短冊情報.set特記事項テキスト_イメージ(entity.get認定調査票特記事項Entity().getTokkiJiko());
                 } else {
                     RString 共有ファイル名 = kyotsuEntity.getShoKisaiHokenshaNo().concat(kyotsuEntity.getHihokenshaNo());
                     RString filePath = getFilePath(kyotsuEntity.getImageSharedFileId(), 共有ファイル名);
                     短冊情報.set特記事項テキスト_イメージ(共有ファイルを引き出す(filePath,
-                            getFilePathByRemban(entity.getNinteichosaTokkijikoNo(), entity.getNinteichosaTokkijikoRemban())));
+                            getFilePathByRemban(entity.get認定調査票特記事項Entity().getNinteichosaTokkijikoNo(),
+                                    entity.get認定調査票特記事項Entity().getNinteichosaTokkijikoRemban())));
                 }
                 短冊情報リスト.add(短冊情報);
             }
@@ -259,8 +263,8 @@ public class TokkiText1A4Business {
      * @return 全面特記事項テキストを取得します
      */
     public RString get特記事項テキスト_イメージ区分() {
-        for (DbT5205NinteichosahyoTokkijikoEntity entity : 特記情報List) {
-            if (TokkijikoTextImageKubun.テキスト.getコード().equals(entity.getTokkijikoTextImageKubun())) {
+        for (TokkijikoIchiranJohoRelateEntity entity : 特記情報List) {
+            if (TokkijikoTextImageKubun.テキスト.getコード().equals(entity.get認定調査票特記事項Entity().getTokkijikoTextImageKubun())) {
                 return TokkijikoTextImageKubun.テキスト.getコード();
             }
         }
@@ -301,11 +305,12 @@ public class TokkiText1A4Business {
         List<RString> テキスト全面List = new ArrayList<>();
         RStringBuilder テキスト全面 = new RStringBuilder();
         for (int i = 0; i < 特記情報List.size(); i++) {
-            if (TokkijikoTextImageKubun.テキスト.getコード().equals(特記情報List.get(i).getTokkijikoTextImageKubun())) {
+            if (TokkijikoTextImageKubun.テキスト.getコード().equals(特記情報List.get(i).get認定調査票特記事項Entity().getTokkijikoTextImageKubun())) {
                 RStringBuilder テキストBuilder = new RStringBuilder();
                 テキストBuilder.append(get特記事項テキスト(kyotsuEntity.getKoroshoIfShikibetsuCode(),
-                        特記情報List.get(i).getNinteichosaTokkijikoNo(), 特記情報List.get(i).getNinteichosaTokkijikoRemban()));
-                テキストBuilder.append(特記情報List.get(i).getTokkiJiko());
+                        特記情報List.get(i).get認定調査票特記事項Entity().getNinteichosaTokkijikoNo(), 
+                        特記情報List.get(i).get認定調査票特記事項Entity().getNinteichosaTokkijikoRemban()));
+                テキストBuilder.append(特記情報List.get(i).get認定調査票特記事項Entity().getTokkiJiko());
                 テキストBuilder.append(System.lineSeparator());
                 表示行数 = 表示行数 + (int) Math.ceil((double) テキストBuilder.length() / 最大文字数);
                 if (表示行数 <= ページ最大表示行数) {

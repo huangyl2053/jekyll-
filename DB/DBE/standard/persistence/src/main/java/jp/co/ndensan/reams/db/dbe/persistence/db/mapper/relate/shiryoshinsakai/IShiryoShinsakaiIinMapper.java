@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiIinJ
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiTaiyosyaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiYoteiJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.TokkijikoIchiranJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5202NinteichosahyoGaikyoChosaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijikoEntity;
@@ -217,12 +218,12 @@ public interface IShiryoShinsakaiIinMapper {
     List<ShinsakaiTaiyosyaJohoEntity> getShinsakaiTaiyosyaJoho(IinShinsakaiIinJohoMyBatisParameter parameter);
 
     /**
-     * 委員用概況特記情報を取得する。
+     * 委員用特記事項一覧情報を取得する。
      *
      * @param parameter IinTokkiJikouItiziHanteiMyBatisParameter
-     * @return List<TokkiIranJohoEntity> 概況特記情報
+     * @return List<TokkijikoIchiranJohoRelateEntity> 特記事項一覧情報
      */
-    List<DbT5205NinteichosahyoTokkijikoEntity> getTokkiIranJoho(IinTokkiJikouItiziHanteiMyBatisParameter parameter);
+    List<TokkijikoIchiranJohoRelateEntity> getTokkiIranJoho(IinTokkiJikouItiziHanteiMyBatisParameter parameter);
 
     /**
      * 介護認定審査会開催予定情報のSelectByKey処理です。

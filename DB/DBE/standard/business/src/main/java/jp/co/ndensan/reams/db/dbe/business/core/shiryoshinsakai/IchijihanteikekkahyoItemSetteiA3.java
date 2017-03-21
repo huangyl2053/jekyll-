@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.Ichijiha
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.TiyosaKekka;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ItiziHanteiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.TokkijikoIchiranJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
@@ -94,7 +95,7 @@ public class IchijihanteikekkahyoItemSetteiA3 {
             List<DbT5304ShujiiIkenshoIkenItemEntity> 前主治医意見書項目情報, List<DbT5207NinteichosahyoServiceJokyoEntity> 予防給付,
             List<DbT5207NinteichosahyoServiceJokyoEntity> 介護給付, DbT5208NinteichosahyoServiceJokyoFlagEntity サービス状況フラグ,
             int データ件数, ShinsakaiSiryoKyotsuEntity 共通情報, List<DbT5304ShujiiIkenshoIkenItemEntity> 主治医意見書項目, RString 合議体番号,
-            List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報, RString ファイルパス) {
+            List<TokkijikoIchiranJohoRelateEntity> 特記情報, RString ファイルパス) {
         RDate 日期 = RDate.getNowDate();
         if (印字する.equals(DbBusinessConfig.get(ConfigNameDBE.今回基本調査項目結果の正常選択肢印刷有無, 日期, SubGyomuCode.DBE認定支援))) {
             is今回結果正常値印字 = true;
@@ -187,7 +188,7 @@ public class IchijihanteikekkahyoItemSetteiA3 {
     private void set基本調査結果リスト(Code 厚労省IF識別コード,
             List<DbT5211NinteichosahyoChosaItemEntity> 調査票調査項目情報,
             List<DbT5304ShujiiIkenshoIkenItemEntity> 主治医意見書項目,
-            List<DbT5205NinteichosahyoTokkijikoEntity> 認定調査票_特記情報,
+            List<TokkijikoIchiranJohoRelateEntity> 認定調査票_特記情報,
             List<TiyosaKekka> 第１群リスト,
             List<TiyosaKekka> 第２群リスト,
             List<TiyosaKekka> 第３群リスト,
@@ -214,7 +215,7 @@ public class IchijihanteikekkahyoItemSetteiA3 {
     }
 
     private TiyosaKekka get調査結果(INinteichosaKomokuMapping 認定調査項目マッピング,
-            List<DbT5205NinteichosahyoTokkijikoEntity> 認定調査票_特記情報,
+            List<TokkijikoIchiranJohoRelateEntity> 認定調査票_特記情報,
             RString 調査票調査結果,
             List<DbT5304ShujiiIkenshoIkenItemEntity> 主治医意見書項目) {
         TiyosaKekka 調査結果 = new TiyosaKekka();
@@ -330,9 +331,9 @@ public class IchijihanteikekkahyoItemSetteiA3 {
         }
     }
 
-    private RString get特記事項符号(INinteichosaKomokuMapping 認定調査項目マッピング, List<DbT5205NinteichosahyoTokkijikoEntity> 認定調査票_特記情報) {
-        for (DbT5205NinteichosahyoTokkijikoEntity 特記事項Entity : 認定調査票_特記情報) {
-            if (特記事項Entity.getNinteichosaTokkijikoNo().equals(認定調査項目マッピング.get特記事項番号())) {
+    private RString get特記事項符号(INinteichosaKomokuMapping 認定調査項目マッピング, List<TokkijikoIchiranJohoRelateEntity> 認定調査票_特記情報) {
+        for (TokkijikoIchiranJohoRelateEntity 特記事項Entity : 認定調査票_特記情報) {
+            if (特記事項Entity.get認定調査票特記事項Entity().getNinteichosaTokkijikoNo().equals(認定調査項目マッピング.get特記事項番号())) {
                 return is特記事項符号印字 ? 特記事項有 : RString.EMPTY;
             }
         }
