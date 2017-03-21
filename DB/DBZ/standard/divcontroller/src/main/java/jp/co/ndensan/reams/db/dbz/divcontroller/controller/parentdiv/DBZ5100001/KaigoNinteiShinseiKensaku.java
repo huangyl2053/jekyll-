@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.divcontroller.controller.parentdiv.DBZ5100001;
 
-import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -273,6 +271,9 @@ public class KaigoNinteiShinseiKensaku {
         RString uiContainerId = controlData.getUIContainerId();
         if (!DBEUC55101.equals(uiContainerId)) {
             parameter.setCheckedみなし2号申請(true);
+        }
+        if (DBEUC55101.equals(uiContainerId)) {
+            parameter.set月例処理未完了(true);
         }
         ShoKisaiHokenshaNo 証記載保険者番号 = ViewStateHolder.get(ViewStateKeys.証記載保険者番号, ShoKisaiHokenshaNo.class);
         if (証記載保険者番号 != null && !証記載保険者番号.isEmpty()) {
