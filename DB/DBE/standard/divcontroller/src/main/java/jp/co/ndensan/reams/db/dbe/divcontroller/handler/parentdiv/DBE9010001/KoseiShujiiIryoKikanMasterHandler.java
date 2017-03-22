@@ -15,8 +15,10 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIryoKikanJoho;
+import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikan;
 import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikanShiten;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.YokinShubetsuPattern;
+import jp.co.ndensan.reams.ua.uax.service.core.kinyukikan.KinyuKikanManager;
 import jp.co.ndensan.reams.ur.urz.definition.core.iryokikan.IryoKikanCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
@@ -244,10 +246,12 @@ public class KoseiShujiiIryoKikanMasterHandler {
         div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().search(
                 new KinyuKikanCode(row.getKinyuKikanCode()), new KinyuKikanShitenCode(row.getKinyuKikanShitenCode()), FlexibleDate.getNowDate());
         if (div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().isゆうちょ銀行()) {
+            KinyuKikanManager kinyuKikanManager = KinyuKikanManager.createInstance();
+            List<KinyuKikan> 金融機関情報 = new ArrayList<>();
+            金融機関情報 = kinyuKikanManager.getValidKinyuKikansOn(FlexibleDate.getNowDate());
             div.getShujiiJohoInput().getKozaJoho().getTxtTenBan().setValue(row.getKinyuKikanShitenCode());
             div.getShujiiJohoInput().getKozaJoho().getTxtTenMei().setValue(
-                    div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().
-                    get金融機関支店().get支店名称());
+                    getKinyuShiten(金融機関情報, row));
             div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().search(
                     new KinyuKikanCode(row.getKinyuKikanCode()), new KinyuKikanShitenCode(RString.EMPTY), FlexibleDate.getNowDate());
         }
@@ -484,6 +488,38 @@ public class KoseiShujiiIryoKikanMasterHandler {
         } else {
             return div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().value();
         }
+    }
+    
+        /**
+     * 金融機関支店を取得します。
+     *
+     * @param 金融機関情報 List<KinyuKikan>
+     * @param row dgSonotaKikanIchiran_Row
+     * @return 支店名　RString
+     */
+    private RString getKinyuShiten(List<KinyuKikan> 金融機関情報, dgShujiiIchiran_Row row) {
+        List<KinyuKikanShiten> 支店リスト = new ArrayList<>();
+        RString 支店名 = RString.EMPTY;
+        for (KinyuKikan kinyuKikanJoho : 金融機関情報) {
+            if ((new RString(kinyuKikanJoho.get金融機関コード().toString())).equals(row.getKinyuKikanCode())) {
+                支店リスト = kinyuKikanJoho.get支店リスト();
+            }
+        }
+        if (支店リスト != null && !支店リスト.isEmpty()) {
+            支店名 = getShitenMeisho(支店リスト, row, 支店名);
+
+        }
+
+        return 支店名;
+    }
+
+    private RString getShitenMeisho(List<KinyuKikanShiten> 支店リスト, dgShujiiIchiran_Row row, RString 支店名) {
+        for (KinyuKikanShiten shiten : 支店リスト) {
+            if (new RString(shiten.get支店コード().toString()).equals(row.getKinyuKikanShitenCode())) {
+                支店名 = shiten.get支店名称();
+            }
+        }
+        return 支店名;
     }
 
     /**

@@ -10,13 +10,13 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteishinchokujohoshokai.YokaigoNinteiShinchokuJoho;
 import jp.co.ndensan.reams.db.dbe.business.report.dbe521002.NiteiGyomuShinchokuJokyoIchiranhyoBodyItem;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5510001.DBE5510001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5510001.YokaigoNinteiShinchokuJohoShokaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5510001.dgShinseiJoho_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.HokenshaDDLPattem;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
@@ -35,7 +35,6 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -107,21 +106,24 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
      * 検索する場合、選択変更します。
      */
     public void radKensakuHohoChange() {
+        ShoKisaiHokenshaNo 証記載保険者番号 = div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号();
         switch (get検索方法()) {
             case 進捗状況から検索する場合:
                 div.getSerchFromHohokensha().setDisplayNone(true);
                 div.getSerchFromShinchokuJokyo().setDisplayNone(false);
                 div.getSerchFromShinchokuJokyo().setIsOpen(true);
                 div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
-                return;
+                break;
             case 被保険者から検索する場合:
                 div.getSerchFromHohokensha().setDisplayNone(false);
                 div.getSerchFromHohokensha().setIsOpen(true);
                 div.getSerchFromShinchokuJokyo().setDisplayNone(true);
                 div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定, HokenshaDDLPattem.全市町村以外);
-                return;
-            default:
+                break;
         }
+        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
+        div.getCcdHokenshaList().setSelectedShichosonIfExist(市町村セキュリティ情報.get市町村情報().get市町村コード());
+        div.getCcdHokenshaList().setSelectedShoKisaiHokenshaNoIfExist(証記載保険者番号);
     }
 
     /**

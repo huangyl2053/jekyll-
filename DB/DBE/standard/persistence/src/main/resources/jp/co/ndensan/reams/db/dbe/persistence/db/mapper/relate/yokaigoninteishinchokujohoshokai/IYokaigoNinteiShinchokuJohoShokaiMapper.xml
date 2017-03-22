@@ -151,7 +151,7 @@
         LEFT JOIN (SELECT DISTINCT "shinseishoKanriNo", '●' AS  tokki from rgdb."DbT5205NinteichosahyoTokkijiko") TB ON TB."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         <where>
             DbT5101."logicalDeletedFlag" = False
-            <if test="!kensakuOptionKey0">
+            <if test="!kensakuOptionKey0 and !kensakuOptionKey1">
                 AND DbT5105."centerSoshinYMD" IS NULL
             </if> 
             <if test="radKensakuHohoKey0">
