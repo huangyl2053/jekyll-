@@ -163,4 +163,11 @@ public class GogitaiJohoShinsaRelateBusiness {
     public FlexibleDate get有効期間終了年月日() {
         return entity.get有効期間終了年月日();
     }
+
+    /**
+     * @return 年度内開催回数
+     */
+    public int get年度内開催回数() {
+        return entity.get年度内開催回数();
+    }
 }

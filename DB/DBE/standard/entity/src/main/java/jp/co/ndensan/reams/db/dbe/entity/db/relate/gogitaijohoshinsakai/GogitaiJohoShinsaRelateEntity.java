@@ -34,4 +34,5 @@ public class GogitaiJohoShinsaRelateEntity {
     private RString 合議体長区分コード;
     private FlexibleDate 有効期間開始年月日;
     private FlexibleDate 有効期間終了年月日;
+    private int 年度内開催回数;
 }
