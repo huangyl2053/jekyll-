@@ -23,7 +23,7 @@ public interface IGogitaiJohoShinsaMapper {
      * 合議体情報の取得処理です。
      *
      * @param param 合議体一覧情報表示用パラメータ
-     * @return 合議体情報 List<GogitaiJohoShinsaRelateEntity>
+     * @return 合議体情報
      */
     List<GogitaiJohoShinsaRelateEntity> get合議体情報(GogitaiIchiranJohoMapperParameter param);
 
@@ -31,7 +31,7 @@ public interface IGogitaiJohoShinsaMapper {
      * 開催予定情報の取得処理です。
      *
      * @param コピー日 コピー日
-     * @return 開催予定情報 List<ShinsakaiKaisaiYoteiJohoEntity>
+     * @return 開催予定情報
      */
     List<ShinsakaiKaisaiYoteiJohoEntity> get開催予定情報(RString コピー日);
 }
