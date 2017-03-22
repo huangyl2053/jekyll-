@@ -30,5 +30,7 @@ public class ChosaJisshishaJohoModel {
     private RString 調査区分;
     private RString 申請書管理番号;
     private int 認定調査依頼履歴番号;
+    private RString イメージテキスト区分;
+    private RString 実施場所ImagePath;
 
 }

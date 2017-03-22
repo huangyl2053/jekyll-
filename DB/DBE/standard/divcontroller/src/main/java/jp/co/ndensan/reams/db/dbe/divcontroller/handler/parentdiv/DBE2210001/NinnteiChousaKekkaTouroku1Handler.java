@@ -357,6 +357,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
     }
 
     private void 施設関連の詳細設定(TempData 概況調査情報, ShinseishoKanriNo 申請書管理番号, Integer 認定調査履歴番号) {
+        ViewStateHolder.put(ViewStateKeys.概況調査テキスト_イメージ区分, 概況調査情報.getTemp_概況調査テキストイメージ区分());
         if (TokkijikoTextImageKubun.イメージ.getコード().equals(概況調査情報.getTemp_概況調査テキストイメージ区分())) {
             div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getGaigyoShisetsuRenrakusaki().setDisplayNone(true);
             setImage施設連絡先(申請書管理番号, 認定調査履歴番号);
@@ -424,6 +425,8 @@ public class NinnteiChousaKekkaTouroku1Handler {
                     model.set記入者名称(chosainJoho.get調査員氏名());
                 }
             }
+            model.setイメージテキスト区分(ViewStateHolder.get(ViewStateKeys.概況調査テキスト_イメージ区分, RString.class));
+            model.set実施場所ImagePath(ViewStateHolder.get(ViewStateKeys.イメージ情報, RString.class));
         }
     }
 
@@ -489,6 +492,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
         RString 実施場所ImagePath = DBEImageUtil.getMaskOrOriginalImageFilePath(出力イメージフォルダパス, ImageFileName.調査実施場所.getImageFileName());
         if (!RString.isNullOrEmpty(実施場所ImagePath)) {
             div.getCcdChosaJisshishaJoho().getImage().getImgChosaJisshiBashoMeisho().setSrc(DBEImageUtil.sanitizePath(実施場所ImagePath));
+            ViewStateHolder.put(ViewStateKeys.イメージ情報, DBEImageUtil.sanitizePath(実施場所ImagePath));
         }
     }
 

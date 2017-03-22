@@ -7,10 +7,8 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.handler.commonchilddiv.ChosaJis
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbx.business.core.koseishichoson.KoseiShichosonMaster;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.ShinsakaiChosainJoho;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.ChosainJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaItakusakiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.NinteiShinseiJoho;
@@ -19,6 +17,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.Chos
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaJisshiBashoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.chosajisshishajoho.ChosaJisshishaJohoParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJisshishaJoho.ChosaJisshishaJoho.ChosaJisshishaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJisshishaJoho.ChosaJisshishaJoho.ChosaJisshishaJohoValidationHandler;
@@ -102,7 +101,13 @@ public class ChosaJisshishaJohoHandler {
         } else {
             div.getDdlChosaJisshiBasho().setSelectedValue(ChosaJisshiBashoCode.自宅内.get名称());
         }
-        div.getTxtJisshiBashoMeisho().setValue(key.get実施場所名称());
+        if (TokkijikoTextImageKubun.イメージ.getコード().equals(key.getイメージテキスト区分())) {
+            div.getTxtJisshiBashoMeisho().setDisplayNone(true);
+            div.getImage().getImgChosaJisshiBashoMeisho().setSrc(key.get実施場所ImagePath());
+        } else {
+            div.getImage().setDisplayNone(true);
+            div.getTxtJisshiBashoMeisho().setValue(key.get実施場所名称());
+        }
         if (key.get所属機関コード() != null && !key.get所属機関コード().isEmpty()) {
             div.getTxtShozokuKikanCode().setValue(key.get所属機関コード());
             getShozokuKikanName();
@@ -141,7 +146,13 @@ public class ChosaJisshishaJohoHandler {
         chosaJisshiBasho.add(chosaJisshi);
         div.getDdlChosaJisshiBasho().setDataSource(chosaJisshiBasho);
         div.getDdlChosaJisshiBasho().setSelectedKey(SHOKAI_KEY);
-        div.getTxtJisshiBashoMeisho().setValue(key.get実施場所名称());
+        if (TokkijikoTextImageKubun.イメージ.getコード().equals(key.getイメージテキスト区分())) {
+            div.getTxtJisshiBashoMeisho().setDisplayNone(true);
+            div.getImage().getImgChosaJisshiBashoMeisho().setSrc(key.get実施場所ImagePath());
+        } else {
+            div.getImage().setDisplayNone(true);
+            div.getTxtJisshiBashoMeisho().setValue(key.get実施場所名称());
+        }
         div.getTxtShozokuKikanCode().setValue(key.get所属機関コード());
         div.getTxtShozokuKikanName().setValue(key.get所属機関名称());
         div.getTxtKinyushaCode().setValue(key.get記入者コード());

@@ -21,8 +21,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosajisshishajoho.ChosaJisshishaJohoModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosatokkijikou.NinteiChosaTokkiJikou;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJisshishaJoho.ChosaJisshishaJoho.ChosaJisshishaJohoDiv;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -30,7 +28,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
-import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSourceConverter;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
@@ -89,6 +86,8 @@ public class TokkiJikoInputHandler {
         model.set記入者名称(ViewStateHolder.get(ViewStateKeys.記入者名称, RString.class));
         model.set調査区分(ViewStateHolder.get(ViewStateKeys.調査区分, RString.class));
         model.set申請書管理番号(temp_申請書管理番号.getColumnValue());
+        model.setイメージテキスト区分(ViewStateHolder.get(ViewStateKeys.概況調査テキスト_イメージ区分, RString.class));
+        model.set実施場所ImagePath(ViewStateHolder.get(ViewStateKeys.イメージ情報, RString.class));
         div.getChosaJisshisha().getCcdChosaJisshishaJoho().intialize(model);
         div.getChosaJisshisha().setIsOpen(false);
 
@@ -238,6 +237,7 @@ public class TokkiJikoInputHandler {
 
     /**
      * 連番数のチェック処理です。
+     *
      * @return message
      */
     public Message checkMaxRemban() {
