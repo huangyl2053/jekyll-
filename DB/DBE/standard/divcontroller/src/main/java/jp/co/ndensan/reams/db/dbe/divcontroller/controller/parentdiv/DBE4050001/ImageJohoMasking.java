@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -89,9 +88,12 @@ public class ImageJohoMasking {
      * @return ResponseData<イメージ情報マスキングDiv>
      */
     public ResponseData<ImageJohoMaskingDiv> onClick_btnTaishoKensaku(ImageJohoMaskingDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         List<ImageJohoMaskingResult> resultList = getHandler(div).get対象者for画面();
         if (!ResponseHolder.isReRequest() && resultList.isEmpty()) {
-            throw new ApplicationException(UrInformationMessages.該当データなし.getMessage());
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
         }
         getHandler(div).setDataGrid(resultList);
         return ResponseData.of(div).setState(DBE4050001StateName.検索結果表示);
