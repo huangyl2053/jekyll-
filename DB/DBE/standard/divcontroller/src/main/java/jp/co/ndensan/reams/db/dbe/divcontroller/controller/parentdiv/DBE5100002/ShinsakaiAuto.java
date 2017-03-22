@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 審査会自動割付取得処理です。
@@ -26,6 +28,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  * @reamsid_L DBE-1350-030 lizhuoxuan
  */
 public class ShinsakaiAuto {
+    
+    private static final RString FLOWPARAMETERS_KEY = new RString("key");
+    private static final RString FLOWPARAMETERS_VALUE = new RString("Batch");
 
     /**
      * 審査会自動割付します。<br/>
@@ -34,6 +39,8 @@ public class ShinsakaiAuto {
      * @return ResponseData<ShinsakaiAutoDiv>
      */
     public ResponseData<ShinsakaiAutoDiv> onLoad(ShinsakaiAutoDiv shinDiv) {
+        FlowParameters fp = FlowParameters.of(FLOWPARAMETERS_KEY, FLOWPARAMETERS_VALUE);
+        FlowParameterAccessor.merge(fp);
         List<ShinsaKayiJidouWaritsukeBusiness> shinsaKayiList
                 = ShinsaKayiJidouWaritsukeFinder.createInstance().getHanteiKekka(ViewStateHolder.get(ViewStateKeys.開催番号,
                                 KaigoNinteiShinsakaiParameter.class)).records();

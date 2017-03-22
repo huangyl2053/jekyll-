@@ -37,6 +37,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameterAccessor;
+import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 
 /**
  * 介護認定審査会対象者割付クラスです。
@@ -48,6 +50,8 @@ public class TaishouWaritsuke {
     private static final RString 審査会割付を完了する = new RString("btnComplete");
     private static final RString 審査会順番を振りなおす = new RString("btnResetShinsaOrder");
     private static final RString 完了メッセージ = new RString("認定審査会対象者割付");
+    private static final RString FLOWPARAMETERS_KEY = new RString("key");
+    private static final RString FLOWPARAMETERS_VALUE = new RString("Kanryo");
 
     /**
      * コントロールdivが「生成」された際の処理です。(オンロード)<br/>
@@ -56,6 +60,8 @@ public class TaishouWaritsuke {
      * @return レスポンスデータ
      */
     public ResponseData<TaishouWaritsukeDiv> onLoad(TaishouWaritsukeDiv div) {
+        FlowParameters fp = FlowParameters.of(FLOWPARAMETERS_KEY, FLOWPARAMETERS_VALUE);
+        FlowParameterAccessor.merge(fp);
         RString 介護認定審査会番号 = ViewStateHolder.get(ViewStateKeys.介護認定審査会番号, RString.class);
         getHandler(div).initializtion(介護認定審査会番号);
         return ResponseData.of(div).setState(DBE5160001StateName.審査会割付);
