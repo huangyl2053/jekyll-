@@ -136,6 +136,11 @@ public class ShujiiIryokikanAndShujiiGuide {
      */
     public ResponseData<ShujiiIryokikanAndShujiiGuideDiv> onClick_btnClear(ShujiiIryokikanAndShujiiGuideDiv div) {
         getHandler(div).btnClear();
+        ShujiiIryokikanandshujiiDataPassModel dataPassModel = DataPassingConverter.deserialize(
+                div.getHdnDataPass(), ShujiiIryokikanandshujiiDataPassModel.class);
+        if (dataPassModel != null && !RString.isNullOrEmpty(dataPassModel.get市町村コード())) {
+            div.getHokenshaList().setSelectedShichosonIfExist(new LasdecCode(dataPassModel.get市町村コード()));
+        }
         return ResponseData.of(div).respond();
     }
 

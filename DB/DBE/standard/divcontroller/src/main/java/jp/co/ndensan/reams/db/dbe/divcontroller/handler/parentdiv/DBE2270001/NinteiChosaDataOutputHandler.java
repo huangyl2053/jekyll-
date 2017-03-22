@@ -110,7 +110,9 @@ public class NinteiChosaDataOutputHandler {
      */
     public void clear検索条件() {
         div.getCcdChosaltakusakiAndChosainInput().clear();
-        div.getCcdHokensha().loadHokenshaList(GyomuBunrui.介護認定);
+        div.getCcdHokensha().loadHokenshaList(GyomuBunrui.介護認定, HokenshaDDLPattem.全市町村以外);
+        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
+        div.getCcdHokensha().setSelectedShichosonIfExist(市町村セキュリティ情報.get市町村情報().get市町村コード());
         div.getCcdChosaltakusakiAndChosainInput().setHdnShichosonCode(get市町村コード());
         div.getTxtMaxCount().setValue(new Decimal(DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数,
                 RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));

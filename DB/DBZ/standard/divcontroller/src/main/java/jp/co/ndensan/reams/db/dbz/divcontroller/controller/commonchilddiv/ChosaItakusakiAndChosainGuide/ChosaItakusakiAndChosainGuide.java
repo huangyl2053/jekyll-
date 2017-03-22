@@ -149,6 +149,11 @@ public class ChosaItakusakiAndChosainGuide {
      */
     public ResponseData<ChosaItakusakiAndChosainGuideDiv> onClick_btnClear(ChosaItakusakiAndChosainGuideDiv div) {
         getHandler(div).検索条件クリア();
+        KijuntsukiShichosonjohoiDataPassModel dataPassModel = DataPassingConverter.deserialize(
+                div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
+        if (dataPassModel != null && !RString.isNullOrEmpty(dataPassModel.get市町村コード())) {
+            div.getHokensha().setSelectedShichosonIfExist(new LasdecCode(dataPassModel.get市町村コード()));
+        }
         return ResponseData.of(div).respond();
     }
 
