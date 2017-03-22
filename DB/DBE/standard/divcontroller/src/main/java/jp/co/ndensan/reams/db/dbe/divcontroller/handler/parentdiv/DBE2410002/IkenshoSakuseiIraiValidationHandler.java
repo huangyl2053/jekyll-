@@ -6,13 +6,16 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2410002;
 
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2410002.IkenshoSakuseiIraiDiv;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 主治医意見書作成依頼(手動)のバリデーションハンドラークラスです。
@@ -42,6 +45,37 @@ public class IkenshoSakuseiIraiValidationHandler {
      */
     public IkenshoSakuseiIraiValidationHandler(IkenshoSakuseiIraiDiv div) {
         this.div = div;
+    }
+
+    /**
+     * 保存するボタンを押下するとき、更新項目のバリデーションチェックを行う。
+     *
+     */
+    public void 更新項目チェック() {
+        RString 更新前_主治医医療機関コード = ViewStateHolder.get(ViewStateKeys.主治医医療機関コード, RString.class);
+        RString 更新前_主治医コード = ViewStateHolder.get(ViewStateKeys.主治医コード, RString.class);
+        RString 更新前_主治医意見書作成依頼年月日 = ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼年月日, RString.class);
+        boolean 更新前_指定医フラグ = ViewStateHolder.get(ViewStateKeys.指定医フラグ, boolean.class);
+        RString 更新後_主治医医療機関コード = div.getCcdShujiiInput().getTxtIryoKikanCode().getValue();
+        RString 更新後_主治医コード = div.getCcdShujiiInput().getTxtShujiiCode().getValue();
+        RString 更新後_主治医意見書作成依頼年月日 = div.getTxtSakuseiIraiD().getValue().toDateString();
+        boolean 更新後_指定医フラグ = div.getCcdShujiiInput().hasShiteii();
+        boolean notUpdate = true;
+        if (!更新前_主治医医療機関コード.equals(更新後_主治医医療機関コード)) {
+            notUpdate = false;
+        }
+        if (!更新前_主治医コード.equals(更新後_主治医コード)) {
+            notUpdate = false;
+        }
+        if (!更新前_主治医意見書作成依頼年月日.equals(更新後_主治医意見書作成依頼年月日)) {
+            notUpdate = false;
+        }
+        if (更新前_指定医フラグ != 更新後_指定医フラグ) {
+            notUpdate = false;
+        }
+        if (notUpdate) {
+            throw new ApplicationException(UrErrorMessages.編集なしで更新不可.getMessage());
+        }
     }
 
     /**

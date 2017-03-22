@@ -50,6 +50,7 @@ public class IkenshoSakuseiIrai {
 
     private static final RString 指定医 = new RString("2");
     private static final RString 保存するボタン名 = new RString("btnUpdate");
+    private static final RString UICONTAINERID_DBEUC24101 = new RString("DBEUC24101");
 
     /**
      * 主治医意見書作成依頼(手動)の初期化です。
@@ -95,6 +96,9 @@ public class IkenshoSakuseiIrai {
      * @return レスポンスデータ
      */
     public ResponseData<IkenshoSakuseiIraiDiv> onClick_btnUpdate(IkenshoSakuseiIraiDiv div) {
+        if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC24101)) {
+            createValidationHandler(div).更新項目チェック();
+        }
         if (!ResponseHolder.isReRequest()) {
             ValidationMessageControlPairs validPairs = createValidationHandler(div).check保存();
             if (validPairs.iterator().hasNext()) {

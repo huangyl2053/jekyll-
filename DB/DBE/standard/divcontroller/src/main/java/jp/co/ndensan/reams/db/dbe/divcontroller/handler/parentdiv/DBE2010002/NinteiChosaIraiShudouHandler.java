@@ -51,6 +51,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -100,6 +101,7 @@ public class NinteiChosaIraiShudouHandler {
     private static final RString DDL_KEY2 = new RString("key2");
     private static final RString デザインシートOCR = new RString("1");
     private static final RString 白紙カラープリンター = new RString("2");
+    private static final RString UICONTAINERID_DBEUC24101 = new RString("DBEUC24101");
 
     /**
      * コンストラクタです。
@@ -146,6 +148,9 @@ public class NinteiChosaIraiShudouHandler {
             div.getTxtHokkoymd().setValue(RDate.getNowDate());
             div.getTxtKigenymd().setValue(RDate.getNowDate());
             setCheckBoxValue(認定調査依頼.get市町村コード());
+            if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC24101)) {
+                更新項目保持(認定調査依頼);
+            }
         }
     }
 
@@ -231,6 +236,12 @@ public class NinteiChosaIraiShudouHandler {
             selectedItemList.add(DDL_KEY2);
         }
         div.getChkSaiCheck().setSelectedItemsByKey(selectedItemList);
+    }
+    
+    private void 更新項目保持(NinnteiChousairaiShudouBusiness 認定調査依頼) {
+        ViewStateHolder.put(ViewStateKeys.認定調査委託先コード, 認定調査依頼.get認定調査委託先コード());
+        ViewStateHolder.put(ViewStateKeys.認定調査員コード, 認定調査依頼.get認定調査員コード());
+        ViewStateHolder.put(ViewStateKeys.認定調査依頼年月日, 認定調査依頼.get認定調査依頼年月日());
     }
 
     /**

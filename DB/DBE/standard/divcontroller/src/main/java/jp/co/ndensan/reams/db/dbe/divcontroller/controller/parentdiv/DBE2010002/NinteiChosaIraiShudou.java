@@ -85,6 +85,7 @@ public class NinteiChosaIraiShudou {
     private static final RString CHKNAME_概況特記 = new RString("概況特記");
     private static final RString CHKNAME_認定調査依頼該当者履歴一覧 = new RString("認定調査依頼該当者履歴一覧");
     private static final int 履歴番号インクリメント = 1;
+    private static final RString UICONTAINERID_DBEUC24101 = new RString("DBEUC24101");
 
     /**
      * 画面初期化処理です。
@@ -153,6 +154,9 @@ public class NinteiChosaIraiShudou {
      * @return ResponseData<SourceDataCollection>
      */
     public ResponseData<NinteiChosaIraiShudouDiv> onClick_btnCommonSaveChosaIrai(NinteiChosaIraiShudouDiv div) {
+        if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC24101)) {
+            getValidationHandler(div).更新項目チェック();
+        }
         if (!ResponseHolder.isReRequest()) {
             ValidationMessageControlPairs validPairs = getValidationHandler(div).checkForUpdate();
             if (validPairs.iterator().hasNext()) {
