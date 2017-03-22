@@ -138,7 +138,7 @@ public class NinteiShinseiToroku {
     private final ShinseiRirekiJohoManager dbt5121Manager;
     private static final RString MENUID_DBEMN31001 = new RString("DBEMN31001");
     private static final RString MENUID_DBEMN31003 = new RString("DBEMN31003");
-    private static final RString MENUID_DBEMN21003 = new RString("DBEMN21003");
+//    private static final RString MENUID_DBEMN21003 = new RString("DBEMN21003");
     private static final RString UICONTAINERID_DBEUC11001 = new RString("DBEUC11001");
     private static final RString UICONTAINERID_DBEUC10002 = new RString("DBEUC10002");
     private static final RString BTNUPDATE_FILENAME = new RString("btnUpdate");
@@ -163,6 +163,9 @@ public class NinteiShinseiToroku {
     private static final String 市町村変更_主治医認定調査員 = "主治医・認定調査員";
     private static final RString 所属機関_TMP = new RString("・");
     private static final RString 申請書管理番号_空 = new RString("00000000000000000");
+    private static final RString 要介護認定個人状況照会 = new RString("要介護認定個人状況照会");
+    private static final RString 審査依頼受付 = new RString("審査依頼受付");
+    private static final RString 審査受付照会 = new RString("審査受付照会");
     private boolean ninteiTandokuDounyuFlag;
 
     /**
@@ -194,6 +197,7 @@ public class NinteiShinseiToroku {
      */
     public ResponseData<NinteiShinseiTorokuDiv> onLoad(NinteiShinseiTorokuDiv div) {
         RString menuID = ResponseHolder.getMenuID();
+        boolean is照会 = DBE1010001StateName.照会.getName().equals(ResponseHolder.getState());
         ShichosonSecurityJoho shichosonSecurity = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
         RString 介護導入形態 = RString.EMPTY;
         if (shichosonSecurity.get導入形態コード().value().equals(DonyuKeitaiCode.認定広域.getCode())) {
@@ -224,9 +228,10 @@ public class NinteiShinseiToroku {
         div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getChkKyuSochisha().setVisible(false);
         div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getChkShikakuShutokuMae().setVisible(false);
 
-        if (MENUID_DBEMN31001.equals(menuID) || MENUID_DBEMN21003.equals(menuID)
+        if (MENUID_DBEMN31001.equals(menuID) //|| MENUID_DBEMN21003.equals(menuID)
                 || ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC11001)
-                || ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC10002)) {
+                || ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC10002) 
+                || is照会) {
             ShinseishoKanriNo 管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
             try {
                 RStringBuilder 前排他制御 = new RStringBuilder();
@@ -328,28 +333,31 @@ public class NinteiShinseiToroku {
                 div.getBtnRenrakusaki().setDisabled(true);
                 div.getBtnJogaiShinsakaiIinGuide().setDisabled(true);
             }
-            if (MENUID_DBEMN21003.equals(menuID) || ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC11001)) {
+//            if (MENUID_DBEMN21003.equals(menuID) || ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC11001) || is照会) {
+            if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC11001) || is照会) {
                 getHandler(div).setShokai();
-                return ResponseData.of(div).rootMenuTitle(new RString("審査受付照会")).respond();
+                return ResponseData.of(div).rootMenuTitle(要介護認定個人状況照会).rootTitle(審査受付照会).respond();
             }
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
             boolean has審査会割付データ = getValidationHandler(div).審査会割付データ存在チェック(result);
             if (!ResponseHolder.isReRequest() && has審査会割付データ) {
-                return ResponseData.of(div).rootTitle(new RString("審査依頼受付")).addMessage(RRWMessages.審査会割当済のため処理不可.getMessage()).respond();
+                return ResponseData.of(div).rootTitle(審査依頼受付).addMessage(RRWMessages.審査会割当済のため処理不可.getMessage()).respond();
             }
             if (!ResponseHolder.isReRequest() && !has審査会割付データ && getValidationHandler(div).依頼完了チェック(result)) {
-                return ResponseData.of(div).rootTitle(new RString("審査依頼受付")).addMessage(RRWMessages.依頼済のため処理不可.getMessage()).respond();
+                return ResponseData.of(div).rootTitle(審査依頼受付).addMessage(RRWMessages.依頼済のため処理不可.getMessage()).respond();
             }
             if (!has審査会割付データ && (manager.has意見書依頼データ(管理番号) || manager.has調査依頼データ(管理番号))) {
                 div.getCcdShozokuShichoson().setDdlDisabled(true);
             }
-
+            if (!has審査会割付データ && manager.has意見書依頼データ(管理番号) && manager.has調査依頼データ(管理番号)) {
+                div.getCcdShozokuShichoson().setDdlDisabled(false);
+            }
             if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
                 div.setReadOnly(true);
                 setBtnUpdateDisableTrue();
-                return ResponseData.of(div).rootTitle(new RString("審査依頼受付")).addValidationMessages(validationMessages).respond();
+                return ResponseData.of(div).rootTitle(審査依頼受付).addValidationMessages(validationMessages).respond();
             }
-            return ResponseData.of(div).rootTitle(new RString("審査依頼受付")).respond();
+            return ResponseData.of(div).rootTitle(審査依頼受付).respond();
         }
         if (MENUID_DBEMN31003.equals(menuID)) {
             Minashi2shisaiJoho business = ViewStateHolder.get(ViewStateKeys.みなし2号登録情報, Minashi2shisaiJoho.class);
@@ -676,7 +684,8 @@ public class NinteiShinseiToroku {
     public ResponseData<NinteiShinseiTorokuDiv> onBefore_btnShichosonRenrakuJiko(NinteiShinseiTorokuDiv div) {
         NinteiShinseiCodeModel data = new NinteiShinseiCodeModel();
         data.set連絡事項(div.getHdnShichosonRenrakuJiko());
-        if (MENUID_DBEMN21003.equals(ResponseHolder.getMenuID())) {
+//        if (MENUID_DBEMN21003.equals(ResponseHolder.getMenuID())
+        if (DBE1010001StateName.照会.getName().equals(ResponseHolder.getState())) {
             data.set表示モード(NinteiShinseiCodeModel.HyojiMode.ShokaiMode);
         } else {
             data.set表示モード(NinteiShinseiCodeModel.HyojiMode.InputMode);

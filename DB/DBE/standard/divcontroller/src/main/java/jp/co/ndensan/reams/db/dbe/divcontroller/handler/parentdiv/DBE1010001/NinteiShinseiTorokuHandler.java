@@ -66,7 +66,7 @@ public class NinteiShinseiTorokuHandler {
     private static final RString みなし２号対象 = new RString("みなし２号");
     private static final RString KEY1 = new RString("key1");
     private static final RString 四マスタ管理方法_構成市町村 = new RString("1");
-    private static final RString 単純照会状態 = new RString("SimpleShokaiMode");
+    private static final RString 照会状態 = new RString("ShokaiMode");
     /**
      * コンストラクタです。
      *
@@ -630,16 +630,15 @@ public class NinteiShinseiTorokuHandler {
         ((ShujiiIryokikanAndShujiiInputDiv) div.getPnlNinteiShinseiDetail().getCcdShujiiIryokikanAndShujiiInput()).getBtnZenkaiIrokikanJoho().setDisabled(true);
         ((ShujiiIryokikanAndShujiiInputDiv) div.getPnlNinteiShinseiDetail().getCcdShujiiIryokikanAndShujiiInput()).getBtnClear().setDisabled(true);
         ((ShujiiIryokikanAndShujiiInputDiv) div.getPnlNinteiShinseiDetail().getCcdShujiiIryokikanAndShujiiInput()).getBtnShujiiRenrakuJiko().setDisabled(false);
-//        div.getPnlNinteiShinseiDetail().getCcdChodsItakusakiAndChosainInput().getBtnChosaItakusakiGuide().setDisabled(true);
-//        div.getPnlNinteiShinseiDetail().getCcdChodsItakusakiAndChosainInput().getBtnChosainGuide().setDisabled(true);
-//        div.getPnlNinteiShinseiDetail().getCcdChodsItakusakiAndChosainInput().getTxtChosaItakusakiCode().setDisabled(true);
-//        div.getPnlNinteiShinseiDetail().getCcdChodsItakusakiAndChosainInput().getTxtChosaItakusakiName().setDisabled(true);
-//        div.getPnlNinteiShinseiDetail().getCcdChodsItakusakiAndChosainInput().getTxtChosainCode().setDisabled(true);
-//        div.getPnlNinteiShinseiDetail().getCcdChodsItakusakiAndChosainInput().getTxtChosainName().setDisabled(true);
-//        ((ChosaItakusakiAndChosainInputDiv) div.getPnlNinteiShinseiDetail().getCcdChodsItakusakiAndChosainInput()).getBtnChosainRenrakuJiko().setDisabled(false);
-        div.getPnlNinteiShinseiDetail().getCcdChodsItakusakiAndChosainInput().initialize(単純照会状態);
-        ((ChosaItakusakiAndChosainInputDiv) div.getPnlNinteiShinseiDetail().getCcdChodsItakusakiAndChosainInput()).getBtnClear().setDisabled(false);
-        ((ChosaItakusakiAndChosainInputDiv) div.getPnlNinteiShinseiDetail().getCcdChodsItakusakiAndChosainInput()).getBtnZenkaiFukusha().setDisabled(false);
+        ((ShujiiIryokikanAndShujiiInputDiv) div.getPnlNinteiShinseiDetail().getCcdShujiiIryokikanAndShujiiInput()).getChkShiteii().setDisabled(true);
+        if (RString.isNullOrEmpty(div.getPnlNinteiShinseiDetail().getCcdShujiiIryokikanAndShujiiInput().getRenrakuJiko())) {
+            ((ShujiiIryokikanAndShujiiInputDiv) div.getPnlNinteiShinseiDetail().getCcdShujiiIryokikanAndShujiiInput()).getBtnShujiiRenrakuJiko().setDisabled(true);
+        }
+        div.getPnlNinteiShinseiDetail().getCcdChodsItakusakiAndChosainInput().initialize(照会状態);
+        ((ChosaItakusakiAndChosainInputDiv) div.getPnlNinteiShinseiDetail().getCcdChodsItakusakiAndChosainInput()).getBtnChosainRenrakuJiko().setDisabled(false);
+        if (RString.isNullOrEmpty(div.getPnlNinteiShinseiDetail().getCcdChodsItakusakiAndChosainInput().getChosainRenrakuJiko())) {
+            ((ChosaItakusakiAndChosainInputDiv) div.getPnlNinteiShinseiDetail().getCcdChodsItakusakiAndChosainInput()).getBtnChosainRenrakuJiko().setDisabled(true);
+        }
         div.setHdnRenrakusakiReadOnly(new RString("1"));
         div.setHdnJogaiMode(RString.EMPTY);
     }
