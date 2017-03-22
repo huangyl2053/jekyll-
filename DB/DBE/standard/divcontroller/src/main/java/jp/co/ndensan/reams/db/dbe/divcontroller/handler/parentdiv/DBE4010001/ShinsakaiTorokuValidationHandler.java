@@ -87,7 +87,7 @@ public class ShinsakaiTorokuValidationHandler {
      */
     public ValidationMessageControlPairs 対象者データ有無チェック() {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
-        validPairs.add(new ValidationMessageControlPair(RRVMessages.対象データなし));
+        validPairs.add(new ValidationMessageControlPair(RRVMessages.編集なしで更新不可));
         return validPairs;
     }
 
@@ -156,7 +156,7 @@ public class ShinsakaiTorokuValidationHandler {
         完了済みデータチェック(DbzErrorMessages.理由付き完了不可, "完了済みデータ"),
         マスキング完了チェック(DbzErrorMessages.理由付き完了不可, "マスキング未完了"),
         対象者選択チェック(UrErrorMessages.対象者を選択),
-        対象データなし(UrErrorMessages.対象データなし);
+        編集なしで更新不可(UrErrorMessages.編集なしで更新不可);
         private final Message message;
 
         private RRVMessages(IMessageGettable message, String... replacements) {
