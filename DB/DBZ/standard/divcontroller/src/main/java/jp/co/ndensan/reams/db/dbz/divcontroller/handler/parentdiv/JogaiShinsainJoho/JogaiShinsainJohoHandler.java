@@ -28,6 +28,23 @@ public class JogaiShinsainJohoHandler {
     private static final RString 照会 = new RString("照会");
     private final JogaiShinsainJohoDiv div;
 
+    private enum _状態 {
+
+        追加("追加"),
+        削除("削除");
+
+        private final RString state;
+
+        private _状態(String state) {
+
+            this.state = new RString(state);
+        }
+
+        private RString get状態() {
+            return state;
+        }
+    }
+
     /**
      * コンストラクタです。
      *
@@ -64,33 +81,30 @@ public class JogaiShinsainJohoHandler {
         div.getTxtShinsakaiIinCode().setDisabled(true);
         div.getBtnShinsakaiIinGuide().setDisabled(true);
         div.getBtnToroku().setDisabled(true);
+        div.getBtnCancel().setDisabled(true);
+        div.getDgShinsakaiIinIchiran().setReadOnly(false);
+        div.getShinsakaiIinJoho().setHdnState(RString.EMPTY);
+        List<dgShinsakaiIinIchiran_Row> selectedRow = new ArrayList<>();
+        div.getDgShinsakaiIinIchiran().setSelectedItems(selectedRow);
     }
 
     /**
      * 登録するボタンを押します。
      */
     public void onClick_btnToroku() {
-        if (!div.getTxtShinsakaiIinCode().isDisabled()) {
+        if (div.getShinsakaiIinJoho().getHdnState().equals(_状態.追加.get状態())) {
             List<dgShinsakaiIinIchiran_Row> rowList = div.getDgShinsakaiIinIchiran().getDataSource();
             List<dgShozokuKikanIchiran_Row> row所属機関 = div.getDgShozokuKikanIchiran().getDataSource();
             RString 所属機関 = RString.EMPTY;
             if (!row所属機関.isEmpty()) {
                 所属機関 = row所属機関.get(0).getShozokuKikanName();
             }
-            rowList.add(new dgShinsakaiIinIchiran_Row(div.getTxtShinsakaiIinCode().getValue(),
+            rowList.add(new dgShinsakaiIinIchiran_Row(div.getShinsakaiIinJoho().getHdnState(), div.getTxtShinsakaiIinCode().getValue(),
                     div.getTxtShinsakaiIinName().getValue(), 所属機関));
             div.getDgShinsakaiIinIchiran().setDataSource(rowList);
-        } else {
-            List<dgShinsakaiIinIchiran_Row> rowList = div.getDgShinsakaiIinIchiran().getDataSource();
-            List<dgShozokuKikanIchiran_Row> row所属機関 = div.getDgShozokuKikanIchiran().getDataSource();
-            RString 所属機関 = RString.EMPTY;
-            if (!row所属機関.isEmpty()) {
-                所属機関 = row所属機関.get(0).getShozokuKikanName();
-            }
-            dgShinsakaiIinIchiran_Row row = rowList.get(div.getDgShinsakaiIinIchiran().getClickedRowId());
-            row.setShinsakaiIinCode(div.getTxtShinsakaiIinCode().getValue());
-            row.setShimei(div.getTxtShinsakaiIinName().getValue());
-            row.setShozokuKikan(所属機関);
+        } else if (div.getShinsakaiIinJoho().getHdnState().equals(_状態.削除.get状態())) {
+            dgShinsakaiIinIchiran_Row row = div.getDgShinsakaiIinIchiran().getClickedItem();
+            row.setState(_状態.削除.get状態());
         }
     }
     

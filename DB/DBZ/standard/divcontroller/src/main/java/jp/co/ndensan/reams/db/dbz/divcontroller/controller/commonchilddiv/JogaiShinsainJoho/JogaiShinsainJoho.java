@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.jogaishinsainjoho.ShinsakaiIinIt
 import jp.co.ndensan.reams.db.dbz.business.core.jogaishinsainjoho.ShinsakaiIinItiranData;
 import jp.co.ndensan.reams.db.dbz.business.core.jogaishinsainjoho.ShinsakaiIinRelateJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
+import jp.co.ndensan.reams.db.dbz.definition.message.DbzQuestionMessages;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JogaiShinsainJoho.JogaiShinsainJoho.JogaiShinsainJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JogaiShinsainJoho.JogaiShinsainJoho.dgShinsakaiIinIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JogaiShinsainJoho.JogaiShinsainJoho.dgShozokuKikanIchiran_Row;
@@ -36,7 +37,24 @@ public class JogaiShinsainJoho {
 
     private static final RString 所属機関_TMP = new RString("・");
     private static final RString 入力モード = new RString("入力");
-    
+
+    private enum _状態 {
+
+        追加("追加"),
+        削除("削除");
+
+        private final RString state;
+
+        private _状態(String state) {
+
+            this.state = new RString(state);
+        }
+
+        private RString get状態() {
+            return state;
+        }
+    }
+
     /**
      * 画面項目の初期化を行します。
      *
@@ -62,6 +80,10 @@ public class JogaiShinsainJoho {
         div.getBtnShinsakaiIinGuide().setDisabled(false);
         div.getBtnToroku().setDisabled(false);
         div.getBtnKakutei().setDisabled(true);
+        div.getBtnShinkiTsuika().setDisabled(true);
+        div.getBtnCancel().setDisabled(false);
+        div.getDgShinsakaiIinIchiran().setReadOnly(true);
+        div.getShinsakaiIinJoho().setHdnState(_状態.追加.get状態());
         getHandler(div).画面項目にセットされている値をクリア();
         return ResponseData.of(div).respond();
     }
@@ -89,7 +111,8 @@ public class JogaiShinsainJoho {
         div.getTxtShinsakaiIinCode().setValue(審査会委員コード);
         div.getTxtShinsakaiIinCode().setDisabled(true);
         div.getBtnShinsakaiIinGuide().setDisabled(true);
-        div.getBtnToroku().setDisabled(false);
+        div.getBtnToroku().setDisabled(true);
+        div.getShinsakaiIinJoho().setHdnState(RString.EMPTY);
         return ResponseData.of(div).respond();
     }
 
@@ -100,11 +123,30 @@ public class JogaiShinsainJoho {
      * @return ResponseData<JogaiShinsainJohoDiv>
      */
     public ResponseData<JogaiShinsainJohoDiv> onClick_btnDelete(JogaiShinsainJohoDiv div) {
-        List<dgShinsakaiIinIchiran_Row> rowList = div.getDgShinsakaiIinIchiran().getDataSource();
-        rowList.remove(div.getDgShinsakaiIinIchiran().getClickedRowId());
-        div.getDgShinsakaiIinIchiran().setDataSource(rowList);
-        getHandler(div).画面項目にセットされている値をクリア();
-        div.getBtnToroku().setDisabled(true);
+        if (div.getDgShinsakaiIinIchiran().getClickedItem() != null
+                && div.getDgShinsakaiIinIchiran().getClickedItem().getState().equals(_状態.削除.get状態())) {
+
+            if (!ResponseHolder.isReRequest()) {
+                QuestionMessage message = new QuestionMessage(DbzQuestionMessages.削除取消の確認.getMessage().getCode(),
+                        DbzQuestionMessages.削除取消の確認.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            }
+            if (new RString(DbzQuestionMessages.削除取消の確認.getMessage().getCode())
+                    .equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                dgShinsakaiIinIchiran_Row row = div.getDgShinsakaiIinIchiran().getClickedItem();
+                row.setState(RString.EMPTY);
+            }
+        } else {
+            RString 審査会委員コード = div.getDgShinsakaiIinIchiran().getActiveRow().getShinsakaiIinCode();
+            set所属機関一覧(審査会委員コード, div, true);
+            div.getTxtShinsakaiIinCode().setValue(審査会委員コード);
+            div.getTxtShinsakaiIinCode().setDisabled(true);
+            div.getBtnShinsakaiIinGuide().setDisabled(true);
+            div.getBtnToroku().setDisabled(false);
+            div.getBtnCancel().setDisabled(false);
+            div.getShinsakaiIinJoho().setHdnState(_状態.削除.get状態());
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -127,14 +169,64 @@ public class JogaiShinsainJoho {
      * @return ResponseData<JogaiShinsainJohoDiv>
      */
     public ResponseData<JogaiShinsainJohoDiv> onClick_btnToroku(JogaiShinsainJohoDiv div) {
-        if (RString.isNullOrEmpty(div.getTxtShinsakaiIinCode().getValue())) {
-            ValidationMessageControlPairs controlPairs = new ValidationMessageControlPairs();
-            controlPairs.add(new ValidationMessageControlPair(JogaiShinsainJohoHandler.RRVMessages.未入力));
-            return ResponseData.of(div).addValidationMessages(controlPairs).respond();
+
+        boolean updateFlag = false;
+
+        if (!ResponseHolder.isReRequest()) {
+            if (!div.getShinsakaiIinJoho().getHdnState().equals(_状態.削除.get状態())) {
+
+                if (RString.isNullOrEmpty(div.getTxtShinsakaiIinCode().getValue())) {
+                    ValidationMessageControlPairs controlPairs = new ValidationMessageControlPairs();
+                    controlPairs.add(new ValidationMessageControlPair(JogaiShinsainJohoHandler.RRVMessages.未入力));
+                    return ResponseData.of(div).addValidationMessages(controlPairs).respond();
+                }
+            }
         }
-        getHandler(div).onClick_btnToroku();
-        div.getBtnToroku().setDisabled(true);
-        div.getBtnKakutei().setDisabled(false);
+        if (div.getDgShinsakaiIinIchiran().getClickedItem() != null
+                && !div.getDgShinsakaiIinIchiran().getClickedItem().getState().isNull()
+                && !div.getDgShinsakaiIinIchiran().getClickedItem().getState().isEmpty()) {
+            if (div.getDgShinsakaiIinIchiran().getClickedItem().getState().equals(_状態.追加.get状態())) {
+                if (!ResponseHolder.isReRequest()) {
+                    QuestionMessage message = new QuestionMessage(UrQuestionMessages.削除の確認.getMessage().getCode(),
+                            UrQuestionMessages.削除の確認.getMessage().evaluate());
+                    return ResponseData.of(div).addMessage(message).respond();
+                }
+                if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode())
+                        .equals(ResponseHolder.getMessageCode())
+                        && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                    List<dgShinsakaiIinIchiran_Row> rowList = div.getDgShinsakaiIinIchiran().getDataSource();
+                    rowList.remove(div.getDgShinsakaiIinIchiran().getClickedRowId());
+                    div.getDgShinsakaiIinIchiran().setDataSource(rowList);
+                    updateFlag = true;
+                }
+            } else if (div.getDgShinsakaiIinIchiran().getClickedItem().getState().equals(_状態.削除.get状態())) {
+
+            }
+        } else {
+            getHandler(div).onClick_btnToroku();
+            updateFlag = true;
+        }
+
+        if (updateFlag) {
+            getHandler(div).画面項目にセットされている値をクリア();
+            getHandler(div).set画面初期状態();
+            div.getBtnKakutei().setDisabled(!is修正有無(div));
+            div.getShinsakaiIinJoho().setHdnState(RString.EMPTY);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * キャンセルするボタンを押します。
+     *
+     * @param div 画面情報
+     * @return ResponseData<JogaiShinsainJohoDiv>
+     */
+    public ResponseData<JogaiShinsainJohoDiv> onClick_btnCancel(JogaiShinsainJohoDiv div) {
+        getHandler(div).画面項目にセットされている値をクリア();
+        getHandler(div).set画面初期状態();
+        div.getBtnKakutei().setDisabled(!is修正有無(div));
+        div.getShinsakaiIinJoho().setHdnState(RString.EMPTY);
         return ResponseData.of(div).respond();
     }
 
@@ -156,11 +248,13 @@ public class JogaiShinsainJoho {
             List<dgShinsakaiIinIchiran_Row> rowList = div.getDgShinsakaiIinIchiran().getDataSource();
             List<ShinsakaiIinItiran> shinsakaiIinItiranList = new ArrayList<>();
             for (dgShinsakaiIinIchiran_Row row : rowList) {
-                ShinsakaiIinItiran shinsakaiIinItiran = new ShinsakaiIinItiran();
-                shinsakaiIinItiran.setShimei(row.getShimei());
-                shinsakaiIinItiran.setShinsakaiIinCode(row.getShinsakaiIinCode());
-                shinsakaiIinItiran.setShozokuKikan(row.getShozokuKikan());
-                shinsakaiIinItiranList.add(shinsakaiIinItiran);
+                if (!row.getState().equals(_状態.削除.get状態())) {
+                    ShinsakaiIinItiran shinsakaiIinItiran = new ShinsakaiIinItiran();
+                    shinsakaiIinItiran.setShimei(row.getShimei());
+                    shinsakaiIinItiran.setShinsakaiIinCode(row.getShinsakaiIinCode());
+                    shinsakaiIinItiran.setShozokuKikan(row.getShozokuKikan());
+                    shinsakaiIinItiranList.add(shinsakaiIinItiran);
+                }
             }
             ShinsakaiIinItiranData shinsakaiIinItiranBusiness = new ShinsakaiIinItiranData();
             shinsakaiIinItiranBusiness.setShinsakaiIinItiranList(shinsakaiIinItiranList);
@@ -220,7 +314,7 @@ public class JogaiShinsainJoho {
             List<ShinsakaiIinItiran> shinsakaiIinItiranList = shinsakaiIinItiranData.getShinsakaiIinItiranList();
             List<dgShinsakaiIinIchiran_Row> rowList = new ArrayList<>();
             for (ShinsakaiIinItiran joho : shinsakaiIinItiranList) {
-                rowList.add(new dgShinsakaiIinIchiran_Row(joho.getShinsakaiIinCode(), joho.getShimei(), joho.getShozokuKikan()));
+                rowList.add(new dgShinsakaiIinIchiran_Row(RString.EMPTY, joho.getShinsakaiIinCode(), joho.getShimei(), joho.getShozokuKikan()));
             }
             div.getDgShinsakaiIinIchiran().setDataSource(rowList);
             
@@ -245,7 +339,7 @@ public class JogaiShinsainJoho {
             所属機関 = nullToEmpty(所属機関, getService().get医療機関名称(joho.get市町村コード(), new ShujiiIryokikanCode(joho.get主治医医療機関コード())));
             所属機関 = nullToEmpty(所属機関, getService().get事業者名称(joho.get市町村コード(), joho.get認定調査委託先コード()));
             所属機関 = nullToEmpty(所属機関, getService().get機関名称(joho.get証記載保険者番号(), joho.getその他機関コード()));
-            rowList.add(new dgShinsakaiIinIchiran_Row(joho.get介護認定審査会委員コード(), joho.get介護認定審査会委員氏名().value(), 所属機関.toRString()));
+            rowList.add(new dgShinsakaiIinIchiran_Row(RString.EMPTY, joho.get介護認定審査会委員コード(), joho.get介護認定審査会委員氏名().value(), 所属機関.toRString()));
         }
         div.getDgShinsakaiIinIchiran().setDataSource(rowList);
     }
@@ -259,7 +353,7 @@ public class JogaiShinsainJoho {
             所属機関 = nullToEmpty(所属機関, getService().get医療機関名称(joho.get市町村コード(), new ShujiiIryokikanCode(joho.get主治医医療機関コード())));
             所属機関 = nullToEmpty(所属機関, getService().get事業者名称(joho.get市町村コード(), joho.get認定調査委託先コード()));
             所属機関 = nullToEmpty(所属機関, getService().get機関名称(joho.get証記載保険者番号(), joho.getその他機関コード()));
-            rowList.add(new dgShinsakaiIinIchiran_Row(joho.get介護認定審査会委員コード(), joho.get介護認定審査会委員氏名().value(), 所属機関.toRString()));
+            rowList.add(new dgShinsakaiIinIchiran_Row(RString.EMPTY, joho.get介護認定審査会委員コード(), joho.get介護認定審査会委員氏名().value(), 所属機関.toRString()));
         }
         div.getDgShinsakaiIinIchiran().setDataSource(rowList);
     }
@@ -274,6 +368,17 @@ public class JogaiShinsainJoho {
             }
         }
         return 所属機関;
+    }
+
+    private boolean is修正有無(JogaiShinsainJohoDiv div) {
+
+        for (dgShinsakaiIinIchiran_Row row : div.getShinsakaiIinIchiran().getDgShinsakaiIinIchiran().getDataSource()) {
+            if (!row.getState().isNull() && !row.getState().isEmpty()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private JogaiShinsainJohoHandler getHandler(JogaiShinsainJohoDiv div) {

@@ -5,6 +5,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JogaiShin
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinsakaiIinJohoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-06_05-07-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-07_20-09-44">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -22,7 +23,7 @@ public class ShinsakaiIinJohoDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("txtShinsakaiIinCode")
-    private TextBox txtShinsakaiIinCode;
+    private TextBoxCode txtShinsakaiIinCode;
     @JsonProperty("btnShinsakaiIinGuide")
     private ButtonDialog btnShinsakaiIinGuide;
     @JsonProperty("txtShinsakaiIinName")
@@ -31,6 +32,8 @@ public class ShinsakaiIinJohoDiv extends Panel {
     private DataGrid<dgShozokuKikanIchiran_Row> dgShozokuKikanIchiran;
     @JsonProperty("lblShozokuKikan")
     private Label lblShozokuKikan;
+    @JsonProperty("hdnState")
+    private RString hdnState;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -43,7 +46,7 @@ public class ShinsakaiIinJohoDiv extends Panel {
      * @return txtShinsakaiIinCode
      */
     @JsonProperty("txtShinsakaiIinCode")
-    public TextBox getTxtShinsakaiIinCode() {
+    public TextBoxCode getTxtShinsakaiIinCode() {
         return txtShinsakaiIinCode;
     }
 
@@ -52,7 +55,7 @@ public class ShinsakaiIinJohoDiv extends Panel {
      * @param txtShinsakaiIinCode txtShinsakaiIinCode
      */
     @JsonProperty("txtShinsakaiIinCode")
-    public void setTxtShinsakaiIinCode(TextBox txtShinsakaiIinCode) {
+    public void setTxtShinsakaiIinCode(TextBoxCode txtShinsakaiIinCode) {
         this.txtShinsakaiIinCode = txtShinsakaiIinCode;
     }
 
@@ -126,6 +129,24 @@ public class ShinsakaiIinJohoDiv extends Panel {
     @JsonProperty("lblShozokuKikan")
     public void setLblShozokuKikan(Label lblShozokuKikan) {
         this.lblShozokuKikan = lblShozokuKikan;
+    }
+
+    /*
+     * gethdnState
+     * @return hdnState
+     */
+    @JsonProperty("hdnState")
+    public RString getHdnState() {
+        return hdnState;
+    }
+
+    /*
+     * sethdnState
+     * @param hdnState hdnState
+     */
+    @JsonProperty("hdnState")
+    public void setHdnState(RString hdnState) {
+        this.hdnState = hdnState;
     }
 
     // </editor-fold>
