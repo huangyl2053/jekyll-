@@ -1150,7 +1150,13 @@ public class NinteiChosaBusiness {
      */
     public ChosahyoSaiCheckhyoRelateEntity set認定調査票差異チェック票List(HomonChosaIraishoRelateEntity entity, List<ChosaIraishoAndChosahyoAndIkenshoPrintBusiness> businessList) {
         ChosahyoSaiCheckhyoRelateEntity checkEntity = new ChosahyoSaiCheckhyoRelateEntity();
-        RString 厚労省IF識別コード = businessList.get(0).get厚労省IF識別コード();
+        RString 厚労省IF識別コード = RString.EMPTY;
+        if (businessList != null && !businessList.isEmpty()) {
+            厚労省IF識別コード = businessList.get(0).get厚労省IF識別コード();
+            checkEntity.set前回二次判定日(businessList.get(0).get二次判定年月日());
+            checkEntity.set前回一次判定結果(get判定結果(厚労省IF識別コード, businessList.get(0).get要介護認定一次判定結果コード()));
+            checkEntity.set前回二次判定結果(get判定結果(厚労省IF識別コード, businessList.get(0).get二次判定要介護状態区分コード()));
+        }
         if (KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(厚労省IF識別コード)) {
             for (ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business : businessList) {
                 前回連番Map.put(business.get連番(),
@@ -1164,11 +1170,8 @@ public class NinteiChosaBusiness {
         }
         checkEntity.set被保険者番号(entity.get被保険者番号());
         checkEntity.set被保険者氏名(entity.get被保険者氏名());
-        checkEntity.set前回二次判定日(businessList.get(0).get二次判定年月日());
         checkEntity.set生年月日(entity.get生年月日());
         checkEntity.set年齢(entity.get年齢());
-        checkEntity.set前回一次判定結果(get判定結果(厚労省IF識別コード, entity.get要介護認定一次判定結果コード()));
-        checkEntity.set前回二次判定結果(get判定結果(厚労省IF識別コード, entity.get二次判定要介護状態区分コード()));
         checkEntity.set前回認知症高齢者自立度(
                 RString.isNullOrEmpty(entity.get前回認知症高齢者自立度())
                 ? RString.EMPTY : NinchishoNichijoSeikatsuJiritsudoCode.toValue(entity.get前回認知症高齢者自立度()).get名称());

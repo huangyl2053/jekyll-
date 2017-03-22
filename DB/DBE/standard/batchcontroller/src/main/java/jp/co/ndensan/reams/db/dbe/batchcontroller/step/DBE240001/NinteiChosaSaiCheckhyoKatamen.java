@@ -69,7 +69,8 @@ public class NinteiChosaSaiCheckhyoKatamen extends BatchProcessBase<HomonChosaIr
         List<ChosaIraishoAndChosahyoAndIkenshoPrintBusiness> businessList = ChosaIraishoAndChosahyoAndIkenshoPrintFinder.createInstance()
                 .get認定調査票差異チェック票(parameter).records();
         ChosahyoSaiCheckhyoRelateEntity checkEntity = business.set認定調査票差異チェック票List(entity, businessList);
-        SaiChekkuhyoItem item = business.setDBE292001Item(checkEntity, businessList.get(0).get厚労省IF識別コード());
+        SaiChekkuhyoItem item = business.setDBE292001Item(checkEntity,
+                businessList != null && !businessList.isEmpty() ? businessList.get(0).get厚労省IF識別コード() : RString.EMPTY);
         if (item != null) {
             SaiChekkuhyoReport report = SaiChekkuhyoReport.createFrom(item);
             report.writeBy(reportSourceWriter);
