@@ -1291,10 +1291,10 @@ public class SabisuJyoukyoA3 {
     }
 
     private RString trimFormat前回中間評価点(RString score) {
-        RStringBuilder scoreBuilder = new RStringBuilder();
-        if (2 == score.indexOf(COMMA)) {
+        RStringBuilder scoreBuilder = new RStringBuilder(score);
+        if (2 == scoreBuilder.indexOf(COMMA)) {
             scoreBuilder.append(RString.HALF_SPACE).append(score);
-        } else if (1 == score.indexOf(COMMA)) {
+        } else if (1 == scoreBuilder.indexOf(COMMA)) {
             scoreBuilder.append(RString.HALF_SPACE).append(RString.HALF_SPACE).append(score);
         }
         return scoreBuilder.substringEmptyOnError(0, 5);
