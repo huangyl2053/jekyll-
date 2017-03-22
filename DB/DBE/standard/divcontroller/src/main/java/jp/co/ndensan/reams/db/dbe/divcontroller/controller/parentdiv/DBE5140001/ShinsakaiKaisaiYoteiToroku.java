@@ -22,7 +22,6 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisaikekka.ShinsakaiKa
 import jp.co.ndensan.reams.db.dbe.definition.core.exclusion.LockingKeys;
 import jp.co.ndensan.reams.db.dbe.definition.core.hoshu.GogitaichoKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.KaigoninteiShinsakaiGichoKubunCode;
-import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.dbe5140001.ShinsakaiKaisaiYoteiJohoParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140001.DBE5140001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140001.DBE5140001TransitionEventName;
@@ -176,15 +175,13 @@ public class ShinsakaiKaisaiYoteiToroku {
      */
     public ResponseData<ShinsakaiKaisaiYoteiTorokuDiv> onLoad(ShinsakaiKaisaiYoteiTorokuDiv div) {
         if (ResponseHolder.isReRequest()) {
-            if (ResponseHolder.getMessageCode().toString()
-                    .equals(DbeErrorMessages.審査会開催予定登録_複数利用_排他.getMessage().getCode())) {
-                return ResponseData.of(div).setState(DBE5140001StateName.更新不可);
-            }
             return ResponseData.of(div).respond();
         }
         if (!RealInitialLocker.tryGetLock(LockingKeys.審査会開催予定登録.value())) {
             div.setReadOnly(true);
-            return ResponseData.of(div).addMessage(DbeErrorMessages.審査会開催予定登録_複数利用_排他.getMessage()).respond();
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnHozon"), true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSchedule"), true);
+            return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
         }
         this.div = div;
         init(RString.EMPTY);
