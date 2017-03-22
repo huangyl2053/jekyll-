@@ -1289,25 +1289,31 @@ public class NinnteiChousaKekkaTouroku1Handler {
             Set<Map.Entry<RString, TokkiJikoInputModel>> set) {
         NinteichosahyoTokkijikoManager dbt5205Manager = InstanceProvider.create(NinteichosahyoTokkijikoManager.class);
         Iterator<Map.Entry<RString, TokkiJikoInputModel>> it = set.iterator();
-        RString 認定調査特記事項番号;
+        RString 前認定調査特記事項番号 = RString.EMPTY;
+        int 認定調査特記事項連番 = 1;
 
         while (it.hasNext()) {
             Map.Entry<RString, TokkiJikoInputModel> entry = it.next();
             TokkiJikoInputModel value = entry.getValue();
-            認定調査特記事項番号 = value.get特記事項番号();
             if (RowState.Deleted.equals(value.getRowState())) {
                 continue;
+            }
+            if (前認定調査特記事項番号.equals(value.get特記事項番号())) {
+                認定調査特記事項連番++;
+            } else {
+                認定調査特記事項連番 = 1;
             }
             NinteichosahyoTokkijiko ninteichosahyoTokkijiko = new NinteichosahyoTokkijiko(
                     temp_申請書管理番号,
                     temp_認定調査履歴番号,
-                    認定調査特記事項番号,
-                    value.get特記連番(),
+                    value.get特記事項番号(),
+                    認定調査特記事項連番,
                     TokkijikoTextImageKubun.テキスト.getコード(),
                     GenponMaskKubun.原本.getCode());
             NinteichosahyoTokkijikoBuilder builder = ninteichosahyoTokkijiko.createBuilderForEdit();
             builder.set特記事項(value.get特記事項());
             dbt5205Manager.save認定調査票_特記情報(builder.build());
+            前認定調査特記事項番号 = value.get特記事項番号();
         }
     }
 

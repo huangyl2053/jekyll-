@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import jp.co.ndensan.reams.db.dbe.business.core.tokkijikoinput.TokkiJikoInputModel;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -20,11 +21,17 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosajisshishajoho.ChosaJisshishaJohoModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosatokkijikou.NinteiChosaTokkiJikou;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJisshishaJoho.ChosaJisshishaJoho.ChosaJisshishaJohoDiv;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
+import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSourceConverter;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -43,6 +50,10 @@ public class TokkiJikoInputHandler {
     private final RString KEY第五群 = new RString("5");
     private final RString KEY特別な医療群 = new RString("6");
     private final RString 読点 = new RString("。");
+    private final RString 全面テキスト = new RString("1");
+    private final RString sortOrder = new RString("dbTokkiJikoNo");
+    private final Decimal 最大連番数 = new Decimal(9);
+    private final int dgTxtTokkiJikoWidth = 860;
     private final int 短冊特記事項最大入力文字数 = Integer.parseInt(DbBusinessConfig.get(
             ConfigNameDBE.認定調査票特記事項最大入力文字数, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString());
 
@@ -85,6 +96,15 @@ public class TokkiJikoInputHandler {
         setDdlTokkiJikoNo();
         set特記事項情報();
         set初期状態の保存();
+        if (全面テキスト.equals(DbBusinessConfig.get(ConfigNameDBE.審査会資料調査特記パターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援))) {
+            div.getTokkiJikoNyuryoku().getBtnAddRemban().setDisplayNone(true);
+            div.getTokkiJikoNyuryoku().getDgTokkiJikoJoho().getGridSetting().setIsShowModifyButtonColumn(false);
+            div.getTokkiJikoNyuryoku().getDgTokkiJikoJoho().getGridSetting().setIsShowDeleteButtonColumn(false);
+            div.getTokkiJikoNyuryoku().getDgTokkiJikoJoho().getGridSetting().getColumn(new RString("txtTokkiJiko")).setWidth(dgTxtTokkiJikoWidth);
+        } else {
+            div.getTokkiJikoNyuryoku().getBtnInput().setDisplayNone(true);
+            div.getTokkiJikoNyuryoku().getTxtTokkiJiko().setMaxLength(短冊特記事項最大入力文字数);
+        }
     }
 
     private void set初期状態の保存() {
@@ -217,6 +237,30 @@ public class TokkiJikoInputHandler {
     }
 
     /**
+     * 連番数のチェック処理です。
+     * @return message
+     */
+    public Message checkMaxRemban() {
+        Message message = null;
+        Decimal 最大連番 = get最大連番();
+        if (最大連番数.compareTo(最大連番) < 1) {
+            message = new ErrorMessage(DbeErrorMessages.連番最大値を超過.getMessage().getCode(),
+                    DbeErrorMessages.連番最大値を超過.getMessage().evaluate());
+        }
+        return message;
+    }
+
+    /**
+     * 「dg修正」ボタン押下処理です。
+     */
+    public void onModify() {
+        RString 特記事項 = div.getTokkiJikoNyuryoku().getDgTokkiJikoJoho().getActiveRow().getTxtTokkiJiko().getValue();
+        div.getTokkiJikoNyuryoku().getTxtTokkiJiko().setValue(特記事項);
+        div.setHdnTokkiJiko(特記事項);
+        div.getTokkiJikoNyuryoku().getTxtTokkiJiko().setDisabled(false);
+    }
+
+    /**
      * 「確定する」ボタン押下時の処理です。
      */
     public void onSave() {
@@ -299,6 +343,69 @@ public class TokkiJikoInputHandler {
     }
 
     /**
+     * 「確定する」ボタン押下時の処理です。
+     */
+    public void onSaveAddRemban() {
+        List<dgTokkiJikoJoho_Row> dataSource = div.getTokkiJikoNyuryoku().getDgTokkiJikoJoho().getDataSource();
+        dgTokkiJikoJoho_Row newRow = createDataSourceRow();
+        dataSource.add(newRow);
+        div.getTokkiJikoNyuryoku().getDgTokkiJikoJoho().setDataSource(dataSource);
+    }
+
+    private dgTokkiJikoJoho_Row createDataSourceRow() {
+        RString 特記事項番号 = div.getTokkiJikoNyuryoku().getDdlTokkiJikoNo().getSelectedKey();
+        Decimal 最大連番 = get最大連番();
+        dgTokkiJikoJoho_Row row = new dgTokkiJikoJoho_Row();
+        row.setDbTokkiJikoNo(特記事項番号);
+        row.getTxtNinteiChosaItemNo().setValue(NinteiChosaTokkiJikou.getEnumByDbt5205認定調査特記事項番号(特記事項番号).get画面表示用特記事項番号());
+        row.getTxtRemban().setValue(Decimal.valueOf(最大連番.add(Decimal.ONE).intValue()));
+        row.getTxtNinteiChosaItemName().setValue(NinteiChosaTokkiJikou.getEnumByDbt5205認定調査特記事項番号(特記事項番号).get特記事項名());
+        row.getTxtTokkiJiko().setValue(div.getTokkiJikoNyuryoku().getTxtTokkiJiko().getValue());
+        row.setBeforeRowState(new RString(RowState.Unchanged.name()));
+        row.setRowState(RowState.Added);
+        return row;
+    }
+
+    private Decimal get最大連番() {
+        RString 特記事項番号 = div.getTokkiJikoNyuryoku().getDdlTokkiJikoNo().getSelectedKey();
+        Decimal 最大連番 = Decimal.ZERO;
+        for (dgTokkiJikoJoho_Row row : div.getTokkiJikoNyuryoku().getDgTokkiJikoJoho().getDataSource()) {
+            if (row.getDbTokkiJikoNo().equals(特記事項番号)) {
+                if (最大連番.compareTo(row.getTxtRemban().getValue()) < 0) {
+                    最大連番 = row.getTxtRemban().getValue();
+                }
+            }
+        }
+        return 最大連番;
+    }
+
+    /**
+     * 「確定する」ボタン押下時の処理です。
+     */
+    public void onSaveModify() {
+        int selectedRowId = Integer.parseInt(div.getHdnSelectedRowId().toString());
+        dgTokkiJikoJoho_Row activeRow = div.getTokkiJikoNyuryoku().getDgTokkiJikoJoho().getDataSource().get(selectedRowId);
+        RString 特記事項 = div.getTokkiJikoNyuryoku().getTxtTokkiJiko().getValue();
+        if (div.getHdnTokkiJiko().equals(特記事項)) {
+            return;
+        }
+        if (!RowState.Added.equals(activeRow.getRowState())) {
+            activeRow.setBeforeRowState(new RString(activeRow.getRowState().name()));
+            activeRow.setRowState(RowState.Modified);
+        } else {
+            activeRow.setBeforeRowState(new RString(RowState.Added.name()));
+        }
+        activeRow.getTxtTokkiJiko().setValue(特記事項);
+    }
+
+    /**
+     * データグリッドを特記事項番号でソートします。
+     */
+    public void sortDataGrid() {
+        div.getTokkiJikoNyuryoku().getDgTokkiJikoJoho().setSortOrder(sortOrder);
+    }
+
+    /**
      * 削除時の「確定する」ボタン押下時の処理です。
      */
     public void onSaveDelete() {
@@ -317,6 +424,25 @@ public class TokkiJikoInputHandler {
             }
         }
         div.getTokkiJikoNyuryoku().getDgTokkiJikoJoho().setDataSource(newDataSource);
+    }
+
+    /**
+     * 「dg削除」ボタン押下時の処理です。
+     *
+     */
+    public void onSaveDataGridDelete() {
+        dgTokkiJikoJoho_Row activeRow = div.getTokkiJikoNyuryoku().getDgTokkiJikoJoho().getActiveRow();
+        if (RowState.Added.equals(activeRow.getRowState())) {
+            List<dgTokkiJikoJoho_Row> dataSource = div.getTokkiJikoNyuryoku().getDgTokkiJikoJoho().getDataSource();
+            dataSource.remove(activeRow);
+        } else if (RowState.Deleted.equals(activeRow.getRowState())) {
+            activeRow.setRowState(RowState.valueOf(activeRow.getBeforeRowState().toString()));
+            activeRow.setModifyButtonState(DataGridButtonState.Enabled);
+        } else {
+            activeRow.setBeforeRowState(new RString(activeRow.getRowState().name()));
+            activeRow.setRowState(RowState.Deleted);
+            activeRow.setModifyButtonState(DataGridButtonState.Disabled);
+        }
     }
 
     private RStringBuilder separate特記事項(List<RString> 特記事項List, RStringBuilder 特記事項Builder) {
@@ -354,6 +480,8 @@ public class TokkiJikoInputHandler {
     public void resetControl() {
         div.getTokkiJikoNyuryoku().getTxtTokkiJiko().clearValue();
         div.getTokkiJikoNyuryoku().getTxtTokkiJiko().setDisabled(true);
+        div.setHdnTokkiJiko(RString.EMPTY);
+        div.setHdnSelectedRowId(RString.EMPTY);
         div.getTokkiJikoNyuryoku().getBtnSave().setDisabled(true);
         div.getTokkiJikoNyuryoku().getBtnCancel().setDisabled(true);
         div.getTokkiJikoNyuryoku().getBtnDelete().setDisplayNone(true);
@@ -382,23 +510,26 @@ public class TokkiJikoInputHandler {
         div.getTokkiJikoNyuryoku().getBtnSave().setDisabled(!parameter);
         div.getTokkiJikoNyuryoku().getBtnCancel().setDisabled(!parameter);
         div.getTokkiJikoNyuryoku().getBtnInput().setDisabled(parameter);
+        div.getTokkiJikoNyuryoku().getBtnAddRemban().setDisabled(parameter);
         div.getTokkiJikoNyuryoku().getRadTokkiJikoGroup().setDisabled(parameter);
         div.getTokkiJikoNyuryoku().getDdlTokkiJikoNo().setDisabled(parameter);
-        div.getBtnReturn().setDisabled(parameter);
-        div.getBtnUpdateCancel().setDisabled(parameter);
+        div.getTokkiJikoNyuryoku().getDgTokkiJikoJoho().setDisabled(parameter);
+        div.getBtnUpdateReturn().setDisabled(parameter);
+        div.getBtnCancelReturn().setDisabled(parameter);
+//        div.getBtnReturn().setDisabled(parameter);
+//        div.getBtnUpdateCancel().setDisabled(parameter);
     }
 
-    /**
-     * 「変更内容を取り消す」ボタン押下時の処理です。
-     */
-    public void onClear() {
-        resetControl();
-        div.getTokkiJikoNyuryoku().getRadTokkiJikoGroup().setSelectedKey(KEY第一群);
-        setDdlTokkiJikoNo();
-        set特記事項情報();
-        set初期状態の保存();
-    }
-
+//    /**
+//     * 「変更内容を取り消す」ボタン押下時の処理です。
+//     */
+//    public void onClear() {
+//        resetControl();
+//        div.getTokkiJikoNyuryoku().getRadTokkiJikoGroup().setSelectedKey(KEY第一群);
+//        setDdlTokkiJikoNo();
+//        set特記事項情報();
+//        set初期状態の保存();
+//    }
     private void setTokkiJikoInputModel(dgTokkiJikoJoho_Row row, TokkiJikoInputModel model) {
         model.set特記事項番号(row.getDbTokkiJikoNo());
         model.set特記連番(row.getTxtRemban().getValue().intValue());

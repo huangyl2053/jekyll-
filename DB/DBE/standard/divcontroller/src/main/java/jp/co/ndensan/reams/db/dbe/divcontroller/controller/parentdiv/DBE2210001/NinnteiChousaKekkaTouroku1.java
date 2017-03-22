@@ -377,6 +377,23 @@ public class NinnteiChousaKekkaTouroku1 {
      * @return レスポンスデータ
      */
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onBeforeOpenDialog_btnTokkiJiko(NinnteiChousaKekkaTouroku1Div div) {
+        sortTokkiJiko();
+        set画面遷移パラメータ(div);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「特記事項入力ダイアログ」にて確定して戻ってきた処理です。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<NinnteiChousaKekkaTouroku1Div> onOkClose_btnTokkiJiko(NinnteiChousaKekkaTouroku1Div div) {
+        sortTokkiJiko();
+        return ResponseData.of(div).respond();
+    }
+    
+    private void sortTokkiJiko() {
         HashMap<RString, TokkiJikoInputModel> tokkiJikoMap = ViewStateHolder.get(ViewStateKeys.特記事項一覧, LinkedHashMap.class);
         List<TokkiJikoInputModel> tokkiJikoList = new ArrayList<>(tokkiJikoMap.values());
         Collections.sort(tokkiJikoList, new TokkiJikoInputComparator());
@@ -386,9 +403,7 @@ public class NinnteiChousaKekkaTouroku1 {
             newTokkiJikoMap.put(new RString(newTokkiJikoMapKey), model);
             newTokkiJikoMapKey++;
         }
-        set画面遷移パラメータ(div);
         ViewStateHolder.put(ViewStateKeys.特記事項一覧, newTokkiJikoMap);
-        return ResponseData.of(div).respond();
     }
 
     /**

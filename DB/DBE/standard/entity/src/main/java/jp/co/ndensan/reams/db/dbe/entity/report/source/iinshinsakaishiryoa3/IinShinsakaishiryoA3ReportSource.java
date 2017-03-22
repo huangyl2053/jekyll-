@@ -327,22 +327,22 @@ public class IinShinsakaishiryoA3ReportSource implements IReportSource {
     public RString sabisuName8;
     @ReportItem(name = "sabisuKaisu8", length = 11, order = 212)
     public RString sabisuKaisu8;
-    @ReportItem(name = "listTokubetsunaIryo1_1", length = 2, order = 213)
-    public RString listTokubetsunaIryo1_1;
-    @ReportItem(name = "listTokubetsunaIryo1_2", length = 1, order = 214)
-    public RString listTokubetsunaIryo1_2;
-    @ReportItem(name = "listTokubetsunaIryo1_3", length = 1, order = 215)
-    public RString listTokubetsunaIryo1_3;
-    @ReportItem(name = "listTokubetsunaIryo1_4", length = 1, order = 216)
-    public RString listTokubetsunaIryo1_4;
-    @ReportItem(name = "listTokubetsunaIryo2_1", length = 2, order = 217)
-    public RString listTokubetsunaIryo2_1;
-    @ReportItem(name = "listTokubetsunaIryo2_2", length = 1, order = 218)
-    public RString listTokubetsunaIryo2_2;
-    @ReportItem(name = "listTokubetsunaIryo2_3", length = 1, order = 219)
-    public RString listTokubetsunaIryo2_3;
-    @ReportItem(name = "listTokubetsunaIryo2_4", length = 1, order = 220)
-    public RString listTokubetsunaIryo2_4;
+    @ReportItem(name = "listtokubetsunaIryo1_1", length = 2, order = 213)
+    public RString listtokubetsunaIryo1_1;
+    @ReportItem(name = "listtokubetsunaIryo1_2", length = 1, order = 214)
+    public RString listtokubetsunaIryo1_2;
+    @ReportItem(name = "listtokubetsunaIryo1_3", length = 1, order = 215)
+    public RString listtokubetsunaIryo1_3;
+    @ReportItem(name = "listtokubetsunaIryo1_4", length = 1, order = 216)
+    public RString listtokubetsunaIryo1_4;
+    @ReportItem(name = "listtokubetsunaIryo2_1", length = 2, order = 217)
+    public RString listtokubetsunaIryo2_1;
+    @ReportItem(name = "listtokubetsunaIryo2_2", length = 1, order = 218)
+    public RString listtokubetsunaIryo2_2;
+    @ReportItem(name = "listtokubetsunaIryo2_3", length = 1, order = 219)
+    public RString listtokubetsunaIryo2_3;
+    @ReportItem(name = "listtokubetsunaIryo2_4", length = 1, order = 220)
+    public RString listtokubetsunaIryo2_4;
     @ReportItem(name = "sabisuName9", order = 221)
     public RString sabisuName9;
     @ReportItem(name = "sabisuKaisu9", length = 11, order = 222)
