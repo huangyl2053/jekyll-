@@ -144,6 +144,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
     private static final RString IFSHIKIBETSUCODE02A = new RString("02A");
     private static final RString IFSHIKIBETSUCODE06A = new RString("06A");
     private static final RString IFSHIKIBETSUCODE09A = new RString("09A");
+    private static final RString IFSHIKIBETSUCODE09B = new RString("09B");
     private final ChosaIraishoAndChosahyoAndIkenshoPrintDiv div;
 
     /**
@@ -1936,7 +1937,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
         RString 判定結果 = RString.EMPTY;
         if (IFSHIKIBETSUCODE99A.equals(厚労省IF識別コード)) {
             判定結果 = IchijiHanteiKekkaCode99.toValue(判定結果コード).get名称();
-        } else if (IFSHIKIBETSUCODE09A.equals(厚労省IF識別コード)) {
+        } else if (IFSHIKIBETSUCODE09A.equals(厚労省IF識別コード) || IFSHIKIBETSUCODE09B.equals(厚労省IF識別コード)) {
             判定結果 = IchijiHanteiKekkaCode09.toValue(判定結果コード).get名称();
         } else if (IFSHIKIBETSUCODE06A.equals(厚労省IF識別コード)) {
             判定結果 = IchijiHanteiKekkaCode06.toValue(判定結果コード).get名称();

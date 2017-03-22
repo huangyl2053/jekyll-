@@ -483,7 +483,7 @@
         ,A."hihokenshaName"
         ,A."seinengappiYMD"
         ,A."age"
-        ,A."koroshoIfShikibetsuCode"
+        ,G."koroshoIfShikibetsuCode"
         ,C."ninchishoNichijoSeikatsuJiritsudoCode" AS "ninchishoSeikatsuJiritsudo"
         ,C."shogaiNichijoSeikatsuJiritsudoCode"  AS "shogaiSeikatsuJiritsudo"
         ,D."ichijiHanteiKekkaCode"
@@ -496,9 +496,12 @@
         LEFT JOIN
         rgdb."DbT5121ShinseiRirekiJoho" AS B
         ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
+        LEFT JOIN
+        rgdb."DbT5101NinteiShinseiJoho" AS G
+        ON B."zenkaiShinseishoKanriNo" = G."shinseishoKanriNo"
         INNER JOIN
         rgdb."DbT5203NinteichosahyoKihonChosa" AS C
-        ON B."zenkaiShinseishoKanriNo" = C."shinseishoKanriNo"
+        ON G."shinseishoKanriNo" = C."shinseishoKanriNo"
         AND NOT EXISTS (
         SELECT 'X'
         FROM rgdb."DbT5203NinteichosahyoKihonChosa" AS C1
@@ -507,29 +510,22 @@
         AND C."ninteichosaRirekiNo" <![CDATA[<]]>  C1."ninteichosaRirekiNo"
 
         )
-        AND C."koroshoIfShikibetsuCode" =
-        (SELECT "koroshoIfShikibetsuCode"
-        FROM rgdb."DbT5101NinteiShinseiJoho"
-        WHERE "shinseishoKanriNo" = B."zenkaiShinseishoKanriNo")
         INNER JOIN
         rgdb."DbT5116IchijiHanteiKekkaJoho" AS D
-        ON C."shinseishoKanriNo" = D."shinseishoKanriNo"
+        ON G."shinseishoKanriNo" = D."shinseishoKanriNo"
         INNER JOIN
         rgdb."DbT5102NinteiKekkaJoho" AS E
-        ON C."shinseishoKanriNo" = E."shinseishoKanriNo"
+        ON G."shinseishoKanriNo" = E."shinseishoKanriNo"
         INNER JOIN
         rgdb."DbT5211NinteichosahyoChosaItem" AS F
-        ON C."shinseishoKanriNo" = F."shinseishoKanriNo"
+        ON G."shinseishoKanriNo" = F."shinseishoKanriNo"
         AND  NOT EXISTS (
         SELECT 'X'
         FROM rgdb."DbT5211NinteichosahyoChosaItem" AS F1
         WHERE
         F."shinseishoKanriNo" = F1."shinseishoKanriNo"
-        AND F."remban" = F1."remban"
         AND F."ninteichosaRirekiNo" <![CDATA[<]]> F1."ninteichosaRirekiNo"
-
         )
-        AND F."koroshoIfShikibetsuCode" = A."koroshoIfShikibetsuCode"
         WHERE
         A."shinseishoKanriNo" = #{申請書管理番号}
         AND A."logicalDeletedFlag" = FALSE

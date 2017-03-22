@@ -169,7 +169,8 @@ public class NinteiChosaBusiness {
         RString 判定結果 = RString.EMPTY;
         if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(厚労省IF識別コード)) {
             判定結果 = IchijiHanteiKekkaCode99.toValue(判定結果コード).get名称();
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード)) {
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード)
+                || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コード)) {
             判定結果 = IchijiHanteiKekkaCode09.toValue(判定結果コード).get名称();
         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(厚労省IF識別コード)) {
             判定結果 = IchijiHanteiKekkaCode06.toValue(判定結果コード).get名称();
@@ -1149,12 +1150,13 @@ public class NinteiChosaBusiness {
      */
     public ChosahyoSaiCheckhyoRelateEntity set認定調査票差異チェック票List(HomonChosaIraishoRelateEntity entity, List<ChosaIraishoAndChosahyoAndIkenshoPrintBusiness> businessList) {
         ChosahyoSaiCheckhyoRelateEntity checkEntity = new ChosahyoSaiCheckhyoRelateEntity();
-        if (KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(entity.get厚労省IF識別コード())) {
+        RString 厚労省IF識別コード = businessList.get(0).get厚労省IF識別コード();
+        if (KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(厚労省IF識別コード)) {
             for (ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business : businessList) {
                 前回連番Map.put(business.get連番(),
                         AnswerPattern.toValue(NinteichosaKomokuMapping09B.toValue(business.get連番()).getパターンNo()).get回答(business.get調査項目()));
             }
-        } else if (KoroshoInterfaceShikibetsuCode.V09A.getCode().equals(entity.get厚労省IF識別コード())) {
+        } else if (KoroshoInterfaceShikibetsuCode.V09A.getCode().equals(厚労省IF識別コード)) {
             for (ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business : businessList) {
                 前回連番Map.put(business.get連番(),
                         AnswerPattern.toValue(NinteichosaKomokuMapping09A.toValue(business.get連番()).getパターンNo()).get回答(business.get調査項目()));
@@ -1162,11 +1164,11 @@ public class NinteiChosaBusiness {
         }
         checkEntity.set被保険者番号(entity.get被保険者番号());
         checkEntity.set被保険者氏名(entity.get被保険者氏名());
-        checkEntity.set前回二次判定日(entity.get二次判定年月日());
+        checkEntity.set前回二次判定日(businessList.get(0).get二次判定年月日());
         checkEntity.set生年月日(entity.get生年月日());
         checkEntity.set年齢(entity.get年齢());
-        checkEntity.set前回一次判定結果(get判定結果(entity.get厚労省IF識別コード(), entity.get要介護認定一次判定結果コード()));
-        checkEntity.set前回二次判定結果(get判定結果(entity.get厚労省IF識別コード(), entity.get二次判定要介護状態区分コード()));
+        checkEntity.set前回一次判定結果(get判定結果(厚労省IF識別コード, entity.get要介護認定一次判定結果コード()));
+        checkEntity.set前回二次判定結果(get判定結果(厚労省IF識別コード, entity.get二次判定要介護状態区分コード()));
         checkEntity.set前回認知症高齢者自立度(
                 RString.isNullOrEmpty(entity.get前回認知症高齢者自立度())
                 ? RString.EMPTY : NinchishoNichijoSeikatsuJiritsudoCode.toValue(entity.get前回認知症高齢者自立度()).get名称());
@@ -1189,7 +1191,7 @@ public class NinteiChosaBusiness {
      * @return SaiChekkuhyoItem
      */
     public SaiChekkuhyoItem setDBE292001Item(ChosahyoSaiCheckhyoRelateEntity entity, RString 厚労省IF識別コード) {
-        SaiChekkuhyoItem item = null;
+        SaiChekkuhyoItem item;
         if (KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(厚労省IF識別コード)) {
             item = new SaiChekkuhyoItem(
                     entity.get前回一次判定結果(),
