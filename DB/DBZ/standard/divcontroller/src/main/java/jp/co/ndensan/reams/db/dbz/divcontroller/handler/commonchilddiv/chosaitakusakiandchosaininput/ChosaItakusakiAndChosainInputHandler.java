@@ -51,6 +51,9 @@ public class ChosaItakusakiAndChosainInputHandler {
             div.getTxtChosainCode().setDisabled(true);
             div.getBtnChosainGuide().setDisabled(true);
             div.getBtnClear().setDisabled(true);
+            if(div.getHdnChosainRenrakuJiko() == null || div.getHdnChosainRenrakuJiko().isEmpty()) {
+                div.getBtnChosainRenrakuJiko().setDisabled(true);
+            }
         }
         if (単純入力状態.equals(モード)) {
             div.getTxtChosaItakusakiCode().setDisabled(false);
