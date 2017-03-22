@@ -73,16 +73,16 @@ module DBZ {
                 return new UZA.DropDownList(this.convFiledName("ddlChosaJisshiBasho"));
             }
 
-            public txtJisshiBashoMeisho(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtJisshiBashoMeisho"));
-            }
-
             public Image(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("Image"));
             }
 
             public imgChosaJisshiBashoMeisho(): UZA.DynamicImage {
                 return new UZA.DynamicImage(this.convFiledName("imgChosaJisshiBashoMeisho"));
+            }
+
+            public txtJisshiBashoMeisho(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtJisshiBashoMeisho"));
             }
 
             public txtKinyushaCode(): UZA.TextBoxCode {

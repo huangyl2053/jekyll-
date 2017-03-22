@@ -180,7 +180,7 @@ public class NinnteiChousaKekkaTouroku1 {
                 return ResponseData.of(div).addMessage(message).respond();
             }
         }
-
+        getHandler(div).編集前調査実施者情報設定();
         if (概況特記出力しない.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
             if (UICONTAINERID_DBEUC20601.equals(ResponseHolder.getUIContainerId())) {
                 return ResponseData.of(div).setState(DBE2210001StateName.調査結果登録_基本運用_特記なし);
@@ -392,7 +392,7 @@ public class NinnteiChousaKekkaTouroku1 {
         sortTokkiJiko();
         return ResponseData.of(div).respond();
     }
-    
+
     private void sortTokkiJiko() {
         HashMap<RString, TokkiJikoInputModel> tokkiJikoMap = ViewStateHolder.get(ViewStateKeys.特記事項一覧, LinkedHashMap.class);
         List<TokkiJikoInputModel> tokkiJikoList = new ArrayList<>(tokkiJikoMap.values());
@@ -738,6 +738,7 @@ public class NinnteiChousaKekkaTouroku1 {
             getValidationHandler().validateFor第4群の必須入力(pairs, div);
             getValidationHandler().validateFor第5群の必須入力(pairs, div);
             getValidationHandler().validateFor生活自立度の必須入力(pairs, div);
+            getValidationHandler().validateFor未編集(pairs, div);
             if (!認定調査結果入手_必須調査票_特記事項不要.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))
                     && !div.getNinteiChosaNyuryoku().getTplKihonChosa().getBtnTokkiJiko().isDisplayNone()) {
                 getValidationHandler().validateFor特記事項の必須入力(pairs, div);
