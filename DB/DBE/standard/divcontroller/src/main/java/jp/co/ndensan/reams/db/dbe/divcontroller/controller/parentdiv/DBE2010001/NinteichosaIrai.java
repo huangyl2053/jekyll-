@@ -168,7 +168,7 @@ public class NinteichosaIrai {
      */
     public IDownLoadServletResponse onClick_btnDataOutput(NinteichosaIraiDiv requestDiv, IDownLoadServletResponse response) {
         FileSpoolManager spoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
-                CSVファイルID_認定調査依頼一覧, UzUDE0831EucAccesslogFileType.Csv);
+                CSVファイルID_認定調査依頼一覧, UzUDE0831EucAccesslogFileType.Other);
         RString 出力名 = EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, CSVファイルID_認定調査依頼一覧);
         RString filePath = Path.combinePath(spoolManager.getEucOutputDirectry(), 出力名);
 
@@ -189,7 +189,7 @@ public class NinteichosaIrai {
                 Optional<PersonalData> personalData = getHandler(requestDiv).getPersonalData(row.getGetShoKisaiHokenshaNo(), row.getHokenshaCode(), row.getShinseishoKanriNo());
                 personalDataList.add(personalData.get());
             }
-            AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
+            AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
             spoolManager.spool(filePath, accessLogUUID);
             csvWriter.close();
         }
