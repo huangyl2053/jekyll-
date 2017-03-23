@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
  * 介護業務専用に作成したアクセスログ制御クラスです。<br>
@@ -54,6 +55,16 @@ public class DbAccessLogger {
      */
     public void flushBy(AccessLogType accessLogType) {
         jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger.log(accessLogType, personalData);
+        personalData.clear();
+    }
+
+    /**
+     * EUCに関するアクセスログを実際に書き出します。
+     *
+     * @param spoolOutputType {@link UzUDE0835SpoolOutputType}
+     */
+    public void flushByEUC(UzUDE0835SpoolOutputType spoolOutputType) {
+        jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger.logEUC(spoolOutputType, personalData);
         personalData.clear();
     }
 }
