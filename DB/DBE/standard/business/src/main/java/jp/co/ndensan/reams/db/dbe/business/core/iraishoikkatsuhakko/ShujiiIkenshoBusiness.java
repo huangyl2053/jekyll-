@@ -24,12 +24,12 @@ import jp.co.ndensan.reams.db.dbz.business.core.ikenshokinyuyoshi.Ikenshokinyuyo
 import jp.co.ndensan.reams.db.dbz.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoItem;
 import jp.co.ndensan.reams.db.dbz.business.report.shujiiikensho.ShujiiIkenshoSakuseiIraishoItem;
 import jp.co.ndensan.reams.db.dbz.business.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoItem;
-import jp.co.ndensan.reams.db.dbz.definition.core.ikenshosakuseiryo.IkenshoSakuseiRyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoIraiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.SakuseiryoSeikyuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.ikenshoprint.ShujiiIkenshoHoshuTankaEntity;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
@@ -274,18 +274,30 @@ public class ShujiiIkenshoBusiness {
     /**
      * 帳票「DBE234001_主治医意見書作成料請求書」Entityデータを作成するメッソドです。
      *
+     * @param 意見書作成料リスト
      * @return ShujiiIkenshoSakuseiRyoSeikyushoItem
      */
-    public ShujiiIkenshoSakuseiRyoSeikyushoItem setDBE234001Item() {
+    public ShujiiIkenshoSakuseiRyoSeikyushoItem setDBE234001Item(List<ShujiiIkenshoHoshuTankaEntity> 意見書作成料リスト) {
         RString 作成料印字 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成料請求書_作成料_印字有無, RDate.getNowDate(),
                 SubGyomuCode.DBE認定支援, processParamter.getShichosonCode());
         ShujiiIkenshoSakuseiRyoSeikyushoItem item = new ShujiiIkenshoSakuseiRyoSeikyushoItem();
         item.setGengo(get和暦(processParamter.getHakkobi(), true));
         item.setAtesakiHokenshaName(entity.get保険者名());
-        item.setShinkiZaitakuKingaku(IkenshoSakuseiRyo.在宅新規.get名称());
-        item.setShinkiShisetsuKingaku(IkenshoSakuseiRyo.在宅継続.get名称());
-        item.setKeizokuZaitakuKingaku(IkenshoSakuseiRyo.施設新規.get名称());
-        item.setKeizokuShisetsuKingaku(IkenshoSakuseiRyo.施設継続.get名称());
+        for (ShujiiIkenshoHoshuTankaEntity 意見書作成料 : 意見書作成料リスト) {
+            if (new Code("1").equals(意見書作成料.getZaitakuShisetsuKubun())) {
+                if (new Code("1").equals(意見書作成料.getIkenshoSakuseiKaisuKubun())) {
+                    item.setShinkiZaitakuKingaku(new RString(意見書作成料.getTanka().toString()));
+                } else if (new Code("2").equals(意見書作成料.getIkenshoSakuseiKaisuKubun())) {
+                    item.setShinkiShisetsuKingaku(new RString(意見書作成料.getTanka().toString()));
+                }
+            } else if (new Code("2").equals(意見書作成料.getZaitakuShisetsuKubun())) {
+                if (new Code("1").equals(意見書作成料.getIkenshoSakuseiKaisuKubun())) {
+                    item.setKeizokuZaitakuKingaku(new RString(意見書作成料.getTanka().toString()));
+                } else if (new Code("2").equals(意見書作成料.getIkenshoSakuseiKaisuKubun())) {
+                    item.setKeizokuShisetsuKingaku(new RString(意見書作成料.getTanka().toString()));
+                }
+            }
+        }
         List<RString> 被保険者番号リスト = get被保険者番号(entity.get被保険者番号());
         item.setHihokenshaNo1(getCode(被保険者番号リスト, 0));
         item.setHihokenshaNo2(getCode(被保険者番号リスト, 1));
@@ -448,9 +460,10 @@ public class ShujiiIkenshoBusiness {
     /**
      * 帳票「DBE013006_主治医意見書作成料請求一覧表」の帳票データを作成するメッソドです。
      *
+     * @param 意見書作成料リスト
      * @return ShujiiIkenshoSeikyuIchiranEntity
      */
-    public ShujiiIkenshoSeikyuIchiranEntity setDBE013006Entity() {
+    public ShujiiIkenshoSeikyuIchiranEntity setDBE013006Entity(List<ShujiiIkenshoHoshuTankaEntity> 意見書作成料リスト) {
         ShujiiIkenshoSeikyuIchiranEntity 帳票Entity = new ShujiiIkenshoSeikyuIchiranEntity();
         帳票Entity.set保険者番号(entity.get証記載保険者番号());
         帳票Entity.set保険者名(entity.get保険者名());
@@ -463,15 +476,18 @@ public class ShujiiIkenshoBusiness {
         帳票Entity.set医療機関(entity.get医療機関名称());
         帳票Entity.set主治医意見書記入年月日(getFlexibleDate(entity.get主治医意見書記入年月日()));
         帳票Entity.set主治医意見書読取年月日(getFlexibleDate(entity.get主治医意見書読取年月日()));
-        if (new Code(SakuseiryoSeikyuKubun.在宅新規.getコード()).equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
-            帳票Entity.set主治医意見書作成料(IkenshoSakuseiRyo.在宅新規.get名称());
-        } else if (new Code(SakuseiryoSeikyuKubun.施設新規.getコード()).equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
-            帳票Entity.set主治医意見書作成料(IkenshoSakuseiRyo.施設新規.get名称());
-        } else if (new Code(SakuseiryoSeikyuKubun.在宅継続.getコード()).equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
-            帳票Entity.set主治医意見書作成料(IkenshoSakuseiRyo.在宅継続.get名称());
-        } else if (new Code(SakuseiryoSeikyuKubun.施設継続.getコード()).equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
-            帳票Entity.set主治医意見書作成料(IkenshoSakuseiRyo.施設継続.get名称());
+        if (!意見書作成料リスト.isEmpty()) {
+            帳票Entity.set主治医意見書作成料(new RString(意見書作成料リスト.get(0).getTanka().toString()));
         }
+//        if (new Code(SakuseiryoSeikyuKubun.在宅新規.getコード()).equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
+//            帳票Entity.set主治医意見書作成料(IkenshoSakuseiRyo.在宅新規.get名称());
+//        } else if (new Code(SakuseiryoSeikyuKubun.施設新規.getコード()).equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
+//            帳票Entity.set主治医意見書作成料(IkenshoSakuseiRyo.施設新規.get名称());
+//        } else if (new Code(SakuseiryoSeikyuKubun.在宅継続.getコード()).equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
+//            帳票Entity.set主治医意見書作成料(IkenshoSakuseiRyo.在宅継続.get名称());
+//        } else if (new Code(SakuseiryoSeikyuKubun.施設継続.getコード()).equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
+//            帳票Entity.set主治医意見書作成料(IkenshoSakuseiRyo.施設継続.get名称());
+//        }
         帳票Entity.set主治医意見書別途診療費(entity.get主治医意見書別途診療費());
         帳票Entity.set報酬支払年月日(getFlexibleDate(entity.get主治医意見書報酬支払年月日()));
         return 帳票Entity;
