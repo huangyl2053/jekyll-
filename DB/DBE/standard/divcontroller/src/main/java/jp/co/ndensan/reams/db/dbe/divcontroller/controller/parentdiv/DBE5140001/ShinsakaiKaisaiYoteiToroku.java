@@ -171,7 +171,7 @@ public class ShinsakaiKaisaiYoteiToroku {
      * 画面初期化処理です。
      *
      * @param div 画面情報
-     * @return ResponseData<ShinsakaiKaisaiYoteiTorokuDiv>
+     * @return ResponseData
      */
     public ResponseData<ShinsakaiKaisaiYoteiTorokuDiv> onLoad(ShinsakaiKaisaiYoteiTorokuDiv div) {
         if (ResponseHolder.isReRequest()) {
@@ -183,10 +183,24 @@ public class ShinsakaiKaisaiYoteiToroku {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSchedule"), true);
             return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
         }
+        return initialize(div);
+    }
+
+    private ResponseData<ShinsakaiKaisaiYoteiTorokuDiv> initialize(ShinsakaiKaisaiYoteiTorokuDiv div) {
         this.div = div;
         init(RString.EMPTY);
         ViewStateHolder.put(ViewStateKeys.保存フラグ, false);
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 画面再表示時の処理です。
+     *
+     * @param div 画面情報
+     * @return ResponseData
+     */
+    public ResponseData<ShinsakaiKaisaiYoteiTorokuDiv> onActive(ShinsakaiKaisaiYoteiTorokuDiv div) {
+        return initialize(div);
     }
 
     /**
