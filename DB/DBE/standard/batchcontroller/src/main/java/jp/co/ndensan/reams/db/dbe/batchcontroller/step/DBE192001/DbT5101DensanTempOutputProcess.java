@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE192001;
 
+import java.util.ArrayList;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.renkeidatatorikomi.RenkeiDataTorikomiBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.renkeidatatorikomi.RenkeiDataTorikomiProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5101TempEntity;
@@ -18,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -25,6 +28,9 @@ import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
@@ -47,6 +53,7 @@ public class DbT5101DensanTempOutputProcess extends BatchProcessBase<DbT5101Temp
     private RenkeiDataTorikomiProcessParamter processParamter;
     private FileSpoolManager manager;
     private RString eucFilePath;
+    private List<PersonalData> personalDataList;
     @BatchWriter
     private CsvWriter<DbT5101TempEUCEntity> eucCsvWriter;
 
@@ -54,6 +61,7 @@ public class DbT5101DensanTempOutputProcess extends BatchProcessBase<DbT5101Temp
     protected void initialize() {
         manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), new RString("NinteiShinseiJoho.CSV"));
+        personalDataList = new ArrayList<>();
     }
 
     @Override
@@ -79,12 +87,14 @@ public class DbT5101DensanTempOutputProcess extends BatchProcessBase<DbT5101Temp
     @Override
     protected void process(DbT5101TempEntity entity) {
         eucCsvWriter.writeLine(new RenkeiDataTorikomiBusiness().setDbT5101TempEUCEntity(entity));
+        personalDataList.add(toPersonalData(entity.get保険者番号(), entity.get被保険者番号()));
     }
 
     @Override
     protected void afterExecute() {
         eucCsvWriter.close();
-        manager.spool(eucFilePath);
+        AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+        manager.spool(eucFilePath, accessLogUUID);
         outputJokenhyoFactory();
     }
 
@@ -100,6 +110,11 @@ public class DbT5101DensanTempOutputProcess extends BatchProcessBase<DbT5101Temp
                 new RenkeiDataTorikomiBusiness().get出力件数(new Decimal(eucCsvWriter.getCount())),
                 new RenkeiDataTorikomiBusiness().get出力条件(processParamter));
         OutputJokenhyoFactory.createInstance(item).print();
+    }
+    
+    private PersonalData toPersonalData(RString 証記載保険者番号, RString 被保険者番号) {
+        ShikibetsuCode shikibetsuCode = new ShikibetsuCode(証記載保険者番号.substring(0, 5).concat(被保険者番号));
+        return PersonalData.of(shikibetsuCode);
     }
 
 }
