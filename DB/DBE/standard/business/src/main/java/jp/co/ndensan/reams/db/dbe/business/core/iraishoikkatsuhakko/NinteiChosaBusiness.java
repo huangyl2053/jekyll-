@@ -281,7 +281,7 @@ public class NinteiChosaBusiness {
                 entity.get調査員氏名(),
                 entity.get被保険者番号(),
                 entity.get認定申請年月日(),
-                NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分_申請時_コード()).get名称(),
+                NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分_申請時_コード()).get略称(),
                 entity.get被保険者氏名(),
                 entity.get被保険者氏名カナ(),
                 Seibetsu.toValue(entity.get性別()).get名称(),

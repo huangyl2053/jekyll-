@@ -664,7 +664,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
         for (ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business : list) {
             RString 認定申請区分 = business.get認定申請区分_申請時_コード();
             if (!RString.isNullOrEmpty(認定申請区分)) {
-                認定申請区分 = NinteiShinseiShinseijiKubunCode.toValue(認定申請区分).get名称();
+                認定申請区分 = NinteiShinseiShinseijiKubunCode.toValue(認定申請区分).get略称();
             }
             ChosaIraiIchiranhyoBodyItem item = new ChosaIraiIchiranhyoBodyItem(
                     div.getTxtHakkoYMD().getValue().wareki().eraType(EraType.KANJI).
