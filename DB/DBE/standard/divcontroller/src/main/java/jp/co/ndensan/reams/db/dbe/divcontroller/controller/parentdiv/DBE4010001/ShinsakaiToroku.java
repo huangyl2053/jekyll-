@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE4010001;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshoiraitaishoichiran.ShinseishoKanriNoList;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4010001.DBE4010001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4010001.DBE4010001TransitionEventName;
@@ -26,6 +28,7 @@ import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.accesslog.ExpandedInformations;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -134,7 +137,7 @@ public class ShinsakaiToroku {
      */
     public IDownLoadServletResponse onClick_btnRyooutput(ShinsakaiTorokuDiv div, IDownLoadServletResponse response) {
         FileSpoolManager manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, CSVファイルID_審査会登録一覧, UzUDE0831EucAccesslogFileType.Csv);
-        List<PersonalData> personalDataList = new ArrayList<>();
+        Set<PersonalData> personalDataList = new HashSet<>();
         RString spoolWorkPath = manager.getEucOutputDirectry();
         RString 出力名 = EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, CSVファイルID_審査会登録一覧);
         RString filePath = Path.combinePath(spoolWorkPath, 出力名);
@@ -149,23 +152,23 @@ public class ShinsakaiToroku {
             List<dgNinteiTaskList_Row> dataList = div.getDgNinteiTaskList().getSelectedItems();
             for (dgNinteiTaskList_Row row : dataList) {
                 csvWriter.writeLine(getCsvData(row));
-                personalDataList.add(toPersonalData(row.getShoKisaiHokenshaNo(), row.getHihoNumber(), row.getShinseishoKanriNo()));
+                personalDataList.add(toPersonalData(row.getShoKisaiHokenshaNo(), row.getHihoNumber(), row.getShinseishoKanriNo()).get());
             }
             csvWriter.close();
         }
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(出力名));
         sfd = SharedFile.defineSharedFile(sfd);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
-        AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
-        manager.spool(filePath, accessLogUUID);
+        Optional<AccessLogUUID> optionalAccessLogUUID = Optional.of(AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList));
+        manager.spool(filePath, optionalAccessLogUUID.get());
         SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
         return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, 出力名), response);
     }
     
-    private PersonalData toPersonalData(RString 証記載保険者番号, RString 被保険者番号, RString 申請書管理番号) {
+    private Optional<PersonalData> toPersonalData(RString 証記載保険者番号, RString 被保険者番号, RString 申請書管理番号) {
         ShikibetsuCode shikibetsuCode = new ShikibetsuCode(証記載保険者番号.substring(0, 5).concat(被保険者番号));
         ExpandedInformation expandedInformation = ExpandedInformations.申請書管理番号.fromValue(申請書管理番号);
-        return PersonalData.of(shikibetsuCode, expandedInformation);
+        return Optional.of(PersonalData.of(shikibetsuCode, expandedInformation));
     }
 
     /**
