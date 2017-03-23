@@ -363,7 +363,7 @@ public class NinteiChosaJohohyo52EntityEditor {
             サービス区分リスト.add(RString.EMPTY);
             サービス区分リスト.add(RString.EMPTY);
             サービス区分リスト.add(RString.EMPTY);
-            サービス区分リスト.add(RString.EMPTY);
+            サービス区分リスト.add(new RString("なし"));
         } else {
             サービス区分リスト.add(new RString(getサービス状況02(認定調査票サービス状況List, 0)));
             サービス区分リスト.add(new RString(getサービス状況02(認定調査票サービス状況List, 連番1)));
