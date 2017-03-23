@@ -43,10 +43,8 @@
         ON			T5202."shinseishoKanriNo"=T5601."shinseishoKanriNo"
         AND			T5202."ninteichosaRirekiNo"=T5601."ninteichosaIraiRirekiNo"
         AND			T5202."gaikyoChosaTextImageKubun"=#{テキストイメージ区分}
-        <if test="!isKoiki">
         INNER JOIN	rgdb."DbT7051KoseiShichosonMaster" AS  T7051
         ON			T7051."shoKisaiHokenshaNo"=T5101."shoKisaiHokenshaNo"            
-        </if>
         INNER JOIN	rgdb."DbT5913ChosainJoho" AS  T5913
         ON			SUBSTR(T5913."shichosonCode", 1, 5)=SUBSTR(T5101."shoKisaiHokenshaNo", 1, 5)
         AND			T5913."ninteiChosaItakusakiCode"=T5601."ninteichosaItakusakiCode"
