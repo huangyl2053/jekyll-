@@ -67,14 +67,6 @@ public final class OcrTorikomiResult {
         return seireki.separator(Separator.SLASH).fillType(FillType.NONE).toDateString();
     }
 
-    PersonalData toPersonalData() {
-        return PersonalData.of(ShikibetsuCode.EMPTY, // TODO 何を指定するのか？？？
-                ExpandedInformations.証記載保険者番号.fromValue(this.key.get被保険者番号()),
-                ExpandedInformations.被保険者番号.fromValue(this.key.get被保険者番号()),
-                ExpandedInformations.申請書管理番号.fromValue(RString.EMPTY) //TOOD 申請書管理番号
-        );
-    }
-
     /**
      * {@link OcrTorikomiResult}を生成します。
      */
