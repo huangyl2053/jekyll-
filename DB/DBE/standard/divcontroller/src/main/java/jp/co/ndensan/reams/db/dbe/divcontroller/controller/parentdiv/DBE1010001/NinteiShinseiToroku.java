@@ -349,13 +349,15 @@ public class NinteiShinseiToroku {
             if (!has審査会割付データ && (manager.has意見書依頼データ(管理番号) || manager.has調査依頼データ(管理番号))) {
                 div.getCcdShozokuShichoson().setDdlDisabled(true);
             }
-            if (!has審査会割付データ && manager.has意見書依頼データ(管理番号) && manager.has調査依頼データ(管理番号)) {
+            if (!has審査会割付データ && !manager.has意見書依頼データ(管理番号) && !manager.has調査依頼データ(管理番号)) {
                 div.getCcdShozokuShichoson().setDdlDisabled(false);
             }
             if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
                 div.setReadOnly(true);
                 setBtnUpdateDisableTrue();
                 return ResponseData.of(div).rootTitle(審査依頼受付).addValidationMessages(validationMessages).respond();
+            } else {
+                 CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNUPDATE_FILENAME, false);
             }
             return ResponseData.of(div).rootTitle(審査依頼受付).respond();
         }

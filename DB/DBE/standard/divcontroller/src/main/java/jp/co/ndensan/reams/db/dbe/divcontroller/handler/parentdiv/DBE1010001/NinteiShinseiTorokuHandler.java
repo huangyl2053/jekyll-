@@ -608,10 +608,10 @@ public class NinteiShinseiTorokuHandler {
         div.getRadMode().setDisabled(true);
         div.getPnlShinseishaJoho().setReadOnly(true);
         div.getPnlEnki().setReadOnly(true);
-        div.getPnlNinteiShinseiDetail().getCcdKaigoNinteiShinseiKihon().setReadOnly(true);
-        div.getPnlNinteiShinseiDetail().getCcdShinseiTodokedesha().setReadOnly(true);
+        div.getPnlNinteiShinseiDetail().getCcdKaigoNinteiShinseiKihon().setDisabled(true);
+        div.getPnlNinteiShinseiDetail().getCcdShinseiTodokedesha().setDisabled(true);
         div.getPnlNinteiShinseiDetail().getServiceDel().setReadOnly(true);
-        div.getPnlNinteiShinseiDetail().getSinseiTorisage().setReadOnly(true);
+        div.getPnlNinteiShinseiDetail().getSinseiTorisage().setDisabled(true);
         div.getPnlNinteiShinseiDetail().getCcdZenkaiNinteiKekkaJoho().setReadOnly(true);
         div.getPnlNinteiShinseiDetail().getCcdNinteiInput().setReadOnly(true);
         div.getPnlNinteiShinseiDetail().getCcdShinseiSonotaJohoInput().setReadOnly(true);
@@ -619,8 +619,8 @@ public class NinteiShinseiTorokuHandler {
         div.getPnlNinteiShinseiDetail().getShisetsuJoho().setReadOnly(true);
         div.getPnlNinteiShinseiDetail().getChkNinteiTsuchishoDoi().setReadOnly(true);
         div.getPnlNinteiShinseiDetail().getChkJohoTeikyoDoi().setReadOnly(true);
-        div.getPnlNinteiShinseiDetail().getDdlShinsakaiYusenKubun().setReadOnly(true);
-        div.getPnlNinteiShinseiDetail().getDdlWariateKubun().setReadOnly(true);
+        div.getPnlNinteiShinseiDetail().getDdlShinsakaiYusenKubun().setDisabled(true);
+        div.getPnlNinteiShinseiDetail().getDdlWariateKubun().setDisabled(true);
         div.getPnlNinteiShinseiDetail().getCcdShujiiIryokikanAndShujiiInput().getBtnIryokikanGuide().setDisabled(true);
         div.getPnlNinteiShinseiDetail().getCcdShujiiIryokikanAndShujiiInput().getBtnShujiiGuide().setDisabled(true);
         div.getPnlNinteiShinseiDetail().getCcdShujiiIryokikanAndShujiiInput().getTxtIryoKikanCode().setDisabled(true);

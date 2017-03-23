@@ -50,6 +50,7 @@ public class NinteiShinseiTodokedeshaHandler {
      * @param model NinteiShinseiTodokedeshaDataPassModel
      */
     public void initialize(NinteiShinseiTodokedeshaDataPassModel model) {
+        div.getDdlShinseiKankeisha().setDisabled(true);
         div.getTxtHonninKankeisei().clearValue();
         div.getCcdShisetsuJohoCommonChildDiv().getTxtNyuryokuShisetsuKodo().clearValue();
         div.getCcdShisetsuJohoCommonChildDiv().getTxtNyuryokuShisetsuMeisho().clearValue();
@@ -91,6 +92,7 @@ public class NinteiShinseiTodokedeshaHandler {
             if (ShinseiTodokedeDaikoKubunCode.代行.getCode().equals(model.get申請届出代行区分コード())) {
                 div.getCcdShisetsuJohoCommonChildDiv().setDisabled(false);
                 div.getDdlShinseiKankeisha().setReadOnly(false);
+                div.getDdlShinseiKankeisha().setDisabled(false);
                 div.getCcdShisetsuJohoCommonChildDiv().getTxtNyuryokuShisetsuKodo().setValue(model.get申請届出代行事業者番号());
                 //div.getCcdShisetsuJohoCommonChildDiv().getTxtNyuryokuShisetsuMeisho().setValue(model.get申請届出代行事業者名称());
             }
