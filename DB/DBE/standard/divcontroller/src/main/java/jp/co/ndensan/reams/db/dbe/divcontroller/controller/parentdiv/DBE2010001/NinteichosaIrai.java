@@ -186,10 +186,10 @@ public class NinteichosaIrai {
 
                 csvWriter.writeLine(getCsvData(row));
 
-                Optional<PersonalData> personalData = getHandler(requestDiv).getPersonalData(row.getGetShoKisaiHokenshaNo(), row.getHokensha());
+                Optional<PersonalData> personalData = getHandler(requestDiv).getPersonalData(row.getGetShoKisaiHokenshaNo(), row.getHokenshaCode());
                 personalDataList.add(personalData.get());
             }
-            AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Excel, personalDataList);
+            AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
             spoolManager.spool(filePath, accessLogUUID);
             csvWriter.close();
         }
