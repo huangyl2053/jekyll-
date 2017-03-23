@@ -186,17 +186,22 @@ public class JogaiShinsainJoho {
                 && !div.getDgShinsakaiIinIchiran().getClickedItem().getState().isNull()
                 && !div.getDgShinsakaiIinIchiran().getClickedItem().getState().isEmpty()) {
             if (div.getDgShinsakaiIinIchiran().getClickedItem().getState().equals(_状態.追加.get状態())) {
-                if (!ResponseHolder.isReRequest()) {
-                    QuestionMessage message = new QuestionMessage(UrQuestionMessages.削除の確認.getMessage().getCode(),
-                            UrQuestionMessages.削除の確認.getMessage().evaluate());
-                    return ResponseData.of(div).addMessage(message).respond();
-                }
-                if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode())
-                        .equals(ResponseHolder.getMessageCode())
-                        && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                    List<dgShinsakaiIinIchiran_Row> rowList = div.getDgShinsakaiIinIchiran().getDataSource();
-                    rowList.remove(div.getDgShinsakaiIinIchiran().getClickedRowId());
-                    div.getDgShinsakaiIinIchiran().setDataSource(rowList);
+                if (div.getShinsakaiIinJoho().getHdnState().equals(_状態.削除.get状態())) {
+                    if (!ResponseHolder.isReRequest()) {
+                        QuestionMessage message = new QuestionMessage(UrQuestionMessages.削除の確認.getMessage().getCode(),
+                                UrQuestionMessages.削除の確認.getMessage().evaluate());
+                        return ResponseData.of(div).addMessage(message).respond();
+                    }
+                    if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode())
+                            .equals(ResponseHolder.getMessageCode())
+                            && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                        List<dgShinsakaiIinIchiran_Row> rowList = div.getDgShinsakaiIinIchiran().getDataSource();
+                        rowList.remove(div.getDgShinsakaiIinIchiran().getClickedRowId());
+                        div.getDgShinsakaiIinIchiran().setDataSource(rowList);
+                        updateFlag = true;
+                    }
+                } else if (div.getShinsakaiIinJoho().getHdnState().equals(_状態.追加.get状態())) {
+                    getHandler(div).onClick_btnToroku();
                     updateFlag = true;
                 }
             } else if (div.getDgShinsakaiIinIchiran().getClickedItem().getState().equals(_状態.削除.get状態())) {

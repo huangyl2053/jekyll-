@@ -477,10 +477,11 @@ public class NinteichosaIraiHandler {
      *
      * @param 証記載保険者番号 RString
      * @param 被保険者番号 RString
+     * @param 申請書管理番号 RString
      * @return PersonalData
      */
-    public Optional<PersonalData> getPersonalData(RString 証記載保険者番号, RString 被保険者番号) {
+    public Optional<PersonalData> getPersonalData(RString 証記載保険者番号, RString 被保険者番号, RString 申請書管理番号) {
         return Optional.of(PersonalData.of(new ShikibetsuCode(証記載保険者番号.substring(0, 5).concat(被保険者番号)),
-                ExpandedInformations.被保険者番号.fromValue(被保険者番号)));
+                ExpandedInformations.申請書管理番号.fromValue(申請書管理番号)));
     }
 }

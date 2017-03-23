@@ -92,8 +92,8 @@ public class ShujiiIkensho5komokuEditor implements IShujiiIkensho5komokuEditor {
             source.listIkengokomoku_14 = get食事行為(item.get食事行為());
         }
         source.listIkengokomoku_15 = get記載有無(source);
-        source.shikibetuCode = ShikibetsuCode.EMPTY;
-
+        source.shikibetuCode = new ShikibetsuCode("000");
+        source.hokenshaNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),new RString("1234325"));
         return edit2(source);
     }
 

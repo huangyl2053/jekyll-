@@ -186,7 +186,7 @@ public class NinteichosaIrai {
 
                 csvWriter.writeLine(getCsvData(row));
 
-                Optional<PersonalData> personalData = getHandler(requestDiv).getPersonalData(row.getGetShoKisaiHokenshaNo(), row.getHokenshaCode());
+                Optional<PersonalData> personalData = getHandler(requestDiv).getPersonalData(row.getGetShoKisaiHokenshaNo(), row.getHokenshaCode(), row.getShinseishoKanriNo());
                 personalDataList.add(personalData.get());
             }
             AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
