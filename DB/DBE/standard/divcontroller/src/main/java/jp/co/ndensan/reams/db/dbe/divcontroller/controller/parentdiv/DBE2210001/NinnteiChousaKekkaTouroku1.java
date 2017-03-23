@@ -670,14 +670,33 @@ public class NinnteiChousaKekkaTouroku1 {
      * @return レスポンスデータ
      */
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onClick_btnIchijiHanteiValidate(NinnteiChousaKekkaTouroku1Div div) {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        IchijiHanteiKekkaJohoSearchManager manager = IchijiHanteiKekkaJohoSearchManager.createIntance();
-        div.setIchijiHanteiArgument(manager.get一次判定引数(申請書管理番号));
-        validationMessages.add(getValidationHandler().validate一次判定引数(div));
-        if (validationMessages.existsError()) {
-            return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        getValidationHandler().validateFor第1群の必須入力(pairs, div);
+        getValidationHandler().validateFor第2群の必須入力(pairs, div);
+        getValidationHandler().validateFor第3群の必須入力(pairs, div);
+        getValidationHandler().validateFor第4群の必須入力(pairs, div);
+        getValidationHandler().validateFor第5群の必須入力(pairs, div);
+        getValidationHandler().validateFor生活自立度の必須入力(pairs, div);
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
+
+        IchijiHanteiKekkaJohoSearchManager manager = IchijiHanteiKekkaJohoSearchManager.createIntance();
+
+        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+        ArrayList<KihonChosaInput> 第1群List = ViewStateHolder.get(ViewStateKeys.第一群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第2群List = ViewStateHolder.get(ViewStateKeys.第二群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第3群List = ViewStateHolder.get(ViewStateKeys.第三群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第4群List = ViewStateHolder.get(ViewStateKeys.第四群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第5群List = ViewStateHolder.get(ViewStateKeys.第五群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 特別な医療List = ViewStateHolder.get(ViewStateKeys.第六群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 自立度List = ViewStateHolder.get(ViewStateKeys.第七群認定調査基本情報リスト, ArrayList.class);
+        RString hanteiArgument = manager.get一次判定引数(申請書管理番号, 第1群List, 第2群List, 第3群List,
+                第4群List, 第5群List, 特別な医療List, 自立度List);
+
+        div.setIchijiHanteiArgument(hanteiArgument);
+
         return ResponseData.of(div).respond();
     }
 
