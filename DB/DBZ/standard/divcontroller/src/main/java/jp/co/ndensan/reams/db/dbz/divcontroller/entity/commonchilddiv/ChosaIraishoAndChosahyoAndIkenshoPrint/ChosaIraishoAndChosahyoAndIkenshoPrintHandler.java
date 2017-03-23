@@ -36,7 +36,6 @@ import jp.co.ndensan.reams.db.dbz.business.report.shujiiikenshosakusei.ShujiiIke
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosa.ChohyoAtesakiKeisho;
 import jp.co.ndensan.reams.db.dbz.definition.core.gamensenikbn.GamenSeniKbn;
-import jp.co.ndensan.reams.db.dbz.definition.core.ikenshosakuseiryo.IkenshoSakuseiRyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping09A;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping09B;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
@@ -53,13 +52,16 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.Sakuseir
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.RensakusakiTsuzukigara;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ShujiiIkenshoHoshuTankaParameter;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.ikenshoprint.ShujiiIkenshoHoshuTankaEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteiShinseiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.kaigiatesakijushosettei.KaigoAtesakiJushoSetteiFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.teikeibunhenkan.KaigoTextHenkanRuleCreator;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.business.core.teikeibunhenkan.ITextHenkanRule;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -1396,6 +1398,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
         List<ShujiiIkenshoSakuseiRyoSeikyushoItem> itemList = new ArrayList<>();
         RString 作成料印字 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成料請求書_作成料_印字有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援,
                 div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
+        ShujiiIkenshoHoshuTankaParameter param = ShujiiIkenshoHoshuTankaParameter.createParameter();
+        List<ShujiiIkenshoHoshuTankaEntity> 意見書作成料リスト = ChosaIraishoAndChosahyoAndIkenshoPrintFinder.createInstance().get主治医意見書作成料報酬単価(param);
         for (dgShujiiIkensho_Row row : div.getDgShujiiIkensho().getDataSource()) {
             ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter
                     = ChosaIraishoAndChosahyoAndIkenshoPrintParameter.createParameter(row.getShinseishoKanriNo());
@@ -1408,10 +1412,21 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 item.setGengo(div.getTxtHakkoYMD().getValue().wareki().eraType(EraType.KANJI).
                         firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
                 item.setAtesakiHokenshaName(business.get保険者名());
-                item.setShinkiZaitakuKingaku(IkenshoSakuseiRyo.toValue(IKENSHOSAKUSEIRYO_11).get名称());
-                item.setShinkiShisetsuKingaku(IkenshoSakuseiRyo.toValue(IKENSHOSAKUSEIRYO_12).get名称());
-                item.setKeizokuZaitakuKingaku(IkenshoSakuseiRyo.toValue(IKENSHOSAKUSEIRYO_21).get名称());
-                item.setKeizokuShisetsuKingaku(IkenshoSakuseiRyo.toValue(IKENSHOSAKUSEIRYO_22).get名称());
+                for (ShujiiIkenshoHoshuTankaEntity 意見書作成料 : 意見書作成料リスト) {
+                    if (new Code("1").equals(意見書作成料.getZaitakuShisetsuKubun())) {
+                        if (new Code("1").equals(意見書作成料.getIkenshoSakuseiKaisuKubun())) {
+                            item.setShinkiZaitakuKingaku(new RString(意見書作成料.getTanka().toString()));
+                        } else if (new Code("2").equals(意見書作成料.getIkenshoSakuseiKaisuKubun())) {
+                            item.setShinkiShisetsuKingaku(new RString(意見書作成料.getTanka().toString()));
+                        }
+                    } else if (new Code("2").equals(意見書作成料.getZaitakuShisetsuKubun())) {
+                        if (new Code("1").equals(意見書作成料.getIkenshoSakuseiKaisuKubun())) {
+                            item.setKeizokuZaitakuKingaku(new RString(意見書作成料.getTanka().toString()));
+                        } else if (new Code("2").equals(意見書作成料.getIkenshoSakuseiKaisuKubun())) {
+                            item.setKeizokuShisetsuKingaku(new RString(意見書作成料.getTanka().toString()));
+                        }
+                    }
+                }
                 List<RString> 保険者番号リスト = get被保険者番号(business.get被保険者番号());
                 item.setHihokenshaNo1(保険者番号リスト.get(0));
                 item.setHihokenshaNo2(保険者番号リスト.get(1));

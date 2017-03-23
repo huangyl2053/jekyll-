@@ -784,4 +784,33 @@
         A."shinseishoKanriNo" = #{申請書管理番号}
         AND A."logicalDeletedFlag" = FALSE
     </select>
+    
+    <resultMap id="ResultMap_ShujiiIkenshoHoshuTankaEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.ikenshoprint.ShujiiIkenshoHoshuTankaEntity" autoMapping="true">
+        <id property="zaitakuShisetsuKubun" column="zaitakuShisetsuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <id property="ikenshoSakuseiKaisuKubun" column="ikenshoSakuseiKaisuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <id property="kaishiYM" column="kaishiYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="shuryoYM" column="shuryoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
+        <result property="tanka" column="tanka" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler"/>
+    </resultMap>
+    <select resultOrdered="true" id="select主治医意見書作成料報酬単価" resultMap="ResultMap_ShujiiIkenshoHoshuTankaEntity"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ShujiiIkenshoHoshuTankaParameter" fetchSize="500">
+        SELECT
+        "zaitakuShisetsuKubun",
+        "ikenshoSakuseiKaisuKubun",
+        "kaishiYM",
+        "shuryoYM",
+        "tanka"
+        FROM
+        rgdb."DbT5032ShujiiIkenshoHoshuTanka"
+        WHERE
+        "kaishiYM" <![CDATA[<]]> #{基準年月}
+        AND #{基準年月} <![CDATA[<]]> "shuryoYM"
+        <if test="is区分指定">
+            AND "zaitakuShisetsuKubun" = #{在宅施設区分}
+            AND "ikenshoSakuseiKaisuKubun" = #{意見書作成回数区分}
+        </if>
+        ORDER BY
+        "zaitakuShisetsuKubun",
+        "ikenshoSakuseiKaisuKubun"
+    </select>
 </mapper>

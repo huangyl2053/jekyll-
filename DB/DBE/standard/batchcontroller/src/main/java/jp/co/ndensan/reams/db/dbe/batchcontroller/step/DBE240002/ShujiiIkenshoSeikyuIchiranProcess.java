@@ -14,6 +14,10 @@ import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.ShujiiIkenshoProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshoseikyuichiran.ShujiiIkenshoSeikyuIchiranReportSource;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.SakuseiryoSeikyuKubun;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ShujiiIkenshoHoshuTankaParameter;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.ikenshoprint.ShujiiIkenshoHoshuTankaEntity;
+import jp.co.ndensan.reams.db.dbz.service.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintFinder;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
@@ -23,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
@@ -67,8 +72,25 @@ public class ShujiiIkenshoSeikyuIchiranProcess extends BatchProcessBase<ShujiiIk
 
     @Override
     protected void process(ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity entity) {
+        RString 在宅施設区分 = RString.EMPTY;
+        RString 回数区分 = RString.EMPTY;
+        if (new Code(SakuseiryoSeikyuKubun.在宅新規.getコード()).equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
+            在宅施設区分 = new RString("1");
+            回数区分 = new RString("1");
+        } else if (new Code(SakuseiryoSeikyuKubun.施設新規.getコード()).equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
+            在宅施設区分 = new RString("2");
+            回数区分 = new RString("1");
+        } else if (new Code(SakuseiryoSeikyuKubun.在宅継続.getコード()).equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
+            在宅施設区分 = new RString("1");
+            回数区分 = new RString("2");
+        } else if (new Code(SakuseiryoSeikyuKubun.施設継続.getコード()).equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
+            在宅施設区分 = new RString("2");
+            回数区分 = new RString("2");
+        }
+        ShujiiIkenshoHoshuTankaParameter param = ShujiiIkenshoHoshuTankaParameter.createParameter(在宅施設区分, 回数区分);
+        List<ShujiiIkenshoHoshuTankaEntity> 意見書作成料リスト = ChosaIraishoAndChosahyoAndIkenshoPrintFinder.createInstance().get主治医意見書作成料報酬単価(param);
         ShujiiIkenshoSeikyuIchiranReport report = new ShujiiIkenshoSeikyuIchiranReport(new ShujiiIkenshoBusiness(entity, processParamter)
-                .setDBE013006Entity(), index++);
+                .setDBE013006Entity(意見書作成料リスト), index++);
         report.writeBy(reportSourceWriter);
     }
 

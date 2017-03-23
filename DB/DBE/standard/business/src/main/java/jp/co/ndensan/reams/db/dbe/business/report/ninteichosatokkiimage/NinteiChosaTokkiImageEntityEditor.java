@@ -227,23 +227,38 @@ public final class NinteiChosaTokkiImageEntityEditor {
         set概況特記事項(ninteiChosaTokkiImageEntity, path, 特記事項マスキング区分);
         for (int i = 0; i < 特記事項区分.size(); i++) {
             RString fileName = get共有ファイル(get特記事項番号(特記事項区分, i), entity.get厚労省IF識別コード());
-//            RString fileFullPath = RString.EMPTY;
-            for (int currentNumber = 0; currentNumber <= 最大共有ファイル下二桁; currentNumber++) {
-                RString currentFileName = fileName.concat(new RString(String.format("%02d", currentNumber))).concat(拡張子_PNG);
-                RString currentFilefullPath = getFilePath(path, currentFileName);
-                if (!RString.isNullOrEmpty(currentFilefullPath)) {
-                    boolean hasMask = !getFilePath(path, currentFileName.replace(拡張子_PNG.toString(), "_BAK.png")).isEmpty();
-                    if (マスキングあり.equals(特記事項マスキング区分) && hasMask) {
-                        特記事項リスト4.add(currentFilefullPath);
-                    } else if (マスキングあり.equals(特記事項マスキング区分) && !hasMask) {
-                        特記事項リスト4.add(RString.EMPTY);
-                    } else if (!マスキングあり.equals(特記事項マスキング区分) && hasMask) {
-                        特記事項リスト4.add(currentFilefullPath.replace(拡張子_PNG.toString(), "_BAK.png"));
-                    } else if (!マスキングあり.equals(特記事項マスキング区分) && !hasMask) {
-                        特記事項リスト4.add(currentFilefullPath);
-                    }
+            int remban = Integer.parseInt(get特記事項連番(特記事項区分, i).toString());
+            RString imageFileName = convertImageFileName(fileName, remban);
+            RString currentFilefullPath = getFilePath(path, imageFileName);
+            if (!RString.isNullOrEmpty(currentFilefullPath)) {
+                boolean hasMask = !getFilePath(path, imageFileName.replace(拡張子_PNG.toString(), "_BAK.png")).isEmpty();
+                if (マスキングあり.equals(特記事項マスキング区分) && hasMask) {
+                    特記事項リスト4.add(currentFilefullPath);
+                } else if (マスキングあり.equals(特記事項マスキング区分) && !hasMask) {
+                    特記事項リスト4.add(RString.EMPTY);
+                } else if (!マスキングあり.equals(特記事項マスキング区分) && hasMask) {
+                    特記事項リスト4.add(currentFilefullPath.replace(拡張子_PNG.toString(), "_BAK.png"));
+                } else if (!マスキングあり.equals(特記事項マスキング区分) && !hasMask) {
+                    特記事項リスト4.add(currentFilefullPath);
                 }
             }
+//            RString fileFullPath = RString.EMPTY;
+//            for (int currentNumber = 0; currentNumber <= 最大共有ファイル下二桁; currentNumber++) {
+//                RString currentFileName = fileName.concat(new RString(String.format("%02d", currentNumber))).concat(拡張子_PNG);
+//                RString currentFilefullPath = getFilePath(path, currentFileName);
+//                if (!RString.isNullOrEmpty(currentFilefullPath)) {
+//                    boolean hasMask = !getFilePath(path, currentFileName.replace(拡張子_PNG.toString(), "_BAK.png")).isEmpty();
+//                    if (マスキングあり.equals(特記事項マスキング区分) && hasMask) {
+//                        特記事項リスト4.add(currentFilefullPath);
+//                    } else if (マスキングあり.equals(特記事項マスキング区分) && !hasMask) {
+//                        特記事項リスト4.add(RString.EMPTY);
+//                    } else if (!マスキングあり.equals(特記事項マスキング区分) && hasMask) {
+//                        特記事項リスト4.add(currentFilefullPath.replace(拡張子_PNG.toString(), "_BAK.png"));
+//                    } else if (!マスキングあり.equals(特記事項マスキング区分) && !hasMask) {
+//                        特記事項リスト4.add(currentFilefullPath);
+//                    }
+//                }
+//            }
 //            if (!RString.isNullOrEmpty(fileFullPath)) {
 //                if (!マスキングあり.equals(特記事項マスキング区分)) {
 //                    特記事項リスト4.add(fileFullPath);
@@ -253,6 +268,14 @@ public final class NinteiChosaTokkiImageEntityEditor {
 //            }
         }
         ninteiChosaTokkiImageEntity.set特記事項リストイメージ(特記事項リスト4);
+    }
+
+    private static RString convertImageFileName(RString baseFileName, int remban) {
+        int imageFileNameRemban = remban - 1;
+        RStringBuilder imageFileName = new RStringBuilder(baseFileName);
+        imageFileName.append(new RString(imageFileNameRemban).padZeroToLeft(2));
+        imageFileName.append(拡張子_PNG);
+        return imageFileName.toRString();
     }
 
     private static RString get特記事項番号(List<NinteichosaRelate> 特記事項区分, int 連番, YokaigoNinteiJohoTeikyoEntity entity) {
@@ -585,9 +608,8 @@ public final class NinteiChosaTokkiImageEntityEditor {
     }
 
     private static RString get特記事項4(RString 特記事項番号, RString 厚労省IF識別コード) {
-        RString imageName = RString.EMPTY;
+        RString imageName = get特記事項401(特記事項番号, 厚労省IF識別コード);
         RStringBuilder builder = new RStringBuilder();
-        builder.append(get特記事項401(特記事項番号, 厚労省IF識別コード));
         if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(厚労省IF識別コード)) {
             if (特記事項番号_4011.equals(特記事項番号)) {
                 builder.append(new RString("C3042-"));
