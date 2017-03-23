@@ -99,47 +99,65 @@ public class JohoTeikyoIsshikiTokkiText1A4Builder implements IJohoTeikyoIsshikiB
         }
         if (entity.get特記事項イメージリスト() != null && !entity.get特記事項イメージリスト().isEmpty()) {
             source.listChosa_1 = getイメージ01();
-            source.tokkiImg1 = getイメージ03(entity.get特記事項イメージリスト(), 連番_0);
-            source.tokkiImg2 = getイメージ03(entity.get特記事項イメージリスト(), 連番_1);
-            source.tokkiImg3 = getイメージ03(entity.get特記事項イメージリスト(), 連番_2);
-            source.tokkiImg4 = getイメージ03(entity.get特記事項イメージリスト(), 連番_3);
-            source.tokkiImg5 = getイメージ03(entity.get特記事項イメージリスト(), 連番_4);
-            source.tokkiImg6 = getイメージ03(entity.get特記事項イメージリスト(), 連番_5);
-            source.tokkiImg7 = getイメージ03(entity.get特記事項イメージリスト(), 連番_6);
-            source.tokkiImg8 = getイメージ03(entity.get特記事項イメージリスト(), 連番_7);
-            source.tokkiImg9 = getイメージ03(entity.get特記事項イメージリスト(), 連番_8);
-            source.tokkiImg10 = getイメージ03(entity.get特記事項イメージリスト(), 連番_9);
-            source.tokkiImg11 = getイメージ03(entity.get特記事項イメージリスト(), 連番_10);
-            source.tokkiImg12 = getイメージ03(entity.get特記事項イメージリスト(), 連番_11);
-            source.tokkiImg13 = getイメージ03(entity.get特記事項イメージリスト(), 連番_12);
-            source.tokkiImg14 = getイメージ03(entity.get特記事項イメージリスト(), 連番_13);
-            source.tokkiImg15 = getイメージ03(entity.get特記事項イメージリスト(), 連番_14);
+            source.tokkiImg1 = getイメージ03(entity.get特記事項イメージリスト(), (count / 30) * 15 + 連番_0);
+            source.tokkiImg2 = getイメージ03(entity.get特記事項イメージリスト(), (count / 30) * 15 + 連番_1);
+            source.tokkiImg3 = getイメージ03(entity.get特記事項イメージリスト(), (count / 30) * 15 + 連番_2);
+            source.tokkiImg4 = getイメージ03(entity.get特記事項イメージリスト(), (count / 30) * 15 + 連番_3);
+            source.tokkiImg5 = getイメージ03(entity.get特記事項イメージリスト(), (count / 30) * 15 + 連番_4);
+            source.tokkiImg6 = getイメージ03(entity.get特記事項イメージリスト(), (count / 30) * 15 + 連番_5);
+            source.tokkiImg7 = getイメージ03(entity.get特記事項イメージリスト(), (count / 30) * 15 + 連番_6);
+            source.tokkiImg8 = getイメージ03(entity.get特記事項イメージリスト(), (count / 30) * 15 + 連番_7);
+            source.tokkiImg9 = getイメージ03(entity.get特記事項イメージリスト(), (count / 30) * 15 + 連番_8);
+            source.tokkiImg10 = getイメージ03(entity.get特記事項イメージリスト(), (count / 30) * 15 + 連番_9);
+            source.tokkiImg11 = getイメージ03(entity.get特記事項イメージリスト(), (count / 30) * 15 + 連番_10);
+            source.tokkiImg12 = getイメージ03(entity.get特記事項イメージリスト(), (count / 30) * 15 + 連番_11);
+            source.tokkiImg13 = getイメージ03(entity.get特記事項イメージリスト(), (count / 30) * 15 + 連番_12);
+            source.tokkiImg14 = getイメージ03(entity.get特記事項イメージリスト(), (count / 30) * 15 + 連番_13);
+            source.tokkiImg15 = getイメージ03(entity.get特記事項イメージリスト(), (count / 30) * 15 + 連番_14);
         }
-        if (entity.get特記事項番号リスト() != null && !entity.get特記事項番号リスト().isEmpty()) {
-            source.listChosa1_1 = getイメージ02();
+        if (entity.get特記事項リスト() != null && !entity.get特記事項リスト().isEmpty()) {
+            source.listChosa1_1 = getイメージ01();
+            source.tokkiText1 = getイメージ04(entity.get特記事項リスト(), (count / 30) * 15 + 連番_0);
+            source.tokkiText2 = getイメージ04(entity.get特記事項リスト(), (count / 30) * 15 + 連番_1);
+            source.tokkiText3 = getイメージ04(entity.get特記事項リスト(), (count / 30) * 15 + 連番_2);
+            source.tokkiText4 = getイメージ04(entity.get特記事項リスト(), (count / 30) * 15 + 連番_3);
+            source.tokkiText5 = getイメージ04(entity.get特記事項リスト(), (count / 30) * 15 + 連番_4);
+            source.tokkiText6 = getイメージ04(entity.get特記事項リスト(), (count / 30) * 15 + 連番_5);
+            source.tokkiText7 = getイメージ04(entity.get特記事項リスト(), (count / 30) * 15 + 連番_6);
+            source.tokkiText8 = getイメージ04(entity.get特記事項リスト(), (count / 30) * 15 + 連番_7);
+            source.tokkiText9 = getイメージ04(entity.get特記事項リスト(), (count / 30) * 15 + 連番_8);
+            source.tokkiText10 = getイメージ04(entity.get特記事項リスト(), (count / 30) * 15 + 連番_9);
+            source.tokkiText11 = getイメージ04(entity.get特記事項リスト(), (count / 30) * 15 + 連番_10);
+            source.tokkiText12 = getイメージ04(entity.get特記事項リスト(), (count / 30) * 15 + 連番_11);
+            source.tokkiText13 = getイメージ04(entity.get特記事項リスト(), (count / 30) * 15 + 連番_12);
+            source.tokkiText14 = getイメージ04(entity.get特記事項リスト(), (count / 30) * 15 + 連番_13);
+            source.tokkiText15 = getイメージ04(entity.get特記事項リスト(), (count / 30) * 15 + 連番_14);
         }
-        List<RString> 特記事項 = new ArrayList<>();
-        RStringBuilder 特記事項builder = new RStringBuilder();
-        RString new番号 = RString.EMPTY;
-        RString old番号 = RString.EMPTY;
-        for (TokkiTextEntity tokkiTextEntity : entity.get特記事項番号リスト()) {
-            new番号 = tokkiTextEntity.get特記事項番号();
-            if (!new番号.equals(old番号)) {
-                if (!RString.isNullOrEmpty(特記事項builder.toRString())) {
-                    特記事項.add(特記事項builder.toRString());
-                }
-                特記事項builder = new RStringBuilder();
-                特記事項builder.append(tokkiTextEntity.get特記事項());
-            } else {
-                特記事項builder.append(System.lineSeparator());
-                特記事項builder.append(tokkiTextEntity.get特記事項());
-            }
-            old番号 = new番号;
-        }
-        if (new番号.equals(old番号)) {
-            特記事項.add(特記事項builder.toRString());
-        }
-        set特記事項リスト(特記事項, source);
+//        if (entity.get特記事項番号リスト() != null && !entity.get特記事項番号リスト().isEmpty()) {
+//            source.listChosa1_1 = getイメージ02();
+//        }
+//        List<RString> 特記事項 = new ArrayList<>();
+//        RStringBuilder 特記事項builder = new RStringBuilder();
+//        RString new番号 = RString.EMPTY;
+//        RString old番号 = RString.EMPTY;
+//        for (TokkiTextEntity tokkiTextEntity : entity.get特記事項番号リスト()) {
+//            new番号 = tokkiTextEntity.get特記事項番号();
+//            if (!new番号.equals(old番号)) {
+//                if (!RString.isNullOrEmpty(特記事項builder.toRString())) {
+//                    特記事項.add(特記事項builder.toRString());
+//                }
+//                特記事項builder = new RStringBuilder();
+//                特記事項builder.append(tokkiTextEntity.get特記事項());
+//            } else {
+//                特記事項builder.append(System.lineSeparator());
+//                特記事項builder.append(tokkiTextEntity.get特記事項());
+//            }
+//            old番号 = new番号;
+//        }
+//        if (new番号.equals(old番号)) {
+//            特記事項.add(特記事項builder.toRString());
+//        }
+//        set特記事項リスト(特記事項, source);
         return source;
     }
 
@@ -263,6 +281,13 @@ public class JohoTeikyoIsshikiTokkiText1A4Builder implements IJohoTeikyoIsshikiB
     private RString getイメージ03(List<TokkiTextEntity> 特記事項イメージリスト, int 連番) {
         if (連番 < 特記事項イメージリスト.size()) {
             return 特記事項イメージリスト.get(連番).get特記事項イメージ();
+        }
+        return RString.EMPTY;
+    }
+
+    private RString getイメージ04(List<TokkiTextEntity> 特記事項イメージリスト, int 連番) {
+        if (連番 < 特記事項イメージリスト.size()) {
+            return 特記事項イメージリスト.get(連番).get特記事項();
         }
         return RString.EMPTY;
     }
