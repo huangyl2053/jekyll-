@@ -55,7 +55,7 @@
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE5410001",
-     "toLayoutTitle": "要介護認定個人状況照会",
+     "toLayoutTitle": " ",
      "toState": "進捗から遷移"
     },
     {
@@ -63,7 +63,7 @@
      "type": "ordinal",
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE5410001",
-     "layoutTitle": "要介護認定個人状況照会",
+     "layoutTitle": " ",
      "eventName": "進捗状況照会に遷移する",
      "destroy": true,
      "condition": "",
@@ -77,7 +77,7 @@
      "type": "end",
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE5410001",
-     "layoutTitle": "要介護認定個人状況照会",
+     "layoutTitle": " ",
      "eventName": "処理完了",
      "destroy": false,
      "condition": ""
@@ -108,7 +108,7 @@
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE5410001",
      "toLayoutTitle": " ",
-     "toState": "default"
+     "toState": "進捗から遷移"
     }
    ]
   }
