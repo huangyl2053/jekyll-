@@ -360,15 +360,18 @@ public class ShinsaKaiKekkaToroku {
     }
 
     private RString 二次判定結果の名称(RString 厚労省IF識別コード, RString 二次判定結果コード) {
+        if (RString.isNullOrEmpty(二次判定結果コード)) {
+            return RString.EMPTY;
+        }
         if (認定ｿﾌﾄ99.equals(厚労省IF識別コード)) {
-            return YokaigoJotaiKubun99.toValue(二次判定結果コード == null ? RString.EMPTY : 二次判定結果コード).get名称();
+            return YokaigoJotaiKubun99.toValue(二次判定結果コード).get名称();
         } else if (認定ｿﾌﾄ2002.equals(厚労省IF識別コード)) {
-            return YokaigoJotaiKubun02.toValue(二次判定結果コード == null ? RString.EMPTY : 二次判定結果コード).get名称();
+            return YokaigoJotaiKubun02.toValue(二次判定結果コード).get名称();
         } else if (認定ｿﾌﾄ2006.equals(厚労省IF識別コード)) {
-            return YokaigoJotaiKubun06.toValue(二次判定結果コード == null ? RString.EMPTY : 二次判定結果コード).get名称();
+            return YokaigoJotaiKubun06.toValue(二次判定結果コード).get名称();
         } else if (認定ｿﾌﾄ2009_A.equals(厚労省IF識別コード)
                 || 認定ｿﾌﾄ2009_B.equals(厚労省IF識別コード)) {
-            return YokaigoJotaiKubun09.toValue(二次判定結果コード == null ? RString.EMPTY : 二次判定結果コード).get名称();
+            return YokaigoJotaiKubun09.toValue(二次判定結果コード).get名称();
         }
         return RString.EMPTY;
     }

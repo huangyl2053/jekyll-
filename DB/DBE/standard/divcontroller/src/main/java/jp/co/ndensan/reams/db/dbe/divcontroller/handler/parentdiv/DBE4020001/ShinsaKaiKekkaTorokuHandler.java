@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoBuilder;
@@ -27,6 +28,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.NiJiHanTeiBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKaiBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.core.dokuji.NijiHanteiKekkaInputHoho;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.accesslog.ExpandedInformations;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
@@ -35,11 +37,13 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -129,6 +133,7 @@ public class ShinsaKaiKekkaTorokuHandler {
     public void 要介護認定完了更新(Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> models) {
         FlexibleDate 割当完了年月日 = new FlexibleDate(RDate.getNowDate().toDateString());
         List<dgNinteiTaskList_Row> 選択データ = div.getDgNinteiTaskList().getSelectedItems();
+        DbAccessLogger accessLogger = new DbAccessLogger();
         for (dgNinteiTaskList_Row データ : 選択データ) {
             ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(データ.getShinseishoKanriNo());
             NinteiKanryoJohoIdentifier 要介護認定完了識別子 = new NinteiKanryoJohoIdentifier(申請書管理番号);
@@ -138,7 +143,10 @@ public class ShinsaKaiKekkaTorokuHandler {
             }
             NinteiKanryoJoho 要介護認定完了 = builder.build();
             ShinsakaiTorokuManager.createInstance().要介護認定完了更新(要介護認定完了.toEntity());
+            accessLogger.store(new ShoKisaiHokenshaNo(データ.getShoKisaiHokenshaNo()), データ.getHihoNumber(),
+                    ExpandedInformations.申請書管理番号.fromValue(申請書管理番号.value()));
         }
+        accessLogger.flushBy(AccessLogType.更新);
     }
 
     private static boolean operatesセンター送信() {
@@ -293,6 +301,7 @@ public class ShinsaKaiKekkaTorokuHandler {
         int completeCount = 0;
         int notCount = 0;
         int i = 0;
+        DbAccessLogger accessLogger = new DbAccessLogger();
         for (NiJiHanTeiBusiness business : 二次判定List) {
             if (i < div.getTxtMaxKensu().getValue().intValue()) {
                 dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
@@ -334,16 +343,20 @@ public class ShinsaKaiKekkaTorokuHandler {
                 row.getHiddenYukoKikan().setValue(new Decimal(business.get二次判定認定有効期間()));
                 row.setNaibuShinsakaiNo(business.get介護認定審査会開催番号());
                 rowList.add(row);
+                accessLogger.store(business.get証記載保険者番号(), business.get被保険者番号(),
+                        ExpandedInformations.申請書管理番号.fromValue(business.get申請書管理番号().value())
+                );
                 i++;
             }
         }
+        accessLogger.flushBy(AccessLogType.照会);
+
         div.getTxtMishoriCount().setValue(new Decimal(notCount));
         div.getTxtCompleteCount().setValue(new Decimal(completeCount));
         div.getTxtTotalCount().setValue(new Decimal(notCount + completeCount));
         div.getDgNinteiTaskList().setDataSource(rowList);
         div.getDgNinteiTaskList().getGridSetting().setSelectedRowCount(二次判定List.size());
         div.getDgNinteiTaskList().getGridSetting().setLimitRowCount(最大件数.intValue());
-
     }
 
     private RString edit審査会名称(RString 審査会開催番号) {
