@@ -336,7 +336,7 @@ public final class NinteiChosaJohohyo22EntityEditor {
             サービス区分リスト.add(RString.EMPTY);
             サービス区分リスト.add(RString.EMPTY);
             サービス区分リスト.add(RString.EMPTY);
-            サービス区分リスト.add(RString.EMPTY);
+            サービス区分リスト.add(new RString("なし"));
             サービス区分リスト.add(RString.EMPTY);
             サービス区分リスト.add(RString.EMPTY);
             サービス区分リスト.add(RString.EMPTY);

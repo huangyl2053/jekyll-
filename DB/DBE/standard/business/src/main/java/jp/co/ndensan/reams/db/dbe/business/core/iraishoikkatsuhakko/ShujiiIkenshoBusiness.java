@@ -288,11 +288,11 @@ public class ShujiiIkenshoBusiness {
                 if (new Code("1").equals(意見書作成料.getIkenshoSakuseiKaisuKubun())) {
                     item.setShinkiZaitakuKingaku(new RString(意見書作成料.getTanka().toString()));
                 } else if (new Code("2").equals(意見書作成料.getIkenshoSakuseiKaisuKubun())) {
-                    item.setShinkiShisetsuKingaku(new RString(意見書作成料.getTanka().toString()));
+                    item.setKeizokuZaitakuKingaku(new RString(意見書作成料.getTanka().toString()));
                 }
             } else if (new Code("2").equals(意見書作成料.getZaitakuShisetsuKubun())) {
                 if (new Code("1").equals(意見書作成料.getIkenshoSakuseiKaisuKubun())) {
-                    item.setKeizokuZaitakuKingaku(new RString(意見書作成料.getTanka().toString()));
+                    item.setShinkiShisetsuKingaku(new RString(意見書作成料.getTanka().toString()));
                 } else if (new Code("2").equals(意見書作成料.getIkenshoSakuseiKaisuKubun())) {
                     item.setKeizokuShisetsuKingaku(new RString(意見書作成料.getTanka().toString()));
                 }

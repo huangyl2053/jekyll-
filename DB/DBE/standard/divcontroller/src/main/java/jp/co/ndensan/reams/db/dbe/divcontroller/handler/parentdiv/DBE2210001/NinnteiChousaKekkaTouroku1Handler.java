@@ -258,34 +258,34 @@ public class NinnteiChousaKekkaTouroku1Handler {
     public void 編集前調査実施者情報設定() {
         RStringBuilder builder = new RStringBuilder();
 
-        builder.append(div.getCcdChosaJisshishaJoho().getTxtChosaJisshiDate() != null ? div.getCcdChosaJisshishaJoho().getTxtChosaJisshiDate().getValue() : RString.EMPTY);
+        builder.append(div.getCcdChosaJisshishaJoho().getTxtChosaJisshiDate().getText() != null ? div.getCcdChosaJisshishaJoho().getTxtChosaJisshiDate().getValue() : RString.EMPTY);
         builder.append(div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho() != null ? div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedKey() : RString.EMPTY);
-        builder.append(div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho() != null ? div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().getValue() : RString.EMPTY);
-        builder.append(div.getCcdChosaJisshishaJoho().getTxtShozokuKikanCode() != null ? div.getCcdChosaJisshishaJoho().getTxtShozokuKikanCode().getText() : RString.EMPTY);
-        builder.append(div.getCcdChosaJisshishaJoho().getTxtKinyushaCode() != null ? div.getCcdChosaJisshishaJoho().getTxtKinyushaCode().getText() : RString.EMPTY);
+        builder.append(div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().getText() != null ? div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().getValue() : RString.EMPTY);
+        builder.append(div.getCcdChosaJisshishaJoho().getTxtShozokuKikanCode().getText() != null ? div.getCcdChosaJisshishaJoho().getTxtShozokuKikanCode().getText() : RString.EMPTY);
+        builder.append(div.getCcdChosaJisshishaJoho().getTxtKinyushaCode().getText() != null ? div.getCcdChosaJisshishaJoho().getTxtKinyushaCode().getText() : RString.EMPTY);
         builder.append(div.getRadGenzaiservis().getSelectedKey());
         builder.append(div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getRadJutakuKaishu().getSelectedKey());
         for (dgRiyoServiceJyokyo_Row row : div.getTabChosaShurui().getDgRiyoServiceJyokyo().getDataSource()) {
             builder.append(row.getServiceJokyo() != null ? row.getServiceJokyo().getText() : RString.EMPTY);
         }
-        builder.append(div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getTxtShichosonTokubetsuKyufu() != null
+        builder.append(div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getTxtShichosonTokubetsuKyufu().getText() != null
                 ? div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getTxtShichosonTokubetsuKyufu().getText() : RString.EMPTY);
-        builder.append(div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getTxtKyufuIgaiJutakuService() != null
+        builder.append(div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getTxtKyufuIgaiJutakuService().getText() != null
                 ? div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getTxtKyufuIgaiJutakuService().getText() : RString.EMPTY);
         for (dgRiyoShisetsu_Row row : div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getDgRiyoShisetsu().getDataSource()) {
             builder.append(new RString(row.getShisetsuRiyoUmu().toString()));
         }
-        builder.append(div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getGaigyoShisetsuRenrakusaki().getTxtShisetsuMeisdho() != null
+        builder.append(div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getGaigyoShisetsuRenrakusaki().getTxtShisetsuMeisdho().getText() != null
                 ? div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getGaigyoShisetsuRenrakusaki().getTxtShisetsuMeisdho().getText() : RString.EMPTY);
-        builder.append(div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getGaigyoShisetsuRenrakusaki().getTxtShisetsuYubinNo() != null
+        builder.append(div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getGaigyoShisetsuRenrakusaki().getTxtShisetsuYubinNo().getText() != null
                 ? div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getGaigyoShisetsuRenrakusaki().getTxtShisetsuYubinNo().getText() : RString.EMPTY);
         builder.append(div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getGaigyoShisetsuRenrakusaki().getTxtShisetsuJusho() != null
                 ? div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getGaigyoShisetsuRenrakusaki().getTxtShisetsuJusho().getDomain().value() : RString.EMPTY);
         builder.append(div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getGaigyoShisetsuRenrakusaki().getTxtTelNo() != null
                 ? div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getGaigyoShisetsuRenrakusaki().getTxtTelNo().getDomain().value() : RString.EMPTY);
-        builder.append(div.getTabChosaShurui().getGaikyoTokkiInput().getTxtGaikyoTokkiNyuroku() != null
+        builder.append(div.getTabChosaShurui().getGaikyoTokkiInput().getTxtGaikyoTokkiNyuroku().getText() != null
                 ? div.getTabChosaShurui().getGaikyoTokkiInput().getTxtGaikyoTokkiNyuroku().getValue() : RString.EMPTY);
-        builder.append(div.getTxtIchijiHanteiKekka() != null
+        builder.append(div.getTxtIchijiHanteiKekka().getText() != null
                 ? div.getTxtIchijiHanteiKekka().getValue() : RString.EMPTY);
         ArrayList<KihonChosaInput> 第1群List = ViewStateHolder.get(ViewStateKeys.第一群認定調査基本情報リスト, ArrayList.class);
         ArrayList<KihonChosaInput> 第2群List = ViewStateHolder.get(ViewStateKeys.第二群認定調査基本情報リスト, ArrayList.class);

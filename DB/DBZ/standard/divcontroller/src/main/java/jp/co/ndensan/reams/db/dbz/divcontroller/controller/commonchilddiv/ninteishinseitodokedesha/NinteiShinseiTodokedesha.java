@@ -108,6 +108,7 @@ public class NinteiShinseiTodokedesha {
 //            div.getTxtJigyoshaCode().setReadOnly(false);
 //            div.getBtnJigyoshaGuide().setDisabled(false);
             div.getDdlShinseiKankeisha().setReadOnly(false);
+            div.getDdlShinseiKankeisha().setDisabled(false);
         } else {
             setその他(div);
             clearCcdShisetsuJohoCommonChildDiv(div);
@@ -240,6 +241,7 @@ public class NinteiShinseiTodokedesha {
     private void setInput(NinteiShinseiTodokedeshaDiv div) {
         div.getDdlTodokledeDaikoKubun().setReadOnly(false);
         div.getDdlShinseiKankeisha().setReadOnly(true);
+        div.getDdlShinseiKankeisha().setDisabled(true);
         div.getBtnSetaiIchiran().setDisabled(true);
         div.getBtnAtenaKensaku().setDisabled(true);
         div.getBtnZenkaiFukusha().setDisabled(false);
@@ -259,6 +261,7 @@ public class NinteiShinseiTodokedesha {
         div.getCcdShisetsuJohoCommonChildDiv().setDisabled(true);
         div.getBtnSetaiIchiran().setDisabled(true);
         div.getDdlShinseiKankeisha().setReadOnly(true);
+        div.getDdlShinseiKankeisha().setDisabled(true);
     }
     
     private void clearCcdShisetsuJohoCommonChildDiv(NinteiShinseiTodokedeshaDiv div) {

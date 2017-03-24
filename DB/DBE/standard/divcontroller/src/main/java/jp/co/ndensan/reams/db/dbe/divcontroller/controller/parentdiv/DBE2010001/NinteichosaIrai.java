@@ -189,9 +189,9 @@ public class NinteichosaIrai {
                 Optional<PersonalData> personalData = getHandler(requestDiv).getPersonalData(row.getGetShoKisaiHokenshaNo(), row.getHokenshaCode(), row.getShinseishoKanriNo());
                 personalDataList.add(personalData.get());
             }
-            AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.Euc, personalDataList);
-            spoolManager.spool(filePath, accessLogUUID);
             csvWriter.close();
+            AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+            spoolManager.spool(filePath, accessLogUUID);
         }
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(出力名));
         sfd = SharedFile.defineSharedFile(sfd);
