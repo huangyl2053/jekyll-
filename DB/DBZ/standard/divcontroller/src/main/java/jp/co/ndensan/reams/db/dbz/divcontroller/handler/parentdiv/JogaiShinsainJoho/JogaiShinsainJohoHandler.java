@@ -10,6 +10,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JogaiShinsainJoho.JogaiShinsainJoho.JogaiShinsainJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JogaiShinsainJoho.JogaiShinsainJoho.dgShinsakaiIinIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JogaiShinsainJoho.JogaiShinsainJoho.dgShozokuKikanIchiran_Row;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
@@ -107,6 +108,22 @@ public class JogaiShinsainJohoHandler {
             row.setState(_状態.削除.get状態());
         }
     }
+
+    /**
+     * 審査会委員コードの重複チェックを行います。
+     *
+     *
+     * @return boolean true:重複あり false:重複なし
+     */
+    public boolean isDupulicationIinCode() {
+        RString iinCode = div.getShinsakaiIinJoho().getTxtShinsakaiIinCode().getText();
+        for (dgShinsakaiIinIchiran_Row row : div.getDgShinsakaiIinIchiran().getDataSource()) {
+            if (row.getShinsakaiIinCode().equals(iinCode)) {
+                return true;
+            }
+        }
+        return false;
+    }
     
     /**
      * 未入力のメッセージを定義します。
@@ -116,7 +133,12 @@ public class JogaiShinsainJohoHandler {
         /**
          * 未入力
          */
-        未入力(UrWarningMessages.未入力, "審査会委員コード");
+        未入力(UrWarningMessages.未入力, "審査会委員コード"),
+        /**
+         * 未入力
+         */
+        重複(UrErrorMessages.既に存在, "追加しようとしている審査会委員コード");
+
         private final Message message;
 
         private RRVMessages(IMessageGettable message, String... replacements) {
