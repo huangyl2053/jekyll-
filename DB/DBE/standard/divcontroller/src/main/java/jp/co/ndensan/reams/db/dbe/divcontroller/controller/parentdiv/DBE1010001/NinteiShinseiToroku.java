@@ -412,6 +412,9 @@ public class NinteiShinseiToroku {
             div.getSinseiTorisage().setReadOnly(true);
             setShinseiJiyu(result, div);
             getHandler(div).loadPnlSinseishaJoho(business.get申請者所属市町村コード(), true);
+            DbAccessLogger accessLog = new DbAccessLogger();
+            accessLog.store(new ShoKisaiHokenshaNo(div.getCcdShikakuInfo().getHookenshaCode()), business.get被保険者番号().value());
+            accessLog.flushBy(AccessLogType.照会);
             return ResponseData.of(div).rootTitle(new RString("みなし２号審査受付")).respond();
         }
         div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtServiceSakujo().setTextKind(TextKind.全角のみ);
@@ -847,7 +850,6 @@ public class NinteiShinseiToroku {
             NinteiShinseiJoho ninteiShinseiJoho = get要介護認定申請情報(div, 申請書管理番号);
             ShinseitodokedeJoho shinseitodokedeJoho = get認定申請届出者情報(div, true, 申請書管理番号);
             ShinseiRirekiJoho shinseiRirekiJoho = get申請履歴情報(申請書管理番号);
-//            NinteiKekkaJoho ninteiKekkaJoho = get認定結果情報(申請書管理番号);
             NinteiKeikakuJoho ninteiKeikakuJoho = get申請計画情報(申請書管理番号, div);
 
             if (manager.has要介護認定申請情報(ninteiShinseiJoho.get被保険者番号(),
@@ -884,12 +886,9 @@ public class NinteiShinseiToroku {
                     manager.save介護連絡先情報(set介護連絡先情報(renrakusakiJoho, true, 申請書管理番号));
                 }
                 add審査会委員除外情報(申請書管理番号, dataList);
-//                manager.save認定結果情報(ninteiKekkaJoho);
                 manager.save申請計画情報(ninteiKeikakuJoho);
                 dbt5105Manager.save要介護認定完了情報(new NinteiKanryoJoho(申請書管理番号));
-
-                return goToKanryo(div, response);
-                //return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage().replace("みなし２号審査受付")).respond();
+                return goToKanryo(div, response, 申請書管理番号);
             }
             return ResponseData.of(div).respond();
         } else {
@@ -904,8 +903,8 @@ public class NinteiShinseiToroku {
         }
     }
 
-    private ResponseData<NinteiShinseiTorokuDiv> goToKanryo(NinteiShinseiTorokuDiv div, IParentResponse<NinteiShinseiTorokuDiv> response) {
-
+    private ResponseData<NinteiShinseiTorokuDiv> goToKanryo(NinteiShinseiTorokuDiv div, IParentResponse<NinteiShinseiTorokuDiv> response, ShinseishoKanriNo 申請書管理番号) {
+        アクセスログ_更新(申請書管理番号, div.getCcdShikakuInfo().getHookenshaCode(), div.getCcdShikakuInfo().getTxtHihokenshaNo().getValue());
         div.getCcdKanryoMessage().setMessage(new RString("要介護認定申請情報の保存処理が完了しました。"),
                 new RString("被保険者番号"),
                 div.getCcdShikakuInfo().getTxtHihokenshaNo().getValue(),
@@ -933,23 +932,9 @@ public class NinteiShinseiToroku {
         validationMessages.add(getValidationHandler(div).センタ送信データ出力完了更新不可チェック(result.getIF送付年月日()));
         validationMessages.add(getValidationHandler(div).認定審査会割当完了更新不可チェック(result));
 
-        Boolean 変更有無フラグ1 = Boolean.FALSE;
         NinteiShinseiJohoBuilder shinseiJohoBuilder = get要介護認定申請情報Com(div, kihonJohoInputDiv, shinseiJoho);
-
-        変更有無フラグ1 = shinseiJohoBuilder.build().toEntity().hasChanged();
-
-        Boolean 変更有無フラグ2 = 介護連絡先情報変更有無フラグ(zenkaiJoho.getDbdBusiness());
-        Boolean 変更有無フラグ3 = Boolean.FALSE;
-
         ShinseitodokedeJoho shinseitodokedeJoho = get認定申請届出者情報(div, false, ShinseishoKanriNo.EMPTY);
-        if (shinseitodokedeJoho != null) {
-            変更有無フラグ3 = shinseitodokedeJoho.toEntity().hasChanged();
-        }
-        Boolean 変更有無フラグ4 = Boolean.FALSE;
-        if (dataList != null && dataList.getShinsakaiIinItiranList() != null) {
-            変更有無フラグ4 = Boolean.TRUE;
-        }
-        if (!(変更有無フラグ1 || 変更有無フラグ2 || 変更有無フラグ3 || 変更有無フラグ4)) {
+        if (!is変更(div)) {
             validationMessages.add(getValidationHandler(div).編集なしチェック(Boolean.TRUE));
         } else {
             validationMessages.add(getValidationHandler(div).有効期間チェック());
@@ -991,13 +976,12 @@ public class NinteiShinseiToroku {
             if (shinseitodokedeJoho != null) {
                 manager.save申請届出情報(shinseitodokedeJoho);
             }
-
+            
             RStringBuilder 前排他制御 = new RStringBuilder();
             前排他制御.append("DBEShinseishoKanriNo");
             前排他制御.append(申請書管理番号.getColumnValue());
             前排他キーの解除(前排他制御.toRString());
-            return goToKanryo(div, response);
-//            return response.addMessage(UrInformationMessages.正常終了.getMessage().replace("審査依頼受付")).respond();
+            return goToKanryo(div, response, 申請書管理番号);
         }
         return response.respond();
     }
@@ -1054,7 +1038,7 @@ public class NinteiShinseiToroku {
             前排他制御.append("DBEShinseishoKanriNo");
             前排他制御.append(申請書管理番号.getColumnValue());
             前排他キーの解除(前排他制御.toRString());
-            return goToKanryo(div, response);
+            return goToKanryo(div, response, 申請書管理番号);
         }
         return response.respond();
     }
@@ -1532,6 +1516,13 @@ public class NinteiShinseiToroku {
     private void 前排他キーの解除(RString 排他) {
         LockingKey 排他キー = new LockingKey(排他);
         RealInitialLocker.release(排他キー);
+    }
+    
+    private void アクセスログ_更新(ShinseishoKanriNo 管理番号, RString 証記載保険者番号, RString 被保険者番号) {
+        DbAccessLogger accessLog = new DbAccessLogger();
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 管理番号.value());
+        accessLog.store(new ShoKisaiHokenshaNo(証記載保険者番号), 被保険者番号, expandedInfo);
+        accessLog.flushBy(AccessLogType.更新);
     }
 
     private static enum RRWMessages implements IMessageGettable {
