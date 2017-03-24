@@ -66,7 +66,6 @@ public class ShinchokuDataOutputHandler {
      */
     public void onLoad() {
         div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
-        div.getRadKubun().setSelectedKey(進捗情報);
         div.getTxtChuishutsuRange().clearFromValue();
         div.getTxtChuishutsuRange().setToValue(RDate.getNowDate());
         // TODO 要介護認定進捗データ出力の際、DbT7022に出力した期間の保存対応完了後以下メソッドを呼ぶようにする。
@@ -81,7 +80,6 @@ public class ShinchokuDataOutputHandler {
      */
     public void btnJokenClear() {
         div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
-        div.getRadKubun().setSelectedKey(進捗情報);
         div.getTxtChuishutsuRange().clearFromValue();
         div.getTxtChuishutsuRange().setToValue(RDate.getNowDate());
         // TODO 要介護認定進捗データ出力の際、DbT7022に出力した期間の保存対応完了後以下メソッドを呼ぶようにする。
@@ -206,7 +204,7 @@ public class ShinchokuDataOutputHandler {
             shinseishoKanriNo.add(row.getShinseishoNo());
         }
         batchparamter.setShinseishoKanriNoList(shinseishoKanriNo);
-        batchparamter.setFayirukuben(div.getRadKubun().getSelectedKey());
+        batchparamter.setFayirukuben(進捗情報);
         batchparamter.setChushutsuFromDate(div.getTxtChuishutsuRange().getFromValue().wareki().toDateString());
         batchparamter.setChushutsuToDate(div.getTxtChuishutsuRange().getToValue().wareki().toDateString());
         batchparamter.setHokensha(div.getCcdHokenshaList().getSelectedItem().get市町村名称());

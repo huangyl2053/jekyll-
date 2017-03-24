@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinchokuDataOutputDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -75,16 +75,6 @@ public class ShinchokuDataOutputDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public RadioButton getRadKubun() {
-        return this.getPnlKensaku().getRadKubun();
-    }
-
-    @JsonIgnore
-    public void  setRadKubun(RadioButton radKubun) {
-        this.getPnlKensaku().setRadKubun(radKubun);
-    }
-
-    @JsonIgnore
     public TextBoxDateRange getTxtZenkaiChuishutsuRange() {
         return this.getPnlKensaku().getTxtZenkaiChuishutsuRange();
     }
@@ -132,16 +122,6 @@ public class ShinchokuDataOutputDiv extends Panel {
     @JsonIgnore
     public void  setBtnJokenClear(Button btnJokenClear) {
         this.getPnlKensaku().setBtnJokenClear(btnJokenClear);
-    }
-
-    @JsonIgnore
-    public Button getBtnKensaku() {
-        return this.getPnlKensaku().getBtnKensaku();
-    }
-
-    @JsonIgnore
-    public void  setBtnKensaku(Button btnKensaku) {
-        this.getPnlKensaku().setBtnKensaku(btnKensaku);
     }
 
     @JsonIgnore
