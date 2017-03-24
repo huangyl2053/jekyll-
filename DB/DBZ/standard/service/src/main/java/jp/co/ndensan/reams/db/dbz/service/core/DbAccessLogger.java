@@ -34,6 +34,7 @@ public class DbAccessLogger {
      * @param shoKisaiHokenshaNo
      * @param hihokenshaNo
      */
+    @Deprecated
     public void store(ShoKisaiHokenshaNo shoKisaiHokenshaNo, RString hihokenshaNo) {
         store(shoKisaiHokenshaNo, hihokenshaNo, new ExpandedInformation(コード, 被保険者番号, hihokenshaNo));
     }
@@ -47,6 +48,17 @@ public class DbAccessLogger {
      */
     public void store(ShoKisaiHokenshaNo shoKisaiHokenshaNo, RString hihokenshaNo, ExpandedInformation expandedInformation) {
         personalData.add(PersonalData.of(new ShikibetsuCode(shoKisaiHokenshaNo.value().substring(0, 5).concat(hihokenshaNo)), expandedInformation));
+    }
+
+    /**
+     * アクセスログを追加します。
+     *
+     * @param shoKisaiHokenshaNo
+     * @param hihokenshaNo
+     * @param expandedInformations
+     */
+    public void store(ShoKisaiHokenshaNo shoKisaiHokenshaNo, RString hihokenshaNo, ExpandedInformation... expandedInformations) {
+        personalData.add(PersonalData.of(new ShikibetsuCode(shoKisaiHokenshaNo.value().substring(0, 5).concat(hihokenshaNo)), expandedInformations));
     }
 
     /**

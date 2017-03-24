@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku.ShinsakaiKe
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku.ShinsakaiKekkaTorokuIChiRanBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.core.TorisageKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.HanteiKekkaCode;
+import jp.co.ndensan.reams.db.dbe.definition.core.util.accesslog.ExpandedInformations;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeNotificationMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
@@ -50,7 +51,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteichosajokyo.NinteiChosaJokyoDataPass;
-import jp.co.ndensan.reams.db.dbz.definition.core.util.accesslog.ExpandedInformations;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.KaigoRowState;
 import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
@@ -412,7 +412,7 @@ public class ShinsakaiKekkaToroku {
                         continue;
                 }
                 logger.store(row2.getHokenshaNo(), row2.getHihokenshaNo(),
-                        ExpandedInformations.申請書管理番号.fromValue(row2.getShinseishoKanriNo().value())
+                        ExpandedInformations.fromValue(row2.getShinseishoKanriNo().value())
                 );
             }
             logger.flushBy(AccessLogType.更新);
