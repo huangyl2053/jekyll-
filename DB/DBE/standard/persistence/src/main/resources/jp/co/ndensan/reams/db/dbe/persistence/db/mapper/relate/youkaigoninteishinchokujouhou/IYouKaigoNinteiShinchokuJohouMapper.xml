@@ -142,9 +142,15 @@
         , H."nijiHanteiYokaigoJotaiKubunCode" AS "H_nijiHanteiYokaigoJotaiKubunCode"
         , I."ichijiHanteiYMD" AS "I_ichijiHanteiYMD"
         , I."ichijiHanteiKekkaCode" AS "I_ichijiHanteiKekkaCode"
-        , K."shinsakaiShiryoSakuseiYMD" AS "K_shinsakaiShiryoSakuseiYMD"
-        , K."shinsakaiKaisaiYoteiYMD" AS "K_shinsakaiKaisaiYoteiYMD"
-        , L."shinsakaiKaisaiYMD" AS "L_shinsakaiKaisaiYMD" 
+        , CASE WHEN H."nijiHanteiYokaigoJotaiKubunCode" IS NULL THEN K."shinsakaiShiryoSakuseiYMD"
+        WHEN H."nijiHanteiYokaigoJotaiKubunCode" = '' THEN K."shinsakaiShiryoSakuseiYMD"
+        ELSE K1."shinsakaiShiryoSakuseiYMD" END "K_shinsakaiShiryoSakuseiYMD"
+        , CASE WHEN H."nijiHanteiYokaigoJotaiKubunCode" IS NULL THEN K."shinsakaiKaisaiYoteiYMD"
+        WHEN H."nijiHanteiYokaigoJotaiKubunCode" = '' THEN K."shinsakaiKaisaiYoteiYMD"
+        ELSE K1."shinsakaiKaisaiYoteiYMD" END "K_shinsakaiKaisaiYoteiYMD"
+        , CASE WHEN H."nijiHanteiYokaigoJotaiKubunCode" IS NULL THEN L."shinsakaiKaisaiYMD"
+        WHEN H."nijiHanteiYokaigoJotaiKubunCode" = '' THEN L."shinsakaiKaisaiYMD"
+        ELSE L1."shinsakaiKaisaiYMD" END "L_shinsakaiKaisaiYMD"
         FROM
         ( 
         SELECT
@@ -152,13 +158,15 @@
         FROM
         rgdb."DbT5105NinteiKanryoJoho" 
         WHERE
-        "ninteichosaIraiKanryoYMD" BETWEEN #{抽出期間開始日} AND #{抽出期間終了日}
+        (("ninteichosaIraiKanryoYMD" BETWEEN #{抽出期間開始日} AND #{抽出期間終了日}
         OR "ninteichosaKanryoYMD" BETWEEN #{抽出期間開始日} AND #{抽出期間終了日}
         OR "ikenshoSakuseiIraiKanryoYMD" BETWEEN #{抽出期間開始日} AND #{抽出期間終了日}
         OR "ikenshoTorokuKanryoYMD" BETWEEN #{抽出期間開始日} AND #{抽出期間終了日} 
         OR "ichijiHanteiKanryoYMD" BETWEEN #{抽出期間開始日} AND #{抽出期間終了日}
         OR "ninteiShinsakaiWariateKanryoYMD" BETWEEN #{抽出期間開始日} AND #{抽出期間終了日} 
-        OR "ninteiShinsakaiKanryoYMD" BETWEEN #{抽出期間開始日} AND #{抽出期間終了日}
+        OR "ninteiShinsakaiKanryoYMD" BETWEEN #{抽出期間開始日} AND #{抽出期間終了日})
+        AND ("ninteiShinsakaiKanryoYMD" IS NULL OR "ninteiShinsakaiKanryoYMD" = ''))
+        OR  "ninteiShinsakaiKanryoYMD" BETWEEN #{抽出期間開始日} AND #{抽出期間終了日}
         ) AS A 
         INNER JOIN 
         ( 
@@ -198,18 +206,15 @@
         rgdb."DbT5201NinteichosaIraiJoho" AS C1 
         WHERE
         C."shinseishoKanriNo" = C1."shinseishoKanriNo" 
-        AND C."logicalDeletedFlag" = False 
         AND C."ninteichosaIraiRirekiNo" <![CDATA[<]]> C1."ninteichosaIraiRirekiNo"
         ) 
         LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS D 
         ON C."ninteichosaItakusakiCode" = D."ninteichosaItakusakiCode" 
         AND D."shichosonCode" = B."shichosonCode" 
-        AND D."jokyoFlag" = True 
         LEFT JOIN rgdb."DbT5913ChosainJoho" AS E 
         ON C."ninteichosaItakusakiCode" = E."ninteiChosaItakusakiCode" 
         AND C."ninteiChosainCode" = E."ninteiChosainCode" 
         AND E."shichosonCode" = B."shichosonCode" 
-        AND E."jokyoFlag" = True 
         LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS F 
         ON A."shinseishoKanriNo" = F."shinseishoKanriNo" 
         AND NOT EXISTS ( 
@@ -219,7 +224,7 @@
         rgdb."DbT5202NinteichosahyoGaikyoChosa" AS F1 
         WHERE
         F."shinseishoKanriNo" = F1."shinseishoKanriNo" 
-        AND F."ninteichosaRirekiNo" <![CDATA[<]]> F1."ninteichosaRirekiNo"
+        AND f."ninteichosaRirekiNo" || f."gaikyoChosaTextImageKubun" <![CDATA[<]]> f1."ninteichosaRirekiNo" || f1."gaikyoChosaTextImageKubun"
         ) 
         LEFT JOIN rgdb."DbT5302ShujiiIkenshoJoho" AS M 
         ON A."shinseishoKanriNo" = M."shinseishoKanriNo" 
@@ -234,10 +239,18 @@
         ) 
         LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS H 
         ON A."shinseishoKanriNo" = H."shinseishoKanriNo" 
+        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" AS J1 
+        ON H."shinsakaiKaisaiNo" = J1."shinsakaiKaisaiNo" 
+        AND H."shinseishoKanriNo" = J1."shinseishoKanriNo" 
+        LEFT JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS K1 
+        ON H."shinsakaiKaisaiNo" = K1."shinsakaiKaisaiNo" 
+        LEFT JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS L1 
+        ON K1."shinsakaiKaisaiNo" = L1."shinsakaiKaisaiNo" 
         LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS I 
         ON A."shinseishoKanriNo" = I."shinseishoKanriNo" 
         LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" AS J 
         ON A."shinseishoKanriNo" = J."shinseishoKanriNo" 
+        AND (J."hanteiKekkaCode" is NULL OR J."hanteiKekkaCode" = '')  
         LEFT JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS K 
         ON J."shinsakaiKaisaiNo" = K."shinsakaiKaisaiNo" 
         LEFT JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS L 
