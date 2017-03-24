@@ -301,7 +301,6 @@ public class ShinsaKaiKekkaTorokuHandler {
         int completeCount = 0;
         int notCount = 0;
         int i = 0;
-        DbAccessLogger accessLogger = new DbAccessLogger();
         for (NiJiHanTeiBusiness business : 二次判定List) {
             if (i < div.getTxtMaxKensu().getValue().intValue()) {
                 dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
@@ -316,6 +315,7 @@ public class ShinsaKaiKekkaTorokuHandler {
                 }
 
                 row.setHokensha(business.get保険者() == null ? RString.EMPTY : business.get保険者());
+                row.setHokenshaNo(business.get証記載保険者番号() == null ? RString.EMPTY : business.get証記載保険者番号().value());
                 if (business.get認定申請年月日() != null && !business.get認定申請年月日().isEmpty()) {
                     row.getNinteiShinseiDay().setValue(new RDate(business.get認定申請年月日().toString()));
                 }
@@ -343,13 +343,9 @@ public class ShinsaKaiKekkaTorokuHandler {
                 row.getHiddenYukoKikan().setValue(new Decimal(business.get二次判定認定有効期間()));
                 row.setNaibuShinsakaiNo(business.get介護認定審査会開催番号());
                 rowList.add(row);
-                accessLogger.store(business.get証記載保険者番号(), business.get被保険者番号(),
-                        ExpandedInformations.申請書管理番号.fromValue(business.get申請書管理番号().value())
-                );
                 i++;
             }
         }
-        accessLogger.flushBy(AccessLogType.照会);
 
         div.getTxtMishoriCount().setValue(new Decimal(notCount));
         div.getTxtCompleteCount().setValue(new Decimal(completeCount));
