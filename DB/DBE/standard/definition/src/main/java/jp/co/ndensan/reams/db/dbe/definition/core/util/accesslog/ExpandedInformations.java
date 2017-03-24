@@ -5,9 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.core.util.accesslog;
 
-import com.google.common.collect.Lists;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -38,14 +36,6 @@ public final class ExpandedInformations {
      * @return {@link ExpandedInformation}
      */
     public static ExpandedInformation[] fromValues(Iterable<? extends RString> shinseishoKanriNos) {
-        return fromValues(Lists.newArrayList(shinseishoKanriNos));
-    }
-
-    /**
-     * @param shinseishoKanriNos 申請書管理番号の値（複数）
-     * @return {@link ExpandedInformation}
-     */
-    public static ExpandedInformation[] fromValues(Collection<? extends RString> shinseishoKanriNos) {
         List<ExpandedInformation> list = new ArrayList<>();
         int i = 1;
         for (RString value : shinseishoKanriNos) {
@@ -68,14 +58,6 @@ public final class ExpandedInformations {
      * @return {@link ExpandedInformation}
      */
     public static ExpandedInformation[] fromShinseishoKanriNos(Iterable<? extends ShinseishoKanriNo> shinseishoKanriNos) {
-        return fromShinseishoKanriNos(Lists.newArrayList(shinseishoKanriNos));
-    }
-
-    /**
-     * @param shinseishoKanriNos 申請書管理番号（複数）
-     * @return {@link ExpandedInformation}
-     */
-    public static ExpandedInformation[] fromShinseishoKanriNos(Collection<? extends ShinseishoKanriNo> shinseishoKanriNos) {
         List<RString> list = new ArrayList<>();
         for (ShinseishoKanriNo no : shinseishoKanriNos) {
             list.add(no.value());

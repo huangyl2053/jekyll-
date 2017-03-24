@@ -34,19 +34,6 @@ public class ExpandedInformationsTest {
 
     @Test
     public void fromValues_Iterable() {
-        Iterable<RString> iterable = Arrays.asList(
-                new RString("100"), new RString("100"), new RString("100"), new RString("100"), new RString("100")
-        );
-        ExpandedInformation[] result = ExpandedInformations.fromValues(iterable);
-        assertThat(result[0].getCode(), is(new Code("0001")));
-        assertThat(result[1].getCode(), is(new Code("0002")));
-        assertThat(result[2].getCode(), is(new Code("0003")));
-        assertThat(result[3].getCode(), is(new Code("0004")));
-        assertThat(result[4].getCode(), is(new Code("0005")));
-    }
-
-    @Test
-    public void fromValues_Collection() {
         List<RString> list = Arrays.asList(
                 new RString("100"), new RString("100"), new RString("100"), new RString("100"), new RString("100")
         );
@@ -66,20 +53,6 @@ public class ExpandedInformationsTest {
 
     @Test
     public void fromShinseishoKanriNos_Iterable() {
-        Iterable<ShinseishoKanriNo> iterable = Arrays.asList(
-                new ShinseishoKanriNo("100"), new ShinseishoKanriNo("100"), new ShinseishoKanriNo("100"),
-                new ShinseishoKanriNo("100"), new ShinseishoKanriNo("100")
-        );
-        ExpandedInformation[] result = ExpandedInformations.fromShinseishoKanriNos(iterable);
-        assertThat(result[0].getCode(), is(new Code("0001")));
-        assertThat(result[1].getCode(), is(new Code("0002")));
-        assertThat(result[2].getCode(), is(new Code("0003")));
-        assertThat(result[3].getCode(), is(new Code("0004")));
-        assertThat(result[4].getCode(), is(new Code("0005")));
-    }
-
-    @Test
-    public void fromShinseishoKanriNos_Collection() {
         List<ShinseishoKanriNo> list = Arrays.asList(
                 new ShinseishoKanriNo("100"), new ShinseishoKanriNo("100"), new ShinseishoKanriNo("100"),
                 new ShinseishoKanriNo("100"), new ShinseishoKanriNo("100")
