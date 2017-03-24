@@ -258,6 +258,15 @@ public class ImageJohoMaskingHandler {
     }
 
     /**
+     * 検索条件入力値をクリアする
+     */
+    public void clearAndDisableSearchYMD() {
+        div.getTxtSearchYMD().clearFromValue();
+        div.getTxtSearchYMD().clearToValue();
+        div.getTxtSearchYMD().setDisabled(true);
+    }
+
+    /**
      * イメージ情報パネルの設定
      */
     public void setMeisai() {
