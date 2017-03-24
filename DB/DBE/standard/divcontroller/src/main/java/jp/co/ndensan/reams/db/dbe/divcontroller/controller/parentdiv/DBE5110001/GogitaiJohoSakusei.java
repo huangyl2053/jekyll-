@@ -162,7 +162,9 @@ public class GogitaiJohoSakusei {
         SearchResult<GogitaiJoho> resultList = service.getDateGridList(
                 GogitaiJohoSakuseiParameter.createGogitaiJohoSakuseiParameter(
                         FlexibleDate.getNowDate(), is現在有効な合議体のみ, 0, FlexibleDate.EMPTY, FlexibleDate.EMPTY, RString.EMPTY, 最大表示件数));
-
+        if (!ResponseHolder.isReRequest() && resultList.records().isEmpty()) {
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
+        }
         Models<GogitaiJohoIdentifier, GogitaiJoho> gogitaiJoho = Models.create(resultList.records());
         ViewStateHolder.put(ViewStateKeys.合議体情報, gogitaiJoho);
         ViewStateHolder.put(ViewStateKeys.状態, RString.EMPTY);
