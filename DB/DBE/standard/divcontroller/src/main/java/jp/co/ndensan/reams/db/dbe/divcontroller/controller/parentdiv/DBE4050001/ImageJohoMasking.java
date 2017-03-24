@@ -100,6 +100,21 @@ public class ImageJohoMasking {
     }
 
     /**
+     * 画面検索条件より、処理対象者データを取得する
+     *
+     * @param div イメージ情報マスキングDiv
+     * @return ResponseData<イメージ情報マスキングDiv>
+     */
+    public ResponseData<ImageJohoMaskingDiv> onChange_ddlKensakuTaisho(ImageJohoMaskingDiv div) {
+        if (new RString("0").equals(div.getDdlKensakuTaisho().getSelectedKey())) {
+            getHandler(div).clearAndDisableSearchYMD();
+        } else {
+            div.getTxtSearchYMD().setDisabled(false);
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 検索条件入力値をクリアする
      *
      * @param div イメージ情報マスキングDiv
