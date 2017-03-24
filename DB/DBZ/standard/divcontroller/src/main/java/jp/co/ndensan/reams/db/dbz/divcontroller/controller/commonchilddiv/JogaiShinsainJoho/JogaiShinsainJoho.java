@@ -179,6 +179,10 @@ public class JogaiShinsainJoho {
                     ValidationMessageControlPairs controlPairs = new ValidationMessageControlPairs();
                     controlPairs.add(new ValidationMessageControlPair(JogaiShinsainJohoHandler.RRVMessages.未入力));
                     return ResponseData.of(div).addValidationMessages(controlPairs).respond();
+                } else if (getHandler(div).isDupulicationIinCode()) {
+                    ValidationMessageControlPairs controlPairs = new ValidationMessageControlPairs();
+                    controlPairs.add(new ValidationMessageControlPair(JogaiShinsainJohoHandler.RRVMessages.重複, div.getTxtShinsakaiIinCode()));
+                    return ResponseData.of(div).addValidationMessages(controlPairs).respond();
                 }
             }
         }
