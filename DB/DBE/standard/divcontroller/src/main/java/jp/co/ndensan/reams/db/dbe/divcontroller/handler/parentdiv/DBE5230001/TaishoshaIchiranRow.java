@@ -11,6 +11,7 @@ import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.HanteiKekkaCode;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001.dgTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.KaigoRowState;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -36,6 +37,20 @@ public class TaishoshaIchiranRow {
             return KaigoRowState.空白;
         }
         return KaigoRowState.valueOf(value.toString());
+    }
+
+    /**
+     * @return 保険者番号
+     */
+    public ShoKisaiHokenshaNo getHokenshaNo() {
+        return new ShoKisaiHokenshaNo(aRow.getHokenshaNo());
+    }
+
+    /**
+     * @return 被保険者番号
+     */
+    public RString getHihokenshaNo() {
+        return aRow.getHihokenshaNo();
     }
 
     /**

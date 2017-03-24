@@ -20,10 +20,12 @@ import jp.co.ndensan.reams.db.dbx.definition.core.NinteiShinseiKubunShinsei;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.accesslog.ExpandedInformations;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.kekka.NinteiShinsakaiIkenShurui;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.kekka.YokaigoJotaizoReiCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.KaigoRowState;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -33,6 +35,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.RYearMonth;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
@@ -290,7 +293,6 @@ public class ShinsakaiKekkaTorokuHandler {
         if (!RString.isNullOrEmpty(row.getHanteiKekkaCode())) {
             div.getKobetsuHyojiArea().getDdlHanteiKekka().setSelectedKey(row.getHanteiKekkaCode());
         } else {
-//            div.getKobetsuHyojiArea().getDdlHanteiKekka().setSelectedKey(RString.EMPTY);
             RString cfgHanteiKekkaShokiHyoji
                     = DbBusinessConfig.get(ConfigNameDBE.介護認定審査会結果登録_判定結果初期表示, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
             if (cfgHanteiKekkaShokiHyoji.equals(HanteiKekkaShokiHyoji.なし.getコード())) {
@@ -341,6 +343,12 @@ public class ShinsakaiKekkaTorokuHandler {
         } else {
             div.getKobetsuHyojiArea().getTxtIchijiHanteiKekkaHenkoRiyu().setValue(RString.EMPTY);
         }
+        TaishoshaIchiranRow row2 = new TaishoshaIchiranRow(row);
+        DbAccessLogger logger = new DbAccessLogger();
+        logger.store(row2.getHokenshaNo(), row2.getHihokenshaNo(),
+                ExpandedInformations.申請書管理番号.fromValue(row2.getShinseishoKanriNo().value())
+        );
+        logger.flushBy(AccessLogType.照会);
     }
 
     private void setInputable個別事項表示欄By(OperationMode mode) {

@@ -169,7 +169,7 @@ public class ShinsaKaiKekkaToroku {
     public IDownLoadServletResponse onClick_btnRyooutput(ShinsaKaiKekkaTorokuDiv div, IDownLoadServletResponse response) {
         RString 出力名 = EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, CSVファイルID_審査会結果登録一覧);
         FileSpoolManager fsmanager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, CSVファイルID_審査会結果登録一覧, UzUDE0831EucAccesslogFileType.Csv);
-        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), 出力名);
+        RString filePath = Path.combinePath(fsmanager.getEucOutputDirectry(), 出力名);
         DbAccessLogger accessLog = new DbAccessLogger();
         try (CsvWriter<ShinsaKaiKekkaTorokuCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).
@@ -207,13 +207,7 @@ public class ShinsaKaiKekkaToroku {
         if (validation.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validation).respond();
         } else {
-            dgNinteiTaskList_Row row = div.getDgNinteiTaskList().getSelectedItems().get(0);
-            set遷移先引数(row);
-            DbAccessLogger logger = new DbAccessLogger();
-            logger.store(new ShoKisaiHokenshaNo(row.getHokenshaNo()), row.getHihoNumber(),
-                    ExpandedInformations.申請書管理番号.fromValue(row.getShinseishoKanriNo())
-            );
-            logger.flushBy(AccessLogType.照会);
+            set遷移先引数(div.getDgNinteiTaskList().getSelectedItems().get(0));
             return ResponseData.of(div).forwardWithEventName(DBE4020001TransitionEventName.審査会対象者個別結果登録へ遷移する).respond();
         }
     }

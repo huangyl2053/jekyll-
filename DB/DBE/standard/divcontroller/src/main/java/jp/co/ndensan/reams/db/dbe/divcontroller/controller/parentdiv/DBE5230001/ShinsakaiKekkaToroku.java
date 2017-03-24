@@ -50,8 +50,10 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoBuilder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteichosajokyo.NinteiChosaJokyoDataPass;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.accesslog.ExpandedInformations;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.divcontroller.util.KaigoRowState;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.db.dbz.service.core.ninteichosajokyo.NinteiChosaJokyoFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -62,6 +64,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -391,21 +394,28 @@ public class ShinsakaiKekkaToroku {
         private void save審査結果(IShinsakakKekksaTorokuManager manager, ShinsakaiKekkaTorokuDiv div) {
             List<dgTaishoshaIchiran_Row> rowList = div.getDgTaishoshaIchiran().getDataSource();
             RString 開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
+            DbAccessLogger logger = new DbAccessLogger();
             for (dgTaishoshaIchiran_Row row : rowList) {
                 TaishoshaIchiranRow row2 = new TaishoshaIchiranRow(row);
                 KaigoRowState state = row2.getJotai();
                 switch (state) {
                     case 追加:
                         saveBy(manager, row2, 開催番号, state);
-                        continue;
+                        break;
                     case 修正:
                         saveBy(manager, row2, 開催番号, state);
-                        continue;
+                        break;
                     case 削除:
                         deleteBy(manager, row2, 開催番号);
+                        break;
                     default:
+                        continue;
                 }
+                logger.store(row2.getHokenshaNo(), row2.getHihokenshaNo(),
+                        ExpandedInformations.申請書管理番号.fromValue(row2.getShinseishoKanriNo().value())
+                );
             }
+            logger.flushBy(AccessLogType.更新);
         }
 
         private static void saveBy(IShinsakakKekksaTorokuManager manager, TaishoshaIchiranRow row, RString 開催番号, KaigoRowState state) {

@@ -118,7 +118,6 @@ public class NinteiKekkaJohoBuilder {
      * @return {@link NinteiKekkaJohoBuilder}
      */
     public NinteiKekkaJohoBuilder set介護認定審査会資料作成年月日(FlexibleDate 介護認定審査会資料作成年月日) {
-        requireNonNull(介護認定審査会資料作成年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会資料作成年月日"));
         entity.setShinsakaiShiryoSakuseiYMD(介護認定審査会資料作成年月日);
         return this;
     }
