@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHok
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
 import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -217,15 +218,17 @@ public class CreateTarget {
      * @return ResponseData<CreateTargetDiv>
      */
     public ResponseData<CreateTargetDiv> onClick_btnKensaku(CreateTargetDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         ValidationMessageControlPairs validPair = getValidationHandler(div).入力チェック();
         if (validPair.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPair).respond();
         }
         CreateTargetMapperParameter param = getHandler(div).createParam();
         SearchResult<CreateTargetBusiness> business = CreateTargetManager.createInstance().get対象者一覧情報(param);
-        ValidationMessageControlPairs validPairs = getValidationHandler(div).データチェック(business.records());
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        if (!ResponseHolder.isReRequest() && business.records().isEmpty()) {
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
         }
         getHandler(div).onClick_btnKensaku(business);
         return ResponseData.of(div).setState(DBE5090001StateName.検索結果);
