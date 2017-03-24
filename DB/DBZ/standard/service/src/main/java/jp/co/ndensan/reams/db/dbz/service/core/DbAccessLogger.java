@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
@@ -62,9 +63,11 @@ public class DbAccessLogger {
      * EUCに関するアクセスログを実際に書き出します。
      *
      * @param spoolOutputType {@link UzUDE0835SpoolOutputType}
+     * @return {@link AccessLogUUID} （ファイルスプールの引数に用いる）
      */
-    public void flushByEUC(UzUDE0835SpoolOutputType spoolOutputType) {
-        jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger.logEUC(spoolOutputType, personalData);
+    public AccessLogUUID flushByEUC(UzUDE0835SpoolOutputType spoolOutputType) {
+        AccessLogUUID uuid = jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger.logEUC(spoolOutputType, personalData);
         personalData.clear();
+        return uuid;
     }
 }

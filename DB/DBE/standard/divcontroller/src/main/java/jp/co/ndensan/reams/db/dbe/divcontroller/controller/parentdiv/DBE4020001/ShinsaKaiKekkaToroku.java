@@ -30,18 +30,11 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotai
 import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDescriptor;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDownload;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.euc.api.EucOtherInfo;
+import jp.co.ndensan.reams.uz.uza.euc.cooperation.EucDownload;
+import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -54,6 +47,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -172,6 +166,7 @@ public class ShinsaKaiKekkaToroku {
      */
     public IDownLoadServletResponse onClick_btnRyooutput(ShinsaKaiKekkaTorokuDiv div, IDownLoadServletResponse response) {
         RString 出力名 = EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, CSVファイルID_審査会結果登録一覧);
+        FileSpoolManager fsmanager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, CSVファイルID_審査会結果登録一覧, UzUDE0831EucAccesslogFileType.Csv);
         RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), 出力名);
         DbAccessLogger accessLog = new DbAccessLogger();
         try (CsvWriter<ShinsaKaiKekkaTorokuCsvEntity> csvWriter
@@ -189,14 +184,9 @@ public class ShinsaKaiKekkaToroku {
                         row.getShinseishoKanriNo());
                 accessLog.store(new ShoKisaiHokenshaNo(row.getShoKisaiHokenshaNo()), row.getHihoNumber(), expandedInfo);
             }
-            csvWriter.close();
         }
-        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(出力名));
-        sfd = SharedFile.defineSharedFile(sfd);
-        CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
-        accessLog.flushByEUC(UzUDE0835SpoolOutputType.EucOther);
-        SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
-        return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, 出力名), response);
+        fsmanager.spool(filePath, accessLog.flushByEUC(UzUDE0835SpoolOutputType.EucOther));
+        return EucDownload.directAccessDownload(SubGyomuCode.DBE認定支援, fsmanager.getSharedFileName(), fsmanager.getSharedFileId(), response);
     }
 
     /**
