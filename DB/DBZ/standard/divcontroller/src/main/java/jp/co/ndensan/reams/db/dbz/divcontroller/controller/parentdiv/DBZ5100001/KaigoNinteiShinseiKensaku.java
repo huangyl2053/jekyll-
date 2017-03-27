@@ -196,7 +196,12 @@ public class KaigoNinteiShinseiKensaku {
     
     private SearchResult<ShinseiKensakuBusiness> search認定(ShinseiKensakuMapperParameter parameter) {
         ShinseiKensakuFinder finder = ShinseiKensakuFinder.createInstance();
-        return finder.search認定(parameter);
+        IUrControlData controlData = UrControlDataFactory.createInstance();
+        RString uiContainerId = controlData.getUIContainerId();
+        if (認定メニュー.equals(uiContainerId)) {
+            parameter.setUseZenkaiShinsei(true);
+        } 
+            return finder.search認定(parameter);
     }
 
     private void setViewState対象内容(dgShinseiJoho_Row row) {

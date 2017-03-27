@@ -170,7 +170,8 @@ public class ShinseiKensakuMapperParameter {
     private boolean isNowPhaseNijiHantei;
     // 月次処理
     private boolean isNowPhaseGetsureiShori;
-
+    
+    
     private boolean isShinseiUketsukeKanryo;
     private boolean isShinseiUketsukeMiKanryo;
     private boolean isChosaIraiKanryo;
@@ -259,6 +260,8 @@ public class ShinseiKensakuMapperParameter {
     private boolean useZenkaiYukoKikan;
     private boolean useZenkaiYukoKikanStartFrom;
     private boolean useZenkaiYukoKikanStartTo;
+    //前回の申請
+    private boolean useZenkaiShinsei;
     private int limitCount;
 
     // 画面詳細条件の認定調査の調査実施場所～調査実施日を入力する場合

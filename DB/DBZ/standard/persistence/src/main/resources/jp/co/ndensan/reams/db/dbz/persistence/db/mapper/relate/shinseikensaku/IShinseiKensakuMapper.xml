@@ -460,6 +460,10 @@
         <if test="useShoriJotaiKubun">
             AND DbT5101NinteiShinseiJoho."shoriJotaiKubun" = #{shoriJotaiKubun}
         </if>
+        <if test="!useShoriJotaiKubun">
+            AND DbT5101NinteiShinseiJoho."shoriJotaiKubun" = '0'
+            OR DbT5101NinteiShinseiJoho."shoriJotaiKubun" = '3'
+        </if>
         <if test="useKoroshoIfShikibetsuCode">
             AND DbT5101NinteiShinseiJoho."koroshoIfShikibetsuCode" = #{koroshoIfShikibetsuCode}
         </if>
@@ -518,6 +522,9 @@
         </if>
         <if test="useShinseiKeikaDaysTo">
             AND DbT5101NinteiShinseiJoho."ninteiShinseiYMD" <![CDATA[>=]]> #{shinseiKeikaDaysTo}
+        </if>
+        <if test="useZenkaiShinsei">
+            AND DbT5101NinteiShinseiJoho."torisageKubunCode" = '1'
         </if>
         <choose>
             <when test="useHihokenshaName">
