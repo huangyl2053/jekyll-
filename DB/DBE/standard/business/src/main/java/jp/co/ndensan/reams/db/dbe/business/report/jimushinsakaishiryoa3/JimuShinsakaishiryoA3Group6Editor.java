@@ -72,12 +72,8 @@ public class JimuShinsakaishiryoA3Group6Editor implements IJimuShinsakaishiryoA3
         source.listShinsei_11 = RString.EMPTY;
         source.listZenkaiｙukokikan_1 = business.get前回期間_下();
         source.listYukokikan_1 = RString.EMPTY;
-        source.shikibetuCode = new ShikibetsuCode(business.get識別コード());
-        if (!RString.isNullOrEmpty(business.get申請書管理番号())) {
-            source.hishokenshaNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
-                    business.get申請書管理番号());
-        }
         source.layout = JimuShinsakaiShiryoA3Layouts.事務局用追加資料.index();
+        setAccessLogInfo(source);
         return source;
     }
 
@@ -103,5 +99,14 @@ public class JimuShinsakaishiryoA3Group6Editor implements IJimuShinsakaishiryoA3
             }
         }
         return RString.EMPTY;
+    }
+    
+    private void setAccessLogInfo(JimuShinsakaishiryoA3ReportSource source) {
+        source.識別コード = new ShikibetsuCode(business.get識別コード());
+        if (!RString.isNullOrEmpty(business.get申請書管理番号())) {
+            ExpandedInformation 拡張情報 = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
+                    business.get申請書管理番号());
+            source.拡張情報 = 拡張情報;
+        }
     }
 }

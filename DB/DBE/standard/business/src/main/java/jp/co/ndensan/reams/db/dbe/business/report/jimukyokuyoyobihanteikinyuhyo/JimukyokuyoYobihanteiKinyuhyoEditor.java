@@ -71,12 +71,7 @@ public class JimukyokuyoYobihanteiKinyuhyoEditor implements IJimukyokuyoYobihant
         source.kaisaiHH = business.get開催時().padZeroToLeft(INT_NUM);
         source.kaisaiMM = business.get開催分().padZeroToLeft(INT_NUM);
         source.gogitaiName = business.get合議体名称();
-        source.shikibetuCode = ShikibetsuCode.EMPTY;
-
-        if (!RString.isNullOrEmpty(business.get被保険者番号())) {
-            source.hishokenshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"),
-                    business.get被保険者番号());
-        }
+        setAccessLogInfo(source);
         return source;
     }
 
@@ -89,6 +84,13 @@ public class JimukyokuyoYobihanteiKinyuhyoEditor implements IJimukyokuyoYobihant
                     .toDateString();
         }
         return RString.EMPTY;
+    }
+
+    private void setAccessLogInfo(JimukyokuyoYobihanteiKinyuhyoReportSource source) {
+        source.識別コード = new ShikibetsuCode(business.get識別コード());
+        ExpandedInformation 拡張情報 = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
+                business.get申請書管理番号().getColumnValue());
+        source.拡張情報 = 拡張情報;
     }
 
 }

@@ -845,6 +845,7 @@
         dbt5101."age" AS dbt5101_age,
         dbt5101."nigoTokuteiShippeiCode" AS dbt5101_nigoTokuteiShippeiCode,
         dbt5101."koroshoIfShikibetsuCode" AS dbt5101_konkaiIfShikibetsuCode,
+        dbt5101."shinseishoKanriNo" AS dbt5101_shinseishoKanriNo,
         ZenShinsakaiWariateJoho."koroshoIfShikibetsuCode" AS dbt5101_zenkaiIfShikibetsuCode,
         ZenShinsakaiWariateJoho."nijiHanteiYokaigoJotaiKubunCode" AS dbt5102_jotaiKubunCode,
         ZenShinsakaiWariateJoho."nijiHanteiNinteiYukoKikan" AS dbt5102_yukoKikan,
@@ -906,6 +907,7 @@
         <result property="age" column="dbt5101_age" />
         <result property="nigoTokuteiShippeiCode" column="dbt5101_nigoTokuteiShippeiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="koroshoIfShikibetsuCode" column="dbt5101_konkaiIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="shinseishoKanriNo" column="dbt5101_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" />
         <result property="zenKoroshoIfShikibetsuCode" column="dbt5101_zenkaiIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="yokaigoJotaiKubunCode" column="dbt5102_jotaiKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="hanteiNinteiYukoKikan" column="dbt5102_yukoKikan" />
