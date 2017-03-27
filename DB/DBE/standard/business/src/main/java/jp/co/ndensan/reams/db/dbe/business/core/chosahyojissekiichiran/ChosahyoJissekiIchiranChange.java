@@ -40,7 +40,8 @@ public final class ChosahyoJissekiIchiranChange {
                 dateFormat(entity.get認定調査受領年月日()),
                 ChosaKubun.toValue(entity.get認定調査区分コード()).get名称(),
                 entity.is訪問の種類() ? new RString("居宅") : new RString("施設"),
-                entity.get単価());
+                entity.get単価(),
+                entity.get申請書管理番号());
         return data;
     }
 

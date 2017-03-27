@@ -271,26 +271,16 @@ public class IchijihanteiekkahyoTokkijiko {
     }
 
     private RString getFilePathByRemban(RString 特記事項番号, int 特記事項連番) {
-        int 特記事項連番_イメージファイル = 特記事項連番 - 1;
-        RStringBuilder イメージファイル = new RStringBuilder();
         RString ファイル名;
+        NinteiChosaTokkiJikou 認定調査特記事項;
         try {
-            ファイル名 = NinteiChosaTokkiJikou.getEnumByDbt5205認定調査特記事項番号(特記事項番号).getイメージファイル();
+            認定調査特記事項 = NinteiChosaTokkiJikou.getEnumByDbt5205認定調査特記事項番号(特記事項番号);
+            ファイル名 = 認定調査特記事項.getComposedImageFileName(特記事項連番);
+            ファイル名.replace(".png", "");
         } catch (Exception e) {
             ファイル名 = RString.EMPTY;
         }
-        if (!RString.isNullOrEmpty(ファイル名)) {
-            イメージファイル.append(ファイル名);
-            for (int i = 0; i <= 最大連番; i++) {
-                if (i == 特記事項連番_イメージファイル) {
-                    イメージファイル.replace(new RString("xx"), new RString(特記事項連番_イメージファイル).padZeroToLeft(2));
-                    イメージファイル.replace(".png", "");
-                    break;
-                }
-            }
-            return イメージファイル.toRString();
-        }
-        return RString.EMPTY;
+        return ファイル名;
     }
 
     private RString get特記事項テキスト(Code 厚労省IF識別コード, RString 調査特記事項番号, int 特記事項連番) {
