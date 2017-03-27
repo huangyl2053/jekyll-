@@ -25,18 +25,18 @@ public class DbAccessLogger {
 
     private final List<PersonalData> personalData = new ArrayList<>();
 
-    private static final Code コード = new Code("0003");
-    private static final RString 被保険者番号 = new RString("被保険者番号");
-
     /**
      * アクセスログを追加します。
      *
      * @param shoKisaiHokenshaNo
      * @param hihokenshaNo
      */
-    @Deprecated
     public void store(ShoKisaiHokenshaNo shoKisaiHokenshaNo, RString hihokenshaNo) {
-        store(shoKisaiHokenshaNo, hihokenshaNo, new ExpandedInformation(コード, 被保険者番号, hihokenshaNo));
+        personalData.add(PersonalData.of(newShikibetsuCode(shoKisaiHokenshaNo, hihokenshaNo)));
+    }
+
+    private static ShikibetsuCode newShikibetsuCode(ShoKisaiHokenshaNo shoKisaiHokenshaNo, RString hihokenshaNo) {
+        return new ShikibetsuCode(shoKisaiHokenshaNo.value().substring(0, 5).concat(hihokenshaNo));
     }
 
     /**
@@ -47,7 +47,7 @@ public class DbAccessLogger {
      * @param expandedInformation
      */
     public void store(ShoKisaiHokenshaNo shoKisaiHokenshaNo, RString hihokenshaNo, ExpandedInformation expandedInformation) {
-        personalData.add(PersonalData.of(new ShikibetsuCode(shoKisaiHokenshaNo.value().substring(0, 5).concat(hihokenshaNo)), expandedInformation));
+        personalData.add(PersonalData.of(newShikibetsuCode(shoKisaiHokenshaNo, hihokenshaNo), expandedInformation));
     }
 
     /**
@@ -58,7 +58,7 @@ public class DbAccessLogger {
      * @param expandedInformations
      */
     public void store(ShoKisaiHokenshaNo shoKisaiHokenshaNo, RString hihokenshaNo, ExpandedInformation... expandedInformations) {
-        personalData.add(PersonalData.of(new ShikibetsuCode(shoKisaiHokenshaNo.value().substring(0, 5).concat(hihokenshaNo)), expandedInformations));
+        personalData.add(PersonalData.of(newShikibetsuCode(shoKisaiHokenshaNo, hihokenshaNo), expandedInformations));
     }
 
     /**
