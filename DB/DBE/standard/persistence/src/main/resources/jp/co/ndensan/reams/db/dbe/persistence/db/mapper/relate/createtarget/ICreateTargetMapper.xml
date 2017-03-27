@@ -859,4 +859,25 @@
         ORDER BY	
         C."remban"	
     </select>
+    
+    <select resultOrdered="true" id="get申請情報" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity"
+            parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
+        SELECT
+        DbT5101.*
+        FROM
+        rgdb."DbT5101NinteiShinseiJoho" DbT5101
+        WHERE
+        DbT5101."shinseishoKanriNo" = #{shinseishoKanriNo}
+        AND DbT5101."logicalDeletedFlag" = false
+    </select>
+    
+    <select resultOrdered="true" id="get外部連携データ" resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7211GaibuRenkeiDataoutputJohoEntity"
+                parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
+        SELECT
+        DbT7211.*
+        FROM
+        rgdb."DbT7211GaibuRenkeiDataoutputJoho" DbT7211
+        WHERE
+        DbT7211."shinseishoKanriNo" = #{shinseishoKanriNo}
+    </select>    
 </mapper>

@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5101NinteiShinseiJohoD
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT7211GaibuRenkeiDataoutputJohoDac;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -62,7 +63,8 @@ public class CreateTargetManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link CreateTargetManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link CreateTargetManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link CreateTargetManager}のインスタンス
      */
     public static CreateTargetManager createInstance() {
         return InstanceProvider.create(CreateTargetManager.class);
@@ -217,8 +219,10 @@ public class CreateTargetManager {
      */
     @Transaction
     public int update(RString 申請書管理番号) {
-        DbT5101NinteiShinseiJohoEntity entity = dbt5101Dac.selectByKey(new ShinseishoKanriNo(申請書管理番号));
+        ICreateTargetMapper mapper = mapperProvider.create(ICreateTargetMapper.class);
+        DbT5101NinteiShinseiJohoEntity entity = mapper.get申請情報(申請書管理番号);
         entity.setIfSofuYMD(FlexibleDate.getNowDate());
+        entity.setState(EntityDataState.Modified);
         return dbt5101Dac.save(entity);
     }
 
@@ -230,7 +234,8 @@ public class CreateTargetManager {
      */
     @Transaction
     public int insertUpdate(RString 申請書管理番号) {
-        DbT7211GaibuRenkeiDataoutputJohoEntity entity = db7211Dac.selectByKey(new ShinseishoKanriNo(申請書管理番号));
+        ICreateTargetMapper mapper = mapperProvider.create(ICreateTargetMapper.class);
+        DbT7211GaibuRenkeiDataoutputJohoEntity entity = mapper.get外部連携データ(申請書管理番号);
         if (entity == null) {
             DbT7211GaibuRenkeiDataoutputJohoEntity dbt7211Entity = new DbT7211GaibuRenkeiDataoutputJohoEntity();
             dbt7211Entity.setShinseishoKanriNo(new ShinseishoKanriNo(申請書管理番号));
@@ -238,6 +243,7 @@ public class CreateTargetManager {
             return db7211Dac.save(dbt7211Entity);
         }
         entity.setCenterSoshinChushutsuYMD(FlexibleDate.getNowDate());
+        entity.setState(EntityDataState.Modified);
         return db7211Dac.save(entity);
     }
 }

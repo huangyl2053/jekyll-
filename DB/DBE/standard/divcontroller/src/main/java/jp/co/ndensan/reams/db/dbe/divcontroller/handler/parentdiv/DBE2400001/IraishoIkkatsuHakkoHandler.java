@@ -348,7 +348,7 @@ public class IraishoIkkatsuHakkoHandler {
 
         if (!div.getChkIkenshoSeikyusho().isDisplayNone()) {
             RString 初期選択_請求書 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼_初期選択_請求書, 基準日, SubGyomuCode.DBE認定支援, 保険者市町村コード);
-            if (選択.equals(初期選択_請求書)) {
+            if (!選択.equals(連動印刷) && 選択.equals(初期選択_請求書)) {
                 請求書選択selectedKeys.add(意見書チェックボックス_請求書);
             }
         }
