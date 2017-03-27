@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.niinteichosajoho.ShinchokuDat
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.niinteichosajoho.ShinchokuDataOutputRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.definition.core.util.accesslog.ExpandedInformations;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -23,6 +22,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -115,10 +115,9 @@ public class ShinchokuDataOutputEucCsvProcess extends BatchProcessBase<Shinchoku
     @Override
     protected void afterExecute() {
         eucCsvWriterJunitoJugo.close();
-        manager.spool(eucFilePath);
-        outputJokenhyoFactory();
         AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
         manager.spool(eucFilePath, accessLogUUID);
+        outputJokenhyoFactory();
     }
 
     private void outputJokenhyoFactory() {
@@ -152,7 +151,7 @@ public class ShinchokuDataOutputEucCsvProcess extends BatchProcessBase<Shinchoku
     
     private PersonalData toPersonalData(RString 証記載保険者番号, RString 被保険者番号, RString 申請書管理番号) {
         ShikibetsuCode shikibetsuCode = new ShikibetsuCode(証記載保険者番号.substring(0, 5).concat(被保険者番号));
-        ExpandedInformation expandedInformation = ExpandedInformations.申請書管理番号.fromValue(申請書管理番号);
+        ExpandedInformation expandedInformation = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号);
         return PersonalData.of(shikibetsuCode, expandedInformation);
     }
 }

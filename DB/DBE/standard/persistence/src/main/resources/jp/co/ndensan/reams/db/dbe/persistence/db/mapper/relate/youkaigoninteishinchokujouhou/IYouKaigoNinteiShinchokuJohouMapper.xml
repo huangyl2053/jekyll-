@@ -239,9 +239,6 @@
         ) 
         LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" AS H 
         ON A."shinseishoKanriNo" = H."shinseishoKanriNo" 
-        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" AS J1 
-        ON H."shinsakaiKaisaiNo" = J1."shinsakaiKaisaiNo" 
-        AND H."shinseishoKanriNo" = J1."shinseishoKanriNo" 
         LEFT JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS K1 
         ON H."shinsakaiKaisaiNo" = K1."shinsakaiKaisaiNo" 
         LEFT JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS L1 
