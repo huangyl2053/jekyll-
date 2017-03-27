@@ -620,8 +620,8 @@ public class ShinchokuDataOutputBusiness {
         eucEntity.set麻痺右下肢(nullToEmpty(entity.get認定調査remban4()));
         eucEntity.set麻痺その他(nullToEmpty(entity.get認定調査remban5()));
         eucEntity.set拘縮肩関節(nullToEmpty(entity.get認定調査remban6()));
-        eucEntity.set障害高齢者自立度(nullToEmpty(entity.getNinchishoNichijoSeikatsuJiritsudoCode()));
-        eucEntity.set認知症高齢者自立度(nullToEmpty(entity.getShogaiNichijoSeikatsuJiritsudoCode()));
+        eucEntity.set障害高齢者自立度(nullToEmpty(entity.getShogaiNichijoSeikatsuJiritsudoCode()));
+        eucEntity.set認知症高齢者自立度(nullToEmpty(entity.getNinchishoNichijoSeikatsuJiritsudoCode()));
         eucEntity.set前回結果_麻痺左上肢(nullToEmpty(entity.get前回認定remban1()));
         eucEntity.set前回結果_麻痺右上肢(nullToEmpty(entity.get前回認定remban2()));
         eucEntity.set前回結果_麻痺左下肢(nullToEmpty(entity.get前回認定remban3()));
