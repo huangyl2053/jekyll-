@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.ocr.IRelatedData;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ProcessingResults;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.ShinseiKey;
 import jp.co.ndensan.reams.db.dbe.entity.csv.ocr.OcrTorikomiKekkaCsvEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.util.ObjectUtil;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -30,6 +32,7 @@ public final class OcrTorikomiResult {
     private final ShinseiKey key;
     private final RString 氏名;
     private final RString 氏名カナ;
+    private final RString 申請書管理番号;
     private final IProcessingResults 処理結果;
 
     private OcrTorikomiResult(Builder builder) {
@@ -37,6 +40,7 @@ public final class OcrTorikomiResult {
         this.氏名 = builder.氏名;
         this.氏名カナ = builder.氏名カナ;
         this.処理結果 = builder.処理結果;
+        this.申請書管理番号 = null;
     }
 
     Collection<OcrTorikomiKekkaCsvEntity> toEntities() {
@@ -55,6 +59,7 @@ public final class OcrTorikomiResult {
             entity.set氏名カナ(this.氏名カナ);
             entity.setKekkaCode(pr.type().code());
             entity.set備考(pr.note());
+            entity.set申請書管理番号(申請書管理番号);
             entities.add(entity);
         }
         return entities;
@@ -73,6 +78,7 @@ public final class OcrTorikomiResult {
         private final ProcessingResults 処理結果;
         private RString 氏名 = RString.EMPTY;
         private RString 氏名カナ = RString.EMPTY;
+        private RString 申請書管理番号 = RString.EMPTY;
 
         /**
          * {@link Builder}を生成します。
@@ -91,6 +97,7 @@ public final class OcrTorikomiResult {
         public Builder set関連データ(IRelatedData 関連データ) {
             this.氏名 = 関連データ.get被保険者氏名();
             this.氏名カナ = 関連データ.get被保険者カナ();
+            this.申請書管理番号 = ObjectUtil.defaultIfNull(関連データ.get申請書管理番号(), ShinseishoKanriNo.EMPTY).value();
             return this;
         }
 

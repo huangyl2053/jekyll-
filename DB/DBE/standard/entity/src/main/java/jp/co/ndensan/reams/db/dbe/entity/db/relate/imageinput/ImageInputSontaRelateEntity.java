@@ -27,6 +27,7 @@ public class ImageInputSontaRelateEntity {
     private RString hihokenshaKana;
     private RString hihokenshaName;
     private FlexibleDate ninteiShinseiYMD;
+    private RString torisageKubunCode;
     private boolean logicalDeletedFlag;
     private boolean matchesShiteiShinseiYMD;
     private RDateTime imageSharedFileId;

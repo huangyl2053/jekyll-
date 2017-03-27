@@ -15,6 +15,7 @@
           , T5101."ninteiShinseiShinseijiKubunCode" AS 申請区分
           , T5101."koroshoIfShikibetsuCode" AS 厚労省IF識別コード
           , T5101."shinseishoKanriNo" AS 申請書管理番号
+          , T5101."torisageKubunCode" AS 取下区分コード
           , T5201."ninteichosaIraiRirekiNo" AS 認定調査依頼履歴番号
           , T5115."imageSharedFileId" AS イメージ共有ファイルID
           , T5201."ninteichosaItakusakiCode" AS 認定調査委託先コード
@@ -26,6 +27,8 @@
           , T5105."ninteiShinsakaiKanryoYMD" AS 認定審査会完了日
           , T5116."kariIchijiHanteiKubun" AS 仮一次判定区分
           , (T5101."ninteiShinseiYMD" = #{認定申請日}) AS matches指定申請日
+          , (T5105."ninteiShinsakaiKanryoYMD" IS NOT NULL) AS has二次判定結果
+          , (T5101."torisageKubunCode" <![CDATA[<>]]> '1') AS has取下Or却下
         FROM
           rgdb."DbT5101NinteiShinseiJoho" AS T5101
           LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" AS T5201
@@ -50,7 +53,7 @@
           WHERE
             T5101."shoKisaiHokenshaNo" = #{証記載保険者番号}
             AND T5101."hihokenshaNo" = #{被保険者番号}
-          ORDER BY matches指定申請日 DESC, 論理削除フラグ, 認定申請日 DESC
+          ORDER BY matches指定申請日 DESC, 論理削除フラグ, has取下Or却下, has二次判定結果, 認定申請日 DESC
           LIMIT 1
     </select>
 

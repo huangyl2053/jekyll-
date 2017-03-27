@@ -41,6 +41,7 @@
           , T5101."ninteiShinseiYMD" AS 認定申請年月日
           , T5101."logicalDeletedFlag" AS 論理削除フラグ
           , T5101."shinseishoKanriNo" AS 申請書管理番号
+          , T5101."torisageKubunCode" AS 取下区分コード
           , T5115."imageSharedFileId" AS イメージ共有ファイルID
           , T5912."shujiiCode" AS 主治医コード
           , T5912."shujiiName" AS 主治医氏名
@@ -57,6 +58,8 @@
           , <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5302ShujiiIkenshoJohoMapper.allColumns_DbT5302ShujiiIkenshoJoho"/>
           , <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5305IkenshoImageJohoMapper.allColumns_DbT5305IkenshoImageJoho" />
           , (T5101."ninteiShinseiYMD" = #{認定申請日}) AS matches指定申請日
+          , (T5105."ninteiShinsakaiKanryoYMD" IS NOT NULL) AS has二次判定結果
+          , (T5101."torisageKubunCode" <![CDATA[<>]]> '1') AS has取下Or却下
         FROM
           rgdb."DbT5101NinteiShinseiJoho" AS T5101
           LEFT JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS T5301
@@ -96,18 +99,19 @@
         WHERE
           T5101."shoKisaiHokenshaNo" = #{証記載保険者番号}
           AND T5101."hihokenshaNo" = #{被保険者番号}
-        ORDER BY matches指定申請日 DESC, 論理削除フラグ, 認定申請年月日 DESC
+        ORDER BY matches指定申請日 DESC, 論理削除フラグ, has取下Or却下, has二次判定結果, 認定申請年月日 DESC
     </select>
 
     <resultMap id="ResultMap_get意見書関連データ" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.imageinput.ImageinputRelateEntity" autoMapping="true">
-        <id property="証記載保険者番号" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <id property="認定申請年月日" column="認定申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <id property="申請書管理番号" column="申請書管理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="証記載保険者番号" column="証記載保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者番号" column="被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="認定申請年月日" column="認定申請年月日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="被保険者氏名" column="被保険者氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="被保険者カナ" column="被保険者カナ" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="施設入所の有無" column="施設入所の有無"/>
-        <result property="申請書管理番号" column="申請書管理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="論理削除フラグ" column="論理削除フラグ"/>
+        <result property="取下区分コード" column="取下区分コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="イメージ共有ファイルID" column="イメージ共有ファイルID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="主治医コード" column="主治医コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="主治医氏名" column="主治医氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -137,6 +141,7 @@
           , T5101."hihokenshaKana" AS "hihokenshaKana"
           , T5101."hihokenshaName" AS "hihokenshaName"
           , T5101."ninteiShinseiYMD" AS "ninteiShinseiYMD"
+          , T5101."torisageKubunCode" AS "torisageKubunCode"
           , T5101."logicalDeletedFlag" AS "logicalDeletedFlag"
           , (T5101."ninteiShinseiYMD" = #{認定申請日}) AS "matchesShiteiShinseiYMD"
           , T5115."imageSharedFileId" AS "imageSharedFileId"
@@ -144,6 +149,8 @@
           , T5105."ikenshoSakuseiIraiKanryoYMD" AS "ikenshoSakuseiIraiKanryoYMD"
           , T5105."ninteiShinsakaiKanryoYMD" AS "ninteiShinsakaiKanryoYMD"
           , T5116."kariIchijiHanteiKubun" AS "kariIchijiHanteiKubun"
+          , (T5105."ninteiShinsakaiKanryoYMD" IS NOT NULL) AS "hasNijiHanteiKekka"
+          , (T5101."torisageKubunCode" <![CDATA[<>]]> '1') AS "hasTorisageOrKyakka"
         FROM
             rgdb."DbT5101NinteiShinseiJoho" AS T5101
         LEFT JOIN rgdb."DbT5105NinteiKanryoJoho" AS T5105
@@ -159,6 +166,8 @@
         ORDER BY
             "matchesShiteiShinseiYMD" DESC,
             "logicalDeletedFlag",
+            "hasTorisageOrKyakka",
+            "hasNijiHanteiKekka",
             "ninteiShinseiYMD" DESC
     </select>
 
@@ -171,6 +180,7 @@
         <result property="hihokenshaName"          column="hihokenshaName"     typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="ninteiShinseiYMD"        column="ninteiShinseiYMD"   typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="imageSharedFileId"       column="imageSharedFileId"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler" />
+        <result property="torisageKubunCode"       column="torisageKubunCode"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="logicalDeletedFlag"      column="logicalDeletedFlag" />
         <result property="matchesShiteiShinseiYMD" column="matchesShiteiShinseiYMD" />
         <result property="kariIchijiHanteiKubun"   column="kariIchijiHanteiKubun" />

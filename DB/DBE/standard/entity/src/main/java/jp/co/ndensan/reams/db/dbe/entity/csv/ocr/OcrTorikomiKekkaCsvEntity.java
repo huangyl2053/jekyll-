@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.entity.csv.ocr;
 
 import java.util.Objects;
-import jp.co.ndensan.reams.db.dbz.definition.core.util.accesslog.ExpandedInformations;
+import jp.co.ndensan.reams.db.dbe.definition.core.util.accesslog.ExpandedInformations;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
@@ -43,21 +43,23 @@ public class OcrTorikomiKekkaCsvEntity {
     private int kekkaCode;
     @CsvField(order = 90, name = "備考")
     private RString 備考;
+    private RString 申請書管理番号;
 
     /**
      * @return PersonalDataへ変換可能な場合、変換結果を保持したインスタンス.　不可能な場合、空.
      */
     public Optional<PersonalData> toPersonalDataIfPossible() {
         if (RString.isNullOrEmpty(this.証記載保険者番号)
-                && RString.isNullOrEmpty(this.被保険者番号)) {
+                && RString.isNullOrEmpty(this.被保険者番号)
+                && RString.isNullOrEmpty(this.申請書管理番号)) {
             return Optional.empty();
         }
         if (this.証記載保険者番号.length() != HOKENSHANO_LENGTH
                 && this.被保険者番号.length() != HIHOKENSHANO_LENGTH) {
             return Optional.empty();
-    }
+        }
         return Optional.of(PersonalData.of(new ShikibetsuCode(this.証記載保険者番号.substring(0, 5).concat(this.被保険者番号)),
-                ExpandedInformations.被保険者番号.fromValue(this.被保険者番号)));
+                ExpandedInformations.fromValue(this.申請書管理番号)));
     }
 
     @Override

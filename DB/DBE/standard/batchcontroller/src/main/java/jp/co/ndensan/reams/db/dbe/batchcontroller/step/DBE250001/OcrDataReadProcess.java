@@ -310,7 +310,7 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
             results.add(ProcessingResultFactory.error(ocrChosa, OcrTorikomiMessages.カタログデータなし));
             return new SaveImageFilesResult(sharedFileID, results);
         }
-        ImageJohoUpdater.Result result = ImageJohoUpdater.shinseiKey(nr.getShinseishoKanriNo(), nr.get証記載保険者番号(), nr.get被保険者番号())
+        ImageJohoUpdater.Result result = ImageJohoUpdater.shinseiKey(nr.get申請書管理番号(), nr.get証記載保険者番号(), nr.get被保険者番号())
                 .sharedFileID(sharedFileID)
                 .imageFilePaths(this.processParameter.getImageFilePaths())
                 .fileNameTheory(FileNameConvertionTheories.ID501)
@@ -451,7 +451,7 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
             if (imageNames.isEmpty()) {
                 continue;
             }
-            ImageJohoUpdater.Result result = ImageJohoUpdater.shinseiKey(nr.getShinseishoKanriNo(), nr.get証記載保険者番号(), nr.get被保険者番号())
+            ImageJohoUpdater.Result result = ImageJohoUpdater.shinseiKey(nr.get申請書管理番号(), nr.get証記載保険者番号(), nr.get被保険者番号())
                     .sharedFileID(共有ファイルID)
                     .imageFilePaths(this.processParameter.getImageFilePaths())
                     .fileNameTheory(theory)
@@ -544,7 +544,7 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
     private static DbT5202NinteichosahyoGaikyoChosaEntity newDbT5202NinteichosahyoGaikyoChosaEntity(NinteiOcrRelate nr) {
         DbT5202NinteichosahyoGaikyoChosaEntity entity = new DbT5202NinteichosahyoGaikyoChosaEntity();
-        entity.setShinseishoKanriNo(nr.getShinseishoKanriNo());
+        entity.setShinseishoKanriNo(nr.get申請書管理番号());
         entity.setNinteichosaRirekiNo(nr.get認定調査依頼履歴番号());
         entity.setGaikyoChosaTextImageKubun(TokkijikoTextImageKubun.イメージ.getコード());
         entity.setKoroshoIfShikibetsuCode(nr.get厚労省IF識別コード().asCode());
@@ -558,7 +558,7 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
     private static IProcessingResults validateDbT5202(DbT5202NinteichosahyoGaikyoChosaEntity entity,
             NinteiOcrRelate nr, OcrChosa ocrChosa, INinteiOcrMapper mapper, OcrDataReadProcessParameter batchParam) {
 
-        ChosahyoOcrContextParameter param = new ChosahyoOcrContextParameter(nr.get申請書管理番号(),
+        ChosahyoOcrContextParameter param = new ChosahyoOcrContextParameter(nr.get申請書管理番号Value(),
                 ocrChosa.get所属機関(), ocrChosa.get記入者());
         NinteiChosaContextEntity context = mapper.getNinteiChosaContext(param);
 
@@ -661,7 +661,7 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
     private static DbT5208NinteichosahyoServiceJokyoFlagEntity newDbT5208NinteichosahyoServiceJokyoFlagEntity(NinteiOcrRelate nr, int 連番) {
         DbT5208NinteichosahyoServiceJokyoFlagEntity entity = new DbT5208NinteichosahyoServiceJokyoFlagEntity();
-        entity.setShinseishoKanriNo(nr.getShinseishoKanriNo());
+        entity.setShinseishoKanriNo(nr.get申請書管理番号());
         entity.setNinteichosaRirekiNo(nr.get認定調査依頼履歴番号());
         entity.setKoroshoIfShikibetsuCode(nr.get厚労省IF識別コード().asCode());
         entity.setRemban(連番);
@@ -712,7 +712,7 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
     private static DbT5207NinteichosahyoServiceJokyoEntity newDbT5207NinteichosahyoServiceJokyoEntity(NinteiOcrRelate nr, int 連番) {
         DbT5207NinteichosahyoServiceJokyoEntity entity = new DbT5207NinteichosahyoServiceJokyoEntity();
-        entity.setShinseishoKanriNo(nr.getShinseishoKanriNo());
+        entity.setShinseishoKanriNo(nr.get申請書管理番号());
         entity.setNinteichosaRirekiNo(nr.get認定調査依頼履歴番号());
         entity.setKoroshoIfShikibetsuCode(nr.get厚労省IF識別コード().asCode());
         entity.setRemban(連番);
@@ -763,7 +763,7 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
     private static DbT5210NinteichosahyoShisetsuRiyoEntity newDbT5210NinteichosahyoShisetsuRiyoEntity(NinteiOcrRelate nr, int 連番) {
         DbT5210NinteichosahyoShisetsuRiyoEntity entity = new DbT5210NinteichosahyoShisetsuRiyoEntity();
-        entity.setShinseishoKanriNo(nr.getShinseishoKanriNo());
+        entity.setShinseishoKanriNo(nr.get申請書管理番号());
         entity.setNinteichosaRirekiNo(nr.get認定調査依頼履歴番号());
         entity.setKoroshoIfShikibetsuCode(nr.get厚労省IF識別コード().asCode());
         entity.setRemban(連番);
@@ -800,7 +800,7 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
     private static DbT5203NinteichosahyoKihonChosaEntity newDbT5203NinteichosahyoKihonChosaEntity(NinteiOcrRelate nr, OcrChosa ocrChosa) {
         DbT5203NinteichosahyoKihonChosaEntity entity = new DbT5203NinteichosahyoKihonChosaEntity();
-        entity.setShinseishoKanriNo(nr.getShinseishoKanriNo());
+        entity.setShinseishoKanriNo(nr.get申請書管理番号());
         entity.setNinteichosaRirekiNo(nr.get認定調査依頼履歴番号());
         entity.setKoroshoIfShikibetsuCode(nr.get厚労省IF識別コード().asCode());
         return entity;
@@ -861,7 +861,7 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
     private static DbT5211NinteichosahyoChosaItemEntity newDbT5211NinteichosahyoChosaItemEntity(NinteiOcrRelate nr, int 連番) {
         DbT5211NinteichosahyoChosaItemEntity entity = new DbT5211NinteichosahyoChosaItemEntity();
-        entity.setShinseishoKanriNo(nr.getShinseishoKanriNo());
+        entity.setShinseishoKanriNo(nr.get申請書管理番号());
         entity.setNinteichosaRirekiNo(nr.get認定調査依頼履歴番号());
         entity.setKoroshoIfShikibetsuCode(nr.get厚労省IF識別コード().asCode());
         entity.setRemban(連番);
@@ -990,7 +990,7 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
     private static DbT5205NinteichosahyoTokkijikoEntity newDbT5205NinteichosahyoTokkijikoEntity(NinteiOcrRelate nr, KomokuNo komokuNo) {
         DbT5205NinteichosahyoTokkijikoEntity entity = new DbT5205NinteichosahyoTokkijikoEntity();
-        entity.setShinseishoKanriNo(nr.getShinseishoKanriNo());
+        entity.setShinseishoKanriNo(nr.get申請書管理番号());
         entity.setNinteichosaRirekiNo(nr.get認定調査依頼履歴番号());
         entity.setNinteichosaTokkijikoNo(komokuNo.getChosaKomokuNo());
         entity.setNinteichosaTokkijikoRemban(komokuNo.getRemban());

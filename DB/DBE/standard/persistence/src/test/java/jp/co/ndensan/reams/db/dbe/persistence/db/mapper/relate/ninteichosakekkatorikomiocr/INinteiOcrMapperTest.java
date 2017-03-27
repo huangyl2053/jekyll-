@@ -35,8 +35,8 @@ public class INinteiOcrMapperTest extends DbeTestDacBase {
         @Test
         public void get関連データ() {
             System.out.println("- get関連データ() -------------------------------");
-//            NinteiOcrMapperParamter param = NinteiOcrMapperParamter.createParamter(new RString("202119"), new RString("0000241181"), new RString("20150501"));
-            NinteiOcrMapperParamter param = NinteiOcrMapperParamter.createParamter(new RString("205625"), new RString("0000041157"), new RString("19990913"));
+//            NinteiOcrMapperParamter param = NinteiOcrMapperParamter.createParamter(new RString("205625"), new RString("0000041157"), new RString("19990913"));
+            NinteiOcrMapperParamter param = NinteiOcrMapperParamter.createParamter(new RString("206029"), new RString("0000008371"), new RString("20170301"));
             INinteiOcrMapper sut = sqlSession.getMapper(INinteiOcrMapper.class);
 
             List<NinteiChosaKekkaTorikomiOcrRelateEntity> list = sut.get関連データ(param);
@@ -46,7 +46,8 @@ public class INinteiOcrMapperTest extends DbeTestDacBase {
             System.out.println(entity.isMatches指定申請日());
             System.out.println(entity.get認定調査依頼完了日());
             System.out.println(entity.get仮一次判定区分());
-            System.out.println("審査会完了日：" + entity.get認定審査会完了日());
+            System.out.println("審査会完了日　：" + entity.get認定審査会完了日());
+            System.out.println("取下区分コード：" + entity.get取下区分コード());
         }
 
         @Test

@@ -13,6 +13,7 @@ import java.util.List;
 import javax.annotation.CheckForNull;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IOcrData;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResults;
+import jp.co.ndensan.reams.db.dbe.definition.core.TorisageKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.TreatmentWhenIchijiHanteiZumi;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.imageinput.ImageinputRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -89,9 +90,7 @@ public class ImageinputRelate extends RelatedDataBase {
         return entity.get申請書管理番号();
     }
 
-    /**
-     * @return 申請書管理番号
-     */
+    @Override
     public ShinseishoKanriNo get申請書管理番号() {
         return new ShinseishoKanriNo(get申請書管理番号Value());
     }
@@ -229,6 +228,11 @@ public class ImageinputRelate extends RelatedDataBase {
     @Override
     protected RString get依頼名() {
         return IRAI_NAME;
+    }
+
+    @Override
+    protected TorisageKubun get取下区分() {
+        return TorisageKubun.toValue(this.entity.get取下区分コード());
     }
 
     /**
