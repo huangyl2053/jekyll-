@@ -50,12 +50,12 @@ public class OcrTorikomiKekkaCsvEntity {
      */
     public Optional<PersonalData> toPersonalDataIfPossible() {
         if (RString.isNullOrEmpty(this.証記載保険者番号)
-                && RString.isNullOrEmpty(this.被保険者番号)
-                && RString.isNullOrEmpty(this.申請書管理番号)) {
+                || RString.isNullOrEmpty(this.被保険者番号)
+                || RString.isNullOrEmpty(this.申請書管理番号)) {
             return Optional.empty();
         }
         if (this.証記載保険者番号.length() != HOKENSHANO_LENGTH
-                && this.被保険者番号.length() != HIHOKENSHANO_LENGTH) {
+                || this.被保険者番号.length() != HIHOKENSHANO_LENGTH) {
             return Optional.empty();
         }
         return Optional.of(PersonalData.of(new ShikibetsuCode(this.証記載保険者番号.substring(0, 5).concat(this.被保険者番号)),

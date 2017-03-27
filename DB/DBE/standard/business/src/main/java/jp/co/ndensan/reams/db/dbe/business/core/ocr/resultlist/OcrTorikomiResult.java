@@ -40,7 +40,7 @@ public final class OcrTorikomiResult {
         this.氏名 = builder.氏名;
         this.氏名カナ = builder.氏名カナ;
         this.処理結果 = builder.処理結果;
-        this.申請書管理番号 = null;
+        this.申請書管理番号 = builder.申請書管理番号;
     }
 
     Collection<OcrTorikomiKekkaCsvEntity> toEntities() {
