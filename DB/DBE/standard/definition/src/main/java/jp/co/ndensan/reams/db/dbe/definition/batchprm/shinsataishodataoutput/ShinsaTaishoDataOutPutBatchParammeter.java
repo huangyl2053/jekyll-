@@ -6,9 +6,11 @@
 package jp.co.ndensan.reams.db.dbe.definition.batchprm.shinsataishodataoutput;
 
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shinsataishodataoutput.ShinsaTaishoDataOutPutProcessParammeter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.shinsataishodataoutput.ShinsakaiFileOutputProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.BatchParameter;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchParameterBase;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -36,5 +38,13 @@ public class ShinsaTaishoDataOutPutBatchParammeter extends BatchParameterBase {
      */
     public ShinsaTaishoDataOutPutProcessParammeter toShinsaTaishoDataOutProcessParammeter() {
         return new ShinsaTaishoDataOutPutProcessParammeter(kaisaiBangou, tempPath);
+    }
+
+    /**
+     * @param accessLogUUID アクセスログUUID
+     * @return {@link  ShinsakaiFileOutputProcessParameter}
+     */
+    public ShinsakaiFileOutputProcessParameter toShinsakaiFileOutputProcessParameter(AccessLogUUID accessLogUUID) {
+        return new ShinsakaiFileOutputProcessParameter(kaisaiBangou, tempPath, accessLogUUID);
     }
 }
