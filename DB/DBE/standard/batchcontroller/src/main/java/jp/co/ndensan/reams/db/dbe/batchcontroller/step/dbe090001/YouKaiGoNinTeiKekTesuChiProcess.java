@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
-import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.db.dbz.service.core.kaigiatesakijushosettei.KaigoAtesakiJushoSetteiFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
@@ -76,7 +75,6 @@ public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNi
     private Map<Integer, RString> 通知文;
     private RString 文書番号;
     private NinshoshaSource 認証者情報;
-    private DbAccessLogger accessLog;
 
     static {
         OUT_DATA_LIST = new RString("outDataList");
@@ -101,7 +99,6 @@ public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNi
             }
         }
         super.initialize();
-        accessLog = new DbAccessLogger();
     }
 
     @Override
@@ -150,13 +147,10 @@ public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNi
         JohoTeikyoShiryoReport report = new JohoTeikyoShiryoReport(headItem);
         report.writeBy(retortWrite);
         outDataList.setValue(headItem);
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), t.getShinseishoKanriNo());
-        accessLog.store(new ShoKisaiHokenshaNo(t.getShoKisaiHokenshaNo()), t.getHihokenshaNo(), expandedInfo);
     }
 
     @Override
     protected void afterExecute() {
-        accessLog.flushBy(AccessLogType.照会);
     }
 
     private JohoTeikyoShiryo eidtItem(YouKaiGoNinTeiKekTesuChiRelateEntity entity) {
