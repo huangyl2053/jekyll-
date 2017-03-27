@@ -136,7 +136,7 @@ public class KojinShinchokuJokyohyoPrintService {
                 joho.getAge(), joho.getYubinNo1(), joho.getHihokenshaJusho(), joho.getTelNo1(), joho.getShinseiRiyu(),
                 joho.getShinseishaName(), joho.getShinseiDaikoJigyoshaName(), joho.getShinseishaKankei(), joho.getHonninKankei(),
                 joho.getYubinNo2(), joho.getShinseishaJusho(), joho.getTelNo2(), joho.getShisetsuName(), joho.getShisetsujusho(),
-                joho.getTelNo3());
+                joho.getTelNo3(), joho.getShinseishoKanriNo(), joho.getShoKisaiHokenshaNo());
         return new KojinShinchokuJokyohyoReportJoho(headItem, items, shujiItemList, bodyItemList);
     }
 }

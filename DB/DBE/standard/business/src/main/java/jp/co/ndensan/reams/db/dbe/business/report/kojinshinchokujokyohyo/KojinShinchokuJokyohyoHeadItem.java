@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.kojinshinchokujokyohyo;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
@@ -39,6 +41,8 @@ public class KojinShinchokuJokyohyoHeadItem {
     private final RString shisetsuName;
     private final RString shisetsujusho;
     private final RString telNo3;
+    private final ShinseishoKanriNo shinseishoKanriNo;
+    private final ShoKisaiHokenshaNo shoKisaiHokenshaNo;
 
     /**
      * インスタンスを生成します。
@@ -65,6 +69,8 @@ public class KojinShinchokuJokyohyoHeadItem {
      * @param shisetsuName 入所施設名
      * @param shisetsujusho 入所施設所在地
      * @param telNo3 入所施設電話番号
+     * @param shinseishoKanriNo ShinseishoKanriNo
+     * @param shoKisaiHokenshaNo ShoKisaiHokenshaNo
      */
     public KojinShinchokuJokyohyoHeadItem(
             RString hihokenshaNo,
@@ -88,7 +94,9 @@ public class KojinShinchokuJokyohyoHeadItem {
             RString telNo2,
             RString shisetsuName,
             RString shisetsujusho,
-            RString telNo3) {
+            RString telNo3,
+            ShinseishoKanriNo shinseishoKanriNo,
+            ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
 
         this.hihokenshaNo = hihokenshaNo;
         this.shinseiKubun = shinseiKubun;
@@ -112,5 +120,7 @@ public class KojinShinchokuJokyohyoHeadItem {
         this.shisetsuName = shisetsuName;
         this.shisetsujusho = shisetsujusho;
         this.telNo3 = telNo3;
+        this.shinseishoKanriNo = shinseishoKanriNo;
+        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 }
