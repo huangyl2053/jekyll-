@@ -280,7 +280,24 @@ public class JogaiShinsainJoho {
      * @return ResponseData<JogaiShinsainJohoDiv>
      */
     public ResponseData<JogaiShinsainJohoDiv> onClick_btnModoru(JogaiShinsainJohoDiv div) {
-        return ResponseData.of(div).dialogNGClose();
+
+        if (!ResponseHolder.isReRequest()) {
+            if (is修正有無(div)) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            } else {
+                return ResponseData.of(div).dialogNGClose();
+            }
+        }
+
+        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return ResponseData.of(div).dialogNGClose();
+        }
+
+        return ResponseData.of(div).respond();
     }
 
     private void set所属機関一覧(RString 審査会委員コード, JogaiShinsainJohoDiv div, boolean 氏名Flag) {
