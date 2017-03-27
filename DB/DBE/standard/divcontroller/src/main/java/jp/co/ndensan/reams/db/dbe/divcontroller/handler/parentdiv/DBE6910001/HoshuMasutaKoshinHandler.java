@@ -754,10 +754,10 @@ public class HoshuMasutaKoshinHandler {
     }
 
     private boolean isデータ変更(dgChosainhoshuTankaIchiran_Row 選択データ) {
-        return !(選択データ.getKaishiYM().getValue().getYearMonth().compareTo(
-                div.getHoshuMasutaTab().getTxtChoKaishiYM().getDomain()) == 0
-                && 選択データ.getShuryoYM().getValue().getYearMonth().compareTo(
-                        div.getHoshuMasutaTab().getTxtChoShuryoYM().getDomain()) == 0
+        return !(選択データ.getKaishiYM().getValue().getYearMonth().toDateString().compareTo(
+                div.getHoshuMasutaTab().getTxtChoKaishiYM().getDomain().toDateString()) == 0
+                && 選択データ.getShuryoYM().getValue().getYearMonth().toDateString().compareTo(
+                        div.getHoshuMasutaTab().getTxtChoShuryoYM().getDomain().toDateString()) == 0
                 && 選択データ.getKaigoNinteiShinsaIinShubetsuCode().equals(
                         div.getHoshuMasutaTab().getDdlKaigoNinteiShinsaIinShubetsu().getSelectedKey())
                 && (選択データ.getTanka().getValue() != null && 選択データ.getTanka().getValue().equals(
@@ -773,10 +773,10 @@ public class HoshuMasutaKoshinHandler {
             if (o2.getKaigoNinteiShinsaIinShubetsuCode().compareTo(o1.getKaigoNinteiShinsaIinShubetsuCode()) != 0) {
                 return o2.getKaigoNinteiShinsaIinShubetsuCode().compareTo(o1.getKaigoNinteiShinsaIinShubetsuCode());
             } else {
-                if (!o2.getKaishiYM().getValue().equals(o1.getKaishiYM().getValue())) {
-                    return o2.getKaishiYM().getValue().compareTo(o1.getKaishiYM().getValue());
+                if (o2.getKaishiYM().getValue().toString().equals(o1.getKaishiYM().getValue().toString()) != true) {
+                    return -1;
                 } else {
-                    return o2.getShuryoYM().getValue().compareTo(o1.getShuryoYM().getValue());
+                    return 0;
                 }
             }
         }
@@ -812,10 +812,10 @@ public class HoshuMasutaKoshinHandler {
     }
 
     private boolean isデータ変更(dgIkenShohoshuTankaIchiran_Row 選択データ) {
-        return !(選択データ.getKaishiYM().getValue().getYearMonth().compareTo(
-                div.getHoshuMasutaTab().getIkenShohoshuTankaNyuryoku().getTxtIkenKaishiYM().getDomain()) == 0
-                && 選択データ.getShuryoYM().getValue().getYearMonth().compareTo(
-                        div.getHoshuMasutaTab().getIkenShohoshuTankaNyuryoku().getTxtIkenShuryoYM().getDomain()) == 0
+        return !(選択データ.getKaishiYM().getValue().getYearMonth().toDateString().compareTo(
+                div.getHoshuMasutaTab().getIkenShohoshuTankaNyuryoku().getTxtIkenKaishiYM().getDomain().toDateString()) == 0
+                && 選択データ.getShuryoYM().getValue().getYearMonth().toDateString().compareTo(
+                        div.getHoshuMasutaTab().getIkenShohoshuTankaNyuryoku().getTxtIkenShuryoYM().getDomain().toDateString()) == 0
                 && 選択データ.getZaitakuShisetsuKubunCode().equals(
                         div.getHoshuMasutaTab().getIkenShohoshuTankaNyuryoku().getDdlZaitakuShisetsuKubun().getSelectedKey())
                 && 選択データ.getIkenshoSakuseiKaisuKubunCode().equals(
@@ -833,10 +833,10 @@ public class HoshuMasutaKoshinHandler {
             if (o2.getZaitakuShisetsuKubunCode().compareTo(o1.getZaitakuShisetsuKubunCode()) != 0) {
                 return o2.getZaitakuShisetsuKubunCode().compareTo(o1.getZaitakuShisetsuKubunCode());
             } else {
-                if (o2.getIkenshoSakuseiKaisuKubunCode().compareTo(o1.getIkenshoSakuseiKaisuKubunCode()) != 0) {
-                    return o2.getKaishiYM().getValue().compareTo(o1.getKaishiYM().getValue());
+                if (o2.getKaishiYM().getValue().toString().equals(o1.getKaishiYM().getValue().toString()) != true) {
+                    return -1;
                 } else {
-                    return o2.getKaishiYM().getValue().compareTo(o1.getKaishiYM().getValue());
+                    return 0;
                 }
             }
         }
@@ -872,10 +872,10 @@ public class HoshuMasutaKoshinHandler {
     }
 
     private boolean isデータ変更(dgHomonChosahoshuTankaIchiran_Row 選択データ) {
-        return !(選択データ.getKaishiYM().getValue().getYearMonth().compareTo(
-                div.getHoshuMasutaTab().getHomonChosahoshuTankaNyuryoku().getTxtHomkaishiYM().getDomain()) == 0
-                && 選択データ.getShuryoYM().getValue().getYearMonth().compareTo(
-                        div.getHoshuMasutaTab().getHomonChosahoshuTankaNyuryoku().getTxtHomshuryoYM().getDomain()) == 0
+        return !(選択データ.getKaishiYM().getValue().getYearMonth().toDateString().compareTo(
+                div.getHoshuMasutaTab().getHomonChosahoshuTankaNyuryoku().getTxtHomkaishiYM().getDomain().toDateString()) == 0
+                && 選択データ.getShuryoYM().getValue().getYearMonth().toDateString().compareTo(
+                        div.getHoshuMasutaTab().getHomonChosahoshuTankaNyuryoku().getTxtHomshuryoYM().getDomain().toDateString()) == 0
                 && 選択データ.getChosaKubunCode().equals(
                         div.getHoshuMasutaTab().getHomonChosahoshuTankaNyuryoku().getDdlChosaKubun().getSelectedKey())
                 && 選択データ.getHomonShubetsuCode().equals(
@@ -895,15 +895,17 @@ public class HoshuMasutaKoshinHandler {
             } else {
                 if (o2.getHomonShubetsuCode().compareTo(o1.getHomonShubetsuCode()) != 0) {
                     return o2.getHomonShubetsuCode().compareTo(o1.getHomonShubetsuCode());
-                } else if (o2.getKaishiYM().getValue().compareTo(o1.getKaishiYM().getValue()) != 0) {
-                    return o2.getKaishiYM().getValue().compareTo(o1.getKaishiYM().getValue());
                 } else {
-                    return o2.getShuryoYM().getValue().compareTo(o1.getShuryoYM().getValue());
+                    if (o2.getKaishiYM().getValue().toString().equals(o1.getKaishiYM().getValue().toString()) != true) {
+                        return -1;
+                    } else {
+                        return 0;
+                    }
                 }
             }
         }
     }
-
+        
     private void set審査会委員別単価マスタ明細状態_非活性() {
         div.getHoshuMasutaTab().getTxtBetuKaishiYM().setDisabled(true);
         div.getHoshuMasutaTab().getTxtBetuShuryoYM().setDisabled(true);
@@ -938,32 +940,14 @@ public class HoshuMasutaKoshinHandler {
     }
 
     private boolean isデータ変更(dgShinsakaiIinBetuTanka_Row 選択データ) {
-        boolean isEquals開始日;
-        if (選択データ.getKaishiYM().getValue().isEmpty() && div.getHoshuMasutaTab().getTxtBetuKaishiYM().getDomain().isEmpty()) {
-            isEquals開始日 = true;
-        } else if (選択データ.getKaishiYM().getValue().isEmpty() && !div.getHoshuMasutaTab().getTxtBetuKaishiYM().getDomain().isEmpty()) {
-            isEquals開始日 = false;
-        } else if (!選択データ.getKaishiYM().getValue().isEmpty() && div.getHoshuMasutaTab().getTxtBetuKaishiYM().getDomain().isEmpty()) {
-            isEquals開始日 = false;
-        } else {
-            isEquals開始日 = 選択データ.getKaishiYM().getValue().getYearMonth().compareTo(
-                    div.getHoshuMasutaTab().getTxtBetuKaishiYM().getDomain()) == 0;
+        boolean isEquals終了日 = true;
+        if (選択データ.getShuryoYM().getValue().isEmpty()
+                || !(選択データ.getShuryoYM().getValue().getYearMonth().toDateString().compareTo(
+                        div.getHoshuMasutaTab().getTxtBetuShuryoYM().getDomain().toDateString()) == 0)) {
+            isEquals終了日 = false;
         }
 
-        boolean isEquals終了日;
-        if (選択データ.getShuryoYM().getValue().isEmpty() && div.getHoshuMasutaTab().getTxtBetuShuryoYM().getDomain().isEmpty()) {
-            isEquals終了日 = true;
-        } else if (選択データ.getShuryoYM().getValue().isEmpty() && !div.getHoshuMasutaTab().getTxtBetuShuryoYM().getDomain().isEmpty()) {
-            isEquals終了日 = false;
-        } else if (!選択データ.getShuryoYM().getValue().isEmpty() && div.getHoshuMasutaTab().getTxtBetuShuryoYM().getDomain().isEmpty()) {
-            isEquals終了日 = false;
-        } else {
-            isEquals終了日 = 選択データ.getShuryoYM().getValue().getYearMonth().compareTo(
-                    div.getHoshuMasutaTab().getTxtBetuShuryoYM().getDomain()) == 0;
-        }
-
-        return !(isEquals開始日
-                && isEquals終了日
+        return !(isEquals終了日
                 && 選択データ.getShinsakaiIinCode().equals(div.getHoshuMasutaTab().getTxtShinsaIinKodo().getValue())
                 && (選択データ.getTanka().getValue() != null && 選択データ.getTanka().getValue().equals(
                         div.getHoshuMasutaTab().getTxtBetuTanka().getValue()))

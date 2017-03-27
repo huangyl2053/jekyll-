@@ -711,11 +711,11 @@ public class HoshuMasutaKoshin {
             return ResponseData.of(div).addValidationMessages(validPairs).respond();
         }
         if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
+                    UrQuestionMessages.保存の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
+        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             update一覧情報();
@@ -746,6 +746,126 @@ public class HoshuMasutaKoshin {
      * @return ResponseData<HoshuMasutaKoshinDiv>
      */
     public ResponseData<HoshuMasutaKoshinDiv> onBefore_ShinsakaiIinGuide(HoshuMasutaKoshinDiv div) {
+        return ResponseData.of(div).respond();
+    }
+    
+     /**
+     * onBlur_txtChoKaishiYM
+     *
+     * @param div 報酬マスタメンテナンスDiv
+     * @return ResponseData<HoshuMasutaKoshinDiv>
+     */
+    public ResponseData<HoshuMasutaKoshinDiv> onBlur_txtChoKaishiYM(HoshuMasutaKoshinDiv div) {
+        if (div.getHoshuMasutaTab().getChosainhoshuTankaNyuryoku().getTxtChoKaishiYM().getDomain().isEmpty()) {
+            ValidationMessageControlPairs controlPairs = getValidationHandler(div).validate和暦に変換不可(
+                div.getHoshuMasutaTab().getChosainhoshuTankaNyuryoku().getTxtChoKaishiYM());
+            return ResponseData.of(div).addValidationMessages(controlPairs).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * onBlur_txtChoShuryoYM
+     *
+     * @param div 報酬マスタメンテナンスDiv
+     * @return ResponseData<HoshuMasutaKoshinDiv>
+     */
+    public ResponseData<HoshuMasutaKoshinDiv> onBlur_txtChoShuryoYM(HoshuMasutaKoshinDiv div) {
+        if (div.getHoshuMasutaTab().getChosainhoshuTankaNyuryoku().getTxtChoShuryoYM().getDomain().isEmpty()) {
+            ValidationMessageControlPairs controlPairs = getValidationHandler(div).validate和暦に変換不可(
+                div.getHoshuMasutaTab().getChosainhoshuTankaNyuryoku().getTxtChoShuryoYM());
+            return ResponseData.of(div).addValidationMessages(controlPairs).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * onBlur_txtIkenKaishiYM
+     *
+     * @param div 報酬マスタメンテナンスDiv
+     * @return ResponseData<HoshuMasutaKoshinDiv>
+     */
+    public ResponseData<HoshuMasutaKoshinDiv> onBlur_txtIkenKaishiYM(HoshuMasutaKoshinDiv div) {
+        if (div.getHoshuMasutaTab().getIkenShohoshuTankaNyuryoku().getTxtIkenKaishiYM().getDomain().isEmpty()) {
+            ValidationMessageControlPairs controlPairs = getValidationHandler(div).validate和暦に変換不可(
+                div.getHoshuMasutaTab().getIkenShohoshuTankaNyuryoku().getTxtIkenKaishiYM());
+            return ResponseData.of(div).addValidationMessages(controlPairs).respond();
+        }        
+        return ResponseData.of(div).respond();
+    }
+    
+     /**
+     * onBlur_txtIkenShuryoYM
+     *
+     * @param div 報酬マスタメンテナンスDiv
+     * @return ResponseData<HoshuMasutaKoshinDiv>
+     */
+    public ResponseData<HoshuMasutaKoshinDiv> onBlur_txtIkenShuryoYM(HoshuMasutaKoshinDiv div) {
+        if (div.getHoshuMasutaTab().getIkenShohoshuTankaNyuryoku().getTxtIkenShuryoYM().getDomain().isEmpty()) {
+            ValidationMessageControlPairs controlPairs = getValidationHandler(div).validate和暦に変換不可(
+                div.getHoshuMasutaTab().getIkenShohoshuTankaNyuryoku().getTxtIkenShuryoYM());
+            return ResponseData.of(div).addValidationMessages(controlPairs).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * onBlur_txtHomkaishiYM
+     *
+     * @param div 報酬マスタメンテナンスDiv
+     * @return ResponseData<HoshuMasutaKoshinDiv>
+     */
+    public ResponseData<HoshuMasutaKoshinDiv> onBlur_txtHomkaishiYM(HoshuMasutaKoshinDiv div) {
+        if (div.getHoshuMasutaTab().getHomonChosahoshuTankaNyuryoku().getTxtHomkaishiYM().getDomain().isEmpty()) {
+            ValidationMessageControlPairs controlPairs = getValidationHandler(div).validate和暦に変換不可(
+                div.getHoshuMasutaTab().getHomonChosahoshuTankaNyuryoku().getTxtHomkaishiYM());
+            return ResponseData.of(div).addValidationMessages(controlPairs).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * onBlur_txtHomshuryoYM
+     *
+     * @param div 報酬マスタメンテナンスDiv
+     * @return ResponseData<HoshuMasutaKoshinDiv>
+     */
+    public ResponseData<HoshuMasutaKoshinDiv> onBlur_txtHomshuryoYM(HoshuMasutaKoshinDiv div) {
+        if (div.getHoshuMasutaTab().getHomonChosahoshuTankaNyuryoku().getTxtHomshuryoYM().getDomain().isEmpty()) {
+            ValidationMessageControlPairs controlPairs = getValidationHandler(div).validate和暦に変換不可(
+                div.getHoshuMasutaTab().getHomonChosahoshuTankaNyuryoku().getTxtHomshuryoYM());
+            return ResponseData.of(div).addValidationMessages(controlPairs).respond();
+        }       
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * onBlur_txtBetuKaishiYM
+     *
+     * @param div 報酬マスタメンテナンスDiv
+     * @return ResponseData<HoshuMasutaKoshinDiv>
+     */
+    public ResponseData<HoshuMasutaKoshinDiv> onBlur_txtBetuKaishiYM(HoshuMasutaKoshinDiv div) {
+        if (div.getHoshuMasutaTab().getShinsakaiIinBetuTankaMeisai().getTxtBetuKaishiYM().getDomain().isEmpty()) {
+            ValidationMessageControlPairs controlPairs = getValidationHandler(div).validate和暦に変換不可(
+                div.getHoshuMasutaTab().getShinsakaiIinBetuTankaMeisai().getTxtBetuKaishiYM());
+            return ResponseData.of(div).addValidationMessages(controlPairs).respond();
+        }      
+        return ResponseData.of(div).respond();
+    }
+
+     /**
+     * onBlur_txtBetuShuryoYM
+     *
+     * @param div 報酬マスタメンテナンスDiv
+     * @return ResponseData<HoshuMasutaKoshinDiv>
+     */
+    public ResponseData<HoshuMasutaKoshinDiv> onBlur_txtBetuShuryoYM(HoshuMasutaKoshinDiv div) {
+        if (div.getHoshuMasutaTab().getShinsakaiIinBetuTankaMeisai().getTxtBetuShuryoYM().getDomain().isEmpty()) {
+            ValidationMessageControlPairs controlPairs = getValidationHandler(div).validate和暦に変換不可(
+                div.getHoshuMasutaTab().getShinsakaiIinBetuTankaMeisai().getTxtBetuShuryoYM());
+            return ResponseData.of(div).addValidationMessages(controlPairs).respond();
+        }      
         return ResponseData.of(div).respond();
     }
     
@@ -841,7 +961,7 @@ public class HoshuMasutaKoshin {
         List<ShinsakaiIinHoshuTanka> 審査員報酬単価マスタ更新情報;
         Models<ShinsakaiIinHoshuTankaIdentifier, ShinsakaiIinHoshuTanka> 審査員報酬単価情報Model
                 = ViewStateHolder.get(ViewStateKeys.審査員報酬単価マスタ情報, Models.class);
-        for (dgChosainhoshuTankaIchiran_Row row : 審査員報酬単価一覧情報) {
+        for (dgChosainhoshuTankaIchiran_Row row : 審査員報酬単価一覧情報) {     
             if (追加モード.equals(row.getColumnState())) {
                 ShinsakaiIinHoshuTanka 新規情報 = new ShinsakaiIinHoshuTanka(
                         new CodeShubetsu(row.getKaigoNinteiShinsaIinShubetsuCode()),
@@ -854,7 +974,8 @@ public class HoshuMasutaKoshin {
                     new CodeShubetsu(row.getKaigoNinteiShinsaIinShubetsuCode()),
                     row.getKaishiYM().getValue().getYearMonth(),
                     row.getShuryoYMbak().getValue().getYearMonth());
-                if (row.getShuryoYMbak().getValue().getYearMonth().compareTo(row.getShuryoYM().getValue().getYearMonth()) == 0) {
+                if (row.getShuryoYMbak().getValue().getYearMonth().toDateString().compareTo(
+                        row.getShuryoYM().getValue().getYearMonth().toDateString()) == 0) {
                     ShinsakaiIinHoshuTanka 更新情報 = 審査員報酬単価情報Model.get(識別子).createBuilderForEdit().
                             set単価(row.getTanka().getValue()).build().modifiedModel();
                     審査員報酬単価情報Model.add(更新情報);
@@ -948,7 +1069,8 @@ public class HoshuMasutaKoshin {
                     row.getKaishiYM().getValue().getYearMonth(),
                     row.getShuryoYMbak().getValue().getYearMonth());
                 NinteiChosaHoshuTanka 既存情報 = 訪問調査報酬単価情報Model.get(識別子);
-                if (既存情報.get終了年月().compareTo(row.getShuryoYM().getValue().getYearMonth()) == 0) {
+                if (既存情報.get終了年月().toDateString().compareTo(
+                        row.getShuryoYM().getValue().getYearMonth().toDateString()) == 0) {
                     NinteiChosaHoshuTanka 更新情報 = 訪問調査報酬単価情報Model.get(識別子).createBuilderForEdit().
                             set単価(row.getTanka().getValue()).
                             build().modifiedModel();
