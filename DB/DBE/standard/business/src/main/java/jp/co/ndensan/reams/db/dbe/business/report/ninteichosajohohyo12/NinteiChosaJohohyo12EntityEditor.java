@@ -425,6 +425,9 @@ public class NinteiChosaJohohyo12EntityEditor {
         ninteiChosaJohohyoEntity.setタイトル(DbBusinessConfig.get(ConfigNameDBE.認定調査情報票, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
         ninteiChosaJohohyoEntity.set年齢(new RStringBuilder().append(entity.get年齢()).append(new RString(" 歳")).toRString());
         ninteiChosaJohohyoEntity.set性別(Seibetsu.toValue(entity.get性別()).get名称());
+        ninteiChosaJohohyoEntity.setTemp_保険者番号(entity.get保険者番号());
+        ninteiChosaJohohyoEntity.setTemp_被保険者番号(entity.get被保険者番号());
+        ninteiChosaJohohyoEntity.setTemp_申請書管理番号(entity.get申請書管理番号());
         setBodyItem01(ninteiChosaJohohyoEntity, entity, 認定調査票記入項目List, イメージID, 認定調査票マスキング区分);
     }
 

@@ -54,6 +54,9 @@ public final class TokkiText1A4AllEditor {
             ninteiEntity.set被保険者番号(yokaigoNinteiJohoTeikyoEntity.get被保険者番号());
             ninteiEntity.set被保険者氏名(yokaigoNinteiJohoTeikyoEntity.get被保険者氏名());
         }
+        ninteiEntity.setTemp_保険者番号(yokaigoNinteiJohoTeikyoEntity.get保険者番号());
+        ninteiEntity.setTemp_被保険者番号(yokaigoNinteiJohoTeikyoEntity.get被保険者番号());
+        ninteiEntity.setTemp_申請書管理番号(yokaigoNinteiJohoTeikyoEntity.get申請書管理番号());
         ninteiEntity.set概況調査特記事項(yokaigoNinteiJohoTeikyoEntity.get概況調査特記事項());
         ninteiEntity.set厚労省IF識別コード(yokaigoNinteiJohoTeikyoEntity.get厚労省IF識別コード());
         ninteiEntity.set申請日_元号(yokaigoNinteiJohoTeikyoEntity.get認定申請年月日() == null ? RString.EMPTY

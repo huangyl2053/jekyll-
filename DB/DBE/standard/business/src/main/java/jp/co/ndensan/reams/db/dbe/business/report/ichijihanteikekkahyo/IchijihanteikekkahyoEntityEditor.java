@@ -219,7 +219,6 @@ public final class IchijihanteikekkahyoEntityEditor {
             RString 特記事項符号印刷有無,
             RString 正常選択肢印刷有無,
             RString 前回との結果比較印刷有無,
-            //            RString 認定調査前回結果印刷有無,
             RString 前回正常選択肢印刷有無,
             RString 一次判定結果マスキング区分) {
         List<RString> EMPTYLIST = new ArrayList<>();
@@ -1441,20 +1440,7 @@ public final class IchijihanteikekkahyoEntityEditor {
             RString 厚労省IF識別コード, RString 前回厚労省IF識別コード) {
         List<RString> 社会生活への適応4リスト = new ArrayList<>();
         if (!前回調査項目.isEmpty()) {
-//            if (差分のみ印刷.equals(認定調査前回結果印刷有無)) {
             return 社会生活機能差分(dbt5211Entity, 前回調査項目, 厚労省IF識別コード, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
-//            }
-//            if (印刷しない.equals(認定調査前回結果印刷有無)) {
-//                社会生活への適応4リスト.add(RString.EMPTY);
-//                社会生活への適応4リスト.add(RString.EMPTY);
-//                社会生活への適応4リスト.add(RString.EMPTY);
-//                社会生活への適応4リスト.add(RString.EMPTY);
-//                社会生活への適応4リスト.add(RString.EMPTY);
-//                社会生活への適応4リスト.add(RString.EMPTY);
-//            }
-//            if (印刷する.equals(認定調査前回結果印刷有無)) {
-//                return 社会生活機能全部(前回調査項目, 厚労省IF識別コード, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
-//            }
         } else {
             社会生活への適応4リスト.add(ハイフン);
             社会生活への適応4リスト.add(ハイフン);
@@ -1594,163 +1580,6 @@ public final class IchijihanteikekkahyoEntityEditor {
         }
         if (識別コード06A.equals(厚労省IF識別コード) || 識別コード02A.equals(厚労省IF識別コード)) {
             return set精神機能差分02A(調査項目, dbt5211Entity, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
-        }
-        return 精神_行動障害4リスト;
-    }
-
-    private static List<RString> 精神機能全部(List<NinteichosahyoChosaItem> dbt5211Entity,
-            RString 厚労省IF識別コード, RString 前回厚労省IF識別コード, RString 前回正常選択肢印刷有無) {
-        List<RString> 精神_行動障害4リスト = new ArrayList<>();
-        if (印字する.equals(前回正常選択肢印刷有無)) {
-            if (識別コード09B.equals(前回厚労省IF識別コード) || 識別コード09A.equals(前回厚労省IF識別コード)) {
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番41));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番42));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番43));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番44));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番45));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番46));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番47));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番48));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番49));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番50));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番51));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番52));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番53));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番54));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番55));
-            }
-            if (識別コード06A.equals(前回厚労省IF識別コード)) {
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番48));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番49));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番51));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番52));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番54));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番55));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番56));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番58));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番60));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番61));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番63));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番66));
-                if (識別コード09B.equals(厚労省IF識別コード) || 識別コード09A.equals(厚労省IF識別コード)) {
-                    精神_行動障害4リスト.add(アスタリスク);
-                    精神_行動障害4リスト.add(アスタリスク);
-                    精神_行動障害4リスト.add(アスタリスク);
-                } else {
-                    精神_行動障害4リスト.add(RString.EMPTY);
-                    精神_行動障害4リスト.add(RString.EMPTY);
-                    精神_行動障害4リスト.add(RString.EMPTY);
-                }
-            }
-            if (識別コード02A.equals(前回厚労省IF識別コード)) {
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番48));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番49));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番51));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番52));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番54));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番55));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番56));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番58));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番60));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番61));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番63));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番66));
-                精神_行動障害4リスト.add(RString.EMPTY);
-                精神_行動障害4リスト.add(RString.EMPTY);
-                精神_行動障害4リスト.add(RString.EMPTY);
-            }
-            if (識別コード99A.equals(前回厚労省IF識別コード)) {
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番54));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番55));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番57));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番58));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番60));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番61));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番62));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番64));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番66));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番67));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番69));
-                精神_行動障害4リスト.add(get略称16(dbt5211Entity, 連番42));
-                精神_行動障害4リスト.add(RString.EMPTY);
-                精神_行動障害4リスト.add(RString.EMPTY);
-                精神_行動障害4リスト.add(RString.EMPTY);
-            }
-        } else {
-            if (識別コード09B.equals(前回厚労省IF識別コード) || 識別コード09A.equals(前回厚労省IF識別コード)) {
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番41));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番42));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番43));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番44));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番45));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番46));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番47));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番48));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番49));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番50));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番51));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番52));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番53));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番54));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番55));
-            }
-            if (識別コード06A.equals(前回厚労省IF識別コード)) {
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番48));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番49));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番51));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番52));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番54));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番55));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番56));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番58));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番60));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番61));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番63));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番66));
-                if (識別コード09B.equals(厚労省IF識別コード) || 識別コード09A.equals(厚労省IF識別コード)) {
-                    精神_行動障害4リスト.add(アスタリスク);
-                    精神_行動障害4リスト.add(アスタリスク);
-                    精神_行動障害4リスト.add(アスタリスク);
-                } else {
-                    精神_行動障害4リスト.add(RString.EMPTY);
-                    精神_行動障害4リスト.add(RString.EMPTY);
-                    精神_行動障害4リスト.add(RString.EMPTY);
-                }
-            }
-            if (識別コード02A.equals(前回厚労省IF識別コード)) {
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番48));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番49));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番51));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番52));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番54));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番55));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番56));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番58));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番60));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番61));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番63));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番66));
-                精神_行動障害4リスト.add(RString.EMPTY);
-                精神_行動障害4リスト.add(RString.EMPTY);
-                精神_行動障害4リスト.add(RString.EMPTY);
-            }
-            if (識別コード99A.equals(前回厚労省IF識別コード)) {
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番54));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番55));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番57));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番58));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番60));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番61));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番62));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番64));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番66));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番67));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番69));
-                精神_行動障害4リスト.add(get略称16_正常選択肢印刷無(dbt5211Entity, 連番42));
-                精神_行動障害4リスト.add(RString.EMPTY);
-                精神_行動障害4リスト.add(RString.EMPTY);
-                精神_行動障害4リスト.add(RString.EMPTY);
-            }
         }
         return 精神_行動障害4リスト;
     }
@@ -2039,17 +1868,7 @@ public final class IchijihanteikekkahyoEntityEditor {
             RString 厚労省IF識別コード, RString 前回厚労省IF識別コード) {
         List<RString> 精神_行動障害4リスト = new ArrayList<>();
         if (!前回調査項目.isEmpty()) {
-//            if (差分のみ印刷.equals(認定調査前回結果印刷有無)) {
             return 精神機能差分(dbt5211Entity, 前回調査項目, 厚労省IF識別コード, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
-//            }
-//            if (印刷しない.equals(認定調査前回結果印刷有無)) {
-//                for (int count = 1; count <= COUNT_15; count++) {
-//                    精神_行動障害4リスト.add(RString.EMPTY);
-//                }
-//            }
-//            if (印刷する.equals(認定調査前回結果印刷有無)) {
-//                return 精神機能全部(前回調査項目, 前回厚労省IF識別コード, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
-//            }
         } else {
             for (int count = 1; count <= COUNT_15; count++) {
                 精神_行動障害4リスト.add(ハイフン);
@@ -2370,126 +2189,6 @@ public final class IchijihanteikekkahyoEntityEditor {
         return 生活機能4リスト;
     }
 
-    private static List<RString> 生活機能全部(List<NinteichosahyoChosaItem> dbt5211Entity, RString 前回厚労省IF識別コード, RString 前回正常選択肢印刷有無) {
-        List<RString> 生活機能4リスト = new ArrayList<>();
-        if (印字する.equals(前回正常選択肢印刷有無)) {
-            if (識別コード09B.equals(前回厚労省IF識別コード) || 識別コード09A.equals(前回厚労省IF識別コード)) {
-                生活機能4リスト.add(get略称10(dbt5211Entity, 連番20));
-                生活機能4リスト.add(get略称10(dbt5211Entity, 連番21));
-                生活機能4リスト.add(get略称11(dbt5211Entity, 連番22));
-                生活機能4リスト.add(get略称10(dbt5211Entity, 連番23));
-                生活機能4リスト.add(get略称10(dbt5211Entity, 連番24));
-                生活機能4リスト.add(get略称10(dbt5211Entity, 連番25));
-                生活機能4リスト.add(get略称12(dbt5211Entity, 連番26));
-                生活機能4リスト.add(get略称12(dbt5211Entity, 連番27));
-                生活機能4リスト.add(get略称12(dbt5211Entity, 連番28));
-                生活機能4リスト.add(get略称10(dbt5211Entity, 連番29));
-                生活機能4リスト.add(get略称10(dbt5211Entity, 連番30));
-                生活機能4リスト.add(get略称13(dbt5211Entity, 連番31));
-            }
-            if (識別コード99A.equals(前回厚労省IF識別コード)) {
-                生活機能4リスト.add(get略称20(dbt5211Entity, 連番17));
-                生活機能4リスト.add(RString.EMPTY);
-                生活機能4リスト.add(get略称33(dbt5211Entity, 連番25));
-                生活機能4リスト.add(get略称33(dbt5211Entity, 連番30));
-                生活機能4リスト.add(RString.EMPTY);
-                生活機能4リスト.add(RString.EMPTY);
-                生活機能4リスト.add(get略称22(dbt5211Entity, 連番31));
-                生活機能4リスト.add(get略称22(dbt5211Entity, 連番32));
-                生活機能4リスト.add(get略称22(dbt5211Entity, 連番33));
-                生活機能4リスト.add(get略称34(dbt5211Entity, 連番36));
-                生活機能4リスト.add(get略称34(dbt5211Entity, 連番37));
-                生活機能4リスト.add(RString.EMPTY);
-            }
-            if (識別コード02A.equals(前回厚労省IF識別コード)) {
-                生活機能4リスト.add(get略称20(dbt5211Entity, 連番16));
-                生活機能4リスト.add(get略称20(dbt5211Entity, 連番17));
-                生活機能4リスト.add(get略称11(dbt5211Entity, 連番23));
-                生活機能4リスト.add(get略称20(dbt5211Entity, 連番24));
-                生活機能4リスト.add(get略称20(dbt5211Entity, 連番26));
-                生活機能4リスト.add(get略称20(dbt5211Entity, 連番27));
-                生活機能4リスト.add(get略称22(dbt5211Entity, 連番28));
-                生活機能4リスト.add(get略称22(dbt5211Entity, 連番29));
-                生活機能4リスト.add(get略称22(dbt5211Entity, 連番30));
-                生活機能4リスト.add(get略称20(dbt5211Entity, 連番32));
-                生活機能4リスト.add(get略称20(dbt5211Entity, 連番33));
-                生活機能4リスト.add(RString.EMPTY);
-            }
-            if (識別コード06A.equals(前回厚労省IF識別コード)) {
-                生活機能4リスト.add(get略称20(dbt5211Entity, 連番16));
-                生活機能4リスト.add(get略称20(dbt5211Entity, 連番17));
-                生活機能4リスト.add(get略称11(dbt5211Entity, 連番23));
-                生活機能4リスト.add(get略称20(dbt5211Entity, 連番24));
-                生活機能4リスト.add(get略称20(dbt5211Entity, 連番26));
-                生活機能4リスト.add(get略称20(dbt5211Entity, 連番27));
-                生活機能4リスト.add(get略称22(dbt5211Entity, 連番28));
-                生活機能4リスト.add(get略称22(dbt5211Entity, 連番29));
-                生活機能4リスト.add(get略称22(dbt5211Entity, 連番30));
-                生活機能4リスト.add(get略称20(dbt5211Entity, 連番32));
-                生活機能4リスト.add(get略称20(dbt5211Entity, 連番33));
-                生活機能4リスト.add(get略称13(dbt5211Entity, 連番80));
-            }
-        } else {
-            if (識別コード09B.equals(前回厚労省IF識別コード) || 識別コード09A.equals(前回厚労省IF識別コード)) {
-                生活機能4リスト.add(get略称10_正常選択肢印刷無(dbt5211Entity, 連番20));
-                生活機能4リスト.add(get略称10_正常選択肢印刷無(dbt5211Entity, 連番21));
-                生活機能4リスト.add(get略称11_正常選択肢印刷無(dbt5211Entity, 連番22));
-                生活機能4リスト.add(get略称10_正常選択肢印刷無(dbt5211Entity, 連番23));
-                生活機能4リスト.add(get略称10_正常選択肢印刷無(dbt5211Entity, 連番24));
-                生活機能4リスト.add(get略称10_正常選択肢印刷無(dbt5211Entity, 連番25));
-                生活機能4リスト.add(get略称12_正常選択肢印刷無(dbt5211Entity, 連番26));
-                生活機能4リスト.add(get略称12_正常選択肢印刷無(dbt5211Entity, 連番27));
-                生活機能4リスト.add(get略称12_正常選択肢印刷無(dbt5211Entity, 連番28));
-                生活機能4リスト.add(get略称10_正常選択肢印刷無(dbt5211Entity, 連番29));
-                生活機能4リスト.add(get略称10_正常選択肢印刷無(dbt5211Entity, 連番30));
-                生活機能4リスト.add(get略称13_正常選択肢印刷無(dbt5211Entity, 連番31));
-            }
-            if (識別コード99A.equals(前回厚労省IF識別コード)) {
-                生活機能4リスト.add(get略称20_正常選択肢印刷無(dbt5211Entity, 連番17));
-                生活機能4リスト.add(RString.EMPTY);
-                生活機能4リスト.add(get略称33_正常選択肢印刷無(dbt5211Entity, 連番25));
-                生活機能4リスト.add(get略称33_正常選択肢印刷無(dbt5211Entity, 連番30));
-                生活機能4リスト.add(RString.EMPTY);
-                生活機能4リスト.add(RString.EMPTY);
-                生活機能4リスト.add(get略称22_正常選択肢印刷無(dbt5211Entity, 連番31));
-                生活機能4リスト.add(get略称22_正常選択肢印刷無(dbt5211Entity, 連番32));
-                生活機能4リスト.add(get略称22_正常選択肢印刷無(dbt5211Entity, 連番33));
-                生活機能4リスト.add(get略称34_正常選択肢印刷無(dbt5211Entity, 連番36));
-                生活機能4リスト.add(get略称34_正常選択肢印刷無(dbt5211Entity, 連番37));
-                生活機能4リスト.add(RString.EMPTY);
-            }
-            if (識別コード02A.equals(前回厚労省IF識別コード)) {
-                生活機能4リスト.add(get略称20_正常選択肢印刷無(dbt5211Entity, 連番16));
-                生活機能4リスト.add(get略称20_正常選択肢印刷無(dbt5211Entity, 連番17));
-                生活機能4リスト.add(get略称11_正常選択肢印刷無(dbt5211Entity, 連番23));
-                生活機能4リスト.add(get略称20_正常選択肢印刷無(dbt5211Entity, 連番24));
-                生活機能4リスト.add(get略称20_正常選択肢印刷無(dbt5211Entity, 連番26));
-                生活機能4リスト.add(get略称20_正常選択肢印刷無(dbt5211Entity, 連番27));
-                生活機能4リスト.add(get略称22_正常選択肢印刷無(dbt5211Entity, 連番28));
-                生活機能4リスト.add(get略称22_正常選択肢印刷無(dbt5211Entity, 連番29));
-                生活機能4リスト.add(get略称22_正常選択肢印刷無(dbt5211Entity, 連番30));
-                生活機能4リスト.add(get略称20_正常選択肢印刷無(dbt5211Entity, 連番32));
-                生活機能4リスト.add(get略称20_正常選択肢印刷無(dbt5211Entity, 連番33));
-                生活機能4リスト.add(RString.EMPTY);
-            }
-            if (識別コード06A.equals(前回厚労省IF識別コード)) {
-                生活機能4リスト.add(get略称20_正常選択肢印刷無(dbt5211Entity, 連番16));
-                生活機能4リスト.add(get略称20_正常選択肢印刷無(dbt5211Entity, 連番17));
-                生活機能4リスト.add(get略称11_正常選択肢印刷無(dbt5211Entity, 連番23));
-                生活機能4リスト.add(get略称20_正常選択肢印刷無(dbt5211Entity, 連番24));
-                生活機能4リスト.add(get略称20_正常選択肢印刷無(dbt5211Entity, 連番26));
-                生活機能4リスト.add(get略称20_正常選択肢印刷無(dbt5211Entity, 連番27));
-                生活機能4リスト.add(get略称22_正常選択肢印刷無(dbt5211Entity, 連番28));
-                生活機能4リスト.add(get略称22_正常選択肢印刷無(dbt5211Entity, 連番29));
-                生活機能4リスト.add(get略称22_正常選択肢印刷無(dbt5211Entity, 連番30));
-                生活機能4リスト.add(get略称20_正常選択肢印刷無(dbt5211Entity, 連番32));
-                生活機能4リスト.add(get略称20_正常選択肢印刷無(dbt5211Entity, 連番33));
-                生活機能4リスト.add(get略称13_正常選択肢印刷無(dbt5211Entity, 連番80));
-            }
-        }
-        return 生活機能4リスト;
-    }
-
     private static List<RString> set生活機能差分99A(List<NinteichosahyoChosaItem> 調査項目,
             List<NinteichosahyoChosaItem> dbt5211Entity, RString 前回厚労省IF識別コード, RString 前回正常選択肢印刷有無) {
         List<RString> 生活機能4リスト = new ArrayList<>();
@@ -2661,26 +2360,7 @@ public final class IchijihanteikekkahyoEntityEditor {
             RString 厚労省IF識別コード, RString 前回厚労省IF識別コード) {
         List<RString> 生活機能4リスト = new ArrayList<>();
         if (!前回調査項目.isEmpty()) {
-//            if (差分のみ印刷.equals(認定調査前回結果印刷有無)) {
             return 生活機能差分(調査項目, 前回調査項目, 厚労省IF識別コード, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
-//            }
-//            if (印刷しない.equals(認定調査前回結果印刷有無)) {
-//                生活機能4リスト.add(RString.EMPTY);
-//                生活機能4リスト.add(RString.EMPTY);
-//                生活機能4リスト.add(RString.EMPTY);
-//                生活機能4リスト.add(RString.EMPTY);
-//                生活機能4リスト.add(RString.EMPTY);
-//                生活機能4リスト.add(RString.EMPTY);
-//                生活機能4リスト.add(RString.EMPTY);
-//                生活機能4リスト.add(RString.EMPTY);
-//                生活機能4リスト.add(RString.EMPTY);
-//                生活機能4リスト.add(RString.EMPTY);
-//                生活機能4リスト.add(RString.EMPTY);
-//                生活機能4リスト.add(RString.EMPTY);
-//            }
-//            if (印刷する.equals(認定調査前回結果印刷有無)) {
-//                return 生活機能全部(前回調査項目, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
-//            }
         } else {
             生活機能4リスト.add(ハイフン);
             生活機能4リスト.add(ハイフン);
@@ -3372,122 +3052,6 @@ public final class IchijihanteikekkahyoEntityEditor {
         return 身体機能_起居動作4リスト;
     }
 
-    private static List<RString> 身体機能全部(List<NinteichosahyoChosaItem> dbt5211Entity, RString 前回厚労省IF識別コード, RString 前回正常選択肢印刷有無) {
-        List<RString> 身体機能_起居動作4リスト = new ArrayList<>();
-        if (印字する.equals(前回正常選択肢印刷有無)) {
-            身体機能_起居動作4リスト.add(get略称01(dbt5211Entity, 0));
-            身体機能_起居動作4リスト.add(get略称01(dbt5211Entity, 連番1));
-            身体機能_起居動作4リスト.add(get略称01(dbt5211Entity, 連番2));
-            身体機能_起居動作4リスト.add(get略称01(dbt5211Entity, 連番3));
-            身体機能_起居動作4リスト.add(get略称01(dbt5211Entity, 連番4));
-            身体機能_起居動作4リスト.add(get略称01(dbt5211Entity, 連番5));
-            if (識別コード09B.equals(前回厚労省IF識別コード) || 識別コード09A.equals(前回厚労省IF識別コード)) {
-                身体機能_起居動作4リスト.add(get略称01(dbt5211Entity, 連番6));
-                身体機能_起居動作4リスト.add(get略称01(dbt5211Entity, 連番7));
-                身体機能_起居動作4リスト.add(get略称01(dbt5211Entity, 連番8));
-                身体機能_起居動作4リスト.add(get略称02(dbt5211Entity, 連番9));
-                身体機能_起居動作4リスト.add(get略称02(dbt5211Entity, 連番10));
-                身体機能_起居動作4リスト.add(get略称03(dbt5211Entity, 連番11));
-                身体機能_起居動作4リスト.add(get略称04(dbt5211Entity, 連番12));
-                身体機能_起居動作4リスト.add(get略称02(dbt5211Entity, 連番13));
-                身体機能_起居動作4リスト.add(get略称02(dbt5211Entity, 連番14));
-                身体機能_起居動作4リスト.add(get略称04(dbt5211Entity, 連番15));
-                身体機能_起居動作4リスト.add(get略称06(dbt5211Entity, 連番16));
-                身体機能_起居動作4リスト.add(get略称07(dbt5211Entity, 連番17));
-                身体機能_起居動作4リスト.add(get略称08(dbt5211Entity, 連番18));
-                身体機能_起居動作4リスト.add(get略称09(dbt5211Entity, 連番19));
-            }
-            if (識別コード02A.equals(前回厚労省IF識別コード) || 識別コード06A.equals(前回厚労省IF識別コード)) {
-                身体機能_起居動作4リスト.add(get略称01(dbt5211Entity, 連番7));
-                身体機能_起居動作4リスト.add(get略称01(dbt5211Entity, 連番8));
-                身体機能_起居動作4リスト.add(get略称01(dbt5211Entity, 連番10));
-                身体機能_起居動作4リスト.add(get略称02(dbt5211Entity, 連番11));
-                身体機能_起居動作4リスト.add(get略称02(dbt5211Entity, 連番12));
-                身体機能_起居動作4リスト.add(get略称03(dbt5211Entity, 連番13));
-                身体機能_起居動作4リスト.add(get略称04(dbt5211Entity, 連番14));
-                身体機能_起居動作4リスト.add(get略称02(dbt5211Entity, 連番15));
-                身体機能_起居動作4リスト.add(get略称02(dbt5211Entity, 連番18));
-                身体機能_起居動作4リスト.add(get略称04(dbt5211Entity, 連番19));
-                身体機能_起居動作4リスト.add(get略称21(dbt5211Entity, 連番20));
-                身体機能_起居動作4リスト.add(get略称22(dbt5211Entity, 連番31));
-                身体機能_起居動作4リスト.add(get略称08(dbt5211Entity, 連番38));
-                身体機能_起居動作4リスト.add(get略称09(dbt5211Entity, 連番39));
-            }
-            if (識別コード99A.equals(前回厚労省IF識別コード)) {
-                身体機能_起居動作4リスト.add(get略称01(dbt5211Entity, 連番7));
-                身体機能_起居動作4リスト.add(get略称01(dbt5211Entity, 連番8));
-                身体機能_起居動作4リスト.add(get略称01(dbt5211Entity, 連番10));
-                身体機能_起居動作4リスト.add(get略称02(dbt5211Entity, 連番11));
-                身体機能_起居動作4リスト.add(get略称02(dbt5211Entity, 連番12));
-                身体機能_起居動作4リスト.add(get略称03(dbt5211Entity, 連番13));
-                身体機能_起居動作4リスト.add(get略称04(dbt5211Entity, 連番15));
-                身体機能_起居動作4リスト.add(get略称02(dbt5211Entity, 連番16));
-                身体機能_起居動作4リスト.add(get略称02(dbt5211Entity, 連番18));
-                身体機能_起居動作4リスト.add(get略称04(dbt5211Entity, 連番19));
-                身体機能_起居動作4リスト.add(get略称21(dbt5211Entity, 連番21));
-                身体機能_起居動作4リスト.add(get略称22(dbt5211Entity, 連番34));
-                身体機能_起居動作4リスト.add(get略称08(dbt5211Entity, 連番44));
-                身体機能_起居動作4リスト.add(get略称09(dbt5211Entity, 連番45));
-            }
-        } else {
-            身体機能_起居動作4リスト.add(get略称01_正常選択肢印刷無(dbt5211Entity, 0));
-            身体機能_起居動作4リスト.add(get略称01_正常選択肢印刷無(dbt5211Entity, 連番1));
-            身体機能_起居動作4リスト.add(get略称01_正常選択肢印刷無(dbt5211Entity, 連番2));
-            身体機能_起居動作4リスト.add(get略称01_正常選択肢印刷無(dbt5211Entity, 連番3));
-            身体機能_起居動作4リスト.add(get略称01_正常選択肢印刷無(dbt5211Entity, 連番4));
-            身体機能_起居動作4リスト.add(get略称01_正常選択肢印刷無(dbt5211Entity, 連番5));
-            if (識別コード09B.equals(前回厚労省IF識別コード) || 識別コード09A.equals(前回厚労省IF識別コード)) {
-                身体機能_起居動作4リスト.add(get略称01_正常選択肢印刷無(dbt5211Entity, 連番6));
-                身体機能_起居動作4リスト.add(get略称01_正常選択肢印刷無(dbt5211Entity, 連番7));
-                身体機能_起居動作4リスト.add(get略称01_正常選択肢印刷無(dbt5211Entity, 連番8));
-                身体機能_起居動作4リスト.add(get略称02_正常選択肢印刷無(dbt5211Entity, 連番9));
-                身体機能_起居動作4リスト.add(get略称02_正常選択肢印刷無(dbt5211Entity, 連番10));
-                身体機能_起居動作4リスト.add(get略称03_正常選択肢印刷無(dbt5211Entity, 連番11));
-                身体機能_起居動作4リスト.add(get略称04_正常選択肢印刷無(dbt5211Entity, 連番12));
-                身体機能_起居動作4リスト.add(get略称02_正常選択肢印刷無(dbt5211Entity, 連番13));
-                身体機能_起居動作4リスト.add(get略称02_正常選択肢印刷無(dbt5211Entity, 連番14));
-                身体機能_起居動作4リスト.add(get略称04_正常選択肢印刷無(dbt5211Entity, 連番15));
-                身体機能_起居動作4リスト.add(get略称06_正常選択肢印刷無(dbt5211Entity, 連番16));
-                身体機能_起居動作4リスト.add(get略称07_正常選択肢印刷無(dbt5211Entity, 連番17));
-                身体機能_起居動作4リスト.add(get略称08_正常選択肢印刷無(dbt5211Entity, 連番18));
-                身体機能_起居動作4リスト.add(get略称09_正常選択肢印刷無(dbt5211Entity, 連番19));
-            }
-            if (識別コード02A.equals(前回厚労省IF識別コード) || 識別コード06A.equals(前回厚労省IF識別コード)) {
-                身体機能_起居動作4リスト.add(get略称01_正常選択肢印刷無(dbt5211Entity, 連番7));
-                身体機能_起居動作4リスト.add(get略称01_正常選択肢印刷無(dbt5211Entity, 連番8));
-                身体機能_起居動作4リスト.add(get略称01_正常選択肢印刷無(dbt5211Entity, 連番10));
-                身体機能_起居動作4リスト.add(get略称02_正常選択肢印刷無(dbt5211Entity, 連番11));
-                身体機能_起居動作4リスト.add(get略称02_正常選択肢印刷無(dbt5211Entity, 連番12));
-                身体機能_起居動作4リスト.add(get略称03_正常選択肢印刷無(dbt5211Entity, 連番13));
-                身体機能_起居動作4リスト.add(get略称04_正常選択肢印刷無(dbt5211Entity, 連番14));
-                身体機能_起居動作4リスト.add(get略称02_正常選択肢印刷無(dbt5211Entity, 連番15));
-                身体機能_起居動作4リスト.add(get略称02_正常選択肢印刷無(dbt5211Entity, 連番18));
-                身体機能_起居動作4リスト.add(get略称04_正常選択肢印刷無(dbt5211Entity, 連番19));
-                身体機能_起居動作4リスト.add(get略称21_正常選択肢印刷無(dbt5211Entity, 連番20));
-                身体機能_起居動作4リスト.add(get略称22_正常選択肢印刷無(dbt5211Entity, 連番31));
-                身体機能_起居動作4リスト.add(get略称08_正常選択肢印刷無(dbt5211Entity, 連番38));
-                身体機能_起居動作4リスト.add(get略称09_正常選択肢印刷無(dbt5211Entity, 連番39));
-            }
-            if (識別コード99A.equals(前回厚労省IF識別コード)) {
-                身体機能_起居動作4リスト.add(get略称01_正常選択肢印刷無(dbt5211Entity, 連番7));
-                身体機能_起居動作4リスト.add(get略称01_正常選択肢印刷無(dbt5211Entity, 連番8));
-                身体機能_起居動作4リスト.add(get略称01_正常選択肢印刷無(dbt5211Entity, 連番10));
-                身体機能_起居動作4リスト.add(get略称02_正常選択肢印刷無(dbt5211Entity, 連番11));
-                身体機能_起居動作4リスト.add(get略称02_正常選択肢印刷無(dbt5211Entity, 連番12));
-                身体機能_起居動作4リスト.add(get略称03_正常選択肢印刷無(dbt5211Entity, 連番13));
-                身体機能_起居動作4リスト.add(get略称04_正常選択肢印刷無(dbt5211Entity, 連番15));
-                身体機能_起居動作4リスト.add(get略称02_正常選択肢印刷無(dbt5211Entity, 連番16));
-                身体機能_起居動作4リスト.add(get略称02_正常選択肢印刷無(dbt5211Entity, 連番18));
-                身体機能_起居動作4リスト.add(get略称04_正常選択肢印刷無(dbt5211Entity, 連番19));
-                身体機能_起居動作4リスト.add(get略称21_正常選択肢印刷無(dbt5211Entity, 連番21));
-                身体機能_起居動作4リスト.add(get略称22_正常選択肢印刷無(dbt5211Entity, 連番34));
-                身体機能_起居動作4リスト.add(get略称08_正常選択肢印刷無(dbt5211Entity, 連番44));
-                身体機能_起居動作4リスト.add(get略称09_正常選択肢印刷無(dbt5211Entity, 連番45));
-            }
-        }
-        return 身体機能_起居動作4リスト;
-    }
-
     private static RString 機能差分結果_身体機能(List<NinteichosahyoChosaItem> 意見書項目,
             List<NinteichosahyoChosaItem> 前回意見書項目, int 連番, int 項目連番, RString 前回厚労省IF識別コード) {
         RString 今回調査 = RString.EMPTY;
@@ -4081,17 +3645,7 @@ public final class IchijihanteikekkahyoEntityEditor {
             RString 前回正常選択肢印刷有無, RString 厚労省IF識別コード, RString 前回厚労省IF識別コード) {
         List<RString> 身体機能_起居動作4リスト = new ArrayList<>();
         if (!前回調査項目.isEmpty()) {
-//            if (差分のみ印刷.equals(認定調査前回結果印刷有無)) {
             return 身体機能差分(調査項目, 前回調査項目, 厚労省IF識別コード, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
-//            }
-//            if (印刷しない.equals(認定調査前回結果印刷有無)) {
-//                for (int count = 1; count <= COUNT_20; count++) {
-//                    身体機能_起居動作4リスト.add(RString.EMPTY);
-//                }
-//            }
-//            if (印刷する.equals(認定調査前回結果印刷有無)) {
-//                return 身体機能全部(前回調査項目, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
-//            }
         } else {
             for (int count = 1; count <= COUNT_20; count++) {
                 身体機能_起居動作4リスト.add(ハイフン);
@@ -4342,23 +3896,7 @@ public final class IchijihanteikekkahyoEntityEditor {
             RString 厚労省IF識別コード, RString 前回厚労省IF識別コード) {
         List<RString> 認知機能4リスト = new ArrayList<>();
         if (!前回調査項目.isEmpty()) {
-//            if (差分のみ印刷.equals(認定調査前回結果印刷有無)) {
             return 認知機能差分(dbt5211Entity, 前回調査項目, 厚労省IF識別コード, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
-//            }
-//            if (印刷しない.equals(認定調査前回結果印刷有無)) {
-//                認知機能4リスト.add(RString.EMPTY);
-//                認知機能4リスト.add(RString.EMPTY);
-//                認知機能4リスト.add(RString.EMPTY);
-//                認知機能4リスト.add(RString.EMPTY);
-//                認知機能4リスト.add(RString.EMPTY);
-//                認知機能4リスト.add(RString.EMPTY);
-//                認知機能4リスト.add(RString.EMPTY);
-//                認知機能4リスト.add(RString.EMPTY);
-//                認知機能4リスト.add(RString.EMPTY);
-//            }
-//            if (印刷する.equals(認定調査前回結果印刷有無)) {
-//                return 認知機能全部(前回調査項目, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
-//            }
         } else {
             認知機能4リスト.add(ハイフン);
             認知機能4リスト.add(ハイフン);
@@ -4531,19 +4069,7 @@ public final class IchijihanteikekkahyoEntityEditor {
             RString 厚労省IF識別コード, RString 前回厚労省IF識別コード) {
         List<RString> 主治医意見書項目4リスト = new ArrayList<>();
         if (!前回意見書項目.isEmpty()) {
-//            if (差分のみ印刷.equals(認定調査前回結果印刷有無)) {
             return 主治医差分(意見書項目, 前回意見書項目, 厚労省IF識別コード, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
-//            }
-//            if (印刷しない.equals(認定調査前回結果印刷有無)) {
-//                主治医意見書項目4リスト.add(RString.EMPTY);
-//                主治医意見書項目4リスト.add(RString.EMPTY);
-//                主治医意見書項目4リスト.add(RString.EMPTY);
-//                主治医意見書項目4リスト.add(RString.EMPTY);
-//                主治医意見書項目4リスト.add(RString.EMPTY);
-//            }
-//            if (印刷する.equals(認定調査前回結果印刷有無)) {
-//                return 主治医全部(前回意見書項目, 前回厚労省IF識別コード, 前回正常選択肢印刷有無);
-//            }
         } else {
             主治医意見書項目4リスト.add(ハイフン);
             主治医意見書項目4リスト.add(ハイフン);
@@ -4783,6 +4309,9 @@ public final class IchijihanteikekkahyoEntityEditor {
         高齢者自立度リスト.add(RString.isNullOrEmpty(entity.get認知症高齢者自立度()) ? RString.EMPTY
                 : NinchishoNichijoSeikatsuJiritsudoCode.toValue(remove半角スペース(entity.get認知症高齢者自立度())).get名称());
         ichijiEntity.set高齢者自立度リスト(高齢者自立度リスト);
+        ichijiEntity.setTemp_保険者番号(entity.get保険者番号());
+        ichijiEntity.setTemp_被保険者番号(entity.get被保険者番号());
+        ichijiEntity.setTemp_申請書管理番号(entity.get申請書管理番号());
         return ichijiEntity;
     }
 
@@ -5110,9 +4639,6 @@ public final class IchijihanteikekkahyoEntityEditor {
                 return IkenKomoku14.toValue(remove半角スペース(item.get意見項目())).get名称();
             }
         }
-//        if (連番 < dbt5304Entity.size() && !RString.isNullOrEmpty(dbt5304Entity.get(連番).get意見項目())) {
-//            return IkenKomoku14.toValue(remove半角スペース(dbt5304Entity.get(連番).get意見項目())).get名称();
-//        }
         return RString.EMPTY;
     }
 
@@ -5122,9 +4648,6 @@ public final class IchijihanteikekkahyoEntityEditor {
                 return IkenKomoku06.toValue(remove半角スペース(item.get意見項目())).get名称();
             }
         }
-//        if (連番 < dbt5304Entity.size() && !RString.isNullOrEmpty(dbt5304Entity.get(連番).get意見項目())) {
-//            return IkenKomoku06.toValue(remove半角スペース(dbt5304Entity.get(連番).get意見項目())).get名称();
-//        }
         return RString.EMPTY;
     }
 
@@ -5134,9 +4657,6 @@ public final class IchijihanteikekkahyoEntityEditor {
                 return IkenKomoku05.toValue(remove半角スペース(item.get意見項目())).get名称();
             }
         }
-//        if (連番 < dbt5304Entity.size() && !RString.isNullOrEmpty(dbt5304Entity.get(連番).get意見項目())) {
-//            return IkenKomoku05.toValue(remove半角スペース(dbt5304Entity.get(連番).get意見項目())).get名称();
-//        }
         return RString.EMPTY;
     }
 
@@ -5146,9 +4666,6 @@ public final class IchijihanteikekkahyoEntityEditor {
                 return IkenKomoku04.toValue(remove半角スペース(item.get意見項目())).get名称();
             }
         }
-//        if (連番 < dbt5304Entity.size() && !RString.isNullOrEmpty(dbt5304Entity.get(連番).get意見項目())) {
-//            return IkenKomoku04.toValue(remove半角スペース(dbt5304Entity.get(連番).get意見項目())).get名称();
-//        }
         return RString.EMPTY;
     }
 
@@ -5158,9 +4675,6 @@ public final class IchijihanteikekkahyoEntityEditor {
                 return IkenKomoku03.toValue(remove半角スペース(item.get意見項目())).get名称();
             }
         }
-//        if (連番 < dbt5304Entity.size() && !RString.isNullOrEmpty(dbt5304Entity.get(連番).get意見項目())) {
-//            return IkenKomoku03.toValue(remove半角スペース(dbt5304Entity.get(連番).get意見項目())).get名称();
-//        }
         return RString.EMPTY;
     }
 
@@ -5361,11 +4875,6 @@ public final class IchijihanteikekkahyoEntityEditor {
                 return IkenKomoku14.toValue(remove半角スペース(item.get意見項目())).get名称();
             }
         }
-//        if (連番 < dbt5304Entity.size()
-//                && !RString.isNullOrEmpty(dbt5304Entity.get(連番).get意見項目())
-//                && !IkenKomoku14.自立ないし何とか自分で食べられる.getコード().equals(dbt5304Entity.get(連番).get意見項目())) {
-//            return IkenKomoku14.toValue(remove半角スペース(dbt5304Entity.get(連番).get意見項目())).get名称();
-//        }
         return RString.EMPTY;
     }
 
@@ -5377,11 +4886,6 @@ public final class IchijihanteikekkahyoEntityEditor {
                 return IkenKomoku06.toValue(remove半角スペース(item.get意見項目())).get名称();
             }
         }
-//        if (連番 < dbt5304Entity.size()
-//                && !RString.isNullOrEmpty(dbt5304Entity.get(連番).get意見項目())
-//                && !IkenKomoku06.伝えられる.getコード().equals(dbt5304Entity.get(連番).get意見項目())) {
-//            return IkenKomoku06.toValue(remove半角スペース(dbt5304Entity.get(連番).get意見項目())).get名称();
-//        }
         return RString.EMPTY;
     }
 
@@ -5393,11 +4897,6 @@ public final class IchijihanteikekkahyoEntityEditor {
                 return IkenKomoku05.toValue(remove半角スペース(item.get意見項目())).get名称();
             }
         }
-//        if (連番 < dbt5304Entity.size()
-//                && !RString.isNullOrEmpty(dbt5304Entity.get(連番).get意見項目())
-//                && !IkenKomoku05.自立.getコード().equals(dbt5304Entity.get(連番).get意見項目())) {
-//            return IkenKomoku05.toValue(remove半角スペース(dbt5304Entity.get(連番).get意見項目())).get名称();
-//        }
         return RString.EMPTY;
     }
 
@@ -5409,11 +4908,6 @@ public final class IchijihanteikekkahyoEntityEditor {
                 return IkenKomoku04.toValue(remove半角スペース(item.get意見項目())).get名称();
             }
         }
-//        if (連番 < dbt5304Entity.size()
-//                && !RString.isNullOrEmpty(dbt5304Entity.get(連番).get意見項目())
-//                && !IkenKomoku04.問題なし.getコード().equals(dbt5304Entity.get(連番).get意見項目())) {
-//            return IkenKomoku04.toValue(remove半角スペース(dbt5304Entity.get(連番).get意見項目())).get名称();
-//        }
         return RString.EMPTY;
     }
 
@@ -5425,11 +4919,6 @@ public final class IchijihanteikekkahyoEntityEditor {
                 return IkenKomoku03.toValue(remove半角スペース(item.get意見項目())).get名称();
             }
         }
-//        if (連番 < dbt5304Entity.size()
-//                && !RString.isNullOrEmpty(dbt5304Entity.get(連番).get意見項目())
-//                && !IkenKomoku03.自立.getコード().equals(dbt5304Entity.get(連番).get意見項目())) {
-//            return IkenKomoku03.toValue(remove半角スペース(dbt5304Entity.get(連番).get意見項目())).get名称();
-//        }
         return RString.EMPTY;
     }
 

@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteijohoteikyo.YokaigoNi
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.Image;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
@@ -36,12 +37,16 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.IsExistJ
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.ChosaItakusakiAndChosainInputDiv;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ImageManager;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -79,6 +84,7 @@ public class YokaigoNinteiJohoTeikyoHandler {
      * @param business 認定申請ビジネスクラス
      */
     public void onLoad(RString 申請書管理番号, NinnteiRiriBusiness business) {
+        DbAccessLogger accessLog = new DbAccessLogger();
         CommonButtonHolder.setDisabledByCommonButtonFieldName(検索へ戻るボタン名, false);
         div.getRadOutputHoho().setSelectedKey(出力方法_一式);
         HihokenshaJyuhouBusiness 被保険者情報 = YokaigoNinteiJohoTeikyoFinder.createInstance().select被保険者情報(申請書管理番号);
@@ -106,6 +112,9 @@ public class YokaigoNinteiJohoTeikyoHandler {
             div.getTxtYubibNo().setValue(被保険者情報.get郵便番号());
             div.getTxtjusho().setValue(被保険者情報.get住所().getColumnValue());
             div.getTxtTelNo().setValue(被保険者情報.get電話番号().getColumnValue());
+            ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(被保険者情報.get証記載保険者番号());
+            ExpandedInformation expandedInformation = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号);
+            accessLog.store(shoKisaiHokenshaNo, 被保険者情報.get被保険者番号(), expandedInformation);
         }
 
         if (business != null) {
@@ -141,7 +150,13 @@ public class YokaigoNinteiJohoTeikyoHandler {
             div.getNinteiKekkaShosai().getTxtShinsakaiYoteibi().setValue(getNull(business.get審査会開催予定日()));
             div.getNinteiKekkaShosai().getTxtShinsakaiKaisaibi().setValue(getNull(business.get審査会開催日()));
             set発行する帳票(business);
+            if (被保険者情報 == null) {
+                ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(business.get証記載保険者番号());
+                ExpandedInformation expandedInformation = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.get申請書管理番号());
+                accessLog.store(shoKisaiHokenshaNo, business.get被保険者番号(), expandedInformation);
+            }
         }
+        accessLog.flushBy(AccessLogType.照会);
     }
 
     /**

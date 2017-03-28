@@ -39,4 +39,7 @@ public class ShujiiikenshoEntity {
     private RString 審査日_日;
     private RString イメージファイル1;
     private RString イメージファイル2;
+    private RString temp_保険者番号;
+    private RString temp_被保険者番号;
+    private RString temp_申請書管理番号;
 }

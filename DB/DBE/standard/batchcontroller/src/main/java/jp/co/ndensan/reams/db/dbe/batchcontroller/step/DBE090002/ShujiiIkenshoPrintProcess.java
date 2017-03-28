@@ -18,8 +18,6 @@ import jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteijohoteikyo.YokaigoNi
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -31,14 +29,11 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportLineRecord;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -75,12 +70,10 @@ public class ShujiiIkenshoPrintProcess extends BatchProcessBase<YokaigoNinteiJoh
     private static final RString 総合事業開始区分_実施済 = new RString("2");
     private static final RString 総合事業未実施 = new RString("総合事業未実施");
     private static final RString 総合事業実施済 = new RString("総合事業実施済");
-    private DbAccessLogger accessLog;
 
     @Override
     protected void initialize() {
         finder = YokaigoNinteiJohoTeikyoFinder.createInstance();
-        accessLog = new DbAccessLogger();
     }
 
     @Override
@@ -92,8 +85,6 @@ public class ShujiiIkenshoPrintProcess extends BatchProcessBase<YokaigoNinteiJoh
     protected void createWriter() {
         batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517151.getReportId().value())
                 .addBreak(new BreakerCatalog<ShujiiikenshoReportSource>().new SimpleLayoutBreaker(
-
-
                     ShujiiikenshoReportSource.LAYOUTBREAKITEM) {
                     @Override
                     public ReportLineRecord<ShujiiikenshoReportSource> occuredBreak(
@@ -119,15 +110,12 @@ public class ShujiiIkenshoPrintProcess extends BatchProcessBase<YokaigoNinteiJoh
                     = ShujiiikenshoEntityEditor.edit(entity, イメージ共有ファイルID, processPrm.get主治医意見書マスキング区分());
             ShujiiikenshoReport report = new ShujiiikenshoReport(shujiiikenshoEntity);
             report.writeBy(reportSourceWriter);
-            ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.get申請書管理番号());
-            accessLog.store(new ShoKisaiHokenshaNo(entity.get保険者番号()), entity.get被保険者番号(), expandedInfo);
         }
     }
 
     @Override
     protected void afterExecute() {
         set出力条件表();
-        accessLog.flushBy(AccessLogType.照会);
     }
 
     private void set出力条件表() {

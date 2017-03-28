@@ -129,4 +129,7 @@ public class NinteiChosaJohohyoEntity {
     private List<RString> 複雑動作リスト_52;
     private List<RString> 特別介護リスト_52;
     private RString サービス区分コード;
+    private RString temp_保険者番号;
+    private RString temp_被保険者番号;
+    private RString temp_申請書管理番号;
 }

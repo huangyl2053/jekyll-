@@ -212,7 +212,7 @@ public class YokaigoNinteiJohoTeikyo {
         ResponseData<SourceDataCollection> response = new ResponseData<>();
         if (ViewStateHolder.get(ViewStateKeys.状態, RString.class) != null
                 && MessageDialogSelectedResult.No.getKey().equals(ViewStateHolder.get(ViewStateKeys.状態, RString.class))) {
-            return response.of(div).respond();
+            return ResponseData.of(div).respond();
         }
 
         ShinseishoKanriNo 申請書管理番号 = (!RString.isNullOrEmpty(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class)))
