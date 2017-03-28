@@ -691,17 +691,13 @@ public class RenkeiDataTorikomiBusiness {
      * DbT5121ShinseiRirekiJohoEntityの設定メソッドです。
      *
      * @param entity DbT5101RelateEntity
+     * @param 前回申請書管理番号 ShinseishoKanriNo
      * @return DbT5121ShinseiRirekiJohoEntity
      */
-    public DbT5121ShinseiRirekiJohoEntity getDbT5121Entity(DbT5101RelateEntity entity) {
+    public DbT5121ShinseiRirekiJohoEntity getDbT5121Entity(DbT5101RelateEntity entity, ShinseishoKanriNo 前回申請書管理番号) {
         DbT5121ShinseiRirekiJohoEntity dbt5121Entity = new DbT5121ShinseiRirekiJohoEntity();
-        DbT5101NinteiShinseiJohoEntity dbt5101Entity = entity.getDbT5101Entity();
         dbt5121Entity.setShinseishoKanriNo(new ShinseishoKanriNo(rstring申請書管理番号));
-        if (dbt5101Entity != null && !dbt5101Entity.getShinseishoKanriNo().isEmpty()) {
-            dbt5121Entity.setZenkaiShinseishoKanriNo(dbt5101Entity.getShinseishoKanriNo());
-        } else {
-            dbt5121Entity.setZenkaiShinseishoKanriNo(new ShinseishoKanriNo(申請書管理番号_ZERO17));
-        }
+        dbt5121Entity.setZenkaiShinseishoKanriNo(前回申請書管理番号);
         return dbt5121Entity;
     }
 
