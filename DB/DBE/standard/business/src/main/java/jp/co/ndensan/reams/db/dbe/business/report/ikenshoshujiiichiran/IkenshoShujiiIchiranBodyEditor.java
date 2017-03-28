@@ -64,7 +64,7 @@ class IkenshoShujiiIchiranBodyEditor implements IkenshoShujiiIchiranEditor {
         source.listIchiranhyoUpper_5 = item.getTelNo() == null ? RString.EMPTY : item.getTelNo().value();
         source.listIchiranhyoUpper_7 = item.getShujiiCode();
         source.listIchiranhyoUpper_8 = item.getShujiiKana() == null ? RString.EMPTY : item.getShujiiKana().value();
-        source.listIchiranhyoUpper_9 = item.getSeibetsu() == null ? RString.EMPTY
+        source.listIchiranhyoUpper_9 = RString.isNullOrEmpty(item.getSeibetsu().getColumnValue().trim()) ? RString.EMPTY
                                        : Gender.toValue(item.getSeibetsu().value()).getName().getShortJapanese();
         source.listIchiranhyoUpper_6 = IryoKikanJokyo.toValue(item.isIryokikanJokyoFlag()).get名称();
         source.listIchiranhyoUpper_10 = ShujiiJokyo.toValue(item.isShujiiJokyoFlag()).get名称();

@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.CyoSaNyuSyuBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKaiBusiness;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteichosaTokusokuHoho;
@@ -32,10 +33,13 @@ import jp.co.ndensan.reams.db.dbz.service.core.yokaigoninteitasklist.YokaigoNint
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -188,7 +192,7 @@ public class NinteichosaKekkaNyushuHandler {
         if (UIContainer_DBEUC22101.equals(ResponseHolder.getUIContainerId())) {
             div.getNinteichosakekkainput().getRadJotaiKubun().setSelectedKey(KanryoShoriStatus.完了可能.getコード());
             div.getNinteichosakekkainput().getRadJotaiKubun().setDisabled(true);
-        } else if(UIContainer_DBEUC20602.equals(ResponseHolder.getUIContainerId())) {
+        } else if (UIContainer_DBEUC20602.equals(ResponseHolder.getUIContainerId())) {
             div.getNinteichosakekkainput().getRadJotaiKubun().setSelectedKey(KanryoShoriStatus.完了可能.getコード());
             div.getNinteichosakekkainput().getRadJotaiKubun().setDisabled(true);
         } else {
@@ -334,4 +338,16 @@ public class NinteichosaKekkaNyushuHandler {
         return no == null || RString.isNullOrEmpty(no.value()) ? RString.EMPTY : no.value();
     }
 
+    /**
+     * アクセスログを出力するためのPersonalDataを取得するメソッドです。
+     *
+     * @param 証記載保険者番号 RString
+     * @param 被保険者番号 RString
+     * @param 申請書管理番号 RString
+     * @return PersonalData
+     */
+    public Optional<PersonalData> getPersonalData(RString 証記載保険者番号, RString 被保険者番号, RString 申請書管理番号) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号);
+        return Optional.of(PersonalData.of(new ShikibetsuCode(証記載保険者番号.substring(0, 5).concat(被保険者番号)), expandedInfo));
+    }
 }
