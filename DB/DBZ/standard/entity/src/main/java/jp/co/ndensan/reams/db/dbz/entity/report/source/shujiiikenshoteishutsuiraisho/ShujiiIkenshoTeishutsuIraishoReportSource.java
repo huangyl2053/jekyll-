@@ -1,8 +1,12 @@
 package jp.co.ndensan.reams.db.dbz.entity.report.source.shujiiikenshoteishutsuiraisho;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 介護保険指定医依頼兼主治医意見書提出依頼書のReportSourceです。
@@ -90,8 +94,9 @@ public class ShujiiIkenshoTeishutsuIraishoReportSource implements IReportSource 
     public RString tsuchibun2;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
-    //追加コードは以下（「User Customize Area」内）に記述してください。
-    //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
-    //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
+    @ReportPerson(id = "X")
+    public ShikibetsuCode 識別コード;
+    @ReportExpandedInfo(id = "X")
+    public ExpandedInformation 拡張情報;
 // </editor-fold>
 }

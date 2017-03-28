@@ -25,8 +25,11 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -89,7 +92,9 @@ public class ChosairairirekiIchiran_DBE220004Process extends BatchProcessBase<Ho
         ChosairairirekiIchiranReport report = new ChosairairirekiIchiranReport(
                 new ChosairairirekiIchiranBusiness(entity.get直近区分(),
                         entity.get被保険者番号(), entity.get被保険者氏名(), entity.get被保険者氏名カナ(), entity.get住所(), entity.get事業者名称(),
-                        entity.get調査員氏名(), 認定調査依頼年月日, 認定申請区分));
+                        entity.get調査員氏名(), 認定調査依頼年月日, 認定申請区分,
+                        new ShikibetsuCode(entity.get証記載保険者番号().substring(0, 5).concat(entity.get被保険者番号())),
+                        new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.get申請書管理番号())));
         report.writeBy(reportSourceWriter);
     }
 

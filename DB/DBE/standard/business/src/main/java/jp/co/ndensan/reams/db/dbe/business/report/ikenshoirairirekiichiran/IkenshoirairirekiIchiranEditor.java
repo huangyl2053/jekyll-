@@ -80,6 +80,8 @@ public class IkenshoirairirekiIchiranEditor implements IIkenshoirairirekiIchiran
         }
         source.listShinseiKubun_1 = business.get認定申請区分();
         source.listKeizokukubun_1 = business.get継続区分();
+        source.識別コード = business.get識別コード();
+        source.拡張情報 = business.get拡張情報();
         return source;
     }
 }

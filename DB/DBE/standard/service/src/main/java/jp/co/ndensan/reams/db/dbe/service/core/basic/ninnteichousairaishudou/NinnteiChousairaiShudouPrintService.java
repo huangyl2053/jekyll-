@@ -142,7 +142,9 @@ public class NinnteiChousairaiShudouPrintService {
                         item.getHomonChosasakiTelNo(),
                         item.getShinseiYMD(),
                         item.getTeishutsuKigen(),
-                        item.getTsuchibun2());
+                        item.getTsuchibun2(),
+                        item.getShikibetsuCode(),
+                        item.getExpandedInformation());
                 要介護認定調査依頼書.add(item);
             }
             ChosaIraishoReport report = ChosaIraishoReport.createFrom(要介護認定調査依頼書);

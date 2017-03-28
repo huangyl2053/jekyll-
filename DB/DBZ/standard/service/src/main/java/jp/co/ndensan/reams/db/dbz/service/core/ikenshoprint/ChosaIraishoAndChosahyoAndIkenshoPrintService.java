@@ -178,7 +178,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
                         item.getHomonChosasakiTelNo(),
                         item.getShinseiYMD(),
                         item.getTeishutsuKigen(),
-                        item.getTsuchibun2());
+                        item.getTsuchibun2(),
+                        item.getShikibetsuCode(),
+                        item.getExpandedInformation());
                 要介護認定調査依頼書.add(item);
             }
             ChosaIraishoReport report = ChosaIraishoReport.createFrom(要介護認定調査依頼書);
@@ -246,7 +248,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
                         item.getListIchiranhyo_11(),
                         item.getListIchiranhyo_12(),
                         item.getShichosonCode(),
-                        item.getChosaItakusakiCode()));
+                        item.getChosaItakusakiCode(),
+                        item.getShinseishoKanriNo()));
             }
             ChosaIraiIchiranhyoReport report = ChosaIraiIchiranhyoReport.createFrom(itemList);
             report.writeBy(reportSourceWriter);

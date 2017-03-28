@@ -40,6 +40,8 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiSh
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.RensakusakiTsuzukigara;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -51,6 +53,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.lang.Wareki;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCode;
 import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCodeResult;
 
@@ -290,7 +293,8 @@ public class NinteiChosaBusiness {
                 entity.get電話番号(),
                 set提出期限(entity),
                 entity.get証記載保険者番号(),
-                entity.get認定調査委託先コード());
+                entity.get認定調査委託先コード(),
+                entity.get申請書管理番号());
     }
 
     private RString set提出期限(HomonChosaIraishoRelateEntity entity) {
@@ -389,7 +393,9 @@ public class NinteiChosaBusiness {
                 entity.get訪問調査先電話番号(),
                 entity.get認定申請年月日(),
                 set提出期限(entity),
-                通知文Map.get(2));
+                通知文Map.get(2),
+                new ShikibetsuCode(processParamter.getShoKisaiHokenshaNo().substring(0, 5).concat(entity.get被保険者番号())),
+                new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.get申請書管理番号()));
     }
 
     /**
@@ -449,7 +455,9 @@ public class NinteiChosaBusiness {
                 getCode(証記載保険者番号リスト, 2),
                 getCode(証記載保険者番号リスト, INT3),
                 getCode(証記載保険者番号リスト, INT4),
-                getCode(証記載保険者番号リスト, INT5));
+                getCode(証記載保険者番号リスト, INT5),
+                new ShikibetsuCode(entity.get証記載保険者番号().substring(0, 5).concat(entity.get被保険者番号())),
+                new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.get申請書管理番号()));
     }
 
     /**
@@ -602,7 +610,9 @@ public class NinteiChosaBusiness {
                 getCode(被保険者番号リスト, INT6),
                 getCode(被保険者番号リスト, INT7),
                 getCode(被保険者番号リスト, INT8),
-                getCode(被保険者番号リスト, INT9));
+                getCode(被保険者番号リスト, INT9),
+                new ShikibetsuCode(entity.get証記載保険者番号().substring(0, 5).concat(entity.get被保険者番号())),
+                new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.get申請書管理番号()));
     }
 
     private RString getCode(List<RString> list, int index) {
@@ -760,7 +770,9 @@ public class NinteiChosaBusiness {
                 getCode(被保険者番号リスト, INT8),
                 getCode(被保険者番号リスト, INT9),
                 getCode(被保険者番号リスト, 1),
-                entity.get被保険者氏名());
+                entity.get被保険者氏名(),
+                new ShikibetsuCode(entity.get証記載保険者番号().substring(0, 5).concat(entity.get被保険者番号())),
+                new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.get申請書管理番号()));
     }
 
     /**
@@ -1279,7 +1291,9 @@ public class NinteiChosaBusiness {
                     前回連番Map.get(NinteichosaKomokuMapping09B.じょくそうの処置.getコード()),
                     前回連番Map.get(NinteichosaKomokuMapping09B.カテーテル.getコード()),
                     entity.get前回障害高齢者自立度(),
-                    entity.get前回認知症高齢者自立度());
+                    entity.get前回認知症高齢者自立度(),
+                    new ShikibetsuCode(processParamter.getShoKisaiHokenshaNo().substring(0, 5).concat(entity.get被保険者番号())),
+                    new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.get申請書管理番号()));
         } else if (KoroshoInterfaceShikibetsuCode.V09A.getCode().equals(厚労省IF識別コード)) {
             item = new SaiChekkuhyoItem(
                     entity.get前回一次判定結果(),
@@ -1364,7 +1378,9 @@ public class NinteiChosaBusiness {
                     前回連番Map.get(NinteichosaKomokuMapping09A.じょくそうの処置.getコード()),
                     前回連番Map.get(NinteichosaKomokuMapping09A.カテーテル.getコード()),
                     entity.get前回障害高齢者自立度(),
-                    entity.get前回認知症高齢者自立度());
+                    entity.get前回認知症高齢者自立度(),
+                    new ShikibetsuCode(processParamter.getShoKisaiHokenshaNo().substring(0, 5).concat(entity.get被保険者番号())),
+                    new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.get申請書管理番号()));
         } else {
             item = new SaiChekkuhyoItem(
                     entity.get前回一次判定結果(),
@@ -1373,8 +1389,9 @@ public class NinteiChosaBusiness {
                     entity.get年齢(),
                     entity.get前回二次判定結果(),
                     entity.get前回二次判定日(),
-                    entity.get生年月日()
-            );
+                    entity.get生年月日(),
+                    new ShikibetsuCode(processParamter.getShoKisaiHokenshaNo().substring(0, 5).concat(entity.get被保険者番号())),
+                    new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.get申請書管理番号()));
         }
         前回連番Map.clear();
         return item;
@@ -1470,7 +1487,9 @@ public class NinteiChosaBusiness {
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
-                RString.EMPTY);
+                RString.EMPTY,
+                new ShikibetsuCode(processParamter.getShoKisaiHokenshaNo().substring(0, 5).concat(entity.get被保険者番号())),
+                new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.get申請書管理番号()));
     }
 
     /**
@@ -1573,8 +1592,9 @@ public class NinteiChosaBusiness {
                 前回連番Map.get(NinteichosaKomokuMapping09B.じょくそうの処置.getコード()),
                 前回連番Map.get(NinteichosaKomokuMapping09B.カテーテル.getコード()),
                 entity.get前回障害高齢者自立度(),
-                entity.get前回認知症高齢者自立度()
-        );
+                entity.get前回認知症高齢者自立度(),
+                new ShikibetsuCode(processParamter.getShoKisaiHokenshaNo().substring(0, 5).concat(entity.get被保険者番号())),
+                new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.get申請書管理番号()));
     }
 
     /**

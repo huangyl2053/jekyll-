@@ -36,6 +36,7 @@ import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -48,6 +49,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCode;
 import jp.co.ndensan.reams.uz.uza.report.util.barcode.CustomerBarCodeResult;
 
@@ -355,6 +357,8 @@ public class ShujiiIkenshoBusiness {
         item.setSeikyuIryokikanYubinNo(getYubinNo(entity.get医療機関郵便番号()));
         item.setSeikyuIryokikanJusho(entity.get医療機関住所());
         item.setSeikyuIryokikanTel(entity.get医療機関電話番号());
+        item.set識別コード(new ShikibetsuCode(processParamter.getShoKisaiHokenshaNo().substring(0, 5).concat(entity.get被保険者番号())));
+        item.set拡張情報(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.get申請書管理番号()));
         return item;
     }
 
@@ -479,17 +483,10 @@ public class ShujiiIkenshoBusiness {
         if (!意見書作成料リスト.isEmpty()) {
             帳票Entity.set主治医意見書作成料(new RString(意見書作成料リスト.get(0).getTanka().toString()));
         }
-//        if (new Code(SakuseiryoSeikyuKubun.在宅新規.getコード()).equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
-//            帳票Entity.set主治医意見書作成料(IkenshoSakuseiRyo.在宅新規.get名称());
-//        } else if (new Code(SakuseiryoSeikyuKubun.施設新規.getコード()).equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
-//            帳票Entity.set主治医意見書作成料(IkenshoSakuseiRyo.施設新規.get名称());
-//        } else if (new Code(SakuseiryoSeikyuKubun.在宅継続.getコード()).equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
-//            帳票Entity.set主治医意見書作成料(IkenshoSakuseiRyo.在宅継続.get名称());
-//        } else if (new Code(SakuseiryoSeikyuKubun.施設継続.getコード()).equals(entity.getDbt5301Entity().getSakuseiryoSeikyuKubun())) {
-//            帳票Entity.set主治医意見書作成料(IkenshoSakuseiRyo.施設継続.get名称());
-//        }
         帳票Entity.set主治医意見書別途診療費(entity.get主治医意見書別途診療費());
         帳票Entity.set報酬支払年月日(getFlexibleDate(entity.get主治医意見書報酬支払年月日()));
+        帳票Entity.set識別コード(new ShikibetsuCode(processParamter.getShoKisaiHokenshaNo().substring(0, 5).concat(entity.get被保険者番号())));
+        帳票Entity.set拡張情報(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.get申請書管理番号()));
         return 帳票Entity;
     }
 
@@ -575,6 +572,8 @@ public class ShujiiIkenshoBusiness {
         item.setTeishutsuKigen(get提出期限(true));
         item.setTsuchibun2(通知文Map.get(2));
         item.setShoriName(IkenshoIraiKubun.toValue(entity.get主治医意見書依頼区分()).get名称());
+        item.set識別コード(new ShikibetsuCode(processParamter.getShoKisaiHokenshaNo().substring(0, 5).concat(entity.get被保険者番号())));
+        item.set拡張情報(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.get申請書管理番号()));
         return item;
     }
 
@@ -643,7 +642,9 @@ public class ShujiiIkenshoBusiness {
                 Seibetsu.toValue(entity.get性別()).get名称(),
                 get提出期限(),
                 entity.get主治医医療機関コード(),
-                entity.get市町村コード());
+                entity.get市町村コード(),
+                new ShikibetsuCode(processParamter.getShoKisaiHokenshaNo().substring(0, 5).concat(entity.get被保険者番号())),
+                new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.get申請書管理番号()));
     }
 
     private RString get提出期限() {
@@ -913,6 +914,8 @@ public class ShujiiIkenshoBusiness {
         if (!RString.isNullOrEmpty(entity.get意見書作成回数区分())) {
             item.setIkenshoSakuseiKaisuKubun(new Code(entity.get意見書作成回数区分()));
         }
+        item.set識別コード(new ShikibetsuCode(processParamter.getShoKisaiHokenshaNo().substring(0, 5).concat(entity.get被保険者番号())));
+        item.set拡張情報(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.get申請書管理番号()));
         return new IkenshoirairirekiIchiran(item);
     }
 
@@ -971,6 +974,8 @@ public class ShujiiIkenshoBusiness {
         item.setBirthGengoMeiji(年号.startsWith(元号_明治) ? RString.EMPTY : 記号_星);
         item.setBirthGengoTaisho(年号.startsWith(元号_大正) ? RString.EMPTY : 記号_星);
         item.setBirthGengoShowa(年号.startsWith(元号_昭和) ? RString.EMPTY : 記号_星);
+        item.set識別コード(new ShikibetsuCode(processParamter.getShoKisaiHokenshaNo().substring(0, 5).concat(entity.get被保険者番号())));
+        item.set拡張情報(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.get申請書管理番号()));
         return item;
     }
 

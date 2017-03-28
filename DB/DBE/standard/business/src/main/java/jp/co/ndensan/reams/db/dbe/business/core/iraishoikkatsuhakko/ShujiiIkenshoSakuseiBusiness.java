@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.ShujiiIk
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ShujiiIkenshoSakuseiRelateEntity;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.uz.uza.batch.batchexecutor.util.JobContextHolder;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -21,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  *
@@ -30,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  */
 public class ShujiiIkenshoSakuseiBusiness {
 
+    private final ShujiiIkenshoSakuseiProcessParamter processParamter;
     private int 宛名連番 = 1;
     private int 連番 = 1;
     private static final RString IRAIFROMYMD = new RString("【依頼開始日】");
@@ -52,13 +56,16 @@ public class ShujiiIkenshoSakuseiBusiness {
     private static final RString IKENSHOSAKUSEISEIKYUUSHO = new RString("【主治医意見書作成料請求書出力区分】");
     private static final RString IKENSHOTEISHUTU = new RString("【介護保険指定医依頼兼主治医意見書提出意見依頼書出力区分】");
 
+    public ShujiiIkenshoSakuseiBusiness(ShujiiIkenshoSakuseiProcessParamter processParamter) {
+        this.processParamter = processParamter;
+    }
+
     /**
      * 帳票「帳票設計_DBE230002_主治医意見書作成依頼一覧表」Headerデータを作成するメッソドです。
      *
-     * @param processParamter processParamter
      * @return SyujiyikenshosakuseyiraihakouHeadItem
      */
-    public SyujiyikenshosakuseyiraihakouHeadItem setHeaderItem(ShujiiIkenshoSakuseiProcessParamter processParamter) {
+    public SyujiyikenshosakuseyiraihakouHeadItem setHeaderItem() {
         return new SyujiyikenshosakuseyiraihakouHeadItem(processParamter.getIraiFromYMD(),
                 processParamter.getIraiToYMD(),
                 processParamter.getShujiiIkenshoSakuseiIraisho());
@@ -84,7 +91,9 @@ public class ShujiiIkenshoSakuseiBusiness {
                 entity.get依頼書提出期限(),
                 entity.get市町村コード(),
                 entity.get市町村名称(),
-                entity.get証記載保険者番号());
+                entity.get証記載保険者番号(),
+                new ShikibetsuCode(processParamter.getShokisaiHokenshaNo().substring(0, 5).concat(entity.get被保険者番号())),
+                new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.get申請書管理番号()));
     }
 
     /**

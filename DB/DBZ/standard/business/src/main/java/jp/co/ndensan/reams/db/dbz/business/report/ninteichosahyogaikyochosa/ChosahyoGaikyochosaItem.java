@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyochosa;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import lombok.Getter;
 
 /**
@@ -101,6 +103,8 @@ public class ChosahyoGaikyochosaItem {
     private final RString hihokenshaNo8;
     private final RString hihokenshaNo9;
     private final RString hihokenshaNo10;
+    private final ShikibetsuCode 識別コード;
+    private final ExpandedInformation 拡張情報;
 
     /**
      * コンストラクタです。
@@ -189,6 +193,8 @@ public class ChosahyoGaikyochosaItem {
      * @param hihokenshaNo8 被保険者番号8
      * @param hihokenshaNo9 被保険者番号9
      * @param hihokenshaNo10 被保険者番号10
+     * @param shikibetuCode
+     * @param 拡張情報
      */
     public ChosahyoGaikyochosaItem(
             RString hokenshaNo1,
@@ -269,7 +275,9 @@ public class ChosahyoGaikyochosaItem {
             RString hihokenshaNo3, RString hihokenshaNo4,
             RString hihokenshaNo5, RString hihokenshaNo6,
             RString hihokenshaNo7, RString hihokenshaNo8,
-            RString hihokenshaNo9, RString hihokenshaNo10) {
+            RString hihokenshaNo9, RString hihokenshaNo10,
+            ShikibetsuCode shikibetuCode,
+            ExpandedInformation 拡張情報) {
         this.hokenshaNo1 = hokenshaNo1;
         this.hokenshaNo2 = hokenshaNo2;
         this.hokenshaNo3 = hokenshaNo3;
@@ -354,5 +362,7 @@ public class ChosahyoGaikyochosaItem {
         this.hihokenshaNo8 = hihokenshaNo8;
         this.hihokenshaNo9 = hihokenshaNo9;
         this.hihokenshaNo10 = hihokenshaNo10;
+        this.識別コード = shikibetuCode;
+        this.拡張情報 = 拡張情報;
     }
 }

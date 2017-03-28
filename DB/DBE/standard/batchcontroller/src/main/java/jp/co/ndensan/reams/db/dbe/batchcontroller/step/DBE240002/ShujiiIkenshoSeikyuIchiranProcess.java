@@ -89,8 +89,8 @@ public class ShujiiIkenshoSeikyuIchiranProcess extends BatchProcessBase<ShujiiIk
         }
         ShujiiIkenshoHoshuTankaParameter param = ShujiiIkenshoHoshuTankaParameter.createParameter(在宅施設区分, 回数区分);
         List<ShujiiIkenshoHoshuTankaEntity> 意見書作成料リスト = ChosaIraishoAndChosahyoAndIkenshoPrintFinder.createInstance().get主治医意見書作成料報酬単価(param);
-        ShujiiIkenshoSeikyuIchiranReport report = new ShujiiIkenshoSeikyuIchiranReport(new ShujiiIkenshoBusiness(entity, processParamter)
-                .setDBE013006Entity(意見書作成料リスト), index++);
+        ShujiiIkenshoSeikyuIchiranReport report = new ShujiiIkenshoSeikyuIchiranReport(
+                new ShujiiIkenshoBusiness(entity, processParamter).setDBE013006Entity(意見書作成料リスト), index++);
         report.writeBy(reportSourceWriter);
     }
 

@@ -55,7 +55,7 @@ public class ShujiiIkenshoSakuseiProcess extends BatchKeyBreakBase<ShujiiIkensho
 
     @Override
     protected void initialize() {
-        business = new ShujiiIkenshoSakuseiBusiness();
+        business = new ShujiiIkenshoSakuseiBusiness(processParamter);
         count = 1;
     }
 
@@ -76,7 +76,7 @@ public class ShujiiIkenshoSakuseiProcess extends BatchKeyBreakBase<ShujiiIkensho
         if (hasBrek(getBefore(), current)) {
             count = 1;
             SyujiyikenshosakuseyiraihakouReport report = SyujiyikenshosakuseyiraihakouReport.
-                    createFrom(business.setHeaderItem(processParamter), business.setBodyItem(current), count++);
+                    createFrom(business.setHeaderItem(), business.setBodyItem(current), count++);
             report.writeBy(reportSourceWriter);
         }
     }
@@ -90,7 +90,7 @@ public class ShujiiIkenshoSakuseiProcess extends BatchKeyBreakBase<ShujiiIkensho
     @Override
     protected void usualProcess(ShujiiIkenshoSakuseiRelateEntity entity) {
         SyujiyikenshosakuseyiraihakouReport report = SyujiyikenshosakuseyiraihakouReport.
-                createFrom(business.setHeaderItem(processParamter), business.setBodyItem(entity), count++);
+                createFrom(business.setHeaderItem(), business.setBodyItem(entity), count++);
         report.writeBy(reportSourceWriter);
     }
 

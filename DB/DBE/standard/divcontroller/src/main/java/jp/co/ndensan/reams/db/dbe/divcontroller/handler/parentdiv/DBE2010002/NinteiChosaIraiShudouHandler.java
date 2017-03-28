@@ -40,7 +40,9 @@ import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoGaikyoChosaManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoKihonChosaManager;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -50,6 +52,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -237,7 +240,7 @@ public class NinteiChosaIraiShudouHandler {
         }
         div.getChkSaiCheck().setSelectedItemsByKey(selectedItemList);
     }
-    
+
     private void 更新項目保持(NinnteiChousairaiShudouBusiness 認定調査依頼) {
         ViewStateHolder.put(ViewStateKeys.認定調査委託先コード, 認定調査依頼.get認定調査委託先コード());
         ViewStateHolder.put(ViewStateKeys.認定調査員コード, 認定調査依頼.get認定調査員コード());
@@ -343,7 +346,9 @@ public class NinteiChosaIraiShudouHandler {
                     business.get事業者名称(),
                     business.get調査員氏名(),
                     認定調査依頼年月日,
-                    認定申請区分_申請時));
+                    認定申請区分_申請時,
+                    new ShikibetsuCode(business.get証記載保険者番号().substring(0, 5).concat(business.get被保険者番号())),
+                    new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.get申請書管理番号())));
         }
 
         return 調査依頼該当者履歴一覧;
@@ -441,8 +446,9 @@ public class NinteiChosaIraiShudouHandler {
                 business.get訪問調査先電話番号(),
                 認定申請年月日,
                 set認定調査提出期限(business),
-                通知文.get(2)
-        );
+                通知文.get(2),
+                new ShikibetsuCode(business.get証記載保険者番号().substring(0, 5).concat(business.get被保険者番号())),
+                new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.get申請書管理番号()));
         chosaIraishoHeadItemList.add(item);
         return chosaIraishoHeadItemList;
     }
@@ -555,9 +561,11 @@ public class NinteiChosaIraiShudouHandler {
                 RString.EMPTY,
                 RString.EMPTY,
                 RString.EMPTY,
-                RString.EMPTY);
+                RString.EMPTY,
+                new ShikibetsuCode(business.get証記載保険者番号().substring(0, 5).concat(business.get被保険者番号())),
+                new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.get申請書管理番号()));
         itemList.add(item);
-        item = createChosahyoKihonchosa(保険者番号リスト, ninteiShinseiDay, 被保険者番号リスト);
+        item = createChosahyoKihonchosa(保険者番号リスト, ninteiShinseiDay, 被保険者番号リスト, business);
         itemList.add(item);
         return itemList;
     }
@@ -602,7 +610,8 @@ public class NinteiChosaIraiShudouHandler {
         return 被保険者番号リスト;
     }
 
-    private ChosahyoGaikyochosaItem createChosahyoKihonchosa(List<RString> 証記載保険者番号リスト, RString ninteiShinseiDay, List<RString> 被保険者番号リスト) {
+    private ChosahyoGaikyochosaItem createChosahyoKihonchosa(List<RString> 証記載保険者番号リスト, RString ninteiShinseiDay,
+            List<RString> 被保険者番号リスト, NinnteiChousairaiShudouBusiness business) {
         ChosahyoGaikyochosaItem item;
         item = new ChosahyoGaikyochosaItem(
                 証記載保険者番号リスト.get(0),
@@ -639,7 +648,9 @@ public class NinteiChosaIraiShudouHandler {
                 被保険者番号リスト.get(INDEX_6),
                 被保険者番号リスト.get(INDEX_7),
                 被保険者番号リスト.get(INDEX_8),
-                被保険者番号リスト.get(INDEX_9));
+                被保険者番号リスト.get(INDEX_9),
+                new ShikibetsuCode(business.get証記載保険者番号().substring(0, 5).concat(business.get被保険者番号())),
+                new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.get申請書管理番号()));
         return item;
     }
 
@@ -680,14 +691,17 @@ public class NinteiChosaIraiShudouHandler {
                     被保険者番号リスト.get(INDEX_8),
                     被保険者番号リスト.get(INDEX_9),
                     被保険者番号リスト.get(1),
-                    business.get被保険者氏名() == null ? RString.EMPTY : business.get被保険者氏名());
+                    business.get被保険者氏名() == null ? RString.EMPTY : business.get被保険者氏名(),
+                    new ShikibetsuCode(business.get証記載保険者番号().substring(0, 5).concat(business.get被保険者番号())),
+                    new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.get申請書管理番号()));
             itemList.add(item);
             if (両面フラグ) {
                 itemList.add(new ChosahyoTokkijikoBusiness(
                         RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                         RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
                         RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY,
-                        RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY));
+                        RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, RString.EMPTY, ShikibetsuCode.EMPTY,
+                        new ExpandedInformation(Code.EMPTY, RString.EMPTY, RString.EMPTY)));
             }
         }
 
@@ -731,7 +745,9 @@ public class NinteiChosaIraiShudouHandler {
                     被保険者番号リスト.get(INDEX_8),
                     被保険者番号リスト.get(INDEX_9),
                     被保険者番号リスト.get(1),
-                    ninteiShinseiJoho.get被保険者氏名() == null ? RString.EMPTY : ninteiShinseiJoho.get被保険者氏名().value());
+                    ninteiShinseiJoho.get被保険者氏名() == null ? RString.EMPTY : ninteiShinseiJoho.get被保険者氏名().value(),
+                    new ShikibetsuCode(ninteiShinseiJoho.get証記載保険者番号().substring(0, 5).concat(ninteiShinseiJoho.get被保険者番号())),
+                    new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), new RString(ninteiShinseiJoho.get申請書管理番号().toString())));
             itemList.add(item);
         }
         return itemList;
@@ -877,7 +893,9 @@ public class NinteiChosaIraiShudouHandler {
                     前回連番Map.get(NinteichosaKomokuMapping09B.じょくそうの処置.getコード()),
                     前回連番Map.get(NinteichosaKomokuMapping09B.カテーテル.getコード()),
                     NinchishoNichijoSeikatsuJiritsudoCode.toValue(business.get認知症高齢者自立度コード()).get名称(),
-                    ShogaiNichijoSeikatsuJiritsudoCode.toValue(business.get障害高齢者自立度コード()).get名称()
+                    ShogaiNichijoSeikatsuJiritsudoCode.toValue(business.get障害高齢者自立度コード()).get名称(),
+                    new ShikibetsuCode(business.get証記載保険者番号().substring(0, 5).concat(business.get被保険者番号())),
+                    new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.get申請書管理番号())
             ));
         }
         return itemList;

@@ -6,8 +6,6 @@
 package jp.co.ndensan.reams.db.dbz.business.report.shujiiikenshosakusei;
 
 import jp.co.ndensan.reams.db.dbz.entity.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoReportSource;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -15,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -90,8 +87,8 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoEditor implements IShujiiIkenshoSak
         source.yubinNo = item.getSeikyuIryokikanYubinNo();
         source.iryokikanJusho = item.getSeikyuIryokikanJusho();
         source.iryokikanTel = item.getSeikyuIryokikanTel();
-        source.shikibetuCode = ShikibetsuCode.EMPTY;
-        source.shokenshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), getHokenshaNo());
+        source.識別コード = item.get識別コード();
+        source.拡張情報 = item.get拡張情報();
         return source;
     }
 

@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.report.ikenshosakuseiiraiichiranhyo;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -46,6 +48,8 @@ public class IkenshoSakuseiIraiIchiranhyoItem {
     private RString listIchiranhyo_9;
     private RString shujiiIryokikanCode;
     private RString shichosonCode;
+    private ShikibetsuCode 識別コード;
+    private ExpandedInformation 拡張情報;
 
     /**
      * コンストラクタを作成します。
@@ -83,6 +87,8 @@ public class IkenshoSakuseiIraiIchiranhyoItem {
      * @param listIchiranhyo_9 提出期限
      * @param shujiiIryokikanCode 主治医医療機関コード
      * @param shichosonCode
+     * @param 識別コード
+     * @param 拡張情報
      */
     public IkenshoSakuseiIraiIchiranhyoItem(RString hakkoYMD, RString denshiKoin, RString ninshoshaYakushokuMei1,
             RString ninshoshaYakushokuMei, RString ninshoshaYakushokuMei2, RString ninshoshaShimeiKakeru,
@@ -90,9 +96,8 @@ public class IkenshoSakuseiIraiIchiranhyoItem {
             RString jushoText, RString kikanNameText, RString shimeiText, RString meishoFuyo, RString printTimeStamp,
             RString title, RString tsuchibun1, RString listIchiranhyo_2, RString listIchiranhyo_3, RString listIchiranhyo_4,
             RString listIchiranhyo_5, RString listIchiranhyo_6, RString listIchiranhyo_7, RString listIchiranhyo_8,
-            RString listIchiranhyo_9,
-            RString shujiiIryokikanCode,
-            RString shichosonCode) {
+            RString listIchiranhyo_9, RString shujiiIryokikanCode, RString shichosonCode,
+            ShikibetsuCode 識別コード, ExpandedInformation 拡張情報) {
         this.hakkoYMD = hakkoYMD;
         this.denshiKoin = denshiKoin;
         this.ninshoshaYakushokuMei1 = ninshoshaYakushokuMei1;
@@ -120,5 +125,7 @@ public class IkenshoSakuseiIraiIchiranhyoItem {
         this.listIchiranhyo_9 = listIchiranhyo_9;
         this.shujiiIryokikanCode = shujiiIryokikanCode;
         this.shichosonCode = shichosonCode;
+        this.識別コード = 識別コード;
+        this.拡張情報 = 拡張情報;
     }
 }

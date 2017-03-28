@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.report.chosahyokihonchosakatamen;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import lombok.Getter;
 
 /**
@@ -39,6 +41,8 @@ public class ChosahyoKihonchosaKatamenItem {
     private final RString hihokenshaNo8;
     private final RString hihokenshaNo9;
     private final RString hihokenshaNo10;
+    private final ShikibetsuCode 識別コード;
+    private final ExpandedInformation 拡張情報;
 
     /**
      * インスタンスを生成します。
@@ -65,13 +69,16 @@ public class ChosahyoKihonchosaKatamenItem {
      * @param hihokenshaNo8 被保険者番号8
      * @param hihokenshaNo9 被保険者番号9
      * @param hihokenshaNo10 被保険者番号10
+     * @param 識別コード
+     * @param 拡張情報
      */
     public ChosahyoKihonchosaKatamenItem(RString shinseiYY1, RString shinseiYY2, RString shinseiMM1,
             RString shinseiMM2, RString shinseiDD1, RString shinseiDD2, RString hokenshaNo1,
             RString hokenshaNo2, RString hokenshaNo3, RString hokenshaNo4, RString hokenshaNo5,
             RString hokenshaNo6, RString hihokenshaNo1, RString hihokenshaNo2, RString hihokenshaNo3,
             RString hihokenshaNo4, RString hihokenshaNo5, RString hihokenshaNo6, RString hihokenshaNo7,
-            RString hihokenshaNo8, RString hihokenshaNo9, RString hihokenshaNo10) {
+            RString hihokenshaNo8, RString hihokenshaNo9, RString hihokenshaNo10,
+            ShikibetsuCode 識別コード, ExpandedInformation 拡張情報) {
         this.shinseiYY1 = shinseiYY1;
         this.shinseiYY2 = shinseiYY2;
         this.shinseiMM1 = shinseiMM1;
@@ -94,5 +101,7 @@ public class ChosahyoKihonchosaKatamenItem {
         this.hihokenshaNo8 = hihokenshaNo8;
         this.hihokenshaNo9 = hihokenshaNo9;
         this.hihokenshaNo10 = hihokenshaNo10;
+        this.識別コード = 識別コード;
+        this.拡張情報 = 拡張情報;
     }
 }

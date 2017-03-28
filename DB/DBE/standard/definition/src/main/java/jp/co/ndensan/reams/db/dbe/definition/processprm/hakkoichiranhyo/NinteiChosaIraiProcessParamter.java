@@ -26,6 +26,7 @@ public class NinteiChosaIraiProcessParamter implements IBatchProcessParameter {
     private final RString ninteiChosaIraisyo;
     private final RString ninteiChosahyo;
     private final List<GridParameter> ninteiChosaIraiList;
+    private final RString shokisaiHokenshaNo;
 
     /**
      * コンストラクタです。
@@ -35,17 +36,20 @@ public class NinteiChosaIraiProcessParamter implements IBatchProcessParameter {
      * @param 認定調査依頼書 認定調査依頼書
      * @param 認定調査票 認定調査票
      * @param 認定調査依頼リスト 認定調査依頼リスト
+     * @param 証記載保険者番号
      */
     public NinteiChosaIraiProcessParamter(RString 依頼日From,
             RString 依頼日To,
             RString 認定調査依頼書,
             RString 認定調査票,
-            List<GridParameter> 認定調査依頼リスト) {
+            List<GridParameter> 認定調査依頼リスト,
+            RString 証記載保険者番号) {
         this.iraiFromYMD = 依頼日From;
         this.iraiToYMD = 依頼日To;
         this.ninteiChosaIraisyo = 認定調査依頼書;
         this.ninteiChosahyo = 認定調査票;
         this.ninteiChosaIraiList = 認定調査依頼リスト;
+        this.shokisaiHokenshaNo = 証記載保険者番号;
     }
 
     /**

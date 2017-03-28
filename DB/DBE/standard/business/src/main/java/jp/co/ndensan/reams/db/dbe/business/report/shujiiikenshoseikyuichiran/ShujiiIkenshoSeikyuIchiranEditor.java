@@ -9,8 +9,6 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshoseikyuichiran.Sh
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshoseikyuichiran.ShujiiIkenshoSeikyuIchiranReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -19,7 +17,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
@@ -76,17 +73,8 @@ public class ShujiiIkenshoSeikyuIchiranEditor implements IShujiiIkenshoSeikyuIch
         Decimal 主治医意見書別途診療費 = item.get主治医意見書別途診療費() == null ? new Decimal(0) : new Decimal(item.get主治医意見書別途診療費().toInt());
         source.listIkeniraimishori_14 = DecimalFormatter.toコンマ区切りRString(主治医意見書別途診療費, 0);
         source.listIkeniraimishori_15 = dateFormat(item.get報酬支払年月日());
-        source.shikibetuCode = ShikibetsuCode.EMPTY;
-        if (item.get保険者番号() == null) {
-            source.hokenshaNo = null;
-        } else {
-            source.hokenshaNo = new ExpandedInformation(new Code("100"), new RString("保険者番号"), item.get保険者番号());
-        }
-        if (item.get被保険者番号() == null) {
-            source.hokenshaNo = null;
-        } else {
-            source.hihokenshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), item.get被保険者番号());
-        }
+        source.識別コード = item.get識別コード();
+        source.拡張情報 = item.get拡張情報();
         return source;
     }
 

@@ -9,8 +9,10 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,4 +36,6 @@ public class IkenshoirairirekiIchiranEntity {
     private FlexibleDate ikenshoSakuseiIraiYMD;
     private Code ninteiShinseiShinseijiKubunCode;
     private Code ikenshoSakuseiKaisuKubun;
+    private ShikibetsuCode 識別コード;
+    private ExpandedInformation 拡張情報;
 }

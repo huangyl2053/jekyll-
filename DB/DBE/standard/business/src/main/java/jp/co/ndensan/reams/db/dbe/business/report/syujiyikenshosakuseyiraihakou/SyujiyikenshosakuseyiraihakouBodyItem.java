@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.syujiyikenshosakuseyiraihakou;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -33,6 +35,8 @@ public class SyujiyikenshosakuseyiraihakouBodyItem {
     private final RString listHakkoIchiranhyo_1_3;
     private final RString listHakkoIchiranhyo_1_4;
     private final RString listHakkoIchiranhyo_1_5;
+    private final ShikibetsuCode 識別コード;
+    private final ExpandedInformation 拡張情報;
 
     /**
      * インスタンスを生成します。
@@ -51,6 +55,8 @@ public class SyujiyikenshosakuseyiraihakouBodyItem {
      * @param listHakkoIchiranhyo_1_3 市町村コード
      * @param listHakkoIchiranhyo_1_4 市町村名称
      * @param listHakkoIchiranhyo_1_5 証記載保険者番号
+     * @param 識別コード 識別コード
+     * @param 拡張情報 拡張情報
      */
     public SyujiyikenshosakuseyiraihakouBodyItem(
             RString listHakkoIchiranhyo_2,
@@ -66,8 +72,9 @@ public class SyujiyikenshosakuseyiraihakouBodyItem {
             RString listHakkoIchiranhyo_1_2,
             RString listHakkoIchiranhyo_1_3,
             RString listHakkoIchiranhyo_1_4,
-            RString listHakkoIchiranhyo_1_5) {
-
+            RString listHakkoIchiranhyo_1_5,
+            ShikibetsuCode 識別コード,
+            ExpandedInformation 拡張情報) {
         this.listHakkoIchiranhyo_2 = listHakkoIchiranhyo_2;
         this.listHakkoIchiranhyo_3 = listHakkoIchiranhyo_3;
         this.listHakkoIchiranhyo_4 = listHakkoIchiranhyo_4;
@@ -82,5 +89,7 @@ public class SyujiyikenshosakuseyiraihakouBodyItem {
         this.listHakkoIchiranhyo_1_3 = listHakkoIchiranhyo_1_3;
         this.listHakkoIchiranhyo_1_4 = listHakkoIchiranhyo_1_4;
         this.listHakkoIchiranhyo_1_5 = listHakkoIchiranhyo_1_5;
+        this.識別コード = 識別コード;
+        this.拡張情報 = 拡張情報;
     }
 }

@@ -8,11 +8,6 @@ package jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyotokkijiko;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteichosahyotokkijiko.ChosahyoTokkijikoBusiness;
 import jp.co.ndensan.reams.db.dbz.entity.report.ninteichosahyotokkijiko.ChosahyoTokkijikoReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.saichekkuhyo.Layouts;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 要介護認定調査票（特記事項）有り-白黒のEditorです。
@@ -62,19 +57,8 @@ public class ChosahyoTokkijikoAriMonoEditorImpl implements IChosahyoTokkijikoEdi
         source.hihokenshaNo10 = business.getHihokenshaNo10();
         source.hihokenshaName = business.getHihokenshaName();
         source.layout = Layouts.鑑;
-        source.shikibetuCode = ShikibetsuCode.EMPTY;
-        RStringBuilder builder = new RStringBuilder();
-        builder.append(business.getHihokenshaNo1());
-        builder.append(business.getHihokenshaNo2());
-        builder.append(business.getHihokenshaNo3());
-        builder.append(business.getHihokenshaNo4());
-        builder.append(business.getHihokenshaNo5());
-        builder.append(business.getHihokenshaNo6());
-        builder.append(business.getHihokenshaNo7());
-        builder.append(business.getHihokenshaNo8());
-        builder.append(business.getHihokenshaNo9());
-        builder.append(business.getHihokenshaNo10());
-        source.hishokenshaNo = new ExpandedInformation(Code.EMPTY, new RString("被保険者番号"), builder.toRString());
+        source.識別コード = business.get識別コード();
+        source.拡張情報 = business.get拡張情報();
         return source;
     }
 

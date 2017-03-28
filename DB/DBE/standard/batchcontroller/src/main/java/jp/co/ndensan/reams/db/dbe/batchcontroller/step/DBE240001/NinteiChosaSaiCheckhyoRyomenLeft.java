@@ -62,11 +62,6 @@ public class NinteiChosaSaiCheckhyoRyomenLeft extends BatchProcessBase<HomonChos
     protected void createWriter() {
         batchReportWriter = BatchReportFactory.createBatchReportWriter(帳票.getReportId().value())
                 .addBreak(new BreakerCatalog<SaiChekkuhyoReportSource>().new SimpleLayoutBreaker(
-
-
-
-
-
                     SaiChekkuhyoReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<SaiChekkuhyoReportSource> occuredBreak(ReportLineRecord<SaiChekkuhyoReportSource> currentRecord,

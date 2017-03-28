@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.report.shujiiikenshosakusei;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  *
@@ -56,4 +58,6 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoItem {
     private RString shinkiZaitakuKingaku;
     private RString keizokuZaitakuKingaku;
     private RString keizokuShisetsuKingaku;
+    private ShikibetsuCode 識別コード;
+    private ExpandedInformation 拡張情報;
 }
