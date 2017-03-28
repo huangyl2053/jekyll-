@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosairaijo
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseitoroku.NinteiShinseiTorokuResult;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseitoroku.RirekiJohoResult;
 import jp.co.ndensan.reams.db.dbe.business.core.seikatsuhogotoroku.Minashi2shisaiJoho;
+import jp.co.ndensan.reams.db.dbe.definition.core.exclusion.LockingKeys;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeInformationMessages;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
@@ -100,7 +101,6 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IParentResponse;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import static jp.co.ndensan.reams.uz.uza.definition.enumeratedtype.message.MessageCreateHelper.toCode;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -234,11 +234,9 @@ public class NinteiShinseiToroku {
                 || is照会) {
             ShinseishoKanriNo 管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
             try {
-                RStringBuilder 前排他制御 = new RStringBuilder();
-                前排他制御.append("DBEShinseishoKanriNo");
-                前排他制御.append(管理番号.getColumnValue());
-                前排他ロックキー(前排他制御.toRString());
+                前排他ロックキー(管理番号.getColumnValue());
             } catch (PessimisticLockingException e) {
+                div.setReadOnly(true);
                 setBtnUpdateDisableTrue();
             }
             RString 被保険者番号 = manager.get被保険者番号(管理番号);
@@ -793,10 +791,7 @@ public class NinteiShinseiToroku {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(div).respond();
         }
-        RStringBuilder 前排他制御 = new RStringBuilder();
-        前排他制御.append("DBEShinseishoKanriNo");
-        前排他制御.append(ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class).getColumnValue());
-        前排他キーの解除(前排他制御.toRString());
+        前排他キーの解除(ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class).getColumnValue());
         return ResponseData.of(div).forwardWithEventName(DBE1010001TransitionEventName.一覧に戻る).respond();
     }
 
@@ -815,10 +810,7 @@ public class NinteiShinseiToroku {
 //            return ResponseData.of(div).respond();
 //        }
         ViewStateHolder.put(ViewStateKeys.機能詳細画面から再検索, Boolean.TRUE);
-        RStringBuilder 前排他制御 = new RStringBuilder();
-        前排他制御.append("DBEShinseishoKanriNo");
-        前排他制御.append(ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class).getColumnValue());
-        前排他キーの解除(前排他制御.toRString());
+        前排他キーの解除(ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class).getColumnValue());
         return ResponseData.of(div).forwardWithEventName(DBE1010001TransitionEventName.再検索).respond();
     }
 
@@ -977,10 +969,7 @@ public class NinteiShinseiToroku {
                 manager.save申請届出情報(shinseitodokedeJoho);
             }
             
-            RStringBuilder 前排他制御 = new RStringBuilder();
-            前排他制御.append("DBEShinseishoKanriNo");
-            前排他制御.append(申請書管理番号.getColumnValue());
-            前排他キーの解除(前排他制御.toRString());
+            前排他キーの解除(申請書管理番号.getColumnValue());
             return goToKanryo(div, response, 申請書管理番号);
         }
         return response.respond();
@@ -1034,10 +1023,7 @@ public class NinteiShinseiToroku {
             } else {
                 manager.deleteAllBy申請書管理番号(申請書管理番号.value());
             }
-            RStringBuilder 前排他制御 = new RStringBuilder();
-            前排他制御.append("DBEShinseishoKanriNo");
-            前排他制御.append(申請書管理番号.getColumnValue());
-            前排他キーの解除(前排他制御.toRString());
+            前排他キーの解除(申請書管理番号.getColumnValue());
             return goToKanryo(div, response, 申請書管理番号);
         }
         return response.respond();
@@ -1507,15 +1493,13 @@ public class NinteiShinseiToroku {
     }
 
     private void 前排他ロックキー(RString 排他ロックキー) {
-        LockingKey 前排他ロックキー = new LockingKey(排他ロックキー);
-        if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
+        if (!RealInitialLocker.tryGetLock(LockingKeys.申請書管理番号.appended(排他ロックキー))) {
             throw new PessimisticLockingException();
         }
     }
 
     private void 前排他キーの解除(RString 排他) {
-        LockingKey 排他キー = new LockingKey(排他);
-        RealInitialLocker.release(排他キー);
+        RealInitialLocker.release(LockingKeys.申請書管理番号.appended(排他));
     }
     
     private void アクセスログ_更新(ShinseishoKanriNo 管理番号, RString 証記載保険者番号, RString 被保険者番号) {
