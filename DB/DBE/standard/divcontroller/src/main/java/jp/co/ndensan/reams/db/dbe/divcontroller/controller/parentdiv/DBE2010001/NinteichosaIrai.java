@@ -185,7 +185,7 @@ public class NinteichosaIrai {
 
                 csvWriter.writeLine(getCsvData(row));
 
-                Optional<PersonalData> personalData = getHandler(requestDiv).getPersonalData(row.getGetShoKisaiHokenshaNo(), row.getHokenshaCode(), row.getShinseishoKanriNo());
+                Optional<PersonalData> personalData = getHandler(requestDiv).getPersonalData(row.getGetShoKisaiHokenshaNo(), row.getHihoNumber(), row.getShinseishoKanriNo());
                 personalDataList.add(personalData.get());
             }
             csvWriter.close();
