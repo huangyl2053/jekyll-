@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE6010001;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsaiinjissekiichiran.ShinsaiinJissekiIchiran;
@@ -46,7 +47,7 @@ public class ShisakaiIinJissekiShokaiHandler {
     private static final RString 審査会単価パターン = DbBusinessConfig.get(ConfigNameDBE.審査員単価パターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
     private static final RString 審査会単価パターン_委員 = ShisakaiIinJissekiIchiranShinsakaiTanka.審査会単価パターン_委員.getコード();
     private static final RString 審査会単価パターン_医師 = ShisakaiIinJissekiIchiranShinsakaiTanka.審査会単価パターン_医師.getコード();
-    RString 審査会委員実績照会_医師範囲_歯科医師 = DbBusinessConfig.get(ConfigNameDBE.審査会委員実績照会_医師範囲_歯科医師, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+    private final RString 審査会委員実績照会_医師範囲_歯科医師 = DbBusinessConfig.get(ConfigNameDBE.審査会委員実績照会_医師範囲_歯科医師, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
     private static final RString 医師範囲に歯科医師含む = new RString("1");
     private static final RString 所属機関_医療機関 = ShisakaiIinJissekiIchiranShozokuKikan.医療機関.get名称();
     private static final RString 所属機関_調査委託先 = ShisakaiIinJissekiIchiranShozokuKikan.調査委託先.get名称();
@@ -190,13 +191,18 @@ public class ShisakaiIinJissekiShokaiHandler {
     private RString get報酬単価(ShinsaiinJissekiIchiran data) {
         if (data.is出欠()) {
             if (審査会単価パターン.equals(審査会単価パターン_委員)) {
-                return data.get単価_委員();
+                return getFormat報酬単価(data.get単価_委員());
             }
             if (審査会単価パターン.equals(審査会単価パターン_医師)) {
-                return data.get単価_医師();
+                return getFormat報酬単価(data.get単価_医師());
             }
         }
         return new RString("0");
+    }
+    
+    private RString getFormat報酬単価(RString 報酬単価) {
+        NumberFormat numFormat = NumberFormat.getNumberInstance();
+        return new RString(numFormat.format(Integer.parseInt(報酬単価.toString())));
     }
 
     /**
@@ -237,6 +243,11 @@ public class ShisakaiIinJissekiShokaiHandler {
         param.setShinsakaijisshibiFrom(審査会実施日FROM);
         param.setShinsakaijisshibiTo(審査会実施日TO);
         param.setSyohyoSyuturyoku(帳票出力区分);
+        boolean is歯科医師含む = false;
+        if (医師範囲に歯科医師含む.equals(審査会委員実績照会_医師範囲_歯科医師)) {
+            is歯科医師含む = true;
+        }
+        param.setIncludeDentist(is歯科医師含む);
         return param;
     }
 
@@ -254,7 +265,11 @@ public class ShisakaiIinJissekiShokaiHandler {
         if (div.getTxtShinsakaiKaisaibi().getToValue() != null) {
             審査会実施日TO = new FlexibleDate(div.getTxtShinsakaiKaisaibi().getToValue().toDateString());
         }
-        ShinsaiinJissekiIchiranMybitisParamter paramter = ShinsaiinJissekiIchiranMybitisParamter.createParamter(false,
+        boolean is歯科医師含む = false;
+        if (医師範囲に歯科医師含む.equals(審査会委員実績照会_医師範囲_歯科医師)) {
+            is歯科医師含む = true;
+        }
+        ShinsaiinJissekiIchiranMybitisParamter paramter = ShinsaiinJissekiIchiranMybitisParamter.createParamter(false, is歯科医師含む,
                 審査会実施日FROM, 審査会実施日TO, new RString(div.getTxtMaxKensu().getValue().toString()), null);
         return paramter;
     }
