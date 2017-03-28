@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -23,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 要介護認定調査督促状のEditorです。
@@ -100,6 +103,8 @@ public class NinteiChosaTokusokujoBodyEditor implements INinteiChosaTokusokujoEd
         edit住所郵便(source);
         edit住所(source);
         edit通知文問合せ(source);
+        edit識別コード(source);
+        edit拡張情報(source);
         return source;
     }
 
@@ -256,6 +261,14 @@ public class NinteiChosaTokusokujoBodyEditor implements INinteiChosaTokusokujoEd
 
     private void edit通知文問合せ(NinteiChosaTokusokujoReportSource source) {
         source.tsuchibun2 = 通知文.get(2);
+    }
+
+    private void edit識別コード(NinteiChosaTokusokujoReportSource source) {
+        source.識別コード = new ShikibetsuCode(entity.getShoKisaiHokenshaNo().substring(0, 5).concat(entity.getHihokenshaNo()));
+    }
+
+    private void edit拡張情報(NinteiChosaTokusokujoReportSource source) {
+        source.拡張情報 = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), new RString(entity.getShinseishoKanriNo().toString()));
     }
 
     private RString getLenStr(RString rstr, int startIndex, int len) {

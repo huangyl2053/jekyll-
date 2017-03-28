@@ -31,6 +31,8 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoItem {
     private final RString listUpper2_1;
     private final RString listUpper2_2;
     private final RString listLower2_2;
+    private final RString 証記載保険者番号;
+    private final RString 申請書管理番号;
 
     /**
      *
@@ -46,13 +48,16 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoItem {
      * @param listUpper2_1 事業者名称
      * @param listUpper2_2 事業者住所
      * @param listLower2_2 事業者電話番号
+     * @param 証記載保険者番号
+     * @param 申請書管理番号
      *
      */
     public NinteiChosaTokusokuTaishoshaIchiranhyoItem(RString cityCode, RString cityName, RString listUpper1_1,
             RString listLower1_1, RString listUpper1_2,
             RString listLower1_2, RDate listShinseiYMD_1,
             RDate listTokusokujoHakkoYMD_1, RString listLower2_1,
-            RString listUpper2_1, RString listUpper2_2, RString listLower2_2) {
+            RString listUpper2_1, RString listUpper2_2, RString listLower2_2,
+            RString 証記載保険者番号, RString 申請書管理番号) {
         this.cityCode = cityCode;
         this.cityName = cityName;
         this.listUpper1_1 = listUpper1_1;
@@ -65,6 +70,8 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoItem {
         this.listUpper2_1 = listUpper2_1;
         this.listUpper2_2 = listUpper2_2;
         this.listLower2_2 = listLower2_2;
+        this.証記載保険者番号 = 証記載保険者番号;
+        this.申請書管理番号 = 申請書管理番号;
     }
 
 }

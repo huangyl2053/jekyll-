@@ -5,9 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.shujiiikenshosakuseitokusokujo;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import lombok.Getter;
 
 /**
@@ -68,6 +70,8 @@ public class ShujiiIkenshoSakuseiTokusokujoItem {
     private final RString seyiben;
     private final RString birthGengo;
     private final RString shoriName;
+    private final ShikibetsuCode 識別コード;
+    private final ExpandedInformation 拡張情報;
 
     /**
      * インスタンスを生成します
@@ -120,6 +124,8 @@ public class ShujiiIkenshoSakuseiTokusokujoItem {
      * @param seyiben
      * @param birthGengo
      * @param shoriName 処理名
+     * @param 識別コード
+     * @param 拡張情報
      */
     public ShujiiIkenshoSakuseiTokusokujoItem(RString bunshoNo, RString denshikoin, RString hakkoYMD1,
             RString koinMojiretsu, RString koinShoryaku, RString ninshoshaShimeiKakeru, RString ninshoshaYakushokuMei, RString ninshoshaShimeiKakenai,
@@ -132,7 +138,7 @@ public class ShujiiIkenshoSakuseiTokusokujoItem {
             RString hokenshaNo2, RString hokenshaNo3, RString hokenshaNo4, RString hokenshaNo5, RString hokenshaNo6,
             RString shinseiKubun, RString hihokenshaNameKana, RString hihokennsyaName, FlexibleDate ikenshoIraiYMD, RDate shinseiYMD,
             RString yubinNo, RString jusho, RDate birthYMD, RString remban,
-            RString seyiben, RString birthGengo, RString shoriName) {
+            RString seyiben, RString birthGengo, RString shoriName, ShikibetsuCode 識別コード, ExpandedInformation 拡張情報) {
         this.bunshoNo = bunshoNo;
         this.denshikoin = denshikoin;
         this.hakkoYMD1 = hakkoYMD1;
@@ -181,6 +187,8 @@ public class ShujiiIkenshoSakuseiTokusokujoItem {
         this.seyiben = seyiben;
         this.birthGengo = birthGengo;
         this.shoriName = shoriName;
+        this.識別コード = 識別コード;
+        this.拡張情報 = 拡張情報;
     }
 
 }

@@ -38,4 +38,5 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity {
     private RString temp_事業者住所;
     private TelNo temp_事業者電話番号;
     private int 行番号;
+    private RString temp_申請書管理番号;
 }
