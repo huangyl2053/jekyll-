@@ -276,7 +276,7 @@ public class IchijihanteiekkahyoTokkijiko {
         try {
             認定調査特記事項 = NinteiChosaTokkiJikou.getEnumByDbt5205認定調査特記事項番号(特記事項番号);
             ファイル名 = 認定調査特記事項.getComposedImageFileName(特記事項連番);
-            ファイル名.replace(".png", "");
+            ファイル名 = ファイル名.replace(".png", "");
         } catch (Exception e) {
             ファイル名 = RString.EMPTY;
         }
