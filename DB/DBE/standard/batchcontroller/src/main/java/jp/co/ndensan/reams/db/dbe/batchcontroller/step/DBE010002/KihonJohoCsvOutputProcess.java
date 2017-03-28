@@ -8,13 +8,16 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE010002;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.euc.dbe010001.KihonJohoEucEntityEditor;
+import jp.co.ndensan.reams.db.dbe.definition.core.util.accesslog.ExpandedInformations;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinseishadataout.ShinseishaDataOutMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shinseishadataout.ShinseishaDataOutProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinseishadataout.KihonJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.euc.shinseishadataout.DBE010001_KihonJohoEucEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinseishadataout.IShinseishaDataOutMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -62,12 +65,14 @@ public class KihonJohoCsvOutputProcess extends BatchProcessBase<KihonJohoEntity>
     private ShinseishaDataOutProcessParameter processParameter;
     private IShinseishaDataOutMapper mapper;
     private List<RString> 申請書管理番号リスト;
+    private DbAccessLogger accessLogger;
 
     @Override
     protected void initialize() {
         fileSpoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         mapper = InstanceProvider.create(MapperProvider.class).create(IShinseishaDataOutMapper.class);
         申請書管理番号リスト = new ArrayList<>();
+        accessLogger = new DbAccessLogger();
     }
 
     @Override
@@ -93,13 +98,15 @@ public class KihonJohoCsvOutputProcess extends BatchProcessBase<KihonJohoEntity>
         List<DbT5304ShujiiIkenshoIkenItemEntity> 意見項目List = mapper.select要介護認定主治医意見書意見項目(parameter);
         csvWriter.writeLine(KihonJohoEucEntityEditor.edit(entity, 意見項目List));
         申請書管理番号リスト.add(entity.getShinseishoKanriNo());
+        accessLogger.store(new ShoKisaiHokenshaNo(entity.getShoKisaiHokenshaNo()), entity.getHihokenshaNo(),
+                ExpandedInformations.fromValue(entity.getShinsakaiKaisaiNo()));
     }
 
     @Override
     protected void afterExecute() {
         output出力条件表();
         csvWriter.close();
-        fileSpoolManager.spool(filePath);
+        fileSpoolManager.spool(filePath, accessLogger.flushByEUC(UzUDE0835SpoolOutputType.EucOther));
     }
 
     private void output出力条件表() {
