@@ -233,7 +233,7 @@ public class NinteiShinseiToroku {
                 || ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC10002) 
                 || is照会) {
             ShinseishoKanriNo 管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-            if (RealInitialLocker.tryGetLock(LockingKeys.申請書管理番号.appended(管理番号.getColumnValue()))) {
+            if (!RealInitialLocker.tryGetLock(LockingKeys.申請書管理番号.appended(管理番号.getColumnValue()))) {
                 div.setReadOnly(true);
                 setBtnUpdateDisableTrue();
                 return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
