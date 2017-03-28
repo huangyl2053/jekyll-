@@ -213,7 +213,10 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
                     row.getKaigoNinteiShinsakaiYoteiDay().getValue() == null ? RString.EMPTY : row.getKaigoNinteiShinsakaiYoteiDay().getValue().toDateString(),
                     row.getHihokenshaJusho(),
                     row.getNinteiChosain(),
-                    row.getShujiiName());
+                    row.getShujiiName(),
+                    row.getShoKisaiHokenshaNo(),
+                    row.getShinseishoKanriNo()
+            );
             list.add(item);
         }
         return list;
@@ -222,7 +225,8 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
     private dgShinseiJoho_Row setRow(YokaigoNinteiShinchokuJoho joho) {
         dgShinseiJoho_Row row = new dgShinseiJoho_Row();
         row.setHokensha(nullToEmpty(joho.get市町村名称()));
-        row.setHihokenshaNo(joho.get被保険者番号() == null ? RString.EMPTY : joho.get被保険者番号().getColumnValue());
+        row.setShoKisaiHokenshaNo(joho.get証記載保険者番号() == null ? RString.EMPTY : joho.get証記載保険者番号());
+        row.setHihokenshaNo(joho.get被保険者番号() == null ? RString.EMPTY : joho.get被保険者番号());
         row.setShimei(nullToEmpty(joho.get被保険者氏名()));
         row.setHihoKubun(HihokenshaKubunCode.to名称OrDefault(joho.get被保険者区分コード(), RString.EMPTY));
         if (joho.get認定申請年月日() == null || joho.get認定申請年月日().isEmpty()) {

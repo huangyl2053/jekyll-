@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class SerchFromHohokenshaDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -26,10 +26,10 @@ public class SerchFromHohokenshaDiv extends Panel {
     private TextBoxCode txtHihokenshaNo;
     @JsonProperty("btnHihokenshaKensaku")
     private Button btnHihokenshaKensaku;
-    @JsonProperty("txtShikibetsuCode")
-    private TextBoxCode txtShikibetsuCode;
     @JsonProperty("txtShimei")
     private TextBoxAtenaMeisho txtShimei;
+    @JsonProperty("txtShikibetsuCode")
+    private TextBoxCode txtShikibetsuCode;
     @JsonProperty("chkKensakuOption")
     private CheckBoxList chkKensakuOption;
 
@@ -76,24 +76,6 @@ public class SerchFromHohokenshaDiv extends Panel {
     }
 
     /*
-     * gettxtShikibetsuCode
-     * @return txtShikibetsuCode
-     */
-    @JsonProperty("txtShikibetsuCode")
-    public TextBoxCode getTxtShikibetsuCode() {
-        return txtShikibetsuCode;
-    }
-
-    /*
-     * settxtShikibetsuCode
-     * @param txtShikibetsuCode txtShikibetsuCode
-     */
-    @JsonProperty("txtShikibetsuCode")
-    public void setTxtShikibetsuCode(TextBoxCode txtShikibetsuCode) {
-        this.txtShikibetsuCode = txtShikibetsuCode;
-    }
-
-    /*
      * gettxtShimei
      * @return txtShimei
      */
@@ -109,6 +91,24 @@ public class SerchFromHohokenshaDiv extends Panel {
     @JsonProperty("txtShimei")
     public void setTxtShimei(TextBoxAtenaMeisho txtShimei) {
         this.txtShimei = txtShimei;
+    }
+
+    /*
+     * gettxtShikibetsuCode
+     * @return txtShikibetsuCode
+     */
+    @JsonProperty("txtShikibetsuCode")
+    public TextBoxCode getTxtShikibetsuCode() {
+        return txtShikibetsuCode;
+    }
+
+    /*
+     * settxtShikibetsuCode
+     * @param txtShikibetsuCode txtShikibetsuCode
+     */
+    @JsonProperty("txtShikibetsuCode")
+    public void setTxtShikibetsuCode(TextBoxCode txtShikibetsuCode) {
+        this.txtShikibetsuCode = txtShikibetsuCode;
     }
 
     /*

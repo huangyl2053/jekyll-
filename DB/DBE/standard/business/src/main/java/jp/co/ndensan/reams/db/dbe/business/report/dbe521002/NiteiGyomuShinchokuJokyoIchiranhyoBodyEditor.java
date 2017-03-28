@@ -5,14 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.dbe521002;
 
+import jp.co.ndensan.reams.db.dbe.definition.core.util.accesslog.ExpandedInformations;
 import jp.co.ndensan.reams.db.dbe.entity.report.dbe521002.NiteiGyomuShinchokuJokyoIchiranhyoReportSource;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 要介護認定業務進捗状況一覧表ボディEditorです。
@@ -47,8 +46,8 @@ public class NiteiGyomuShinchokuJokyoIchiranhyoBodyEditor implements INiteiGyomu
     }
 
     private NiteiGyomuShinchokuJokyoIchiranhyoReportSource bodyEdit(NiteiGyomuShinchokuJokyoIchiranhyoReportSource source) {
-        source.shikibetuCode = ShikibetsuCode.EMPTY;
-        source.hishokenshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), item.getListIchiranhyo2_3());
+        source.shikibetuCode = new ShikibetsuCode(item.getShoKisaiHokenshaNo().substring(0, 5).concat(item.getListIchiranhyo2_3()));
+        source.shinseishoKanriNo = ExpandedInformations.fromValue(item.getShinseishoKanriNo())[0];
         source.listIchiranhyo1_1 = new RString(String.valueOf(no));
         source.listIchiranhyo1_2 = item.getListIchiranhyo1_2();
         source.listIchiranhyo1_3 = item.getListIchiranhyo1_3();

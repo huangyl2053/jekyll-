@@ -7,10 +7,14 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE3010002;
 
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJohoBuilder;
+import jp.co.ndensan.reams.db.dbe.definition.core.util.accesslog.ExpandedInformations;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE3010002.IchijiHanteiExecuterDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
@@ -31,8 +35,21 @@ public class IchijiHanteiExecuterHandler {
         ShinseishoKanriNo shinseishoKanriNo = new ShinseishoKanriNo(shinseishoKanriNoStr);
         div.getCcdShinseishaInfo().initialize(shinseishoKanriNo);
         div.getCcdHanteiKekka().initialize(shinseishoKanriNo);
-
+        accessLogBy(AccessLogType.照会, shinseishoKanriNoStr);
         div.setHanteiMae(div.getCcdHanteiKekka().get一次判定結果文字列());
+    }
+
+    public void accessLogBy(AccessLogType type, RString shinseishoKanriNo) {
+        RString shoKisaiHokenshaNo = div.getCcdShinseishaInfo().get証記載保険者番号();
+        RString hihokenshaNo = div.getCcdShinseishaInfo().get被保険者番号();
+        if (RString.isNullOrEmpty(shoKisaiHokenshaNo) || RString.isNullOrEmpty(hihokenshaNo)) {
+            throw new IllegalStateException("アクセスログの記録は、CcdShinseishaInfoの初期化後に実施してください。");
+        }
+        DbAccessLogger accessLog = new DbAccessLogger();
+        accessLog.store(new ShoKisaiHokenshaNo(shoKisaiHokenshaNo), hihokenshaNo,
+                ExpandedInformations.fromValue(shinseishoKanriNo)
+        );
+        accessLog.flushBy(type);
     }
 
     public boolean hasChanged一次判定結果() {

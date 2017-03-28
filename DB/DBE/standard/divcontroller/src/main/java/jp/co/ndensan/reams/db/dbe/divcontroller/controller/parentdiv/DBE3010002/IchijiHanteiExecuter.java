@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
 import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 
 /**
@@ -161,9 +162,10 @@ public class IchijiHanteiExecuter {
                     ninteiKanryoJoho = ninteiKanryoJoho.createBuilderForEdit().set要介護認定一次判定完了年月日(null).build();
                     ninteiKanryoManager.save要介護認定完了情報(ninteiKanryoJoho.modifiedModel());
                 }
-            }else{
+            } else {
                 manager.save要介護認定一次判定結果情報(torokuTaisho);
             }
+            getHandler(div).accessLogBy(AccessLogType.更新, torokuTaisho.identifier().get申請書管理番号().value());
             div.getCcdHanteiKekka().clear一次判定結果();
             div.getCcdKanryoMessage().setSuccessMessage(new RString("一次判定結果を保存しました。"));
             前排他キーの解除();
@@ -182,12 +184,12 @@ public class IchijiHanteiExecuter {
         前排他キーの解除();
         return ResponseData.of(div).forwardWithEventName(DBE3010002TransitionEventName.完了処理へ遷移).respond();
     }
-   
+
     /**
      * 処理選択ラジオボタンをチェンジしたときの処理を定義します。
      *
      * @param div 一次判定実行Divquals(div.getRadShoriSelect().getSelectedKey())) {
-            div.getCcdHanteiKekka().setAbledBtnIchijiHantei();
+     * div.getCcdHanteiKekka().setAbledBtnIchijiHantei();
      * @return ResponseData
      */
     public ResponseData<IchijiHanteiExecuterDiv> onChange_radShoriSelect(IchijiHanteiExecuterDiv div) {
@@ -202,15 +204,15 @@ public class IchijiHanteiExecuter {
     private IchijiHanteiExecuterHandler getHandler(IchijiHanteiExecuterDiv div) {
         return new IchijiHanteiExecuterHandler(div);
     }
-    
+
     private boolean 前排他キーのセット() {
         RString temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
         LockingKey 排他キー = new LockingKey(SubGyomuCode.DBE認定支援.getGyomuCode().getColumnValue()
                 .concat(new RString("ShinseishoKanriNo")).concat(temp_申請書管理番号));
         return RealInitialLocker.tryGetLock(排他キー);
     }
-    
-        private void 前排他キーの解除() {
+
+    private void 前排他キーの解除() {
         RString temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
         LockingKey 排他キー = new LockingKey(SubGyomuCode.DBE認定支援.getGyomuCode().getColumnValue().concat(new RString("ShinseishoKanriNo"))
                 .concat(temp_申請書管理番号));

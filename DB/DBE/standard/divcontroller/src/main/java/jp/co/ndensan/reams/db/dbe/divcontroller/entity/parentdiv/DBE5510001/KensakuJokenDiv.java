@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class KensakuJokenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -168,16 +168,6 @@ public class KensakuJokenDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxCode getTxtShikibetsuCode() {
-        return this.getSerchFromHohokensha().getTxtShikibetsuCode();
-    }
-
-    @JsonIgnore
-    public void  setTxtShikibetsuCode(TextBoxCode txtShikibetsuCode) {
-        this.getSerchFromHohokensha().setTxtShikibetsuCode(txtShikibetsuCode);
-    }
-
-    @JsonIgnore
     public TextBoxAtenaMeisho getTxtShimei() {
         return this.getSerchFromHohokensha().getTxtShimei();
     }
@@ -185,6 +175,16 @@ public class KensakuJokenDiv extends Panel {
     @JsonIgnore
     public void  setTxtShimei(TextBoxAtenaMeisho txtShimei) {
         this.getSerchFromHohokensha().setTxtShimei(txtShimei);
+    }
+
+    @JsonIgnore
+    public TextBoxCode getTxtShikibetsuCode() {
+        return this.getSerchFromHohokensha().getTxtShikibetsuCode();
+    }
+
+    @JsonIgnore
+    public void  setTxtShikibetsuCode(TextBoxCode txtShikibetsuCode) {
+        this.getSerchFromHohokensha().setTxtShikibetsuCode(txtShikibetsuCode);
     }
 
     @JsonIgnore
