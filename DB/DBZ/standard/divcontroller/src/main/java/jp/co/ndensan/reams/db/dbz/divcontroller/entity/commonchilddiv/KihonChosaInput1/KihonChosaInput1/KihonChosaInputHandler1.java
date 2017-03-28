@@ -167,7 +167,7 @@ public class KihonChosaInputHandler1 {
         onLoad第一群身体機能(認定調査基本情報リスト, 認定調査前回結果表示);
         setTokkiJikouDisabled(申請書管理番号, 認定調査依頼履歴番号);
     }
-    
+
     private void setTokkiJikouDisabled(ShinseishoKanriNo 申請書管理番号, RString 認定調査依頼履歴番号) {
         ArrayList<RString> tokkiJikouNoList = setTokkiJikouNoList();
         NinteichosahyoTokkijikoManager manager = InstanceProvider.create(NinteichosahyoTokkijikoManager.class);
@@ -182,7 +182,7 @@ public class KihonChosaInputHandler1 {
             gaitouTokkiJikouNoList.clear();
         }
     }
-    
+
     private ArrayList<RString> setTokkiJikouNoList() {
         ArrayList<RString> tokkiJikouNoList = new ArrayList<>();
         tokkiJikouNoList.add(NinteiChosaTokkiJikou.麻痺等の有無.get認定調査票_特記情報_認定調査特記事項番号());
@@ -200,9 +200,9 @@ public class KihonChosaInputHandler1 {
         tokkiJikouNoList.add(NinteiChosaTokkiJikou.聴力.get認定調査票_特記情報_認定調査特記事項番号());
         return tokkiJikouNoList;
     }
-    
+
     private void setDisabled(RString tokkiJikouNo) {
-        if(NinteiChosaTokkiJikou.麻痺等の有無.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
+        if (NinteiChosaTokkiJikou.麻痺等の有無.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
             div.getBtnMahi().setDisabled(true);
         } else if (NinteiChosaTokkiJikou.拘縮の有無.get認定調査票_特記情報_認定調査特記事項番号().equals(tokkiJikouNo)) {
             div.getBtnKoshuku().setDisabled(true);
@@ -706,9 +706,6 @@ public class KihonChosaInputHandler1 {
     private void 拘縮の有無アンダーライン(List<RString> 前回拘縮の有無) {
         if (!前回拘縮の有無.isEmpty()) {
             div.getChkKoshuku().setIcon(getListControlTextIcon(前回拘縮の有無));
-        } else {
-            前回拘縮の有無.add(KEY0);
-            div.getChkKoshuku().setIcon(getListControlTextIcon(前回拘縮の有無));
         }
     }
 
@@ -735,9 +732,6 @@ public class KihonChosaInputHandler1 {
 
     private void 麻痺等の有無アンダーライン(List<RString> 前回麻痺等の有無) {
         if (!前回麻痺等の有無.isEmpty()) {
-            div.getChkMahi().setIcon(getListControlTextIcon(前回麻痺等の有無));
-        } else {
-            前回麻痺等の有無.add(KEY0);
             div.getChkMahi().setIcon(getListControlTextIcon(前回麻痺等の有無));
         }
     }
