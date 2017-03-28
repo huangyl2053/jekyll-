@@ -7,11 +7,14 @@ package jp.co.ndensan.reams.db.dbe.business.report.ninteichosatokusokujyo;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosatokusokujyo.NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.ninteichosatokusokujyo.NinteiChosaTokusokuTaishoshaIchiranhyoReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 認定調査督促対象者一覧表ボディEditorです。
@@ -44,6 +47,8 @@ class NinteiChosaTokusokuTaishoshaIchiranhyoBodyEditor implements INinteiChosaTo
         edit被保険者氏名(source);
         edit調査員名(source);
         edit事業者電話番号(source);
+        edit識別コード(source);
+        edit拡張情報(source);
         return source;
     }
 
@@ -93,5 +98,13 @@ class NinteiChosaTokusokuTaishoshaIchiranhyoBodyEditor implements INinteiChosaTo
 
     private void edit事業者電話番号(NinteiChosaTokusokuTaishoshaIchiranhyoReportSource source) {
         source.listLower2_2 = entity.getTemp_事業者電話番号() == null ? RString.EMPTY : entity.getTemp_事業者電話番号().getColumnValue();
+    }
+
+    private void edit識別コード(NinteiChosaTokusokuTaishoshaIchiranhyoReportSource source) {
+        source.識別コード = new ShikibetsuCode(entity.getTemp_保険者番号().substring(0, 5).concat(entity.getTemp_被保険者番号()));
+    }
+
+    private void edit拡張情報(NinteiChosaTokusokuTaishoshaIchiranhyoReportSource source) {
+        source.拡張情報 = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.getTemp_申請書管理番号());
     }
 }
