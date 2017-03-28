@@ -7,9 +7,12 @@ package jp.co.ndensan.reams.db.dbe.service.core.ichijipanteisyori;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import jp.co.ndensan.reams.db.dbe.business.core.ichijipanteisyori.IChiJiPanTeiSyoRiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichijipanteisyori.IChiJiPanTeiSyoRiParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijipanteisyori.IChiJiPanTeiSyoRiRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ichijipanteisyori.IIChiJiPanTeiSyoRiMapper;
@@ -171,20 +174,20 @@ public class IChiJiPanTeiSyoRiManager {
     }
 
     /**
-     * 認定調査票（概況調査）を一括で登録する。
+     * 一次判定結果を一括で登録する。
      *
      * @param 要介護認定一次判定結果情報List IchijiHanteiKekkaJohoのリスト
-     * @return 保存したデータ数
+     * @return 保存したデータのキー
      */
     @Transaction
-    public int save要介護認定一次判定結果情報List(List<IchijiHanteiKekkaJoho> 要介護認定一次判定結果情報List) {
-        int saveNum = 0;
+    public Set<IchijiHanteiKekkaJohoIdentifier> save要介護認定一次判定結果情報List(List<IchijiHanteiKekkaJoho> 要介護認定一次判定結果情報List) {
+        Set<IchijiHanteiKekkaJohoIdentifier> set = new HashSet<>();
         for (IchijiHanteiKekkaJoho joho : 要介護認定一次判定結果情報List) {
             if (save要介護認定一次判定結果情報(joho)) {
-                saveNum++;
+                set.add(joho.identifier());
             }
         }
-        return saveNum;
+        return set;
     }
 
     @Transaction

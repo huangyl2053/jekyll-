@@ -194,19 +194,12 @@ public class ShinseishaDataOutput {
         }
         SearchResult<ShinseiKensakuBusiness> searchResult
                 = ShinseiKensakuFinder.createInstance().getShinseiKensaku(getHandler(div).createSearchParameter(hihokenshaNo));
-        DbAccessLogger accessLogger = new DbAccessLogger();
         if (!searchResult.records().isEmpty()) {
             int lastShinseiYmdIndex = findLastIndex(searchResult);
             div.getCcdNinteishinseishaFinder()
                     .updateSaikinShorisha(hihokenshaNo, searchResult.records().get(lastShinseiYmdIndex).get被保険者氏名().value());
             div.getCcdNinteishinseishaFinder().reloadSaikinShorisha();
             getHandler(div).set申請一覧データグリッド(searchResult);
-            for (dgShinseiJoho_Row row : div.getDgShinseiJoho().getDataSource()) {
-                ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
-                        row.getShinseishoKanriNo());
-                accessLogger.store(new ShoKisaiHokenshaNo(row.getShoKisaiHokenshaNo()), row.getHihokenshaNo(), expandedInfo);
-            }
-            accessLogger.flushBy(AccessLogType.照会);
         } else {
             div.getDgShinseiJoho().setDataSource(Collections.<dgShinseiJoho_Row>emptyList());
             return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
