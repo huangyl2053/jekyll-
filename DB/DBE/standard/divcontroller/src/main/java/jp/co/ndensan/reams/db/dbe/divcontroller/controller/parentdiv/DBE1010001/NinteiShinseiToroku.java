@@ -88,6 +88,7 @@ import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
 import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AgeArrivalDay;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -101,7 +102,6 @@ import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.IParentResponse;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import static jp.co.ndensan.reams.uz.uza.definition.enumeratedtype.message.MessageCreateHelper.toCode;
-import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYear;
@@ -233,11 +233,10 @@ public class NinteiShinseiToroku {
                 || ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC10002) 
                 || is照会) {
             ShinseishoKanriNo 管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-            try {
-                前排他ロックキー(管理番号.getColumnValue());
-            } catch (PessimisticLockingException e) {
+            if (RealInitialLocker.tryGetLock(LockingKeys.申請書管理番号.appended(管理番号.getColumnValue()))) {
                 div.setReadOnly(true);
                 setBtnUpdateDisableTrue();
+                return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
             }
             RString 被保険者番号 = manager.get被保険者番号(管理番号);
             RString 証記載保険者番号 = manager.get証記載保険者番号(管理番号);
@@ -1490,12 +1489,6 @@ public class NinteiShinseiToroku {
 
     private JogaiShinsainJohoFinder getService() {
         return JogaiShinsainJohoFinder.createInstance();
-    }
-
-    private void 前排他ロックキー(RString 排他ロックキー) {
-        if (!RealInitialLocker.tryGetLock(LockingKeys.申請書管理番号.appended(排他ロックキー))) {
-            throw new PessimisticLockingException();
-        }
     }
 
     private void 前排他キーの解除(RString 排他) {
