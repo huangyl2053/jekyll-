@@ -710,13 +710,14 @@ public class NinnteiChousaKekkaTouroku1 {
 
         ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         RString result = div.getIchijiHanteiResult();
-        if (RString.isNullOrEmpty(result)) {
+        if (RString.isNullOrEmpty(result) && UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId())) {
             return ResponseData.of(div).addMessage(DbeErrorMessages.一次判定失敗.getMessage()).respond();
         }
         IchijiHanteiKekkaResultConveter converter = new IchijiHanteiKekkaResultConveter(申請書管理番号, result);
         List<IchijiHanteiShoriKekka> kekkaList = converter.convert();
 
-        if (kekkaList == null || kekkaList.isEmpty()) {
+        if (UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId())
+                && (kekkaList == null || kekkaList.isEmpty())) {
             return ResponseData.of(div).addMessage(DbeErrorMessages.一次判定失敗.getMessage()).respond();
         }
 
@@ -777,12 +778,7 @@ public class NinnteiChousaKekkaTouroku1 {
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
                 || new RString(UrQuestionMessages.削除の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            if (isDelete) {
-                getHandler(div).削除処理();
-            } else {
-                getHandler(div).更新処理();
-                getHandler(div).updateGridAndViewStateData(kekkaList);
-            }
+            更新処理(isDelete, div, kekkaList);
             前排他キーの解除();
             div.getCcdKanryoMessage().setMessage(
                     new RString(UrInformationMessages.正常終了.getMessage().replace("完了処理・認定調査結果登録").evaluate()), RString.EMPTY, RString.EMPTY, true);
@@ -803,6 +799,17 @@ public class NinnteiChousaKekkaTouroku1 {
             return ResponseData.of(div).setState(DBE2210001StateName.完了_削除);
         }
         return ResponseData.of(div).respond();
+    }
+
+    private void 更新処理(boolean isDelete, NinnteiChousaKekkaTouroku1Div div, List<IchijiHanteiShoriKekka> kekkaList) {
+        if (isDelete) {
+            getHandler(div).削除処理();
+        } else {
+            getHandler(div).更新処理();
+            if (UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId())) {
+                getHandler(div).updateGridAndViewStateData(kekkaList);
+            }
+        }
     }
 
     /**
