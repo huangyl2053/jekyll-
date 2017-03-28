@@ -83,22 +83,12 @@
             resultMap="ResultMap_get認定調査票" fetchSize="500">
         WITH target AS(
             SELECT
-                dbT5101."shinseishoKanriNo" AS "shinseishoKanriNo",
+                dbT5201."shinseishoKanriNo" AS "shinseishoKanriNo",
                 dbT5201."ninteichosaIraiRirekiNo" AS "ninteichosaRirekiNo"
-            FROM (
-                SELECT
-                    "shinseishoKanriNo"
-                FROM
-                    rgdb."DbT5101NinteiShinseiJoho" dbT5101
-                WHERE
-                    dbT5101."shoKisaiHokenshaNo"     = #{証記載保険者番号}
-                    AND dbT5101."hihokenshaNo"       = #{被保険者番号}
-                    AND dbT5101."ninteiShinseiYMD"   = #{認定申請日}
-                    AND dbT5101."logicalDeletedFlag" = FALSE
-                ) dbT5101
-            INNER JOIN
+            FROM
                 rgdb."DbT5201NinteichosaIraiJoho" AS dbT5201
-             ON  dbT5101."shinseishoKanriNo"  = dbT5201."shinseishoKanriNo"
+            WHERE
+                 dbT5201."shinseishoKanriNo"  = #{申請書管理番号}
              AND dbT5201."logicalDeletedFlag" = FALSE
              AND NOT EXISTS (
                 SELECT *

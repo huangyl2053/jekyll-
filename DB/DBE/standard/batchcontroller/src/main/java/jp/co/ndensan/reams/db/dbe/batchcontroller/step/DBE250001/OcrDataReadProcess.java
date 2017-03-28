@@ -64,6 +64,7 @@ import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosakekkat
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ocr.IOcrCsvMapper;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosakekkatorikomiocr.NinteiOcrFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.ocr.imagejoho.ImageJohoUpdater;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosahyoservicejokyoflag.IServiceJokyoFlag;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosahyoservicejokyoflag.ServiceJokyoFlags;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.INinteichosaKomokuMapping;
@@ -230,7 +231,7 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
         }
         ProcessingResults results = new ProcessingResults();
         results.addAll(nrValidated); //警告があれば追加される。
-        NinteiChosahyoEntity chosaKekka = search認定調査結果By(finder, paramter);
+        NinteiChosahyoEntity chosaKekka = search認定調査結果By(finder, nr.get申請書管理番号());
         results.addAll(saveImageFilesAndUpdateTables(ocrChosas, chosaKekka, nr));
         for (OcrChosa o : ocrChosas.values()) {
             results.addSuccessIfNotContains(o);
@@ -466,8 +467,8 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
     //</editor-fold>
 
 //--  共通処理  ---------------------------------------------------------------------------------------------------------------------------
-    private static NinteiChosahyoEntity search認定調査結果By(NinteiOcrFinder finder, NinteiOcrMapperParamter parameter) {
-        List<NinteiChosahyoEntity> entities = finder.get認定調査票(parameter);
+    private static NinteiChosahyoEntity search認定調査結果By(NinteiOcrFinder finder, ShinseishoKanriNo shinseishoKanriNo) {
+        List<NinteiChosahyoEntity> entities = finder.get認定調査票(NinteiOcrMapperParamter.searchByShinseishoKanriNo(shinseishoKanriNo));
         if (entities.isEmpty()) {
             return new NinteiChosahyoEntity();
         }
@@ -475,7 +476,7 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
     }
 
     private static NinteiOcrMapperParamter toParameterToSearchRelatedData(ShinseiKey key) {
-        return NinteiOcrMapperParamter.createParamter(key.get証記載保険者番号(), key.get被保険者番号(), key.get認定申請日());
+        return NinteiOcrMapperParamter.searchByAmbiguousParams(key.get証記載保険者番号(), key.get被保険者番号(), key.get認定申請日());
     }
 
     //<editor-fold defaultstate="collapsed" desc="処理結果の作成">
