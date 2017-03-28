@@ -398,6 +398,8 @@ public class ShinsakaiIinJohoTorokuHandler {
         div.getKozaJoho().getTxtGinkoKozaNo().clearValue();
         div.getKozaJoho().getTxtKozaMeiginin().clearValue();
         div.getKozaJoho().getTxtKanjiMeiginin().clearValue();
+        div.getKozaJoho().getTxtTenBan().clearValue();
+        div.getKozaJoho().getTxtTenMei().clearValue();
     }
 
     /**

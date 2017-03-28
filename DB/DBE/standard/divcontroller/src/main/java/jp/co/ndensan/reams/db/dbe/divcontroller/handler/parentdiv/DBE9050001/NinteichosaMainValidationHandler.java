@@ -199,29 +199,25 @@ public class NinteichosaMainValidationHandler {
                     || !div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShu().getSelectedValue().isEmpty()
                     || !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenBan().getValue().isEmpty()
                     || !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().getValue().isEmpty()
-                    || !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().getValue().isEmpty()
-                    || !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKanjiMeiginin().getValue().isEmpty()) {
+                    || !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().getValue().isEmpty()) {
                 return !div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().isEmpty()
                         && !div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShu().getSelectedValue().isEmpty()
                         && !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenBan().getValue().isEmpty()
                         && !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenMei().getValue().isEmpty()
                         && !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().getValue().isEmpty()
-                        && !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().getValue().isEmpty()
-                        &&!div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKanjiMeiginin().getValue().isEmpty();
+                        && !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().getValue().isEmpty();
             }
         } else {
             if (!div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().isEmpty()
                     || !div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().isEmpty()
                     || !div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShu().getSelectedValue().isEmpty()
                     || !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().getValue().isEmpty()
-                    || !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().getValue().isEmpty()
-                    || !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKanjiMeiginin().getValue().isEmpty()) {
+                    || !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().getValue().isEmpty()) {
                 return !div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().isEmpty()
                         && !div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().isEmpty()
                         && !div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShu().getSelectedValue().isEmpty()
                         && !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().getValue().isEmpty()
-                        && !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().getValue().isEmpty()
-                        && !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKanjiMeiginin().getValue().isEmpty();
+                        && !div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().getValue().isEmpty();
             }
         }
         return true;

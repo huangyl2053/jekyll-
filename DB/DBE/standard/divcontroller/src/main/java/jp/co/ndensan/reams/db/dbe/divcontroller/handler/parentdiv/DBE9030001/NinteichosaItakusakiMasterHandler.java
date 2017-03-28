@@ -85,6 +85,7 @@ public class NinteichosaItakusakiMasterHandler {
                     SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("四マスタ優先表示市町村識別ID"));
     private static final RString 預金種別 = new RString("預金種別");
     private static final RString 預金種目 = new RString("預金種目");
+    private static final RString 空白 = new RString("");
 
     /**
      * コンストラクタです。
@@ -209,7 +210,7 @@ public class NinteichosaItakusakiMasterHandler {
         List<YokinShubetsuPattern> yokinShubetsuPatternlist = div.getChosaitakusakiJohoInput().getKozaJoho().
                 getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関().get預金種別リスト();
         List<KeyValueDataSource> yokinShubetsuList = new ArrayList<>();
-        yokinShubetsuList.add(new KeyValueDataSource(SELECTKEY_空白, RString.EMPTY));
+        yokinShubetsuList.add(new KeyValueDataSource(空白, RString.EMPTY));
         for (YokinShubetsuPattern yokinShubetsuPattern : yokinShubetsuPatternlist) {
             KeyValueDataSource keyValueDataSource = new KeyValueDataSource();
             keyValueDataSource.setKey(yokinShubetsuPattern.get預金種別コード());
@@ -266,11 +267,12 @@ public class NinteichosaItakusakiMasterHandler {
         div.getChosaitakusakiJohoInput().getRadautowatitsuke().setSelectedKey(有効);
         div.getChosaitakusakiJohoInput().getRadChosainJokyo().setSelectedKey(有効);
         div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().clear();
-        div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().setSelectedIndex(0);
+        div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().setSelectedKey(空白);
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().clearValue();
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().clearValue();
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKanjiMeiginin().clearValue();
-
+        div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenBan().clearValue();
+        div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenMei().clearValue();
     }
 
     /**
@@ -726,7 +728,7 @@ public class NinteichosaItakusakiMasterHandler {
                     new KinyuKikanCode(row.getKinyuKikanCode()), new KinyuKikanShitenCode(RString.EMPTY), FlexibleDate.getNowDate());
         }
         setKozaJoho();
-        div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().setSelectedKey(row.getYokinShubetsu().isEmpty() ? new RString(0) : row.getYokinShubetsu());
+        div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().setSelectedKey(row.getYokinShubetsu());
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().setValue(row.getKozaNo());
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().setValue(row.getKozaMeigininKana());
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKanjiMeiginin().setValue(row.getKozaMeiginin());

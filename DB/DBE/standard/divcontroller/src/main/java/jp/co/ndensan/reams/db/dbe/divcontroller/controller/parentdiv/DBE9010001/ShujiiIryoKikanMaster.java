@@ -72,6 +72,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikan;
 import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikanShiten;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 
 /**
  * 主治医医療機関情報処理のクラスです。
@@ -286,9 +287,7 @@ public class ShujiiIryoKikanMaster {
      */
     public ResponseData<ShujiiIryoKikanMasterDiv> onBlur_kinyuKikanCode(ShujiiIryoKikanMasterDiv div) {
         getHandler(div).setKozaJoho();
-        if (div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関() != null) {
-            div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu().setSelectedKey(SELECTKEY_空白);
-        }
+        div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu().setSelectedKey(SELECTKEY_空白);
         div.getShujiiJohoInput().getKozaJoho().getTxtTenBan().clearValue();
         div.getShujiiJohoInput().getKozaJoho().getTxtTenMei().clearValue();
         div.getShujiiJohoInput().getKozaJoho().getTxtGinkoKozaNo().clearValue();
@@ -326,9 +325,7 @@ public class ShujiiIryoKikanMaster {
      */
     public ResponseData<ShujiiIryoKikanMasterDiv> onOkClose_KinyuKikan(ShujiiIryoKikanMasterDiv div) {
         getHandler(div).setKozaJoho();
-        if (div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関() != null) {
-            div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu().setSelectedKey(SELECTKEY_空白);
-        }
+        div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu().setSelectedKey(SELECTKEY_空白);
         div.getShujiiJohoInput().getKozaJoho().getTxtTenBan().clearValue();
         div.getShujiiJohoInput().getKozaJoho().getTxtTenMei().clearValue();
         div.getShujiiJohoInput().getKozaJoho().getTxtGinkoKozaNo().clearValue();
@@ -649,9 +646,28 @@ public class ShujiiIryoKikanMaster {
             if (!口座名義人exist) {
                 validPairs.add(new ValidationMessageControlPair(validationErrorMessage.口座名義人, 口座名義人));
             }
-
             if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
+        }
+        if (div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput() != null) {
+            if (div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().isゆうちょ銀行()) {
+                TextBoxCode 店番 = div.getShujiiJohoInput().getKozaJoho().getTxtTenBan();
+                TextBox 店名 = div.getShujiiJohoInput().getKozaJoho().getTxtTenMei();
+                boolean 店番exist = !RString.EMPTY.equals(店番.getValue());
+                boolean 店名exist = !RString.EMPTY.equals(店名.getValue());
+                if (預金種別exist || 口座番号exist || 口座名義人exist || 金融機関exist || 店番exist || 店名exist) {
+                    ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+                    if (!店番exist) {
+                        validPairs.add(new ValidationMessageControlPair(validationErrorMessage.店番, 店番));
+                    }
+                    if (!店名exist) {
+                        validPairs.add(new ValidationMessageControlPair(validationErrorMessage.店名, 店番));
+                    }
+                    if (validPairs.iterator().hasNext()) {
+                        return ResponseData.of(div).addValidationMessages(validPairs).respond();
+                    }
+                }
             }
         }
 
@@ -714,11 +730,14 @@ public class ShujiiIryoKikanMaster {
                 .setState(DBE9010001StateName.医療機関一覧);
     }
 
-    private enum validationErrorMessage implements IValidationMessage {
+    private static enum validationErrorMessage implements IValidationMessage {
 
         預金種別(UrErrorMessages.必須項目),
         口座番号(UrErrorMessages.必須項目),
-        口座名義人(UrErrorMessages.必須項目);
+        口座名義人(UrErrorMessages.必須項目),
+        店番(UrErrorMessages.必須項目),
+        店名(UrErrorMessages.不正, "店番");
+
         private final Message message;
 
         private validationErrorMessage(IMessageGettable message, String... replacements) {

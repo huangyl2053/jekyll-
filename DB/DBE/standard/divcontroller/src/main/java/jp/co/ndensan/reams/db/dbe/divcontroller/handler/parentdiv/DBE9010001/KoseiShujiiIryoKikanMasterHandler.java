@@ -256,8 +256,7 @@ public class KoseiShujiiIryoKikanMasterHandler {
                     new KinyuKikanCode(row.getKinyuKikanCode()), new KinyuKikanShitenCode(RString.EMPTY), FlexibleDate.getNowDate());
         }
         setKozaJoho();
-        div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu().setSelectedKey((row.getYokinShubetsu() == null
-                || row.getYokinShubetsu().isEmpty()) ? new RString(0) : row.getYokinShubetsu());
+        div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu().setSelectedKey(row.getYokinShubetsu());
         div.getShujiiJohoInput().getKozaJoho().getTxtGinkoKozaNo().setValue(row.getKozaNo());
         div.getShujiiJohoInput().getKozaJoho().getTxtKozaMeiginin().setValue(row.getKozaMeigininKana());
         div.getShujiiJohoInput().getKozaJoho().getTxtKanjiMeiginin().setValue(row.getKozaMeiginin());
@@ -448,7 +447,9 @@ public class KoseiShujiiIryoKikanMasterHandler {
         div.getShujiiJohoInput().getTxtdaihyoshakananame().clearValue();
         div.getShujiiJohoInput().getRadJokyoFlag().setSelectedIndex(0);
         div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().clear();
-        div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu().setSelectedIndex(0);
+        div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu().setSelectedKey(SELECTKEY_空白);
+        div.getShujiiJohoInput().getKozaJoho().getTxtTenBan().clearValue();
+        div.getShujiiJohoInput().getKozaJoho().getTxtTenMei().clearValue();
         div.getShujiiJohoInput().getKozaJoho().getTxtGinkoKozaNo().clearValue();
         div.getShujiiJohoInput().getKozaJoho().getTxtKozaMeiginin().clearValue();
         div.getShujiiJohoInput().getKozaJoho().getTxtKanjiMeiginin().clearValue();

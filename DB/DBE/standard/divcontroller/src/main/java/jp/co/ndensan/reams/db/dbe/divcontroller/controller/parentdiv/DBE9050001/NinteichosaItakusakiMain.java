@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.basic.SonotaKikanJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.SonotaKikanJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosaitakusakimaster.SonotaKikanMasterMapperParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosaitakusakimaster.SonotaKikanMasterSearchParameter;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9020001.DBE9020001StateName;
+import jp.co.ndensan.reams.db.dbe.divcosetSelectedKeyntroller.entity.parentdiv.DBE9020001.DBE9020001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9050001.DBE9050001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9050001.NinteichosaItakusakiCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9050001.NinteichosaItakusakiMainDiv;
@@ -102,9 +102,7 @@ public class NinteichosaItakusakiMain {
      */
     public ResponseData<NinteichosaItakusakiMainDiv> onBlur_kinyuKikanCode(NinteichosaItakusakiMainDiv div) {
         getHandler(div).setKozaJoho();
-        if (div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関() != null) {
-            div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShu().setSelectedKey(SELECTKEY_空白);
-        }
+        div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShu().setSelectedKey(SELECTKEY_空白);
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenBan().clearValue();
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenMei().clearValue();
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().clearValue();
@@ -142,9 +140,7 @@ public class NinteichosaItakusakiMain {
      */
     public ResponseData<NinteichosaItakusakiMainDiv> onOkClose_KinyuKikan(NinteichosaItakusakiMainDiv div) {
         getHandler(div).setKozaJoho();
-        if (div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関() != null) {
-            div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShu().setSelectedKey(SELECTKEY_空白);
-        }
+        div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShu().setSelectedKey(SELECTKEY_空白);
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenBan().clearValue();
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenMei().clearValue();
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().clearValue();
