@@ -33,6 +33,7 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.euc.api.EucOtherInfo;
 import jp.co.ndensan.reams.uz.uza.euc.cooperation.EucDownload;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
@@ -70,6 +71,7 @@ public class Ikenshoget {
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString UIContainer_DBEUC23101 = new RString("DBEUC23101");
     private static final RString UIContainer_DBEUC20702 = new RString("DBEUC20702");
+    private static final RString CSVファイルID_主治医意見書入手一覧 = new RString("DBE207001");
 
     /**
      * 完了処理・主治医意見書入手の初期化。(オンロード)<br/>
@@ -147,8 +149,9 @@ public class Ikenshoget {
      * @return IDownLoadServletResponse
      */
     public IDownLoadServletResponse onClick_btnOutputCsv(IkenshogetDiv div, IDownLoadServletResponse response) {
-        FileSpoolManager spoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, CSVファイル名, UzUDE0831EucAccesslogFileType.Csv);
-        RString filePath = Path.combinePath(spoolManager.getEucOutputDirectry(), CSVファイル名);
+        FileSpoolManager spoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, CSVファイルID_主治医意見書入手一覧, UzUDE0831EucAccesslogFileType.Csv);
+        RString 出力名 = EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, CSVファイルID_主治医意見書入手一覧);
+        RString filePath = Path.combinePath(spoolManager.getEucOutputDirectry(), 出力名);
         try (CsvWriter<IkenshoNyushuCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).
                 setDelimiter(EUC_WRITER_DELIMITER).
@@ -168,7 +171,7 @@ public class Ikenshoget {
             AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
             spoolManager.spool(filePath, accessLogUUID);
         }
-        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(CSVファイル名));
+        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(出力名));
         sfd = SharedFile.defineSharedFile(sfd);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
         SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
