@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5102NinteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5502ShinsakaiWariateJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5503ShinsakaiWariateIinJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5511ShinsakaiKaisaiKekkaJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -254,10 +255,10 @@ public class DataTorikomiEdit {
      */
     public DbT5105NinteiKanryoJohoEntity editDbT5105Entity(TempShinsakaiKekkaEntity entity,
                                                                     DbT5105NinteiKanryoJohoEntity dbt5105Entity) {
-       if (!HanteiKekkaCode.existsCode(entity.get今回_二次判定())) {
+       if (!HanteiKekkaCode.existsCode(entity.get今回_通知区分())) {
             return dbt5105Entity;
         }
-        switch (HanteiKekkaCode.toValue(entity.get今回_二次判定())) {
+        switch (HanteiKekkaCode.toValue(entity.get今回_通知区分())) {
                 case 再調査_意見書のみ:
                     dbt5105Entity.setIkenshoSakuseiIraiKanryoYMD(null);
                     dbt5105Entity.setIkenshoTorokuKanryoYMD(null);
@@ -291,6 +292,18 @@ public class DataTorikomiEdit {
 
             }
         return dbt5105Entity;
+    }
+    
+    /**
+     * DbT5502ShinsakaiWariateJohoEntityの編集メソッドです。
+     * 
+     * @param entity TempShinsakaiKekkaEntity
+     * @param dbt5502 DbT5502ShinsakaiWariateJohoEntity
+     * @return DbT5502ShinsakaiWariateJohoEntity
+     */
+    public DbT5502ShinsakaiWariateJohoEntity editDbT5502Entity(TempShinsakaiKekkaEntity entity, DbT5502ShinsakaiWariateJohoEntity dbt5502) {
+        dbt5502.setHanteiKekkaCode(new Code(entity.get今回_通知区分()));
+        return null;
     }
     
     /**
