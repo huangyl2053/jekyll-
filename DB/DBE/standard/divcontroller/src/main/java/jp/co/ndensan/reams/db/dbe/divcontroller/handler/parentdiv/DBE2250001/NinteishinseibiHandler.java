@@ -154,6 +154,7 @@ public class NinteishinseibiHandler {
         row.getNinteiShinseiYMD().setValue(convertFlexibleDate(entity.get認定申請年月日()));
         row.getHihokenshaNo().setValue(entity.get被保険者番号());
         row.setHihokenshaName(entity.get被保険者氏名());
+        row.setShokisaiHokenshaNo(entity.get証記載保険者番号());
         row.setNinteiShinseiShinseijiKubunCode(NinteiShinseiShinseijiKubunCode.to名称OrDefault(entity.get認定申請区分申請時コード(), RString.EMPTY));
         row.getNinteichosaIraiKanryoYMD().setValue(convertFlexibleDate(entity.get認定調査依頼完了年月日()));
         row.setNinteiChosaItakusakiCode(entity.get認定調査委託先コード());

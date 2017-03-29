@@ -134,7 +134,7 @@ public class DBE224001_NinteichosaDataOutputParameter extends BatchParameterBase
     }
 
     public NinteiChosaFileOutputProcessParamter toNinteiChosaFileOutputProcessParamter() {
-        return new NinteiChosaFileOutputProcessParamter(this.shichosonCode, this.addedFileName, this.tempFilePath);
+        return new NinteiChosaFileOutputProcessParamter(this.shinseishoKanriNoList, this.shichosonCode, this.addedFileName, this.tempFilePath);
     }
 
 }

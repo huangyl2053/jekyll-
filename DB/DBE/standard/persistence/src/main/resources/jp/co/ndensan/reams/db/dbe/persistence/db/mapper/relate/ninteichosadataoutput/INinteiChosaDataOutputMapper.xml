@@ -867,7 +867,26 @@
         rgdb."DbT5102NinteiKekkaJoho" AS "DbT5102"
         ON "CsvTempTableZenkai".申請書管理番号 = "DbT5102"."shinseishoKanriNo"
     </select>
-
+    
+    <select resultOrdered="true" id="getPersonalData" resultMap="resultMap_PersonalData"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosadataoutput.NinteiChosaFileOutputMybitisParameter" fetchSize="500">
+        SELECT
+        DbT5101."shinseishoKanriNo",
+        DbT5101."shoKisaiHokenshaNo",
+        DbT5101."hihokenshaNo"
+        FROM 
+        rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
+        WHERE 
+        DbT5101."shinseishoKanriNo" IN
+        <foreach collection="shinseishoKanriNoList" item="code" open="(" separator="," close=")"> #{code} </foreach>
+    </select>
+    
+    <resultMap id="resultMap_PersonalData" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaOutputPersonalDataEntity" autoMapping="true">
+        <result property="申請書管理番号" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="証記載保険者番号" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+    </resultMap>
+    
     <!--今回分のresultMap-->
     <resultMap id="resultMap_getCsvTable" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaDataOutputBatchRelateEntity" autoMapping="true">
         <result property="申請書管理番号" column="申請書管理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2250001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Wed Feb 22 13:16:41 JST 2017 
+ * Wed Mar 29 10:10:57 JST 2017 
  */
 
 
@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 
 public class dgNinteiChosaData_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
 
     private RString jyotai;
     private RString hokenja;
@@ -75,6 +75,7 @@ public class dgNinteiChosaData_Row extends DataRow {
     private RString serviceJokyoKinyuRemban;
     private RString shisetsuRiyoFlagRemban;
     private RString errorJiyu;
+    private RString shokisaiHokenshaNo;
 
     public dgNinteiChosaData_Row() {
         super();
@@ -129,6 +130,7 @@ public class dgNinteiChosaData_Row extends DataRow {
         this.serviceJokyoKinyuRemban = RString.EMPTY;
         this.shisetsuRiyoFlagRemban = RString.EMPTY;
         this.errorJiyu = RString.EMPTY;
+        this.shokisaiHokenshaNo = RString.EMPTY;
         this.setOriginalData("jyotai", jyotai);
         this.setOriginalData("hokenja", hokenja);
         this.setOriginalData("ninteiShinseiYMD", ninteiShinseiYMD);
@@ -180,9 +182,10 @@ public class dgNinteiChosaData_Row extends DataRow {
         this.setOriginalData("serviceJokyoKinyuRemban", serviceJokyoKinyuRemban);
         this.setOriginalData("shisetsuRiyoFlagRemban", shisetsuRiyoFlagRemban);
         this.setOriginalData("errorJiyu", errorJiyu);
+        this.setOriginalData("shokisaiHokenshaNo", shokisaiHokenshaNo);
     }
 
-    public dgNinteiChosaData_Row(RString jyotai, RString hokenja, TextBoxFlexibleDate ninteiShinseiYMD, TextBoxCode hihokenshaNo, RString hihokenshaName, RString ninteiShinseiShinseijiKubunCode, TextBoxFlexibleDate ninteichosaIraiKanryoYMD, RString ninteiChosaItakusakiCode, RString ninteiChosaItakusakimei, RString ninteiChosainCode, RString ninteiChosainName, TextBoxFlexibleDate ninteichosaJisshiYMD, RString shinseishoKanriNo, TextBoxNum ninteichosaIraiRirekiNo, RString remban, RString koroshoIfShikibetsuCode, RString shisetsuRiyoFlag, RString serviceJokyoKinyu, RString serviceJokyo, RString researchItem, RString ninchishoNichijoSeikatsuJiritsudoCode, RString shogaiNichijoSeikatsuJiritsudoCode, RString ninteichosaTokkijikoNoRemban, RString gaikyoTokkiTextImageKubun, RString jutakuKaishu, RString tokubetsuKyufuService, RString zaitakuService, RString shuso, RString kazokuJokyo, RString kyojuKankyo, RString kikaiKiki, RString ninteichousaIraiKubunCode, RString ninteichosaIraiKaisu, TextBoxFlexibleDate ninteichosaJuryoYMD, RString ninteiChosaKubunCode, RString chosaJisshiBashoCode, RString chosaJisshiBashoMeisho, RString serviceKubunCode, RString riyoShisetsuShimei, RString riyoShisetsuJusho, RString riyoShisetsuTelNo, RString riyoShisetsuYubinNo, RString tokki, TextBoxFlexibleDate tokkijikoUketsukeYMD, TextBoxFlexibleDate tokkijikoJuryoYMD, RString serviceJokyoFlag, RString serviceJokyoRemban, RString serviceJokyoFlagRemban, RString serviceJokyoKinyuRemban, RString shisetsuRiyoFlagRemban, RString errorJiyu) {
+    public dgNinteiChosaData_Row(RString jyotai, RString hokenja, TextBoxFlexibleDate ninteiShinseiYMD, TextBoxCode hihokenshaNo, RString hihokenshaName, RString ninteiShinseiShinseijiKubunCode, TextBoxFlexibleDate ninteichosaIraiKanryoYMD, RString ninteiChosaItakusakiCode, RString ninteiChosaItakusakimei, RString ninteiChosainCode, RString ninteiChosainName, TextBoxFlexibleDate ninteichosaJisshiYMD, RString shinseishoKanriNo, TextBoxNum ninteichosaIraiRirekiNo, RString remban, RString koroshoIfShikibetsuCode, RString shisetsuRiyoFlag, RString serviceJokyoKinyu, RString serviceJokyo, RString researchItem, RString ninchishoNichijoSeikatsuJiritsudoCode, RString shogaiNichijoSeikatsuJiritsudoCode, RString ninteichosaTokkijikoNoRemban, RString gaikyoTokkiTextImageKubun, RString jutakuKaishu, RString tokubetsuKyufuService, RString zaitakuService, RString shuso, RString kazokuJokyo, RString kyojuKankyo, RString kikaiKiki, RString ninteichousaIraiKubunCode, RString ninteichosaIraiKaisu, TextBoxFlexibleDate ninteichosaJuryoYMD, RString ninteiChosaKubunCode, RString chosaJisshiBashoCode, RString chosaJisshiBashoMeisho, RString serviceKubunCode, RString riyoShisetsuShimei, RString riyoShisetsuJusho, RString riyoShisetsuTelNo, RString riyoShisetsuYubinNo, RString tokki, TextBoxFlexibleDate tokkijikoUketsukeYMD, TextBoxFlexibleDate tokkijikoJuryoYMD, RString serviceJokyoFlag, RString serviceJokyoRemban, RString serviceJokyoFlagRemban, RString serviceJokyoKinyuRemban, RString shisetsuRiyoFlagRemban, RString errorJiyu, RString shokisaiHokenshaNo) {
         super();
         this.setOriginalData("jyotai", jyotai);
         this.setOriginalData("hokenja", hokenja);
@@ -235,6 +238,7 @@ public class dgNinteiChosaData_Row extends DataRow {
         this.setOriginalData("serviceJokyoKinyuRemban", serviceJokyoKinyuRemban);
         this.setOriginalData("shisetsuRiyoFlagRemban", shisetsuRiyoFlagRemban);
         this.setOriginalData("errorJiyu", errorJiyu);
+        this.setOriginalData("shokisaiHokenshaNo", shokisaiHokenshaNo);
         this.jyotai = jyotai;
         this.hokenja = hokenja;
         this.ninteiShinseiYMD = ninteiShinseiYMD;
@@ -286,6 +290,7 @@ public class dgNinteiChosaData_Row extends DataRow {
         this.serviceJokyoKinyuRemban = serviceJokyoKinyuRemban;
         this.shisetsuRiyoFlagRemban = shisetsuRiyoFlagRemban;
         this.errorJiyu = errorJiyu;
+        this.shokisaiHokenshaNo = shokisaiHokenshaNo;
     }
 
     public RString getJyotai() {
@@ -490,6 +495,10 @@ public class dgNinteiChosaData_Row extends DataRow {
 
     public RString getErrorJiyu() {
         return errorJiyu;
+    }
+
+    public RString getShokisaiHokenshaNo() {
+        return shokisaiHokenshaNo;
     }
 
     public void setJyotai(RString jyotai) {
@@ -745,6 +754,11 @@ public class dgNinteiChosaData_Row extends DataRow {
     public void setErrorJiyu(RString errorJiyu) {
         this.setOriginalData("errorJiyu", errorJiyu);
         this.errorJiyu = errorJiyu;
+    }
+
+    public void setShokisaiHokenshaNo(RString shokisaiHokenshaNo) {
+        this.setOriginalData("shokisaiHokenshaNo", shokisaiHokenshaNo);
+        this.shokisaiHokenshaNo = shokisaiHokenshaNo;
     }
 
     // </editor-fold>

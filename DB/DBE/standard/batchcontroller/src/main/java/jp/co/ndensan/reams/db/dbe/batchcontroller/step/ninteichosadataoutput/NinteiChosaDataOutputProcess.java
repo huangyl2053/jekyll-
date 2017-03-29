@@ -5,8 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteichosadataoutput;
 
-import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosadataoutput.NinteiChosaDataOutputResult;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosadataoutput.NinteiChosaDataCsvProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaBasicDataRelateEntity;
@@ -32,10 +30,7 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
  *
@@ -60,7 +55,6 @@ public class NinteiChosaDataOutputProcess extends BatchProcessBase<NinteiChosaBa
     private RString eucFilePath;
     @BatchWriter
     private CsvWriter<NinteiChosaDataOutputEucCsvEntity> eucCsvWriter;
-    private final List<PersonalData> personalDataList = new ArrayList<>();
 
     @Override
     protected void initialize() {
@@ -96,14 +90,11 @@ public class NinteiChosaDataOutputProcess extends BatchProcessBase<NinteiChosaBa
             市町村名称 = entity.get今回分Entity().get市町村名称();
         }
         eucCsvWriter.writeLine(new NinteiChosaDataOutputResult().setEucCsvEntity(entity));
-        PersonalData personalData = new NinteiChosaDataOutputResult().getPersonalData(entity.get今回分Entity().get申請書管理番号());
-        personalDataList.add(personalData);
     }
 
     @Override
     protected void afterExecute() {
         eucCsvWriter.close();
-        AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
         outputJokenhyoFactory();
     }
 
