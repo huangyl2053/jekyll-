@@ -93,15 +93,15 @@ public class Yokaigoninteiimagekanri {
                 ExpandedInformations.fromValue(申請書管理番号)
         );
         accessLog.flushBy(AccessLogType.照会);
+        ImagekanriJoho イメージ管理情報 = finder.getImageJoho(申請書管理番号);
+        present(div, イメージ管理情報);
         if (!RealInitialLocker.tryGetLock(LockingKeys.申請書管理番号.appended(申請書管理番号))) {
-            div.getBtnGaikyoTokki().setDisplayNone(!uses概況特記());
             div.setReadOnly(true);
             setDisabledCommonBtnField(true);
             return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
         }
-        ImagekanriJoho イメージ管理情報 = finder.getImageJoho(申請書管理番号);
         ViewStateHolder.put(ViewStateKeys.イメージ情報, イメージ管理情報);
-        return present(div, イメージ管理情報);
+        return ResponseData.of(div).respond();
     }
 
     private ResponseData<YokaigoninteiimagekanriDiv> present(YokaigoninteiimagekanriDiv div, ImagekanriJoho イメージ管理情報) {

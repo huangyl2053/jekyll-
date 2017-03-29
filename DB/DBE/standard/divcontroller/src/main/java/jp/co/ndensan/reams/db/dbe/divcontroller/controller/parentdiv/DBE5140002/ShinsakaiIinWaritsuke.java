@@ -75,11 +75,6 @@ public class ShinsakaiIinWaritsuke {
         if (ResponseHolder.isReRequest()) {
             return ResponseData.of(div).respond();
         }
-        if (!RealInitialLocker.tryGetLock(LockingKeys.介護認定審査会開催番号.appended(開催番号))) {
-            div.setReadOnly(true);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(FIELD_NAME_BTN_HOZON, true);
-            return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
-        }
         List<ShinsakaiKaisaiYoteiJoho> kaisaiYoteiJohoList = kaisaiYoteiJohomanager
                 .search審査会開催予定情報Of開催番号(開催番号).records();
         getHandler(div).onLoad(kaisaiYoteiJohoList, 開催番号);
@@ -88,6 +83,11 @@ public class ShinsakaiIinWaritsuke {
         Models<ShinsakaiWariateIinJoho2Identifier, ShinsakaiWariateIinJoho2> models
                 = Models.create(iinJohomanager.searchByKaisaiNo(開催番号).records());
         getHandler(div).setShinsakaiIinDataGrid(iinKoseList, iinJoholist);
+        if (!RealInitialLocker.tryGetLock(LockingKeys.介護認定審査会開催番号.appended(開催番号))) {
+            div.setReadOnly(true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(FIELD_NAME_BTN_HOZON, true);
+            return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
+        }
         ViewStateHolder.put(ViewStateKeys.介護認定審査会割当委員情報_一覧, models);
         return ResponseData.of(div).respond();
     }
