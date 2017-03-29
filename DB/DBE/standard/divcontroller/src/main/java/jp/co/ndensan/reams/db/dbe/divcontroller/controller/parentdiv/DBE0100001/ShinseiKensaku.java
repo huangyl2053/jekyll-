@@ -34,11 +34,7 @@ import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.db.dbx.definition.message.DbQuestionMessages;
-import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 要介護認定申請検索のクラスです。
@@ -87,7 +83,7 @@ public class ShinseiKensaku {
      */
     public ResponseData<ShinseiKensakuDiv> onActive(ShinseiKensakuDiv div) {
         Boolean is機能詳細画面から再検索 = ViewStateHolder.get(ViewStateKeys.機能詳細画面から再検索, Boolean.class);
-        if(is機能詳細画面から再検索 != null && is機能詳細画面から再検索.equals(Boolean.TRUE)){
+        if (is機能詳細画面から再検索 != null && is機能詳細画面から再検索.equals(Boolean.TRUE)) {
             div.getCcdNinteishinseishaFinder().initialize();
         }
         ViewStateHolder.remove(ViewStateKeys.機能詳細画面から再検索);
@@ -151,7 +147,7 @@ public class ShinseiKensaku {
     private ResponseData<ShinseiKensakuDiv> processKensaku(ShinseiKensakuDiv div, RString hihokenshaNo) {
         if (ResponseHolder.isReRequest()) {
             return ResponseData.of(div).respond();
-        } 
+        }
         ValidationMessageControlPairs pairs = div.getCcdNinteishinseishaFinder().validate();
         if (pairs.existsError()) {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
@@ -215,7 +211,7 @@ public class ShinseiKensaku {
         RString menuID = ResponseHolder.getMenuID();
         dgShinseiJoho_Row row = (event == Events.検索結果1件) ? div.getDgShinseiJoho().getDataSource().get(0)
                 : (event == Events.対象選択) ? div.getDgShinseiJoho().getClickedItem()
-                        : null;
+                : null;
         if (row == null) {
             return ResponseData.of(div).respond();
         }
@@ -235,12 +231,6 @@ public class ShinseiKensaku {
             div.getCcdNinteishinseishaFinder().reloadSaikinShorisha();
         }
 
-        DbAccessLogger accessLogger = new DbAccessLogger();
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
-                        row.getShinseishoKanriNo());
-        accessLogger.store(new ShoKisaiHokenshaNo(row.getShoKisaiHokenshaNo()), row.getHihokenshaNo(), expandedInfo);
-        accessLogger.flushBy(AccessLogType.照会);
-        
         if (MENUID_DBEMN21001.equals(menuID)) {
             ViewStateHolder.put(ViewStateKeys.申請書管理番号, 申請書管理番号);
             ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, 認定調査履歴番号);
@@ -299,7 +289,7 @@ public class ShinseiKensaku {
         }
         if (MENUID_DBEMN71003.equals(menuID)) {
             ViewStateHolder.put(ViewStateKeys.被保険者番号, 被保険者番号);
-                return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.要介護認定進捗情報データ出力へ).respond();
+            return ResponseData.of(div).forwardWithEventName(DBE0100001TransitionEventName.要介護認定進捗情報データ出力へ).respond();
         }
         return ResponseData.of(div).respond();
     }
