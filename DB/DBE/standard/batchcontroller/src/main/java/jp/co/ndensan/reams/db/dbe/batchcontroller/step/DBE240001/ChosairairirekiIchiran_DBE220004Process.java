@@ -44,8 +44,6 @@ public class ChosairairirekiIchiran_DBE220004Process extends BatchProcessBase<Ho
     private static final ReportId 帳票ID = ReportIdDBE.DBE220004.getReportId();
     private NinteiChosaProcessParamter processParamter;
     private NinteiChosaBusiness business;
-//    private IHomonChosaIraishoMapper mapper;
-//    private List<RString> 被保険者番号List;
 
     @BatchWriter
     private BatchReportWriter<ChosairairirekiIchiranReportSource> batchWriter;
@@ -54,18 +52,10 @@ public class ChosairairirekiIchiran_DBE220004Process extends BatchProcessBase<Ho
     @Override
     protected void initialize() {
         business = new NinteiChosaBusiness(processParamter);
-//        mapper = getMapper(IHomonChosaIraishoMapper.class);
-//        被保険者番号List = new ArrayList<>();
-//        List<HomonChosaIraishoRelateEntity> 認定調査依頼情報
-//                = mapper.get認定調査依頼情報(processParamter.toHomonChosaIraishoMybitisParamter());
-//        for (HomonChosaIraishoRelateEntity entity : 認定調査依頼情報) {
-//            被保険者番号List.add(entity.get被保険者番号());
-//        }
     }
 
     @Override
     protected IBatchReader createReader() {
-//        return new BatchDbReader(MYBATIS_SELECT_ID, ShujiiIkenshoMybatisParameter.createSelectByKeyParam(被保険者番号List));
         return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toNinteiChosaMybitisParamter());
     }
 
@@ -93,8 +83,8 @@ public class ChosairairirekiIchiran_DBE220004Process extends BatchProcessBase<Ho
                 new ChosairairirekiIchiranBusiness(entity.get直近区分(),
                         entity.get被保険者番号(), entity.get被保険者氏名(), entity.get被保険者氏名カナ(), entity.get住所(), entity.get事業者名称(),
                         entity.get調査員氏名(), 認定調査依頼年月日, 認定申請区分,
-                        new ShikibetsuCode(entity.get証記載保険者番号().substring(0, 5).concat(entity.get被保険者番号())),
-                        new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.get申請書管理番号())));
+                        !RString.isNullOrEmpty(entity.get被保険者番号()) ? new ShikibetsuCode(entity.get証記載保険者番号().substring(0, 5).concat(entity.get被保険者番号())) : null,
+                        !RString.isNullOrEmpty(entity.get被保険者番号()) ? new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.get申請書管理番号()) : null));
         report.writeBy(reportSourceWriter);
     }
 

@@ -172,7 +172,7 @@ public class Masking {
     public IDownLoadServletResponse onClick_btnOutputCsv(MaskingDiv div, IDownLoadServletResponse response) {
         FileSpoolManager manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, CSVファイルID_マスキング一覧, UzUDE0831EucAccesslogFileType.Csv);
         RString 出力名 = EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, CSVファイルID_マスキング一覧);
-        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), 出力名);
+        RString filePath = Path.combinePath(manager.getEucOutputDirectry(), 出力名);
         List<PersonalData> personalDataList = new ArrayList<>();
         try (CsvWriter<MaskingIchiranCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).

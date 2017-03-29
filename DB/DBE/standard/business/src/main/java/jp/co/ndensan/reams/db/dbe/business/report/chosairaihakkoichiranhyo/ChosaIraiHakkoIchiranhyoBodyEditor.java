@@ -57,6 +57,8 @@ class ChosaIraiHakkoIchiranhyoBodyEditor implements IChosaIraiHakkoIchiranhyoEdi
         source.listHakkoIchiranhyo_8 = item.get調査員名();
         source.listHakkoIchiranhyo_9 = RString.EMPTY;
         source.listHakkoIchiranhyo_10 = RString.EMPTY;
+        source.識別コード = item.get識別コード();
+        source.拡張情報 = item.get拡張情報();
         return source;
     }
 }
