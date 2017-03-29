@@ -483,4 +483,22 @@
     <delete id="deleteDbT5123PhysicalByShinseishoKanriNo" parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" > DELETE FROM rgdb."DbT5123NinteiKeikakuJoho" WHERE "shinseishoKanriNo" = #{shinseishoKanriNo}  </delete>
     <delete id="deleteDbT5150PhysicalByShinseishoKanriNo" parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" > DELETE FROM rgdb."DbT5150RenrakusakiJoho" WHERE "shinseishoKanriNo" = #{shinseishoKanriNo}  </delete>
     <delete id="deleteDbT5590PhysicalByShinseishoKanriNo" parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" > DELETE FROM rgdb."DbT5590ShinsakaiIinJogaiJoho" WHERE "shinseishoKanriNo" = #{shinseishoKanriNo}  </delete>
+
+    <select resultOrdered="true" id="getZenkaiShinseishoKanriNo" resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteishinchokujohoshokai.HihokenshaJohoParamter" fetchSize="500">
+        SELECT
+        DbT5101."shinseishoKanriNo"
+        FROM
+        rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
+        LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" DbT5102
+        ON DbT5102."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        WHERE
+        DbT5101."shoKisaiHokenshaNo" = #{証記載保険者番号}
+        AND DbT5101."hihokenshaNo" = #{被保険者番号}
+        AND DbT5101."torisageKubunCode" = '1'
+        AND DbT5101."shoriJotaiKubun" in ('0','3')
+        ORDER BY
+        DbT5101."ninteiShinseiYMD" DESC, DbT5102."nijiHanteiYMD" DESC
+        LIMIT 1
+    </select>
 </mapper>

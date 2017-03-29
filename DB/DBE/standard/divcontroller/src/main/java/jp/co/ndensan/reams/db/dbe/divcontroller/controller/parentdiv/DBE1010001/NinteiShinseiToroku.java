@@ -840,7 +840,7 @@ public class NinteiShinseiToroku {
             ShinseishoKanriNo 申請書管理番号 = get申請書管理番号(div);
             NinteiShinseiJoho ninteiShinseiJoho = get要介護認定申請情報(div, 申請書管理番号);
             ShinseitodokedeJoho shinseitodokedeJoho = get認定申請届出者情報(div, true, 申請書管理番号);
-            ShinseiRirekiJoho shinseiRirekiJoho = get申請履歴情報(申請書管理番号);
+            ShinseiRirekiJoho shinseiRirekiJoho = get申請履歴情報(申請書管理番号, div.getCcdShikakuInfo().getHookenshaCode(), div.getCcdShikakuInfo().getTxtHihokenshaNo().getValue());
             NinteiKeikakuJoho ninteiKeikakuJoho = get申請計画情報(申請書管理番号, div);
 
             if (manager.has要介護認定申請情報(ninteiShinseiJoho.get被保険者番号(),
@@ -1274,12 +1274,12 @@ public class NinteiShinseiToroku {
         return shinseiJohoBuilder;
     }
 
-    private ShinseiRirekiJoho get申請履歴情報(ShinseishoKanriNo 申請書管理番号) {
+    private ShinseiRirekiJoho get申請履歴情報(ShinseishoKanriNo 申請書管理番号, RString 証記載保険者番号, RString 被保険者番号) {
         ShinseiRirekiJoho shinseiRirekiJoho = new ShinseiRirekiJoho(申請書管理番号);
         ShinseiRirekiJohoBuilder shinseiRirekiJohoBuilder = shinseiRirekiJoho.createBuilderForEdit();
-        Minashi2shisaiJoho business = ViewStateHolder.get(ViewStateKeys.みなし2号登録情報, Minashi2shisaiJoho.class);
-        if (business != null && business.get前回申請書管理番号() != null && !business.get前回申請書管理番号().isEmpty()) {
-            shinseiRirekiJohoBuilder.set前回申請管理番号(business.get前回申請書管理番号());
+        ShinseishoKanriNo 前回申請書管理番号 = manager.get前回申請管理番号(証記載保険者番号, 被保険者番号);
+        if (前回申請書管理番号 != null && !前回申請書管理番号.isEmpty()) {
+            shinseiRirekiJohoBuilder.set前回申請管理番号(前回申請書管理番号);
         } else {
             shinseiRirekiJohoBuilder.set前回申請管理番号(new ShinseishoKanriNo(RString.EMPTY.padZeroToLeft(ZERO_17)));
         }

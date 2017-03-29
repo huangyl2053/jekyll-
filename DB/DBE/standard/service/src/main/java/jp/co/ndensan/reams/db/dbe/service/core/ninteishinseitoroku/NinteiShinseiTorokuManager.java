@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.basic.NinteiKeikakuJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiIinJogaiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseitoroku.NinteiShinseiTorokuResult;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseitoroku.RirekiJohoResult;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteishinchokujohoshokai.HihokenshaJohoParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5590ShinsakaiIinJogaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinseitoroku.NinteiShinseiTorokuRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinseitoroku.RirekiJohoRelateEntity;
@@ -284,6 +285,22 @@ public class NinteiShinseiTorokuManager {
         DbT5121ShinseiRirekiJohoEntity entity = dbt5121Dac.selectByKey(申請書管理番号);
         if (entity != null) {
             return entity.getZenkaiShinseishoKanriNo();
+        }
+        return null;
+    }
+
+    /**
+     * 申請書管理番号により、前回申請管理番号の取得
+     *
+     * @param 証記載保険者番号 証記載保険者番号
+     * @param 被保険者番号 被保険者番号
+     * @return 前回申請管理番号
+     */
+    public ShinseishoKanriNo get前回申請管理番号(RString 証記載保険者番号, RString 被保険者番号) {
+        RString 前回申請管理番号
+                = mapperProvider.create(INinteiShinseiTorokuMapper.class).getZenkaiShinseishoKanriNo(HihokenshaJohoParamter.createParameter(証記載保険者番号, 被保険者番号));
+        if (前回申請管理番号 != null && !前回申請管理番号.isEmpty()) {
+            return new ShinseishoKanriNo(前回申請管理番号);
         }
         return null;
     }
