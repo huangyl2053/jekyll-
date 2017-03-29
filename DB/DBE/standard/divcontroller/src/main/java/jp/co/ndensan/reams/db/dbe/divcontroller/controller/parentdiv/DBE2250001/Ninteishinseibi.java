@@ -178,7 +178,7 @@ public class Ninteishinseibi {
     public IDownLoadServletResponse onClick_btnErrorListOutput(NinteishinseibiDiv div, IDownLoadServletResponse response) {
         FileSpoolManager manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, エラーリスト_EUCENTITYID, UzUDE0831EucAccesslogFileType.Csv);
         RString 出力名 = EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, エラーリスト_EUCENTITYID);
-        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), 出力名);
+        RString filePath = Path.combinePath(manager.getEucOutputDirectry(), 出力名);
         List<PersonalData> personalDataList = new ArrayList<>();
         try (CsvWriter<NinteichosaIchiranErrorListCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath)

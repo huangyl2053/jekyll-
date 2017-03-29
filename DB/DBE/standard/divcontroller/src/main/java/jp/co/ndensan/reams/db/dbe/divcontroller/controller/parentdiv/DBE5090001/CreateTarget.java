@@ -310,7 +310,7 @@ public class CreateTarget {
             List<CreateTargetBusiness> 前回サービス項目List = dataMap.get(前回サービス項目.get申請書管理番号()).get前回サービスの状況();
             前回サービス項目List.add(前回サービス項目);
         }
-        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), ファイル名);
+        RString filePath = Path.combinePath(manager.getEucOutputDirectry(), ファイル名);
         try (CsvWriter<CreateTargetCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(false).build()) {

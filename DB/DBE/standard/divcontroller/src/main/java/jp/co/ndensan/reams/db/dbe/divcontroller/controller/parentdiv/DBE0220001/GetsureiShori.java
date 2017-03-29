@@ -192,7 +192,7 @@ public class GetsureiShori {
     public IDownLoadServletResponse onClick_btnOutputCsv(GetsureiShoriDiv div, IDownLoadServletResponse response) {
         FileSpoolManager manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         RString CSVファイル名 = EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, EUC_ENTITY_ID);
-        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
+        RString filePath = Path.combinePath(manager.getEucOutputDirectry(), CSVファイル名);
         List<PersonalData> personalDataList = new ArrayList<>();
         try (CsvWriter<CenterSoshinIchiranCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).
