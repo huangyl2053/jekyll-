@@ -31,7 +31,7 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity {
     @CsvField(order = 1, name = "No")
     private RString no;
 
-    @CsvField(order = 6, name = "保険者")
+    @CsvField(order = 6, name = "保険者名")
     private RString hokenshaName;
 
     @CsvField(order = 7, name = "被保険者番号")
@@ -52,13 +52,13 @@ public class NinteiChosaTokusokuTaishoshaIchiranhyoCsvEntity {
     @CsvField(order = 12, name = "調査委託先コード")
     private RString chosaItakusakiCode;
 
-    @CsvField(order = 13, name = "事業者名称")
+    @CsvField(order = 13, name = "調査委託先名称")
     private RString kikanName;
 
-    @CsvField(order = 14, name = "事業者住所")
+    @CsvField(order = 14, name = "調査機関住所")
     private RString kikanJusho;
 
-    @CsvField(order = 15, name = "事業者電話番号")
+    @CsvField(order = 15, name = "調査機関電話番号")
     private RString kikanTel;
 
     @CsvField(order = 16, name = "調査員コード")

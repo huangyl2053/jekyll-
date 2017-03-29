@@ -36,14 +36,8 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
@@ -81,22 +75,6 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE233002"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
-    private static final RString CSVタイトル = new RString("主治医意見書督促対象者一覧");
-    private static final RString 市町村コード = new RString("市町村コード");
-    private static final RString 市町村名称 = new RString("市町村名称");
-    private static final RString 番号 = new RString("No");
-    private static final RString 保険者名 = new RString("保険者名");
-    private static final RString 被保険者番号 = new RString("被保険者番号");
-    private static final RString 被保険者氏名カナ = new RString("被保険者氏名カナ");
-    private static final RString 被保険者氏名 = new RString("被保険者氏名");
-    private static final RString 申請日 = new RString("申請日");
-    private static final RString 督促状発行日 = new RString("督促状発行日");
-    private static final RString 主治医コード = new RString("主治医コード");
-    private static final RString 氏名 = new RString("主治医氏名");
-    private static final RString 医療機関コード = new RString("主治医医療機関コード");
-    private static final RString 事業者名称 = new RString("主治医医療機関名称");
-    private static final RString 事業者住所 = new RString("主治医医療機関住所");
-    private static final RString 事業者電話番号 = new RString("主治医医療機関電話番号");
     private static final RString 改頁キー = new RString("cityCode");
     private static int index = 1;
 
@@ -131,37 +109,6 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
                     setNewLine(NewLine.CRLF).
                     hasHeader(true).
                     build();
-        }
-    }
-
-    @Override
-    protected void beforeExecute() {
-        if (outputCsv) {
-            csvWriter.writeLine(new ShujiiIkenTokusokujoCsvEntity(
-                    CSVタイトル, null, null, null, null,
-                    null, null, null, null,
-                    null, null, null, null, null, null));
-            RStringBuilder systemDateTime = new RStringBuilder();
-            RDateTime datetime = RDate.getNowDateTime();
-            systemDateTime.append(datetime.getDate().wareki().eraType(EraType.KANJI).
-                    firstYear(FirstYear.GAN_NEN).
-                    separator(Separator.JAPANESE).
-                    fillType(FillType.BLANK).toDateString());
-            systemDateTime.append(RString.HALF_SPACE);
-            systemDateTime.append(String.format("%02d", datetime.getHour()));
-            systemDateTime.append(new RString("時"));
-            systemDateTime.append(String.format("%02d", datetime.getMinute()));
-            systemDateTime.append(new RString("分"));
-            systemDateTime.append(String.format("%02d", datetime.getSecond()));
-            systemDateTime.append(new RString("秒"));
-            csvWriter.writeLine(new ShujiiIkenTokusokujoCsvEntity(
-                    systemDateTime.toRString(),
-                    null, null, null, null,
-                    null, null, null, null,
-                    null, null, null, null, null, null));
-            csvWriter.writeLine(new ShujiiIkenTokusokujoCsvEntity(
-                    番号, 市町村コード, 市町村名称, 保険者名, 被保険者番号, 被保険者氏名カナ, 被保険者氏名, 申請日, 督促状発行日,
-                    医療機関コード, 事業者名称, 事業者住所, 事業者電話番号, 主治医コード, 氏名));
         }
     }
 
