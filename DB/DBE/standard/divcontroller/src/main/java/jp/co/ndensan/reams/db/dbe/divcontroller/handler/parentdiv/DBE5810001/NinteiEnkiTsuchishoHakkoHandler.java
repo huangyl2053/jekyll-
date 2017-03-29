@@ -10,17 +10,21 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteienkitsuchishohakko.DgHakkotaishoshaRow;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteienkitsuchishohakko.NinteiEnkiTsuchishoHakkoBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE581001.DBE581001_EnkitsuchiParameter;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import static jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5810001.DBE5810001StateName.検索;
 import static jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5810001.DBE5810001StateName.通知書;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5810001.NinteiEnkiTsuchishoHakkoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5810001.dgHakkotaishosha_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteienkitsuchishohakko.NinteiEnkiTsuchishoHakkoManager;
+import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoDonyuKeitai;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoDbT5101Child;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.service.core.kaigiatesakijushosettei.KaigoAtesakiJushoSetteiFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -28,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
@@ -95,7 +100,23 @@ public class NinteiEnkiTsuchishoHakkoHandler {
         div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         div.getTxtInsatsuDate().setValue(RDate.getNowDate());
         CommonButtonHolder.setDisabledByCommonButtonFieldName(一覧表を発行する_FileName, true);
-        div.getCcdNinteiEnkiTsuchishoBunshoBango().initialize(new ReportId(帳票分類ID));
+
+        KaigoAtesakiJushoSetteiFinder finader = KaigoAtesakiJushoSetteiFinder.createInstance();
+        List<KaigoDonyuKeitai> 介護導入形態 = finader.select介護導入形態().records();
+        ReportId 帳票ID = ReportIdDBE.DBE581001.getReportId();
+        RString 証記載保険者番号 = div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value();
+        for (KaigoDonyuKeitai item : 介護導入形態) {
+            if (GyomuBunrui.介護認定.equals(item.get業務分類()) && DonyuKeitaiCode.認定広域.equals(item.get導入形態コード())
+                    && 証記載保険者番号 != null && !証記載保険者番号.isEmpty()) {
+                RStringBuilder 帳票IDBuilder = new RStringBuilder();
+                帳票IDBuilder.append(帳票ID.value()).append(new RString("_")).append(証記載保険者番号);
+                帳票ID = new ReportId(帳票IDBuilder.toRString());
+            }
+        }
+
+        div.getCcdNinteiEnkiTsuchishoBunshoBango().initialize(帳票ID);
+
+//        div.getCcdNinteiEnkiTsuchishoBunshoBango().initialize(new ReportId(帳票分類ID));
     }
 
     private void clear検索条件() {
