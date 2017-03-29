@@ -779,6 +779,7 @@ public class NinnteiChousaKekkaTouroku1 {
                 || new RString(UrQuestionMessages.削除の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             更新処理(isDelete, div, kekkaList);
+            アクセスログ(div, 申請書管理番号);
             前排他キーの解除();
             div.getCcdKanryoMessage().setMessage(
                     new RString(UrInformationMessages.正常終了.getMessage().replace("完了処理・認定調査結果登録").evaluate()), RString.EMPTY, RString.EMPTY, true);
@@ -923,6 +924,15 @@ public class NinnteiChousaKekkaTouroku1 {
         } else {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnGaikyoTokkiInput"), true);
         }
+    }
+
+    private void アクセスログ(NinnteiChousaKekkaTouroku1Div div, ShinseishoKanriNo 申請書管理番号) {
+        RString 被保険者番号 = div.getCcdNinteiShinseishaKihonInfo().get被保険者番号();
+        RString 証記載保険者番号 = div.getCcdNinteiShinseishaKihonInfo().get証記載保険者番号();
+        DbAccessLogger accessLog = new DbAccessLogger();
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号.value());
+        accessLog.store(new ShoKisaiHokenshaNo(証記載保険者番号), 被保険者番号, expandedInfo);
+        accessLog.flushBy(AccessLogType.更新);
     }
 
     private NinnteiChousaKekkaTouroku1Handler getHandler(NinnteiChousaKekkaTouroku1Div div) {

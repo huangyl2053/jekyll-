@@ -828,6 +828,7 @@ public class ShujiiIkenshoTorokuTotal {
             getHandler(div).要介護認定完了情報更新(ninteiKanryoJoho);
         }
         ninteiManager.save(ninteiShinseiJoho);
+        アクセスログ(div, 管理番号);
     }
 
     private void setShujiiIkenshoJohoCommon(ShujiiIkenshoJohoBuilder shujiiIkenshoBuilder, ShujiiIkenshoTorokuTotalDiv div) {
@@ -934,6 +935,15 @@ public class ShujiiIkenshoTorokuTotal {
     private void 前排他キーの解除(RString 排他) {
         LockingKey 排他キー = new LockingKey(排他);
         RealInitialLocker.release(排他キー);
+    }
+
+    private void アクセスログ(ShujiiIkenshoTorokuTotalDiv div, ShinseishoKanriNo 管理番号) {
+        RString 被保険者番号 = div.getCcdNinteiShinseishaKihonInfo().get被保険者番号();
+        RString 証記載保険者番号 = div.getCcdNinteiShinseishaKihonInfo().get証記載保険者番号();
+        DbAccessLogger accessLog = new DbAccessLogger();
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 管理番号.value());
+        accessLog.store(new ShoKisaiHokenshaNo(証記載保険者番号), 被保険者番号, expandedInfo);
+        accessLog.flushBy(AccessLogType.更新);
     }
 
 }
