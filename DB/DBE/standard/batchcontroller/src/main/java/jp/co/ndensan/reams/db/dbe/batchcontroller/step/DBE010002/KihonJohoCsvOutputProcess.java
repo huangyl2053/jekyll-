@@ -99,7 +99,7 @@ public class KihonJohoCsvOutputProcess extends BatchProcessBase<KihonJohoEntity>
         csvWriter.writeLine(KihonJohoEucEntityEditor.edit(entity, 意見項目List));
         申請書管理番号リスト.add(entity.getShinseishoKanriNo());
         accessLogger.store(new ShoKisaiHokenshaNo(entity.getShoKisaiHokenshaNo()), entity.getHihokenshaNo(),
-                ExpandedInformations.fromValue(entity.getShinsakaiKaisaiNo()));
+                ExpandedInformations.fromValue(entity.getShinseishoKanriNo()));
     }
 
     @Override
