@@ -115,10 +115,6 @@ public class NinnteiChousaKekkaTouroku1 {
         }
         ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         Integer 認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
-        boolean gotLock = 前排他キーのセット();
-        if (!gotLock) {
-            throw new PessimisticLockingException();
-        }
         NinteichosaIraiJohoManager ninteiChosaIraiJohoManager = InstanceProvider.create(NinteichosaIraiJohoManager.class);
         NinteichosaIraiJoho 認定調査依頼情報 = ninteiChosaIraiJohoManager.get認定調査依頼情報(申請書管理番号, 認定調査履歴番号);
         if ((!UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId()))
@@ -179,6 +175,11 @@ public class NinnteiChousaKekkaTouroku1 {
                         DbeErrorMessages.一次判定済のため処理不可.getMessage().evaluate());
                 return ResponseData.of(div).addMessage(message).respond();
             }
+        }
+        boolean gotLock = 前排他キーのセット();
+        if (!gotLock) {
+            div.setReadOnly(true);
+            throw new PessimisticLockingException();
         }
         getHandler(div).編集前調査実施者情報設定();
         if (概況特記出力しない.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {

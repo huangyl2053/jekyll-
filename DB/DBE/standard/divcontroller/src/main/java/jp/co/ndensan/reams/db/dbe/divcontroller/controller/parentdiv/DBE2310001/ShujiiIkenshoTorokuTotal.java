@@ -231,7 +231,7 @@ public class ShujiiIkenshoTorokuTotal {
         RStringBuilder 前排他制御開催番号 = new RStringBuilder();
         前排他制御開催番号.append("DBEShinseishoKanriNo");
         前排他制御開催番号.append(管理番号);
-        前排他ロックキー(前排他制御開催番号.toRString());
+        前排他ロックキー(div, 前排他制御開催番号.toRString());
         div.getRadJotaiKubun().setSelectedKey(登録_修正);
 
         return ResponseData.of(div).respond();
@@ -925,9 +925,10 @@ public class ShujiiIkenshoTorokuTotal {
         return new ShujiiIkenshoTorokuHandler(div);
     }
 
-    private void 前排他ロックキー(RString 排他ロックキー) {
+    private void 前排他ロックキー(ShujiiIkenshoTorokuTotalDiv div, RString 排他ロックキー) {
         LockingKey 前排他ロックキー = new LockingKey(排他ロックキー);
         if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
+            div.setReadOnly(true);
             throw new PessimisticLockingException();
         }
     }
