@@ -895,6 +895,8 @@ public class ShujiiIkenshoBusiness {
         item.setChokkinKubun(entity.get直近区分());
         if (!RString.isNullOrEmpty(entity.get被保険者番号())) {
             item.setHihokenshaNo(new HihokenshaNo(entity.get被保険者番号()));
+            item.set識別コード(new ShikibetsuCode(processParamter.getShoKisaiHokenshaNo().substring(0, 5).concat(entity.get被保険者番号())));
+            item.set拡張情報(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.get申請書管理番号()));
         }
         if (!RString.isNullOrEmpty(entity.get被保険者氏名カナ())) {
             item.setHihokenshaKana(new AtenaKanaMeisho(entity.get被保険者氏名カナ()));
@@ -914,8 +916,6 @@ public class ShujiiIkenshoBusiness {
         if (!RString.isNullOrEmpty(entity.get意見書作成回数区分())) {
             item.setIkenshoSakuseiKaisuKubun(new Code(entity.get意見書作成回数区分()));
         }
-        item.set識別コード(new ShikibetsuCode(processParamter.getShoKisaiHokenshaNo().substring(0, 5).concat(entity.get被保険者番号())));
-        item.set拡張情報(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.get申請書管理番号()));
         return new IkenshoirairirekiIchiran(item);
     }
 

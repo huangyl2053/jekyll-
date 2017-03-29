@@ -1180,6 +1180,7 @@ public class NinteiChosaBusiness {
                         AnswerPattern.toValue(NinteichosaKomokuMapping09A.toValue(business.get連番()).getパターンNo()).get回答(business.get調査項目()));
             }
         }
+        checkEntity.set申請書管理番号(entity.get申請書管理番号());
         checkEntity.set被保険者番号(entity.get被保険者番号());
         checkEntity.set被保険者氏名(entity.get被保険者氏名());
         checkEntity.set生年月日(entity.get生年月日());

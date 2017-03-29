@@ -479,7 +479,9 @@
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
         SELECT
         DISTINCT
-        A."hihokenshaNo"
+        A."shoKisaiHokenshaNo"
+        ,A."shinseishoKanriNo"
+        ,A."hihokenshaNo"
         ,A."hihokenshaName"
         ,A."seinengappiYMD"
         ,A."age"

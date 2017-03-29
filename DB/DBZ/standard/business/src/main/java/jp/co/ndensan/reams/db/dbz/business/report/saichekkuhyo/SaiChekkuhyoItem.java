@@ -378,6 +378,8 @@ public class SaiChekkuhyoItem {
      * @param zenkaiNijiHantei 前回二次判定結果
      * @param zenkaiNijihanteiYMD 前回二次判定日
      * @param seinengappi 生年月日
+     * @param 識別コード
+     * @param 拡張情報
      *
      */
     public SaiChekkuhyoItem(
