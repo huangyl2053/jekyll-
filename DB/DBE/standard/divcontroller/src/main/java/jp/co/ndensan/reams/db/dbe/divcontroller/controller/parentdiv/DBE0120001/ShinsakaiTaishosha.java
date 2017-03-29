@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE0120001
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaitaishosha.ShinsakaiTaishoshaBusiness;
-import jp.co.ndensan.reams.db.dbe.definition.core.util.accesslog.ExpandedInformations;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeInformationMessages;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaitaishosha.TaishoshaIchiranMapperParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0120001.DBE0120001TransitionEventName;
@@ -17,12 +16,9 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0120001.Shi
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0120001.ShinsakaiTaishoshaValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaitaisho.ShinsakaiTaishoshaFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -64,11 +60,6 @@ public class ShinsakaiTaishosha {
     public ResponseData<ShinsakaiTaishoshaDiv> btn_Shokai(ShinsakaiTaishoshaDiv div) {
         dgTaishoshaIchiran_Row row = div.getDgTaishoshaIchiran().getClickedItem();
         ViewStateHolder.put(ViewStateKeys.申請書管理番号, row.getShinseishoKanriNo());
-        DbAccessLogger logger = new DbAccessLogger();
-        logger.store(new ShoKisaiHokenshaNo(row.getHokenshaNo()), row.getHihokenshaNumber(),
-                ExpandedInformations.fromValue(row.getShinseishoKanriNo())
-        );
-        logger.flushBy(AccessLogType.照会);
         return ResponseData.of(div).forwardWithEventName(DBE0120001TransitionEventName.対象者選択).respond();
     }
 

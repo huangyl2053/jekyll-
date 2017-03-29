@@ -10,7 +10,6 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shinseikensaku.ShinseiKensakuBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE010002.DBE010002_ShinseishaDataOutParameter;
-import jp.co.ndensan.reams.db.dbe.definition.core.util.accesslog.ExpandedInformations;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0100002.DBE0100002StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0100002.ShinseishaDataOutputDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0100002.dgShinseiJoho_Row;
@@ -19,12 +18,10 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0100002.Shi
 import jp.co.ndensan.reams.db.dbe.service.core.shinseikensaku.ShinseiKensakuFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -166,11 +163,6 @@ public class ShinseishaDataOutput {
      */
     public ResponseData<ShinseishaDataOutputDiv> onClick_btnShokai(ShinseishaDataOutputDiv div) {
         dgShinseiJoho_Row row = div.getDgShinseiJoho().getClickedItem();
-        DbAccessLogger accessLog = new DbAccessLogger();
-        accessLog.store(new ShoKisaiHokenshaNo(row.getShoKisaiHokenshaNo()), row.getHihokenshaNo(),
-                ExpandedInformations.fromValue(row.getShinseishoKanriNo())
-        );
-        accessLog.flushBy(AccessLogType.照会);
         ViewStateHolder.put(ViewStateKeys.申請書管理番号, row.getShinseishoKanriNo());
         return ResponseData.of(div).respond();
     }
