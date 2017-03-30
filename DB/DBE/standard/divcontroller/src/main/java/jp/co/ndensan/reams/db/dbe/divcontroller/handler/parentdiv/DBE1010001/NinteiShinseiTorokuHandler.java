@@ -516,6 +516,12 @@ public class NinteiShinseiTorokuHandler {
         if (result.get二号特定疾病コード() != null && !result.get二号特定疾病コード().isEmpty()) {
             div.getCcdKaigoNinteiShinseiKihon().setTokuteiShippei(TokuteiShippei.toValue(result.get二号特定疾病コード().value()));
         }
+        if (HihokenshaKubunCode.第２号被保険者.getコード().equals(result.get被保険者区分コード()) 
+                || HihokenshaKubunCode.生活保護.getコード().equals(result.get被保険者区分コード())) {
+            div.getCcdKaigoNinteiShinseiKihon().setRequiredForDdlTokuteiShippei(true);
+        } else {
+            div.getCcdKaigoNinteiShinseiKihon().setRequiredForDdlTokuteiShippei(false);
+        }
         div.getCcdKaigoNinteiShinseiKihon().setServiceSakujoTeikeibun(result.get申請サービス削除の理由());
         div.getCcdKaigoNinteiShinseiKihon().setNinteiShinseRiyuTeikeibun(result.get認定申請理由());
     }

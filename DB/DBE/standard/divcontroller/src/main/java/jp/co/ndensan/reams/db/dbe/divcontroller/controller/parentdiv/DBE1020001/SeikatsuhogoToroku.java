@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1020001.Sei
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1020001.SeikatsuhogoTorokuValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.seikatsuhogotoroku.SeikatsuhogoTorokuFinder;
 import jp.co.ndensan.reams.db.dbx.business.core.basic.KoseiShichosonShishoMaster;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.HokenshaDDLPattem;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -31,7 +33,12 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshali
 import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteiShinseiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.shishosecurityjoho.ShishoSecurityJoho;
+import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
+import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AgeArrivalDay;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -254,6 +261,10 @@ public class SeikatsuhogoToroku {
     }
 
     private boolean is年齢範囲外(RString 年齢) {
+//        RString 年齢到達前_事前申請可能時期 = DbBusinessConfig.get(ConfigNameDBE.年齢到達前_事前申請可能時期, RDate.getNowDate(), SubGyomuCode.DBE認定支援, div.getCcdShozokuShichoson().getSelectedItem().get市町村コード());
+//        IDateOfBirth dob = DateOfBirthFactory.createInstance(div.getTxtBirthYMD().getValue().minusDay(年齢到達前_事前申請可能時期.toInt()).toFlexibleDate());
+//        AgeCalculator agecalculator = new AgeCalculator(dob, JuminJotai.住民, FlexibleDate.MAX, AgeArrivalDay.前日);
+//        if (!RString.isNullOrEmpty(agecalculator.get年齢())) {
         if (!RString.isNullOrEmpty(年齢)) {
             int age = Integer.parseInt(年齢.toString());
             return age < 40 || age >= 65;
