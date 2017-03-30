@@ -195,7 +195,6 @@ public class ShinsakaiIinJohoToroku {
         dgShinsaInJohoIchiran_Row row = div.getDgShinsaInJohoIchiran().getClickedItem();
         ViewStateHolder.put(ViewStateKeys.介護認定審査会委員登録情報, row);
         createHandOf(div).審査会委員一覧修正ボタンHandler(div);
-        createHandOf(div).setKozaJoho();
         return ResponseData.of(div).respond();
     }
 
@@ -211,7 +210,6 @@ public class ShinsakaiIinJohoToroku {
         }
         getValidationHandler(div).削除可否チェック(div.getDgShinsaInJohoIchiran().getClickedItem().getShinsainCode());
         createHandOf(div).審査会委員一覧削除ボタンHandler(div);
-        createHandOf(div).setKozaJoho();
         return ResponseData.of(div).respond();
     }
 
@@ -731,13 +729,7 @@ public class ShinsakaiIinJohoToroku {
      * @return ResponseData<ShinsakaiIinJohoTorokuDiv>
      */
     public ResponseData<ShinsakaiIinJohoTorokuDiv> onBlur_kinyuKikanCode(ShinsakaiIinJohoTorokuDiv div) {
-        createHandOf(div).setKozaJoho();
-        div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getDdlYokinShubetsu().setSelectedKey(SELECTKEY_空白);
-        div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getTxtTenBan().clearValue();
-        div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getTxtTenMei().clearValue();
-        div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getTxtGinkoKozaNo().clearValue();
-        div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getTxtKozaMeiginin().clearValue();
-        div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getTxtKanjiMeiginin().clearValue();
+        createHandOf(div).initKozaJoho();
         return ResponseData.of(div).respond();
     }
 
@@ -769,13 +761,7 @@ public class ShinsakaiIinJohoToroku {
      * @return ResponseData<ShinsakaiIinJohoTorokuDiv>
      */
     public ResponseData<ShinsakaiIinJohoTorokuDiv> onOkClose_KinyuKikan(ShinsakaiIinJohoTorokuDiv div) {
-        createHandOf(div).setKozaJoho();
-        div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getDdlYokinShubetsu().setSelectedKey(SELECTKEY_空白);
-        div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getTxtTenBan().clearValue();
-        div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getTxtTenMei().clearValue();
-        div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getTxtGinkoKozaNo().clearValue();
-        div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getTxtKozaMeiginin().clearValue();
-        div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getTxtKanjiMeiginin().clearValue();
+        createHandOf(div).initKozaJoho();
         return ResponseData.of(div).respond();
     }
 
