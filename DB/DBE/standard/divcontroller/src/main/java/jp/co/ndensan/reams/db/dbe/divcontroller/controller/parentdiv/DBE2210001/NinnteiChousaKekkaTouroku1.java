@@ -176,11 +176,13 @@ public class NinnteiChousaKekkaTouroku1 {
                 return ResponseData.of(div).addMessage(message).respond();
             }
         }
-        boolean gotLock = 前排他キーのセット();
-        if (!gotLock) {
-            div.setReadOnly(true);
-            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存するボタン, true);
-            return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
+        if (!new RString(UrErrorMessages.排他_他のユーザが使用中.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+            boolean gotLock = 前排他キーのセット();
+            if (!gotLock) {
+                div.setReadOnly(true);
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(保存するボタン, true);
+                return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
+            }
         }
         getHandler(div).編集前調査実施者情報設定();
         if (概況特記出力しない.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
