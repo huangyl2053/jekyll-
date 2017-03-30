@@ -6,6 +6,12 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2210001;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
+import jp.co.ndensan.reams.db.dbe.business.core.tokkijikoinput.TokkiJikoInputModel;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.NinnteiChousaKekkaTouroku1Div;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.NinnteiChousaKekkaTouroku1DivSpec;
@@ -392,6 +398,16 @@ public class NinnteiChousaKekkaTouroku1ValidationHandler {
             builder.append(item.get調査項目());
             builder.append(item.get障害高齢者自立度());
             builder.append(item.is特記事項有無());
+        }
+        HashMap gaikyoTokkiNyurokuMap = ViewStateHolder.get(ViewStateKeys.特記事項一覧, LinkedHashMap.class);
+        Set<Map.Entry<RString, TokkiJikoInputModel>> set = gaikyoTokkiNyurokuMap.entrySet();
+        Iterator<Map.Entry<RString, TokkiJikoInputModel>> it = set.iterator();
+        while (it.hasNext()) {
+            Map.Entry<RString, TokkiJikoInputModel> entry = it.next();
+            TokkiJikoInputModel value = entry.getValue();
+            builder.append(value.get特記事項());
+            builder.append(value.get特記事項番号());
+            builder.append(value.get特記連番());
         }
         RString 編集前データ = ViewStateHolder.get(ViewStateKeys.画面データ, RString.class);
 
