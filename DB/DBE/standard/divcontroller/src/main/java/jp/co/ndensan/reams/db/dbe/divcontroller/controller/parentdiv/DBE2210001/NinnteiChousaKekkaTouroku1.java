@@ -54,7 +54,6 @@ import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -94,6 +93,7 @@ public class NinnteiChousaKekkaTouroku1 {
     private static final RString UICONTAINERID_DBEUC40501 = new RString("DBEUC40501");
     private static final RString 概況特記出力しない = new RString("2");
     private static final RString 認定調査結果入手_必須調査票_特記事項不要 = new RString("1");
+    private static final RString 保存するボタン = new RString("btnChosaKekkaUpdate");
 
     /**
      * 認定調査結果登録1の初期化。(オンロード)<br/>
@@ -179,7 +179,8 @@ public class NinnteiChousaKekkaTouroku1 {
         boolean gotLock = 前排他キーのセット();
         if (!gotLock) {
             div.setReadOnly(true);
-            throw new PessimisticLockingException();
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(保存するボタン, true);
+            return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
         }
         getHandler(div).編集前調査実施者情報設定();
         if (概況特記出力しない.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
