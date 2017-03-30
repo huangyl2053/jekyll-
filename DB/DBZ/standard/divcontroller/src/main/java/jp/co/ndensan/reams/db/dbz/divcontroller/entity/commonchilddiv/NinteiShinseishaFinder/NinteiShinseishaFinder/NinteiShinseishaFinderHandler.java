@@ -56,6 +56,7 @@ public class NinteiShinseishaFinderHandler {
     private static final RString MENUID_DBEMN72001 = new RString("DBEMN72001");
     private static final RString MENUID_DBEMN24001 = new RString("DBEMN24001");
     private static final RString MENUID_DBEMN31001 = new RString("DBEMN31001");
+    private static final RString MENUID_DBEMN31002 = new RString("DBEMN31002");
 
     /**
      * コンストラクタです。
@@ -158,7 +159,7 @@ public class NinteiShinseishaFinderHandler {
         setAbledKanryoJoho();
         init完了情報();
     }
-    
+
     private void init二次判定結果DDL() {
         div.getDdlNijiHanteiKekka().setDataSource(dataSourceOf二次判定結果From厚労省IFコード(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3));
         div.getDdlNijiHanteiKekka().setSelectedIndex(0);
@@ -607,7 +608,7 @@ public class NinteiShinseishaFinderHandler {
         div.getChkTsuchiShori().setDisabled(true);
         div.getChkIkenshoNyushu().setDisabled(false);
         div.getChkGetsureiShori().setDisabled(false);
-        
+
     }
 
     public void clearKanryoJoho() {
@@ -644,7 +645,7 @@ public class NinteiShinseishaFinderHandler {
         div.getChkIkenshoNyushu().setSelectedItemsByKey(selectedkeyMikann);
         div.getChkGetsureiShori().setSelectedItemsByKey(selectedkeyMikann);
     }
- 
+
     public void set調査依頼完了情報() {
         List<RString> selectedkeyMikann = new ArrayList<>();
         List<RString> selectedkeyKanryo = new ArrayList<>();
@@ -688,7 +689,7 @@ public class NinteiShinseishaFinderHandler {
         div.getChkGetsureiShori().setSelectedItemsByKey(selectedkeyMikann);
         div.getChkShinseiUketsuke().setSelectedItemsByKey(selectedkeyKanryo);
     }
-    
+
     public void set調査入手完了情報() {
         List<RString> selectedkeyMikann = new ArrayList<>();
         List<RString> selectedkeyKanryo = new ArrayList<>();
@@ -940,6 +941,8 @@ public class NinteiShinseishaFinderHandler {
             setKanryoJoho_DBEMN43001();
         } else if (MENUID_DBEMN72001.equals(menuID)) {
             setKanryoJoho_DBEMN72001();
+        } else if (MENUID_DBEMN31002.equals(menuID)) {
+            setKanryoJoho_DBEMN31002();
         }
     }
 
@@ -955,6 +958,8 @@ public class NinteiShinseishaFinderHandler {
             setKanryoJoho_DBEMN43001();
         } else if (MENUID_DBEMN72001.equals(menuID)) {
             setKanryoJoho_DBEMN72001();
+        } else if (MENUID_DBEMN31002.equals(menuID)) {
+            setKanryoJoho_DBEMN31002();
         }
     }
 
@@ -1039,5 +1044,9 @@ public class NinteiShinseishaFinderHandler {
         div.getChkNijiHantei().setDisabled(true);
         div.getChkGetsureiShori().setSelectedItemsByKey(selectedkeyMikann);
         div.getChkGetsureiShori().setDisabled(true);
+    }
+
+    private void setKanryoJoho_DBEMN31002() {
+        div.getChkGetsureiShori().setSelectedItemsByKey(Arrays.asList(処理状態未完了));
     }
 }
