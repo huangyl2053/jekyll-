@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
@@ -26,21 +25,17 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.Ich
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
-import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
 /**
@@ -62,7 +57,6 @@ public class HanteiKekkaIchiranProcess extends BatchProcessBase<HanteiKekkaIchir
     private int 総ページ数;
     private int index;
     private HanteiKekkaJohoShuturyokuMybatisParameter mybatisParameter;
-    private DbAccessLogger accessLog;
 
     @BatchWriter
     private BatchReportWriter<HanteiKekkaIchiranA4ReportSource> batchReportWriter;
@@ -72,7 +66,6 @@ public class HanteiKekkaIchiranProcess extends BatchProcessBase<HanteiKekkaIchir
     protected void initialize() {
         システム時刻 = RDateTime.now();
         index = 0;
-        accessLog = new DbAccessLogger();
     }
 
     @Override
@@ -115,10 +108,6 @@ public class HanteiKekkaIchiranProcess extends BatchProcessBase<HanteiKekkaIchir
 
     @Override
     protected void process(HanteiKekkaIchiranEntity entity) {
-        ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(entity.get証記載保険者番号());
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
-                entity.get申請書管理番号());
-        accessLog.store(shoKisaiHokenshaNo, entity.get被保険者番号(), expandedInfo);
         entity.setTitle(REPORTNAME);
         entity.set出力対象(出力対象);
         entity.setPrintTimeStamp(システム時刻);
@@ -170,11 +159,6 @@ public class HanteiKekkaIchiranProcess extends BatchProcessBase<HanteiKekkaIchir
         }
         HanteiKekkaIchiranReport report = new HanteiKekkaIchiranReport(entity);
         report.writeBy(reportSourceWriter);
-    }
-    
-    @Override
-    protected void afterExecute() {
-        accessLog.flushBy(AccessLogType.照会);
     }
 
 }

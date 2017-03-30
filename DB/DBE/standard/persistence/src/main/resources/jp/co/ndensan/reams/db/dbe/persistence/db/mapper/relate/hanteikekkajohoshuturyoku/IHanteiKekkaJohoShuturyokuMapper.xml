@@ -149,6 +149,7 @@
     <resultMap id="resultMap_HanteiKekkaIchiranA3List" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkaichirana3.HanteiKekkaIchiranA3Entity" autoMapping="true">
         <result property="介護認定審査会審査順" column="shinsakaiOrder" />
         <result property="市町村名称" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="申請書管理番号" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="証記載保険者番号" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="被保険者氏名" column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="被保険者番号" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -183,6 +184,7 @@
         dbT5502."shinsakaiOrder" AS shinsakaiOrder
         ,dbT7051."shichosonCode" AS shichosonCode
         ,dbT7051."shichosonMeisho" AS shichosonMeisho
+        ,dbT5101."shinseishoKanriNo" AS shinseishoKanriNo
         ,dbT5101."shoKisaiHokenshaNo" AS shoKisaiHokenshaNo
         ,dbT5101."hihokenshaName" AS hihokenshaName
         ,dbT5101."hihokenshaNo" AS hihokenshaNo
@@ -259,6 +261,7 @@
         A.shinsakaiOrder AS shinsakaiOrder
         ,A.shichosonCode AS shichosonCode
         ,A.shichosonMeisho AS shichosonMeisho
+        ,A.shinseishoKanriNo AS shinseishoKanriNo
         ,A.shoKisaiHokenshaNo AS shoKisaiHokenshaNo
         ,A.hihokenshaName AS hihokenshaName
         ,A.hihokenshaNo AS hihokenshaNo
@@ -868,6 +871,7 @@
     <resultMap id="resultMap_KekkatsuchiIchiran" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.kekkatsuchiichiranhyo.KekkatsuchiIchiranhyoEntity" autoMapping="true">
         <result property="hokenshaName" column="保険者名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="shoKisaiHokenshaNo" column="保険者番号" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler" />
+        <result property="shinseishoKanriNo" column="申請書管理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shinseiYMD" column="申請日" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="hihokenshaNo" column="被保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="hihokenshaName" column="氏名"  typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -888,6 +892,7 @@
         SELECT
         dbT7051."shichosonMeisho" AS 保険者名
         ,dbT7051."shoKisaiHokenshaNo" AS 保険者番号
+        ,dbT5101."shinseishoKanriNo" AS 申請書管理番号
         ,dbT5101."ninteiShinseiYMD" AS 申請日
         ,dbT5101."hihokenshaNo" AS 被保険者番号
         ,dbT5101."hihokenshaName" AS 氏名

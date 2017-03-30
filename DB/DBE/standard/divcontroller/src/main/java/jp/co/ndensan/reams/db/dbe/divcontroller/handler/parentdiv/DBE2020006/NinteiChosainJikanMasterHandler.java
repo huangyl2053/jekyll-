@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuShichoson;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaSchedule;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteichosaikkatsuinput.NinteiChosaIkkatsuInputModel;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.DayOfWeek;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -1372,15 +1373,16 @@ public class NinteiChosainJikanMasterHandler {
             UzT0007CodeEntity 指定調査地区 = CodeMaster.getCode(SubGyomuCode.DBE認定支援,
                     DBECodeShubetsu.調査地区コード.getコード(), chikuShichoson.get調査地区コード(), 基准日);
             if (null != 指定調査地区) {
-                dataSource.add(調査地区ドロップダウンリスト(指定調査地区));
+                dataSource.add(調査地区ドロップダウンリスト(指定調査地区, chikuShichoson.get市町村コード()));
             }
         }
         return dataSource;
     }
 
-    private KeyValueDataSource 調査地区ドロップダウンリスト(UzT0007CodeEntity 指定調査地区) {
+    private KeyValueDataSource 調査地区ドロップダウンリスト(UzT0007CodeEntity 指定調査地区, LasdecCode 市町村コード) {
         KeyValueDataSource keyValue = new KeyValueDataSource();
-        keyValue.setKey(指定調査地区.getコード().value());
+        RString key = 指定調査地区.getコード().value().concat(市町村コード.value());
+        keyValue.setKey(key);
         keyValue.setValue(指定調査地区.getコード名称());
         return keyValue;
     }

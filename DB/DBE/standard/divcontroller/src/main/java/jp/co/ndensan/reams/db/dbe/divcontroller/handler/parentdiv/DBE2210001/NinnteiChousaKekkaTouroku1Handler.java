@@ -387,6 +387,16 @@ public class NinnteiChousaKekkaTouroku1Handler {
             builder.append(item.get障害高齢者自立度());
             builder.append(item.is特記事項有無());
         }
+        HashMap gaikyoTokkiNyurokuMap = ViewStateHolder.get(ViewStateKeys.特記事項一覧, LinkedHashMap.class);
+        Set<Map.Entry<RString, TokkiJikoInputModel>> set = gaikyoTokkiNyurokuMap.entrySet();
+        Iterator<Map.Entry<RString, TokkiJikoInputModel>> it = set.iterator();
+        while (it.hasNext()) {
+            Map.Entry<RString, TokkiJikoInputModel> entry = it.next();
+            TokkiJikoInputModel value = entry.getValue();
+            builder.append(value.get特記事項());
+            builder.append(value.get特記事項番号());
+            builder.append(value.get特記連番());
+        }
         ViewStateHolder.put(ViewStateKeys.画面データ, builder.toRString());
     }
 
