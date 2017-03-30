@@ -94,6 +94,7 @@ public class NinnteiChousaKekkaTouroku1 {
     private static final RString 概況特記出力しない = new RString("2");
     private static final RString 認定調査結果入手_必須調査票_特記事項不要 = new RString("1");
     private static final RString 保存するボタン = new RString("btnChosaKekkaUpdate");
+    private static final ShinseishoKanriNo DEFAULT前回申請書管理番号 = new ShinseishoKanriNo("00000000000000000");
 
     /**
      * 認定調査結果登録1の初期化。(オンロード)<br/>
@@ -519,7 +520,7 @@ public class NinnteiChousaKekkaTouroku1 {
         if (!NinteichosaIraiKubun.再調査.getCode().equals(認定調査依頼区分コード)) {
             boolean 前回基本調査項目値あり = ViewStateHolder.get(ViewStateKeys.前回基本調査項目値あり, Boolean.class);
             if (!前回基本調査項目値あり
-                    && (前回申請書管理番号 == null || 前回申請書管理番号.isEmpty())) {
+                    && (前回申請書管理番号 == null || 前回申請書管理番号.isEmpty() || 前回申請書管理番号.equals(DEFAULT前回申請書管理番号))) {
                 throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("前回値"));
             }
         }
@@ -540,11 +541,12 @@ public class NinnteiChousaKekkaTouroku1 {
         }
         if (new RString(DbeWarningMessages.既に基本調査値が存在します_上書き確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            if (NinteichosaIraiKubun.再調査.getCode().equals(認定調査依頼区分コード)) {
-                getHandler(div).前回値コピー処理_前回履歴(第1群List, 第2群List, 第3群List, 第4群List, 第5群List, 特別な医療List, 自立度List);
-            } else {
-                getHandler(div).前回値コピー処理_前回申請(第1群List, 第2群List, 第3群List, 第4群List, 第5群List, 特別な医療List, 自立度List);
-            }
+//            if (NinteichosaIraiKubun.再調査.getCode().equals(認定調査依頼区分コード)) {
+//                getHandler(div).前回値コピー処理_前回履歴(第1群List, 第2群List, 第3群List, 第4群List, 第5群List, 特別な医療List, 自立度List);
+//            } else {
+//                getHandler(div).前回値コピー処理_前回申請(第1群List, 第2群List, 第3群List, 第4群List, 第5群List, 特別な医療List, 自立度List);
+//            }
+            getHandler(div).前回値コピー処理_前回申請(第1群List, 第2群List, 第3群List, 第4群List, 第5群List, 特別な医療List, 自立度List);
             ViewStateHolder.put(ViewStateKeys.第一群認定調査基本情報リスト, 第1群List);
             ViewStateHolder.put(ViewStateKeys.第二群認定調査基本情報リスト, 第2群List);
             ViewStateHolder.put(ViewStateKeys.第三群認定調査基本情報リスト, 第3群List);
