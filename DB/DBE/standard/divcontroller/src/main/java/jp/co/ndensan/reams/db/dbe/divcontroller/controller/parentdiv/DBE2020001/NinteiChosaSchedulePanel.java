@@ -11,14 +11,15 @@ import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichousasukejuru.Nin
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020001.DBE2020001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020001.NinteiChosaSchedulePanelDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020001.NinteiChosaScheduleHandler;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020001.ValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.sukejurutouroku.SukejuruTourokuFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.Seireki;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -35,7 +36,6 @@ public class NinteiChosaSchedulePanel {
     private static final RString 画面ステート_3 = new RString("3");
     private static final RString 遷移元画面番号 = new RString("01");
     private static final RString モード = new RString("1");
-    private static final int 月_12 = 12;
 
     /**
      * 認定調査スケジュール登録1_一覧情報。
@@ -48,77 +48,75 @@ public class NinteiChosaSchedulePanel {
         return createResponse(div);
     }
 
+     /**
+     * onBlur_txtChoKaishiYM
+     *
+     * @param div 認定調査スケジュール登録1_一覧情報Div
+     * @return ResponseData<NinteiChosaSchedulePanelDiv>
+     */
+    public ResponseData<NinteiChosaSchedulePanelDiv> onBlur_txtConfigurationYM(NinteiChosaSchedulePanelDiv div) {
+        if (div.getSearchConditionPanel().getTxtConfigurationYM().getDomain().isEmpty()) {
+            ValidationMessageControlPairs controlPairs = getValidationHandler(div).validate和暦に変換不可(
+                div.getSearchConditionPanel().getTxtConfigurationYM());
+            return ResponseData.of(div).addValidationMessages(controlPairs).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+    
     /**
      * 前月へ　ボタン。<br/>
      *
-     * @param ninteiDiv NinteiChosaSchedulePanelDiv
+     * @param div NinteiChosaSchedulePanelDiv
      * @return ResponseData<NinteiChosaSchedulePanelDiv>
      */
-    public ResponseData<NinteiChosaSchedulePanelDiv> onClick_btnPreviousMonth(NinteiChosaSchedulePanelDiv ninteiDiv) {
-        if (ninteiDiv.getSearchConditionPanel().getTxtSetteiYM().getValue() == null
-                || ninteiDiv.getSearchConditionPanel().getTxtSetteiYM().getValue().isEmpty()) {
-            return createResponseData(ninteiDiv);
-        }
-        Seireki date1 = ninteiDiv.getSearchConditionPanel().getTxtSetteiYM().getValue().seireki();
-        FlexibleDate date;
-        if (Integer.parseInt(date1.getMonth().toString()) == 1) {
-            date = new FlexibleDate(Integer.parseInt(date1.getYear().toString()) - 1, 月_12, 1);
-        } else {
-            date = new FlexibleDate(Integer.parseInt(date1.getYear().toString()), Integer.parseInt(date1.getMonth().toString()) - 1, 1);
-        }
-        ninteiDiv.getSearchConditionPanel().getTxtSetteiYM().setValue(date);
-        return createResponseData(ninteiDiv);
+    public ResponseData<NinteiChosaSchedulePanelDiv> onClick_btnPreviousMonth(NinteiChosaSchedulePanelDiv div) {
+        FlexibleYearMonth beforeYearMonth = div.getSearchConditionPanel().getTxtConfigurationYM().getDomain().minusMonth(1);
+        div.getSearchConditionPanel().getTxtConfigurationYM().setDomain(beforeYearMonth);
+        return ResponseData.of(div).respond();
     }
-
+    
+    
     /**
      * 次月へ　ボタン。<br/>
      *
-     * @param ninteiDiv NinteiChosaSchedulePanelDiv
+     * @param div NinteiChosaSchedulePanelDiv
      * @return ResponseData<NinteiChosaSchedulePanelDiv>
      */
-    public ResponseData<NinteiChosaSchedulePanelDiv> onClick_btnNextMonth(NinteiChosaSchedulePanelDiv ninteiDiv) {
-        if (ninteiDiv.getSearchConditionPanel().getTxtSetteiYM().getValue() == null
-                || ninteiDiv.getSearchConditionPanel().getTxtSetteiYM().getValue().isEmpty()) {
-            return createResponseData(ninteiDiv);
-        }
-        Seireki date2 = ninteiDiv.getSearchConditionPanel().getTxtSetteiYM().getValue().seireki();
-        FlexibleDate date;
-        if (Integer.parseInt(date2.getMonth().toString()) == 月_12) {
-            date = new FlexibleDate(Integer.parseInt(date2.getYear().toString()) + 1, 01, 1);
-        } else {
-            date = new FlexibleDate(Integer.parseInt(date2.getYear().toString()), Integer.parseInt(date2.getMonth().toString()) + 1, 1);
-        }
-        ninteiDiv.getSearchConditionPanel().getTxtSetteiYM().setValue(date);
-        return createResponseData(ninteiDiv);
+    public ResponseData<NinteiChosaSchedulePanelDiv> onClick_btnNextMonth(NinteiChosaSchedulePanelDiv div) {
+        FlexibleYearMonth beforeYearMonth = div.getSearchConditionPanel().getTxtConfigurationYM().getDomain().plusMonth(1);
+        div.getSearchConditionPanel().getTxtConfigurationYM().setDomain(beforeYearMonth);
+        return ResponseData.of(div).respond();
     }
 
     /**
      * 表示する　ボタン。<br/>
      *
-     * @param ninteiDiv NinteiChosaSchedulePanelDiv
+     * @param div NinteiChosaSchedulePanelDiv
      * @return ResponseData<NinteiChosaSchedulePanelDiv>
      */
-    public ResponseData<NinteiChosaSchedulePanelDiv> onClick_btnDisplay(NinteiChosaSchedulePanelDiv ninteiDiv) {
+    public ResponseData<NinteiChosaSchedulePanelDiv> onClick_btnDisplay(NinteiChosaSchedulePanelDiv div) {
         if (ResponseHolder.isReRequest()) {
-            return ResponseData.of(ninteiDiv).respond();
+            return ResponseData.of(div).respond();
         }
-        Seireki date2 = ninteiDiv.getSearchConditionPanel().getTxtSetteiYM().getValue().seireki();
-        FlexibleDate date = new FlexibleDate(Integer.parseInt(date2.getYear().toString()), Integer.parseInt(date2.getMonth().toString()), 1);
-        NinteiChousaSukejuruParameter ninteiParameter = NinteiChousaSukejuruParameter.
-                createGamenParam(new RString(ninteiDiv.getSearchConditionPanel().getTxtSetteiYM().getValue().toString()),
-                        new RString(ninteiDiv.getSearchConditionPanel().getDdlTaishoChiku().getSelectedKey().toString()),
-                        new RString(date.toString()), new RString(date.plusMonth(1).minusDay(1).toString()));
-        List<NinteichosaScheduleBusiness> ninteiList = SukejuruTourokuFinder.createInstance()
-                .getcheMapper(ninteiParameter).records();
-        if (ninteiList == null || ninteiList.isEmpty()) {
-            ValidationMessageControlPairs validationMessages = createHandlerOf(ninteiDiv).check_btnKakuninn(ninteiDiv);
+        FlexibleYearMonth 対象年月 = div.getSearchConditionPanel().getTxtConfigurationYM().getDomain();
+        FlexibleDate 対象年月初日 = new FlexibleDate(対象年月.getYearValue(), 対象年月.getMonthValue(), 1);
+        FlexibleDate 対象年月末日 = new FlexibleDate(対象年月.getYearValue(), 対象年月.getMonthValue(), 対象年月.getLastDay());
+        NinteiChousaSukejuruParameter parameter = NinteiChousaSukejuruParameter.createGamenParam(
+                new RString(div.getSearchConditionPanel().getTxtConfigurationYM().getDomain().toString()),
+                new RString(div.getSearchConditionPanel().getDdlTaishoChiku().getSelectedKey().toString()),
+                new RString(対象年月初日.toString()),
+                new RString(対象年月末日.toString()));
+        SukejuruTourokuFinder 認定調査スケジュール登録Finder = SukejuruTourokuFinder.createInstance();
+        List<NinteichosaScheduleBusiness> 認定調査スケジュールList = 認定調査スケジュール登録Finder.getcheMapper(parameter).records();
+        if (認定調査スケジュールList == null || 認定調査スケジュールList.isEmpty()) {
+            ValidationMessageControlPairs validationMessages = createHandlerOf(div).check_btnKakuninn(div);
             if (validationMessages.iterator().hasNext()) {
-                ninteiDiv.getDgNinteiChosaSchedule().clearSource();
-                return ResponseData.of(ninteiDiv).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
+                div.getDgNinteiChosaSchedule().clearSource();
+                return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
             }
         }
-        createHandlerOf(ninteiDiv).kennsaku(ninteiList);
-        return createResponseData(ninteiDiv);
+        getHandler(div).kennsaku(認定調査スケジュールList);
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -194,5 +192,9 @@ public class NinteiChosaSchedulePanel {
 
     private NinteiChosaScheduleHandler createHandlerOf(NinteiChosaSchedulePanelDiv fukuDiv) {
         return new NinteiChosaScheduleHandler(fukuDiv);
+    }
+    
+    private ValidationHandler getValidationHandler(NinteiChosaSchedulePanelDiv ninteidiv) {
+        return new ValidationHandler(ninteidiv);
     }
 }
