@@ -261,7 +261,7 @@
         A.shinsakaiOrder AS shinsakaiOrder
         ,A.shichosonCode AS shichosonCode
         ,A.shichosonMeisho AS shichosonMeisho
-        shinseishoKanriNo AS shinseishoKanriNo
+        ,A.shinseishoKanriNo AS shinseishoKanriNo
         ,A.shoKisaiHokenshaNo AS shoKisaiHokenshaNo
         ,A.hihokenshaName AS hihokenshaName
         ,A.hihokenshaNo AS hihokenshaNo
