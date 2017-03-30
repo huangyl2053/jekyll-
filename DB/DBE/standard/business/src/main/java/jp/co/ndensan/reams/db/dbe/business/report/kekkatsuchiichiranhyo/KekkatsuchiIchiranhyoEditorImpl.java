@@ -80,8 +80,8 @@ public class KekkatsuchiIchiranhyoEditorImpl implements IKekkatsuchiIchiranhyoEd
         source.listKekkatsuchitaisho_3 = entity.getShinseiYMD() == null
                 ? RString.EMPTY : 和暦年月日Fomart(new FlexibleDate(entity.getShinseiYMD()));
         source.listKekkatsuchitaisho_4 = entity.getHihokenshaNo();
-        source.shikibetuCode = new ShikibetsuCode(RString.EMPTY);
-        source.hishokenshaNo = new ExpandedInformation(Code.EMPTY, new RString("被保険者番号"), entity.getHihokenshaNo());
+        source.識別コード = new ShikibetsuCode(entity.getShoKisaiHokenshaNo().getColumnValue().substring(0, 5).concat(entity.getHihokenshaNo()));
+        source.拡張情報 = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.getShinseishoKanriNo());
         source.listKekkatsuchitaisho_5 = entity.getHihokenshaName();
         source.listKekkatsuchitaisho_6 = entity.getHihokenshaKana();
         source.listKekkatsuchitaisho_7 = entity.getSeinengappiYMD() == null
