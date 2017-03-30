@@ -189,6 +189,18 @@ public class PublicationShiryoShinsakai {
         return ResponseData.of(getHandler(div).onClick_btnKogakuParamSave()).respond();
     }
 
+    /**
+     * 「一覧に戻る」ボタンを押下下処理です。
+     *
+     * @param div PublicationShiryoShinsakaiDiv
+     * @return ResponseData<PublicationShiryoShinsakaiDiv>
+     */
+    public ResponseData<PublicationShiryoShinsakaiDiv> onClick_btnToReturnIchiran(PublicationShiryoShinsakaiDiv div) {
+        RString 審査会一覧_開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
+        RealInitialLocker.release(LockingKeys.介護認定審査会開催番号.appended(審査会一覧_開催番号));
+        return ResponseData.of(div).respond();
+    }
+
     private ErrorMessage check概況調査情報(ShinseishoKanriNo 申請書管理番号) {
         ErrorMessage message = null;
         NinteichosahyoGaikyoChosa 認定調査票概況調査情報
