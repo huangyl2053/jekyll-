@@ -38,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -59,6 +60,9 @@ public class PublicationShiryoShinsakai {
      * @return ResponseData<PublicationShiryoShinsakaiDiv>
      */
     public ResponseData<PublicationShiryoShinsakaiDiv> onLoad(PublicationShiryoShinsakaiDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         RString 審査会一覧_開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         KaisaiYoteiJohoBusiness 開催予定情報
                 = ShiryoShinsakaiFinder.createInstance().get開催予定情報(審査会一覧_開催番号);
@@ -66,7 +70,7 @@ public class PublicationShiryoShinsakai {
         if (!RealInitialLocker.tryGetLock(LockingKeys.介護認定審査会開催番号.appended(審査会一覧_開催番号))) {
             div.setReadOnly(true);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(実行するボタン, true);
-            throw new PessimisticLockingException();
+            return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
         }
         return ResponseData.of(div).respond();
     }
