@@ -132,18 +132,19 @@ public class JizenShinsakaiShiryoPublicationHandler {
         div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoIin().setSelectedItemsByKey(印刷帳票chk);
         div.getPublishingCondition().getPublishingConditionForShinsakaiIin().getChkPrintChohyoShinsakaiIin()
                 .setSelectedItemsByKey(印刷審査会資料chk);
-        ShichosonSecurityJohoFinder 市町村セキュリティFinder = ShichosonSecurityJohoFinder.createInstance();
-        ShichosonSecurityJoho 市町村セキュリティ情報 = 市町村セキュリティFinder.getShichosonSecurityJoho(GyomuBunrui.介護認定);
-        if (市町村セキュリティ情報 != null && 市町村セキュリティ情報.get導入形態コード() != null) {
-            if (DonyuKeitaiCode.認定広域.getCode().equals(市町村セキュリティ情報.get導入形態コード().getCode())) {
-                div.getPublishingCondition().getCcdBunshoNoInput().initialize(new ReportId(ReportIdDBE.DBE515001.getReportId().value().concat("_")
-                        .concat(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))));
-            } else {
-                div.getPublishingCondition().getCcdBunshoNoInput().initialize(ReportIdDBE.DBE515001.getReportId());
-            }
-        } else {
-            div.getPublishingCondition().getCcdBunshoNoInput().initialize(ReportIdDBE.DBE515001.getReportId());
-        }
+        div.getPublishingCondition().getCcdBunshoNoInput().initialize(ReportIdDBE.DBE515001.getReportId());
+//        ShichosonSecurityJohoFinder 市町村セキュリティFinder = ShichosonSecurityJohoFinder.createInstance();
+//        ShichosonSecurityJoho 市町村セキュリティ情報 = 市町村セキュリティFinder.getShichosonSecurityJoho(GyomuBunrui.介護認定);
+//        if (市町村セキュリティ情報 != null && 市町村セキュリティ情報.get導入形態コード() != null) {
+//            if (DonyuKeitaiCode.認定広域.getCode().equals(市町村セキュリティ情報.get導入形態コード().getCode())) {
+//                div.getPublishingCondition().getCcdBunshoNoInput().initialize(new ReportId(ReportIdDBE.DBE515001.getReportId().value().concat("_")
+//                        .concat(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))));
+//            } else {
+//                div.getPublishingCondition().getCcdBunshoNoInput().initialize(ReportIdDBE.DBE515001.getReportId());
+//            }
+//        } else {
+//            div.getPublishingCondition().getCcdBunshoNoInput().initialize(ReportIdDBE.DBE515001.getReportId());
+//        }
     }
 
     /**

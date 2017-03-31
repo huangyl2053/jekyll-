@@ -210,6 +210,7 @@ public class DBE526002_JIzenShinsakekkaTorokuSakuseiParameter extends BatchParam
             bangoEnd = Integer.valueOf(shuryosiyoBangou.toString());
         }
         return new DBE517002_ShinsakaiShiryoIinParameter(shinsakaiKaisaiNo,
+                RString.EMPTY,
                 shinsakaiKaisaiYoteiYMD,
                 shinsakaiKaishiYoteiTime,
                 gogitaiNo,
