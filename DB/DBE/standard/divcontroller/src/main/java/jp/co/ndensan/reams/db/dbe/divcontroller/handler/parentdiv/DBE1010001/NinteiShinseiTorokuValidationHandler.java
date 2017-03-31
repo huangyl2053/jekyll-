@@ -9,9 +9,17 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseitoroku.NinteiShinse
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1010001.NinteiShinseiTorokuDiv;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
+import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
+import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AgeArrivalDay;
+import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -33,6 +41,8 @@ public class NinteiShinseiTorokuValidationHandler {
 
     private static final RString MENUID_DBEMN21003 = new RString("DBEMN21003");
     private static final RString 認定申請有効 = new RString("認定申請有効");
+    private static final int 年齢40 = 40;
+    private static final int 年齢65 = 65;
 
     /**
      * コンストラクタです。
@@ -225,6 +235,30 @@ public class NinteiShinseiTorokuValidationHandler {
     }
 
     /**
+     * 年齢入力チェック
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs 年齢チェック() {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        
+        RDate 認定申請日 = div.getTplShinseijoho().getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtShinseiYMD().getValue();
+        RString 被保険者区分 = div.getTplShinseijoho().getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlHihokenshaKubun().getSelectedKey();
+        RString 年齢到達前_事前申請可能時期 = DbBusinessConfig.get(ConfigNameDBE.年齢到達前_事前申請可能時期, RDate.getNowDate(), SubGyomuCode.DBE認定支援, div.getCcdShozokuShichoson().getSelectedItem().get市町村コード());
+        IDateOfBirth dob = DateOfBirthFactory.createInstance(new FlexibleDate(div.getTplShinseishaJoho().getTxtJohoBirthday().getValue().toDateString()));
+        AgeCalculator agecalculator = new AgeCalculator(dob, JuminJotai.住民, FlexibleDate.MAX, AgeArrivalDay.前日);
+        FlexibleDate 年齢40の3か月前 = agecalculator.get年齢到達日(年齢40).minusDay(年齢到達前_事前申請可能時期.toInt());
+        FlexibleDate 年齢65の3か月前 = agecalculator.get年齢到達日(年齢65).minusDay(年齢到達前_事前申請可能時期.toInt());
+        if (認定申請日.isBefore(new RDate(年齢40の3か月前.toString()))) {
+            validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.年齢が40歳以上65歳未満));
+        }
+        if (HihokenshaKubunCode.第１号被保険者.getコード().equals(被保険者区分) && 認定申請日.isBefore(new RDate(年齢65の3か月前.toString()))) {
+            validationMessages.add(new ValidationMessageControlPair(NinteiShinseiTorokuMessages.事前申請可能時期外));
+        }
+        return validationMessages;
+    }
+
+    /**
      * 依頼完了チェック
      *
      * @param result NinteiShinseiTorokuResult
@@ -261,7 +295,9 @@ public class NinteiShinseiTorokuValidationHandler {
         主治医意見書作成依頼済のため処理不可(DbeErrorMessages.依頼済のため処理不可, "主治医意見書作成依頼"),
         認定調査と主治医意見書作成依頼済のため処理不可(DbeErrorMessages.依頼済のため処理不可, "認定調査依頼・主治医意見書作成依頼"),
         延期見込期間または延期理由必須(UrErrorMessages.未入力, "延期登録の場合、延期見込期間または延期理由"),
-        延期決定日必須(UrErrorMessages.未入力, "延期登録の場合、延期決定日");
+        延期決定日必須(UrErrorMessages.未入力, "延期登録の場合、延期決定日"),
+        年齢が40歳以上65歳未満(DbeWarningMessages.年齢が40歳以上65歳未満),
+        事前申請可能時期外(DbeWarningMessages.事前申請可能時期外, "第１号被保険者");
 
         private final Message message;
 

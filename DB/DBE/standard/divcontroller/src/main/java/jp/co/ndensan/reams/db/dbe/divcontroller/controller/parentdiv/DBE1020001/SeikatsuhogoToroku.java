@@ -9,15 +9,12 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.seikatsuhogotoroku.Minashi2shisaiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.seikatsuhogotoroku.SeikatsuhogoTorokuResult;
-import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1020001.DBE1020001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1020001.SeikatsuhogoTorokuDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1020001.SeikatsuhogoTorokuHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1020001.SeikatsuhogoTorokuValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.seikatsuhogotoroku.SeikatsuhogoTorokuFinder;
 import jp.co.ndensan.reams.db.dbx.business.core.basic.KoseiShichosonShishoMaster;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.HokenshaDDLPattem;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -33,12 +30,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshali
 import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteiShinseiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.shishosecurityjoho.ShishoSecurityJoho;
-import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
-import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
-import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
-import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.AgeArrivalDay;
-import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.JuminJotai;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -49,9 +41,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Saiban;
@@ -241,16 +231,17 @@ public class SeikatsuhogoToroku {
         }
         Minashi2shisaiJoho minashi2shisaiJoho = getHandler(div).setBusiness(前回申請書管理番号);
         ViewStateHolder.put(ViewStateKeys.みなし2号登録情報, minashi2shisaiJoho);
-
-        if (is年齢範囲外(minashi2shisaiJoho.get年齢())) {
-            if (!ResponseHolder.isReRequest()) {
-                return ResponseData.of(div).addMessage(DbeWarningMessages.年齢が40歳以上65歳未満.getMessage()).respond();
-            }
-            if (new RString(DbeWarningMessages.年齢が40歳以上65歳未満.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
-                return ResponseData.of(div).respond();
-            }
-        }
+        
+//  登録画面の年齢チェックは「保存」の時にします
+//        if (is年齢範囲外(minashi2shisaiJoho.get年齢())) {
+//            if (!ResponseHolder.isReRequest()) {
+//                return ResponseData.of(div).addMessage(DbeWarningMessages.年齢が40歳以上65歳未満.getMessage()).respond();
+//            }
+//            if (new RString(DbeWarningMessages.年齢が40歳以上65歳未満.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+//                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+//                return ResponseData.of(div).respond();
+//            }
+//        }
 
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         validationMessages.add(getValidationHandler(div).allCheck());
@@ -260,17 +251,14 @@ public class SeikatsuhogoToroku {
         return ResponseData.of(div).forwardWithEventName(DBE1020001TransitionEventName.申請情報入力へ).respond();
     }
 
-    private boolean is年齢範囲外(RString 年齢) {
-//        RString 年齢到達前_事前申請可能時期 = DbBusinessConfig.get(ConfigNameDBE.年齢到達前_事前申請可能時期, RDate.getNowDate(), SubGyomuCode.DBE認定支援, div.getCcdShozokuShichoson().getSelectedItem().get市町村コード());
-//        IDateOfBirth dob = DateOfBirthFactory.createInstance(div.getTxtBirthYMD().getValue().minusDay(年齢到達前_事前申請可能時期.toInt()).toFlexibleDate());
-//        AgeCalculator agecalculator = new AgeCalculator(dob, JuminJotai.住民, FlexibleDate.MAX, AgeArrivalDay.前日);
+//    private boolean is年齢範囲外(RString 年齢) {
 //        if (!RString.isNullOrEmpty(agecalculator.get年齢())) {
-        if (!RString.isNullOrEmpty(年齢)) {
-            int age = Integer.parseInt(年齢.toString());
-            return age < 40 || age >= 65;
-        }
-        return true;
-    }
+//        if (!RString.isNullOrEmpty(年齢)) {
+//            int age = Integer.parseInt(年齢.toString());
+//            return age < 40 || age >= 65;
+//        }
+//        return true;
+//    }
 
     /**
      * 宛名共通検索条件を入力する共有子を閉じるの場合、個人番号と行政区の設定です。

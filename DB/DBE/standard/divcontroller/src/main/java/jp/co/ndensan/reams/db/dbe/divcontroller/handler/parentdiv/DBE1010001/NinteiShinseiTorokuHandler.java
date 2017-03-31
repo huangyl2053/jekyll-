@@ -84,19 +84,20 @@ public class NinteiShinseiTorokuHandler {
      * @param 管理番号 申請書管理番号
      * @param 被保険者番号 被保険者番号
      * @param 介護導入形態 介護導入形態
+     * @param 市町村コード 市町村コード
      */
     public void loadUpdate(NinteiShinseiTorokuResult result, ShinseishoKanriNo 管理番号,
-            RString 被保険者番号, RString 介護導入形態) {
+            RString 被保険者番号, RString 介護導入形態, LasdecCode 市町村コード) {
         div.getBtnIryohokenGuide().setDisabled(true);
         div.getBtnNyuinAndShisetsuNyusho().setDisabled(true);
         div.getCcdKaigoNinteiShinseiKihon().initialize();
         div.getCcdZenkaiNinteiKekkaJoho().onLoad(SubGyomuCode.DBE認定支援, 管理番号, new RString("1"));
         div.getCcdShinseiSonotaJohoInput().initialize();
 
+        if (市町村コード != null) {
+            div.getCcdShikakuInfo().initialize(市町村コード.value(), 被保険者番号);
+        }
         if (result != null) {
-            if (result.get証記載保険者番号() != null) {
-                div.getCcdShikakuInfo().initialize(result.get証記載保険者番号(), 被保険者番号);
-            }
             setCommonDiv(result, 管理番号);
         } else {
             div.getCcdShujiiIryokikanAndShujiiInput().initialize(LasdecCode.EMPTY,

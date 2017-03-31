@@ -96,6 +96,7 @@ import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.EdabanCode;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
@@ -231,7 +232,7 @@ public class NinteiShinseiToroku {
 
         if (MENUID_DBEMN31001.equals(menuID) //|| MENUID_DBEMN21003.equals(menuID)
                 || ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC11001)
-                || ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC10002) 
+                || ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC10002)
                 || is照会) {
             ShinseishoKanriNo 管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
             RString 被保険者番号 = manager.get被保険者番号(管理番号);
@@ -253,7 +254,11 @@ public class NinteiShinseiToroku {
             }
             getHandler(div).loadPnl(result, ninteiTandokuDounyuFlag);
             ViewStateHolder.put(ViewStateKeys.台帳種別表示, new RString("台帳種別表示有り"));
-            getHandler(div).loadUpdate(result, 管理番号, 被保険者番号, 介護導入形態);
+            LasdecCode 市町村コード = LasdecCode.EMPTY;
+            if (result != null) {
+                市町村コード = manager.get市町村コード(result.get証記載保険者番号());
+            }
+            getHandler(div).loadUpdate(result, 管理番号, 被保険者番号, 介護導入形態, 市町村コード);
             set連絡先(管理番号, div, false);
             RirekiJohoResult comResult = manager.get共有子データ(管理番号.getColumnValue());
             ShinseiRirekiJoho zenkaiShinseiRirekiJoho = dbt5121Manager.get申請履歴情報ByKey(管理番号);
@@ -327,7 +332,7 @@ public class NinteiShinseiToroku {
                 div.getBtnJogaiShinsakaiIinGuide().setDisabled(true);
             }
 //            if (MENUID_DBEMN21003.equals(menuID) || ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC11001) || is照会) {
-            if (!RealInitialLocker.tryGetLock(LockingKeys.申請書管理番号.appended(管理番号.getColumnValue()))) {
+            if (!ResponseHolder.isReRequest() && !RealInitialLocker.tryGetLock(LockingKeys.申請書管理番号.appended(管理番号.getColumnValue()))) {
                 div.setReadOnly(true);
                 setBtnUpdateDisableTrue();
                 return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
@@ -355,7 +360,7 @@ public class NinteiShinseiToroku {
                 setBtnUpdateDisableTrue();
                 return ResponseData.of(div).rootTitle(審査依頼受付).addValidationMessages(validationMessages).respond();
             } else {
-                 CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNUPDATE_FILENAME, false);
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNUPDATE_FILENAME, false);
             }
             return ResponseData.of(div).rootTitle(審査依頼受付).respond();
         }
@@ -420,6 +425,17 @@ public class NinteiShinseiToroku {
         div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtNinteiShinseRiyu().setTextKind(TextKind.全角のみ);
         div.getCcdNinteiInput().getTxtShinsakaiIken().setTextKind(TextKind.全角のみ);
 
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 審査依頼受付／みなし２号審査受付onActive事件。
+     *
+     * @param div 審査依頼受付／みなし２号審査受付Div
+     * @return ResponseData<NinteiShinseiTorokuDiv>
+     */
+    public ResponseData<NinteiShinseiTorokuDiv> onActive(NinteiShinseiTorokuDiv div) {
+        onLoad(div);
         return ResponseData.of(div).respond();
     }
 
@@ -761,7 +777,7 @@ public class NinteiShinseiToroku {
         response.data = div;
         return response;
     }
-    
+
     /**
      * ダイアログ上で選択した取下げ定型文を取得します。
      *
@@ -792,7 +808,7 @@ public class NinteiShinseiToroku {
         response.data = div;
         return response;
     }
-    
+
     /**
      * ダイアログ上で選択したサービス削除の旨定型文情報を取得します。
      *
@@ -818,7 +834,8 @@ public class NinteiShinseiToroku {
      * @return ResponseData<NinteiShinseiTorokuDiv>
      */
     public ResponseData<NinteiShinseiTorokuDiv> onClick_btnBackToIchiran(NinteiShinseiTorokuDiv div) {
-        if (!ResponseHolder.isReRequest() && is変更(div)) {
+        boolean is照会 = DBE1010001StateName.照会.getName().equals(ResponseHolder.getState());
+        if (!ResponseHolder.isReRequest() && is変更(div) && !is照会 && !div.isReadOnly()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.画面遷移の確認.getMessage()).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
@@ -863,6 +880,7 @@ public class NinteiShinseiToroku {
 //        NinteiChosaJokyoDataPass zenkai = DataPassingConverter.deserialize(div.getHdnZenkai(), NinteiChosaJokyoDataPass.class);
 //        NinteiChosaJokyoDataPass konkai = DataPassingConverter.deserialize(div.getHdnKonkai(), NinteiChosaJokyoDataPass.class);
 
+        validationMessages.add(getValidationHandler(div).年齢チェック());
         validationMessages.add(getValidationHandler(div).取下日理由必須チェック());
 //        validationMessages.add(getValidationHandler(div).区分変更申請時取下日理由入力チェック());
         validationMessages.add(getValidationHandler(div).申請サービス削除と取下理由存在チェック());
@@ -893,7 +911,7 @@ public class NinteiShinseiToroku {
             validationMessages.add(getValidationHandler(div).被保険者区分チェック());
             validationMessages.add(getValidationHandler(div).有効期間チェック());
 
-            if (validationMessages.iterator().hasNext()) {
+            if (!ResponseHolder.isReRequest() && validationMessages.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
             if (!ResponseHolder.isReRequest() || (ResponseHolder.isReRequest() && new RString(DbzWarningMessages.確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode()))) {
@@ -955,7 +973,7 @@ public class NinteiShinseiToroku {
         }
 
         validationMessages.add(getValidationHandler(div).センタ送信データ出力完了更新不可チェック(result.getIF送付年月日()));
-        validationMessages.add(getValidationHandler(div).認定審査会割当完了更新不可チェック(result));
+        //validationMessages.add(getValidationHandler(div).認定審査会割当完了更新不可チェック(result));
 
         NinteiShinseiJohoBuilder shinseiJohoBuilder = get要介護認定申請情報Com(div, kihonJohoInputDiv, shinseiJoho);
         ShinseitodokedeJoho shinseitodokedeJoho = get認定申請届出者情報(div, false, ShinseishoKanriNo.EMPTY);
@@ -1001,7 +1019,7 @@ public class NinteiShinseiToroku {
             if (shinseitodokedeJoho != null) {
                 manager.save申請届出情報(shinseitodokedeJoho);
             }
-            
+
             前排他キーの解除(申請書管理番号.getColumnValue());
             return goToKanryo(div, response, 申請書管理番号);
         }
@@ -1531,7 +1549,7 @@ public class NinteiShinseiToroku {
     private void 前排他キーの解除(RString 排他) {
         RealInitialLocker.release(LockingKeys.申請書管理番号.appended(排他));
     }
-    
+
     private void アクセスログ_更新(ShinseishoKanriNo 管理番号, RString 証記載保険者番号, RString 被保険者番号) {
         DbAccessLogger accessLog = new DbAccessLogger();
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 管理番号.value());
