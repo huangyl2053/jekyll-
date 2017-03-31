@@ -534,7 +534,7 @@ public enum ReportIdDBE {
     /**
      * 要介護認定延期通知書タイトルの帳票ＩＤです。
      */
-    DBE581001(new ReportId("DBE581001_YokaigoNinteiEnkiTshuchisho"), new RString("要介護認定延期通知書タイトル")),
+    DBE581001(new ReportId("DBE581001_YokaigoNinteiEnkiTshuchisho"), new RString("要介護認定延期通知書")),
     /**
      * 要介護認定延期通知書発行一覧表の帳票ＩＤです。
      */
