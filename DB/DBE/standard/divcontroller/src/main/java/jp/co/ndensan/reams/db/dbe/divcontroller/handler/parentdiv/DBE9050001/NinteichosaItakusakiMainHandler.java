@@ -549,6 +549,8 @@ public class NinteichosaItakusakiMainHandler {
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().clearValue();
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().clearValue();
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKanjiMeiginin().clearValue();
+        div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenBan().clearValue();
+        div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenMei().clearValue();
     }
 
     /**

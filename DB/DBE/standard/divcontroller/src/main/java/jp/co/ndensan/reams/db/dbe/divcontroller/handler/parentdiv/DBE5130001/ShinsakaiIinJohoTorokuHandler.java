@@ -271,6 +271,17 @@ public class ShinsakaiIinJohoTorokuHandler {
         if (div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関() == null) {
             return;
         }
+        if (div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().isゆうちょ銀行()) {
+            RString tenBan = div.getDgShinsaInJohoIchiran().getClickedItem().getKinyuKikanShitenCode();
+            div.getKozaJoho().getTxtTenBan().setValue(tenBan);
+            if (!RString.isNullOrEmpty(tenBan)) {
+                RString shitenMeisho = getShitenMeisho(tenBan);
+                if (!RString.EMPTY.equals(tenBan)) {
+                    div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getTxtTenMei().
+                            setValue(shitenMeisho);
+                }
+            }
+        }
         div.getKozaJoho().getDdlYokinShubetsu().setSelectedKey(div.getDgShinsaInJohoIchiran().getClickedItem().getYokinShubetsu());
         div.getKozaJoho().getTxtGinkoKozaNo().setValue(div.getDgShinsaInJohoIchiran().getClickedItem().getKozaNo());
         div.getKozaJoho().getTxtKozaMeiginin().setValue(div.getDgShinsaInJohoIchiran().getClickedItem().getKozaMeigininKana());
@@ -506,7 +517,13 @@ public class ShinsakaiIinJohoTorokuHandler {
         shinsakaiIinJohoBuilder.set電話番号(div.getTxtTelNo1().getDomain());
         shinsakaiIinJohoBuilder.setFAX番号(div.getTxtFaxNo().getDomain());
         shinsakaiIinJohoBuilder.set金融機関コード(div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode());
-        shinsakaiIinJohoBuilder.set金融機関支店コード(div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode());
+        if (div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput() != null) {
+            if (!div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().isゆうちょ銀行()) {
+                shinsakaiIinJohoBuilder.set金融機関支店コード(div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode());
+            } else {
+                shinsakaiIinJohoBuilder.set金融機関支店コード(new KinyuKikanShitenCode(div.getKozaJoho().getTxtTenBan().getValue()));
+            }
+        }
         shinsakaiIinJohoBuilder.set預金種別(div.getKozaJoho().getDdlYokinShubetsu().getSelectedKey());
         shinsakaiIinJohoBuilder.set口座番号(div.getKozaJoho().getTxtGinkoKozaNo().getValue());
         shinsakaiIinJohoBuilder.set口座名義人カナ(new AtenaKanaMeisho(div.getKozaJoho().getTxtKozaMeiginin().getValue()));

@@ -342,6 +342,7 @@ public class ShujiiIryoKikanMaster {
      */
     public ResponseData<ShujiiIryoKikanMasterDiv> onSelectByModifyButton_dgShujiiIchiran(
             ShujiiIryoKikanMasterDiv div) {
+        getHandler(div).clearShujiiIryoKikanJohoToMeisai();
         div.getShujiiJohoInput().setState(状態_修正);
         getHandler(div).setDisabledFalse();
         dgShujiiIchiran_Row row = div.getShujiiIchiran().getDgShujiiIchiran().getActiveRow();
@@ -364,6 +365,7 @@ public class ShujiiIryoKikanMaster {
      */
     public ResponseData<ShujiiIryoKikanMasterDiv> onSelectByDeleteButton_dgShujiiIchiran(
             ShujiiIryoKikanMasterDiv div) {
+        getHandler(div).clearShujiiIryoKikanJohoToMeisai();
         div.getShujiiJohoInput().setState(状態_削除);
         dgShujiiIchiran_Row row = div.getShujiiIchiran().getDgShujiiIchiran().getActiveRow();
         getHandler(div).setShujiiJohoToMeisai(row);
@@ -381,6 +383,7 @@ public class ShujiiIryoKikanMaster {
      */
     public ResponseData<ShujiiIryoKikanMasterDiv> onSelectByDlbClick_dgShujiiIchiran(ShujiiIryoKikanMasterDiv div) {
         dgShujiiIchiran_Row row = div.getShujiiIchiran().getDgShujiiIchiran().getActiveRow();
+        getHandler(div).clearShujiiIryoKikanJohoToMeisai();
         getHandler(div).setShujiiJohoToMeisai(row);
         if (状態_修正.equals(row.getJotai())) {
             div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().setDisabled(true);
@@ -631,10 +634,11 @@ public class ShujiiIryoKikanMaster {
         DropDownList 預金種別 = div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu();
         TextBoxCode 口座番号 = div.getShujiiJohoInput().getKozaJoho().getTxtGinkoKozaNo();
         TextBoxKana 口座名義人 = div.getShujiiJohoInput().getKozaJoho().getTxtKozaMeiginin();
+        boolean 金融機関コードexist = !RString.EMPTY.equals(div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().getColumnValue());
         boolean 預金種別exist = !RString.EMPTY.equals(預金種別.getSelectedValue());
         boolean 口座番号exist = !RString.EMPTY.equals(口座番号.getValue());
         boolean 口座名義人exist = !RString.EMPTY.equals(口座名義人.getValue());
-        if (預金種別exist || 口座番号exist || 口座名義人exist || 金融機関exist) {
+        if (預金種別exist || 口座番号exist || 口座名義人exist || 金融機関exist || 金融機関コードexist) {
             ValidationMessageControlPairs validPairs = div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().validResult金融機関();
 
             if (!預金種別exist) {

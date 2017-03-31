@@ -256,7 +256,7 @@ public class KoseiShujiiIryoKikanMasterHandler {
                     new KinyuKikanCode(row.getKinyuKikanCode()), new KinyuKikanShitenCode(RString.EMPTY), FlexibleDate.getNowDate());
         }
         setKozaJoho();
-        div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu().setSelectedKey(row.getYokinShubetsu());
+        div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu().setSelectedKey(nullToEmpty(row.getYokinShubetsu()));
         div.getShujiiJohoInput().getKozaJoho().getTxtGinkoKozaNo().setValue(row.getKozaNo());
         div.getShujiiJohoInput().getKozaJoho().getTxtKozaMeiginin().setValue(row.getKozaMeigininKana());
         div.getShujiiJohoInput().getKozaJoho().getTxtKanjiMeiginin().setValue(row.getKozaMeiginin());

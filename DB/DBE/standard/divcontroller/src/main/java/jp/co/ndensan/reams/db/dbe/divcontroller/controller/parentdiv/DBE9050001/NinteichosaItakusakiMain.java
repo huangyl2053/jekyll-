@@ -245,6 +245,7 @@ public class NinteichosaItakusakiMain {
      * @return ResponseData<NinteichosaItakusakiMainDiv>
      */
     public ResponseData<NinteichosaItakusakiMainDiv> onSelectByModifyButton_dgSonotaKikanIchiran(NinteichosaItakusakiMainDiv div) {
+        getHandler(div).clearChosaitakusakiJohoInput();
         div.getChosaitakusakiJohoInput().setState(状態_修正);
         getHandler(div).setDisabledFalseToShujiiJohoInputMeisai();
         dgSonotaKikanIchiran_Row row = div.getSonotaKikanichiran().getDgSonotaKikanIchiran().getClickedItem();
@@ -265,6 +266,7 @@ public class NinteichosaItakusakiMain {
      * @return ResponseData<NinteichosaItakusakiMainDiv>
      */
     public ResponseData<NinteichosaItakusakiMainDiv> onSelectByDeleteButton_dgSonotaKikanIchiran(NinteichosaItakusakiMainDiv div) {
+        getHandler(div).clearChosaitakusakiJohoInput();
         div.getChosaitakusakiJohoInput().setState(状態_削除);
         dgSonotaKikanIchiran_Row row = div.getSonotaKikanichiran().getDgSonotaKikanIchiran().getActiveRow();
         getHandler(div).setChosaitakusakiJohoInput(row);
@@ -282,6 +284,7 @@ public class NinteichosaItakusakiMain {
      * @return ResponseData<NinteichosaItakusakiMainDiv>
      */
     public ResponseData<NinteichosaItakusakiMainDiv> onSelectByDlbClick_dgSonotaKikanIchiran(NinteichosaItakusakiMainDiv div) {
+        getHandler(div).clearChosaitakusakiJohoInput();
         dgSonotaKikanIchiran_Row row = div.getSonotaKikanichiran().getDgSonotaKikanIchiran().getActiveRow();
         getHandler(div).setChosaitakusakiJohoInput(row);
         ViewStateHolder.put(ViewStateKeys.その他機関マスタ選択行, row);

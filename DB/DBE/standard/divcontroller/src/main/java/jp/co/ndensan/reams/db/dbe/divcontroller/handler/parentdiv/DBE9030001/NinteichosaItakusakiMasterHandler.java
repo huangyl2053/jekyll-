@@ -307,6 +307,7 @@ public class NinteichosaItakusakiMasterHandler {
      *
      */
     public void set修正状態() {
+        clear();
         div.set状態(修正状態コード);
         div.getChosaitakusakiJohoInput().getDdlItakusakikubun().getDataSource().clear();
         div.getChosaitakusakiJohoInput().getDdlItakusakikubun().getDataSource().addAll(createListFromChosaItakuKubunCodeASC());
@@ -333,6 +334,7 @@ public class NinteichosaItakusakiMasterHandler {
      *
      */
     public void set削除状態() {
+        clear();
         div.set状態(削除状態コード);
         div.getChosaitakusakiJohoInput().getDdlItakusakikubun().getDataSource().clear();
         div.getChosaitakusakiJohoInput().getDdlItakusakikubun().getDataSource().addAll(createListFromChosaItakuKubunCodeASC());
