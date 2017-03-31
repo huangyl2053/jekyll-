@@ -291,7 +291,7 @@ public class ImageJohoMaskingHandler {
             throw new ApplicationException(UrErrorMessages.対象データなし.getMessage());
         }
 
-        boolean ロック = 前排他ロックキー(前排他用文字列.concat(taishoshaRow.get申請書管理番号()));
+        boolean succeedLock = 前排他ロックキー(前排他用文字列.concat(taishoshaRow.get申請書管理番号()));
 
         ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(taishoshaRow.get保険者());
         ExpandedInformation expandedInformation = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), taishoshaRow.get申請書管理番号());
@@ -305,10 +305,10 @@ public class ImageJohoMaskingHandler {
         setTxetMaskingTaisho(rowList);
         setTextGaikyo(rowList);
         Collections.sort(rowList, 表示順);
-        div.getDgImageMaskingTaisho().setReadOnly(!ロック);
+        div.getDgImageMaskingTaisho().setReadOnly(!succeedLock);
         div.getDgImageMaskingTaisho().setDataSource(rowList);
         accessLog.flushBy(AccessLogType.照会);
-        return ロック;
+        return succeedLock;
     }
 
     private List<dgImageMaskingTaisho_Row> setMaskingTaisho(File file, List<dgImageMaskingTaisho_Row> rowList) {
