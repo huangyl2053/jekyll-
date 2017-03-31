@@ -117,7 +117,7 @@ class ChosaIraiIchiranhyoBodyEditor implements IChosaIraiIchiranhyoEditor {
         source.shichosoncode = item.getShichosonCode();
         source.chosaitakusakicode = item.getChosaItakusakiCode();
         source.pageCountForItakusaki = new RString(pageCount);
-        source.識別コード = new ShikibetsuCode(item.getShichosonCode().substring(0, 5).concat(item.getListIchiranhyo_3()));
+        source.識別コード = new ShikibetsuCode(item.getShokisaiHokenshaNo().substring(0, 5).concat(item.getListIchiranhyo_3()));
         source.拡張情報 = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.getShinseishoKanriNo());
         return source;
     }

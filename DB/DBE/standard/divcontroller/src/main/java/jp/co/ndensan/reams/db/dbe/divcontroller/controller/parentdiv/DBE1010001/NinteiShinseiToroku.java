@@ -152,6 +152,7 @@ public class NinteiShinseiToroku {
     private static final RString 歳 = new RString("歳");
     private static final RString KEY1 = new RString("key1");
     private static final RString サービス削除の旨 = new RString("1010");
+    private static final RString 取下げ定型文 = new RString("2001");
     private static final RString みなし２号対象 = new RString("みなし２号");
     private static final RString 作成 = new RString("みなし2号の要介護認定申請情報を作成します。");
     private static final RString 削除 = new RString("表示の要介護認定申請情報を削除します。");
@@ -233,11 +234,6 @@ public class NinteiShinseiToroku {
                 || ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC10002) 
                 || is照会) {
             ShinseishoKanriNo 管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-            if (!RealInitialLocker.tryGetLock(LockingKeys.申請書管理番号.appended(管理番号.getColumnValue()))) {
-                div.setReadOnly(true);
-                setBtnUpdateDisableTrue();
-                return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
-            }
             RString 被保険者番号 = manager.get被保険者番号(管理番号);
             RString 証記載保険者番号 = manager.get証記載保険者番号(管理番号);
 
@@ -331,6 +327,11 @@ public class NinteiShinseiToroku {
                 div.getBtnJogaiShinsakaiIinGuide().setDisabled(true);
             }
 //            if (MENUID_DBEMN21003.equals(menuID) || ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC11001) || is照会) {
+            if (!RealInitialLocker.tryGetLock(LockingKeys.申請書管理番号.appended(管理番号.getColumnValue()))) {
+                div.setReadOnly(true);
+                setBtnUpdateDisableTrue();
+                return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
+            }
             if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC11001) || is照会) {
                 getHandler(div).setShokai();
                 return ResponseData.of(div).rootMenuTitle(要介護認定個人状況照会).rootTitle(審査受付照会).respond();
@@ -389,6 +390,7 @@ public class NinteiShinseiToroku {
             div.getCcdKaigoNinteiShinseiKihon().setShinseiKubunShinseiji(NinteiShinseiShinseijiKubunCode.新規申請);
             div.getCcdKaigoNinteiShinseiKihon().setHihokenshaKubun(HihokenshaKubunCode.生活保護);
             div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlShinseiKubunHorei().setRequired(false);
+            div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getDdlTokuteiShippei().setRequired(true);
 
             div.getCcdShinseiTodokedesha().initialize(new NinteiShinseiTodokedeshaDataPassModel());
             getHandler(div).setCcdShinseiTodokedesha(div, ninteiTandokuDounyuFlag);
@@ -497,7 +499,8 @@ public class NinteiShinseiToroku {
      */
     public ResponseData<NinteiShinseiTorokuDiv> onChange_ddlHihokenshaKubun(NinteiShinseiTorokuDiv div) {
         KaigoNinteiShinseiKihonJohoInputDiv kihonJohoInputDiv = div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv();
-        if (HihokenshaKubunCode.第２号被保険者.getコード().equals(kihonJohoInputDiv.getDdlHihokenshaKubun().getSelectedKey())) {
+        RString selectedKey = kihonJohoInputDiv.getDdlHihokenshaKubun().getSelectedKey();
+        if (HihokenshaKubunCode.第２号被保険者.getコード().equals(selectedKey) || HihokenshaKubunCode.生活保護.getコード().equals(selectedKey)) {
             div.getCcdKaigoNinteiShinseiKihon().setRequiredForDdlTokuteiShippei(true);
         } else {
             div.getCcdKaigoNinteiShinseiKihon().setRequiredForDdlTokuteiShippei(false);
@@ -758,7 +761,38 @@ public class NinteiShinseiToroku {
         response.data = div;
         return response;
     }
+    
+    /**
+     * ダイアログ上で選択した取下げ定型文を取得します。
+     *
+     * @param div 介護認定申請基本情報の入力用DIV
+     * @return ResponseData
+     */
+    public ResponseData onBeforeOpenDialog_btnTorisageTeikeibun(NinteiShinseiTorokuDiv div) {
+        ResponseData<NinteiShinseiTorokuDiv> response = new ResponseData<>();
+        div.setHdnSubGyomuCd(ControlDataHolder.getGyomuCD().value());
+        div.setHdnGroupCode(取下げ定型文);
+        response.data = div;
+        return response;
+    }
 
+    /**
+     * ダイアログ上で選択した取下げ定型文を取得します。
+     *
+     * @param div 介護認定申請基本情報の入力用DIV
+     * @return ResponseData
+     */
+    public ResponseData onOkClose_btnTorisageTeikeibun(NinteiShinseiTorokuDiv div) {
+        ResponseData<NinteiShinseiTorokuDiv> response = new ResponseData<>();
+        RStringBuilder torisage = new RStringBuilder(div.getTxtTorisageJiyu().getValue() == null
+                ? RString.EMPTY : div.getTxtTorisageJiyu().getValue());
+        torisage.append(div.getHdnTorisageTeikeibun());
+        div.getTxtTorisageJiyu().setValue(torisage.toRString());
+
+        response.data = div;
+        return response;
+    }
+    
     /**
      * ダイアログ上で選択したサービス削除の旨定型文情報を取得します。
      *
@@ -1143,6 +1177,9 @@ public class NinteiShinseiToroku {
                 if (flag) {
                     break;
                 }
+            }
+            if (!介護連絡先情報リスト.isEmpty()) {
+                return Boolean.TRUE;
             }
         }
         return flag;

@@ -4,22 +4,19 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DataGrid;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * NinteiChosaSchedulePanel のクラスファイル
- *
+ * NinteiChosaSchedulePanel のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class NinteiChosaSchedulePanelDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -77,13 +74,13 @@ public class NinteiChosaSchedulePanelDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtSetteiYM() {
-        return this.getSearchConditionPanel().getTxtSetteiYM();
+    public TextBoxFlexibleYearMonth getTxtConfigurationYM() {
+        return this.getSearchConditionPanel().getTxtConfigurationYM();
     }
 
     @JsonIgnore
-    public void setTxtSetteiYM(TextBoxFlexibleDate txtSetteiYM) {
-        this.getSearchConditionPanel().setTxtSetteiYM(txtSetteiYM);
+    public void  setTxtConfigurationYM(TextBoxFlexibleYearMonth txtConfigurationYM) {
+        this.getSearchConditionPanel().setTxtConfigurationYM(txtConfigurationYM);
     }
 
     @JsonIgnore
@@ -92,7 +89,7 @@ public class NinteiChosaSchedulePanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnPreviousMonth(Button btnPreviousMonth) {
+    public void  setBtnPreviousMonth(Button btnPreviousMonth) {
         this.getSearchConditionPanel().setBtnPreviousMonth(btnPreviousMonth);
     }
 
@@ -102,7 +99,7 @@ public class NinteiChosaSchedulePanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnNextMonth(Button btnNextMonth) {
+    public void  setBtnNextMonth(Button btnNextMonth) {
         this.getSearchConditionPanel().setBtnNextMonth(btnNextMonth);
     }
 
@@ -112,7 +109,7 @@ public class NinteiChosaSchedulePanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setDdlTaishoChiku(DropDownList ddlTaishoChiku) {
+    public void  setDdlTaishoChiku(DropDownList ddlTaishoChiku) {
         this.getSearchConditionPanel().setDdlTaishoChiku(ddlTaishoChiku);
     }
 
@@ -122,7 +119,7 @@ public class NinteiChosaSchedulePanelDiv extends Panel {
     }
 
     @JsonIgnore
-    public void setBtnDisplay(Button btnDisplay) {
+    public void  setBtnDisplay(Button btnDisplay) {
         this.getSearchConditionPanel().setBtnDisplay(btnDisplay);
     }
 

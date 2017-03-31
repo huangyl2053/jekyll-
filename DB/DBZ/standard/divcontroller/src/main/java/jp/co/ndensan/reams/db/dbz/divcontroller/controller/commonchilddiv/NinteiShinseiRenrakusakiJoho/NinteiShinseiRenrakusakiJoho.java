@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -225,7 +227,37 @@ public class NinteiShinseiRenrakusakiJoho {
      * @return ResponseData<NinteiShinseiRenrakusakiJohoDiv>
      */
     public ResponseData<NinteiShinseiRenrakusakiJohoDiv> onClick_btnModoru(NinteiShinseiRenrakusakiJohoDiv div) {
-        return ResponseData.of(div).dialogNGClose();
+        if (!ResponseHolder.isReRequest()) {
+            if (is修正有無(div)) {
+                QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                        UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                return ResponseData.of(div).addMessage(message).respond();
+            } else {
+                return ResponseData.of(div).dialogNGClose();
+            }
+        }
+
+        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return ResponseData.of(div).dialogNGClose();
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    private boolean is修正有無(NinteiShinseiRenrakusakiJohoDiv div) {
+        NinteiShinseiBusinessCollection dataPass = ViewStateHolder.get(ViewStateKeys.連絡先情報, NinteiShinseiBusinessCollection.class);
+        
+        if (dataPass != null) {
+            for (RenrakusakiJoho joho : getHandler(div).setBusiness(dataPass.getDbdBusiness())) {
+                if (joho.hasChanged()) {
+                    return true;
+                }
+            }
+        } else if (!div.getDgRenrakusakiIchiran().getDataSource().isEmpty()) {
+            return true;
+        }
+        return false;
     }
 
     private NinteiShinseiRenrakusakiJohoHandler getHandler(NinteiShinseiRenrakusakiJohoDiv div) {

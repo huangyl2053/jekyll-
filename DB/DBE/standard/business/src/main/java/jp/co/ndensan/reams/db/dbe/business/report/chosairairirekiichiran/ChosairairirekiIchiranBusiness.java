@@ -30,8 +30,8 @@ public class ChosairairirekiIchiranBusiness {
     private final RString 調査員名;
     private final RString 認定調査依頼日;
     private final RString 申請区分;
-    private final ShikibetsuCode 識別コード;
-    private final ExpandedInformation 拡張情報;
+    private ShikibetsuCode 識別コード;
+    private ExpandedInformation 拡張情報;
 
     /**
      * コンストラクタです。
@@ -45,8 +45,6 @@ public class ChosairairirekiIchiranBusiness {
      * @param 調査員名 調査員名
      * @param 認定調査依頼日 認定調査依頼日
      * @param 申請区分 申請区分
-     * @param 識別コード
-     * @param 拡張情報
      */
     public ChosairairirekiIchiranBusiness(RString 直近区分,
             RString 被保険者番号,
@@ -56,9 +54,8 @@ public class ChosairairirekiIchiranBusiness {
             RString 調査機関名,
             RString 調査員名,
             RString 認定調査依頼日,
-            RString 申請区分,
-            ShikibetsuCode 識別コード,
-            ExpandedInformation 拡張情報) {
+            RString 申請区分
+    ) {
         this.直近区分 = 直近区分;
         this.被保険者番号 = 被保険者番号;
         this.氏名 = 氏名;
@@ -68,7 +65,5 @@ public class ChosairairirekiIchiranBusiness {
         this.調査員名 = 調査員名;
         this.認定調査依頼日 = 認定調査依頼日;
         this.申請区分 = 申請区分;
-        this.識別コード = 識別コード;
-        this.拡張情報 = 拡張情報;
     }
 }

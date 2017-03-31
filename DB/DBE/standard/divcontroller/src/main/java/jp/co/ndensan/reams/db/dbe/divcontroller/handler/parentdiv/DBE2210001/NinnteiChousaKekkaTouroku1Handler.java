@@ -1951,6 +1951,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
 
         builder.set要介護認定一次判定結果コード(updateData.get要介護認定一次判定結果コード());
         builder.set要介護認定一次判定結果コード_認知症加算(updateData.get要介護認定一次判定結果コード_認知症加算());
+        builder.set要介護認定一次判定警告コード(updateData.get要介護認定一次判定警告コード());
 
         builder.set要介護認定等基準時間(updateData.get要介護認定等基準時間());
         builder.set要介護認定等基準時間_食事(updateData.get要介護認定等基準時間_食事());

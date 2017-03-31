@@ -346,9 +346,7 @@ public class NinteiChosaIraiShudouHandler {
                     business.get事業者名称(),
                     business.get調査員氏名(),
                     認定調査依頼年月日,
-                    認定申請区分_申請時,
-                    new ShikibetsuCode(business.get証記載保険者番号().substring(0, 5).concat(business.get被保険者番号())),
-                    new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.get申請書管理番号())));
+                    認定申請区分_申請時));
         }
 
         return 調査依頼該当者履歴一覧;

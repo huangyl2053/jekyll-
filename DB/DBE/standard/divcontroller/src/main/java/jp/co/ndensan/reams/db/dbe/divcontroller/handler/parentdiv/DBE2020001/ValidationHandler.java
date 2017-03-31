@@ -5,11 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2020001;
 
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020001.NinteiChosaSchedulePanelDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.TextBoxFlexibleYearMonth;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -42,10 +44,24 @@ public class ValidationHandler {
                 ninteidiv.getDgNinteiChosaSchedule()));
         return validPairs;
     }
+    
+    /**
+     * validationMessage和暦に変換不可を返す。
+     *
+     * @param textBoxFlexibleYearMonth TextBoxFlexibleYearMonth
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs validate和暦に変換不可(TextBoxFlexibleYearMonth textBoxFlexibleYearMonth) {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        validationMessages.add(new ValidationMessageControlPair(RRVMessages.和暦に変換不可,
+                textBoxFlexibleYearMonth));
+        return validationMessages;
+    }
 
     private static enum RRVMessages implements IValidationMessage {
 
-        Validate対象者一覧未表示(UrErrorMessages.該当データなし);
+        Validate対象者一覧未表示(UrErrorMessages.該当データなし),
+        和暦に変換不可(DbeErrorMessages.和暦に変換不可);
         private final Message message;
 
         private RRVMessages(IMessageGettable message, String... replacements) {

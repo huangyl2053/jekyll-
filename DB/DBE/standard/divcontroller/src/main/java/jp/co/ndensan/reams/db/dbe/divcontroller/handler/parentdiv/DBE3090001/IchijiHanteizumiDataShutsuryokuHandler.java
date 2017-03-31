@@ -517,11 +517,19 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
             }
             a4Data.set合議体番号(business.get一次判定結果情報().get合議体番号());
             a4Data.set審査順(business.get一次判定結果情報().get審査会審査順());
-            a4Data.set被保険者区分(HihokenshaKubunCode.toValue(business.get一次判定結果情報().get被保険者区分コード()).get名称());
-            a4Data.set申請区分(NinteiShinseiShinseijiKubunCode.toValue(business.get一次判定結果情報().get申請区分申()).get名称());
+            if (!RString.isNullOrEmpty(business.get一次判定結果情報().get被保険者区分コード())) {
+                a4Data.set被保険者区分(HihokenshaKubunCode.toValue(business.get一次判定結果情報().get被保険者区分コード()).get名称());
+            }
+            if (!RString.isNullOrEmpty(business.get一次判定結果情報().get申請区分申())) {
+                a4Data.set申請区分(NinteiShinseiShinseijiKubunCode.toValue(business.get一次判定結果情報().get申請区分申()).get名称());
+            }
             a4Data.set年齢(business.get一次判定結果情報().get年齢());
-            a4Data.set性別(Seibetsu.toValue(business.get一次判定結果情報().get性別()).get名称());
-            a4Data.set現在の状況(GenzainoJokyoCode.toValue(business.get一次判定結果情報().get施設利用()).get名称());
+            if (!RString.isNullOrEmpty(business.get一次判定結果情報().get性別())) {
+                a4Data.set性別(Seibetsu.toValue(business.get一次判定結果情報().get性別()).get名称());
+            }
+            if (!RString.isNullOrEmpty(business.get一次判定結果情報().get施設利用())) {
+                a4Data.set現在の状況(GenzainoJokyoCode.toValue(business.get一次判定結果情報().get施設利用()).get名称());
+            }
             a4Data.set前々回要介護度(shutsuryoku.set要介護状態区分コード(business.get一次判定結果情報().get厚労省IF識別コード(),
                     business.get一次判定結果情報().get前々回要介護度()));
             a4Data.set前々回認定有効期間(business.get一次判定結果情報().get前々回認定有効期間());
@@ -546,7 +554,9 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
             a4Data.set事業者名(business.get一次判定結果情報().get事業者名称());
             a4Data.set認定調査員番号(business.get一次判定結果情報().get認定調査員コード());
             a4Data.set認定調査員氏名(business.get一次判定結果情報().get調査員氏名());
-            a4Data.set認定調査員資格(Sikaku.toValue(business.get一次判定結果情報().get調査員資格()).get名称());
+            if (!RString.isNullOrEmpty(business.get一次判定結果情報().get調査員資格())) {
+                a4Data.set認定調査員資格(Sikaku.toValue(business.get一次判定結果情報().get調査員資格()).get名称());
+            }
             a4Data.set医療機関番号(business.get一次判定結果情報().get主治医医療機関コード());
             a4Data.set医療機関名称(business.get一次判定結果情報().get医療機関名称());
             a4Data.set主治医番号(business.get一次判定結果情報().get主治医コード());
@@ -558,7 +568,9 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
             a4Data.set認定有効期間(business.get一次判定結果情報().get認定有効期間());
             a4Data.set認定有効期間開始年月日(business.get一次判定結果情報().get認定有効期間開始年月日());
             a4Data.set認定有効期間終了年月日(business.get一次判定結果情報().get認定有効期間終了年月日());
-            a4Data.set特定疾病名(TokuteiShippei.toValue(business.get一次判定結果情報().get特定疾病()).get名称());
+            if (!RString.isNullOrEmpty(business.get一次判定結果情報().get特定疾病())) {
+                a4Data.set特定疾病名(TokuteiShippei.toValue(business.get一次判定結果情報().get特定疾病()).get名称());
+            }
             if (business.get一次判定結果情報().get要介護状態像例コード() != null) {
                 a4Data.set状態像名称(YokaigoJotaizoReiCode.toValue(business.get一次判定結果情報().get要介護状態像例コード()).get名称());
             }

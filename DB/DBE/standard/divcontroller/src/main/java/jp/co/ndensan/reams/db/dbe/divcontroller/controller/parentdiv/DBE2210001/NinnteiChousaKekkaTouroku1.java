@@ -515,14 +515,9 @@ public class NinnteiChousaKekkaTouroku1 {
      * @return レスポンスデータ
      */
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onClick_btnZenkaiCopy(NinnteiChousaKekkaTouroku1Div div) {
-        RString 認定調査依頼区分コード = ViewStateHolder.get(ViewStateKeys.認定調査依頼区分コード, RString.class);
         ShinseishoKanriNo 前回申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号2, ShinseishoKanriNo.class);
-        if (!NinteichosaIraiKubun.再調査.getCode().equals(認定調査依頼区分コード)) {
-            boolean 前回基本調査項目値あり = ViewStateHolder.get(ViewStateKeys.前回基本調査項目値あり, Boolean.class);
-            if (!前回基本調査項目値あり
-                    && (前回申請書管理番号 == null || 前回申請書管理番号.isEmpty() || 前回申請書管理番号.equals(DEFAULT前回申請書管理番号))) {
-                throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("前回値"));
-            }
+        if (前回申請書管理番号 == null || 前回申請書管理番号.isEmpty() || 前回申請書管理番号.equals(DEFAULT前回申請書管理番号)) {
+            throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("前回値"));
         }
         ArrayList<KihonChosaInput> 第1群List = ViewStateHolder.get(ViewStateKeys.第一群認定調査基本情報リスト, ArrayList.class);
         ArrayList<KihonChosaInput> 第2群List = ViewStateHolder.get(ViewStateKeys.第二群認定調査基本情報リスト, ArrayList.class);
@@ -716,13 +711,15 @@ public class NinnteiChousaKekkaTouroku1 {
 
         ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         RString result = div.getIchijiHanteiResult();
-        if (RString.isNullOrEmpty(result) && UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId())) {
+        if (RString.isNullOrEmpty(result) && (UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId())
+                || UICONTAINERID_DBEUC40501.equals(ResponseHolder.getUIContainerId()))) {
             return ResponseData.of(div).addMessage(DbeErrorMessages.一次判定失敗.getMessage()).respond();
         }
         IchijiHanteiKekkaResultConveter converter = new IchijiHanteiKekkaResultConveter(申請書管理番号, result);
         List<IchijiHanteiShoriKekka> kekkaList = converter.convert();
 
-        if (UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId())
+        if ((UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId()) 
+                || UICONTAINERID_DBEUC40501.equals(ResponseHolder.getUIContainerId()))
                 && (kekkaList == null || kekkaList.isEmpty())) {
             return ResponseData.of(div).addMessage(DbeErrorMessages.一次判定失敗.getMessage()).respond();
         }
@@ -813,7 +810,8 @@ public class NinnteiChousaKekkaTouroku1 {
             getHandler(div).削除処理();
         } else {
             getHandler(div).更新処理();
-            if (UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId())) {
+            if (UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId())
+                    || UICONTAINERID_DBEUC40501.equals(ResponseHolder.getUIContainerId())) {
                 getHandler(div).updateGridAndViewStateData(kekkaList);
             }
         }
