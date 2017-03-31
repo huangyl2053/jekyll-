@@ -6,31 +6,36 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5240001;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.chosaocrtorikomi.ChosaOCRTorikomiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteikekkajoho.NinteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.OcrTorikomiUtil;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaikekkajoho.ShinsakaiKaisaiKekkaJoho2;
+import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OcrDataType;
+import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OcrFiles;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5240001.ChosaOCRTorikomiMainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5240001.TorikomiData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5240001.TorikomiEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5240001.dgChosahyoTorikomiKekka_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.dokuji.NijiHanteiKekkaInputHoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.uz.uza.batch.externalcharacter.reader.CsvListReader;
+import jp.co.ndensan.reams.uz.uza.batch.externalcharacter.reader.CsvListReaderParameter;
+import jp.co.ndensan.reams.uz.uza.batch.externalcharacter.reader.CsvListReaderParameterBuilder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
-import jp.co.ndensan.reams.uz.uza.io.Path;
-import jp.co.ndensan.reams.uz.uza.io.csv.CsvListReader;
-import jp.co.ndensan.reams.uz.uza.io.csv.CsvReader;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -50,7 +55,6 @@ public class ChosaOCRTorikomiHandler {
 
     private static final RString 空白 = RString.EMPTY;
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
-    private static final RString ファイル名 = new RString("OCRSHINSA.CSV");
     private final Code 識別コード_09A = new Code("09A");
     private final Code 識別コード_09B = new Code("09B");
     private final Code 識別コード_99A = new Code("99A");
@@ -125,10 +129,47 @@ public class ChosaOCRTorikomiHandler {
     /**
      * 審査結果OCRを取込ボタンを押します。
      *
+     * @param sfed 共有ファイルエントリ
      * @return CSVData
      */
-    public List<TorikomiData> onClick_Ikensho() {
-        return getCSVファイル();
+    public List<TorikomiData> perseShinsaKekkaCsv(SharedFileEntryDescriptor sfed) {
+        if (sfed == null) {
+            return Collections.emptyList();
+        }
+        return getCSVファイル(sfed);
+    }
+
+    private List<TorikomiData> getCSVファイル(SharedFileEntryDescriptor sfed) {
+        Map<OcrDataType, OcrFiles> filesByType = OcrTorikomiUtil.copyToLocalAndGroupingByType(
+                ReadOnlySharedFileEntryDescriptor.fromString(sfed.toString())
+        );
+        RString csvFilePath = filesByType.get(OcrDataType.二次判定結果記入シート).findCsvFilePath();
+        List<TorikomiData> list = new ArrayList<>();
+        if (csvFilePath.isEmpty()) {
+            return list;
+        }
+        try (CsvListReader reader = new CsvListReader(param(csvFilePath))) {
+            while (true) {
+                List<RString> aLine = reader.readLine();
+                if (aLine == null) {
+                    break;
+                }
+                list.add(toTorikomiData(aLine));
+            }
+        }
+        return list;
+    }
+
+    private static CsvListReaderParameter param(RString csvFilePath) {
+        return new CsvListReaderParameterBuilder(csvFilePath)
+                .colDelimiter(CSV_WRITER_DELIMITER).rowDelimiter(NewLine.CRLF).encode(Encode.UTF_8).hasHeader(false).build();
+    }
+
+    //TODO TorikomiDataのコンストラクタにする。
+    private static TorikomiData toTorikomiData(List<RString> list) {
+        TorikomiData data = new TorikomiData();
+        data.set項目数(list.size());
+        return data;
     }
 
     /**
@@ -456,33 +497,6 @@ public class ChosaOCRTorikomiHandler {
             }
         }
         return 判定結果;
-    }
-
-    private List<TorikomiData> getCSVファイル() {
-        RString imagePath = Path.combinePath(Path.getRootPath(空白), DbBusinessConfig
-                .get(ConfigNameDBE.OCRアップロード用ファイル格納パス, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
-        RString csvReaderPath = Path.combinePath(imagePath, ファイル名);
-        CsvReader csvReader = new CsvReader.InstanceBuilder(csvReaderPath, TorikomiData.class)
-                .setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8)
-                .hasHeader(false).setNewLine(NewLine.CRLF).build();
-        return readCsvFile(csvReader, csvReaderPath);
-    }
-
-    private List<TorikomiData> readCsvFile(CsvReader csvReader, RString csvReaderPath) {
-        CsvListReader read = new CsvListReader.InstanceBuilder(csvReaderPath).build();
-        List<TorikomiData> csvEntityList = new ArrayList<>();
-        while (true) {
-            TorikomiData entity = (TorikomiData) csvReader.readLine();
-            if (entity != null) {
-                entity.set項目数(read.readLine().size());
-                csvEntityList.add(entity);
-            } else {
-                break;
-            }
-        }
-        csvReader.close();
-        read.close();
-        return csvEntityList;
     }
 
     /**

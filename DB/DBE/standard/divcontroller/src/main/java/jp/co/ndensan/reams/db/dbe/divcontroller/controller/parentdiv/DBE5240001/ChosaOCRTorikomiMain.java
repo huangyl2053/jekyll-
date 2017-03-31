@@ -26,12 +26,9 @@ import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.shinsakaiwariat
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaikaisaikekkajoho.ShinsakaiKaisaiKekkaJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.Image;
 import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.ImageManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -45,10 +42,10 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntry
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -68,6 +65,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class ChosaOCRTorikomiMain {
 
+    private static final RString SHINA_KEKKA_TOROKU_OCR = new RString("審査結果登録_OCR");
     private static final RString ファイル名 = new RString("OCRSHINSA.CSV");
     private static final int CSV項目数 = 38;
     private static final RString チェックOK = new RString("OK");
@@ -75,6 +73,19 @@ public class ChosaOCRTorikomiMain {
     private static final RString 記入無し = new RString("0");
     private static final RString INDEX_0 = new RString("0");
     private static final RString INDEX_1 = new RString("1");
+    private static final ViewStateKey<String> 共有ファイルエントリ情報
+            = new ViewStateKey(ViewStateKeys.共有ファイルエントリ情報, String.class);
+
+    private static class ViewStateKey<T> {
+
+        final Enum key;
+        final Class<T> type;
+
+        ViewStateKey(Enum key, Class<T> type) {
+            this.key = key;
+            this.type = type;
+        }
+    }
 
     /**
      * 画面初期化処理です。
@@ -99,10 +110,16 @@ public class ChosaOCRTorikomiMain {
      *
      * @param div 画面情報
      * @return ResponseData<ChosaOCRTorikomiMainDiv>
+     * @precated
      */
+    @Deprecated
     public ResponseData<ChosaOCRTorikomiMainDiv> onClick_BtnOCRTorikomi(ChosaOCRTorikomiMainDiv div) {
         RString 審査会開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
-        List<TorikomiEntity> entityList = csvCheck処理(getHandler(div).onClick_Ikensho(), div, 審査会開催番号);
+        SharedFileEntryDescriptor sfed = SharedFileEntryDescriptor.fromString(
+                ViewStateHolder.get(共有ファイルエントリ情報.key, 共有ファイルエントリ情報.type)
+        );
+
+        List<TorikomiEntity> entityList = csvCheck処理(getHandler(div).perseShinsaKekkaCsv(sfed), div, 審査会開催番号);
         if (entityList.isEmpty()) {
             CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnCommonUpdateChosaResult"), false);
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
@@ -332,27 +349,44 @@ public class ChosaOCRTorikomiMain {
      */
     @SuppressWarnings("checkstyle:illegaltoken")
     public ResponseData<ChosaOCRTorikomiMainDiv> onclick_BtnUpload(ChosaOCRTorikomiMainDiv div, FileData[] files) {
+        RString temp = Directory.createTmpDirectory();
         for (FileData file : files) {
-            if (file.getFileName().endsWith(new RString("CSV"))) {
-                savaCsvファイル(file);
-            } else {
-                boolean 選択Flag = false;
-                for (dgChosahyoTorikomiKekka_Row row : div.getDgChosahyoTorikomiKekka().getDataSource()) {
-                    if (row.getSelected()) {
-                        選択Flag = true;
-                    }
-                }
-                if (!選択Flag) {
-                    ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-                    validationMessages.add(getValidationHandler().check一覧対象未選択());
-                    return ResponseData.of(div).addValidationMessages(validationMessages).respond();
-                }
-                save共有フォルダ(div, new FilesystemPath(file.getFilePath()));
-            }
+            jp.co.ndensan.reams.uz.uza.io.File.copy(file.getFilePath(), Path.combinePath(temp, file.getFileName()));
         }
+        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(SHINA_KEKKA_TOROKU_OCR));
+        SharedFile.defineSharedFile(sfd);
+        SharedFileEntryDescriptor sfed = SharedFile.copyToSharedFile(sfd, FilesystemPath.fromString(temp), copySharedFileOption());
+        ViewStateHolder.put(共有ファイルエントリ情報.key, sfed.toString());
+        //<editor-fold defaultstate="collapsed" desc="実装完了後、不要なら削除する。">
+//        for (FileData file : files) {
+//            if (file.getFileName().endsWith(new RString("CSV"))) {
+//                savaCsvファイル(file);
+//            } else {
+//                boolean 選択Flag = false;
+//                for (dgChosahyoTorikomiKekka_Row row : div.getDgChosahyoTorikomiKekka().getDataSource()) {
+//                    if (row.getSelected()) {
+//                        選択Flag = true;
+//                    }
+//                }
+//                if (!選択Flag) {
+//                    ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+//                    validationMessages.add(getValidationHandler().check一覧対象未選択());
+//                    return ResponseData.of(div).addValidationMessages(validationMessages).respond();
+//                }
+//                save共有フォルダ(div, new FilesystemPath(file.getFilePath()));
+//            }
+//        }
+        //</editor-fold>
         return ResponseData.of(div).respond();
     }
 
+    private static final int ONE_WEEK = 7;
+
+    private static CopyToSharedFileOpts copySharedFileOption() {
+        return new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusDay(ONE_WEEK)).isCompressedArchive(false);
+    }
+
+    //<editor-fold defaultstate="collapsed" desc="おそらく不要">
     private boolean savaCsvファイル(FileData file) {
         RString imagePath = Path.combinePath(Path.getRootPath(RString.EMPTY), DbBusinessConfig
                 .get(ConfigNameDBE.OCRアップロード用ファイル格納パス, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
@@ -388,7 +422,7 @@ public class ChosaOCRTorikomiMain {
                         sfd = SharedFile.defineSharedFile(sfd);
                         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusMonth(1));
                         SharedFileEntryDescriptor entity = SharedFile.copyToSharedFile(sfd, path, opts);
-                        updateDbT5115(data.get申請書管理番号(), entity.getSharedFileId());
+//                        updateDbT5115(data.get申請書管理番号(), entity.getSharedFileId());
                     } else {
                         ReadOnlySharedFileEntryDescriptor or_sfd = new ReadOnlySharedFileEntryDescriptor(FilesystemName
                                 .fromString(data.get保険者番号().concat(data.get被保険者番号())), data.getイメージ共有ファイルID());
@@ -398,18 +432,20 @@ public class ChosaOCRTorikomiMain {
             }
         }
     }
-
-    private void updateDbT5115(ShinseishoKanriNo 申請書管理番号, RDateTime イメージ共有ファイルID) {
-        ImageManager mannger = new ImageManager();
-        Image image = mannger.getイメージ情報(申請書管理番号);
-        if (image == null) {
-            image = new Image(申請書管理番号);
-            image = image.createBuilderForEdit().setイメージ共有ファイルID(イメージ共有ファイルID).build();
-        } else {
-            image = image.createBuilderForEdit().setイメージ共有ファイルID(イメージ共有ファイルID).build().modifiedModel();
-        }
-        mannger.saveイメージ情報(image);
-    }
+//
+//    private void updateDbT5115(ShinseishoKanriNo 申請書管理番号, RDateTime イメージ共有ファイルID) {
+//        ImageManager mannger = new ImageManager();
+//        Image image = mannger.getイメージ情報(申請書管理番号);
+//        if (image == null) {
+//            image = new Image(申請書管理番号);
+//            image = image.createBuilderForEdit().setイメージ共有ファイルID(イメージ共有ファイルID).build();
+//        } else {
+//            image = image.createBuilderForEdit().setイメージ共有ファイルID(イメージ共有ファイルID).build().modifiedModel();
+//        }
+//        mannger.saveイメージ情報(image);
+//    }
+//
+    //</editor-fold>
 
     private void db更新(ChosaOCRTorikomiMainDiv div, RString 審査会開催番号) {
         DbAccessLogger accessLog = new DbAccessLogger();
