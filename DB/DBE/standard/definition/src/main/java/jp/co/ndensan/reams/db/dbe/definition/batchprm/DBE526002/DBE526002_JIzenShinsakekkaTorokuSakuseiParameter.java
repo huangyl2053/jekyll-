@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE526002;
 
+import java.util.HashMap;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE517002.DBE517002_ShinsakaiShiryoIinParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.jizenshinsakekka.JizenShinsakekkaProcessParameter;
@@ -90,7 +91,6 @@ public class DBE526002_JIzenShinsakekkaTorokuSakuseiParameter extends BatchParam
     private RString yobiHenteiFlag;
     @BatchParameter(key = BUNSHOKANRINO, name = "文書管理番号")
     private RString bunshoKanriNo;
-    private Map<RString, RString> 帳票一覧Map;
 
     /**
      * コンストラクタです。
@@ -209,6 +209,8 @@ public class DBE526002_JIzenShinsakekkaTorokuSakuseiParameter extends BatchParam
             bangoStart = Integer.valueOf(kaishisiyoBangou.toString());
             bangoEnd = Integer.valueOf(shuryosiyoBangou.toString());
         }
+        Map<RString, RString> 帳票一覧Map = new HashMap<>();
+
         return new DBE517002_ShinsakaiShiryoIinParameter(shinsakaiKaisaiNo,
                 RString.EMPTY,
                 shinsakaiKaisaiYoteiYMD,
