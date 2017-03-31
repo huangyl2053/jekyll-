@@ -711,13 +711,15 @@ public class NinnteiChousaKekkaTouroku1 {
 
         ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         RString result = div.getIchijiHanteiResult();
-        if (RString.isNullOrEmpty(result) && UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId())) {
+        if (RString.isNullOrEmpty(result) && (UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId())
+                || UICONTAINERID_DBEUC40501.equals(ResponseHolder.getUIContainerId()))) {
             return ResponseData.of(div).addMessage(DbeErrorMessages.一次判定失敗.getMessage()).respond();
         }
         IchijiHanteiKekkaResultConveter converter = new IchijiHanteiKekkaResultConveter(申請書管理番号, result);
         List<IchijiHanteiShoriKekka> kekkaList = converter.convert();
 
-        if (UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId())
+        if ((UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId()) 
+                || UICONTAINERID_DBEUC40501.equals(ResponseHolder.getUIContainerId()))
                 && (kekkaList == null || kekkaList.isEmpty())) {
             return ResponseData.of(div).addMessage(DbeErrorMessages.一次判定失敗.getMessage()).respond();
         }
@@ -808,7 +810,8 @@ public class NinnteiChousaKekkaTouroku1 {
             getHandler(div).削除処理();
         } else {
             getHandler(div).更新処理();
-            if (UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId())) {
+            if (UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId())
+                    || UICONTAINERID_DBEUC40501.equals(ResponseHolder.getUIContainerId())) {
                 getHandler(div).updateGridAndViewStateData(kekkaList);
             }
         }

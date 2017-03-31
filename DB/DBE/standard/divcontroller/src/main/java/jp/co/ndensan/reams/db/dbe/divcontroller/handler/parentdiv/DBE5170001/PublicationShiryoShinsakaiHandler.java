@@ -444,7 +444,9 @@ public class PublicationShiryoShinsakaiHandler {
         setChk委員帳票(印刷帳票_審査会資料組み合わせ, 印刷帳票_審査会資料以外, 印刷帳票_審査会資料);
 
         set審査会資料活性制御();
-        文書番号管理の初期化();
+//        文書番号管理の初期化();
+        div.getCcdBunshoNoInput().initialize(ReportIdDBE.DBE515001.getReportId());
+        setCcdBunshoNoInputControl();
     }
 
     private void setChk事務局帳票(List<RString> 印刷帳票_審査会資料組み合わせ, List<RString> 印刷帳票_審査会資料以外, List<RString> 印刷帳票_審査会資料) {
@@ -459,21 +461,21 @@ public class PublicationShiryoShinsakaiHandler {
         div.getChkPrintChohyoIin2().setSelectedItemsByKey(印刷帳票_審査会資料以外);
     }
 
-    private void 文書番号管理の初期化() {
-        ShichosonSecurityJohoFinder 市町村セキュリティFinder = ShichosonSecurityJohoFinder.createInstance();
-        ShichosonSecurityJoho 市町村セキュリティ情報 = 市町村セキュリティFinder.getShichosonSecurityJoho(GyomuBunrui.介護認定);
-        if (市町村セキュリティ情報 != null && 市町村セキュリティ情報.get導入形態コード() != null) {
-            if (DonyuKeitaiCode.認定広域.getCode().equals(市町村セキュリティ情報.get導入形態コード().getCode())) {
-                div.getCcdBunshoNoInput().initialize(new ReportId(ReportIdDBE.DBE515001.getReportId().value().concat("_")
-                        .concat(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))));
-            } else {
-                div.getCcdBunshoNoInput().initialize(ReportIdDBE.DBE515001.getReportId());
-            }
-        } else {
-            div.getCcdBunshoNoInput().initialize(ReportIdDBE.DBE515001.getReportId());
-        }
-        setCcdBunshoNoInputControl();
-    }
+//    private void 文書番号管理の初期化() {
+//        ShichosonSecurityJohoFinder 市町村セキュリティFinder = ShichosonSecurityJohoFinder.createInstance();
+//        ShichosonSecurityJoho 市町村セキュリティ情報 = 市町村セキュリティFinder.getShichosonSecurityJoho(GyomuBunrui.介護認定);
+//        if (市町村セキュリティ情報 != null && 市町村セキュリティ情報.get導入形態コード() != null) {
+//            if (DonyuKeitaiCode.認定広域.getCode().equals(市町村セキュリティ情報.get導入形態コード().getCode())) {
+//                div.getCcdBunshoNoInput().initialize(new ReportId(ReportIdDBE.DBE515001.getReportId().value().concat("_")
+//                        .concat(DbBusinessConfig.get(ConfigNameDBU.保険者情報_保険者番号, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告))));
+//            } else {
+//                div.getCcdBunshoNoInput().initialize(ReportIdDBE.DBE515001.getReportId());
+//            }
+//        } else {
+//            div.getCcdBunshoNoInput().initialize(ReportIdDBE.DBE515001.getReportId());
+//        }
+//        setCcdBunshoNoInputControl();
+//    }
 
     private void 事務局用印刷帳票の初期化(RDate 日期, RString 出力スタイル, List<RString> 印刷帳票_審査会資料組み合わせ,
             List<RString> 印刷帳票_審査会資料以外, List<RString> 印刷帳票_審査会資料) {
