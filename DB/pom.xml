@@ -52,6 +52,7 @@
         <jp.co.ndensan.reams.dzxVersion>1.17.0</jp.co.ndensan.reams.dzxVersion>
         <!-- <jp.co.ndensan.reams.uaVersion>1.13.3</jp.co.ndensan.reams.uaVersion> -->
         <jp.co.ndensan.reams.bbVersion>1.17.0</jp.co.ndensan.reams.bbVersion>
+        <jp.co.ndensan.reams.ucxVersion>1.14.1</jp.co.ndensan.reams.ucxVersion>
         <!-- other -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
