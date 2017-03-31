@@ -51,7 +51,6 @@ import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedAppendOption;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -264,7 +263,7 @@ public class ImageJohoMaskingHandler {
     /**
      * イメージ情報パネルの設定
      */
-    public void setMeisai() {
+    public boolean setMeisai() {
         DbAccessLogger accessLog = new DbAccessLogger();
         dgImageMaskShoriTaishosha_Row taishoshaRow = div.getDgImageMaskShoriTaishosha().getClickedItem();
         RString outputImagePath = Directory.createTmpDirectory();
@@ -292,7 +291,7 @@ public class ImageJohoMaskingHandler {
             throw new ApplicationException(UrErrorMessages.対象データなし.getMessage());
         }
 
-        前排他ロックキー(前排他用文字列.concat(taishoshaRow.get申請書管理番号()));
+        boolean ロック = 前排他ロックキー(前排他用文字列.concat(taishoshaRow.get申請書管理番号()));
 
         ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(taishoshaRow.get保険者());
         ExpandedInformation expandedInformation = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), taishoshaRow.get申請書管理番号());
@@ -306,8 +305,10 @@ public class ImageJohoMaskingHandler {
         setTxetMaskingTaisho(rowList);
         setTextGaikyo(rowList);
         Collections.sort(rowList, 表示順);
+        div.getDgImageMaskingTaisho().setReadOnly(!ロック);
         div.getDgImageMaskingTaisho().setDataSource(rowList);
         accessLog.flushBy(AccessLogType.照会);
+        return ロック;
     }
 
     private List<dgImageMaskingTaisho_Row> setMaskingTaisho(File file, List<dgImageMaskingTaisho_Row> rowList) {
@@ -852,11 +853,9 @@ public class ImageJohoMaskingHandler {
         ViewStateHolder.put(ViewStateKeys.被保険者番号, row.get被保番号());
     }
 
-    private void 前排他ロックキー(RString 排他ロックキー) {
+    private boolean 前排他ロックキー(RString 排他ロックキー) {
         LockingKey 前排他ロックキー = new LockingKey(排他ロックキー);
-        if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
-            throw new PessimisticLockingException();
-        }
+        return RealInitialLocker.tryGetLock(前排他ロックキー);
     }
 
     private void 前排他キーの解除(RString 排他) {
