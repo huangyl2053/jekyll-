@@ -14,7 +14,7 @@
     </parent>
 
     <modules>
-        <module>DBB/standard</module>
+        <module>DBA/standard</module>
         <module>DBZ/standard</module>
         <module>DBX/standard</module>
     </modules>
