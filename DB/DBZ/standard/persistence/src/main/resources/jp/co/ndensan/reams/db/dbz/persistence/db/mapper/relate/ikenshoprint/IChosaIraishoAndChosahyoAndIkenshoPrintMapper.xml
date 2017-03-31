@@ -345,7 +345,9 @@
     <select resultOrdered="true" id="select認定調査依頼一覧表" resultMap="resultMap_select認定調査依頼情報"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter" fetchSize="500">
         SELECT
-        A."hihokenshaNo"
+        A."shinseishoKanriNo"
+        ,A."shoKisaiHokenshaNo"
+        ,A."hihokenshaNo"
         ,A."ninteiShinseiYMD"
         ,A."hihokenshaKana"
         ,A."hihokenshaName"
@@ -591,7 +593,8 @@
     <select resultOrdered="true" id="select意見書作成依頼一覧表" resultMap="resultMap_select認定調査依頼情報"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
         SELECT
-        A."hihokenshaNo"
+        A."shinseishoKanriNo"
+        ,A."hihokenshaNo"
         ,A."hihokenshaKana"
         ,A."hihokenshaName"
         ,A."seinengappiYMD"

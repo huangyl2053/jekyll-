@@ -705,7 +705,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                     set認定調査提出期限(business),
                     business.get市町村コード(),
                     business.get認定調査委託先コード(),
-                    business.get申請書管理番号()
+                    business.get申請書管理番号(),
+                    business.get保険者番号()
             );
             chosaIraishoHeadItemList.add(item);
         }

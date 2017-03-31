@@ -249,7 +249,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
                         item.getListIchiranhyo_12(),
                         item.getShichosonCode(),
                         item.getChosaItakusakiCode(),
-                        item.getShinseishoKanriNo()));
+                        item.getShinseishoKanriNo(),
+                        item.getShokisaiHokenshaNo()));
             }
             ChosaIraiIchiranhyoReport report = ChosaIraiIchiranhyoReport.createFrom(itemList);
             report.writeBy(reportSourceWriter);

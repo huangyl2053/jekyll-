@@ -294,7 +294,8 @@ public class NinteiChosaBusiness {
                 set提出期限(entity),
                 entity.get証記載保険者番号(),
                 entity.get認定調査委託先コード(),
-                entity.get申請書管理番号());
+                entity.get申請書管理番号(),
+                entity.get証記載保険者番号());
     }
 
     private RString set提出期限(HomonChosaIraishoRelateEntity entity) {

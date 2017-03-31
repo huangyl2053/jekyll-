@@ -79,12 +79,14 @@ public class ChosairairirekiIchiran_DBE220004Process extends BatchProcessBase<Ho
         } else {
             認定申請区分 = NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分_申請時_コード()).get略称();
         }
-        ChosairairirekiIchiranReport report = new ChosairairirekiIchiranReport(
-                new ChosairairirekiIchiranBusiness(entity.get直近区分(),
-                        entity.get被保険者番号(), entity.get被保険者氏名(), entity.get被保険者氏名カナ(), entity.get住所(), entity.get事業者名称(),
-                        entity.get調査員氏名(), 認定調査依頼年月日, 認定申請区分,
-                        !RString.isNullOrEmpty(entity.get被保険者番号()) ? new ShikibetsuCode(entity.get証記載保険者番号().substring(0, 5).concat(entity.get被保険者番号())) : null,
-                        !RString.isNullOrEmpty(entity.get被保険者番号()) ? new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.get申請書管理番号()) : null));
+        ChosairairirekiIchiranBusiness rirekiBusiness = new ChosairairirekiIchiranBusiness(entity.get直近区分(),
+                entity.get被保険者番号(), entity.get被保険者氏名(), entity.get被保険者氏名カナ(), entity.get住所(), entity.get事業者名称(),
+                entity.get調査員氏名(), 認定調査依頼年月日, 認定申請区分);
+        if (!RString.isNullOrEmpty(entity.get被保険者番号())) {
+            rirekiBusiness.set識別コード(new ShikibetsuCode(entity.get証記載保険者番号().substring(0, 5).concat(entity.get被保険者番号())));
+            rirekiBusiness.set拡張情報(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.get申請書管理番号()));
+        }
+        ChosairairirekiIchiranReport report = new ChosairairirekiIchiranReport(rirekiBusiness);
         report.writeBy(reportSourceWriter);
     }
 

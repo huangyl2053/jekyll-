@@ -50,6 +50,7 @@ public class ChosaIraiIchiranhyoBodyItem {
     private final RString shichosonCode;
     private final RString chosaItakusakiCode;
     private final RString shinseishoKanriNo;
+    private final RString shokisaiHokenshaNo;
 
     /**
      * インスタンスを生成します。
@@ -149,6 +150,7 @@ public class ChosaIraiIchiranhyoBodyItem {
         this.shichosonCode = RString.EMPTY;
         this.chosaItakusakiCode = RString.EMPTY;
         this.shinseishoKanriNo = RString.EMPTY;
+        this.shokisaiHokenshaNo = RString.EMPTY;
     }
 
     /**
@@ -187,6 +189,7 @@ public class ChosaIraiIchiranhyoBodyItem {
      * @param shichosonCode 市町村コード
      * @param chosaItakusakiCode 認定調査委託先コード
      * @param shinseishoKanriNo
+     * @param shokisaiHokenshaNo
      */
     public ChosaIraiIchiranhyoBodyItem(
             RString hakkoYMD,
@@ -221,7 +224,8 @@ public class ChosaIraiIchiranhyoBodyItem {
             RString listIchiranhyo_12,
             RString shichosonCode,
             RString chosaItakusakiCode,
-            RString shinseishoKanriNo) {
+            RString shinseishoKanriNo,
+            RString shokisaiHokenshaNo) {
         this.hakkoYMD = hakkoYMD;
         this.denshiKoin = denshiKoin;
         this.ninshoshaYakushokuMei = ninshoshaYakushokuMei;
@@ -255,6 +259,7 @@ public class ChosaIraiIchiranhyoBodyItem {
         this.shichosonCode = shichosonCode;
         this.chosaItakusakiCode = chosaItakusakiCode;
         this.shinseishoKanriNo = shinseishoKanriNo;
+        this.shokisaiHokenshaNo = shokisaiHokenshaNo;
     }
 
 }
