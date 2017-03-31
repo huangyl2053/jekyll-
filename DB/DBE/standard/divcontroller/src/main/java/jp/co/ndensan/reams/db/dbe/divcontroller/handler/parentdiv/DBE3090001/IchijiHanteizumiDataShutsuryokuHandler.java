@@ -65,6 +65,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
 /**
  * 画面設計_DBE3090001_一次判定データ出力Handlerです。
@@ -474,16 +475,17 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
      * @param dbt5304Entity List<ShujiiIkenshoIkenItem>
      * @param 前回dbt5304Entity List<ShujiiIkenshoIkenItem>
      * @param 認定調査特記事項番号リスト List<NinteichosahyoTokkijiko>
+     * @return SourceDataCollection SourceDataCollection
      */
-    public void set帳票(List<IchijiHanteizumiDataBusiness> 一次判定結果list,
+    public SourceDataCollection set帳票(List<IchijiHanteizumiDataBusiness> 一次判定結果list,
             List<NinteichosahyoServiceJokyo> 認定調査票概況調査リスト, List<NinteichosahyoServiceJokyoFlag> 認定調査票フラグリスト,
             List<NinteichosahyoChosaItem> 認定調査票調査項目リスト, List<NinteichosahyoChosaItem> 前回調査項目リスト,
             List<ShujiiIkenshoIkenItem> dbt5304Entity, List<ShujiiIkenshoIkenItem> 前回dbt5304Entity,
             List<NinteichosahyoTokkijiko> 認定調査特記事項番号リスト) {
         IchijiHanteizumiDataShutsuryoku shutsuryoku = new IchijiHanteizumiDataShutsuryoku();
         IchijihanteikekkahyoBusiness a4Data = new IchijihanteikekkahyoBusiness();
+        IchijihanteikekkahyoPrintService printService = new IchijihanteikekkahyoPrintService();
         for (IchijiHanteizumiDataBusiness business : 一次判定結果list) {
-            IchijihanteikekkahyoPrintService printService = new IchijihanteikekkahyoPrintService();
             a4Data.setタイトル(new RString("一次判定結果票"));
             if (business.get一次判定結果情報().get作成年月日() != null) {
                 a4Data.set作成日_元号(new FlexibleDate(business.get一次判定結果情報().get作成年月日()).wareki().eraType(EraType.KANJI).getEra());
@@ -607,8 +609,9 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
             a4Data.set現在のサービス状況(shutsuryoku.setサービス状況(business, 認定調査票概況調査リスト, 認定調査票フラグリスト));
             set帳票印刷(a4Data, business, shutsuryoku, 認定調査票調査項目リスト, 前回調査項目リスト,
                     dbt5304Entity, 前回dbt5304Entity, 認定調査特記事項番号リスト);
-            printService.print(a4Data);
+//            printService.print(a4Data);
         }
+        return printService.print(a4Data);
     }
 
     private void set帳票印刷(IchijihanteikekkahyoBusiness a4Data, IchijiHanteizumiDataBusiness business,

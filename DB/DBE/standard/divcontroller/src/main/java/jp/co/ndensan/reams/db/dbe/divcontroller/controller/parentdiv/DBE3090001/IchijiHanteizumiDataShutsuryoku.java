@@ -42,6 +42,7 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -164,16 +165,27 @@ public class IchijiHanteizumiDataShutsuryoku {
     }
 
     /**
+     * 「一次判定結果票を出力する」ボタンを押時のバリデーションチェックです。
+     *
+     * @param div 一次判定データ出力div
+     * @return ResponseData
+     */
+    public ResponseData<IchijiHanteizumiDataShutsuryokuDiv> onClick_ValidationOfIchijiHanteiKekkahyoShutsuryoku(IchijiHanteizumiDataShutsuryokuDiv div) {
+        ValidationMessageControlPairs validPairs = getValidatisonHandlerr(div).validate一覧未選択チェック();
+        if (validPairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        }
+        return ResponseData.of(div).respond();
+    }
+
+    /**
      * 「一次判定結果票を出力する」ボタンを押下。
      *
      * @param div 一次判定データ出力div
      * @return ResponseData
      */
-    public ResponseData<IchijiHanteizumiDataShutsuryokuDiv> onClick_btnIchijiHanteiKekkahyoShutsuryoku(IchijiHanteizumiDataShutsuryokuDiv div) {
-        ValidationMessageControlPairs validPairs = getValidatisonHandlerr(div).validate一覧未選択チェック();
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
-        }
+    public ResponseData<SourceDataCollection> onClick_btnIchijiHanteiKekkahyoShutsuryoku(IchijiHanteizumiDataShutsuryokuDiv div) {
+        ResponseData<SourceDataCollection> response = new ResponseData<>();
         List<IchijiHanteizumiDataBusiness> 一次判定結果list = finder.get一次判定結果情報(getHandler(div).createParam帳票()).records();
         List<NinteichosahyoServiceJokyo> 認定調査票概況調査リスト = finder.get認定調査票概況調査(getHandler(div).createParam帳票()).records();
         List<NinteichosahyoServiceJokyoFlag> 認定調査票フラグリスト = finder.get認定調査票フラグ(getHandler(div).createParam帳票()).records();
@@ -182,9 +194,8 @@ public class IchijiHanteizumiDataShutsuryoku {
         List<ShujiiIkenshoIkenItem> 主治医意見書意見項目リスト = finder.get主治医意見書意見項目(getHandler(div).createParam帳票()).records();
         List<ShujiiIkenshoIkenItem> 前回主治医意見書意見項目リスト = finder.get前回主治医意見書意見項目(getHandler(div).createParam帳票()).records();
         List<NinteichosahyoTokkijiko> 認定調査特記事項番号リスト = finder.get認定調査特記事項番号(getHandler(div).createParam帳票()).records();
-        getHandler(div).set帳票(一次判定結果list, 認定調査票概況調査リスト, 認定調査票フラグリスト, 認定調査票調査項目リスト, 前回調査票調査項目リスト,
-                主治医意見書意見項目リスト, 前回主治医意見書意見項目リスト, 認定調査特記事項番号リスト);
-        return ResponseData.of(div).respond();
+        return ResponseData.of(getHandler(div).set帳票(一次判定結果list, 認定調査票概況調査リスト, 認定調査票フラグリスト, 認定調査票調査項目リスト, 前回調査票調査項目リスト,
+                主治医意見書意見項目リスト, 前回主治医意見書意見項目リスト, 認定調査特記事項番号リスト)).respond();
     }
 
     /**
