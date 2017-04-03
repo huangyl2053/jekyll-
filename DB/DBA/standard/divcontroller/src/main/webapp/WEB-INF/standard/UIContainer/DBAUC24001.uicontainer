@@ -95,6 +95,78 @@
      "eventName": "完了",
      "destroy": false,
      "condition": ""
+    },
+    {
+     "id": "8",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA2040011",
+     "layoutTitle": "他市町村住所地特例異動",
+     "eventName": "通知書発行画面に遷移",
+     "destroy": true,
+     "condition": "適用完了",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA7010011",
+     "toLayoutTitle": "他市町村住所地特例連絡票発行",
+     "toState": "他画面から遷移"
+    },
+    {
+     "id": "9",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA2040011",
+     "layoutTitle": "他市町村住所地特例異動",
+     "eventName": "通知書発行画面に遷移",
+     "destroy": true,
+     "condition": "解除完了",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA7020011",
+     "toLayoutTitle": "他特例施設退所通知書発行",
+     "toState": "他画面から遷移"
+    },
+    {
+     "id": "10",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA2040011",
+     "layoutTitle": "他市町村住所地特例異動",
+     "eventName": "通知書発行画面に遷移",
+     "destroy": true,
+     "condition": "変更完了",
+     "toLayoutSubGyomuCode": "DBA",
+     "toLayoutName": "DBA7030011",
+     "toLayoutTitle": "他特例施設変更通知書発行",
+     "toState": "他画面から遷移"
+    },
+    {
+     "id": "11",
+     "type": "end",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA7010011",
+     "layoutTitle": "他市町村住所地特例連絡票発行",
+     "eventName": "完了",
+     "destroy": true,
+     "condition": ""
+    },
+    {
+     "id": "12",
+     "type": "end",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA7020011",
+     "layoutTitle": "他特例施設退所通知書発行",
+     "eventName": "完了",
+     "destroy": true,
+     "condition": ""
+    },
+    {
+     "id": "13",
+     "type": "end",
+     "layoutSubGyomuCode": "DBA",
+     "layoutName": "DBA7030011",
+     "layoutTitle": "他特例施設変更通知書発行",
+     "eventName": "完了",
+     "destroy": true,
+     "condition": ""
     }
    ]
   },

@@ -62,6 +62,11 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
     private static final RString KOSHIN = new RString("修正");
     private static final RString SAKUJYO = new RString("削除");
     private static final RString ROOTTITLE = new RString("他市町村住所地特例異動の保存処理が完了しました。");
+    private static final RString STATE_追加適用 = new RString("追加適用");
+    private static final RString STATE_追加解除 = new RString("追加解除");
+    private static final RString STATE_適用完了 = new RString("適用完了");
+    private static final RString STATE_解除完了 = new RString("解除完了");
+    private static final RString STATE_変更完了 = new RString("変更完了");
     private static final LockingKey LOCKINGKEY = new LockingKey(new RString("TatokuIdoKanri"));
     private static final QuestionMessage SYORIMESSAGE = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
             UrQuestionMessages.処理実行の確認.getMessage().evaluate());
@@ -161,7 +166,14 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
             set処理実行(div);
             RealInitialLocker.release(LOCKINGKEY);
             div.getCcdKaigoKanryoMessage().setMessage(ROOTTITLE, RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
-            return ResponseData.of(div).setState(DBA2040011StateName.完了);
+            RString state = ResponseHolder.getState();
+            if (state.equals(STATE_追加適用)) {
+                return ResponseData.of(div).setState(DBA2040011StateName.適用完了);
+            } else if (state.equals(STATE_追加解除)) {
+                return ResponseData.of(div).setState(DBA2040011StateName.解除完了);
+            } else {
+                return ResponseData.of(div).setState(DBA2040011StateName.変更完了);
+            }
         }
         return ResponseData.of(div).respond();
     }
@@ -179,6 +191,23 @@ public class HokaShichosonJyusyochiTokureisyaKanri {
             return ResponseData.of(div).forwardWithEventName(DBA2040011TransitionEventName.検索に戻る).respond();
         }
         return ResponseData.of(div).forwardWithEventName(DBA2040011TransitionEventName.再検索).parameter(PARAMETER);
+    }
+
+    /**
+     * 「通知書発行画面に進む」ボタンの処理です。
+     *
+     * @param div HokaShichosonJyusyochiTokureisyaKanriDiv
+     * @return HokaShichosonJyusyochiTokureisyaKanriDiv
+     */
+    public ResponseData<HokaShichosonJyusyochiTokureisyaKanriDiv> onClick_btnTsuchishoHakko(HokaShichosonJyusyochiTokureisyaKanriDiv div) {
+        RString state = ResponseHolder.getState();
+        if (STATE_適用完了.equals(state)) {
+            return ResponseData.of(div).forwardWithEventName(DBA2040011TransitionEventName.通知書発行画面に遷移).parameter(STATE_適用完了);
+        } else if (STATE_解除完了.equals(state)) {
+            return ResponseData.of(div).forwardWithEventName(DBA2040011TransitionEventName.通知書発行画面に遷移).parameter(STATE_解除完了);
+        } else {
+            return ResponseData.of(div).forwardWithEventName(DBA2040011TransitionEventName.通知書発行画面に遷移).parameter(STATE_変更完了);
+        }
     }
 
     private Map<RString, RString> getMode() {

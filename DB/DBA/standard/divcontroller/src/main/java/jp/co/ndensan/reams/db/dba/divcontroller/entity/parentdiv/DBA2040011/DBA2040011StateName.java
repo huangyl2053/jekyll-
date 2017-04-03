@@ -18,7 +18,9 @@ public enum DBA2040011StateName implements IStateEnumerations {
     追加適用("追加適用"),
     追加解除("追加解除"),
     追加変更("追加変更"),
-    完了("完了");
+    適用完了("適用完了"),
+    解除完了("解除完了"),
+    変更完了("変更完了");
 
     private final RString name;
 

@@ -17,17 +17,17 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShikakuKihonJohoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-06-27_21-36-36">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-16_09-04-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("cddTaJushochiTokureishaKanri")
-    private TaJushochiTokureishaKanriDiv cddTaJushochiTokureishaKanri;
     @JsonProperty("ccdKaigoAtenaInfo")
     private KaigoAtenaInfoDiv ccdKaigoAtenaInfo;
+    @JsonProperty("cddTaJushochiTokureishaKanri")
+    private TaJushochiTokureishaKanriDiv cddTaJushochiTokureishaKanri;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -36,21 +36,21 @@ public class ShikakuKihonJohoDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getcddTaJushochiTokureishaKanri
-     * @return cddTaJushochiTokureishaKanri
-     */
-    @JsonProperty("cddTaJushochiTokureishaKanri")
-    public ITaJushochiTokureishaKanriDiv getCddTaJushochiTokureishaKanri() {
-        return cddTaJushochiTokureishaKanri;
-    }
-
-    /*
      * getccdKaigoAtenaInfo
      * @return ccdKaigoAtenaInfo
      */
     @JsonProperty("ccdKaigoAtenaInfo")
     public IKaigoAtenaInfoDiv getCcdKaigoAtenaInfo() {
         return ccdKaigoAtenaInfo;
+    }
+
+    /*
+     * getcddTaJushochiTokureishaKanri
+     * @return cddTaJushochiTokureishaKanri
+     */
+    @JsonProperty("cddTaJushochiTokureishaKanri")
+    public ITaJushochiTokureishaKanriDiv getCddTaJushochiTokureishaKanri() {
+        return cddTaJushochiTokureishaKanri;
     }
 
     // </editor-fold>
