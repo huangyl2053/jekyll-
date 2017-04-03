@@ -15,6 +15,7 @@
 
     <modules>
         <module>DBA/standard</module>
+        <module>DBU/standard</module>
         <module>DBZ/standard</module>
         <module>DBX/standard</module>
     </modules>
