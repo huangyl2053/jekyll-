@@ -55,7 +55,7 @@ public class NinteiShinseiValidationHandler {
         messages.add(ValidateChain.validateStart(div).ifNot(FutangendogakuShinseiDivSpec.預貯金_1000万以下_Or_2000万以下)
                 .thenAdd(NinteiShinseiValidationMessages.預貯金チェック).messages());
         pairs.add(new ValidationMessageControlDictionaryBuilder().
-                add(NinteiShinseiValidationMessages.預貯金チェック).build().check(messages));
+                add(NinteiShinseiValidationMessages.預貯金チェック, div.getChkYochokinKijunIka()).build().check(messages));
         return pairs;
     }
 
