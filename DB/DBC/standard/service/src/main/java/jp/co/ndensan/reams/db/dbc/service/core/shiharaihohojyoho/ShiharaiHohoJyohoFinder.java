@@ -75,7 +75,6 @@ public class ShiharaiHohoJyohoFinder {
         List<Koza> 口座ID = new ArrayList<>();
         KozaSearchKeyBuilder keyBuilder = new KozaSearchKeyBuilder();
         keyBuilder.set業務コード(GyomuCode.DB介護保険);
-        keyBuilder.setサブ業務コード(SubGyomuCode.DBC介護給付);
         keyBuilder.set科目コード(shunoKamoku.getコード());
         keyBuilder.set識別コード(parameter.getShikibetsuCode());
         List<Koza> kozaList = KozaService.createKozaManager(AuthorityKind.参照権限収納科目).get口座(keyBuilder.build());
