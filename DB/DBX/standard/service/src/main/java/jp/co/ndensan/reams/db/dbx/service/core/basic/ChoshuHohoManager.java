@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbb.service.core.basic;
+package jp.co.ndensan.reams.db.dbx.service.core.basic;
 
 import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbb.persistence.db.basic.DbT2001ChoshuHohoDac;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT2001ChoshuHohoDac;
 import jp.co.ndensan.reams.db.dbx.business.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT2001ChoshuHohoEntity;
@@ -38,7 +38,7 @@ public class ChoshuHohoManager {
      *
      * @param dac {@link DbT2001ChoshuHohoDac}
      */
-    ChoshuHohoManager(DbT2001ChoshuHohoDac dac) {
+    public ChoshuHohoManager(DbT2001ChoshuHohoDac dac) {
         this.dac = dac;
     }
 

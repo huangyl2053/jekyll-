@@ -35,7 +35,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB8120001.Sok
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB8120001.SokujiFukaKouseiMainValidationHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.handler.parentdiv.DBB8120001.SokujiFukaKouseiSaveHandler;
 import jp.co.ndensan.reams.db.dbb.divcontroller.viewbox.idotaishoshaichiranparameter.IdoTaishoshaIchiranparameter;
-import jp.co.ndensan.reams.db.dbb.service.core.basic.ChoshuHohoManager;
+import jp.co.ndensan.reams.db.dbx.service.core.basic.ChoshuHohoManager;
 import jp.co.ndensan.reams.db.dbb.service.core.fuka.sokujikosei.SokujiFukaKoseiService;
 import jp.co.ndensan.reams.db.dbb.service.core.fukajoho.fukajoho.FukaJohoManager;
 import jp.co.ndensan.reams.db.dbb.service.core.fukakousei.SokujiFukaKouseiManager;
