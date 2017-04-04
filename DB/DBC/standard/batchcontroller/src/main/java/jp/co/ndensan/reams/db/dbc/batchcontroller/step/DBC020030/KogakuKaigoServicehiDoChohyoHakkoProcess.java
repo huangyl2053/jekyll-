@@ -267,7 +267,6 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
         }
         IKozaSearchKey kozaSearchKey = new KozaSearchKeyBuilder()
                 .set業務コード(GyomuCode.DB介護保険)
-                .setサブ業務コード(SubGyomuCode.DBC介護給付)
                 .set科目コード(科目コード)
                 .set基準日(FlexibleDate.getNowDate()).build();
         List<KamokuCode> kamokuList = new ShunoKamokuAuthority().
@@ -393,6 +392,7 @@ public class KogakuKaigoServicehiDoChohyoHakkoProcess extends BatchKeyBreakBase<
         EditedAtesaki 編集後宛先 = JushoHenshu.create編集後宛先(AtesakiFactory.createInstance(entity.get宛先()), 地方公共団体, 帳票制御共通情報);
         return 編集後宛先.get編集後住所();
     }
+
     private PersonalData toPersonalData(KogakuServiceReportEntity entity) {
         ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"),
                 new RString("被保険者番号"), new RString(entity.get一時Entity().getHihokenshaNo().toString()));

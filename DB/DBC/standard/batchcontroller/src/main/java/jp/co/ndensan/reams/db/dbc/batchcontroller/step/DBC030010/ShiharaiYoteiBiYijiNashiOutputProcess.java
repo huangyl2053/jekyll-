@@ -98,7 +98,7 @@ public class ShiharaiYoteiBiYijiNashiOutputProcess extends BatchProcessBase<Shok
     @Override
     protected IBatchReader createReader() {
         outputCore = new ReportOutputJokenhyoProcessCore();
-        
+
         RString 出力順 = get出力順(ReportIdDBC.DBC100002_2.getReportId(), batchPram.getSyutujunId());
         if (!RString.isNullOrEmpty(出力順)) {
             出力順 = 出力順.replace(ORDER_BY, RString.EMPTY);
@@ -113,7 +113,7 @@ public class ShiharaiYoteiBiYijiNashiOutputProcess extends BatchProcessBase<Shok
         }
         ShikibetsuTaishoPSMSearchKeyBuilder key2 = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
         IShikibetsuTaishoPSMSearchKey psmShikibetsuTaisho = key2.build();
-        
+
         ShikibetsuTaishoSearchKeyBuilder key = new ShikibetsuTaishoSearchKeyBuilder(
                 ShikibetsuTaishoGyomuHanteiKeyFactory.createInstance(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先), true);
         key.setデータ取得区分(DataShutokuKubun.直近レコード);
@@ -124,7 +124,7 @@ public class ShiharaiYoteiBiYijiNashiOutputProcess extends BatchProcessBase<Shok
         宛先builder.set基準日(batchPram.getHakkoYMD());
         宛先builder.set送付先利用区分(SofusakiRiyoKubun.利用する);
         宛先builder.set代納人利用区分(DainoRiyoKubun.利用しない);
-        
+
         ShunoKamokuFinder 収納科目Finder = ShunoKamokuFinder.createInstance();
         IShunoKamoku 介護給付_償還 = 収納科目Finder.get科目(ShunoKamokuShubetsu.介護給付_償還);
         KamokuCode 科目コード;
@@ -135,23 +135,24 @@ public class ShiharaiYoteiBiYijiNashiOutputProcess extends BatchProcessBase<Shok
         }
         IKozaSearchKey searchKey = new KozaSearchKeyBuilder()
                 .set業務コード(GyomuCode.DB介護保険)
-                .setサブ業務コード(SubGyomuCode.DBC介護給付)
                 .set科目コード(科目コード)
                 .set基準日(FlexibleDate.getNowDate()).build();
         List<KamokuCode> kamokuList = new ShunoKamokuAuthority().
                 get参照権限科目コード(UrControlDataFactory.createInstance().getLoginInfo().getUserId());
-        
+
         ShokanKetteiTsuchiShoKetteiTsuchiIchiranParameter parameter
                 = ShokanKetteiTsuchiShoKetteiTsuchiIchiranParameter.toMybatisParameter(出力順, 資格区分, psmShikibetsuTaisho,
                         key.getPSM検索キー(), 宛先builder.build(), searchKey, kamokuList);
         帳票制御共通情報 = get帳票制御共通情報();
         return new BatchDbReader(帳票取得SQL, parameter);
     }
+
     private ChohyoSeigyoKyotsu get帳票制御共通情報() {
         ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
         return chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBC介護給付,
                 new ReportId(ReportIdDBC.DBC100002_2.getReportId().value()));
     }
+
     private RString get出力順(ReportId 帳票分類ID, RString 出力順ID) {
 
         if (RString.isNullOrEmpty(出力順ID)) {
@@ -164,7 +165,7 @@ public class ShiharaiYoteiBiYijiNashiOutputProcess extends BatchProcessBase<Shok
         }
         return MyBatisOrderByClauseCreator.create(KetteiTsuchiIchiranOutPutOrder.class, outputOrder);
     }
-    
+
     @Override
     protected void createWriter() {
         batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC100002.getReportId().value()).create();
@@ -198,7 +199,7 @@ public class ShiharaiYoteiBiYijiNashiOutputProcess extends BatchProcessBase<Shok
         }
         return builder.toRString();
     }
-    
+
     private RString getJufukuKey(ShokanKetteiTsuchiShoShiharai shiharai) {
         RStringBuilder key = new RStringBuilder();
         key.append(shiharai.get被保険者番号().value());
@@ -206,7 +207,7 @@ public class ShiharaiYoteiBiYijiNashiOutputProcess extends BatchProcessBase<Shok
         key.append(shiharai.get整理番号().padLeft(new RString(ZERO), TEN));
         return key.toRString();
     }
-    
+
     @Override
     protected void afterExecute() {
         if (帳票データリスト.isEmpty()) {
@@ -235,9 +236,10 @@ public class ShiharaiYoteiBiYijiNashiOutputProcess extends BatchProcessBase<Shok
         ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiReport report
                 = ShokanKetteiTsuchiShoShiharaiYoteiBiYijiNashiReport.createFrom(itemList);
         report.writeBy(reportSourceWriter);
-        
+
         eucFileOutputJohoFactory();
     }
+
     private void eucFileOutputJohoFactory() {
         List<RString> 出力条件List = outputCore.get出力条件(batchPram.getBatParmeter(), outputOrder);
         ReportOutputJokenhyoItem reportOutputJokenhyoItem = new ReportOutputJokenhyoItem(
