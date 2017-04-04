@@ -98,6 +98,7 @@ public class ShiharaiHenkoTsuchiHakko {
             div.getSashitomeTsuchisho().setIsPublish(false);
             div.getGengakuTsuchisho().setDisplayNone(true);
             div.getGengakuTsuchisho().setIsPublish(false);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnReportPublish"), true);
         }
 
         return ResponseData.of(div).respond();
@@ -135,7 +136,8 @@ public class ShiharaiHenkoTsuchiHakko {
             ReportId repotId = ReportIdDBD.DBD100002.getReportId();
             div.getCcdHenkoTsuchishoBunshoNo().initialize(repotId);
         }
-        if (!(取得された支払方法変更管理情報.getShiharaiHohoHenkoSashitomeList().get(0).get差止決定年月日() == null
+        if (!取得された支払方法変更管理情報.getShiharaiHohoHenkoSashitomeList().isEmpty() 
+                && !(取得された支払方法変更管理情報.getShiharaiHohoHenkoSashitomeList().get(0).get差止決定年月日() == null
                 || 取得された支払方法変更管理情報.getShiharaiHohoHenkoSashitomeList().get(0).get差止決定年月日().isEmpty())) {
             div.getSashitomeTsuchisho().setDisplayNone(false);
             div.getSashitomeTsuchisho().setDisabled(false);
@@ -149,7 +151,8 @@ public class ShiharaiHenkoTsuchiHakko {
             }
             div.getCcdSashitomeTsuchishoBunshoNo().initialize(repotId);
         }
-        if (!(取得された支払方法変更管理情報.getShiharaiHohoHenkoSashitomeList().get(0).get控除決定年月日() == null
+        if (!取得された支払方法変更管理情報.getShiharaiHohoHenkoSashitomeList().isEmpty()
+                && !(取得された支払方法変更管理情報.getShiharaiHohoHenkoSashitomeList().get(0).get控除決定年月日() == null
                 || 取得された支払方法変更管理情報.getShiharaiHohoHenkoSashitomeList().get(0).get控除決定年月日().isEmpty())) {
             div.getKojoTsuchisho().setDisplayNone(false);
             div.getKojoTsuchisho().setDisabled(false);
@@ -166,6 +169,7 @@ public class ShiharaiHenkoTsuchiHakko {
             ReportId repotId = ReportIdDBD.DBD100005.getReportId();
             div.getCcdHenkoTsuchishoBunshoNo().initialize(repotId);
         }
+        CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnReportPublish"), false);
         return ResponseData.of(div).respond();
 
     }
