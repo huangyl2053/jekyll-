@@ -139,7 +139,7 @@ public class ChosaOCRTorikomiMain {
     }
 
     private List<TorikomiEntity> csvCheck処理(List<TorikomiData> dataList, ChosaOCRTorikomiMainDiv div, RString 審査会開催番号) {
-        DbAccessLogger accessLog = new DbAccessLogger();
+//        DbAccessLogger accessLog = new DbAccessLogger();
         if (dataList.isEmpty()) {
             throw new ApplicationException(UrErrorMessages.対象データなし_追加メッセージあり.getMessage().replace(ファイル名.toString()));
         }
@@ -148,11 +148,11 @@ public class ChosaOCRTorikomiMain {
             ChosaOCRTorikomiParameter param = ChosaOCRTorikomiParameter.createParam(審査会開催番号,
                     csvData.get保険者番号(),
                     csvData.get被保険者番号());
-            if (csvData.get項目数() != CSV項目数) {
-                csvData.setOK_NG(チェックNG);
-            } else {
-                csvData.setOK_NG(チェックOK);
-            }
+//            if (csvData.get項目数() != CSV項目数) {
+//                csvData.setOK_NG(チェックNG);
+//            } else {
+//                csvData.setOK_NG(チェックOK);
+//            }
             if (記入無し.equals(csvData.get非該当()) && 記入無し.equals(csvData.get要支援1()) && 記入無し.equals(csvData.get要支援2())
                     && 記入無し.equals(csvData.get要介護1()) && 記入無し.equals(csvData.get要介護2()) && 記入無し.equals(csvData.get要介護3())
                     && 記入無し.equals(csvData.get要介護4()) && 記入無し.equals(csvData.get要介護5())) {
@@ -168,33 +168,33 @@ public class ChosaOCRTorikomiMain {
                 List<ChosaOCRTorikomiBusiness> 関連データList
                         = ChosaOCRTorikomiFinder.createInstance().getChosahyoTorikomiKekka(param).records();
                 for (ChosaOCRTorikomiBusiness 関連データ : 関連データList) {
-                    if (関連データ.get証記載保険者番号().equals(csvData.get保険者番号()) && 関連データ.get被保険者番号().equals(csvData.get被保険者番号())) {
-                        TorikomiData data = getHandler(div).setDB更新用データ(csvData);
-                        data.setNo(関連データ.getNo());
-                        data.set保険者(関連データ.get保険者());
-                        data.set申請書管理番号(関連データ.get申請書管理番号());
-                        data.set厚労省IF識別コード(関連データ.get厚労省IF識別コード());
-                        data.set認定申請年月日(関連データ.get認定申請年月日());
-                        data.set認定申請区分申請時コード(関連データ.get認定申請区分申請時コード());
-                        data.set被保険者氏名(関連データ.get被保険者氏名());
-                        data.setDbt5101_被保険者番号(関連データ.get被保険者番号());
-                        data.set証記載保険者番号(関連データ.get証記載保険者番号());
-                        data.set要介護認定一次判定結果コード(関連データ.get要介護認定一次判定結果コード());
-                        data.set二次判定要介護状態区分コード(関連データ.get二次判定要介護状態区分コード());
-                        data.set二次判定年月日(関連データ.get二次判定年月日());
-                        data.set二次判定認定有効終了年月日(関連データ.get二次判定認定有効終了年月日());
-                        data.set合議体番号(関連データ.get合議体番号());
-                        data.set介護認定審査会開催予定場所コード(関連データ.get介護認定審査会開催予定場所コード());
-                        data.set介護認定審査会開催予定年月日(関連データ.get介護認定審査会開催予定年月日());
-                        TorikomiEntity entity = getTorikomiEntity(data);
-                        dB更新用.add(entity);
-                    }
+//                    if (関連データ.get証記載保険者番号().equals(csvData.get保険者番号()) && 関連データ.get被保険者番号().equals(csvData.get被保険者番号())) {
+                    TorikomiData data = getHandler(div).setDB更新用データ(csvData);
+                    data.setNo(関連データ.getNo());
+                    data.set保険者(関連データ.get保険者());
+                    data.set申請書管理番号(関連データ.get申請書管理番号());
+                    data.set厚労省IF識別コード(関連データ.get厚労省IF識別コード());
+                    data.set認定申請年月日(関連データ.get認定申請年月日());
+                    data.set認定申請区分申請時コード(関連データ.get認定申請区分申請時コード());
+                    data.set被保険者氏名(関連データ.get被保険者氏名());
+                    data.setDbt5101_被保険者番号(関連データ.get被保険者番号());
+                    data.set証記載保険者番号(関連データ.get証記載保険者番号());
+                    data.set要介護認定一次判定結果コード(関連データ.get要介護認定一次判定結果コード());
+                    data.set二次判定要介護状態区分コード(関連データ.get二次判定要介護状態区分コード());
+                    data.set二次判定年月日(関連データ.get二次判定年月日());
+                    data.set二次判定認定有効終了年月日(関連データ.get二次判定認定有効終了年月日());
+                    data.set合議体番号(関連データ.get合議体番号());
+                    data.set介護認定審査会開催予定場所コード(関連データ.get介護認定審査会開催予定場所コード());
+                    data.set介護認定審査会開催予定年月日(関連データ.get介護認定審査会開催予定年月日());
+                    TorikomiEntity entity = getTorikomiEntity(data);
+                    dB更新用.add(entity);
+//                    }
                 }
             }
-            ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), csvData.get申請書管理番号().getColumnValue());
-            accessLog.store(new ShoKisaiHokenshaNo(csvData.get保険者番号()), csvData.get被保険者番号(), expandedInfo);
+//            ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), csvData.get申請書管理番号().getColumnValue());
+//            accessLog.store(new ShoKisaiHokenshaNo(csvData.get保険者番号()), csvData.get被保険者番号(), expandedInfo);
         }
-        accessLog.flushBy(AccessLogType.照会);
+//        accessLog.flushBy(AccessLogType.照会);
         return dB更新用;
     }
 

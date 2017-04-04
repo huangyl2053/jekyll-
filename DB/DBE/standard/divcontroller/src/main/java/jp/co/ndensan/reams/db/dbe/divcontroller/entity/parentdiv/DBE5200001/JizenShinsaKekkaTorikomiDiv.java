@@ -9,11 +9,11 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * PublicationResult のクラスファイル 
+ * JizenShinsaKekkaTorikomi のクラスファイル 
  * 
  * @author 自動生成
  */
-public class PublicationResultDiv extends Panel {
+public class JizenShinsaKekkaTorikomiDiv extends Panel {
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     /*
      * [ private の作成 ]
@@ -21,8 +21,10 @@ public class PublicationResultDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("DgBeforeShinsakaiResult")
-    private DataGrid<DgBeforeShinsakaiResult_Row> DgBeforeShinsakaiResult;
+    @JsonProperty("uplJizanShinsaKekka")
+    private UploadPanel uplJizanShinsaKekka;
+    @JsonProperty("btnGetResult")
+    private Button btnGetResult;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -31,21 +33,39 @@ public class PublicationResultDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getDgBeforeShinsakaiResult
-     * @return DgBeforeShinsakaiResult
+     * getuplJizanShinsaKekka
+     * @return uplJizanShinsaKekka
      */
-    @JsonProperty("DgBeforeShinsakaiResult")
-    public DataGrid<DgBeforeShinsakaiResult_Row> getDgBeforeShinsakaiResult() {
-        return DgBeforeShinsakaiResult;
+    @JsonProperty("uplJizanShinsaKekka")
+    public UploadPanel getUplJizanShinsaKekka() {
+        return uplJizanShinsaKekka;
     }
 
     /*
-     * setDgBeforeShinsakaiResult
-     * @param DgBeforeShinsakaiResult DgBeforeShinsakaiResult
+     * setuplJizanShinsaKekka
+     * @param uplJizanShinsaKekka uplJizanShinsaKekka
      */
-    @JsonProperty("DgBeforeShinsakaiResult")
-    public void setDgBeforeShinsakaiResult(DataGrid<DgBeforeShinsakaiResult_Row> DgBeforeShinsakaiResult) {
-        this.DgBeforeShinsakaiResult = DgBeforeShinsakaiResult;
+    @JsonProperty("uplJizanShinsaKekka")
+    public void setUplJizanShinsaKekka(UploadPanel uplJizanShinsaKekka) {
+        this.uplJizanShinsaKekka = uplJizanShinsaKekka;
+    }
+
+    /*
+     * getbtnGetResult
+     * @return btnGetResult
+     */
+    @JsonProperty("btnGetResult")
+    public Button getBtnGetResult() {
+        return btnGetResult;
+    }
+
+    /*
+     * setbtnGetResult
+     * @param btnGetResult btnGetResult
+     */
+    @JsonProperty("btnGetResult")
+    public void setBtnGetResult(Button btnGetResult) {
+        this.btnGetResult = btnGetResult;
     }
 
     // </editor-fold>

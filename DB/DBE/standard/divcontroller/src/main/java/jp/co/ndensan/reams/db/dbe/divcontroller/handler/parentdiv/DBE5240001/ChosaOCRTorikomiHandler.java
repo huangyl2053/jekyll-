@@ -151,10 +151,10 @@ public class ChosaOCRTorikomiHandler {
         try (CsvListReader reader = new CsvListReader(param(csvFilePath))) {
             while (true) {
                 List<RString> aLine = reader.readLine();
-                if (aLine == null) {
+                if (aLine == null || aLine.isEmpty()) {
                     break;
                 }
-                list.add(toTorikomiData(aLine));
+                list.add(TorikomiData.of(aLine));
             }
         }
         return list;
@@ -162,14 +162,12 @@ public class ChosaOCRTorikomiHandler {
 
     private static CsvListReaderParameter param(RString csvFilePath) {
         return new CsvListReaderParameterBuilder(csvFilePath)
-                .colDelimiter(CSV_WRITER_DELIMITER).rowDelimiter(NewLine.CRLF).encode(Encode.UTF_8).hasHeader(false).build();
-    }
-
-    //TODO TorikomiDataのコンストラクタにする。
-    private static TorikomiData toTorikomiData(List<RString> list) {
-        TorikomiData data = new TorikomiData();
-        data.set項目数(list.size());
-        return data;
+                .enclosure(RString.EMPTY)
+                .colDelimiter(CSV_WRITER_DELIMITER)
+                .rowDelimiter(NewLine.CRLF)
+                .encode(Encode.UTF_8)
+                .hasHeader(false)
+                .build();
     }
 
     /**
@@ -233,10 +231,15 @@ public class ChosaOCRTorikomiHandler {
     }
 
     private int rStringToInt(RString data) {
-        if (data != null) {
-            return Integer.valueOf(data.toString());
+        //TODO 暫定対応のため、修正が必要。例外をキャッチしない。例外がスローされるのは、おそらく、引数に設定する元の編集がおかしい。
+        try {
+            if (data != null) {
+                return Integer.valueOf(data.toString());
+            }
+            return 0;
+        } catch (Exception e) {
+            return 0;
         }
-        return 0;
     }
 
     private FlexibleDate get認定有効期間開始日(TorikomiEntity data) {
@@ -513,7 +516,7 @@ public class ChosaOCRTorikomiHandler {
         if (row.getNinteiYukoKikan() != null) {
             認定有効期間 = Integer.valueOf(row.getNinteiYukoKikan().toString());
         }
-        return ninteiKekkaJoho.createBuilderForEdit().set二次判定年月日(new FlexibleDate(get審査会開催日(data.get審査会開催日())))
+        return ninteiKekkaJoho.createBuilderForEdit().set二次判定年月日(get審査会開催日(data.get審査会開催日()))
                 .set二次判定要介護状態区分コード(get二次判定要介護状態区分コード(data, row))
                 .set二次判定認定有効期間(認定有効期間)
                 .set二次判定認定有効開始年月日(new FlexibleDate(dateFormat34(row.getNinteiYukoKikanKaishiYMD())))
@@ -598,7 +601,7 @@ public class ChosaOCRTorikomiHandler {
      */
     public ShinsakaiWariateIinJoho editShinsakaiWariateIinJoho(ShinsakaiWariateIinJoho shinsakaiWariateIinJoho, dgChosahyoTorikomiKekka_Row row,
             TorikomiEntity data, RString 審査会開催番号) {
-        return shinsakaiWariateIinJoho.createBuilderForEdit().set介護認定審査会開催年月日(new FlexibleDate(get審査会開催日(data.get審査会開催日())))
+        return shinsakaiWariateIinJoho.createBuilderForEdit().set介護認定審査会開催年月日(get審査会開催日(data.get審査会開催日()))
                 .set委員遅刻有無(false)
                 .set委員出席時間(data.get開催開始時間())
                 .set委員早退有無(false)
@@ -623,7 +626,7 @@ public class ChosaOCRTorikomiHandler {
      */
     public ShinsakaiKaisaiKekkaJoho2 editShinsakaiKaisaiKekkaJoho(ShinsakaiKaisaiKekkaJoho2 kekkaJoho, dgChosahyoTorikomiKekka_Row row, TorikomiEntity data) {
         return kekkaJoho.createBuilderForEdit().set合議体番号(data.get合議体番号())
-                .set介護認定審査会開催年月日(new FlexibleDate(get審査会開催日(data.get審査会開催日())))
+                .set介護認定審査会開催年月日(get審査会開催日(data.get審査会開催日()))
                 .set介護認定審査会開始時刻(data.get開催開始時間())
                 .set介護認定審査会終了時刻(data.get開催終了時間())
                 .set介護認定審査会開催場所コード(data.get介護認定審査会開催予定場所コード())
@@ -632,15 +635,17 @@ public class ChosaOCRTorikomiHandler {
                 .build();
     }
 
-    private RString get審査会開催日(RString data) {
-        RStringBuilder builder1 = new RStringBuilder();
-        builder1.append(new RString("平成"));
-        builder1.append(data.substring(0, 2));
-        builder1.append(new RString("年"));
-        RStringBuilder builder2 = new RStringBuilder();
-        builder2.append(new RDate(builder1.toString()).seireki().toDateString().substring(0, INDEX_4));
-        builder2.append(data.substring(2));
-        return builder2.toRString();
+    private FlexibleDate get審査会開催日(RString data) {
+//        RStringBuilder builder1 = new RStringBuilder();
+//        builder1.append(new RString("平成"));
+//        builder1.append(data.substring(0, 2));
+//        builder1.append(new RString("年"));
+//        RStringBuilder builder2 = new RStringBuilder();
+//        builder2.append(new RDate(builder1.toString()).seireki().toDateString().substring(0, INDEX_4));
+//        builder2.append(data.substring(2));
+//        return builder2.toRString();
+//        return data;
+        return FlexibleDate.getNowDate();
     }
 
     private int get所要時間合計(TorikomiEntity data) {

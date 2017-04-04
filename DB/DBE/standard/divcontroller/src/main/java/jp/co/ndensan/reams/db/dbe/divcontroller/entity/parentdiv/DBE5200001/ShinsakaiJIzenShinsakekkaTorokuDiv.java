@@ -4,8 +4,10 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5200001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -14,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinsakaiJIzenShinsakekkaTorokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -23,6 +25,8 @@ public class ShinsakaiJIzenShinsakekkaTorokuDiv extends Panel {
      */
     @JsonProperty("JizenShinsakaiShiryoPublication")
     private JizenShinsakaiShiryoPublicationDiv JizenShinsakaiShiryoPublication;
+    @JsonProperty("JizenShinsaKekkaTorikomi")
+    private JizenShinsaKekkaTorikomiDiv JizenShinsaKekkaTorikomi;
     @JsonProperty("PublicationResult")
     private PublicationResultDiv PublicationResult;
     @JsonProperty("serviceType")
@@ -50,6 +54,24 @@ public class ShinsakaiJIzenShinsakekkaTorokuDiv extends Panel {
     @JsonProperty("JizenShinsakaiShiryoPublication")
     public void setJizenShinsakaiShiryoPublication(JizenShinsakaiShiryoPublicationDiv JizenShinsakaiShiryoPublication) {
         this.JizenShinsakaiShiryoPublication = JizenShinsakaiShiryoPublication;
+    }
+
+    /*
+     * getJizenShinsaKekkaTorikomi
+     * @return JizenShinsaKekkaTorikomi
+     */
+    @JsonProperty("JizenShinsaKekkaTorikomi")
+    public JizenShinsaKekkaTorikomiDiv getJizenShinsaKekkaTorikomi() {
+        return JizenShinsaKekkaTorikomi;
+    }
+
+    /*
+     * setJizenShinsaKekkaTorikomi
+     * @param JizenShinsaKekkaTorikomi JizenShinsaKekkaTorikomi
+     */
+    @JsonProperty("JizenShinsaKekkaTorikomi")
+    public void setJizenShinsaKekkaTorikomi(JizenShinsaKekkaTorikomiDiv JizenShinsaKekkaTorikomi) {
+        this.JizenShinsaKekkaTorikomi = JizenShinsaKekkaTorikomi;
     }
 
     /*
@@ -86,6 +108,29 @@ public class ShinsakaiJIzenShinsakekkaTorokuDiv extends Panel {
     @JsonProperty("serviceType")
     public void setServiceType(RString serviceType) {
         this.serviceType = serviceType;
+    }
+
+    /*
+     * [ ショートカットの作成 ]
+     */
+    @JsonIgnore
+    public UploadPanel getUplJizanShinsaKekka() {
+        return this.getJizenShinsaKekkaTorikomi().getUplJizanShinsaKekka();
+    }
+
+    @JsonIgnore
+    public void  setUplJizanShinsaKekka(UploadPanel uplJizanShinsaKekka) {
+        this.getJizenShinsaKekkaTorikomi().setUplJizanShinsaKekka(uplJizanShinsaKekka);
+    }
+
+    @JsonIgnore
+    public Button getBtnGetResult() {
+        return this.getJizenShinsaKekkaTorikomi().getBtnGetResult();
+    }
+
+    @JsonIgnore
+    public void  setBtnGetResult(Button btnGetResult) {
+        this.getJizenShinsaKekkaTorikomi().setBtnGetResult(btnGetResult);
     }
 
     // </editor-fold>

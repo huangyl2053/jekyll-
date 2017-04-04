@@ -139,7 +139,7 @@ public class TorikomiData implements Serializable {
             case _901:
                 return _901(list);
             case _902:
-
+                return _902(list);
             default:
                 return new TorikomiData();
         }
@@ -175,7 +175,7 @@ public class TorikomiData implements Serializable {
 
     private static RString getOrEMPTY(List<RString> list, int index) {
         if (0 <= index && index < list.size()) {
-            return list.get(0);
+            return list.get(index);
         }
         return RString.EMPTY;
     }
