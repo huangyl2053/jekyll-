@@ -253,6 +253,12 @@ public class IinTokkiTextPage1A3Editor implements IIinTokkiTextA3Editor {
             source.listTokubetsunaIryo2_3 = item.get特別な医療リスト２().get(index).get特記事項有無();
             source.listTokubetsunaIryo2_4 = item.get特別な医療リスト２().get(index).get段階改善フラグ();
         }
+        if (index < item.get主治医意見書().size()) {
+            source.listshujiiikensho_1 = item.get主治医意見書().get(index).get調査結果();
+            source.listshujiiikensho_2 = item.get主治医意見書().get(index).get段階改善フラグ();
+            source.listshujiiikensho_3 = item.get主治医意見書().get(index).get段階改善値();
+            source.listshujiiikensho_4 = item.get主治医意見書().get(index).get前回結果();
+        }
         return editSource2(source);
     }
 
@@ -387,7 +393,7 @@ public class IinTokkiTextPage1A3Editor implements IIinTokkiTextA3Editor {
                 .firstYear(FirstYear.ICHI_NEN).separator(Separator.PERIOD)
                 .fillType(FillType.ZERO).toDateString();
     }
-    
+
     private RString get元号(FlexibleDate 年月日) {
         if (年月日 != null && !年月日.isEmpty()) {
             return パターン12(年月日).substring(0, 2);
@@ -415,7 +421,7 @@ public class IinTokkiTextPage1A3Editor implements IIinTokkiTextA3Editor {
         }
         return RString.EMPTY;
     }
-    
+
     private RString パターン12(FlexibleDate 年月日) {
         return 年月日.wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE)

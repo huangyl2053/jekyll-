@@ -519,6 +519,15 @@ public class IinTokkiTextA3ReportSource implements IReportSource {
     public RString notes6;
     @ReportItem(name = "oldVersion", length = 3, order = 306)
     public RString oldVersion;
+
+    @ReportItem(name = "listshujiiikensho_1", length = 18, order = 311)
+    public RString listshujiiikensho_1;
+    @ReportItem(name = "listshujiiikensho_2", length = 1, order = 312)
+    public RString listshujiiikensho_2;
+    @ReportItem(name = "listshujiiikensho_3", length = 1, order = 313)
+    public RString listshujiiikensho_3;
+    @ReportItem(name = "listshujiiikensho_4", length = 18, order = 314)
+    public RString listshujiiikensho_4;
     //なし
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
