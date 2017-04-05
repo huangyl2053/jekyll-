@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.Chus
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.Kyakasha;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyukyotsu.KyuShochiSha;
 import jp.co.ndensan.reams.db.dbd.definition.batchprm.hanyolist.jukyusha2.SoshitsuKubun;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1320001.DBD1320001StateName;
 import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1320001.HanyoListParamDiv;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.Outputs;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.hanyolist.atena.AtenaSelectBatchParameter;
@@ -44,6 +45,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RYear;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 
 /**
  * 汎用リスト出力(介護受給共通)のハンドラークラスです。
@@ -211,10 +213,9 @@ public class HanyoListParamHandler {
     /**
      * 汎用リスト出力の初期化。
      *
-     * @param menuID メニューID
      */
-    public void onLoad(RString menuID) {
-        if (汎用リスト_利用者負担割合メニューID.equals(menuID)) {
+    public void onLoad() {
+        if (DBD1320001StateName.利用者負担割合.getName().equals(ResponseHolder.getState())) {
             RYear 開始年度 = NendoUtil.getNendo(RDate.getNowDate());
             List<KeyValueDataSource> 年度選択肢 = new ArrayList<>();
             for (int i = 1; i <= 年度_10; i++) {
@@ -252,7 +253,7 @@ public class HanyoListParamHandler {
             出力方法list.add(new KeyValueDataSource(outputs.getコード(), outputs.get名称()));
         }
         div.getRadShuturyokuHoho().setDataSource(出力方法list);
-        if (汎用リスト_施設入退所メニューID.equals(menuID)) {
+        if (DBD1320001StateName.施設入退所.getName().equals(ResponseHolder.getState())) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(汎用リスト_施設入退所帳票ID));
             div.getCcdShutsuryokuKomoku().load(汎用リスト_施設入退所帳票ID, SubGyomuCode.DBD介護受給);
             set表題パネル(汎用リスト_施設入退所表題);
@@ -260,7 +261,7 @@ public class HanyoListParamHandler {
             div.getBtnParamRestore().setBatchId(汎用リスト_施設入退所バッチID);
             div.getBtnParamSave().setBatchId(汎用リスト_施設入退所バッチID);
             onClick_radChushutsuJokenB();
-        } else if (汎用リスト_利用者負担額減免メニューID.equals(menuID)) {
+        } else if (DBD1320001StateName.利用者負担額減免.getName().equals(ResponseHolder.getState())) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(汎用リスト_利用者負担額減免帳票ID));
             div.getCcdShutsuryokuKomoku().load(汎用リスト_利用者負担額減免帳票ID, SubGyomuCode.DBD介護受給);
             set表題パネル(汎用リスト_利用者負担額減免表題);
@@ -268,7 +269,7 @@ public class HanyoListParamHandler {
             onClick_radChushutsuJokenB();
             div.getBtnParamSave().setBatchId(汎用リスト_利用者負担額減免バッチID);
             div.getBtnParamRestore().setBatchId(汎用リスト_利用者負担額減免バッチID);
-        } else if (汎用リスト_訪問介護利用者負担額減額メニューID.equals(menuID)) {
+        } else if (DBD1320001StateName.訪問介護減免.getName().equals(ResponseHolder.getState())) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(汎用リスト_訪問介護利用者負担額減額帳票ID));
             div.getCcdShutsuryokuKomoku().load(汎用リスト_訪問介護利用者負担額減額帳票ID, SubGyomuCode.DBD介護受給);
             set表題パネル(汎用リスト_訪問介護利用者負担額減額表題);
@@ -276,7 +277,7 @@ public class HanyoListParamHandler {
             onClick_radChushutsuJokenB();
             div.getBtnParamSave().setBatchId(汎用リスト_訪問介護利用者負担額減額バッチID);
             div.getBtnParamRestore().setBatchId(汎用リスト_訪問介護利用者負担額減額バッチID);
-        } else if (汎用リスト_社会福祉法人軽減メニューID.equals(menuID)) {
+        } else if (DBD1320001StateName.社福軽減.getName().equals(ResponseHolder.getState())) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(汎用リスト_社会福祉法人軽減帳票ID));
             div.getCcdShutsuryokuKomoku().load(汎用リスト_社会福祉法人軽減帳票ID, SubGyomuCode.DBD介護受給);
             set表題パネル(汎用リスト_社会福祉法人軽減表題);
@@ -284,7 +285,7 @@ public class HanyoListParamHandler {
             onClick_radChushutsuJokenB();
             div.getBtnParamSave().setBatchId(汎用リスト_社会福祉法人軽減バッチID);
             div.getBtnParamRestore().setBatchId(汎用リスト_社会福祉法人軽減バッチID);
-        } else if (汎用リスト_特別地域加算減免メニューID.equals(menuID)) {
+        } else if (DBD1320001StateName.特別地域加算減免.getName().equals(ResponseHolder.getState())) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(汎用リスト_特別地域加算減免帳票ID));
             div.getCcdShutsuryokuKomoku().load(汎用リスト_特別地域加算減免帳票ID, SubGyomuCode.DBD介護受給);
             set表題パネル(汎用リスト_特別地域加算減免表題);
@@ -292,7 +293,7 @@ public class HanyoListParamHandler {
             onClick_radChushutsuJokenB();
             div.getBtnParamSave().setBatchId(汎用リスト_特別地域加算減免バッチID);
             div.getBtnParamRestore().setBatchId(汎用リスト_特別地域加算減免バッチID);
-        } else if (汎用リスト_負担限度額認定メニューID.equals(menuID)) {
+        } else if (DBD1320001StateName.負担限度額認定.getName().equals(ResponseHolder.getState())) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(汎用リスト_負担限度額認定帳票ID));
             div.getCcdShutsuryokuKomoku().load(汎用リスト_負担限度額認定帳票ID, SubGyomuCode.DBD介護受給);
             set表題パネル(汎用リスト_負担限度額認定表題);
@@ -300,7 +301,7 @@ public class HanyoListParamHandler {
             onClick_radChushutsuJokenB();
             div.getBtnParamSave().setBatchId(汎用リスト_負担限度額認定バッチID);
             div.getBtnParamRestore().setBatchId(汎用リスト_負担限度額認定バッチID);
-        } else if (汎用リスト_国保メニューID.equals(menuID)) {
+        } else if (DBD1320001StateName.国保.getName().equals(ResponseHolder.getState())) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(汎用リスト_国保帳票ID));
             div.getCcdShutsuryokuKomoku().load(汎用リスト_国保帳票ID, SubGyomuCode.DBD介護受給);
             set表題パネル(汎用リスト_国保表題);
@@ -308,7 +309,7 @@ public class HanyoListParamHandler {
             onClick_radChushutsuJokenB();
             div.getBtnParamSave().setBatchId(汎用リスト_国保バッチID);
             div.getBtnParamRestore().setBatchId(汎用リスト_国保バッチID);
-        } else if (汎用リスト_後期高齢者メニューID.equals(menuID)) {
+        } else if (DBD1320001StateName.後期高齢者.getName().equals(ResponseHolder.getState())) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(汎用リスト_後期高齢者帳票ID));
             div.getCcdShutsuryokuKomoku().load(汎用リスト_後期高齢者帳票ID, SubGyomuCode.DBD介護受給);
             set表題パネル(汎用リスト_後期高齢者表題);
@@ -316,7 +317,7 @@ public class HanyoListParamHandler {
             onClick_radChushutsuJokenB();
             div.getBtnParamSave().setBatchId(汎用リスト_後期高齢者バッチID);
             div.getBtnParamRestore().setBatchId(汎用リスト_後期高齢者バッチID);
-        } else if (汎用リスト_事業対象者メニューID.equals(menuID)) {
+        } else if (DBD1320001StateName.事業対象者.getName().equals(ResponseHolder.getState())) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(汎用リスト_事業対象者帳票ID));
             div.getCcdShutsuryokuKomoku().load(汎用リスト_事業対象者帳票ID, SubGyomuCode.DBD介護受給);
             set表題パネル(汎用リスト_事業対象者表題);
@@ -324,7 +325,7 @@ public class HanyoListParamHandler {
             onClick_radChushutsuJokenB();
             div.getBtnParamSave().setBatchId(汎用リスト_事業対象者バッチID);
             div.getBtnParamRestore().setBatchId(汎用リスト_事業対象者バッチID);
-        } else if (汎用リスト_利用者負担割合メニューID.equals(menuID)) {
+        } else if (DBD1320001StateName.利用者負担割合.getName().equals(ResponseHolder.getState())) {
             div.getCcdShutsuryokujun().load(SubGyomuCode.DBD介護受給, new ReportId(汎用リスト_利用者負担割合帳票ID));
             div.getCcdShutsuryokuKomoku().load(汎用リスト_利用者負担割合帳票ID, SubGyomuCode.DBD介護受給);
             set表題パネル(汎用リスト_利用者負担割合表題);
@@ -340,30 +341,29 @@ public class HanyoListParamHandler {
     /**
      * 条件の保存
      *
-     * @param menuID メニューID
      * @return BatchParameterMap
      */
-    public BatchParameterMap saveBatchParamterMap(RString menuID) {
+    public BatchParameterMap saveBatchParamterMap() {
         BatchParameterMap batchParameterMap = null;
-        if (汎用リスト_施設入退所メニューID.equals(menuID)) {
+        if (DBD1320001StateName.施設入退所.getName().equals(ResponseHolder.getState())) {
             batchParameterMap = new BatchParameterMap(get汎用リスト_施設入退所BatchParameter());
-        } else if (汎用リスト_利用者負担額減免メニューID.equals(menuID)) {
+        } else if (DBD1320001StateName.利用者負担額減免.getName().equals(ResponseHolder.getState())) {
             batchParameterMap = new BatchParameterMap(get汎用リスト_利用者負担額減免BatchParameter());
-        } else if (汎用リスト_訪問介護利用者負担額減額メニューID.equals(menuID)) {
+        } else if (DBD1320001StateName.訪問介護減免.getName().equals(ResponseHolder.getState())) {
             batchParameterMap = new BatchParameterMap(get汎用リスト_訪問介護利用者負担額減額BatchParameter());
-        } else if (汎用リスト_社会福祉法人軽減メニューID.equals(menuID)) {
+        } else if (DBD1320001StateName.社福軽減.getName().equals(ResponseHolder.getState())) {
             batchParameterMap = new BatchParameterMap(get汎用リスト_社会福祉法人軽減BatchParameter());
-        } else if (汎用リスト_特別地域加算減免メニューID.equals(menuID)) {
+        } else if (DBD1320001StateName.特別地域加算減免.getName().equals(ResponseHolder.getState())) {
             batchParameterMap = new BatchParameterMap(get汎用リスト_特別地域加算減免BatchParameter());
-        } else if (汎用リスト_負担限度額認定メニューID.equals(menuID)) {
+        } else if (DBD1320001StateName.負担限度額認定.getName().equals(ResponseHolder.getState())) {
             batchParameterMap = new BatchParameterMap(get汎用リスト_負担限度額認定BatchParameter());
-        } else if (汎用リスト_国保メニューID.equals(menuID)) {
+        } else if (DBD1320001StateName.国保.getName().equals(ResponseHolder.getState())) {
             batchParameterMap = new BatchParameterMap(get汎用リスト_国保BatchParameter());
-        } else if (汎用リスト_後期高齢者メニューID.equals(menuID)) {
+        } else if (DBD1320001StateName.後期高齢者.getName().equals(ResponseHolder.getState())) {
             batchParameterMap = new BatchParameterMap(get汎用リスト_後期高齢者BatchParameter());
-        } else if (汎用リスト_事業対象者メニューID.equals(menuID)) {
+        } else if (DBD1320001StateName.事業対象者.getName().equals(ResponseHolder.getState())) {
             batchParameterMap = new BatchParameterMap(get汎用リスト_事業対象者BatchParameter());
-        } else if (汎用リスト_利用者負担割合メニューID.equals(menuID)) {
+        } else if (DBD1320001StateName.利用者負担割合.getName().equals(ResponseHolder.getState())) {
             batchParameterMap = new BatchParameterMap(get汎用リスト_利用者負担割合BatchParameter());
         }
         return batchParameterMap;
@@ -372,38 +372,37 @@ public class HanyoListParamHandler {
     /**
      * 条件の復元
      *
-     * @param menuID メニューID
      */
-    public void restoreBatchParameter(RString menuID) {
+    public void restoreBatchParameter() {
         BatchParameterMap batchParameterMap = getBatchParameterMap();
-        if (汎用リスト_施設入退所メニューID.equals(menuID)) {
+        if (DBD1320001StateName.施設入退所.getName().equals(ResponseHolder.getState())) {
             restore汎用リスト_施設入退所BatchParameter(batchParameterMap);
             onClick_radChushutsuJokenB();
-        } else if (汎用リスト_利用者負担額減免メニューID.equals(menuID)) {
+        } else if (DBD1320001StateName.利用者負担額減免.getName().equals(ResponseHolder.getState())) {
             restore汎用リスト_利用者負担額減免BatchParameter(batchParameterMap);
             onClick_radChushutsuJokenB();
-        } else if (汎用リスト_訪問介護利用者負担額減額メニューID.equals(menuID)) {
+        } else if (DBD1320001StateName.訪問介護減免.getName().equals(ResponseHolder.getState())) {
             restore汎用リスト_訪問介護利用者負担額減額BatchParameter(batchParameterMap);
             onClick_radChushutsuJokenB();
-        } else if (汎用リスト_社会福祉法人軽減メニューID.equals(menuID)) {
+        } else if (DBD1320001StateName.社福軽減.getName().equals(ResponseHolder.getState())) {
             restore汎用リスト_社会福祉法人軽減BatchParameter(batchParameterMap);
             onClick_radChushutsuJokenB();
-        } else if (汎用リスト_特別地域加算減免メニューID.equals(menuID)) {
+        } else if (DBD1320001StateName.特別地域加算減免.getName().equals(ResponseHolder.getState())) {
             restore汎用リスト_特別地域加算減免BatchParameter(batchParameterMap);
             onClick_radChushutsuJokenB();
-        } else if (汎用リスト_負担限度額認定メニューID.equals(menuID)) {
+        } else if (DBD1320001StateName.負担限度額認定.getName().equals(ResponseHolder.getState())) {
             restore汎用リスト_負担限度額認定BatchParameter(batchParameterMap);
             onClick_radChushutsuJokenB();
-        } else if (汎用リスト_国保メニューID.equals(menuID)) {
+        } else if (DBD1320001StateName.国保.getName().equals(ResponseHolder.getState())) {
             restore汎用リスト_国保BatchParameter(batchParameterMap);
             onClick_radChushutsuJokenB();
-        } else if (汎用リスト_後期高齢者メニューID.equals(menuID)) {
+        } else if (DBD1320001StateName.後期高齢者.getName().equals(ResponseHolder.getState())) {
             restore汎用リスト_後期高齢者BatchParameter(batchParameterMap);
             onClick_radChushutsuJokenB();
-        } else if (汎用リスト_事業対象者メニューID.equals(menuID)) {
+        } else if (DBD1320001StateName.事業対象者.getName().equals(ResponseHolder.getState())) {
             restore汎用リスト_事業対象者BatchParameter(batchParameterMap);
             onClick_radChushutsuJokenB();
-        } else if (汎用リスト_利用者負担割合メニューID.equals(menuID)) {
+        } else if (DBD1320001StateName.利用者負担割合.getName().equals(ResponseHolder.getState())) {
             restore汎用リスト_利用者負担割合BatchParameter(batchParameterMap);
             onClick_radChushutsuJokenA();
         }
@@ -435,9 +434,12 @@ public class HanyoListParamHandler {
         if (年度KEY.equals(div.getRadChushutsuJokenA1().getSelectedKey())) {
             div.getDdlKijunNendo().setDisabled(表示);
             div.getChkChokkinNomiA().setDisabled(表示);
+            div.getTxtKijunDateA().clearValue();
             div.getTxtKijunDateA().setDisabled(非表示);
         } else {
+            div.getDdlKijunNendo().setSelectedKey(NendoUtil.getNendo(RDate.getNowDate()).toDateString());
             div.getDdlKijunNendo().setDisabled(非表示);
+            div.getChkChokkinNomiA().setSelectedItemsByKey(new ArrayList<RString>());
             div.getChkChokkinNomiA().setDisabled(非表示);
             div.getTxtKijunDateA().setDisabled(表示);
         }
@@ -483,30 +485,57 @@ public class HanyoListParamHandler {
     private void 基準日RbG_Onclick画面項目制御(boolean is基準日RbSelected) {
         if (!div.getTxtKijunDateB().isDisplayNone()) {
             div.getTxtKijunDateB().setDisabled(!is基準日RbSelected);
+            if (is基準日RbSelected) {
+                div.getTxtKijunDateB().setValue(RDate.getNowDate());
+            } else {
+                div.getTxtKijunDateB().clearValue();
+            }
         }
         if (div.getLblJitenTaishoshaB().isDisplayNone()) {
             div.getLblJitenTaishoshaB().setDisplayNone(!is基準日RbSelected);
         }
         if (!div.getChushutsuShosaiB21().isDisplayNone()) {
             div.getChushutsuShosaiB21().setDisabled(is基準日RbSelected);
+            if (is基準日RbSelected) {
+                div.getChushutsuShosaiB21().getRadHaniJoken1().setSelectedKey(入所日KEY);
+            }
         }
         if (!div.getChushutsuShosaiB22().isDisplayNone()) {
             div.getChushutsuShosaiB22().setDisabled(is基準日RbSelected);
+            if (is基準日RbSelected) {
+                div.getChushutsuShosaiB22().getRadHaniJoken2().setSelectedKey(申請日KEY);
+            }
         }
         if (!div.getChushutsuShosaiB23().isDisplayNone()) {
             div.getChushutsuShosaiB23().setDisabled(is基準日RbSelected);
+            if (is基準日RbSelected) {
+                div.getChushutsuShosaiB23().getRadHaniJoken3().setSelectedKey(取得日KEY);
+            }
         }
         if (!div.getChushutsuShosaiB24().isDisplayNone()) {
             div.getChushutsuShosaiB24().setDisabled(is基準日RbSelected);
+            if (is基準日RbSelected) {
+                div.getChushutsuShosaiB24().getRadHaniJoken4().setSelectedKey(適用開始日KEY);
+            }
         }
         if (!div.getChkShinseishaNomi().isDisplayNone()) {
             div.getChkShinseishaNomi().setDisabled(is基準日RbSelected);
+            if (is基準日RbSelected) {
+                div.getChkShinseishaNomi().setSelectedItemsByKey(new ArrayList<RString>());
+            }
         }
         if (!div.getChkChokkinNomi2().isDisplayNone()) {
             div.getChkChokkinNomi2().setDisabled(is基準日RbSelected);
+            if (is基準日RbSelected) {
+                div.getChkChokkinNomi2().setSelectedItemsByKey(new ArrayList<RString>());
+            }
         }
         if (!div.getTxtChushutsuHani().isDisplayNone()) {
             div.getTxtChushutsuHani().setDisabled(is基準日RbSelected);
+            if (is基準日RbSelected) {
+                div.getTxtChushutsuHani().clearFromValue();
+                div.getTxtChushutsuHani().clearToValue();
+            }
         }
     }
 
@@ -901,7 +930,7 @@ public class HanyoListParamHandler {
         restore出力順_帳票ID_出力項目(batchParameterMap, 出力順パラメータ名称3, 帳票IDパラメータ名称1, 出力項目パラメータ名称1);
     }
 
-    private void restore汎用リスト_事業対象者BatchParameter(BatchParameterMap batchParameterMap) { 
+    private void restore汎用リスト_事業対象者BatchParameter(BatchParameterMap batchParameterMap) {
         div.getRadChushutsuJokenB1().clearSelectedItem();
         div.getRadChushutsuJokenB2().clearSelectedItem();
         restore事業対象者データ抽出(batchParameterMap, 事業対象者データ抽出パラメータ名称);
@@ -1118,11 +1147,15 @@ public class HanyoListParamHandler {
         RString 抽出方法区分 = map.getParameterValue(RString.class, fieldName);
         if (抽出方法区分.equals(ChushutsuHohoKubun.年度.getコード())) {
             div.getRadChushutsuJokenA1().setSelectedKey(年度KEY);
+            div.getRadChushutsuJokenA2().clearSelectedItem();
         } else if (抽出方法区分.equals(ChushutsuHohoKubun.年度基準日.getコード())) {
+            div.getRadChushutsuJokenA1().clearSelectedItem();
             div.getRadChushutsuJokenA2().setSelectedKey(年度基準日KEY);
         } else if (抽出方法区分.equals(ChushutsuHohoKubun.基準日.getコード())) {
             div.getRadChushutsuJokenB1().setSelectedKey(基準日KEY);
+            div.getRadChushutsuJokenB2().clearSelectedItem();
         } else {
+            div.getRadChushutsuJokenB1().clearSelectedItem();
             div.getRadChushutsuJokenB2().setSelectedKey(範囲KEY);
         }
     }

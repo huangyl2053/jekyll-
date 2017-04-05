@@ -195,7 +195,7 @@ public class JukyushaDaichoPanelHandler {
      */
     public void onSelect_radChushutsuTaisho() {
         if (div.getRadChushutsuTaisho().getSelectedKey().equals(ChushutsuHohoKubun.直近.getコード())) {
-            set有効データ内最新Cb(false, false);
+            set有効データ内最新Cb(false, true);
             set基準日(true);
             set範囲(true);
         } else if (div.getRadChushutsuTaisho().getSelectedKey().equals(ChushutsuHohoKubun.基準日.getコード())) {
@@ -349,13 +349,19 @@ public class JukyushaDaichoPanelHandler {
     }
 
     private void set基準日(boolean isDisabled) {
-        div.getTxtKijyunYmd().setValue(RDate.getNowDate());
+        if (isDisabled) {
+            div.getTxtKijyunYmd().clearValue();
+        } else {
+            div.getTxtKijyunYmd().setValue(RDate.getNowDate());
+        }
         div.getTxtKijyunYmd().setDisabled(isDisabled);
     }
 
     private void set範囲(boolean isDisabled) {
-        div.getTxtNinteiYmdHani().clearFromValue();
-        div.getTxtNinteiYmdHani().clearToValue();
+        if (isDisabled) {
+            div.getTxtNinteiYmdHani().clearFromValue();
+            div.getTxtNinteiYmdHani().clearToValue();
+        }
         div.getTxtNinteiYmdHani().setDisabled(isDisabled);
     }
 

@@ -39,7 +39,7 @@ public class HanyoListParam {
      * @return ResponseData<HanyoListParamDiv>
      */
     public ResponseData<HanyoListParamDiv> onLoad(HanyoListParamDiv div) {
-        getHandler(div).onLoad(ResponseHolder.getMenuID());
+        getHandler(div).onLoad();
         return ResponseData.of(div).respond();
     }
 
@@ -66,7 +66,7 @@ public class HanyoListParam {
      * @return ResponseData<BatchParameterMap>
      */
     public ResponseData<BatchParameterMap> onClick_saveBatchParameterSave(HanyoListParamDiv div) {
-        return ResponseData.of(getHandler(div).saveBatchParamterMap(ResponseHolder.getMenuID())).respond();
+        return ResponseData.of(getHandler(div).saveBatchParamterMap()).respond();
     }
 
     /**
@@ -76,7 +76,7 @@ public class HanyoListParam {
      * @return ResponseData<HanyoListParamDiv>
      */
     public ResponseData<HanyoListParamDiv> onClick_onRestoreBatchParameter(HanyoListParamDiv div) {
-        getHandler(div).restoreBatchParameter(ResponseHolder.getMenuID());
+        getHandler(div).restoreBatchParameter();
         return ResponseData.of(div).respond();
     }
 
@@ -174,7 +174,8 @@ public class HanyoListParam {
      * 訪問介護利用者負担額減額「実行する」ボタン 操作実施
      *
      * @param div ドメインオブジェクトを取り出したい {@link HanyoListParamDiv}
-     * @return ResponseData<DBD710050_HanyoListHomonKaigoRiyoshaFutanGakuGengakuParameter>
+     * @return
+     * ResponseData<DBD710050_HanyoListHomonKaigoRiyoshaFutanGakuGengakuParameter>
      */
     public ResponseData<DBD710050_HanyoListHomonKaigoRiyoshaFutanGakuGengakuParameter> onClick_btnHomonKaigoBatchRegister(HanyoListParamDiv div) {
         DBD710050_HanyoListHomonKaigoRiyoshaFutanGakuGengakuParameter parameter = getHandler(div).get汎用リスト_訪問介護利用者負担額減額BatchParameter();
@@ -185,7 +186,8 @@ public class HanyoListParam {
      * 社会福祉法人軽減「実行する」ボタン 操作実施
      *
      * @param div ドメインオブジェクトを取り出したい {@link HanyoListParamDiv}
-     * @return ResponseData<DBD710060_HanyoListShakaiFukushiHojinKeigenParameter>
+     * @return
+     * ResponseData<DBD710060_HanyoListShakaiFukushiHojinKeigenParameter>
      */
     public ResponseData<DBD710060_HanyoListShakaiFukushiHojinKeigenParameter> onClick_btnShakaiFukushiBatchRegister(HanyoListParamDiv div) {
         DBD710060_HanyoListShakaiFukushiHojinKeigenParameter parameter = getHandler(div).get汎用リスト_社会福祉法人軽減BatchParameter();
@@ -196,7 +198,8 @@ public class HanyoListParam {
      * 特別地域加算減免「実行する」ボタン 操作実施
      *
      * @param div ドメインオブジェクトを取り出したい {@link HanyoListParamDiv}
-     * @return ResponseData<DBD710070_HanyoListTokubetsuChiikiKasanGemmenParameter>
+     * @return
+     * ResponseData<DBD710070_HanyoListTokubetsuChiikiKasanGemmenParameter>
      */
     public ResponseData<DBD710070_HanyoListTokubetsuChiikiKasanGemmenParameter> onClick_btnTokubetsuChiikiKasanBatchRegister(HanyoListParamDiv div) {
         DBD710070_HanyoListTokubetsuChiikiKasanGemmenParameter parameter = getHandler(div).get汎用リスト_特別地域加算減免BatchParameter();
