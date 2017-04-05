@@ -9,6 +9,8 @@ import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.IryoHokenR
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.IryoHokenRirekiDialogButton.IryoHokenRirekiDialogButtonDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.RofukuNenkinDialogButton.IRofukuNenkinDialogButtonDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.RofukuNenkinDialogButton.RofukuNenkinDialogButtonDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.SeikatsuHogoJohoDailogButton.ISeikatsuHogoJohoDailogButtonDiv;
+import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.SeikatsuHogoJohoDailogButton.SeikatsuHogoJohoDailogButtonDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoDialogButton.IShisetsuNyutaishoDialogButtonDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoDialogButton.ShisetsuNyutaishoDialogButtonDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.ShoKaishuKirokuDialogButton.IShoKaishuKirokuDialogButtonDiv;
@@ -25,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class HihokenshaShokaiPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-06_01-12-04">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-16_09-04-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -34,10 +36,12 @@ public class HihokenshaShokaiPanelDiv extends Panel {
      */
     @JsonProperty("ccdSetaiShotokuButton")
     private ShotokuShokaiDialogButtonDiv ccdSetaiShotokuButton;
-    @JsonProperty("ccdIryoHokenButton")
-    private IryoHokenRirekiDialogButtonDiv ccdIryoHokenButton;
     @JsonProperty("ccdRofukuNenkinButton")
     private RofukuNenkinDialogButtonDiv ccdRofukuNenkinButton;
+    @JsonProperty("ccdIryoHokenButton")
+    private IryoHokenRirekiDialogButtonDiv ccdIryoHokenButton;
+    @JsonProperty("ccdSeikatsuHogoJoho")
+    private SeikatsuHogoJohoDailogButtonDiv ccdSeikatsuHogoJoho;
     @JsonProperty("ccdShisetsuNyutaishoButton")
     private ShisetsuNyutaishoDialogButtonDiv ccdShisetsuNyutaishoButton;
     @JsonProperty("ccdShoKofuKaishuButton")
@@ -61,6 +65,15 @@ public class HihokenshaShokaiPanelDiv extends Panel {
     }
 
     /*
+     * getccdRofukuNenkinButton
+     * @return ccdRofukuNenkinButton
+     */
+    @JsonProperty("ccdRofukuNenkinButton")
+    public IRofukuNenkinDialogButtonDiv getCcdRofukuNenkinButton() {
+        return ccdRofukuNenkinButton;
+    }
+
+    /*
      * getccdIryoHokenButton
      * @return ccdIryoHokenButton
      */
@@ -70,12 +83,12 @@ public class HihokenshaShokaiPanelDiv extends Panel {
     }
 
     /*
-     * getccdRofukuNenkinButton
-     * @return ccdRofukuNenkinButton
+     * getccdSeikatsuHogoJoho
+     * @return ccdSeikatsuHogoJoho
      */
-    @JsonProperty("ccdRofukuNenkinButton")
-    public IRofukuNenkinDialogButtonDiv getCcdRofukuNenkinButton() {
-        return ccdRofukuNenkinButton;
+    @JsonProperty("ccdSeikatsuHogoJoho")
+    public ISeikatsuHogoJohoDailogButtonDiv getCcdSeikatsuHogoJoho() {
+        return ccdSeikatsuHogoJoho;
     }
 
     /*
