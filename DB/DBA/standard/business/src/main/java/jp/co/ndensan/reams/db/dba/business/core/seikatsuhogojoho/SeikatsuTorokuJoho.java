@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.business.core.seikatsuHogoJoho;
+package jp.co.ndensan.reams.db.dba.business.core.seikatsuhogojoho;
 
 import java.io.Serializable;
 import java.util.List;

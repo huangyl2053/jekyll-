@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.entity.db.relate.seikatsuHogoJoho;
+package jp.co.ndensan.reams.db.dba.entity.db.relate.seikatsuhogojoho;
 
 import java.util.List;
 import jp.co.ndensan.reams.ur.urd.entity.db.basic.seikatsuhogo.UrT0508SeikatsuHogoJukyushaEntity;

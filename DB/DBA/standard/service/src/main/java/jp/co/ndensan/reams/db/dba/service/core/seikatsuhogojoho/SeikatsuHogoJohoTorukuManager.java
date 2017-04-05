@@ -3,23 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.service.core.seikatsuHogoJoho;
+package jp.co.ndensan.reams.db.dba.service.core.seikatsuhogojoho;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import jp.co.ndensan.reams.db.dba.business.core.seikatsuHogoJoho.SeikatsuFujyoShubetsuJoho;
-import jp.co.ndensan.reams.db.dba.business.core.seikatsuHogoJoho.SeikatsuJukyuShaJoho;
-import jp.co.ndensan.reams.db.dba.business.core.seikatsuHogoJoho.SeikatsuTeishiJoho;
-import jp.co.ndensan.reams.db.dba.business.core.seikatsuHogoJoho.SeikatsuTorokuJoho;
-import jp.co.ndensan.reams.db.dba.definition.mybatisprm.seikatsuHogoJoho.SeikatsuHogoJohoTorokuMyBatisParameter;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.seikatsuHogoJoho.SeikatsuHogoJohoTorokuEntity;
+import jp.co.ndensan.reams.db.dba.business.core.seikatsuhogojoho.SeikatsuFujyoShubetsuJoho;
+import jp.co.ndensan.reams.db.dba.business.core.seikatsuhogojoho.SeikatsuJukyuShaJoho;
+import jp.co.ndensan.reams.db.dba.business.core.seikatsuhogojoho.SeikatsuTeishiJoho;
+import jp.co.ndensan.reams.db.dba.business.core.seikatsuhogojoho.SeikatsuTorokuJoho;
+import jp.co.ndensan.reams.db.dba.definition.mybatisprm.seikatsuhogojoho.SeikatsuHogoJohoTorokuMyBatisParameter;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.seikatsuhogojoho.SeikatsuHogoJohoTorokuEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.seikatsuhogo.ISeikatsuHogoJohoTorokuMapper;
 import jp.co.ndensan.reams.ur.urd.entity.db.basic.seikatsuhogo.UrT0508SeikatsuHogoJukyushaEntity;
 import jp.co.ndensan.reams.ur.urd.entity.db.basic.seikatsuhogo.UrT0526SeikatsuHogoFujoShuruiEntity;
 import jp.co.ndensan.reams.ur.urd.entity.db.basic.seikatsuhogo.UrT0528SeikatsuHogoTeishikikanEntity;
-import jp.co.ndensan.reams.ur.urz.persistence.db.mapper.util.MapperProvider;
+import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;

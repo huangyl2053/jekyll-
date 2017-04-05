@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.commonchilddiv.SeikatsuHogoJohoCommonDiv;
 
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.SeikatsuHogoJohoCommonDiv.SeikatsuHogoJohoCommonDivDiv;
-import jp.co.ndensan.reams.db.dba.divcontroller.handler.commonchilddiv.seikatsuHogoJoho.SeikatsuHogoJohoHandler;
+import jp.co.ndensan.reams.db.dba.divcontroller.handler.commonchilddiv.seikatsuhogojoho.SeikatsuHogoJohoHandler;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 
 /**

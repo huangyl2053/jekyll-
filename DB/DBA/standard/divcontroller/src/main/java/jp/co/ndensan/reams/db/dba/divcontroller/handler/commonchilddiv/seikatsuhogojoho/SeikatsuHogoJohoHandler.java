@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dba.divcontroller.handler.commonchilddiv.seikatsuHogoJoho;
+package jp.co.ndensan.reams.db.dba.divcontroller.handler.commonchilddiv.seikatsuhogojoho;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.business.core.seikatsuHogoJoho.SeikatsuFujyoShubetsuJoho;
-import jp.co.ndensan.reams.db.dba.business.core.seikatsuHogoJoho.SeikatsuTeishiJoho;
-import jp.co.ndensan.reams.db.dba.business.core.seikatsuHogoJoho.SeikatsuTorokuJoho;
+import jp.co.ndensan.reams.db.dba.business.core.seikatsuhogojoho.SeikatsuFujyoShubetsuJoho;
+import jp.co.ndensan.reams.db.dba.business.core.seikatsuhogojoho.SeikatsuTeishiJoho;
+import jp.co.ndensan.reams.db.dba.business.core.seikatsuhogojoho.SeikatsuTorokuJoho;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.SeikatsuHogoJohoCommonDiv.SeikatsuHogoJohoCommonDivDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.SeikatsuHogoJohoCommonDiv.dgRirekiIchiran_Row;
-import jp.co.ndensan.reams.db.dba.service.core.seikatsuHogoJoho.SeikatsuHogoJohoTorukuManager;
+import jp.co.ndensan.reams.db.dba.service.core.seikatsuhogojoho.SeikatsuHogoJohoTorukuManager;
 import jp.co.ndensan.reams.ur.urd.definition.core.seikatsuhogo.KaigoRyoDairiNofuKubun;
 import jp.co.ndensan.reams.ur.urd.definition.core.seikatsuhogo.KyugoShisetsuNyuTaishoKubun;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;

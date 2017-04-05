@@ -7,8 +7,8 @@
 package jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.seikatsuhogo;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dba.definition.mybatisprm.seikatsuHogoJoho.SeikatsuHogoJohoTorokuMyBatisParameter;
-import jp.co.ndensan.reams.db.dba.entity.db.relate.seikatsuHogoJoho.SeikatsuHogoJohoTorokuEntity;
+import jp.co.ndensan.reams.db.dba.definition.mybatisprm.seikatsuhogojoho.SeikatsuHogoJohoTorokuMyBatisParameter;
+import jp.co.ndensan.reams.db.dba.entity.db.relate.seikatsuhogojoho.SeikatsuHogoJohoTorokuEntity;
 
 /**
  *

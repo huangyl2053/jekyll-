@@ -3,10 +3,10 @@
 <!--@reamsid_L URU-5640-030 zhuxiaojun-->
 <mapper namespace="jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.seikatsuhogo.ISeikatsuHogoJohoTorokuMapper">
     <select resultOrdered="true" id="get生活保護情報登録リスト"  resultMap="SeikatsuJohoEntityResult"
-        parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.seikatsuHogoJoho.SeikatsuHogoJohoTorokuMyBatisParameter" fetchSize="500">
+        parameterType="jp.co.ndensan.reams.db.dba.definition.mybatisprm.seikatsuhogojoho.SeikatsuHogoJohoTorokuMyBatisParameter" fetchSize="500">
         <include refid="selectSeikatsuJohoEntityList" />
     </select>
-    <resultMap id="SeikatsuJohoEntityResult" type="jp.co.ndensan.reams.db.dba.entity.db.relate.seikatsuHogoJoho.SeikatsuHogoJohoTorokuEntity" autoMapping="true">
+    <resultMap id="SeikatsuJohoEntityResult" type="jp.co.ndensan.reams.db.dba.entity.db.relate.seikatsuhogojoho.SeikatsuHogoJohoTorokuEntity" autoMapping="true">
         <association property="生活保護受給者" resultMap="resultMap_seikatsu"/>
         <collection property="扶助種別リスト" resultMap="resultMap_fujyolist"/>
         <collection property="停止期間リスト" resultMap="resultMap_teshilist"/>
