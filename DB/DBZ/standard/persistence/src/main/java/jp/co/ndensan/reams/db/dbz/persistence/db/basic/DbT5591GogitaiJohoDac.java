@@ -136,26 +136,6 @@ public class DbT5591GogitaiJohoDac implements ISaveable<DbT5591GogitaiJohoEntity
     }
 
     /**
-     * 合議体番号の重複をチェックします。
-     *
-     * @param 合議体番号 GogitaiNo
-     * @return int
-     * @throws NullPointerException 引数のいずれかがnullの場合
-     */
-    @Transaction
-    public int selectgogitaiNoJuuhukuByKey(
-            int 合議体番号) throws NullPointerException {
-        requireNonNull(合議体番号, UrSystemErrorMessages.値がnull.getReplacedMessage("合議体番号"));
-
-        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
-
-        return accessor.select().table(DbT5591GogitaiJoho.class).
-                where(
-                        eq(gogitaiNo, 合議体番号)).
-                getCount();
-    }
-
-    /**
      * 合議体情報deletePhysical件数を返します。
      *
      * @param entity 合議体情報テーブルのエンティティ

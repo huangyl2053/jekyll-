@@ -19,6 +19,7 @@ import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijohosakuse
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5591GogitaiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5592ShinsakaiKaisaiBashoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5591GogitaiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5592ShinsakaiKaisaiBashoJohoDac;
@@ -26,6 +27,7 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5593GogitaiWariateIinJ
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
@@ -168,13 +170,15 @@ public class GogitaiJohoSakuseiFinder {
     }
 
     /**
-     * 合議体番号を取得します。
      *
      * @param 合議体番号 合議体番号
-     * @return int
+     * @param 有効開始日 有効開始日
+     * @return 指定の合議体番号、有効開始日の合議体が存在する場合、{@code true}.
      */
-    public int getGogitaiNoJuuhuku(int 合議体番号) {
-        return dbt5591dac.selectgogitaiNoJuuhukuByKey(合議体番号);
+    public boolean exists(int 合議体番号, RDate 有効開始日) {
+        java.util.Objects.requireNonNull(有効開始日);
+        FlexibleDate fDate = new FlexibleDate(有効開始日.toDateString());
+        return dbt5591dac.selectByKey(合議体番号, fDate) != null;
     }
 
     /**

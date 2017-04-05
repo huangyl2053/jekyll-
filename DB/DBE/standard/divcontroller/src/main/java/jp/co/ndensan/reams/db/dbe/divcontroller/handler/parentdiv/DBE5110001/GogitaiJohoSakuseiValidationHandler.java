@@ -24,6 +24,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -59,14 +60,19 @@ public class GogitaiJohoSakuseiValidationHandler {
     public ValidationMessageControlPairs gogitaiNoJuuhukuCheck() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         GogitaiJohoSakuseiFinder service = GogitaiJohoSakuseiFinder.createInstance();
-        if (0 < service.getGogitaiNoJuuhuku(Integer.parseInt(div.getTxtGogitaiNumber().getValue().toString()))) {
-            validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.既に登録済));
+        Decimal gogitaiNo = div.getTxtGogitaiNumber().getValue();
+        RDate yukoKaisiDate = div.getTxtYukoKaishiYMD().getValue();
+        if (service.exists(gogitaiNo.intValue(), yukoKaisiDate)) {
+            validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.既に登録済,
+                    div.getTxtGogitaiNumber(), div.getTxtYukoKaishiYMD()));
             return validationMessages;
         }
         List<dgGogitaiIchiran_Row> rowList = div.getDgGogitaiIchiran().getDataSource();
         for (dgGogitaiIchiran_Row row : rowList) {
-            if (row.getGogitaiNumber().getValue().equals(div.getTxtGogitaiNumber().getValue())) {
-                validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.既に登録済));
+            if (row.getGogitaiNumber().getValue().equals(gogitaiNo)
+                    && java.util.Objects.equals(row.getYukoKaishiYMD().getValue(), yukoKaisiDate)) {
+                validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.既に登録済,
+                        div.getTxtGogitaiNumber(), div.getTxtYukoKaishiYMD()));
                 return validationMessages;
             }
         }
@@ -345,7 +351,7 @@ public class GogitaiJohoSakuseiValidationHandler {
     private static enum GogitaiJohoSakuseiMessages implements IValidationMessage {
 
         桁数が不正(UrErrorMessages.桁数が不正, "合議体No", "2"),
-        既に登録済(UrErrorMessages.既に登録済, "合議体No"),
+        既に登録済(UrErrorMessages.既に登録済, "この合議体NOと有効開始日"),
         コードマスタなし(UrErrorMessages.コードマスタなし),
         終了日が開始日以前(DbeErrorMessages.終了日が開始日以前),
         期間が不正_追加メッセージあり２(UrErrorMessages.期間が不正_追加メッセージあり２, "開始予定時刻", "終了予定時刻"),
