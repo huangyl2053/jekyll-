@@ -43,10 +43,5 @@
             <groupId>jp.co.ndensan.reams.ca.cax</groupId>
             <artifactId>CaxEntity</artifactId>
         </dependency>
-        <dependency>
-            <artifactId>UcxDefinition</artifactId>
-            <groupId>jp.co.ndensan.reams.uc.ucx</groupId>
-            <version>${jp.co.ndensan.reams.ucxVersion}</version>
-        </dependency>
     </dependencies>
 </project>
