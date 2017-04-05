@@ -317,6 +317,12 @@ public class IinShinsakaishiryoA3Group2Editor implements IIinShinsakaishiryoA3Ed
             source.listTokubetsunaIryo2_3 = item.get特別な医療リスト２().get(index).get特記事項有無();
             source.listTokubetsunaIryo2_4 = item.get特別な医療リスト２().get(index).get段階改善フラグ();
         }
+        if (index < item.get主治医意見書().size()) {
+            source.listshujiiikensho_1 = item.get主治医意見書().get(index).get調査結果();
+            source.listshujiiikensho_2 = item.get主治医意見書().get(index).get段階改善フラグ();
+            source.listshujiiikensho_3 = item.get主治医意見書().get(index).get段階改善値();
+            source.listshujiiikensho_4 = item.get主治医意見書().get(index).get前回結果();
+        }
         return editSource2(source);
     }
 

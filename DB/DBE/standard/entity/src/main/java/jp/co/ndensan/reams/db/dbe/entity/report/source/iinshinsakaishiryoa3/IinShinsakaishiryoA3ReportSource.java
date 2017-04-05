@@ -399,11 +399,19 @@ public class IinShinsakaishiryoA3ReportSource implements IReportSource {
     public RString notes6;
     @ReportItem(name = "oldVersion", length = 3, order = 248)
     public RString oldVersion;
+    @ReportItem(name = "listshujiiikensho_1", length = 18, order = 249)
+    public RString listshujiiikensho_1;
+    @ReportItem(name = "listshujiiikensho_2", length = 1, order = 250)
+    public RString listshujiiikensho_2;
+    @ReportItem(name = "listshujiiikensho_3", length = 1, order = 251)
+    public RString listshujiiikensho_3;
+    @ReportItem(name = "listshujiiikensho_4", length = 18, order = 252)
+    public RString listshujiiikensho_4;
 
     //DBE517041_GaikyotokkiTextA3
-    @ReportItem(name = "gaikyotokkiImg", order = 250)
+    @ReportItem(name = "gaikyotokkiImg", order = 271)
     public RString gaikyotokkiImg;
-    @ReportItem(name = "gaikyotokkiText", order = 251)
+    @ReportItem(name = "gaikyotokkiText", order = 272)
     public RString gaikyotokkiText;
 
     //DBE517031_TokkiText1A3
