@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5110001;
 
 import java.util.List;
+import java.util.Objects;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaijoho.GogitaiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaijoho.GogitaiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinjoho.shinsakaiiinjoho.ShinsakaiIinJoho;
@@ -76,8 +77,11 @@ public class GogitaiJohoSakuseiValidationHandler {
             if (!row.getGogitaiNumber().getValue().equals(gogitaiNo)) {
                 continue;
             }
-            Range<RDate> range = new Range<>(row.getYukoKaishiYMD().getValue(), row.getYukoShuryoYMD().getValue());
-            if (range.between(yukoKaishiDate) || range.between(yukoShuryoDate)) {
+            if (Objects.equals(row.getYukoKaishiYMD().getValue(), yukoKaishiDate)) {
+                continue;
+            }
+            if (yukoKaishiDate.isBeforeOrEquals(row.getYukoShuryoYMD().getValue())
+                    && row.getYukoKaishiYMD().getValue().isBeforeOrEquals(yukoShuryoDate)) {
                 validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.合議体NO_有効期間重複,
                         div.getTxtGogitaiNumber(), div.getTxtYukoKaishiYMD(), div.getTxtYukoShuryoYMD()));
                 return validationMessages;
@@ -101,6 +105,20 @@ public class GogitaiJohoSakuseiValidationHandler {
             validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.合議体NO_有効期間重複,
                     div.getTxtGogitaiNumber(), div.getTxtYukoShuryoYMD()));
             return validationMessages;
+        }
+        for (dgGogitaiIchiran_Row row : div.getDgGogitaiIchiran().getDataSource()) {
+            if (!row.getGogitaiNumber().getValue().equals(gogitaiNo)) {
+                continue;
+            }
+            if (Objects.equals(row.getYukoKaishiYMD().getValue(), yukoKaishiDate)) {
+                continue;
+            }
+            if (yukoKaishiDate.isBeforeOrEquals(row.getYukoShuryoYMD().getValue())
+                    && row.getYukoKaishiYMD().getValue().isBeforeOrEquals(yukoShuryoDate)) {
+                validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.合議体NO_有効期間重複,
+                        div.getTxtGogitaiNumber(), div.getTxtYukoKaishiYMD(), div.getTxtYukoShuryoYMD()));
+                return validationMessages;
+            }
         }
         return validationMessages;
     }
