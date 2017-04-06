@@ -477,9 +477,11 @@ public class GogitaiJohoSakusei {
         RString jyotai = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
         if (!ResponseHolder.isReRequest()) {
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-
             if (JYOTAI_CODE_ADD.equals(jyotai)) {
                 validationMessages.add(getValidationHandler(div).gogitaiNoJuuhukuCheck());
+            }
+            if (JYOTAI_CODE_UPD.equals(jyotai)) {
+                validationMessages.add(getValidationHandler(div).gogitaiKikanChofukuCheckAtModifing());
             }
             if (!JYOTAI_CODE_DEL.equals(jyotai)) {
                 validationMessages.add(getValidationHandler(div).gogitaichoPersonNumCheck());
@@ -489,7 +491,6 @@ public class GogitaiJohoSakusei {
                 validationMessages.add(getValidationHandler(div).kaishiToShuryoYMDCheck());
                 validationMessages.add(getValidationHandler(div).kaishiYoteiToShuryoYoteiTimeCheck());
             }
-
             if (JYOTAI_CODE_ADD.equals(jyotai) || JYOTAI_CODE_UPD.equals(jyotai)) {
                 validationMessages.add(getValidationHandler(div).yukoKikanCheck());
             }
@@ -565,39 +566,12 @@ public class GogitaiJohoSakusei {
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             Models<GogitaiJohoIdentifier, GogitaiJoho> gogitaiJohoModel = ViewStateHolder.get(ViewStateKeys.合議体情報, Models.class);
             GogitaiJohoTransactionalService.createInstance().saveGogitaiJohoBy(new GogitaiJohoPreserver(), gogitaiJohoModel);
-//            Iterator<GogitaiJoho> 合議体情報 = gogitaiJohoModel.iterator();
-//            while (合議体情報.hasNext()) {
-//                GogitaiJoho gogitaiJoho = 合議体情報.next();
-//                if (gogitaiJoho.toEntity().getState() == EntityDataState.Added) {
-//                    manager.save(gogitaiJoho);
-//                }
-//                if (gogitaiJoho.toEntity().getState() == EntityDataState.Deleted) {
-//                    manager.deletePhysicalGogitaiWariateIinJoho(koshinmaedate(gogitaiJoho));
-//                    gogitaiNOExitCheck(gogitaiJoho.get合議体番号());
-//                    manager.deletePhysicalWithoutGogitaiWariateIin(gogitaiJoho);
-//                }
-//                if (gogitaiJoho.toEntity().getState() == EntityDataState.Modified) {
-//                    manager.deletePhysicalGogitaiWariateIinJoho(koshinmaedate(gogitaiJoho));
-//                    manager.saveGogitaiJoho(gogitaiJoho);
-//                    GogitaiWariateIinJohoManager gogitaiWariateIinJohoManager = GogitaiWariateIinJohoManager.createInstance();
-//                    for (GogitaiWariateIinJoho gogitaiWariateIinJoho : gogitaiJohoModel.get(gogitaiJoho.identifier()).getGogitaiWariateIinJohoList()) {
-//                        gogitaiWariateIinJohoManager.save(gogitaiWariateIinJoho);
-//                    }
-//                }
-//            }
             div.getCcdKanryoMsg().setMessage(new RString(UrInformationMessages.正常終了.getMessage().
                     replace(合議体情報作成.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE5110001StateName.完了);
 
         }
         return ResponseData.of(div).setState(DBE5110001StateName.合議体情報作成);
-    }
-
-    private void gogitaiNOExitCheck(int 合議体番号) {
-        if (service.getGogitaiWariateIinJohoCount(合議体番号)
-                && service.getShinsakaiKaisaiYoteiJohoCount(合議体番号)) {
-            throw new ApplicationException(DbeErrorMessages.他の情報で使用している為削除不可.getMessage());
-        }
     }
 
     private static class GogitaiJohoPreserver implements IGogitaiJohoPreserver {
@@ -616,7 +590,6 @@ public class GogitaiJohoSakusei {
                 }
                 if (gogitaiJoho.toEntity().getState() == EntityDataState.Deleted) {
                     manager.deletePhysicalGogitaiWariateIinJoho(koshinmaedate(gogitaiJoho));
-//                    gogitaiNOExitCheck(gogitaiJoho.get合議体番号());
                     manager.deletePhysicalWithoutGogitaiWariateIin(gogitaiJoho);
                 }
                 if (gogitaiJoho.toEntity().getState() == EntityDataState.Modified) {

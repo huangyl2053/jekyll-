@@ -87,6 +87,25 @@ public class GogitaiJohoSakuseiValidationHandler {
     }
 
     /**
+     * 合議体Noの重複をチェックします。
+     *
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs gogitaiKikanChofukuCheckAtModifing() {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        GogitaiJohoSakuseiFinder service = GogitaiJohoSakuseiFinder.createInstance();
+        Decimal gogitaiNo = div.getTxtGogitaiNumber().getValue();
+        RDate yukoKaishiDate = div.getTxtYukoKaishiYMD().getValue();
+        RDate yukoShuryoDate = div.getTxtYukoShuryoYMD().getValue();
+        if (service.existsOtherOverlappingYukoKikan(gogitaiNo.intValue(), yukoKaishiDate, yukoShuryoDate)) {
+            validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.合議体NO_有効期間重複,
+                    div.getTxtGogitaiNumber(), div.getTxtYukoShuryoYMD()));
+            return validationMessages;
+        }
+        return validationMessages;
+    }
+
+    /**
      *
      * 使用状況をチェックします。
      *
