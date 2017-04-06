@@ -50,6 +50,7 @@ import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShin
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.ChosaItakusakiAndChosainInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -188,9 +189,28 @@ public class ShokkenTorikeshiIchibuNinteiHandler {
             model.set電話番号(申請届出者情報.get申請届出者電話番号().value());
         }
         div.getCcdShinseiTodokedesha().initialize(model);
+        LasdecCode 市町村コード = LasdecCode.EMPTY;
+        RString 主治医医療機関コード = RString.EMPTY;
+        RString 医療機関名称 = RString.EMPTY;
+        RString 主治医コード = RString.EMPTY;
+        RString 主治医氏名 = RString.EMPTY;
+        if (今回情報.get主治医医療機関情報().get市町村コード() != null) {
+            市町村コード = 今回情報.get主治医医療機関情報().get市町村コード();
+        }
+        if (今回情報.get主治医医療機関情報().get主治医医療機関コード() != null) {
+            主治医医療機関コード = 今回情報.get主治医医療機関情報().get主治医医療機関コード().getColumnValue();
+        }
+        if (今回情報.get主治医医療機関情報().get医療機関名称() != null) {
+            医療機関名称 = 今回情報.get主治医医療機関情報().get医療機関名称();
+        }
+        if (今回情報.get主治医情報().get主治医コード() != null) {
+            主治医コード = 今回情報.get主治医情報().get主治医コード();
+        }
+        if (今回情報.get主治医情報().get主治医氏名() != null) {
+            主治医氏名 = 今回情報.get主治医情報().get主治医氏名();
+        }
         div.getCcdShujiiIryokikanAndShujiiInput().initialize(
-                今回情報.get主治医医療機関情報().get市町村コード(), 申請書管理番号, SubGyomuCode.DBD介護受給, 今回情報.get主治医医療機関情報().get主治医医療機関コード().getColumnValue(),
-                今回情報.get主治医医療機関情報().get医療機関名称(), 今回情報.get主治医情報().get主治医コード(), 今回情報.get主治医情報().get主治医氏名());
+                市町村コード, 申請書管理番号, SubGyomuCode.DBD介護受給, 主治医医療機関コード, 医療機関名称, 主治医コード, 主治医氏名);
         div.getCcdShujiiIryokikanAndShujiiInput().setShiteii(今回情報.get要介護認定申請情報().is指定医フラグ());
         div.getCcdChosaItakusakiAndChosainInput().setHdnShichosonCode(今回情報.get認定調査委託先情報().get市町村コード().value());
         div.getCcdChosaItakusakiAndChosainInput().setHdnShinseishoKanriNo(申請書管理番号.value());
