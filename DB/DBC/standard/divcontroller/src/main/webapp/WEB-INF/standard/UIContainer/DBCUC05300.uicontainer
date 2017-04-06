@@ -37,7 +37,7 @@
      "layoutName": "DBC0530011",
      "layoutTitle": "後期資格情報登録",
      "eventName": "対象者検索へ戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
      "toLayoutName": "DBZ0200001",

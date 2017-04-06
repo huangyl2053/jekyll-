@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 @lombok.Setter
 public class SetaiHaakuMybatisParameter extends UaFt200FindShikibetsuTaishoParam implements IMyBatisParameter {
 
+    private final UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam;
+
     /**
      * コンストラクタです
      *
@@ -25,5 +27,6 @@ public class SetaiHaakuMybatisParameter extends UaFt200FindShikibetsuTaishoParam
      */
     public SetaiHaakuMybatisParameter(IShikibetsuTaishoPSMSearchKey searchKey) {
         super(searchKey);
+        this.shikibetsutaishoParam = new UaFt200FindShikibetsuTaishoParam(searchKey);
     }
 }

@@ -11,10 +11,10 @@
         <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler" />
         <association property="t4101Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.ResultMap_DbT4101NinteiShinseiJohoEntity"/>
         <association property="t4001Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.ResultMap_DbT4001JukyushaDaichoEntity"/>
-        <association property="t5911Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5911ShujiiIryoKikanJohoMapper.ResultMap_DbT5911ShujiiIryoKikanJohoEntity"/>
-        <association property="t5912Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5912ShujiiJohoMapper.ResultMap_DbT5912ShujiiJohoEntity"/>
-        <association property="t5910Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5910NinteichosaItakusakiJohoMapper.ResultMap_DbT5910NinteichosaItakusakiJohoEntity"/>
-        <association property="t5913Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5913ChosainJohoMapper.ResultMap_DbT5913ChosainJohoEntity"/>
+        <association property="t5911Entity" resultMap="ResultMap_DbT5911ShujiiIryoKikanJohoEntity"/>
+        <association property="t5912Entity" resultMap="ResultMap_DbT5912ShujiiJohoEntity"/>
+        <association property="t5910Entity" resultMap="ResultMap_DbT5910NinteichosaItakusakiJohoEntity"/>
+        <association property="t5913Entity" resultMap="ResultMap_DbT5913ChosainJohoEntity"/>
         <association property="t4102Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4102NinteiKekkaJohoMapper.ResultMap_DbT4102NinteiKekkaJohoEntity"/>
         <association property="t4120Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4120ShinseitodokedeJohoMapper.ResultMap_DbT4120ShinseitodokedeJohoEntity"/>
     </resultMap>
@@ -30,10 +30,10 @@
         SELECT
         <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4101NinteiShinseiJohoMapper.allColumns_DbT4101NinteiShinseiJoho" />
         ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4001JukyushaDaichoMapper.allColumns_DbT4001JukyushaDaicho" />
-        ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5911ShujiiIryoKikanJohoMapper.allColumns_DbT5911ShujiiIryoKikanJoho" />
-        ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5912ShujiiJohoMapper.allColumns_DbT5912ShujiiJoho" />
-        ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5910NinteichosaItakusakiJohoMapper.allColumns_DbT5910NinteichosaItakusakiJoho" />
-        ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5913ChosainJohoMapper.allColumns_DbT5913ChosainJoho" />
+        ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4911ShujiiIryoKikanJohoMapper.allColumns_DbT4911ShujiiIryoKikanJoho" />
+        ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4912ShujiiJohoMapper.allColumns_DbT4912ShujiiJoho" />
+        ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4910NinteichosaItakusakiJohoMapper.allColumns_DbT4910NinteichosaItakusakiJoho" />
+        ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4913ChosainJohoMapper.allColumns_DbT4913ChosainJoho" />
         ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4102NinteiKekkaJohoMapper.allColumns_DbT4102NinteiKekkaJoho" />
         ,<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT4120ShinseitodokedeJohoMapper.allColumns_DbT4120ShinseitodokedeJoho" />
         ,T7051."shichosonCode"
@@ -51,23 +51,23 @@
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051
         ON T7051."shoKisaiHokenshaNo" = "DbT4101NinteiShinseiJoho"."shoKisaiHokenshaNo"
 
-        LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho" AS "DbT5911ShujiiIryoKikanJoho"
-        ON "DbT5911ShujiiIryoKikanJoho"."shichosonCode" = T7051."shichosonCode"
-        AND "DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode" = "DbT4101NinteiShinseiJoho"."shujiiIryokikanCode"
+        LEFT JOIN rgdb."DbT4911ShujiiIryoKikanJoho" AS "DbT4911ShujiiIryoKikanJoho"
+        ON "DbT4911ShujiiIryoKikanJoho"."shichosonCode" = T7051."shichosonCode"
+        AND "DbT4911ShujiiIryoKikanJoho"."shujiiIryokikanCode" = "DbT4101NinteiShinseiJoho"."shujiiIryokikanCode"
 
-        LEFT JOIN rgdb."DbT5912ShujiiJoho" AS "DbT5912ShujiiJoho"
-        ON "DbT5912ShujiiJoho"."shichosonCode" = T7051."shichosonCode"
-        AND "DbT5912ShujiiJoho"."shujiiIryokikanCode" = "DbT4101NinteiShinseiJoho"."shujiiIryokikanCode"
-        AND "DbT5912ShujiiJoho"."shujiiCode" = "DbT4101NinteiShinseiJoho"."shujiiCode"
+        LEFT JOIN rgdb."DbT4912ShujiiJoho" AS "DbT4912ShujiiJoho"
+        ON "DbT4912ShujiiJoho"."shichosonCode" = T7051."shichosonCode"
+        AND "DbT4912ShujiiJoho"."shujiiIryokikanCode" = "DbT4101NinteiShinseiJoho"."shujiiIryokikanCode"
+        AND "DbT4912ShujiiJoho"."shujiiCode" = "DbT4101NinteiShinseiJoho"."shujiiCode"
 
-        LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS "DbT5910NinteichosaItakusakiJoho"
-        ON "DbT5910NinteichosaItakusakiJoho"."shichosonCode" = T7051."shichosonCode"
-        AND "DbT5910NinteichosaItakusakiJoho"."ninteichosaItakusakiCode" = "DbT4101NinteiShinseiJoho"."ninteiChosaItakusakiCode"
+        LEFT JOIN rgdb."DbT4910NinteichosaItakusakiJoho" AS "DbT4910NinteichosaItakusakiJoho"
+        ON "DbT4910NinteichosaItakusakiJoho"."shichosonCode" = T7051."shichosonCode"
+        AND "DbT4910NinteichosaItakusakiJoho"."ninteichosaItakusakiCode" = "DbT4101NinteiShinseiJoho"."ninteiChosaItakusakiCode"
 
-        LEFT JOIN rgdb."DbT5913ChosainJoho" AS "DbT5913ChosainJoho"
-        ON "DbT5913ChosainJoho"."shichosonCode" = T7051."shichosonCode"
-        AND "DbT5913ChosainJoho"."ninteiChosaItakusakiCode" = "DbT4101NinteiShinseiJoho"."ninteiChosaItakusakiCode"
-        AND "DbT5913ChosainJoho"."ninteiChosainCode" = "DbT4101NinteiShinseiJoho"."ninteiChosainCode"
+        LEFT JOIN rgdb."DbT4913ChosainJoho" AS "DbT4913ChosainJoho"
+        ON "DbT4913ChosainJoho"."shichosonCode" = T7051."shichosonCode"
+        AND "DbT4913ChosainJoho"."ninteiChosaItakusakiCode" = "DbT4101NinteiShinseiJoho"."ninteiChosaItakusakiCode"
+        AND "DbT4913ChosainJoho"."ninteiChosainCode" = "DbT4101NinteiShinseiJoho"."ninteiChosainCode"
 
         LEFT JOIN rgdb."DbT4102NinteiKekkaJoho" AS "DbT4102NinteiKekkaJoho"
         ON "DbT4102NinteiKekkaJoho"."shinseishoKanriNo" = "DbT4101NinteiShinseiJoho"."shinseishoKanriNo"
@@ -104,4 +104,106 @@
         "DbT4001JukyushaDaicho"."rirekiNo" DESC, "DbT4001JukyushaDaicho"."edaban" DESC
         LIMIT 1
     </select>
+    
+    <resultMap id="ResultMap_DbT5911ShujiiIryoKikanJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5911ShujiiIryoKikanJohoEntity" autoMapping="true">
+        <id property="shichosonCode" column="dbT4911ShujiiIryoKikanJoho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <id property="shujiiIryokikanCode" column="dbT4911ShujiiIryoKikanJoho_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.db.dbz.entity.typehandlers.ShujiiIryokikanCodeTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT4911ShujiiIryoKikanJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT4911ShujiiIryoKikanJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT4911ShujiiIryoKikanJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT4911ShujiiIryoKikanJoho_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT4911ShujiiIryoKikanJoho_isDeleted" />
+        <result property="updateCount" column="dbT4911ShujiiIryoKikanJoho_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT4911ShujiiIryoKikanJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT4911ShujiiIryoKikanJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="iryokikanCode" column="dbT4911ShujiiIryoKikanJoho_iryokikanCode" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.IryoKikanCodeTypeHandler"/>
+        <result property="iryoKikanMeisho" column="dbT4911ShujiiIryoKikanJoho_iryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="iryoKikanMeishoKana" column="dbT4911ShujiiIryoKikanJoho_iryoKikanMeishoKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yubinNo" column="dbT4911ShujiiIryoKikanJoho_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="jusho" column="dbT4911ShujiiIryoKikanJoho_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="telNo" column="dbT4911ShujiiIryoKikanJoho_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="faxNo" column="dbT4911ShujiiIryoKikanJoho_faxNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="daihyoshaName" column="dbT4911ShujiiIryoKikanJoho_daihyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="daihyoshaNameKana" column="dbT4911ShujiiIryoKikanJoho_daihyoshaNameKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jokyoFlag" column="dbT4911ShujiiIryoKikanJoho_jokyoFlag" />
+    </resultMap>
+    
+    <resultMap id="ResultMap_DbT5912ShujiiJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5912ShujiiJohoEntity" autoMapping="true">
+        <id property="shichosonCode" column="dbT4912ShujiiJoho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <id property="shujiiIryokikanCode" column="dbT4912ShujiiJoho_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="shujiiCode" column="dbT4912ShujiiJoho_shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT4912ShujiiJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT4912ShujiiJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT4912ShujiiJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT4912ShujiiJoho_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT4912ShujiiJoho_isDeleted" />
+        <result property="updateCount" column="dbT4912ShujiiJoho_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT4912ShujiiJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT4912ShujiiJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shujiiName" column="dbT4912ShujiiJoho_shujiiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shujiiKana" column="dbT4912ShujiiJoho_shujiiKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
+        <result property="seibetsu" column="dbT4912ShujiiJoho_seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
+        <result property="yubinNo" column="dbT4912ShujiiJoho_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="jusho" column="dbT4912ShujiiJoho_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="telNo" column="dbT4912ShujiiJoho_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="faxNo" column="dbT4912ShujiiJoho_faxNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="shinryokaName" column="dbT4912ShujiiJoho_shinryokaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="shiteiiFlag" column="dbT4912ShujiiJoho_shiteiiFlag" />
+        <result property="jokyoFlag" column="dbT4912ShujiiJoho_jokyoFlag" />
+    </resultMap>
+    
+    <resultMap id="ResultMap_DbT5910NinteichosaItakusakiJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5910NinteichosaItakusakiJohoEntity" autoMapping="true">
+        <id property="shichosonCode" column="dbT4910NinteichosaItakusakiJoho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <id property="ninteichosaItakusakiCode" column="dbT4910NinteichosaItakusakiJoho_ninteichosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT4910NinteichosaItakusakiJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT4910NinteichosaItakusakiJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT4910NinteichosaItakusakiJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT4910NinteichosaItakusakiJoho_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT4910NinteichosaItakusakiJoho_isDeleted" />
+        <result property="updateCount" column="dbT4910NinteichosaItakusakiJoho_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT4910NinteichosaItakusakiJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT4910NinteichosaItakusakiJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jigyoshaNo" column="dbT4910NinteichosaItakusakiJoho_jigyoshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.JigyoshaNoTypeHandler"/>
+        <result property="jigyoshaMeisho" column="dbT4910NinteichosaItakusakiJoho_jigyoshaMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jigyoshaMeishoKana" column="dbT4910NinteichosaItakusakiJoho_jigyoshaMeishoKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="yubinNo" column="dbT4910NinteichosaItakusakiJoho_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="jusho" column="dbT4910NinteichosaItakusakiJoho_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="telNo" column="dbT4910NinteichosaItakusakiJoho_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="faxNo" column="dbT4910NinteichosaItakusakiJoho_faxNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="daihyoshaName" column="dbT4910NinteichosaItakusakiJoho_daihyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="daihyoshaNameKana" column="dbT4910NinteichosaItakusakiJoho_daihyoshaNameKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chosaItakuKubun" column="dbT4910NinteichosaItakusakiJoho_chosaItakuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="tokuteiChosainDisplayFlag" column="dbT4910NinteichosaItakusakiJoho_tokuteiChosainDisplayFlag" />
+        <result property="waritsukeTeiin" column="dbT4910NinteichosaItakusakiJoho_waritsukeTeiin" />
+        <result property="waritsukeChiku" column="dbT4910NinteichosaItakusakiJoho_waritsukeChiku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ChikuCodeTypeHandler"/>
+        <result property="autoWaritsukeFlag" column="dbT4910NinteichosaItakusakiJoho_autoWaritsukeFlag" />
+        <result property="kikanKubun" column="dbT4910NinteichosaItakusakiJoho_kikanKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jokyoFlag" column="dbT4910NinteichosaItakusakiJoho_jokyoFlag" />
+    </resultMap>
+    
+    <resultMap id="ResultMap_DbT5913ChosainJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity" autoMapping="true">
+        <id property="shichosonCode" column="dbT4913ChosainJoho_shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
+        <id property="ninteiChosaItakusakiCode" column="dbT4913ChosainJoho_ninteiChosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <id property="ninteiChosainCode" column="dbT4913ChosainJoho_ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertDantaiCd" column="dbT4913ChosainJoho_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertTimestamp" column="dbT4913ChosainJoho_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="insertReamsLoginId" column="dbT4913ChosainJoho_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="insertContextId" column="dbT4913ChosainJoho_insertContextId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.UUIDTypeHandler"/>
+        <result property="isDeleted" column="dbT4913ChosainJoho_isDeleted" />
+        <result property="updateCount" column="dbT4913ChosainJoho_updateCount" />
+        <result property="lastUpdateTimestamp" column="dbT4913ChosainJoho_lastUpdateTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
+        <result property="lastUpdateReamsLoginId" column="dbT4913ChosainJoho_lastUpdateReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chosainShimei" column="dbT4913ChosainJoho_chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chosainKanaShimei" column="dbT4913ChosainJoho_chosainKanaShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="seibetsu" column="dbT4913ChosainJoho_seibetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chosainShikaku" column="dbT4913ChosainJoho_chosainShikaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chikuCode" column="dbT4913ChosainJoho_chikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="chosaKanoNinzuPerMonth" column="dbT4913ChosainJoho_chosaKanoNinzuPerMonth" />
+        <result property="yubinNo" column="dbT4913ChosainJoho_yubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
+        <result property="jusho" column="dbT4913ChosainJoho_jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+        <result property="telNo" column="dbT4913ChosainJoho_telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="faxNo" column="dbT4913ChosainJoho_faxNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
+        <result property="shozokuKikanName" column="dbT4913ChosainJoho_shozokuKikanName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="jokyoFlag" column="dbT4913ChosainJoho_jokyoFlag" />
+    </resultMap>
 </mapper>

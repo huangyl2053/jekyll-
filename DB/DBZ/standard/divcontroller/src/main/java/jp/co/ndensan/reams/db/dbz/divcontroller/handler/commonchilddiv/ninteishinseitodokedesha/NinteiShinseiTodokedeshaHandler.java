@@ -96,7 +96,7 @@ public class NinteiShinseiTodokedeshaHandler {
                 div.getCcdShisetsuJohoCommonChildDiv().getTxtNyuryokuShisetsuKodo().setValue(model.get申請届出代行事業者番号());
                 //div.getCcdShisetsuJohoCommonChildDiv().getTxtNyuryokuShisetsuMeisho().setValue(model.get申請届出代行事業者名称());
             }
-            if (!RString.isNullOrEmpty(model.get事業者区分().trim())) {
+            if (!RString.isNullOrEmpty(model.get事業者区分()) && !RString.isNullOrEmpty(model.get事業者区分().trim())) {
                 div.getDdlShinseiKankeisha().setSelectedKey(model.get事業者区分());
             }
         }

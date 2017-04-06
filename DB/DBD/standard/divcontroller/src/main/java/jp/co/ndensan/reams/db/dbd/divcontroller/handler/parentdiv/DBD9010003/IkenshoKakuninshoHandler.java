@@ -98,14 +98,24 @@ public class IkenshoKakuninshoHandler {
             }
         }
         if (表示対象データ != null) {
-            div.getPanelShosaiEria().getTxtZenkaiHakkouBi().setValue(new RDate(表示対象データ.get発行年月日().wareki().toDateString().toString()));
-            div.getPanelShosaiEria().getTxtShinseiBi().setValue(new RDate(表示対象データ.get申請年月日().wareki().toDateString().toString()));
-            div.getPanelShosaiEria().getTxtDateIkensyoSakuseiBi().setValue(
-                    new RDate(表示対象データ.get主治医意見書受領年月日().wareki().toDateString().toString()));
-            div.getPanelShosaiEria().getTxtNinteiKikan().setFromValue(
-                    new RDate(表示対象データ.get認定有効期間開始年月日().wareki().toDateString().toString()));
-            div.getPanelShosaiEria().getTxtNinteiKikan().setFromValue(
-                    new RDate(表示対象データ.get認定有効期間終了年月日().wareki().toDateString().toString()));
+            if (表示対象データ.get発行年月日() != null && !表示対象データ.get発行年月日().isEmpty()) {
+                div.getPanelShosaiEria().getTxtZenkaiHakkouBi().setValue(new RDate(表示対象データ.get発行年月日().wareki().toDateString().toString()));
+            }
+            if (表示対象データ.get申請年月日() != null && !表示対象データ.get申請年月日().isEmpty()) {
+                div.getPanelShosaiEria().getTxtShinseiBi().setValue(new RDate(表示対象データ.get申請年月日().wareki().toDateString().toString()));
+            }
+            if (表示対象データ.get主治医意見書受領年月日() != null && !表示対象データ.get主治医意見書受領年月日().isEmpty()) {
+                div.getPanelShosaiEria().getTxtDateIkensyoSakuseiBi().setValue(
+                        new RDate(表示対象データ.get主治医意見書受領年月日().wareki().toDateString().toString()));
+            }
+            if (表示対象データ.get認定有効期間開始年月日() != null && !表示対象データ.get認定有効期間開始年月日().isEmpty()) {
+                div.getPanelShosaiEria().getTxtNinteiKikan().setFromValue(
+                        new RDate(表示対象データ.get認定有効期間開始年月日().wareki().toDateString().toString()));
+            }
+            if (表示対象データ.get認定有効期間終了年月日() != null && !表示対象データ.get認定有効期間終了年月日().isEmpty()) {
+                div.getPanelShosaiEria().getTxtNinteiKikan().setFromValue(
+                        new RDate(表示対象データ.get認定有効期間終了年月日().wareki().toDateString().toString()));
+            }
             div.getPanelShosaiEria().getTxtZiritudo().setValue(get日常生活自立度(表示対象データ.get日常生活自立度()));
             div.getPanelShosaiEria().getTxtNyoushikkin().setValue(表示対象データ.is尿失禁の有無() ? あり : なし);
             div.setHdndatakubun(表示対象のデータ区分);
