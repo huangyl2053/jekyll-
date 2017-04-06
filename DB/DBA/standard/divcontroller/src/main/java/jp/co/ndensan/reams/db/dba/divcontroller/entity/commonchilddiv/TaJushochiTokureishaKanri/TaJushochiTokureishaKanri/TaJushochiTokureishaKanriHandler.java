@@ -139,10 +139,12 @@ public class TaJushochiTokureishaKanriHandler {
                     div.getBtnTorikeshi().setDisabled(true);
                     div.getBtnKakunin().setDisabled(true);
                 }
-                div.getTxtTasyobi().clearValue();
-                div.getTxtKaijyobi().clearValue();
-                div.getTxtKaijyoTodokedebi().clearValue();
-                div.getDdlKaijyoJiyo().setSelectedKey(RString.EMPTY);
+                if (最新適用情報 != null && !最新適用情報.getKaijoYMD().isEmpty() || 最新適用情報 == null) {
+                    div.getTxtTasyobi().clearValue();
+                    div.getTxtKaijyobi().clearValue();
+                    div.getTxtKaijyoTodokedebi().clearValue();
+                    div.getDdlKaijyoJiyo().setSelectedKey(RString.EMPTY);
+                }
                 ViewStateHolder.put(ViewStateKeys.台帳種別表示, new RString("台帳種別表示有り"));
                 break;
             case ShisetuHenko:
@@ -237,6 +239,7 @@ public class TaJushochiTokureishaKanriHandler {
      * 「取消する」ボタンを押下する場合、入力の内容をクリアします。
      */
     public void onClick_Torikeshi() {
+        div.getTajushochiTokureiInput().setDisplayNone(true);
         clear他市町村住所地特例情報入力エリア();
     }
 
@@ -1125,6 +1128,7 @@ public class TaJushochiTokureishaKanriHandler {
     }
 
     private void set他市町村住所地特例情報入力エリア活性の設定() {
+        div.getTajushochiTokureiInput().setDisplayNone(false);
         div.getTxtTasyobi().setDisabled(false);
         div.getTxtNyusyobi().setDisabled(false);
         div.getTxtTekiyobi().setDisabled(false);
