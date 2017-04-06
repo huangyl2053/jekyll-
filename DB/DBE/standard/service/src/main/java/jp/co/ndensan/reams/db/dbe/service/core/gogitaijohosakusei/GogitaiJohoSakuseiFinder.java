@@ -19,7 +19,6 @@ import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.gogitaijohosakuse
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.gogitaijoho.gogitaijoho.GogitaiJohoMapperParameter;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5591GogitaiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5592ShinsakaiKaisaiBashoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5591GogitaiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5592ShinsakaiKaisaiBashoJohoDac;
@@ -170,15 +169,19 @@ public class GogitaiJohoSakuseiFinder {
     }
 
     /**
-     *
      * @param 合議体番号 合議体番号
      * @param 有効開始日 有効開始日
-     * @return 指定の合議体番号、有効開始日の合議体が存在する場合、{@code true}.
+     * @param 有効終了日 有効終了日
+     * @return 指定の合議体番号に該当し重複する有効期間を持つ合議体が存在する場合、{@code true}.
      */
-    public boolean exists(int 合議体番号, RDate 有効開始日) {
+    public boolean existsOverlappingYukoKikan(int 合議体番号, RDate 有効開始日, RDate 有効終了日) {
         java.util.Objects.requireNonNull(有効開始日);
-        FlexibleDate fDate = new FlexibleDate(有効開始日.toDateString());
-        return dbt5591dac.selectByKey(合議体番号, fDate) != null;
+        java.util.Objects.requireNonNull(有効終了日);
+        return !dbt5591dac.selectGogitaiOverlappingYukoKikan(
+                合議体番号,
+                new FlexibleDate(有効開始日.toDateString()),
+                new FlexibleDate(有効終了日.toDateString()))
+                .isEmpty();
     }
 
     /**

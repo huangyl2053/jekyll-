@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5110001;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaijoho.GogitaiJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaijoho.GogitaiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinjoho.shinsakaiiinjoho.ShinsakaiIinJoho;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
@@ -24,12 +26,14 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.Range;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * 合議体情報作成の抽象ValidationHandlerクラスです。
@@ -52,7 +56,6 @@ public class GogitaiJohoSakuseiValidationHandler {
     }
 
     /**
-     *
      * 合議体Noの重複をチェックします。
      *
      * @return ValidationMessageControlPairs
@@ -61,22 +64,25 @@ public class GogitaiJohoSakuseiValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         GogitaiJohoSakuseiFinder service = GogitaiJohoSakuseiFinder.createInstance();
         Decimal gogitaiNo = div.getTxtGogitaiNumber().getValue();
-        RDate yukoKaisiDate = div.getTxtYukoKaishiYMD().getValue();
-        if (service.exists(gogitaiNo.intValue(), yukoKaisiDate)) {
-            validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.既に登録済,
-                    div.getTxtGogitaiNumber(), div.getTxtYukoKaishiYMD()));
+        RDate yukoKaishiDate = div.getTxtYukoKaishiYMD().getValue();
+        RDate yukoShuryoDate = div.getTxtYukoShuryoYMD().getValue();
+        if (service.existsOverlappingYukoKikan(gogitaiNo.intValue(), yukoKaishiDate, yukoShuryoDate)) {
+            validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.合議体NO_有効期間重複,
+                    div.getTxtGogitaiNumber(), div.getTxtYukoKaishiYMD(), div.getTxtYukoShuryoYMD()));
             return validationMessages;
         }
         List<dgGogitaiIchiran_Row> rowList = div.getDgGogitaiIchiran().getDataSource();
         for (dgGogitaiIchiran_Row row : rowList) {
-            if (row.getGogitaiNumber().getValue().equals(gogitaiNo)
-                    && java.util.Objects.equals(row.getYukoKaishiYMD().getValue(), yukoKaisiDate)) {
-                validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.既に登録済,
-                        div.getTxtGogitaiNumber(), div.getTxtYukoKaishiYMD()));
+            if (!row.getGogitaiNumber().getValue().equals(gogitaiNo)) {
+                continue;
+            }
+            Range<RDate> range = new Range<>(row.getYukoKaishiYMD().getValue(), row.getYukoShuryoYMD().getValue());
+            if (range.between(yukoKaishiDate) || range.between(yukoShuryoDate)) {
+                validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.合議体NO_有効期間重複,
+                        div.getTxtGogitaiNumber(), div.getTxtYukoKaishiYMD(), div.getTxtYukoShuryoYMD()));
                 return validationMessages;
             }
         }
-
         return validationMessages;
     }
 
@@ -84,19 +90,27 @@ public class GogitaiJohoSakuseiValidationHandler {
      *
      * 使用状況をチェックします。
      *
+     * @param gogitaiJohoModel gogitaiJohoModel
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs 使用状況チェック() {
+    public ValidationMessageControlPairs 使用状況チェック(Models<GogitaiJohoIdentifier, GogitaiJoho> gogitaiJohoModel) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        dgGogitaiIchiran_Row selectedRow = div.getDgGogitaiIchiran().getClickedItem();
         GogitaiJohoSakuseiFinder service = GogitaiJohoSakuseiFinder.createInstance();
-
-        boolean isUsed = service.isUsed(div.getDgGogitaiIchiran().getClickedItem().getGogitaiNumber().getValue().intValue(),
-                div.getDgGogitaiIchiran().getClickedItem().getYukoKaishiYMD().getValue().toFlexibleDate(),
-                div.getDgGogitaiIchiran().getClickedItem().getYukoShuryoYMD().getValue().toFlexibleDate());
+        boolean isUsed = service.isUsed(
+                selectedRow.getGogitaiNumber().getValue().intValue(),
+                new FlexibleDate(selectedRow.getYukoKaishiYMD().getValue().toDateString()),
+                new FlexibleDate(selectedRow.getYukoShuryoYMD().getValue().toDateString())
+        );
         if (isUsed) {
-            validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.削除不可));
+            validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.予定登録済みのため削除不可));
         }
-
+        GogitaiJohoIdentifier identifier = new GogitaiJohoIdentifier(selectedRow.getGogitaiNumber().getValue().intValue(),
+                new FlexibleDate(selectedRow.getYukoKaishiYMD().getValue().toDateString()));
+        GogitaiJoho gogitaiJoho = gogitaiJohoModel.get(identifier);
+        if (!gogitaiJoho.getGogitaiWariateIinJohoList().isEmpty()) {
+            validationMessages.add(new ValidationMessageControlPair(GogitaiJohoSakuseiMessages.割当委員存在のため削除不可));
+        }
         return validationMessages;
     }
 
@@ -351,7 +365,7 @@ public class GogitaiJohoSakuseiValidationHandler {
     private static enum GogitaiJohoSakuseiMessages implements IValidationMessage {
 
         桁数が不正(UrErrorMessages.桁数が不正, "合議体No", "2"),
-        既に登録済(UrErrorMessages.既に登録済, "この合議体NOと有効開始日"),
+        合議体NO_有効期間重複(DbeErrorMessages.合議体NO_有効期間重複),
         コードマスタなし(UrErrorMessages.コードマスタなし),
         終了日が開始日以前(DbeErrorMessages.終了日が開始日以前),
         期間が不正_追加メッセージあり２(UrErrorMessages.期間が不正_追加メッセージあり２, "開始予定時刻", "終了予定時刻"),
@@ -360,7 +374,8 @@ public class GogitaiJohoSakuseiValidationHandler {
         合議体委員数が最大値を超過(DbeErrorMessages.合議体委員数が最大値を超過),
         審査会の合議体長は必ず１人(DbeErrorMessages.審査会の合議体長は必ず１人),
         超過(DbeErrorMessages.超過, "審査会委員", "審査会委員定員"),
-        削除不可(DbeErrorMessages.他の情報で使用している為削除不可),
+        予定登録済みのため削除不可(DbeErrorMessages.予定登録済みのため合議体情報削除不可),
+        割当委員存在のため削除不可(DbeErrorMessages.割当委員存在のため合議体情報削除不可),
         審査会委員定員数超過(DbeWarningMessages.審査会委員定員数超過),
         審査会最低定員数不足(DbeWarningMessages.審査会最低定員数不足),
         対象データなし_追加メッセージあり(UrErrorMessages.対象データなし_追加メッセージあり, "合議体一覧");

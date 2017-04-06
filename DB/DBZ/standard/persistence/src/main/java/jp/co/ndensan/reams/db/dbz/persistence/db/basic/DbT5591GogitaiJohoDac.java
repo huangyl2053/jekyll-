@@ -17,8 +17,7 @@ import jp.co.ndensan.reams.uz.uza.core.mybatis.SqlSession;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.db.DbAccessorNormalType;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.and;
-import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.eq;
+import static jp.co.ndensan.reams.uz.uza.util.db.Restrictions.*;
 import jp.co.ndensan.reams.uz.uza.util.db.util.DbAccessors;
 import jp.co.ndensan.reams.uz.uza.util.di.InjectSession;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -84,6 +83,25 @@ public class DbT5591GogitaiJohoDac implements ISaveable<DbT5591GogitaiJohoEntity
                                 eq(gogitaiYukoKikanKaishiYMD, 合議体有効期間開始年月日),
                                 eq(gogitaiYukoKikanShuryoYMD, 合議体有効期間終了年月日))).
                 toObject(DbT5591GogitaiJohoEntity.class);
+    }
+
+    /**
+     * @param 合議体番号 合議体番号
+     * @param 有効開始日 有効開始日
+     * @param 有効終了日 有効終了日
+     * @return 指定の合議体番号に該当し、指定の値と重複する有効期間を持つ合議体すべて
+     */
+    public List<DbT5591GogitaiJohoEntity> selectGogitaiOverlappingYukoKikan(int 合議体番号, FlexibleDate 有効開始日, FlexibleDate 有効終了日) {
+        return new DbAccessorNormalType(session)
+                .select()
+                .table(DbT5591GogitaiJoho.class)
+                .where(and(
+                                eq(gogitaiNo, 合議体番号),
+                                leq(有効開始日, gogitaiYukoKikanShuryoYMD),
+                                leq(gogitaiYukoKikanKaishiYMD, 有効終了日)
+                        )
+                )
+                .toList(DbT5591GogitaiJohoEntity.class);
     }
 
     /**

@@ -237,7 +237,7 @@ public class GogitaiJohoSakuseiHandler {
         div.getTxtGogitaiNumber().setDisabled(true);
         div.getTxtYukoKaishiYMD().setDisabled(true);
         各ボタン活性設定(Boolean.TRUE);
-
+        div.getDgGogitaiIchiran().setReadOnly(true);
     }
 
     /**
@@ -270,6 +270,7 @@ public class GogitaiJohoSakuseiHandler {
         合議体詳細情報項目初期値設定();
         合議体詳細情報項目状態設定(true);
         各ボタン活性設定(Boolean.FALSE);
+        div.getDgGogitaiIchiran().setReadOnly(false);
     }
 
     /**
@@ -485,6 +486,7 @@ public class GogitaiJohoSakuseiHandler {
         gogitaiJohoBuilder.set介護認定審査会委員定員(div.getTxtIinTeiin().getValue().intValue());
         gogitaiJohoBuilder.set合議体ダミーフラグ(RAD_KEY_1.equals(div.getRadDummyFlag().getSelectedKey()));
         gogitaiJohoBuilder.set合議体精神科医存在フラグ(RAD_KEY_0.equals(div.getRadSeishinkaiSonzai().getSelectedKey()));
+        gogitaiJohoBuilder.clearGogitaiWariateIinJoho();
         gogitaiJohoBuilder = 合議体割当審査員情報編集(gogitaiJohoBuilder);
         return gogitaiJohoBuilder.build();
     }

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaijoho;
 
+import java.util.ArrayList;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJohoIdentifier;
@@ -27,7 +28,7 @@ public class GogitaiJohoBuilder {
 
     private final DbT5591GogitaiJohoEntity entity;
     private final GogitaiJohoIdentifier id;
-    private final Models<GogitaiWariateIinJohoIdentifier, GogitaiWariateIinJoho> gogitaiWariateIinJoho;
+    private Models<GogitaiWariateIinJohoIdentifier, GogitaiWariateIinJoho> gogitaiWariateIinJoho;
     private final Models<ShinsakaiKaisaiBashoJohoIdentifier, ShinsakaiKaisaiBashoJoho> shinsakaiKaisaiBashoJoho;
 
     /**
@@ -159,7 +160,7 @@ public class GogitaiJohoBuilder {
         entity.setGogitaiSeishinkaSonzaiFlag(合議体精神科医存在フラグ);
         return this;
     }
-    
+
     /**
      * 状態を設定します。
      *
@@ -180,6 +181,11 @@ public class GogitaiJohoBuilder {
     public GogitaiJohoBuilder set合議体ダミーフラグ(boolean 合議体ダミーフラグ) {
         requireNonNull(合議体ダミーフラグ, UrSystemErrorMessages.値がnull.getReplacedMessage("合議体ダミーフラグ"));
         entity.setGogitaiDummyFlag(合議体ダミーフラグ);
+        return this;
+    }
+
+    public GogitaiJohoBuilder clearGogitaiWariateIinJoho() {
+        this.gogitaiWariateIinJoho = Models.create(new ArrayList<GogitaiWariateIinJoho>());
         return this;
     }
 

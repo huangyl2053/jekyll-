@@ -24,6 +24,8 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5110001.Gog
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5110001.GogitaiJohoSakuseiValidationHandler;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.gogitaijohosakusei.GogitaiJohoSakuseiCSVShuturyokuEntity;
 import jp.co.ndensan.reams.db.dbe.service.core.gogitaijoho.gogitaijoho.GogitaiJohoManager;
+import jp.co.ndensan.reams.db.dbe.service.core.gogitaijoho.gogitaijoho.GogitaiJohoTransactionalService;
+import jp.co.ndensan.reams.db.dbe.service.core.gogitaijoho.gogitaijoho.IGogitaiJohoPreserver;
 import jp.co.ndensan.reams.db.dbe.service.core.gogitaijoho.gogitaiwariateiinjoho.GogitaiWariateIinJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.gogitaijohosakusei.GogitaiJohoSakuseiFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
@@ -93,7 +95,7 @@ public class GogitaiJohoSakusei {
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private final GogitaiJohoSakuseiFinder service;
-    private final GogitaiJohoManager manager;
+
     private final RString 合議体情報作成 = new RString("合議体情報作成");
     private static final RString WORKFLOW_KEY_BATCH = new RString("Batch");
     private static final RString WORKFLOW_KEY_KANRYO = new RString("Kanryo");
@@ -104,7 +106,6 @@ public class GogitaiJohoSakusei {
      */
     public GogitaiJohoSakusei() {
         this.service = GogitaiJohoSakuseiFinder.createInstance();
-        this.manager = GogitaiJohoManager.createInstance();
     }
 
     /**
@@ -298,8 +299,10 @@ public class GogitaiJohoSakusei {
             return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            Models<GogitaiJohoIdentifier, GogitaiJoho> gogitaiJohoModel = ViewStateHolder.get(ViewStateKeys.合議体情報, Models.class);
+
             ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-            validationMessages.add(getValidationHandler(div).使用状況チェック());
+            validationMessages.add(getValidationHandler(div).使用状況チェック(gogitaiJohoModel));
             if (validationMessages.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
@@ -309,7 +312,7 @@ public class GogitaiJohoSakusei {
                 div.getDgGogitaiIchiran().getDataSource().remove(div.getDgGogitaiIchiran().getClickedRowId());
             } else if (!JYOTAI_NAME_DEL.equals(div.getDgGogitaiIchiran().getClickedItem().getJyotai())) {
                 div.getDgGogitaiIchiran().getClickedItem().setJyotai(JYOTAI_NAME_DEL);
-                Models<GogitaiJohoIdentifier, GogitaiJoho> gogitaiJohoModel = ViewStateHolder.get(ViewStateKeys.合議体情報, Models.class);
+
                 GogitaiJohoIdentifier identifier = new GogitaiJohoIdentifier(
                         div.getDgGogitaiIchiran().getClickedItem().getGogitaiNumber().getValue().intValue(),
                         new FlexibleDate(div.getDgGogitaiIchiran().getClickedItem().getYukoKaishiYMD().getValue().toDateString()));
@@ -319,7 +322,7 @@ public class GogitaiJohoSakusei {
                 gogitaiJohoModel.add(gogitaiJoho);
                 ViewStateHolder.put(ViewStateKeys.合議体情報, gogitaiJohoModel);
             }
-            getHandler(div).合議体詳細情報削除モード設定(false);
+            getHandler(div).合議体詳細情報削除モード設定(true);
             CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_UPDATE_NAME, false);
         }
         return ResponseData.of(div).respond();
@@ -561,15 +564,59 @@ public class GogitaiJohoSakusei {
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             Models<GogitaiJohoIdentifier, GogitaiJoho> gogitaiJohoModel = ViewStateHolder.get(ViewStateKeys.合議体情報, Models.class);
-            Iterator<GogitaiJoho> 合議体情報 = gogitaiJohoModel.iterator();
-            while (合議体情報.hasNext()) {
-                GogitaiJoho gogitaiJoho = 合議体情報.next();
+            GogitaiJohoTransactionalService.createInstance().saveGogitaiJohoBy(new GogitaiJohoPreserver(), gogitaiJohoModel);
+//            Iterator<GogitaiJoho> 合議体情報 = gogitaiJohoModel.iterator();
+//            while (合議体情報.hasNext()) {
+//                GogitaiJoho gogitaiJoho = 合議体情報.next();
+//                if (gogitaiJoho.toEntity().getState() == EntityDataState.Added) {
+//                    manager.save(gogitaiJoho);
+//                }
+//                if (gogitaiJoho.toEntity().getState() == EntityDataState.Deleted) {
+//                    manager.deletePhysicalGogitaiWariateIinJoho(koshinmaedate(gogitaiJoho));
+//                    gogitaiNOExitCheck(gogitaiJoho.get合議体番号());
+//                    manager.deletePhysicalWithoutGogitaiWariateIin(gogitaiJoho);
+//                }
+//                if (gogitaiJoho.toEntity().getState() == EntityDataState.Modified) {
+//                    manager.deletePhysicalGogitaiWariateIinJoho(koshinmaedate(gogitaiJoho));
+//                    manager.saveGogitaiJoho(gogitaiJoho);
+//                    GogitaiWariateIinJohoManager gogitaiWariateIinJohoManager = GogitaiWariateIinJohoManager.createInstance();
+//                    for (GogitaiWariateIinJoho gogitaiWariateIinJoho : gogitaiJohoModel.get(gogitaiJoho.identifier()).getGogitaiWariateIinJohoList()) {
+//                        gogitaiWariateIinJohoManager.save(gogitaiWariateIinJoho);
+//                    }
+//                }
+//            }
+            div.getCcdKanryoMsg().setMessage(new RString(UrInformationMessages.正常終了.getMessage().
+                    replace(合議体情報作成.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
+            return ResponseData.of(div).setState(DBE5110001StateName.完了);
+
+        }
+        return ResponseData.of(div).setState(DBE5110001StateName.合議体情報作成);
+    }
+
+    private void gogitaiNOExitCheck(int 合議体番号) {
+        if (service.getGogitaiWariateIinJohoCount(合議体番号)
+                && service.getShinsakaiKaisaiYoteiJohoCount(合議体番号)) {
+            throw new ApplicationException(DbeErrorMessages.他の情報で使用している為削除不可.getMessage());
+        }
+    }
+
+    private static class GogitaiJohoPreserver implements IGogitaiJohoPreserver {
+
+        private final GogitaiJohoManager manager;
+
+        private GogitaiJohoPreserver() {
+            this.manager = GogitaiJohoManager.createInstance();
+        }
+
+        @Override
+        public void save(Models<GogitaiJohoIdentifier, GogitaiJoho> gogitaiJohoModel) {
+            for (GogitaiJoho gogitaiJoho : gogitaiJohoModel) {
                 if (gogitaiJoho.toEntity().getState() == EntityDataState.Added) {
                     manager.save(gogitaiJoho);
                 }
                 if (gogitaiJoho.toEntity().getState() == EntityDataState.Deleted) {
                     manager.deletePhysicalGogitaiWariateIinJoho(koshinmaedate(gogitaiJoho));
-                    gogitaiNOExitCheck(gogitaiJoho.get合議体番号());
+//                    gogitaiNOExitCheck(gogitaiJoho.get合議体番号());
                     manager.deletePhysicalWithoutGogitaiWariateIin(gogitaiJoho);
                 }
                 if (gogitaiJoho.toEntity().getState() == EntityDataState.Modified) {
@@ -581,28 +628,22 @@ public class GogitaiJohoSakusei {
                     }
                 }
             }
-
-            div.getCcdKanryoMsg().setMessage(new RString(UrInformationMessages.正常終了.getMessage().
-                    replace(合議体情報作成.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
-            return ResponseData.of(div).setState(DBE5110001StateName.完了);
-
         }
-        return ResponseData.of(div).setState(DBE5110001StateName.合議体情報作成);
-    }
 
-    private GogitaiJoho koshinmaedate(GogitaiJoho gogitaiJoho) {
-        Models<GogitaiJohoIdentifier, GogitaiJoho> gogitaiJohoModeltmp = ViewStateHolder.get(ViewStateKeys.合議体情報更新前, Models.class);
-        Iterator<GogitaiJoho> 合議体情報tmp = gogitaiJohoModeltmp.iterator();
-        while (合議体情報tmp.hasNext()) {
-            GogitaiJoho gogitaiJohotmp = 合議体情報tmp.next();
+        private GogitaiJoho koshinmaedate(GogitaiJoho gogitaiJoho) {
+            Models<GogitaiJohoIdentifier, GogitaiJoho> gogitaiJohoModeltmp = ViewStateHolder.get(ViewStateKeys.合議体情報更新前, Models.class);
+            Iterator<GogitaiJoho> 合議体情報tmp = gogitaiJohoModeltmp.iterator();
+            while (合議体情報tmp.hasNext()) {
+                GogitaiJoho gogitaiJohotmp = 合議体情報tmp.next();
 
-            if (gogitaiJohotmp.get合議体番号() == gogitaiJoho.get合議体番号()
-                    && gogitaiJohotmp.get合議体有効期間開始年月日().equals(gogitaiJoho.get合議体有効期間開始年月日())) {
-                return gogitaiJohotmp.createBuilderForEdit().set介護認定審査会開催場所コード(gogitaiJoho.get介護認定審査会開催場所コード()).build();
+                if (gogitaiJohotmp.get合議体番号() == gogitaiJoho.get合議体番号()
+                        && gogitaiJohotmp.get合議体有効期間開始年月日().equals(gogitaiJoho.get合議体有効期間開始年月日())) {
+                    return gogitaiJohotmp.createBuilderForEdit().set介護認定審査会開催場所コード(gogitaiJoho.get介護認定審査会開催場所コード()).build();
+                }
+
             }
-
+            return gogitaiJoho;
         }
-        return gogitaiJoho;
     }
 
     /**
@@ -675,13 +716,6 @@ public class GogitaiJohoSakusei {
 
     private GogitaiJohoSakuseiValidationHandler getValidationHandler(GogitaiJohoSakuseiDiv div) {
         return new GogitaiJohoSakuseiValidationHandler(div);
-    }
-
-    private void gogitaiNOExitCheck(int 合議体番号) {
-        if (service.getGogitaiWariateIinJohoCount(合議体番号)
-                && service.getShinsakaiKaisaiYoteiJohoCount(合議体番号)) {
-            throw new ApplicationException(DbeErrorMessages.他の情報で使用している為削除不可.getMessage());
-        }
     }
 
     private boolean 合議体詳細情報変更有無判定(GogitaiJohoSakuseiDiv div,
