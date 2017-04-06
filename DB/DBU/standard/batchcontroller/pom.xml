@@ -40,19 +40,19 @@
             <artifactId>DbxDefinition</artifactId>
         </dependency>
         <!-- DBZ -->
-        <!-- å…¬é–‹ç³» -->
+        <!-- ŒöŠJŒn -->
          <dependency>
             <groupId>jp.co.ndensan.reams.ur.urz</groupId>
             <artifactId>UrzBatchController</artifactId>
         </dependency>
-        <!-- ãƒ†ã‚¹ãƒˆ -->
+        <!-- ƒeƒXƒg -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
             <version>1.0-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
-        <!-- ãƒ„ãƒ¼ãƒ« -->
+        <!-- ƒc[ƒ‹ -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzTestHelper</artifactId>
@@ -78,13 +78,6 @@
             <groupId>jp.co.ndensan.reams.db.dba</groupId>
             <artifactId>DbaEntity</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>jp.co.ndensan.reams.db.dbu</groupId>
-            <artifactId>DbuBatchController</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>test</scope>
             <type>jar</type>
         </dependency>
     </dependencies>
