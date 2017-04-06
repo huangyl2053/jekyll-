@@ -35,9 +35,9 @@
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shinseikensaku.ShinseiKensakuMapperParameter"
             fetchSize="500">
         SELECT
-        <include refid="selectShinseiJoho"/>
+        <include refid="selectShinseiJoho認定"/>
         FROM
-        <include refid="tablesWithParameter"/>
+        <include refid="tablesWithParameter認定"/>
         ORDER BY
         DbT5101NinteiShinseiJoho."hihokenshaKana",
         DbT7051KoseiShichosonMaster."shichosonCode",
@@ -52,21 +52,21 @@
         SELECT
         count(1)
         FROM
-        <include refid="tablesWithParameter"/>
+        <include refid="tablesWithParameter認定"/>
     </select>
 
     <select resultOrdered="true" id="selectShinseiJoho受給" resultMap="ResultMap_ShinseiKensakuRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shinseikensaku.ShinseiKensakuMapperParameter"
             fetchSize="500">
         SELECT
-        <include refid="selectShinseiJoho"/>
+        <include refid="selectShinseiJoho受給"/>
         FROM
-        <include refid="tablesWithParameter"/>
+        <include refid="tablesWithParameter受給"/>
         ORDER BY
-        DbT5101NinteiShinseiJoho."hihokenshaKana",
+        DbT4101NinteiShinseiJoho."hihokenshaKana",
         DbT7051KoseiShichosonMaster."shichosonCode",
-        DbT5101NinteiShinseiJoho."hihokenshaNo",
-        DbT5101NinteiShinseiJoho."ninteiShinseiYMD" DESC
+        DbT4101NinteiShinseiJoho."hihokenshaNo",
+        DbT4101NinteiShinseiJoho."ninteiShinseiYMD" DESC
         LIMIT #{limitCount}
     </select>
 
@@ -76,10 +76,10 @@
         SELECT
         count(1)
         FROM
-        <include refid="tablesWithParameter"/>
+        <include refid="tablesWithParameter受給"/>
     </select>
 
-    <sql id="selectShinseiJoho">
+    <sql id="selectShinseiJoho認定">
         <!-- SELECT -->
         DbT5101NinteiShinseiJoho."shinseishoKanriNo",
         DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo",
@@ -110,7 +110,38 @@
         <!-- FROM -->
     </sql>
 
-    <sql id="tablesWithParameter">
+    <sql id="selectShinseiJoho受給">
+        <!-- SELECT -->
+        DbT4101NinteiShinseiJoho."shinseishoKanriNo",
+        DbT4101NinteiShinseiJoho."shoKisaiHokenshaNo",
+        DbT4101NinteiShinseiJoho."hihokenshaNo",
+        DbT4101NinteiShinseiJoho."ninteiShinseiYMD",
+        DbT4101NinteiShinseiJoho."ninteiShinseiShinseijiKubunCode",
+        DbT4101NinteiShinseiJoho."seinengappiYMD",
+        DbT4101NinteiShinseiJoho."age",
+        DbT4101NinteiShinseiJoho."seibetsu",
+        DbT4101NinteiShinseiJoho."hihokenshaName",
+        DbT4101NinteiShinseiJoho."hihokenshaKana",
+        DbT4101NinteiShinseiJoho."yubinNo",
+        DbT4101NinteiShinseiJoho."jusho",
+        DbT4101NinteiShinseiJoho."telNo",
+        DbT4101NinteiShinseiJoho."koroshoIfShikibetsuCode",
+        DbT4101NinteiShinseiJoho."zenkaiYukoKikanStart",
+        DbT4101NinteiShinseiJoho."zenkaiYukoKikanEnd",
+        zenkaiNinteiShinseiJoho."nijiHanteiYokaigoJotaiKubunCode",
+        zenkaiNinteiShinseiJoho."nijiHanteiNinteiYukoKikan",
+        zenkaiNinteiShinseiJoho."zenkaiKoroshoIfShikibetsuCode",
+        DbT7051KoseiShichosonMaster."shichosonMeisho",
+        DbT4910NinteichosaItakusakiJoho."jigyoshaMeisho",
+        DbT4913ChosainJoho."chosainShimei",
+        DbT4911ShujiiIryoKikanJoho."iryoKikanMeisho",
+        DbT4912ShujiiJoho."shujiiName",
+        DbT4301ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo",
+        DbT4201NinteichosaIraiJoho."ninteichosaIraiRirekiNo"
+        <!-- FROM -->
+    </sql>
+
+    <sql id="tablesWithParameter認定">
         <!-- FROM -->
         rgdb."DbT5101NinteiShinseiJoho"  DbT5101NinteiShinseiJoho
         <if test="useNinteichosahyoGaikyoChosa">
@@ -546,6 +577,447 @@
                 </if>
                 <if test="is完全一致">
                     AND replace(replace(DbT5101NinteiShinseiJoho."hihokenshaKana",' ',''),'　','') = #{hihokenshaName}
+                </if>
+            </when>
+        </choose>
+    </sql>
+
+    <sql id="tablesWithParameter受給">
+        <!-- FROM -->
+        rgdb."DbT4101NinteiShinseiJoho"  DbT4101NinteiShinseiJoho
+        <if test="useNinteichosahyoGaikyoChosa">
+            INNER JOIN
+            rgdb."DbT4202NinteichosahyoGaikyoChosa" DbT4202NinteichosahyoGaikyoChosa
+            ON DbT4101NinteiShinseiJoho."shinseishoKanriNo" = DbT4202NinteichosahyoGaikyoChosa."shinseishoKanriNo"
+            AND DbT4202NinteichosahyoGaikyoChosa."ninteichosaRirekiNo" =
+            (SELECT MAX(NinteichosahyoGaikyoChosa."ninteichosaRirekiNo")
+            FROM rgdb."DbT4202NinteichosahyoGaikyoChosa" NinteichosahyoGaikyoChosa
+            WHERE DbT4101NinteiShinseiJoho."shinseishoKanriNo" = NinteichosahyoGaikyoChosa."shinseishoKanriNo")
+            <if test="useChosaJisshiBashoCode">
+                AND DbT4202NinteichosahyoGaikyoChosa."chosaJisshiBashoCode" = #{chosaJisshiBashoCode}
+            </if>
+            <if test="useNinteiChosaKubunCode">
+                AND DbT4202NinteichosahyoGaikyoChosa."ninteiChosaKubunCode" = #{ninteiChosaKubunCode}
+            </if>
+            <if test="useNinteichosaJisshiYMDFrom">
+                AND DbT4202NinteichosahyoGaikyoChosa."ninteichosaJisshiYMD" <![CDATA[>=]]> #{ninteichosaJisshiYMDFrom}
+            </if>
+            <if test="useNinteichosaJisshiYMDTo">
+                AND DbT4202NinteichosahyoGaikyoChosa."ninteichosaJisshiYMD" <![CDATA[<=]]> #{ninteichosaJisshiYMDTo}
+            </if>
+        </if>
+        <if test="useNinteichosahyoKihonChosa">
+            INNER JOIN
+            rgdb."DbT4203NinteichosahyoKihonChosa" DbT4203NinteichosahyoKihonChosa
+            ON DbT4101NinteiShinseiJoho."shinseishoKanriNo" = DbT4203NinteichosahyoKihonChosa."shinseishoKanriNo"
+            AND DbT4203NinteichosahyoKihonChosa."ninteichosaRirekiNo" =
+            (SELECT MAX(NinteichosahyoKihonChosa."ninteichosaRirekiNo")
+            FROM rgdb."DbT4203NinteichosahyoKihonChosa" NinteichosahyoKihonChosa
+            WHERE NinteichosahyoKihonChosa."shinseishoKanriNo" = DbT4101NinteiShinseiJoho."shinseishoKanriNo")
+            <if test="useNichijoSeikatsuJiritsudoCd">
+                AND DbT4203NinteichosahyoKihonChosa."ninchishoNichijoSeikatsuJiritsudoCode" = #{nichijoSeikatsuJiritsudoCode}
+            </if>
+            <if test="useNichijoSeikatsuJiritsudo">
+                AND DbT4203NinteichosahyoKihonChosa."shogaiNichijoSeikatsuJiritsudoCode" = #{nichijoSeikatsuJiritsudo}
+            </if>
+        </if>
+        LEFT JOIN
+        rgdb."DbT4301ShujiiIkenshoIraiJoho" DbT4301ShujiiIkenshoIraiJoho
+        ON DbT4101NinteiShinseiJoho."shinseishoKanriNo" = DbT4301ShujiiIkenshoIraiJoho."shinseishoKanriNo"
+        AND DbT4301ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo" =
+        (SELECT MAX(ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo")
+        FROM rgdb."DbT4301ShujiiIkenshoIraiJoho" ShujiiIkenshoIraiJoho
+        WHERE ShujiiIkenshoIraiJoho."shinseishoKanriNo" = DbT4101NinteiShinseiJoho."shinseishoKanriNo"
+        AND ShujiiIkenshoIraiJoho."logicalDeletedFlag" = FALSE)
+        AND DbT4301ShujiiIkenshoIraiJoho."logicalDeletedFlag" = FALSE
+        <if test="useShujiiIkenshoJoho">
+            INNER JOIN
+            rgdb."DbT4302ShujiiIkenshoJoho" DbT4302ShujiiIkenshoJoho
+            ON DbT4101NinteiShinseiJoho."shinseishoKanriNo" = DbT4302ShujiiIkenshoJoho."shinseishoKanriNo"
+            AND DbT4302ShujiiIkenshoJoho."ikenshoIraiRirekiNo" =
+            (SELECT MAX(ShujiiIkenshoJoho."ikenshoIraiRirekiNo")
+            FROM rgdb."DbT4302ShujiiIkenshoJoho" ShujiiIkenshoJoho
+            WHERE ShujiiIkenshoJoho."shinseishoKanriNo" = DbT4101NinteiShinseiJoho."shinseishoKanriNo")
+            <if test="useIkenshoJuryoYMDFrom">
+                AND DbT4302ShujiiIkenshoJoho."ikenshoJuryoYMD" <![CDATA[>=]]> #{ikenshoJuryoYMDFrom}
+            </if>
+            <if test="useIkenshoJuryoYMDTo">
+                AND DbT4302ShujiiIkenshoJoho."ikenshoJuryoYMD" <![CDATA[<=]]> #{ikenshoJuryoYMDTo}
+            </if>
+        </if>
+        <if test="useShujiiIkenshoIkenItem">
+            INNER JOIN
+            rgdb."DbT4304ShujiiIkenshoIkenItem" DbT4304ShujiiIkenshoIkenItem
+            ON DbT4101NinteiShinseiJoho."shinseishoKanriNo" = DbT4304ShujiiIkenshoIkenItem."shinseishoKanriNo"
+            AND DbT4304ShujiiIkenshoIkenItem."ikenshoIraiRirekiNo" =
+            (SELECT MAX(ShujiiIkenshoIkenItem."ikenshoIraiRirekiNo")
+            FROM rgdb."DbT4304ShujiiIkenshoIkenItem" ShujiiIkenshoIkenItem
+            WHERE ShujiiIkenshoIkenItem."shinseishoKanriNo" = DbT4101NinteiShinseiJoho."shinseishoKanriNo")
+            <if test="useIkenItem13 and !useIkenItem14">
+                AND DbT4304ShujiiIkenshoIkenItem."remban" = 13
+                AND DbT4304ShujiiIkenshoIkenItem."ikenItem" = #{ikenItem13}
+            </if>
+            <if test="!useIkenItem13 and useIkenItem14">
+                AND DbT4304ShujiiIkenshoIkenItem."remban" = 14
+                AND DbT4304ShujiiIkenshoIkenItem."ikenItem" = #{ikenItem14}
+            </if>
+            <if test="useIkenItem13 and useIkenItem14">
+                AND ((DbT4304ShujiiIkenshoIkenItem."remban" = 13
+                AND DbT4304ShujiiIkenshoIkenItem."ikenItem" = #{ikenItem13})
+                OR (DbT4304ShujiiIkenshoIkenItem."remban" = 14
+                AND DbT4304ShujiiIkenshoIkenItem."ikenItem" = #{ikenItem14}))
+            </if>
+        </if>
+        <if test="useIchijiHanteiKekkaJoho">
+            INNER JOIN
+            rgdb."DbT4116IchijiHanteiKekkaJoho" DbT4116IchijiHanteiKekkaJoho
+            ON DbT4101NinteiShinseiJoho."shinseishoKanriNo" = DbT4116IchijiHanteiKekkaJoho."shinseishoKanriNo"
+            <if test="useIchijiHanteiYMDFrom">
+                AND DbT4116IchijiHanteiKekkaJoho."ichijiHanteiYMD" <![CDATA[>=]]> #{ichijiHanteiYMDFrom}
+            </if>
+            <if test="useIchijiHanteiYMDTo">
+                AND DbT4116IchijiHanteiKekkaJoho."ichijiHanteiYMD" <![CDATA[<=]]> #{ichijiHanteiYMDTo}
+            </if>
+            <if test="useIchijiHanteiKekkaCode">
+                AND DbT4116IchijiHanteiKekkaJoho."ichijiHanteiKekkaCode" = #{ichijiHanteiKekkaCode}
+            </if>
+        </if>
+        <if test="useIchiGojiHanteiKekkaJoho">
+            INNER JOIN
+            rgdb."DbT4510IchiGojiHanteiKekkaJoho" DbT4510IchiGojiHanteiKekkaJoho
+            ON DbT4101NinteiShinseiJoho."shinseishoKanriNo" = DbT4510IchiGojiHanteiKekkaJoho."shinseishoKanriNo"
+            <if test="useIchiGojiHanteiYMDFrom">
+                AND DbT4510IchiGojiHanteiKekkaJoho."ichiGojiHanteiYMD" <![CDATA[>=]]> #{ichiGojiHanteiYMDFrom}
+            </if>
+            <if test="useIchiGojiHanteiYMDTo">
+                AND DbT4510IchiGojiHanteiKekkaJoho."ichiGojiHanteiYMD" <![CDATA[<=]]> #{ichiGojiHanteiYMDTo}
+            </if>
+            <if test="useIchiGojiHanteiKekkaCode">
+                AND DbT4510IchiGojiHanteiKekkaJoho."ichiGojiHanteiKekkaCode" = #{ichiGojiHanteiKekkaCode}
+            </if>
+        </if>
+        <if test="useNinteiKekkaJoho">
+            INNER JOIN
+            rgdb."DbT4102NinteiKekkaJoho" DbT4102NinteiKekkaJoho
+            ON DbT4101NinteiShinseiJoho."shinseishoKanriNo" = DbT4102NinteiKekkaJoho."shinseishoKanriNo"
+            <if test="useNijiHanteiYokaigoJotaiKubun">
+                AND DbT4102NinteiKekkaJoho."nijiHanteiYokaigoJotaiKubunCode" = #{nijiHanteiYokaigoJotaiKubun}
+            </if>
+            <if test="useNijiHanteiNinteiYukoKikan">
+                AND DbT4102NinteiKekkaJoho."nijiHanteiNinteiYukoKikan" = #{nijiHanteiNinteiYukoKikan}
+            </if>
+            <if test="useYokaiYMD">
+                AND DbT4102NinteiKekkaJoho."nijiHanteiNinteiYukoKaishiYMD" <![CDATA[<=]]> #{yokaiYMD}
+                AND DbT4102NinteiKekkaJoho."nijiHanteiNinteiYukoShuryoYMD" <![CDATA[>=]]> #{yokaiYMD}
+            </if>
+            <if test="useNinteiYukoKaishiYMDFrom">
+                AND DbT4102NinteiKekkaJoho."nijiHanteiNinteiYukoKaishiYMD" <![CDATA[>=]]> #{ninteiYukoKaishiYMDFrom}
+            </if>
+            <if test="useNinteiYukoKaishiYMDTo">
+                AND DbT4102NinteiKekkaJoho."nijiHanteiNinteiYukoKaishiYMD" <![CDATA[<=]]> #{ninteiYukoKaishiYMDTo}
+            </if>
+            <if test="useNinteiYukoShuryoYMDFrom">
+                AND DbT4102NinteiKekkaJoho."nijiHanteiNinteiYukoShuryoYMD" <![CDATA[>=]]> #{ninteiYukoShuryoYMDFrom}
+            </if>
+            <if test="useNinteiYukoShuryoYMDTo">
+                AND DbT4102NinteiKekkaJoho."nijiHanteiNinteiYukoShuryoYMD" <![CDATA[<=]]> #{ninteiYukoShuryoYMDTo}
+            </if>
+            <if test="useNijiHanteiYMDFrom">
+                AND DbT4102NinteiKekkaJoho."nijiHanteiYMD" <![CDATA[>=]]> #{nijiHanteiYMDFrom}
+            </if>
+            <if test="useNijiHanteiYMDTo">
+                AND DbT4102NinteiKekkaJoho."nijiHanteiYMD" <![CDATA[<=]]> #{nijiHanteiYMDTo}
+            </if>
+        </if>
+        <if test="useShinsakaiKaisaiKekkaJoho">
+            INNER JOIN
+            rgdb."DbT4511ShinsakaiKaisaiKekkaJoho" DbT4511ShinsakaiKaisaiKekkaJoho
+            ON DbT4101NinteiShinseiJoho."shinseishoKanriNo" = DbT4511ShinsakaiKaisaiKekkaJoho."shinsakaiKaisaiNo"
+            <if test="useShinsakaiKaisaiYMDFrom">
+                AND DbT4511ShinsakaiKaisaiKekkaJoho."shinsakaiKaisaiYMD" <![CDATA[>=]]> #{shinsakaiKaisaiYMDFrom}
+            </if>
+            <if test="useShinsakaiKaisaiYMDTo">
+                AND DbT4511ShinsakaiKaisaiKekkaJoho."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{shinsakaiKaisaiYMDTo}
+            </if>
+        </if>
+        LEFT JOIN
+        (
+        SELECT
+        DbT4121."shinseishoKanriNo" AS "shinseishoKanriNo"
+        ,DbT4101."ninteiChosaItakusakiCode" AS "ninteiChosaItakusakiCode"
+        ,DbT4101."shujiiIryokikanCode" AS "shujiiIryokikanCode"
+        ,DbT4101."koroshoIfShikibetsuCode" AS "zenkaiKoroshoIfShikibetsuCode"
+        ,DbT4102."nijiHanteiYokaigoJotaiKubunCode" AS "nijiHanteiYokaigoJotaiKubunCode"
+        ,DbT4102."nijiHanteiNinteiYukoKikan" AS "nijiHanteiNinteiYukoKikan"
+        FROM rgdb."DbT4121ShinseiRirekiJoho" DbT4121
+        LEFT JOIN rgdb."DbT4101NinteiShinseiJoho" DbT4101
+        ON DbT4101."shinseishoKanriNo" = DbT4121."zenkaiShinseishoKanriNo"
+        LEFT JOIN rgdb."DbT4102NinteiKekkaJoho" DbT4102
+        ON DbT4101."shinseishoKanriNo" = DbT4102."shinseishoKanriNo"
+        ) AS zenkaiNinteiShinseiJoho
+        ON DbT4101NinteiShinseiJoho."shinseishoKanriNo" = zenkaiNinteiShinseiJoho."shinseishoKanriNo"
+        <if test="useGeninShikkan">
+            INNER JOIN
+            rgdb."DbT4300GeninShikkan" DbT4300GeninShikkan
+            ON DbT4101NinteiShinseiJoho."shinseishoKanriNo" = DbT4300GeninShikkan."shinseishoKanriNo"
+            <if test="useGeninShikkanCode">
+                AND DbT4300GeninShikkan."geninShikkanCode" = #{geninShikkanCode}
+            </if>
+        </if>
+        <if test="useNinteiKanryoJoho">
+            INNER JOIN
+            rgdb."DbT4105NinteiKanryoJoho" DbT4105NinteiKanryoJoho
+            ON DbT4101NinteiShinseiJoho."shinseishoKanriNo" = DbT4105NinteiKanryoJoho."shinseishoKanriNo"
+            <if test="isNowPhaseBlank">
+                <if test="isShinseiUketsukeKanryo and !isShinseiUketsukeMiKanryo">
+                    AND (DbT4105NinteiKanryoJoho."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
+                    OR DbT4105NinteiKanryoJoho."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<>]]> '')
+                </if>
+                <if test="!isShinseiUketsukeKanryo and isShinseiUketsukeMiKanryo">
+                    AND (DbT4105NinteiKanryoJoho."ninteiShinseiJohoTorokuKanryoYMD" IS NULL
+                    OR DbT4105NinteiKanryoJoho."ninteiShinseiJohoTorokuKanryoYMD" = '')
+                </if>
+                <if test="isChosaIraiKanryo and !isChosaIraiMiKanryo">
+                    AND (DbT4105NinteiKanryoJoho."ninteichosaIraiKanryoYMD" IS NOT NULL
+                    OR DbT4105NinteiKanryoJoho."ninteichosaIraiKanryoYMD" <![CDATA[<>]]> '')
+                </if>
+                <if test="!isChosaIraiKanryo and isChosaIraiMiKanryo">
+                    AND (DbT4105NinteiKanryoJoho."ninteichosaIraiKanryoYMD" IS NULL
+                    OR DbT4105NinteiKanryoJoho."ninteichosaIraiKanryoYMD" = '')
+                </if>
+                <if test="isIkenshoIraiKanryo and !isIkenshoIraiMiKanryo">
+                    AND (DbT4105NinteiKanryoJoho."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
+                    OR (DbT4105NinteiKanryoJoho."ikenshoSakuseiIraiKanryoYMD" <![CDATA[<>]]> '')
+                </if>
+                <if test="!isIkenshoIraiKanryo and isIkenshoIraiMiKanryo">
+                    AND (DbT4105NinteiKanryoJoho."ikenshoSakuseiIraiKanryoYMD" IS NULL
+                    OR DbT4105NinteiKanryoJoho."ikenshoSakuseiIraiKanryoYMD" = '')
+                </if>
+
+                <if test="isChosaNyushuKanryo and !isChosaNyushuMiKanryo">
+                    AND (DbT4105NinteiKanryoJoho."ninteichosaKanryoYMD" IS NOT NULL
+                    OR DbT4105NinteiKanryoJoho."ninteichosaKanryoYMD" <![CDATA[<>]]> '')
+                </if>
+                <if test="!isChosaNyushuKanryo and isChosaNyushuMiKanryo">
+                    AND (DbT4105NinteiKanryoJoho."ninteichosaKanryoYMD" IS NULL
+                    OR DbT4105NinteiKanryoJoho."ninteichosaKanryoYMD" = '')
+                </if>
+
+                <if test="isIkenshoNyushuKanryo and !isIkenshoNyushuMiKanryo">
+                    AND (DbT4105NinteiKanryoJoho."ikenshoTorokuKanryoYMD" IS NOT NULL
+                    OR DbT4105NinteiKanryoJoho."ikenshoTorokuKanryoYMD" <![CDATA[<>]]> '')
+                </if>
+                <if test="!isIkenshoNyushuKanryo and isIkenshoNyushuMiKanryo">
+                    AND (DbT4105NinteiKanryoJoho."ikenshoTorokuKanryoYMD" IS NULL
+                    OR DbT4105NinteiKanryoJoho."ikenshoTorokuKanryoYMD" = '')
+                </if>
+
+                <if test="isIchijiHanteiKanryo and !isIchijiHanteiMiKanryo">
+                    AND (DbT4105NinteiKanryoJoho."ichijiHanteiKanryoYMD" IS NOT NULL
+                    OR DbT4105NinteiKanryoJoho."ichijiHanteiKanryoYMD" <![CDATA[<>]]> '')
+                </if>
+                <if test="!isIchijiHanteiKanryo and isIchijiHanteiMiKanryo">
+                    AND (DbT4105NinteiKanryoJoho."ichijiHanteiKanryoYMD" IS NULL
+                    OR DbT4105NinteiKanryoJoho."ichijiHanteiKanryoYMD" = '')
+                </if>
+
+                <if test="isMaskingKanryo and !isMaskingMiKanryo">
+                    AND (DbT4105NinteiKanryoJoho."maskingKanryoYMD" IS NOT NULL
+                    OR DbT4105NinteiKanryoJoho."maskingKanryoYMD" <![CDATA[<>]]> '')
+                </if>
+                <if test="!isMaskingKanryo and isMaskingMiKanryo">
+                    AND (DbT4105NinteiKanryoJoho."maskingKanryoYMD" IS NULL
+                    OR DbT4105NinteiKanryoJoho."maskingKanryoYMD" = '')
+                </if>
+
+                <if test="isShinsakaiTorokuKanryo and !isShinsakaiTorokuMiKanryo">
+                    AND (DbT4105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" IS NOT NULL
+                    OR DbT4105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" <![CDATA[<>]]> '')
+                </if>
+                <if test="!isShinsakaiTorokuKanryo and isShinsakaiTorokuMiKanryo">
+                    AND (DbT4105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" IS NULL
+                    OR DbT4105NinteiKanryoJoho."ninteiShinsakaiWariateKanryoYMD" = '')
+                </if>
+                <if test="isNijiHanteiKanryo and !isNijiHanteiMiKanryo">
+                    AND (DbT4105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" IS NOT NULL
+                    OR DbT4105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" <![CDATA[<>]]> '')
+                </if>
+                <if test="!isNijiHanteiKanryo and isNijiHanteiMiKanryo">
+                    AND (DbT4105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" IS NULL
+                    OR DbT4105NinteiKanryoJoho."ninteiShinsakaiKanryoYMD" = '')
+                </if>
+
+                <if test="isGetsureiShoriKanryo and !isGetsureiShoriMiKanryo">
+                    AND (DbT4105NinteiKanryoJoho."centerSoshinYMD" IS NOT NULL
+                    OR DbT4105NinteiKanryoJoho."centerSoshinYMD" <![CDATA[<>]]> '')
+                </if>
+                <if test="!isGetsureiShoriKanryo and isGetsureiShoriMiKanryo">
+                    AND (DbT4105NinteiKanryoJoho."centerSoshinYMD" IS NULL
+                    OR DbT4105NinteiKanryoJoho."centerSoshinYMD" = '')
+                </if>
+            </if>
+        </if>
+        LEFT JOIN
+        rgdb."DbT7051KoseiShichosonMaster" DbT7051KoseiShichosonMaster
+        ON DbT4101NinteiShinseiJoho."shoKisaiHokenshaNo" = DbT7051KoseiShichosonMaster."shoKisaiHokenshaNo"
+        LEFT JOIN
+        rgdb."DbT4910NinteichosaItakusakiJoho" DbT4910NinteichosaItakusakiJoho
+        ON DbT4101NinteiShinseiJoho."ninteiChosaItakusakiCode" = DbT4910NinteichosaItakusakiJoho."ninteichosaItakusakiCode"
+        AND DbT4101NinteiShinseiJoho."shichosonCode" = DbT4910NinteichosaItakusakiJoho."shichosonCode"
+        LEFT JOIN
+        rgdb."DbT4913ChosainJoho" DbT4913ChosainJoho
+        ON DbT4101NinteiShinseiJoho."ninteiChosaItakusakiCode" = DbT4913ChosainJoho."ninteiChosaItakusakiCode"
+        AND DbT4101NinteiShinseiJoho."ninteiChosainCode" = DbT4913ChosainJoho."ninteiChosainCode"
+        AND DbT4101NinteiShinseiJoho."shichosonCode" = DbT4913ChosainJoho."shichosonCode"
+        LEFT JOIN
+        rgdb."DbT4911ShujiiIryoKikanJoho" DbT4911ShujiiIryoKikanJoho
+        ON DbT4101NinteiShinseiJoho."shujiiIryokikanCode" = DbT4911ShujiiIryoKikanJoho."shujiiIryokikanCode"
+        AND DbT4101NinteiShinseiJoho."shichosonCode" = DbT4911ShujiiIryoKikanJoho."shichosonCode"
+        LEFT JOIN
+        rgdb."DbT4912ShujiiJoho" DbT4912ShujiiJoho
+        ON DbT4101NinteiShinseiJoho."shujiiIryokikanCode" = DbT4912ShujiiJoho."shujiiIryokikanCode"
+        AND DbT4101NinteiShinseiJoho."shujiiCode" = DbT4912ShujiiJoho."shujiiCode"
+        AND DbT4101NinteiShinseiJoho."shichosonCode" = DbT4912ShujiiJoho."shichosonCode"
+        LEFT JOIN
+        rgdb."DbT4201NinteichosaIraiJoho" DbT4201NinteichosaIraiJoho
+        ON DbT4101NinteiShinseiJoho."shinseishoKanriNo" = DbT4201NinteichosaIraiJoho."shinseishoKanriNo"
+        AND DbT4201NinteichosaIraiJoho."ninteichosaIraiRirekiNo" =
+        (SELECT MAX(NinteichosaIraiJoho."ninteichosaIraiRirekiNo")
+        FROM rgdb."DbT4201NinteichosaIraiJoho" NinteichosaIraiJoho
+        WHERE NinteichosaIraiJoho."shinseishoKanriNo" = DbT4101NinteiShinseiJoho."shinseishoKanriNo"
+        AND NinteichosaIraiJoho."logicalDeletedFlag" = FALSE)
+        AND DbT4201NinteichosaIraiJoho."logicalDeletedFlag" = FALSE
+        WHERE
+        DbT4101NinteiShinseiJoho."logicalDeletedFlag" = false
+        <if test="useHihokenshaNo">
+            AND DbT4101NinteiShinseiJoho."hihokenshaNo" = #{hihokenshaNo}
+        </if>
+        <if test="useShoKisaiHokenshaNo">
+            AND DbT4101NinteiShinseiJoho."shoKisaiHokenshaNo" = #{shoKisaiHokenshaNo}
+        </if>
+        <if test="useShishoCode">
+            AND DbT4101NinteiShinseiJoho."shishoCode" = #{shishoCode}
+        </if>
+        AND DbT4101NinteiShinseiJoho."minashiNigoEtcTaishoFlag" = #{minashiNigoEtcTaishoFlag}
+        <if test="useNinteiShinseiYMDFrom">
+            AND DbT4101NinteiShinseiJoho."ninteiShinseiYMD"  <![CDATA[>=]]> #{ninteiShinseiYMDFrom}
+        </if>
+        <if test="useNinteiShinseiYMDTo">
+            AND DbT4101NinteiShinseiJoho."ninteiShinseiYMD"  <![CDATA[<=]]> #{ninteiShinseiYMDTo}
+        </if>
+        <if test="useSeinengappiYMDFrom">
+            AND DbT4101NinteiShinseiJoho."seinengappiYMD"  <![CDATA[>=]]> #{seinengappiYMDFrom}
+        </if>
+        <if test="useSeinengappiYMDTo">
+            AND DbT4101NinteiShinseiJoho."seinengappiYMD"  <![CDATA[<=]]> #{seinengappiYMDTo}
+        </if>
+        <if test="useNinteiShinseiShinseijiKubun">
+            AND DbT4101NinteiShinseiJoho."ninteiShinseiShinseijiKubunCode" = #{ninteiShinseiShinseijiKubun}
+        </if>
+        <if test="isMan and !isWoman">
+            AND DbT4101NinteiShinseiJoho."seibetsu" = '1'
+        </if>
+        <if test="!isMan and isWoman">
+            AND DbT4101NinteiShinseiJoho."seibetsu" = '2'
+        </if>
+        <if test="isMan and isWoman">
+            AND (DbT4101NinteiShinseiJoho."seibetsu" = '1' OR DbT4101NinteiShinseiJoho."seibetsu" = '2')
+        </if>
+        <if test="useHihokenshaKubunCode">
+            AND DbT4101NinteiShinseiJoho."hihokenshaKubunCode" = #{hihokenshaKubunCode}
+        </if>
+        <if test="useNinteiShinseiHoreiKubunCode">
+            AND DbT4101NinteiShinseiJoho."ninteiShinseiHoreiKubunCode" = #{ninteiShinseiHoreiKubunCode}
+        </if>
+        <if test="useShoriJotaiKubun">
+            AND DbT4101NinteiShinseiJoho."shoriJotaiKubun" = #{shoriJotaiKubun}
+        </if>
+        <if test="useKoroshoIfShikibetsuCode">
+            AND DbT4101NinteiShinseiJoho."koroshoIfShikibetsuCode" = #{koroshoIfShikibetsuCode}
+        </if>
+        <if test="useYubinNo">
+            AND DbT4101NinteiShinseiJoho."yubinNo" = #{yubinNo}
+        </if>
+        <if test="useChikuCode">
+            AND DbT4101NinteiShinseiJoho."chikuCode" = #{chikuCode}
+        </if>
+
+        <if test="!ignoreShisetsuNyusho">
+            AND DbT4101NinteiShinseiJoho."shisetsuNyushoFlag" = #{shisetsuNyushoFlag}
+        </if>
+
+        <if test="useChosaShichosonCode">
+            AND DbT4910NinteichosaItakusakiJoho."shichosonCode" = #{chosaShichosonCode}
+        </if>
+        <if test="useNinteiChosaItakusakiCode">
+            AND DbT4101NinteiShinseiJoho."ninteiChosaItakusakiCode" = #{ninteiChosaItakusakiCode}
+        </if>
+        <if test="useNinteiChosainCode">
+            AND DbT4101NinteiShinseiJoho."ninteiChosainCode" = #{ninteiChosainCode}
+        </if>
+        <if test="useShujiiShichosonCode">
+            AND DbT4911ShujiiIryoKikanJoho."shichosonCode" = #{shujiiShichosonCode}
+        </if>
+        <if test="useShujiiIryokikanCode">
+            AND DbT4101NinteiShinseiJoho."shujiiIryokikanCode" = #{shujiiIryokikanCode}
+        </if>
+        <if test="useShujiiCode">
+            AND DbT4101NinteiShinseiJoho."shujiiCode" = #{shujiiCode}
+        </if>
+        <if test="useIshiKubunCode">
+            AND DbT4301ShujiiIkenshoIraiJoho."ishiKubunCode" = #{ishiKubunCode}
+        </if>
+        <if test="useZenkaiNinteiChosaItakusaki">
+            AND zenkaiNinteiShinseiJoho."ninteiChosaItakusakiCode" = #{zenkaiNinteiChosaItakusaki}
+        </if>
+        <if test="useZenkaiShujiiIryokikanCode">
+            AND zenkaiNinteiShinseiJoho."shujiiIryokikanCode" = #{zenkaiShujiiIryokikanCode}
+        </if>
+        <if test="useZenkaiJotaiKubunCode">
+            AND zenkaiNinteiShinseiJoho."nijiHanteiYokaigoJotaiKubunCode" = #{zenkaiJotaiKubunCode}
+        </if>
+        <if test="useZenkaiYukoKikan">
+            AND zenkaiNinteiShinseiJoho."nijiHanteiNinteiYukoKikan" = #{zenkaiYukoKikan}
+        </if>
+        <if test="useZenkaiYukoKikanStartFrom">
+            AND DbT4101NinteiShinseiJoho."zenkaiYukoKikanStart" <![CDATA[>=]]> #{zenkaiYukoKikanStartFrom}
+        </if>
+        <if test="useZenkaiYukoKikanStartTo">
+            AND DbT4101NinteiShinseiJoho."zenkaiYukoKikanStart" <![CDATA[<=]]> #{zenkaiYukoKikanStartTo}
+        </if>
+        <if test="useShinseiKeikaDaysForm">
+            AND DbT4101NinteiShinseiJoho."ninteiShinseiYMD" <![CDATA[<=]]> #{shinseiKeikaDaysForm}
+        </if>
+        <if test="useShinseiKeikaDaysTo">
+            AND DbT4101NinteiShinseiJoho."ninteiShinseiYMD" <![CDATA[>=]]> #{shinseiKeikaDaysTo}
+        </if>
+        <choose>
+            <when test="useHihokenshaName">
+                <if test="is前方一致">
+                    AND replace(replace(DbT4101NinteiShinseiJoho."hihokenshaName",' ',''),'　','') LIKE #{hihokenshaName} || '%'
+                </if>
+                <if test="is後方一致">
+                    AND replace(replace(DbT4101NinteiShinseiJoho."hihokenshaName",' ',''),'　','') LIKE '%' || #{hihokenshaName}
+                </if>
+                <if test="is部分一致">
+                    AND replace(replace(DbT4101NinteiShinseiJoho."hihokenshaName",' ',''),'　','') LIKE '%' || #{hihokenshaName} || '%'
+                </if>
+                <if test="is完全一致">
+                    AND replace(replace(DbT4101NinteiShinseiJoho."hihokenshaName",' ',''),'　','') = #{hihokenshaName}
+                </if>
+            </when>
+            <when test="useHihokenshaKana">
+                <if test="is前方一致">
+                    AND replace(replace(DbT4101NinteiShinseiJoho."hihokenshaKana",' ',''),'　','') LIKE #{hihokenshaName} || '%'
+                </if>
+                <if test="is後方一致">
+                    AND replace(replace(DbT4101NinteiShinseiJoho."hihokenshaKana",' ',''),'　','') LIKE '%' || #{hihokenshaName}
+                </if>
+                <if test="is部分一致">
+                    AND replace(replace(DbT4101NinteiShinseiJoho."hihokenshaKana",' ',''),'　','') LIKE '%' || #{hihokenshaName} || '%'
+                </if>
+                <if test="is完全一致">
+                    AND replace(replace(DbT4101NinteiShinseiJoho."hihokenshaKana",' ',''),'　','') = #{hihokenshaName}
                 </if>
             </when>
         </choose>
