@@ -83,7 +83,14 @@ public class NinteiShinseishaFinderHandler {
      * @param parameter パラメタ
      */
     public void initialize(NinteiShinseishaFinderParameter parameter) {
-        initialize();
+        if (parameter.get業務分類().equals(GyomuBunrui.介護認定)) {
+            div.getDdlHokenshaNumber().loadHokenshaList(GyomuBunrui.介護認定);
+        } else {
+            div.getDdlHokenshaNumber().loadHokenshaList(GyomuBunrui.介護事務);
+        }
+        div.getCcdSaikinShorisha().initialize(div.getDdlHokenshaNumber().getSelectedItem().get証記載保険者番号());
+        initialize共通処理();
+        initTennyuNashi();
         if (parameter.get業務分類() != null) {
             div.getDdlHokenshaNumber().loadHokenshaList(parameter.get業務分類());
         }
