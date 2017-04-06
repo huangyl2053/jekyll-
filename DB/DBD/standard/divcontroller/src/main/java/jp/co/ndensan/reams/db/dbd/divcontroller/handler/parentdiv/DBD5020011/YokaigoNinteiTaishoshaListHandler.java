@@ -31,7 +31,7 @@ public class YokaigoNinteiTaishoshaListHandler {
      * @return 要介護認定処理対象者一覧
      */
     public List<dgNinteiTaishosha_Row> onLoad() {
-        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
+        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         RString 導入形態コード = null;
         if (市町村セキュリティ情報.get導入形態コード() != null) {
             導入形態コード = 市町村セキュリティ情報.get導入形態コード().getColumnValue();

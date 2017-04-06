@@ -184,7 +184,7 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
             return null;
         }
 
-        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
+        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         if (null == 市町村セキュリティ情報) {
             return null;
         }
