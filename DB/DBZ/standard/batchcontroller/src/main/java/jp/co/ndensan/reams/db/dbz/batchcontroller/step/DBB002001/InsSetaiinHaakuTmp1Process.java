@@ -5,13 +5,17 @@
  */
 package jp.co.ndensan.reams.db.dbz.batchcontroller.step.DBB002001;
 
+import jp.co.ndensan.reams.db.dbz.definition.processprm.setaiinhaaku.SetaiShotokuKazeiHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.fuka.SetaiHakuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.fuka.SetaiShotokuEntity;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -25,6 +29,7 @@ public class InsSetaiinHaakuTmp1Process extends BatchProcessBase<SetaiHakuEntity
             + "ISetaiShotokuKazeiHanteiMapper.select世帯員把握入力_1");
 
     private static final RString 本人区分 = new RString("1");
+    private SetaiShotokuKazeiHanteiProcessParameter parameter;
 
     @BatchWriter
     BatchEntityCreatedTempTableWriter tableWriter;
@@ -39,7 +44,8 @@ public class InsSetaiinHaakuTmp1Process extends BatchProcessBase<SetaiHakuEntity
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MAPPERPATH);
+        ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.未定義);
+        return new BatchDbReader(MAPPERPATH, parameter.toSetaiHaakuMybatisParameter(builder.build()));
     }
 
     @Override

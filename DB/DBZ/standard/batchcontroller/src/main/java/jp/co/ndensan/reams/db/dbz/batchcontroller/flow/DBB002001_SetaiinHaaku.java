@@ -42,7 +42,7 @@ public class DBB002001_SetaiinHaaku extends BatchFlowBase<DBB002001_SetaiinHaaku
      *
      * @return IBatchFlowCommand
      */
-    @Step (UPDATESETAIINHAAKU)
+    @Step(UPDATESETAIINHAAKU)
     protected IBatchFlowCommand updSetaiinHaaku() {
         return simpleBatch(UpdSetaiinHaakuNyuryokuProcess.class).define();
     }
@@ -52,10 +52,11 @@ public class DBB002001_SetaiinHaaku extends BatchFlowBase<DBB002001_SetaiinHaaku
      *
      * @return IBatchFlowCommand
      */
-    @Step (INSSETAIINHAAKU_1)
+    @Step(INSSETAIINHAAKU_1)
     protected IBatchFlowCommand insSetaiinHaaku1() {
 
-        return loopBatch(InsSetaiinHaakuTmp1Process.class).define();
+        return loopBatch(InsSetaiinHaakuTmp1Process.class).arguments(getParameter().
+                toSetaiShotokuKazeiHanteiProcessParameter()).define();
     }
 
     /**
@@ -63,7 +64,7 @@ public class DBB002001_SetaiinHaaku extends BatchFlowBase<DBB002001_SetaiinHaaku
      *
      * @return IBatchFlowCommand
      */
-    @Step (INSSETAIINHAAKU_2)
+    @Step(INSSETAIINHAAKU_2)
     protected IBatchFlowCommand insSetaiinHaaku2() {
 
         return loopBatch(InsSetaiinHaakuTmp2Process.class).arguments(getParameter().
@@ -75,7 +76,7 @@ public class DBB002001_SetaiinHaaku extends BatchFlowBase<DBB002001_SetaiinHaaku
      *
      * @return IBatchFlowCommand
      */
-    @Step (INSSETAIINHAAKU_3)
+    @Step(INSSETAIINHAAKU_3)
     protected IBatchFlowCommand insSetaiinHaaku3() {
 
         return loopBatch(InsSetaiinHaakuTmp3Process.class).define();
@@ -86,7 +87,7 @@ public class DBB002001_SetaiinHaaku extends BatchFlowBase<DBB002001_SetaiinHaaku
      *
      * @return 帳票出力パラメータ
      */
-    @Step (UPDATESESAIHAAKU)
+    @Step(UPDATESESAIHAAKU)
     protected IBatchFlowCommand updSetaiHaaku() {
         return simpleBatch(UpdSetaiinHaakuTmpProcess.class).arguments(getParameter().
                 toSetaiShotokuKazeiHanteiProcessParameter()).define();
