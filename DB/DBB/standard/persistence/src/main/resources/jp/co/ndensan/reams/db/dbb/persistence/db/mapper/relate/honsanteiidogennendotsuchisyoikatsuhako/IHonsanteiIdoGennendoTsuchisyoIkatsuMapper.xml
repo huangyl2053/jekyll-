@@ -1874,7 +1874,7 @@
             -->
               ON "ShikibetsuTaisho"."shikibetsuCode" = 賦課Newest."shikibetsuCode"
           INNER JOIN
-             rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','','') AS "Atesaki"
+             rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','','{}') AS "Atesaki"
               ON "Atesaki"."shikibetsuCode" = 賦課Newest."shikibetsuCode"
           LEFT JOIN
             rgca."CaFt703FindNokumi"(NULL, NULL, 'DB', 'DBB', ${科目コード}, NULL, #{処理日}) AS "Nokumi"
@@ -2582,7 +2582,7 @@
             -->
               ON "ShikibetsuTaisho"."shikibetsuCode" = 計算後情報."shikibetsuCode"
           LEFT JOIN
-             rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','','') AS "Atesaki"
+             rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','','{}') AS "Atesaki"
               ON "Atesaki"."shikibetsuCode" = 計算後情報."shikibetsuCode"
           LEFT JOIN
             rgca."CaFt703FindNokumi"(NULL, NULL, 'DB', 'DBB', ${科目コード}, NULL, #{処理日}) AS "Nokumi"
@@ -3315,7 +3315,7 @@
             -->
               ON "ShikibetsuTaisho"."shikibetsuCode" = 計算後情報."shikibetsuCode"
           LEFT JOIN
-             rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','','') AS "Atesaki"
+             rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','','{}') AS "Atesaki"
               ON "Atesaki"."shikibetsuCode" = 計算後情報."shikibetsuCode"
           LEFT JOIN
             rgca."CaFt703FindNokumi"(NULL, NULL, 'DB', 'DBB', ${科目コード}, NULL, #{処理日}) AS "Nokumi"

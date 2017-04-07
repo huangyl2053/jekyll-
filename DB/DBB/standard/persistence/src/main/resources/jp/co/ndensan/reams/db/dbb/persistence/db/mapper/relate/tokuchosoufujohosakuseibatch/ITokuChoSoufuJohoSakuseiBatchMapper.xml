@@ -117,7 +117,7 @@
         FROM
             "特徴依頼追加Temp" AS 特徴依頼追加Temp
         LEFT JOIN
-            rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','','') AS "Atesaki"
+            rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','','{}') AS "Atesaki"
         ON "Atesaki"."shikibetsuCode" = 特徴依頼追加Temp."shikibetsuCode"
         LEFT JOIN
             rgca."CaFt703FindNokumi"(NULL, NULL, 'DB', 'DBB', ${科目コード}, NULL, #{処理日}) AS "Nokumi"
@@ -730,7 +730,7 @@ resultMap="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT2001Choshu
         FROM
             "特徴異動追加Temp" AS 特徴異動追加Temp
         LEFT JOIN
-            rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','','') AS "Atesaki"
+            rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','','{}') AS "Atesaki"
         ON "Atesaki"."shikibetsuCode" = 特徴異動追加Temp."shikibetsuCode"
         LEFT JOIN
             rgca."CaFt703FindNokumi"(NULL, NULL, 'DB', 'DBB', ${科目コード}, NULL, #{処理日}) AS "Nokumi"

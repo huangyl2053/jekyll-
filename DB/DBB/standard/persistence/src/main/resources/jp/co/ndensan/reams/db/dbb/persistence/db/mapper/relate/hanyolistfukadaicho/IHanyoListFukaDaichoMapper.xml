@@ -153,7 +153,7 @@
             ON  最新被保台帳."hihokenshaNo" = 賦課_特徴回付情報付加."dbT2002Fuka_hihokenshaNo"
 	INNER JOIN <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> AS "ShikibetsuTaisho"
             ON "ShikibetsuTaisho"."shikibetsuCode" = 最新被保台帳."shikibetsuCode"
-	INNER JOIN rgua."UaFt250FindAtesaki"('DB','DBB','',FALSE,'','',TRUE ,TRUE ,TRUE ,TRUE ,'','') AS "Atesaki"
+	INNER JOIN rgua."UaFt250FindAtesaki"('DB','DBB','',FALSE,'','',TRUE ,TRUE ,TRUE ,TRUE ,'','{}') AS "Atesaki"
             ON "Atesaki"."shikibetsuCode" = 最新被保台帳."shikibetsuCode"
 	INNER JOIN
             rgdb."DbT2003Kibetsu" AS "DbT2003Kibetsu"

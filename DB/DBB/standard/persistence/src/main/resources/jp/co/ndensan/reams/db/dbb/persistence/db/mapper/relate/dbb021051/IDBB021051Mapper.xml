@@ -28,7 +28,7 @@
                 ON "V2001"."hihokenshaNo" = "V1001"."hihokenshaNo"
             <if test="最優先住所 ==2 " >
             INNER JOIN
-                rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','','') AS "Atesaki"
+                rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','','{}') AS "Atesaki"
             ON
                 "Atesaki"."shikibetsuCode"="ShikibetsuTaisho"."shikibetsuCode"
             AND
