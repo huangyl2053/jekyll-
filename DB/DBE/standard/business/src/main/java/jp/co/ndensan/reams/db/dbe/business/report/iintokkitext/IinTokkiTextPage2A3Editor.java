@@ -113,7 +113,7 @@ public class IinTokkiTextPage2A3Editor implements IIinTokkiTextA3Editor {
                 source.tokkiText1 = get特記事項_tokkiText((page - 1) * 2 - 1);
                 source.tokkiText2 = get特記事項_tokkiText((page - 1) * 2);
             } else if (短冊.equals(item.get特記パターン())) {
-                source = set特記事項テキスト連番_名称(source);
+                source = set特記事項連番_名称(source, TokkijikoTextImageKubun.テキスト);
                 source = set特記事項テキスト(source);
             }
         } else if (TokkijikoTextImageKubun.イメージ.getコード().equals(item.get特記事項テキスト_イメージ区分())) {
@@ -121,7 +121,7 @@ public class IinTokkiTextPage2A3Editor implements IIinTokkiTextA3Editor {
                 source.tokkiImg1 = get特記事項_tokkiImg((page - 1) * 2 - 1);
                 source.tokkiImg2 = get特記事項_tokkiImg((page - 1) * 2);
             } else if (短冊.equals(item.get特記パターン())) {
-                source = set特記事項イメージ連番_名称(source);
+                source = set特記事項連番_名称(source, TokkijikoTextImageKubun.イメージ);
                 source = set特記事項イメージ(source);
             }
         }
@@ -380,25 +380,59 @@ public class IinTokkiTextPage2A3Editor implements IIinTokkiTextA3Editor {
         }
         return source;
     }
+//
+//    private IinTokkiTextA3ReportSource set特記事項テキスト連番_名称(IinTokkiTextA3ReportSource source) {
+//        if ((PAGE2連番名称COUNT * (page - 2) + PAGE1連番名称COUNT + index) < 特記事項List.size()) {
+//            source.listChosa2_1 = 特記事項List.get(PAGE2連番名称COUNT * (page - 2) + PAGE1連番名称COUNT + index);
+//        }
+//        if ((PAGE2連番名称COUNT * (page - 2) + PAGE2連番名称COUNT + PAGE1連番名称COUNT + index) < 特記事項List.size()) {
+//            source.listChosa3_1 = 特記事項List.get(PAGE2連番名称COUNT * (page - 2) + PAGE2連番名称COUNT + PAGE1連番名称COUNT + index);
+//        }
+//        return source;
+//    }
+//
+//    private IinTokkiTextA3ReportSource set特記事項イメージ連番_名称(IinTokkiTextA3ReportSource source) {
+//        if ((PAGE2連番名称COUNT * (page - 2) + PAGE1連番名称COUNT + index) < 特記事項List.size()) {
+//            source.listChosa_1 = 特記事項List.get(PAGE2連番名称COUNT * (page - 2) + PAGE1連番名称COUNT + index);
+//        }
+//        if ((PAGE2連番名称COUNT * (page - 2) + PAGE2連番名称COUNT + PAGE1連番名称COUNT + index) < 特記事項List.size()) {
+//            source.listChosa1_1 = 特記事項List.get(PAGE2連番名称COUNT * (page - 2) + PAGE2連番名称COUNT + PAGE1連番名称COUNT + index);
+//        }
+//        return source;
+//    }
 
-    private IinTokkiTextA3ReportSource set特記事項テキスト連番_名称(IinTokkiTextA3ReportSource source) {
-        if ((PAGE2連番名称COUNT * (page - 2) + PAGE1連番名称COUNT + index) < 特記事項List.size()) {
-            source.listChosa2_1 = 特記事項List.get(PAGE2連番名称COUNT * (page - 2) + PAGE1連番名称COUNT + index);
-        }
-        if ((PAGE2連番名称COUNT * (page - 2) + PAGE2連番名称COUNT + PAGE1連番名称COUNT + index) < 特記事項List.size()) {
-            source.listChosa3_1 = 特記事項List.get(PAGE2連番名称COUNT * (page - 2) + PAGE2連番名称COUNT + PAGE1連番名称COUNT + index);
-        }
+    private IinTokkiTextA3ReportSource set特記事項連番_名称(IinTokkiTextA3ReportSource source, TokkijikoTextImageKubun 特記事項テキストイメージ区分) {
+        setTokkijikoNameOddPage(source, 特記事項テキストイメージ区分);
+        setTokkijikoNameEvenPage(source, 特記事項テキストイメージ区分);
         return source;
     }
 
-    private IinTokkiTextA3ReportSource set特記事項イメージ連番_名称(IinTokkiTextA3ReportSource source) {
+    private void setTokkijikoNameOddPage(IinTokkiTextA3ReportSource source, TokkijikoTextImageKubun 特記事項テキストイメージ区分) {
         if ((PAGE2連番名称COUNT * (page - 2) + PAGE1連番名称COUNT + index) < 特記事項List.size()) {
-            source.listChosa_1 = 特記事項List.get(PAGE2連番名称COUNT * (page - 2) + PAGE1COUNT + index);
+            if (TokkijikoTextImageKubun.テキスト.equals(特記事項テキストイメージ区分)) {
+                source.listChosa2_1 = getTokkijikoNameOddPage();
+            } else {
+                source.listChosa_1 = getTokkijikoNameOddPage();
+            }
         }
+    }
+
+    private void setTokkijikoNameEvenPage(IinTokkiTextA3ReportSource source, TokkijikoTextImageKubun 特記事項テキストイメージ区分) {
         if ((PAGE2連番名称COUNT * (page - 2) + PAGE2連番名称COUNT + PAGE1連番名称COUNT + index) < 特記事項List.size()) {
-            source.listChosa1_1 = 特記事項List.get(PAGE2連番名称COUNT * (page - 2) + PAGE2連番名称COUNT + PAGE1COUNT + index);
+            if (TokkijikoTextImageKubun.テキスト.equals(特記事項テキストイメージ区分)) {
+                source.listChosa3_1 = getTokkijikoNameEvenPage();
+            } else {
+                source.listChosa1_1 = getTokkijikoNameEvenPage();
+            }
         }
-        return source;
+    }
+
+    private RString getTokkijikoNameOddPage() {
+        return 特記事項List.get(PAGE2連番名称COUNT * (page - 2) + PAGE1連番名称COUNT + index);
+    }
+
+    private RString getTokkijikoNameEvenPage() {
+        return 特記事項List.get(PAGE2連番名称COUNT * (page - 2) + PAGE2連番名称COUNT + PAGE1連番名称COUNT + index);
     }
 
     private RString get元号(FlexibleDate 年月日) {
@@ -424,7 +458,7 @@ public class IinTokkiTextPage2A3Editor implements IIinTokkiTextA3Editor {
         }
         return RString.EMPTY;
     }
-    
+
     private FillTypeFormatted パターン12(FlexibleDate 年月日) {
 
         return 年月日.wareki().eraType(EraType.KANJI)

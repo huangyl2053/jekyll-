@@ -253,12 +253,12 @@ public class JimukyokuyoYobihanteiKinyuhyoReportSource implements IReportSource 
     //追加コードは以下（「User Customize Area」内）に記述してください。
     //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
-// </editor-fold>
     @ReportPerson(id = "A")
-    public ShikibetsuCode shikibetuCode;
+    public ShikibetsuCode 識別コード;
     @ReportExpandedInfo(id = "A")
-    public ExpandedInformation hishokenshaNo;
+    public ExpandedInformation 拡張情報;
 
+// </editor-fold>
     /**
      * 改ページ条件のキーです。
      */

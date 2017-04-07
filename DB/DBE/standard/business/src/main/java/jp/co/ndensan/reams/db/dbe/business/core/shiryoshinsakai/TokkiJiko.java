@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.TokkijikoIchiranJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitexta4.TokkiA4Entity;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku02A;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku06A;
@@ -55,7 +56,7 @@ public class TokkiJiko {
      * @param imageFileDirectoryPath 画像ファイルのディレクトリパス
      */
     public TokkiJiko(ShinsakaiSiryoKyotsuEntity kyotsuEntity,
-            List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List,
+            List<TokkijikoIchiranJohoRelateEntity> 特記情報List,
             RString imageFileDirectoryPath) {
         this.kyotsuEntity = kyotsuEntity;
         this.imageFileDirectoryPath = imageFileDirectoryPath;
@@ -222,31 +223,36 @@ public class TokkiJiko {
         return filePathList;
     }
 
-    private List<TokkiA4Entity> create短冊テキストリスト(List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List) {
+    private List<TokkiA4Entity> create短冊テキストリスト(List<TokkijikoIchiranJohoRelateEntity> 特記情報List) {
         List<TokkiA4Entity> 短冊情報リスト = new ArrayList<>();
-        for (DbT5205NinteichosahyoTokkijikoEntity entity : 特記情報List) {
-            if (TokkijikoTextImageKubun.テキスト.getコード().equals(entity.getTokkijikoTextImageKubun())) {
+        for (TokkijikoIchiranJohoRelateEntity entity : 特記情報List) {
+            if (TokkijikoTextImageKubun.テキスト.getコード().equals(entity.get認定調査票特記事項Entity().getTokkijikoTextImageKubun())) {
                 TokkiA4Entity 短冊情報 = new TokkiA4Entity();
                 短冊情報.set事項番号(get項目番号(kyotsuEntity.getKoroshoIfShikibetsuCode(),
-                        entity.getNinteichosaTokkijikoNo(), entity.getNinteichosaTokkijikoRemban()));
-                短冊情報.set項目名称(get項目名称(kyotsuEntity.getKoroshoIfShikibetsuCode(), entity.getNinteichosaTokkijikoNo()));
-                短冊情報.set特記事項テキスト_イメージ(entity.getTokkiJiko());
+                        entity.get認定調査票特記事項Entity().getNinteichosaTokkijikoNo(),
+                        entity.get認定調査票特記事項Entity().getNinteichosaTokkijikoRemban()));
+                短冊情報.set項目名称(get項目名称(kyotsuEntity.getKoroshoIfShikibetsuCode(),
+                        entity.get認定調査票特記事項Entity().getNinteichosaTokkijikoNo()));
+                短冊情報.set特記事項テキスト_イメージ(entity.get認定調査票特記事項Entity().getTokkiJiko());
                 短冊情報リスト.add(短冊情報);
             }
         }
         return 短冊情報リスト;
     }
 
-    private List<TokkiA4Entity> create短冊イメージリスト(List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List) {
+    private List<TokkiA4Entity> create短冊イメージリスト(List<TokkijikoIchiranJohoRelateEntity> 特記情報List) {
         List<TokkiA4Entity> 短冊情報リスト = new ArrayList<>();
-        for (DbT5205NinteichosahyoTokkijikoEntity entity : 特記情報List) {
-            if (TokkijikoTextImageKubun.イメージ.getコード().equals(entity.getTokkijikoTextImageKubun())) {
+        for (TokkijikoIchiranJohoRelateEntity entity : 特記情報List) {
+            if (TokkijikoTextImageKubun.イメージ.getコード().equals(entity.get認定調査票特記事項Entity().getTokkijikoTextImageKubun())) {
                 RString imageFileName = getFileNameByRemban(
-                        entity.getNinteichosaTokkijikoNo(), entity.getNinteichosaTokkijikoRemban());
+                        entity.get認定調査票特記事項Entity().getNinteichosaTokkijikoNo(),
+                        entity.get認定調査票特記事項Entity().getNinteichosaTokkijikoRemban());
                 TokkiA4Entity 短冊情報 = new TokkiA4Entity();
                 短冊情報.set事項番号(get項目番号(kyotsuEntity.getKoroshoIfShikibetsuCode(),
-                        entity.getNinteichosaTokkijikoNo(), entity.getNinteichosaTokkijikoRemban()));
-                短冊情報.set項目名称(get項目名称(kyotsuEntity.getKoroshoIfShikibetsuCode(), entity.getNinteichosaTokkijikoNo()));
+                        entity.get認定調査票特記事項Entity().getNinteichosaTokkijikoNo(),
+                        entity.get認定調査票特記事項Entity().getNinteichosaTokkijikoRemban()));
+                短冊情報.set項目名称(get項目名称(kyotsuEntity.getKoroshoIfShikibetsuCode(),
+                        entity.get認定調査票特記事項Entity().getNinteichosaTokkijikoNo()));
                 短冊情報.set特記事項テキスト_イメージ(getFilePath(imageFileName));
                 短冊情報リスト.add(短冊情報);
             }

@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai;
 
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTokkiJikouItiziHanteiProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.HanteiJohoEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
@@ -328,6 +329,15 @@ public class YobihanteiKinyuhyoBusiness {
      */
     public RString get合議体名称() {
         return paramter.getGogitaiName();
+    }
+
+    /**
+     * 申請書管理番号を取得します。
+     *
+     * @return 申請書管理番号
+     */
+    public ShinseishoKanriNo get申請書管理番号() {
+        return entity.getShinseishoKanriNo();
     }
 
     private RString get作成日期() {

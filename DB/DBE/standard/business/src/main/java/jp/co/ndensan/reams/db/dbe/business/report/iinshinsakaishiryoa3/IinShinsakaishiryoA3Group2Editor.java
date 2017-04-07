@@ -306,16 +306,16 @@ public class IinShinsakaishiryoA3Group2Editor implements IIinShinsakaishiryoA3Ed
             source.listFuseigo5_2 = item.get第５群リスト().get(index).get特記事項有無();
         }
         if (index < item.get特別な医療リスト１().size()) {
-            source.listTokubetsunaIryo1_1 = item.get特別な医療リスト１().get(index).get調査結果();
-            source.listTokubetsunaIryo1_2 = item.get特別な医療リスト１().get(index).get認定調査と主治医意見書の結果比較();
-            source.listTokubetsunaIryo1_3 = item.get特別な医療リスト１().get(index).get特記事項有無();
-            source.listTokubetsunaIryo1_4 = item.get特別な医療リスト１().get(index).get段階改善フラグ();
+            source.listtokubetsunaIryo1_1 = item.get特別な医療リスト１().get(index).get調査結果();
+            source.listtokubetsunaIryo1_2 = item.get特別な医療リスト１().get(index).get認定調査と主治医意見書の結果比較();
+            source.listtokubetsunaIryo1_3 = item.get特別な医療リスト１().get(index).get特記事項有無();
+            source.listtokubetsunaIryo1_4 = item.get特別な医療リスト１().get(index).get段階改善フラグ();
         }
         if (index < item.get特別な医療リスト２().size()) {
-            source.listTokubetsunaIryo2_1 = item.get特別な医療リスト２().get(index).get調査結果();
-            source.listTokubetsunaIryo2_2 = item.get特別な医療リスト２().get(index).get認定調査と主治医意見書の結果比較();
-            source.listTokubetsunaIryo2_3 = item.get特別な医療リスト２().get(index).get特記事項有無();
-            source.listTokubetsunaIryo2_4 = item.get特別な医療リスト２().get(index).get段階改善フラグ();
+            source.listtokubetsunaIryo2_1 = item.get特別な医療リスト２().get(index).get調査結果();
+            source.listtokubetsunaIryo2_2 = item.get特別な医療リスト２().get(index).get認定調査と主治医意見書の結果比較();
+            source.listtokubetsunaIryo2_3 = item.get特別な医療リスト２().get(index).get特記事項有無();
+            source.listtokubetsunaIryo2_4 = item.get特別な医療リスト２().get(index).get段階改善フラグ();
         }
         if (index < item.get主治医意見書().size()) {
             source.listshujiiikensho_1 = item.get主治医意見書().get(index).get調査結果();

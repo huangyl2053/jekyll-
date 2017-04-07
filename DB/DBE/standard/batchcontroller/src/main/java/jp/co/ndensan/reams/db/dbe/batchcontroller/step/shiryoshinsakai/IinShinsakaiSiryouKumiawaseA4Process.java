@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ItiziHanteiEn
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiIinJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiTaiyosyaJohoEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.TokkijikoIchiranJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
@@ -217,7 +218,7 @@ public class IinShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBase
         for (ShinsakaiSiryoKyotsuEntity kyotsuEntity : shinsakaiSiryoKyotsuList) {
             if (shinseishoKanriNo.equals(kyotsuEntity.getShinseishoKanriNo())) {
                 kyotsuEntity.setJimukyoku(false);
-                List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List = get特記情報(kyotsuEntity);
+                List<TokkijikoIchiranJohoRelateEntity> 特記情報List = get特記情報(kyotsuEntity);
                 return new TokkiText1A4Business(kyotsuEntity, 特記情報List, batchReportWriter.getImageFolderPath());
             }
         }
@@ -280,7 +281,7 @@ public class IinShinsakaiSiryouKumiawaseA4Process extends SimpleBatchProcessBase
         return サービス利用状況;
     }
 
-    private List<DbT5205NinteichosahyoTokkijikoEntity> get特記情報(ShinsakaiSiryoKyotsuEntity entity) {
+    private List<TokkijikoIchiranJohoRelateEntity> get特記情報(ShinsakaiSiryoKyotsuEntity entity) {
         List<ShinseishoKanriNo> 申請書管理番号リスト = new ArrayList<>();
         List<Integer> 認定調査依頼履歴番号リスト = new ArrayList<>();
         申請書管理番号リスト.add(entity.getShinseishoKanriNo());

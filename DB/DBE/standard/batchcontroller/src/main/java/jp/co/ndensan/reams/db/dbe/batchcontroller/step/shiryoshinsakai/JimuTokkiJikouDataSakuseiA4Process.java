@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakute
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinShinsakaiIinJohoProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.TokkijikoIchiranJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.tokkijiko.TokkiJikoReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shiryoshinsakai.IJimuShiryoShinsakaiIinMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -88,7 +89,7 @@ public class JimuTokkiJikouDataSakuseiA4Process extends BatchKeyBreakBase<Shinsa
         RString 共有ファイル名 = kyotsuEntity.getShoKisaiHokenshaNo().concat(kyotsuEntity.getHihokenshaNo());
         RString imageFilePath = copySharedFile(kyotsuEntity.getImageSharedFileId(), 共有ファイル名);
 
-        List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List = get特記情報(kyotsuEntity);
+        List<TokkijikoIchiranJohoRelateEntity> 特記情報List = get特記情報(kyotsuEntity);
         TokkiJiko tokkiJiko = new TokkiJiko(kyotsuEntity, 特記情報List, imageFilePath);
         TokkiJikoReport report = new TokkiJikoReport(tokkiJiko);
         report.writeBy(reportSourceWriter);
@@ -109,7 +110,7 @@ public class JimuTokkiJikouDataSakuseiA4Process extends BatchKeyBreakBase<Shinsa
     protected void afterExecute() {
     }
 
-    private List<DbT5205NinteichosahyoTokkijikoEntity> get特記情報(ShinsakaiSiryoKyotsuEntity entity) {
+    private List<TokkijikoIchiranJohoRelateEntity> get特記情報(ShinsakaiSiryoKyotsuEntity entity) {
         List<ShinseishoKanriNo> 申請書管理番号リスト = new ArrayList<>();
         List<Integer> 認定調査依頼履歴番号リスト = new ArrayList<>();
         申請書管理番号リスト.add(entity.getShinseishoKanriNo());

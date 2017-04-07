@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.entity.report.source.jimushinsakaishiryoa3.Jim
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
@@ -78,12 +79,7 @@ public class JimuShinsakaishiryoA3Group1Editor implements IJimuShinsakaishiryoA3
             source.listShinsei1_11 = RString.EMPTY;
             source.listZenkaiｙukokikan1_1 = shinsakaishiryoList.get(index).get前回期間_下();
             source.listYukokikan1_1 = RString.EMPTY;
-            source.shikibetuCode = new ShikibetsuCode(shinsakaishiryoList.get(index).get識別コード());
-            if (shinsakaishiryoList.get(index).is事務局() && shinsakaishiryoList.get(index).get申請書管理番号() != null
-                    && !shinsakaishiryoList.get(index).get申請書管理番号().isEmpty()) {
-                source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
-                        shinsakaishiryoList.get(index).get申請書管理番号().getColumnValue());
-            }
+            setAccessLogInfo(source);
         }
         if ((index + INT_25) < shinsakaishiryoList.size()) {
             source.listShinsei2_1 = shinsakaishiryoList.get(index + INT_25).get審査会審査順().padZeroToLeft(INT_2);
@@ -113,5 +109,14 @@ public class JimuShinsakaishiryoA3Group1Editor implements IJimuShinsakaishiryoA3
             }
         }
         return RString.EMPTY;
+    }
+
+    private void setAccessLogInfo(JimuShinsakaishiryoA3ReportSource source) {
+        source.識別コード = new ShikibetsuCode(shinsakaishiryoList.get(index).get識別コード());
+        if (shinsakaishiryoList.get(index).get申請書管理番号() != null && !shinsakaishiryoList.get(index).get申請書管理番号().isEmpty()) {
+            ExpandedInformation 拡張情報 = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
+                    shinsakaishiryoList.get(index).get申請書管理番号().getColumnValue());
+            source.拡張情報 = 拡張情報;
+        }
     }
 }

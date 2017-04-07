@@ -679,7 +679,7 @@ public class JimuShinsakaishiryoA3ReportSource implements IReportSource {
     public RString listZenkaiｙukokikan2_1;
     @ReportItem(name = "listYukokikan2_1", length = 19, order = 638)
     public RString listYukokikan2_1;
-    
+
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
@@ -687,6 +687,11 @@ public class JimuShinsakaishiryoA3ReportSource implements IReportSource {
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
     @ReportItem(name = "layout", order = 999)
     public int layout;
+
+    @ReportPerson(id = "X")
+    public ShikibetsuCode 識別コード;
+    @ReportExpandedInfo(id = "X")
+    public ExpandedInformation 拡張情報;
 
     /**
      * レイアウトブレイク用キーの一覧です。
@@ -697,14 +702,6 @@ public class JimuShinsakaishiryoA3ReportSource implements IReportSource {
         LAYOUT_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("layout")));
     }
 // </editor-fold>
-
-    @ReportPerson(id = "X")
-    public ShikibetsuCode shikibetuCode;
-    @ReportExpandedInfo(id = "X")
-    public ExpandedInformation shinseishoKanriNo;
-    @ReportExpandedInfo(id = "X")
-    public ExpandedInformation hishokenshaNo;
-
     /**
      * 改ページ条件のキーです。
      */

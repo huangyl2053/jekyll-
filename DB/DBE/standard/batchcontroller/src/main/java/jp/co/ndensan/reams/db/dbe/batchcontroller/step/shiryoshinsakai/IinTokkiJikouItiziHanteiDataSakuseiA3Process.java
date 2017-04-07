@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.shiryoshinsakai.IinTokki
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA3Entity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ItiziHanteiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.TokkijikoIchiranJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.iintokkitext.IinTokkiTextA3ReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shiryoshinsakai.IShiryoShinsakaiIinMapper;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
@@ -94,7 +95,7 @@ public class IinTokkiJikouItiziHanteiDataSakuseiA3Process extends BatchKeyBreakB
     @Override
     protected void createWriter() {
         List<ItiziHanteiEntity> 一次判定EntityList = mapper.getTokkiJikouItiziHantei(myBatisParameter);
-        List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報 = new ArrayList<>();
+        List<TokkijikoIchiranJohoRelateEntity> 特記情報 = new ArrayList<>();
         for (ItiziHanteiEntity entity : 一次判定EntityList) {
             if (get共通情報(共通情報, entity.getShinseishoKanriNo()) != null) {
                 特記情報 = get特記情報(get共通情報(共通情報, entity.getShinseishoKanriNo()));
@@ -151,15 +152,21 @@ public class IinTokkiJikouItiziHanteiDataSakuseiA3Process extends BatchKeyBreakB
         List<DbT5211NinteichosahyoChosaItemEntity> 調査票調査項目 = mapper.getChosahyoChosaItem(myBatisParameter);
         List<DbT5211NinteichosahyoChosaItemEntity> 前回調査票調査項目 = mapper.getZenkaiChosahyoChosaItem(myBatisParameter);
         List<DbT5304ShujiiIkenshoIkenItemEntity> 前回主治医意見書 = mapper.getZenkaiIkenshoIkenItem(myBatisParameter);
-        List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報 = new ArrayList<>();
-        if (get共通情報(共通情報, entity.getShinseishoKanriNo()) != null) {
-            特記情報 = get特記情報(get共通情報(共通情報, entity.getShinseishoKanriNo()));
-        }
-        IchijihanteikekkahyoA3Entity ichijiHanteiEntity = new IchijihanteikekkahyoItemSetteiA3().set項目(entity, 特記事項,
-                調査票調査項目, 前回調査票調査項目, 主治医意見書,
-                前回主治医意見書, 予防給付サービス利用状況, 介護給付サービス利用状況, サービス状況フラグ, データ件数,
-                get共通情報(共通情報, entity.getShinseishoKanriNo()), 主治医意見書, new RString(paramter.getGogitaiNo()),
-                特記情報, batchWriteA3.getImageFolderPath());
+        List<TokkijikoIchiranJohoRelateEntity> 特記情報 = get特記情報(get共通情報(共通情報, entity.getShinseishoKanriNo()));
+        IchijihanteikekkahyoA3Entity ichijiHanteiEntity = new IchijihanteikekkahyoItemSetteiA3().set項目(entity,
+                調査票調査項目, 
+                前回調査票調査項目,
+                主治医意見書,
+                前回主治医意見書,
+                予防給付サービス利用状況, 
+                介護給付サービス利用状況,
+                サービス状況フラグ,
+                データ件数,
+                get共通情報(共通情報, entity.getShinseishoKanriNo()),
+                主治医意見書,
+                new RString(paramter.getGogitaiNo()),
+                特記情報,
+                batchWriteA3.getImageFolderPath());
         ichijiHanteiEntity.setServiceKubunCode(entity.getServiceKubunCode());
         ichijiHanteiEntity.set審査番号(審査番号);
         item = new IchijihanteikekkahyoA3Business(ichijiHanteiEntity, false);
@@ -182,7 +189,7 @@ public class IinTokkiJikouItiziHanteiDataSakuseiA3Process extends BatchKeyBreakB
         return null;
     }
 
-    private List<DbT5205NinteichosahyoTokkijikoEntity> get特記情報(ShinsakaiSiryoKyotsuEntity entity) {
+    private List<TokkijikoIchiranJohoRelateEntity> get特記情報(ShinsakaiSiryoKyotsuEntity entity) {
         List<ShinseishoKanriNo> 申請書管理番号リスト = new ArrayList<>();
         List<Integer> 認定調査依頼履歴番号リスト = new ArrayList<>();
         申請書管理番号リスト.add(entity.getShinseishoKanriNo());
@@ -193,9 +200,9 @@ public class IinTokkiJikouItiziHanteiDataSakuseiA3Process extends BatchKeyBreakB
         return mapper.getTokkiIranJoho(myBatisParameter);
     }
 
-    private RString get特記事項テキストイメージ区分(List<DbT5205NinteichosahyoTokkijikoEntity> 特記情報List) {
-        for (DbT5205NinteichosahyoTokkijikoEntity 特記情報 : 特記情報List) {
-            if (TokkijikoTextImageKubun.イメージ.getコード().equals(特記情報.getTokkijikoTextImageKubun())) {
+    private RString get特記事項テキストイメージ区分(List<TokkijikoIchiranJohoRelateEntity> 特記情報List) {
+        for (TokkijikoIchiranJohoRelateEntity 特記情報 : 特記情報List) {
+            if (TokkijikoTextImageKubun.イメージ.getコード().equals(特記情報.get認定調査票特記事項Entity().getTokkijikoTextImageKubun())) {
                 return TokkijikoTextImageKubun.イメージ.getコード();
             }
         }
