@@ -29,7 +29,6 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * 老齢福祉年金画面のハンドラークラスです。
@@ -166,8 +165,11 @@ public class RoreiFukushiNenkinShokaiHandler {
      */
     public RoreiFukushiNenkinJukyusha set老齢福祉年金確定ボタン押下の更新処理(
             RoreiFukushiNenkinJukyusha roreifukushinenkinjukyusha) {
-        return roreifukushinenkinjukyusha.createBuilderForEdit().set受給廃止年月日(new FlexibleDate(
-                div.getPanelInput().getTxtEndDate().getValue().toDateString())).build();
+        FlexibleDate 受給廃止年月日 = FlexibleDate.EMPTY;
+        if (div.getPanelInput().getTxtEndDate() != null && div.getPanelInput().getTxtEndDate().getValue() != null) {
+            受給廃止年月日 = new FlexibleDate(div.getPanelInput().getTxtEndDate().getValue().toDateString());
+        }
+        return roreifukushinenkinjukyusha.createBuilderForEdit().set受給廃止年月日(受給廃止年月日).build();
     }
 
     /**

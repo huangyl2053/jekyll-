@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1030011;
 
+import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.business.core.exclusivekey.DbaExclusiveKey;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1030011.DBA1030011StateName;
@@ -15,10 +16,12 @@ import jp.co.ndensan.reams.db.dba.service.core.tajushochito.TaJushochiTokureiChe
 import jp.co.ndensan.reams.db.dba.service.core.tekiyojogaisha.TekiyoJogaishaChecker;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.validations.TextBoxFlexibleDateValidator;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -53,6 +56,7 @@ public class ShikakuSoshitsuIdoTotal {
     private static final RString SHISETSU = new RString("施設入退所");
     private static final RString SHORUIJOKYO = new RString("証交付回収");
     private static final RString 修正 = new RString("修正");
+    private static final RString 状態_照会 = new RString("照会");
 
     private static final Integer FIRSTINDEX = Integer.valueOf("0");
 
@@ -72,6 +76,11 @@ public class ShikakuSoshitsuIdoTotal {
         TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ShikibetsuCode shikibetsuCode = key.get識別コード();
         HihokenshaNo hihokenshaNo = key.get被保険者番号();
+        HihokenshaDaichoManager manager = HihokenshaDaichoManager.createInstance();
+        List<HihokenshaDaicho> hihoDaichoList = manager.get最新被保険者台帳(hihokenshaNo);
+        ArrayList<HihokenshaDaicho> serialHihoDaicho = new ArrayList<>();
+        serialHihoDaicho.addAll(hihoDaichoList);
+        ViewStateHolder.put(ViewStateKeys.対象者_被保険者台帳情報, serialHihoDaicho);
 
         if (shikibetsuCode == null || shikibetsuCode.isEmpty()) {
             return setNotExecutableAndReturnMessage(div, UrInformationMessages.該当データなし.getMessage());
@@ -119,6 +128,7 @@ public class ShikakuSoshitsuIdoTotal {
 
     private ResponseData<ShikakuSoshitsuIdoTotalDiv> setNotExecutableAndReturnMessage(ShikakuSoshitsuIdoTotalDiv div, Message message) {
         div.setDisabled(true);
+        div.getKihonJoho().getCcdKaigoAtenaInfo().getAtenaInfoDiv().setDisabled(true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_RESEARCH, true);
         return ResponseData.of(div).addMessage(message).respond();
     }
@@ -192,7 +202,14 @@ public class ShikakuSoshitsuIdoTotal {
      */
     public ResponseData<ShikakuSoshitsuIdoTotalDiv> onClick_btnSyouHoSo(ShikakuSoshitsuIdoTotalDiv div) {
         releaseLock();
-        createHandler(div).setパラメータ();
+        TaishoshaKey key = ViewStateHolder.get(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class);
+        ViewStateHolder.put(ViewStateKeys.識別コード, key.get識別コード());
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, key.get被保険者番号());
+        ViewStateHolder.put(ViewStateKeys.状態, 状態_照会);
+        ViewStateHolder.put(ViewStateKeys.資格得喪情報, createHandler(div).setパラメータ());
+        dgShikakuShutokuRireki_Row row = div.getShikakuSoshitsuJoho().getTplShikakuJoho().getShikakuTokusoRirekiMain().getCcdShikakuTokusoRireki().getDataGridSelectItem();
+        ViewStateHolder.put(ViewStateKeys.対象者_資格取得日, row.getShutokuDate().getValue());
+        
         return ResponseData.of(div).forwardWithEventName(DBA1030011TransitionEventName.詳細へ).respond();
     }
 

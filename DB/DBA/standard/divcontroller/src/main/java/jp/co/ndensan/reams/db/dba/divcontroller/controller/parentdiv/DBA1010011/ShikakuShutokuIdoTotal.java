@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1010011;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -17,11 +18,13 @@ import jp.co.ndensan.reams.db.dba.service.core.tajushochito.TaJushochiTokureiChe
 import jp.co.ndensan.reams.db.dba.service.core.tekiyojogaisha.TekiyoJogaishaChecker;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.validations.TextBoxFlexibleDateValidator;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -56,6 +59,7 @@ public class ShikakuShutokuIdoTotal {
     private static final RString RONEN = new RString("老福年金");
     private static final RString SHISETSU = new RString("施設入退所");
     private static final RString 追加 = new RString("追加");
+    private static final RString 状態_照会 = new RString("照会");
 
     private static final RString COMMON_BUTTON_RESEARCH = new RString("btnUpdate");
 
@@ -73,6 +77,11 @@ public class ShikakuShutokuIdoTotal {
         TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ShikibetsuCode shikibetsuCode = key.get識別コード();
         HihokenshaNo hihokenshaNo = key.get被保険者番号();
+        HihokenshaDaichoManager manager = HihokenshaDaichoManager.createInstance();
+        List<HihokenshaDaicho> hihoDaichoList = manager.get最新被保険者台帳(hihokenshaNo);
+        ArrayList<HihokenshaDaicho> serialHihoDaicho = new ArrayList<>();
+        serialHihoDaicho.addAll(hihoDaichoList);
+        ViewStateHolder.put(ViewStateKeys.対象者_被保険者台帳情報, serialHihoDaicho);
 
         if (validateShikibetsuCode(shikibetsuCode)) {
             div.setDisabled(true);
@@ -244,16 +253,16 @@ public class ShikakuShutokuIdoTotal {
      */
     public ResponseData<ShikakuShutokuIdoTotalDiv> onClick_btnSyouHoSo(ShikakuShutokuIdoTotalDiv div) {
 //<<<<<<< HEAD
-        releaseLock(div);
-        createHandler(div).setパラメータ();
+//        releaseLock(div);
+//        createHandler(div).setパラメータ();
 //=======
-//        前排他ロックキー = new LockingKey(createHandler(div).get前排他キー());
-//        RealInitialLocker.release(前排他ロックキー);
-//        TaishoshaKey key = ViewStateHolder.get(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class);
-//        ViewStateHolder.put(ViewStateKeys.識別コード, key.get識別コード());
-//        ViewStateHolder.put(ViewStateKeys.被保険者番号, key.get被保険者番号());
-//        ViewStateHolder.put(ViewStateKeys.状態, 状態_照会);
-//        ViewStateHolder.put(ViewStateKeys.資格得喪情報, createHandler(div).setパラメータ());
+        前排他ロックキー = new LockingKey(createHandler(div).get前排他キー());
+        RealInitialLocker.release(前排他ロックキー);
+        TaishoshaKey key = ViewStateHolder.get(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class);
+        ViewStateHolder.put(ViewStateKeys.識別コード, key.get識別コード());
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, key.get被保険者番号());
+        ViewStateHolder.put(ViewStateKeys.状態, 状態_照会);
+        ViewStateHolder.put(ViewStateKeys.資格得喪情報, createHandler(div).setパラメータ());
 //>>>>>>> origin/sync
         return ResponseData.of(div).forwardWithEventName(DBA1010011TransitionEventName.詳細へ).respond();
     }
@@ -342,7 +351,7 @@ public class ShikakuShutokuIdoTotal {
                 compareToDate = row.getSoshitsuDate();
             }
             // 期間重複チェック
-            if (!div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
+            if (rowList.size() > 1 && !div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
                     getShikakuShutokuInput().getTxtShutokuDate().getValue().isEmpty()
                     && div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
                     getShikakuShutokuInput().getTxtShutokuDate().getValue().compareTo(compareToDate.getValue()) <= 0) {
