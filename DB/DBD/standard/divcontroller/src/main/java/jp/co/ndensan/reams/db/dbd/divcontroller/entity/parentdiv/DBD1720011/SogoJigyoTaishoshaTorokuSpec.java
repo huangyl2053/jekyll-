@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1720011;
+package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1720011;
 
-import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1720011.SogoJigyoTaishoshaTorokuHandler;
+import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1720011.SogoJigyoTaishoshaTorokuHandler;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 

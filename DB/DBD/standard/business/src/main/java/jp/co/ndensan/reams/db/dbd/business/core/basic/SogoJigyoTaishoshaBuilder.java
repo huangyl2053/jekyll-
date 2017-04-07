@@ -110,6 +110,18 @@ public class SogoJigyoTaishoshaBuilder {
     }
 
     /**
+     * チェックリスト実施日を設定します。
+     *
+     * @param チェックリスト実施日 チェックリスト実施日
+     * @return {@link SogoJigyoTaishoshaBuilder}
+     */
+    public SogoJigyoTaishoshaBuilder setチェックリスト実施日(FlexibleDate チェックリスト実施日) {
+        requireNonNull(チェックリスト実施日, UrSystemErrorMessages.値がnull.getReplacedMessage("チェックリスト実施日"));
+        entity.setChecklistJisshiYMD(チェックリスト実施日);
+        return this;
+    }
+
+    /**
      * {@link SogoJigyoTaishosha}のインスタンスを生成します。
      *
      * @return {@link SogoJigyoTaishosha}のインスタンス

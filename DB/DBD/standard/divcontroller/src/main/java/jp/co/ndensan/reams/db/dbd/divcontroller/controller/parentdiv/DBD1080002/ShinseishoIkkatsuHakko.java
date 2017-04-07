@@ -24,7 +24,10 @@ import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1080002.Shi
 import jp.co.ndensan.reams.db.dbd.service.core.kouhoushajoho.KouhoushaJohoService;
 import jp.co.ndensan.reams.db.dbd.service.core.kouhoushajoho.ShinseishoIkkatsuHakkoService;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -119,7 +122,8 @@ public class ShinseishoIkkatsuHakko {
      * 「把握リストを発行する」の処理です。
      *
      * @param div ShinseishoIkkatsuHakkoDiv
-     * @return ResponseData<DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter>
+     * @return
+     * ResponseData<DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter>
      */
     public ResponseData<DBD102020_GemmenGengakuShinseishoIkkatsuHakkoParameter> onClick_btnprint(ShinseishoIkkatsuHakkoDiv div) {
         UUID 発行処理ID = UUID.randomUUID();
@@ -165,9 +169,11 @@ public class ShinseishoIkkatsuHakko {
         } else {
             div.getGenmenShinseiHaakuList().getTxtKijunYMD().setValue(shineisho.get基準日());
             div.getGenmenShinseiHaakuList().getTxtShotokuNendo().setDomain(shineisho.get所得年度().getNendo());
+            ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先);
+            builder.set基準日(shineisho.get基準日());
             KouhoushaJohoParameter parameter = new KouhoushaJohoParameter(shineisho.get基準日(), shineisho.getバッチ処理日時(),
                     div.getGenmenShinseiHaakuList().getDdlGemmenGengakuShurui().
-                    getSelectedKey());
+                    getSelectedKey(), builder.build());
             KouhoushaJohoService kouhoushaJohoSerive = KouhoushaJohoService.creatInstence();
             List<KouhoushaJoho> 候補者情報List = kouhoushaJohoSerive.find候補者情報(parameter);
             div.getGenmenShinseiHaakuList().getDdlKohoshaList().setDataSource(getHandler(div).get候補者情報(候補者情報List));

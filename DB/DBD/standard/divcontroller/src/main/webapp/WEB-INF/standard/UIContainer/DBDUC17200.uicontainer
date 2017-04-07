@@ -1,7 +1,7 @@
 ﻿{
- "uiContainerName": "DBCUC17200",
+ "uiContainerName": "DBDUC17200",
  "displayWizard": false,
- "subGyomuCode": "DBC",
+ "subGyomuCode": "DBD",
  "steps": [
   {
    "id": 1,
@@ -16,16 +16,16 @@
      "eventName": "対象者特定",
      "destroy": false,
      "condition": "",
-     "toLayoutSubGyomuCode": "DBC",
-     "toLayoutName": "DBC1720011",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBD1720011",
      "toLayoutTitle": "総合事業対象者登録",
      "toState": "Default"
     },
     {
      "id": "2",
      "type": "end",
-     "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC1720011",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD1720011",
      "layoutTitle": "総合事業対象者登録",
      "eventName": "完了",
      "destroy": false,
@@ -43,8 +43,8 @@
     {
      "id": "4",
      "type": "ordinal",
-     "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC1720011",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD1720011",
      "layoutTitle": "総合事業対象者登録",
      "eventName": "検索結果一覧へ",
      "destroy": true,
@@ -57,8 +57,8 @@
     {
      "id": "5",
      "type": "ordinal",
-     "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC1720011",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD1720011",
      "layoutTitle": "総合事業対象者登録",
      "eventName": "再検索",
      "destroy": true,

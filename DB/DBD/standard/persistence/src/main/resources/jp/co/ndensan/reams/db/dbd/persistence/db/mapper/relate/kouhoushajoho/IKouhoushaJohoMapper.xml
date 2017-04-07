@@ -49,9 +49,12 @@
                 FROM rgdb."DbT4030ShinseishoHakkoTaishoshaHaakuBatch" AS A
                 INNER  JOIN rgdb."DbT4031ShinseishoHakkoKohoshas" AS E
                 ON E."haakuShoriID" =A."haakuShoriID"
-                INNER JOIN  rgua."UaFt200FindShikibetsuTaisho"('',#{基準日},FALSE,'DB',FALSE,'','','','','','','','','','','',true,
+                INNER JOIN  
+                <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmShikibetsuTaisho"/>
+<!--                rgua."UaFt200FindShikibetsuTaisho"('',#{基準日},FALSE,'DB',FALSE,'','','','','','','','','','','',true,
         '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
+        true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') -->
+                AS "ShikibetsuTaisho"
                 ON "ShikibetsuTaisho"."shikibetsuCode" =E."shikibetsuCode"
                 LEFT JOIN rgdb."DbV4001JukyushaDaicho" AS C 
                 ON C."hihokenshaNo" = E."hihokenshaNo"

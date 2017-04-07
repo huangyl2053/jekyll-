@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC1720011;
+package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD1720011;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.SogoJigyoTaishosha;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.SogoJigyoTaishoshaBuilder;
-import jp.co.ndensan.reams.db.dbc.business.core.sogojigyotaishoshatoroku.SogoJigyoTaishoshaToJotai;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1720011.SogoJigyoTaishoshaTorokuDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1720011.dgKihonInfo_Row;
-import jp.co.ndensan.reams.db.dbc.service.core.basic.SogoJigyoTaishoshaManager;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.SogoJigyoTaishosha;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.SogoJigyoTaishoshaBuilder;
+import jp.co.ndensan.reams.db.dbd.business.core.sogojigyotaishoshatoroku.SogoJigyoTaishoshaToJotai;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1720011.SogoJigyoTaishoshaTorokuDiv;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD1720011.dgKihonInfo_Row;
+import jp.co.ndensan.reams.db.dbd.service.core.basic.SogoJigyoTaishoshaManager;
 import jp.co.ndensan.reams.db.dbd.business.core.basic.SogoJigyoTaishoshaIdentifier;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
