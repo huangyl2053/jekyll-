@@ -11,10 +11,14 @@
             <if test="最優先住所 ==2 " >
                 , <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt250FindAtesakiMapper.columns_Atesaki" />
             </if>
-            FROM    
+            FROM 
+               <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
+               AS "ShikibetsuTaisho"
+               <!--   
                 rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',false,
                 '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
                 true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
+                -->
             INNER JOIN rgdb."DbV1001HihokenshaDaicho" AS "V1001" 
                 ON "V1001"."shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
                         <if test="資格区分 ==1  ||  資格区分 ==3 ||  資格区分 ==5 " >AND "V1001"."hihokennshaKubunCode" IN ('1')</if>

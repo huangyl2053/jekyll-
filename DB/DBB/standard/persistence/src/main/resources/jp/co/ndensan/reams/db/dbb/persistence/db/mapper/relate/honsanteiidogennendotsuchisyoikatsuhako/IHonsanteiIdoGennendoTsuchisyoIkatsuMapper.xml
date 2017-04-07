@@ -1865,9 +1865,13 @@
               ON 賦課Newest."fukaNendo" = 徴収方法Newest."fukaNendo"
               AND 賦課Newest."hihokenshaNo" = 徴収方法Newest."hihokenshaNo"
           INNER JOIN 
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> 
+            AS "ShikibetsuTaisho"
+            <!--
             rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
                    '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
-                   true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
+                   true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"          
+            -->
               ON "ShikibetsuTaisho"."shikibetsuCode" = 賦課Newest."shikibetsuCode"
           INNER JOIN
              rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','','') AS "Atesaki"
@@ -2568,10 +2572,14 @@
             ''
         FROM 
           rgdb."DbT2015KeisangoJoho" AS 計算後情報
-          INNER JOIN 
+          INNER JOIN
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> 
+            AS "ShikibetsuTaisho"
+            <!-- 
             rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
                    '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
                    true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
+            -->
               ON "ShikibetsuTaisho"."shikibetsuCode" = 計算後情報."shikibetsuCode"
           LEFT JOIN
              rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','','') AS "Atesaki"
@@ -3297,10 +3305,14 @@
             ''
         FROM 
           "DbT2015KeisangoJohoTemp" AS 計算後情報
-          INNER JOIN 
+          INNER JOIN
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> 
+            AS "ShikibetsuTaisho"
+            <!-- 
             rgua."UaFt200FindShikibetsuTaisho"('','',FALSE,'DB',FALSE,'','','','','','','','','','','',true,
                    '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
                    true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}') AS "ShikibetsuTaisho"
+            -->
               ON "ShikibetsuTaisho"."shikibetsuCode" = 計算後情報."shikibetsuCode"
           LEFT JOIN
              rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','','') AS "Atesaki"

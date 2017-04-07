@@ -75,6 +75,16 @@
        FROM
             master
        INNER JOIN
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
+                (
+                    SELECT
+                        ARRAY_AGG(CAST (master."shikibetsuCode" AS TEXT))
+                    FROM
+                        master
+                )
+            <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
+            AS "shikibetsuCode"
+            <!--
             rgua."UaFt200FindShikibetsuTaisho"('','',false,'DB',false,'','','','','','','','','','','',true,
             '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
             true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',        
@@ -84,7 +94,8 @@
                     FROM
                         master
                 )      
-            ) AS "shikibetsuCode"     
+            ) AS "shikibetsuCode"
+            -->    
        ON
             "master"."shikibetsuCode" = "shikibetsuCode"."shikibetsuCode"
        <if test="doteiOutput!=null and !doteiOutput.isEmpty()">

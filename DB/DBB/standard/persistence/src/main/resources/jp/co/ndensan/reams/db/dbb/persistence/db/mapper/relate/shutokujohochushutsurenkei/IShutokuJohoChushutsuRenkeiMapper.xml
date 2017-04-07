@@ -45,10 +45,14 @@
         FROM
          "DbTKaigoShotokuTempTable" AS A
         LEFT JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> 
+        AS 宛名
+        <!--
         rgua."UaFt200FindShikibetsuTaisho"('','',true,'DB',false,'','','','','','','','','','','',true,
         '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,
         true,'','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','','{}')
         AS 宛名
+        -->
         ON
         A."shikibetsuCode" = 宛名."shikibetsuCode"
         LEFT JOIN
