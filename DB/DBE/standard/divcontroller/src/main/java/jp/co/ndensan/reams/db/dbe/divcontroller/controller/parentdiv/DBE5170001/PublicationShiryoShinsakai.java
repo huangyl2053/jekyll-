@@ -9,6 +9,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiWariateJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.KaisaiYoteiJohoBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE517000.DBE517000_ShinsakaiShiryoParameter;
+import jp.co.ndensan.reams.db.dbe.definition.core.exclusion.LockingKeys;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5170001.PublicationShiryoShinsakaiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5170001.PublicationShiryoShinsakaiHandler;
@@ -29,11 +30,15 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -46,6 +51,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 public class PublicationShiryoShinsakai {
 
     private final RString マスキング完了処理_審査会割当後 = new RString("2");
+    private final RString 実行するボタン = new RString("btnToPrint");
 
     /**
      * 画面初期化処理です。
@@ -54,10 +60,18 @@ public class PublicationShiryoShinsakai {
      * @return ResponseData<PublicationShiryoShinsakaiDiv>
      */
     public ResponseData<PublicationShiryoShinsakaiDiv> onLoad(PublicationShiryoShinsakaiDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         RString 審査会一覧_開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
         KaisaiYoteiJohoBusiness 開催予定情報
                 = ShiryoShinsakaiFinder.createInstance().get開催予定情報(審査会一覧_開催番号);
         getHandler(div).onLoad(開催予定情報);
+        if (!RealInitialLocker.tryGetLock(LockingKeys.介護認定審査会開催番号.appended(審査会一覧_開催番号))) {
+            div.setReadOnly(true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(実行するボタン, true);
+            return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -177,6 +191,18 @@ public class PublicationShiryoShinsakai {
         builder.append(new RString("DBEShinsakaiNo"))
                 .append(審査会一覧_開催番号);
         return ResponseData.of(getHandler(div).onClick_btnKogakuParamSave()).respond();
+    }
+
+    /**
+     * 「一覧に戻る」ボタンを押下下処理です。
+     *
+     * @param div PublicationShiryoShinsakaiDiv
+     * @return ResponseData<PublicationShiryoShinsakaiDiv>
+     */
+    public ResponseData<PublicationShiryoShinsakaiDiv> onClick_btnToReturnIchiran(PublicationShiryoShinsakaiDiv div) {
+        RString 審査会一覧_開催番号 = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
+        RealInitialLocker.release(LockingKeys.介護認定審査会開催番号.appended(審査会一覧_開催番号));
+        return ResponseData.of(div).respond();
     }
 
     private ErrorMessage check概況調査情報(ShinseishoKanriNo 申請書管理番号) {
