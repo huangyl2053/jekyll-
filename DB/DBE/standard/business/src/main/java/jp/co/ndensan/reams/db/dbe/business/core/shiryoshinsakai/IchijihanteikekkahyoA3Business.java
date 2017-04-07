@@ -176,7 +176,10 @@ public class IchijihanteikekkahyoA3Business {
      * @return 管理番号
      */
     public RString get管理番号() {
-        return entity.get管理番号();
+        if (isJimu) {
+            return entity.get管理番号();
+        }
+        return RString.EMPTY;
     }
 
     /**
@@ -1307,6 +1310,9 @@ public class IchijihanteikekkahyoA3Business {
      * @return 前回結果の認定ソフトバージョン記号
      */
     public RString get前回結果バージョン記号() {
-        return entity.get前回結果バージョン記号();
+        if (isJimu) {
+            return entity.get前回結果バージョン記号();
+        }
+        return RString.EMPTY;
     }
 }
