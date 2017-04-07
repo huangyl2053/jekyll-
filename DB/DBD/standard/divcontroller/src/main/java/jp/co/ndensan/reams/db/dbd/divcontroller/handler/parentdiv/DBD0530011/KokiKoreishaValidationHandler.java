@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0530011;
+package jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD0530011;
 
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0530011.KokiKoreishaDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0530011.KokiKoreishaDivSpec;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD0530011.KokiKoreishaDiv;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD0530011.KokiKoreishaDivSpec;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;

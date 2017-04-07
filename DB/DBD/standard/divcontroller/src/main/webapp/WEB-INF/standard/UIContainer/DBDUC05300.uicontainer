@@ -1,7 +1,7 @@
 ﻿{
- "uiContainerName": "DBCUC05300",
+ "uiContainerName": "DBDUC05300",
  "displayWizard": false,
- "subGyomuCode": "DBC",
+ "subGyomuCode": "DBD",
  "steps": [
   {
    "id": 1,
@@ -25,16 +25,16 @@
      "eventName": "対象者特定",
      "destroy": false,
      "condition": "",
-     "toLayoutSubGyomuCode": "DBC",
-     "toLayoutName": "DBC0530011",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBD0530011",
      "toLayoutTitle": "後期資格情報登録",
      "toState": "初期状態"
     },
     {
      "id": "3",
      "type": "ordinal",
-     "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC0530011",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD0530011",
      "layoutTitle": "後期資格情報登録",
      "eventName": "対象者検索へ戻る",
      "destroy": true,
@@ -47,8 +47,8 @@
     {
      "id": "4",
      "type": "end",
-     "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC0530011",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD0530011",
      "layoutTitle": "後期資格情報登録",
      "eventName": "完了",
      "destroy": false,

@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0530011;
+package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD0530011;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class MeisaiPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

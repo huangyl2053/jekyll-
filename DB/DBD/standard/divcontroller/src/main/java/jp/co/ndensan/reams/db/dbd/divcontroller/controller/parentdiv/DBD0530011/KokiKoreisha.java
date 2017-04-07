@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC0530011;
+package jp.co.ndensan.reams.db.dbd.divcontroller.controller.parentdiv.DBD0530011;
 
-import jp.co.ndensan.reams.db.dbc.business.core.basic.KokiKoreishaInfo;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.KokiKoreishaInfoBuilder;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0530011.DBC0530011StateName;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0530011.DBC0530011TransitionEventName;
-import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC0530011.KokiKoreishaDiv;
-import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0530011.KokiKoreishaHandler;
-import jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC0530011.KokiKoreishaValidationHandler;
-import jp.co.ndensan.reams.db.dbc.service.core.basic.KokiKoreishaInfoManager;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.KokiKoreishaInfo;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.KokiKoreishaInfoBuilder;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD0530011.DBD0530011StateName;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD0530011.DBD0530011TransitionEventName;
+import jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD0530011.KokiKoreishaDiv;
+import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD0530011.KokiKoreishaHandler;
+import jp.co.ndensan.reams.db.dbd.divcontroller.handler.parentdiv.DBD0530011.KokiKoreishaValidationHandler;
+import jp.co.ndensan.reams.db.dbd.service.core.basic.KokiKoreishaInfoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
@@ -86,7 +86,7 @@ public class KokiKoreisha {
         if (被保険者番号 != null && !被保険者番号.isEmpty()) {
             getHandler(div).前排他キーの解除(被保険者番号);
         }
-        return ResponseData.of(div).forwardWithEventName(DBC0530011TransitionEventName.対象者検索へ戻る).respond();
+        return ResponseData.of(div).forwardWithEventName(DBD0530011TransitionEventName.対象者検索へ戻る).respond();
     }
 
     /**
@@ -191,7 +191,7 @@ public class KokiKoreisha {
         AccessLogger.log(AccessLogType.更新, PersonalData.of(識別コード, expandedInfo));
         div.getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()),
                 RString.EMPTY, RString.EMPTY, true);
-        return ResponseData.of(div).setState(DBC0530011StateName.完了);
+        return ResponseData.of(div).setState(DBD0530011StateName.完了);
     }
 
     private KokiKoreishaHandler getHandler(KokiKoreishaDiv div) {

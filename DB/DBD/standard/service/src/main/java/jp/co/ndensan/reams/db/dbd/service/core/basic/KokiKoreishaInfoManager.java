@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbc.service.core.basic;
+package jp.co.ndensan.reams.db.dbd.service.core.basic;
 
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.business.core.basic.KokiKoreishaInfo;
-import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT7124KokiKoreishaInfoDac;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.KokiKoreishaInfo;
+import jp.co.ndensan.reams.db.dbd.persistence.db.basic.DbT7124KokiKoreishaInfoDac;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7124KokiKoreishaInfoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
