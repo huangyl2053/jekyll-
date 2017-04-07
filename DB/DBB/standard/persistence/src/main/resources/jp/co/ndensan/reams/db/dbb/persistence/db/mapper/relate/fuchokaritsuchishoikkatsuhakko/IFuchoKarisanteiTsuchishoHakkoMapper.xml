@@ -500,10 +500,10 @@
         FROM 
         "DbT2015KeisangoJohoTemp" AS 計算後情報
         INNER JOIN
-        rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','') AS "Atesaki"
+        rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','','') AS "Atesaki"
         ON "Atesaki"."shikibetsuCode" = 計算後情報."shikibetsuCode"
         INNER JOIN
-        rgua."UaFt250FindAtesaki"('DB','DBB','','true','','','true','true','false','false','') AS "AtesakiDaino"
+        rgua."UaFt250FindAtesaki"('DB','DBB','','true','','','true','true','false','false','','') AS "AtesakiDaino"
         ON "AtesakiDaino"."shikibetsuCode" = 計算後情報."shikibetsuCode"
         AND "AtesakiDaino"."atesakiShubetsu" = '3'
         LEFT JOIN
@@ -1053,10 +1053,10 @@
         FROM 
         rgdb."DbT2015KeisangoJoho" AS 計算後情報
         INNER JOIN
-        rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','') AS "Atesaki"
+        rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','','') AS "Atesaki"
         ON "Atesaki"."shikibetsuCode" = 計算後情報."shikibetsuCode"
         INNER JOIN
-        rgua."UaFt250FindAtesaki"('DB','DBB','','true','','','true','true','false','false','') AS "AtesakiDaino"
+        rgua."UaFt250FindAtesaki"('DB','DBB','','true','','','true','true','false','false','','') AS "AtesakiDaino"
         ON "AtesakiDaino"."shikibetsuCode" = 計算後情報."shikibetsuCode"
         AND "AtesakiDaino"."atesakiShubetsu" = '3'
         LEFT JOIN

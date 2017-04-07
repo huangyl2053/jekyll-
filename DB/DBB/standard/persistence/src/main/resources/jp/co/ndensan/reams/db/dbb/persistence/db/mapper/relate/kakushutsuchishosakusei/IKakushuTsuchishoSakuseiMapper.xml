@@ -126,7 +126,7 @@
         ON 
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode" = "DbT2002Fuka"."shikibetsuCode"    
         INNER JOIN
-        rgua."UaFt250FindAtesaki"('DB','DBB','','true','',#{識別コード},'true','true','true','true','') AS "Atesaki"
+        rgua."UaFt250FindAtesaki"('DB','DBB','','true','',#{識別コード},'true','true','true','true','','') AS "Atesaki"
         ON 
         "Atesaki"."shikibetsuCode" = "DbT2002Fuka"."shikibetsuCode"
         LEFT JOIN

@@ -1886,7 +1886,7 @@
                    )) AS "ShikibetsuTaisho"
               ON "ShikibetsuTaisho"."shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
         LEFT JOIN
-             rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','') AS "Atesaki"
+             rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','','') AS "Atesaki"
               ON "Atesaki"."shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
         LEFT JOIN
             rgca."CaFt703FindNokumi"(NULL, NULL, 'DB', 'DBB', ${科目コード}, NULL, #{処理日}) AS "Nokumi"
@@ -3088,7 +3088,7 @@
                    )) AS "ShikibetsuTaisho"
               ON "ShikibetsuTaisho"."shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
         LEFT JOIN
-             rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','') AS "Atesaki"
+             rgua."UaFt250FindAtesaki"('DB','DBB','','false','','','true','true','false','false','','') AS "Atesaki"
               ON "Atesaki"."shikibetsuCode" = master."dbT2015KeisangoJoho_shikibetsuCode"
         LEFT JOIN
             rgca."CaFt703FindNokumi"(NULL, NULL, 'DB', 'DBB', ${科目コード}, NULL, #{処理日}) AS "Nokumi"

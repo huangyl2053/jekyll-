@@ -57,7 +57,7 @@
                 rgdb."DbV2502KaigoShotoku" AS DbV2502
                 LEFT JOIN rgdb."DbV1001HihokenshaDaicho" AS DbV1001
                 ON DbV1001."shikibetsuCode" = DbV2502."shikibetsuCode"
-                INNER JOIN rgua."UaFt250FindAtesaki"('DB','DBB','',FALSE,'','',TRUE ,TRUE ,TRUE ,TRUE ,'') AS "Atesaki"
+                INNER JOIN rgua."UaFt250FindAtesaki"('DB','DBB','',FALSE,'','',TRUE ,TRUE ,TRUE ,TRUE ,'','') AS "Atesaki"
                 ON "Atesaki"."shikibetsuCode"=DbV2502."shikibetsuCode"
                 LEFT JOIN (
                         SELECT
