@@ -44,7 +44,7 @@ public class InsSetaiinHaakuTmp1Process extends BatchProcessBase<SetaiHakuEntity
 
     @Override
     protected IBatchReader createReader() {
-        ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.未定義);
+        ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先);
         return new BatchDbReader(MAPPERPATH, parameter.toSetaiHaakuMybatisParameter(builder.build()));
     }
 
