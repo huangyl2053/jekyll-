@@ -82,13 +82,13 @@ public class HokaShichosonJyusyochiTokureisyaKanriDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public IKaigoAtenaInfoDiv getCcdKaigoAtenaInfo() {
-        return this.getShikakuKihonJoho().getCcdKaigoAtenaInfo();
+    public ITaJushochiTokureishaKanriDiv getCddTaJushochiTokureishaKanri() {
+        return this.getShikakuKihonJoho().getCddTaJushochiTokureishaKanri();
     }
 
     @JsonIgnore
-    public ITaJushochiTokureishaKanriDiv getCddTaJushochiTokureishaKanri() {
-        return this.getShikakuKihonJoho().getCddTaJushochiTokureishaKanri();
+    public IKaigoAtenaInfoDiv getCcdKaigoAtenaInfo() {
+        return this.getShikakuKihonJoho().getCcdKaigoAtenaInfo();
     }
 
     // </editor-fold>

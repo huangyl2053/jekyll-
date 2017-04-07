@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tennyutenshutsuh
 import java.util.List;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tennyutenshutsuhoryu.TennyushutsuHoryuTaishoshaRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tennyutenshutsuhoryu.TenshutsuHoryuTaishoshaRelateEntity;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 
 /**
  * 転入転出保留対象者管理のMapperクラスです。
@@ -37,4 +38,19 @@ public interface ITennyuTenshutsuHoryuTaishoshaMapper {
      */
     List<TennyushutsuHoryuTaishoshaRelateEntity> get広域保留対象者情報の取得処理();
 
+    /**
+     * 転出保留対象者情報の取得する。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @return TenshutsuHoryuTaishoshaRelateEntity
+     */
+    TenshutsuHoryuTaishoshaRelateEntity get転出保留対象者情報(ShikibetsuCode 識別コード);
+
+    /**
+     * 転入保留対象者情報の取得する。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @return TennyushutsuHoryuTaishoshaRelateEntity
+     */
+    TennyushutsuHoryuTaishoshaRelateEntity get転入保留対象者情報(ShikibetsuCode 識別コード);
 }

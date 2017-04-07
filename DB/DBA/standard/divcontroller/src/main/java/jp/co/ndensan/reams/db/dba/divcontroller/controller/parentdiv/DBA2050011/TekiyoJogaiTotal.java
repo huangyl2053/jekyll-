@@ -6,12 +6,16 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA2050011;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.business.core.tennyutenshutsuhoryu.TennyuHoryuTaisho;
+import jp.co.ndensan.reams.db.dba.definition.message.DbaQuestionMessages;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TekiyoJogaiRireki.TekiyoJogaiRireki.datagridTekiyoJogai_Row;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2050011.DBA2050011StateName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2050011.DBA2050011TransitionEventName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2050011.TekiyoJogaiTotalDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA2050011.TekiyoJogaiTotalHandler;
+import jp.co.ndensan.reams.db.dba.service.core.tennyutenshutsuhoryutaishosha.TennyuTenshutsuHoryuTaishoshaManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.TennyushutsuHoryuTaishosha;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShisetsuNyutaishoRirekiKanri.dgShisetsuNyutaishoRireki_Row;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
@@ -34,6 +38,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 適用除外者管理のクラス。
@@ -108,8 +113,8 @@ public class TekiyoJogaiTotal {
         RealInitialLocker.release(前排他ロックキー);
         return ResponseData.of(requestDiv).forwardWithEventName(DBA2050011TransitionEventName.検索に戻る).respond();
     }
-    
-        /**
+
+    /**
      * 「検索結果一覧に戻る」ボタンを押下して、対象者検索結果一覧画面に戻る。
      *
      * @param requestDiv 適用除外者管理Div
@@ -119,7 +124,6 @@ public class TekiyoJogaiTotal {
         RealInitialLocker.release(前排他ロックキー);
         return ResponseData.of(requestDiv).forwardWithEventName(DBA2050011TransitionEventName.検索一覧).respond();
     }
-    
 
     /**
      * 「適用除外情報を保存する」ボタンを押下します。
@@ -139,14 +143,51 @@ public class TekiyoJogaiTotal {
                         UrQuestionMessages.処理実行の確認.getMessage().evaluate());
                 return ResponseData.of(requestDiv).addMessage(message).respond();
             }
+            if (new RString(UrInformationMessages.保存終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                return ResponseData.of(requestDiv).forwardWithEventName(DBA2050011TransitionEventName.完了).respond();
+            }
+
+            TennyuTenshutsuHoryuTaishoshaManager 転入出保留対象者Manager = InstanceProvider.create(TennyuTenshutsuHoryuTaishoshaManager.class);
+            RString メニューID = ResponseHolder.getMenuID();
+            if (new RString(DbaQuestionMessages.保留対象取消確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+                TennyuHoryuTaisho 転入保留対象者情報 = ViewStateHolder.get(ViewStateKeys.転入保留対象者, TennyuHoryuTaisho.class);
+                TennyushutsuHoryuTaishosha 転入出保留対象者情報 = 転入保留対象者情報.get転入保留対象者();
+                転入出保留対象者Manager.delete転入保留対象者(転入出保留対象者情報);
+                RealInitialLocker.release(前排他ロックキー);
+                if (遷移元メニューID_適用_転入転出保留対象者管理.equals(メニューID)) {
+                    return ResponseData.of(requestDiv).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
+                } else {
+                    return ResponseData.of(requestDiv).setState(DBA2050011StateName.完了状態);
+                }
+            }
+
+            if (new RString(DbaQuestionMessages.保留対象取消確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                    && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                RealInitialLocker.release(前排他ロックキー);
+                if (遷移元メニューID_適用_転入転出保留対象者管理.equals(メニューID)) {
+                    return ResponseData.of(requestDiv).forwardWithEventName(DBA2050011TransitionEventName.完了).respond();
+                } else {
+                    return ResponseData.of(requestDiv).setState(DBA2050011StateName.完了状態);
+                }
+            }
+
             if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
                 一覧データの保存(requestDiv);
-                RealInitialLocker.release(前排他ロックキー);
-                requestDiv.getKanryoMessage().getCcdKaigoKanryoMessage().setSuccessMessage(
-                        new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
-                return ResponseData.of(requestDiv).setState(DBA2050011StateName.完了状態);
+                TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+                ShikibetsuCode 識別コード = key.get識別コード();
+                Message message = 転入出保留対象者Manager.check転入保留対象者(識別コード);
+                if (message != null) {
+                    return ResponseData.of(requestDiv).addMessage(message).respond();
+                } else {
+                    RealInitialLocker.release(前排他ロックキー);
+                    requestDiv.getKanryoMessage().getCcdKaigoKanryoMessage().setSuccessMessage(
+                            new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
+                    return ResponseData.of(requestDiv).setState(DBA2050011StateName.完了状態);
+                }
             }
         }
         return ResponseData.of(requestDiv).respond();

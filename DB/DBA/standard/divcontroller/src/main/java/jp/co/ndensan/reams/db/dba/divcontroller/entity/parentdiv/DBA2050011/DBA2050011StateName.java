@@ -18,7 +18,8 @@ public enum DBA2050011StateName implements IStateEnumerations {
     適用状態("適用状態"),
     解除状態("解除状態"),
     変更状態("変更状態"),
-    完了状態("完了状態");
+    完了状態("完了状態"),
+    転出転入保留対象者管理_適用状態("転出転入保留対象者管理_適用状態");
 
     private final RString name;
 

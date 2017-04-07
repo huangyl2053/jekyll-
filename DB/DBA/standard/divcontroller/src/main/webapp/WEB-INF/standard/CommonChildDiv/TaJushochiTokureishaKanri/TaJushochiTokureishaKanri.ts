@@ -75,7 +75,7 @@ module DBA
                 }
 
                 public Teisei(): void {
-                  this.controls.btnAdd().displayNone = false;
+                  this.controls.btnAdd().displayNone = true;
                   this.controls.btnKakunin().displayNone = false;
                   this.controls.btnTorikeshi().displayNone = false;
                   
@@ -111,7 +111,7 @@ module DBA
                 }
 
                 public Tekiyo(): void {
-                  this.controls.btnAdd().displayNone = false;
+                  this.controls.btnAdd().displayNone = true;
                   this.controls.btnKakunin().displayNone = false;
                   this.controls.btnTorikeshi().displayNone = false;
                   
@@ -121,7 +121,7 @@ module DBA
                   gridSetting.isShowRowState = false;
                   gridSetting.isShowSelectButtonColumn = false;
                   gridSetting.isShowModifyButtonColumn = true;
-                  gridSetting.isShowDeleteButtonColumn = true;
+                  gridSetting.isShowDeleteButtonColumn = false;
                   
                   this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
                   //this.controls.dgJushochiTokureiRireki()._control.afterPropertiesSet();

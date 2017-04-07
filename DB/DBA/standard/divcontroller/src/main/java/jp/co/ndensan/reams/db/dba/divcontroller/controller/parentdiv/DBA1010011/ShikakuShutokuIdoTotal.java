@@ -10,15 +10,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.business.core.tennyutenshutsuhoryu.TennyuHoryuTaisho;
+import jp.co.ndensan.reams.db.dba.definition.message.DbaQuestionMessages;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.DBA1010011StateName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.DBA1010011TransitionEventName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.ShikakuShutokuIdoTotalDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1010011.ShiKaKuSyuToKuIdouTotalHandler;
 import jp.co.ndensan.reams.db.dba.service.core.tajushochito.TaJushochiTokureiChecker;
 import jp.co.ndensan.reams.db.dba.service.core.tekiyojogaisha.TekiyoJogaishaChecker;
+import jp.co.ndensan.reams.db.dba.service.core.tennyutenshutsuhoryutaishosha.TennyuTenshutsuHoryuTaishoshaManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.business.core.TennyushutsuHoryuTaishosha;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
@@ -45,6 +49,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 資格取得異動の対象者情報を表示するためのDivControllerです。
@@ -60,6 +65,7 @@ public class ShikakuShutokuIdoTotal {
     private static final RString SHISETSU = new RString("施設入退所");
     private static final RString 追加 = new RString("追加");
     private static final RString 状態_照会 = new RString("照会");
+    private static final RString UIコンテナID_転入出保留対象者管理 = new RString("DBAUC17001");
 
     private static final RString COMMON_BUTTON_RESEARCH = new RString("btnUpdate");
 
@@ -190,12 +196,50 @@ public class ShikakuShutokuIdoTotal {
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
+
+        if (new RString(UrInformationMessages.保存終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return ResponseData.of(div).forwardWithEventName(DBA1010011TransitionEventName.完了).respond();
+        }
+
+        TennyuTenshutsuHoryuTaishoshaManager 転入出保留対象者Manager = InstanceProvider.create(TennyuTenshutsuHoryuTaishoshaManager.class);
+        RString UIコンテナID = ResponseHolder.getUIContainerId();
+        if (new RString(DbaQuestionMessages.保留対象取消確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            TennyuHoryuTaisho 転入保留対象者情報 = ViewStateHolder.get(ViewStateKeys.転入保留対象者, TennyuHoryuTaisho.class);
+            TennyushutsuHoryuTaishosha 転入出保留対象者情報 = 転入保留対象者情報.get転入保留対象者();
+            転入出保留対象者Manager.delete転入保留対象者(転入出保留対象者情報);
+            releaseLock(div);
+            if (UIコンテナID_転入出保留対象者管理.equals(UIコンテナID)) {
+                return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
+            } else {
+                return ResponseData.of(div).setState(DBA1010011StateName.完了状態);
+            }
+        }
+
+        if (new RString(DbaQuestionMessages.保留対象取消確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            releaseLock(div);
+            if (UIコンテナID_転入出保留対象者管理.equals(UIコンテナID)) {
+                return ResponseData.of(div).forwardWithEventName(DBA1010011TransitionEventName.完了).respond();
+            } else {
+                return ResponseData.of(div).setState(DBA1010011StateName.完了状態);
+            }
+        }
+
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             createHandler(div).save();
+            TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+            ShikibetsuCode 識別コード = key.get識別コード();
+            Message message = 転入出保留対象者Manager.check転入保留対象者(識別コード);
+            if (message != null) {
+                return ResponseData.of(div).addMessage(message).respond();
+            } else {
             releaseLock(div);
             div.getComplete().getCcdComplete().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
             return ResponseData.of(div).setState(DBA1010011StateName.完了状態);
+        }
         }
         return ResponseData.of(div).respond();
     }

@@ -34,7 +34,7 @@ public class TaJushochiTokureishaKanri {
      * @return ResponseData<TaJushochiTokureishaKanriDiv>
      */
     public ResponseData<TaJushochiTokureishaKanriDiv> onClick_BtnAdd(TaJushochiTokureishaKanriDiv requestDiv) {
-        getHandler(requestDiv).onClick_BtnAdd();
+//        getHandler(requestDiv).onClick_BtnAdd();
         return ResponseData.of(requestDiv).respond();
     }
 

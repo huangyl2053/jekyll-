@@ -33,7 +33,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  * @reamsid_L DBA-0200-010 linghuhang
  */
 public class TaJushochiTokureishaKanriDiv extends Panel implements ITaJushochiTokureishaKanriDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-04-04_16-17-53">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-16_09-04-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
