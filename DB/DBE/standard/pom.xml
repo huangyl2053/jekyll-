@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>jp.co.ndensan.reams.db.dbe</groupId>
     <artifactId>dbe</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.17.3</version>
     <packaging>pom</packaging>
     <name>DBE</name>
     <parent>
@@ -15,7 +15,6 @@
     <properties>
         <jp.co.ndensan.reams.dbz.version>1.0-SNAPSHOT</jp.co.ndensan.reams.dbz.version>
         <jp.co.ndensan.reams.dbzVersion>${jp.co.ndensan.reams.dbz.version}</jp.co.ndensan.reams.dbzVersion>
-
     </properties>
     <modules>
         <module>entity</module>
