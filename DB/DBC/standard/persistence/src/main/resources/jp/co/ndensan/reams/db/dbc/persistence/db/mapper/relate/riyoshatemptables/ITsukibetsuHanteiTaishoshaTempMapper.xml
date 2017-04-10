@@ -38,7 +38,7 @@
         "TsukibetsuHanteiTaishoshaTemp"."gekihenKanwaKubun" as "TsukibetsuHanteiTaishoshaTemp_gekihenKanwaKubun"
     </sql>
 
-    <resultMap id="ResultMap_TsukibetsuHanteiTaishoshaTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.HanteiTaishoshaTempEntity" autoMapping="true">
+    <resultMap id="ResultMap_TsukibetsuHanteiTaishoshaTempEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.temptables.HanteiTaishoshaTempEntity" autoMapping="true">
         <result property="taishoNendo" column="TsukibetsuHanteiTaishoshaTemp_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <result property="taishoTsuki" column="TsukibetsuHanteiTaishoshaTemp_taishoTsuki" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="taishoKubun" column="TsukibetsuHanteiTaishoshaTemp_taishoKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

@@ -1,7 +1,7 @@
 ﻿{
- "uiContainerName": "DBCUC20023",
+ "uiContainerName": "DBDUC20023",
  "displayWizard": false,
- "subGyomuCode": "DBC",
+ "subGyomuCode": "DBD",
  "steps": [
   {
    "id": 1,
@@ -25,8 +25,8 @@
      "eventName": "対象者特定",
      "destroy": false,
      "condition": "",
-     "toLayoutSubGyomuCode": "DBC",
-     "toLayoutName": "DBC2000022",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBD2000022",
      "toLayoutTitle": "利用者負担割合即時更正",
      "toState": "照会"
     },
@@ -43,8 +43,8 @@
     {
      "id": "4",
      "type": "ordinal",
-     "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC2000022",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD2000022",
      "layoutTitle": "利用者負担割合即時更正",
      "eventName": "再検索",
      "destroy": true,
@@ -57,8 +57,8 @@
     {
      "id": "5",
      "type": "ordinal",
-     "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC2000022",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD2000022",
      "layoutTitle": "利用者負担割合即時更正",
      "eventName": "検索結果一覧",
      "destroy": true,
@@ -71,8 +71,8 @@
     {
      "id": "6",
      "type": "end",
-     "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC2000022",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD2000022",
      "layoutTitle": "利用者負担割合即時更正",
      "eventName": "終了",
      "destroy": false,

@@ -5,9 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020;
 
-import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc180020.DBC180020ProcessParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.SetainJohoTempEntity;
-import jp.co.ndensan.reams.db.dbc.service.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHantei;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd180020.DBD180020ProcessParameter;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.temptables.SetainJohoTempEntity;
+import jp.co.ndensan.reams.db.dbd.service.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHantei;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -26,7 +26,7 @@ public class SetainTuikaProcess extends BatchProcessBase<SetainJohoTempEntity> {
     private static final RString TABLENAME = new RString("TuikaHanteiTaishoshaTemp");
     private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "riyoshafutanwariaihantei.IRiyoshaFutanwariaiMapper.select世帯員追加");
-    private DBC180020ProcessParameter parameter;
+    private DBD180020ProcessParameter parameter;
     @BatchWriter
     private BatchEntityCreatedTempTableWriter 追加判定対象者Temp;
 

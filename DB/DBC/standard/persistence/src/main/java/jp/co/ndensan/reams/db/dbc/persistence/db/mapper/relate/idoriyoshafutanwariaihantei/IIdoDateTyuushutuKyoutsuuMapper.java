@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.idoriyoshafutanwariaihantei;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc180020.IdoDateTyuushutuKyoutsuuMyBatisParameter;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd180020.IdoDateTyuushutuKyoutsuuMyBatisParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.idoriyoshafutanwariaihantei.IdoRiyoshaDateEntity;
 
 /**

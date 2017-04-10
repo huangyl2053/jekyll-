@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.dbc180030.ShoriHizukeKanriTblUpdateProcess;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180030.DBC180030_KanendoRiyoshaFutanwariaiHanteiParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD180030.DBD180030_KanendoRiyoshaFutanwariaiHanteiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.kanendoriyoshafutanwariaihantei.KanendoRiyoshaFutanwariaiHanteiProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBC-4940-030 wangrenze
  */
-public class DBC180030_KanendoRiyoshaFutanwariaiHantei extends BatchFlowBase<DBC180030_KanendoRiyoshaFutanwariaiHanteiParameter> {
+public class DBC180030_KanendoRiyoshaFutanwariaiHantei extends BatchFlowBase<DBD180030_KanendoRiyoshaFutanwariaiHanteiParameter> {
 
     private static final RString 異動データ抽出_ID = new RString("DBC180021_RiyoshaFutanwariaiHanteiIdoDataSelectSub");
     private static final String 異動データ抽出 = "idodatetyuushutukyoutsuu";

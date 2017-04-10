@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC2000012;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180020.DBC180020_IdoRiyoshaFutanwariaiHanteiParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD180020.DBD180020_IdoRiyoshaFutanwariaiHanteiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcQuestionMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000012.DBC2000012StateName;
@@ -92,9 +92,9 @@ public class IdoRiyoshaFutanwariaiHantei {
      *
      * @return ResponseData
      */
-    public ResponseData<DBC180020_IdoRiyoshaFutanwariaiHanteiParameter> onClick_btnBatchRegister(
+    public ResponseData<DBD180020_IdoRiyoshaFutanwariaiHanteiParameter> onClick_btnBatchRegister(
             IdoRiyoshaFutanwariaiHanteiDiv div) {
-        DBC180020_IdoRiyoshaFutanwariaiHanteiParameter parameter = getHandler(div).バッチ起動処理();
+        DBD180020_IdoRiyoshaFutanwariaiHanteiParameter parameter = getHandler(div).バッチ起動処理();
         return ResponseData.of(parameter).respond();
     }
 

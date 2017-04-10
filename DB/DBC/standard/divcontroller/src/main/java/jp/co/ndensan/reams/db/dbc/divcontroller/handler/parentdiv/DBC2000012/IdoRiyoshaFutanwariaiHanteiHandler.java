@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2000012;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180020.DBC180020_IdoRiyoshaFutanwariaiHanteiParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD180020.DBD180020_IdoRiyoshaFutanwariaiHanteiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000012.IdoRiyoshaFutanwariaiHanteiDiv;
 import jp.co.ndensan.reams.db.dbx.business.core.basic.ShoriDateKanri;
@@ -208,8 +208,8 @@ public class IdoRiyoshaFutanwariaiHanteiHandler {
      *
      * @return DBC180020_IdoRiyoshaFutanwariaiHanteiParameter
      */
-    public DBC180020_IdoRiyoshaFutanwariaiHanteiParameter バッチ起動処理() {
-        DBC180020_IdoRiyoshaFutanwariaiHanteiParameter parameter = new DBC180020_IdoRiyoshaFutanwariaiHanteiParameter();
+    public DBD180020_IdoRiyoshaFutanwariaiHanteiParameter バッチ起動処理() {
+        DBD180020_IdoRiyoshaFutanwariaiHanteiParameter parameter = new DBD180020_IdoRiyoshaFutanwariaiHanteiParameter();
         FlexibleYear 画面_年度 = new FlexibleYear(div.getDdlNendo().getSelectedKey());
         RString 月日 = DbBusinessConfig.get(ConfigNameDBC.利用者負担割合判定管理_年度終了月日, RDate.getNowDate(),
                 SubGyomuCode.DBC介護給付);

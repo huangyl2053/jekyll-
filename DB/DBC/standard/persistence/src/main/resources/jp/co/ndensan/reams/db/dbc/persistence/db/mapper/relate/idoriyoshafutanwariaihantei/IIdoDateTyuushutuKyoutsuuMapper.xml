@@ -5,7 +5,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.idoriyoshafutanwariaihantei.IIdoDateTyuushutuKyoutsuuMapper">
                     
     <select resultOrdered="true" id="select受給者台帳異動"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc180020.IdoDateTyuushutuKyoutsuuMyBatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd180020.IdoDateTyuushutuKyoutsuuMyBatisParameter"
             resultMap="resultMap_IdoData" fetchSize="500">
         <include refid="selectJukyushaDaichoIdo" />
     </select>
@@ -81,7 +81,7 @@
     </sql>
     
     <select resultOrdered="true" id="select総合事業対象者異動"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc180020.IdoDateTyuushutuKyoutsuuMyBatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd180020.IdoDateTyuushutuKyoutsuuMyBatisParameter"
             resultMap="resultMap_IdoData" fetchSize="500">
         <include refid="selectSogoJigyoTaishoshaIdo" />
     </select>
@@ -159,7 +159,7 @@
     
     
     <select resultOrdered="true" id="select被保険者台帳異動"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc180020.IdoDateTyuushutuKyoutsuuMyBatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd180020.IdoDateTyuushutuKyoutsuuMyBatisParameter"
             resultMap="resultMap_IdoData" fetchSize="500">
         <include refid="selectHihokenshaDaichoIdo" />
     </select>
@@ -233,7 +233,7 @@
     
     
     <select resultOrdered="true" id="select介護所得異動"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc180020.IdoDateTyuushutuKyoutsuuMyBatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd180020.IdoDateTyuushutuKyoutsuuMyBatisParameter"
             resultMap="resultMap_IdoData" fetchSize="500">
         <include refid="selectKaigoShotokuIdo" />
     </select>
@@ -308,7 +308,7 @@
     </sql>
     
      <select resultOrdered="true" id="select宛名識別対象異動"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc180020.IdoDateTyuushutuKyoutsuuMyBatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd180020.IdoDateTyuushutuKyoutsuuMyBatisParameter"
             resultMap="resultMap_IdoData" fetchSize="500">
         <include refid="selectShikibetsuTaishoIdo" />
     </select>
@@ -366,7 +366,7 @@
     
     
     <select resultOrdered="true" id="select生活保護受給者異動"
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc180020.IdoDateTyuushutuKyoutsuuMyBatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd180020.IdoDateTyuushutuKyoutsuuMyBatisParameter"
             resultMap="resultMap_IdoData" fetchSize="500">
         <include refid="selectSeikatsuHogoJukyushaIdo" />
     </select>

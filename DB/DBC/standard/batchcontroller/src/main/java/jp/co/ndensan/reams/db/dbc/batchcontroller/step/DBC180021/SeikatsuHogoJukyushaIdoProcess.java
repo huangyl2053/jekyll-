@@ -6,9 +6,9 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180021;
 
 import jp.co.ndensan.reams.db.dbc.business.core.idoriyoshafutanwariaihantei.HanteiTaishoshaTempEditor;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc180020.IdoDateTyuushutuKyoutsuuProcessParameter;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd180020.IdoDateTyuushutuKyoutsuuProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.idoriyoshafutanwariaihantei.IdoRiyoshaDateEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.HanteiTaishoshaTempEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.temptables.HanteiTaishoshaTempEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;

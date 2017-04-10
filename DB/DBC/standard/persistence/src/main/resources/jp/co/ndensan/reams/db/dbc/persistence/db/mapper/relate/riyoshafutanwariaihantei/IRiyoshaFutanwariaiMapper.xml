@@ -4,7 +4,7 @@
 <mapper namespace="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshafutanwariaihantei.IRiyoshaFutanwariaiMapper">
     <!--処理詳細2(1)世帯員把握入力の作成-->
     <select resultOrdered="true" id="select世帯員把握入力" 
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc180020.DBC180020MyBatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd180020.DBD180020MyBatisParameter"
             resultMap="ResultMap_SetaiHaakuTempEntity"
             fetchSize="500">
         SELECT
@@ -25,7 +25,7 @@
     </select>
     <!--処理詳細2(3)世帯員情報Tempの作成-->
     <select resultOrdered="true" id="select世帯員情報" 
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc180020.DBC180020MyBatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd180020.DBD180020MyBatisParameter"
             resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.ISetainJohoTempMapper.ResultMap_SetainJohoTempEntity"
             fetchSize="500">
         SELECT
@@ -75,7 +75,7 @@
     </select>
     <!--処理詳細2(4)世帯員（利用者負担割合・本人）追加-->
     <select resultOrdered="true" id="select世帯員追加" 
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc180020.DBC180020MyBatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd180020.DBD180020MyBatisParameter"
             resultMap="ResultMap_TukiHanteiTaishoshaTemp"
             fetchSize="500">
         SELECT
@@ -118,7 +118,7 @@
     </select>
     <!--処理詳細3判定対象者Tempの追加-->
     <select resultOrdered="true" id="select判定対象者追加" 
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc180020.DBC180020MyBatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd180020.DBD180020MyBatisParameter"
             resultMap="ResultMap_HanteiTaishoshaDaichoEntity"
             fetchSize="500">
         SELECT 
@@ -308,7 +308,7 @@
     </select>
     <!--処理詳細5生活保護該当情報Tempの作成-->
     <select resultOrdered="true" id="select生活保護該当情報作成" 
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc180020.DBC180020MyBatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd180020.DBD180020MyBatisParameter"
             resultMap="ResultMap_SeikatsuHogoGaitoJohoTemp"
             fetchSize="500">
         SELECT
@@ -330,7 +330,7 @@
     </select>
     <!-- 処理詳細4(4)月別判定対象者Tempの作成 -->
     <select resultOrdered="true" id="select月別判定対象者作成" 
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc180020.DBC180020MyBatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd180020.DBD180020MyBatisParameter"
             resultMap="ResultMap_TsukibetsuHanteiTaishoshaDaichoEntity"
             fetchSize="500">
         SELECT
@@ -511,7 +511,7 @@
     </select>
     <!-- 処理詳細4(4)月別判定対象者Tempの作成二回目-->
     <select resultOrdered="true" id="select月別判定対象者作成二回目" 
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc180020.DBC180020MyBatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd180020.DBD180020MyBatisParameter"
             resultMap="ResultMap_TsukibetsuHanteiTaishoshaDaichoEntity"
             fetchSize="500">
         SELECT
@@ -693,7 +693,7 @@
 
     <!--処理詳細6負担割合判定（年次）-->
     <select resultOrdered="true" id="select負担割合判定年次" 
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc180020.DBC180020MyBatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd180020.DBD180020MyBatisParameter"
             resultMap="ResultMap_FutanWariaiHanteiJohoEntity"
             fetchSize="500">
         SELECT
@@ -722,7 +722,7 @@
     </select>
     <!--処理詳細7負担割合判定（月次）-->
     <select resultOrdered="true" id="select負担割合判定月次" 
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc180020.DBC180020MyBatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd180020.DBD180020MyBatisParameter"
             resultMap="ResultMap_FutanWariaiHanteiJohoEntity"
             fetchSize="500">
         SELECT
@@ -753,7 +753,7 @@
 
     <!--処理詳細8負担割合判定マージ-->
     <select resultOrdered="true" id="select負担割合判定マージ" 
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc180020.DBC180020MyBatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd180020.DBD180020MyBatisParameter"
             resultMap="ResultMap_RiyoshaFutanWariaiTempUnionEntity"
             fetchSize="500">
         SELECT
@@ -891,7 +891,7 @@
     </select>
     <!--処理詳細9 月別負担割合（新）Tempの作成-->
     <select resultOrdered="true" id="select月別負担割合作成新" 
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc180020.DBC180020MyBatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd180020.DBD180020MyBatisParameter"
             resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.ITsukibetsuFutanWariaiTempMapper.ResultMap_TsukibetsuFutanWariaiTempEntity"
             fetchSize="500">
         SELECT
@@ -965,7 +965,7 @@
     </select>
     <!--処理詳細10 月別負担割合（現）Tempの作成-->
     <select resultOrdered="true" id="select月別負担割合作成現" 
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc180020.DBC180020MyBatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd180020.DBD180020MyBatisParameter"
             resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.ITsukibetsuFutanWariaiTempMapper.ResultMap_TsukibetsuFutanWariaiTempEntity"
             fetchSize="500">
         SELECT		
@@ -1108,7 +1108,7 @@
     </select>
     <!--処理詳細11(1)利用者負担割合、利用者負担割合明細-->												
     <select resultOrdered="true" id="select負担割合と明細" 
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc180020.DBC180020MyBatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd180020.DBD180020MyBatisParameter"
             resultMap="ResultMap_FutanWariaiRelateEntity"
             fetchSize="500">
         SELECT
@@ -1154,7 +1154,7 @@
 
     <!--処理詳細12 利用者負担割合根拠の登録-->
     <select resultOrdered="true" id="select負担割合根拠" 
-            parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc180020.DBC180020MyBatisParameter"
+            parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd180020.DBD180020MyBatisParameter"
             resultMap="ResultMap_DbT3115SakuseiEntity"
             fetchSize="500">
         SELECT
@@ -1459,7 +1459,7 @@
        DROP TABLE "TmpSetaiShotoku"  
     </delete>
     
-    <resultMap id="ResultMap_FutanWariaiRelateEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.FutanWariaiRelateEntity" autoMapping="true">
+    <resultMap id="ResultMap_FutanWariaiRelateEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.FutanWariaiRelateEntity" autoMapping="true">
         <id  column="RiyoshaFutanWariaiMeisaiTemp_hihokenshaNo"  />
         <id  column="RiyoshaFutanWariaiMeisaiTemp_edaNo"  />
         <association property="利用者負担割合明細" 
@@ -1471,12 +1471,12 @@
     </resultMap>
      
     
-    <resultMap id="ResultMap_HihokenshaNoEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.HihokenshaNoEntity" autoMapping="true">
+    <resultMap id="ResultMap_HihokenshaNoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.HihokenshaNoEntity" autoMapping="true">
         <id property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
         <result property="idoShubetsu" column="idoShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
 
-    <resultMap id="ResultMap_DbT3115SakuseiEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.DbT3115SakuseiEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT3115SakuseiEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.DbT3115SakuseiEntity" autoMapping="true">
         <id property="被保険者番号"  column="dbT3115_hihokenshaNo"
             typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
         <id property="年度"  column="dbT3115_nendo"
@@ -1488,7 +1488,7 @@
         <result property="世帯員所得履歴番号" column="dbT3115_motoRirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.DecimalTypeHandler" />    
     </resultMap>
 
-    <resultMap id="ResultMap_FutanWariaiHanteiJohoEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.FutanWariaiHanteiJohoEntity" autoMapping="true">
+    <resultMap id="ResultMap_FutanWariaiHanteiJohoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.FutanWariaiHanteiJohoEntity" autoMapping="true">
         <id column="HanteiTaishoshaTemp_hihokenshaNo"  />
         <id column="HanteiTaishoshaTemp_taishoNendo" />
         <id column="HanteiTaishoshaTemp_taishoTsuki"  />
@@ -1501,12 +1501,12 @@
                 typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <association property="判定対象者" 
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.IHanteiTaishoshaTempMapper.ResultMap_HanteiTaishoshaTempEntity" />
-        <collection property="生活保護該当情報" ofType="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.SeikatsuHogoGaitoJohoTempEntity"
+        <collection property="生活保護該当情報" ofType="jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.temptables.SeikatsuHogoGaitoJohoTempEntity"
                     resultMap="ResultMap_SeikatsuHogoGaitoJohoTemp" />
-        <collection property="世帯員情報Entity"  ofType="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.SetainJohoRelateEntity"
+        <collection property="世帯員情報Entity"  ofType="jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.SetainJohoRelateEntity"
                     resultMap="ResultMap_SetainJohoRelateEntity" />
     </resultMap>
-    <resultMap id="ResultMap_SetainJohoRelateEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.SetainJohoRelateEntity" autoMapping="true">
+    <resultMap id="ResultMap_SetainJohoRelateEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.SetainJohoRelateEntity" autoMapping="true">
         <id column="SetainJohoTemp_taishoTsuki"  />
         <id column="SetainJohoTemp_setaiCode"  />
         <id column="SetainJohoTemp_shikibetsuCode"  />
@@ -1517,7 +1517,7 @@
                      resultMap="ResultMap_DbV2512KaigoShotokuNewest" />
     </resultMap>
 
-    <resultMap id="ResultMap_SeikatsuHogoGaitoJohoTemp" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.SeikatsuHogoGaitoJohoTempEntity" autoMapping="true">
+    <resultMap id="ResultMap_SeikatsuHogoGaitoJohoTemp" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.temptables.SeikatsuHogoGaitoJohoTempEntity" autoMapping="true">
         <id property="shikibetsuCode" column="SeikatsuHogoGaitoJohoTemp_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <id property="jukyuKaishiYMD" column="SeikatsuHogoGaitoJohoTemp_jukyuKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="taishoNendo" column="SeikatsuHogoGaitoJohoTemp_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -1567,7 +1567,7 @@
         #{対象年度} as "setaiHaaku_taishoNendo",
         "DbT1001HihokenshaDaicho"."jushochiTokureiFlag"as "setaiHaaku_jushochiTokureiFlag"
     </sql>
-    <resultMap id="ResultMap_SetaiHaakuTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.SetaiHaakuEntity" autoMapping="true">
+    <resultMap id="ResultMap_SetaiHaakuTempEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.temptables.SetaiHaakuEntity" autoMapping="true">
         <result property="hihokenshaNo" column="setaiHaaku_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="shikibetsuCode" column="setaiHaaku_shikibetsuCode1" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="shikibetsuCode2" column="setaiHaaku_shikibetsuCode2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
@@ -1577,7 +1577,7 @@
         <result property="jushochiTokureiFlag" column="setaiHaaku_jushochiTokureiFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
-    <resultMap id="ResultMap_TukiHanteiTaishoshaTemp" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.SetainJohoTempEntity" autoMapping="true">
+    <resultMap id="ResultMap_TukiHanteiTaishoshaTemp" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.temptables.SetainJohoTempEntity" autoMapping="true">
         <id property="hihokenshaNo" column="SetainJohoTemp_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="taishoNendo" column="SetainJohoTemp_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
     </resultMap>
@@ -1626,7 +1626,7 @@
     </sql>
     
     <resultMap id="ResultMap_RiyoshaFutanWariaiTempUnionEntity" 
-               type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.RiyoshaFutanWariaiTempUnionEntity" autoMapping="true">
+               type="jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.RiyoshaFutanWariaiTempUnionEntity" autoMapping="true">
         <id column="RiyoshaFutanWariaiMeisaiTemp_nendo" />
         <id column="RiyoshaFutanWariaiMeisaiTemp_hihokenshaNo" />
         <id column="RiyoshaFutanWariaiMeisaiTemp_edaNo" />
@@ -1637,7 +1637,7 @@
                      resultMap="jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshatemptables.IRiyoshaFutanWariaiKonkyoTempMapper.ResultMap_RiyoshaFutanWariaiKonkyoTempEntity" />
     </resultMap>
 
-    <resultMap id="ResultMap_TsukibetsuHanteiTaishoshaDaichoEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.TsukibetsuHanteiTaishoshaDaichoEntity" autoMapping="true">
+    <resultMap id="ResultMap_TsukibetsuHanteiTaishoshaDaichoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.TsukibetsuHanteiTaishoshaDaichoEntity" autoMapping="true">
         <id property="被保険者番号" column="hanteiTaishoshaTemp_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler" />
         <result property="異動種別" column="hanteiTaishoshaTemp_idoShubetsu" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <collection property="被保険者台帳"  ofType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity"
@@ -1652,7 +1652,7 @@
                     resultMap="jp.co.ndensan.reams.db.dbd.persistence.db.mapper.basic.IDbT3105SogoJigyoTaishoshaMapper.ResultMap_DbT3105SogoJigyoTaishoshaEntity" />
     </resultMap>
 
-    <resultMap id="ResultMap_HanteiTaishoshaDaichoEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.HanteiTaishoshaDaichoEntity" autoMapping="true">
+    <resultMap id="ResultMap_HanteiTaishoshaDaichoEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.HanteiTaishoshaDaichoEntity" autoMapping="true">
         <id column="SetainJohoTemp_hihokenshaNo"  />
         <association property="追加判定対象者" 
                      resultMap="ResultMap_TukiHanteiTaishoshaTemp" />

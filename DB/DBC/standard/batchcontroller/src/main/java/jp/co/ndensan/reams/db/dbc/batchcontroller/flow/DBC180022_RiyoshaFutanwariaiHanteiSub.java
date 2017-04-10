@@ -8,10 +8,10 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180022.FutanWariaiHanteiNenziProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180022.HanteiTaishoshaTuikaProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180022.SeikatsuHogoGaitoJohoTempProcess;
-import jp.co.ndensan.reams.db.dbc.business.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHanteiUtil;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180022.DBC180022_RiyoshaFutanwariaiHanteiSubParameter;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc180020.DBC180020ProcessParameter;
-import jp.co.ndensan.reams.db.dbc.service.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHantei;
+import jp.co.ndensan.reams.db.dbd.business.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHanteiUtil;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD180022.DBD180022_RiyoshaFutanwariaiHanteiSubParameter;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd180020.DBD180020ProcessParameter;
+import jp.co.ndensan.reams.db.dbd.service.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHantei;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RYear;
  *
  * @reamsid_L DBC-4950-030 liuyang
  */
-public class DBC180022_RiyoshaFutanwariaiHanteiSub extends BatchFlowBase<DBC180022_RiyoshaFutanwariaiHanteiSubParameter> {
+public class DBC180022_RiyoshaFutanwariaiHanteiSub extends BatchFlowBase<DBD180022_RiyoshaFutanwariaiHanteiSubParameter> {
 
     private static final int NUM12 = 12;
     private static final RString 年次 = new RString("1");
@@ -39,9 +39,9 @@ public class DBC180022_RiyoshaFutanwariaiHanteiSub extends BatchFlowBase<DBC1800
     private static final String FLOW_WORK51 = "work51";
     private static final String FLOW_WORK6 = "work6";
     private static final String FLOW_WORK7 = "work7";
-    private DBC180020ProcessParameter prm;
-    private DBC180020ProcessParameter loopPrm;
-    private DBC180020ProcessParameter processPrm;
+    private DBD180020ProcessParameter prm;
+    private DBD180020ProcessParameter loopPrm;
+    private DBD180020ProcessParameter processPrm;
     private RiyoshaFutanWariaiHanteiUtil util;
     private RiyoshaFutanWariaiHantei service;
     private RString shoriKubun;

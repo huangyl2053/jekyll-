@@ -14,11 +14,11 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.SetainHakunyury
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.SetainJohoSakuseiProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.TsukibetsuHanteiTaishoshaTempNigaimeProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.TsukibetsuHanteiTaishoshaTempProcess;
-import jp.co.ndensan.reams.db.dbc.business.core.riyoshafutanwariaihantei.HanteiKijunYMDInstance;
-import jp.co.ndensan.reams.db.dbc.business.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHanteiUtil;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180024.DBC180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishoshaParameter;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc180020.DBC180020ProcessParameter;
-import jp.co.ndensan.reams.db.dbc.service.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHantei;
+import jp.co.ndensan.reams.db.dbd.business.core.riyoshafutanwariaihantei.HanteiKijunYMDInstance;
+import jp.co.ndensan.reams.db.dbd.business.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHanteiUtil;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD180024.DBD180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishoshaParameter;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd180020.DBD180020ProcessParameter;
+import jp.co.ndensan.reams.db.dbd.service.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHantei;
 import jp.co.ndensan.reams.db.dbz.definition.batchprm.DBB002001.DBB002001_SetaiinHaakuParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -33,7 +33,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RYear;
  * @reamsid_L DBC-4950-030 liuyang
  */
 public class DBC180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishosha
-        extends BatchFlowBase<DBC180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishoshaParameter> {
+        extends BatchFlowBase<DBD180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishoshaParameter> {
 
     private static final String 判定基準日設定 = "hanteiKijunbiSetteiProcess";
     private static final String CLEAR世帯員把握入力 = "clearSetainHakuNyuryokuTempProcess";
@@ -49,7 +49,7 @@ public class DBC180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishosha
     private static final String 月別判定対象者の作成二回目 = "tsukibetsuHanteiTaishoshaTempNigaimeProcess";
 
     private int kijunbiSize;
-    private DBC180020ProcessParameter loopProcessPrm;
+    private DBD180020ProcessParameter loopProcessPrm;
     private RiyoshaFutanWariaiHanteiUtil util;
     private RiyoshaFutanWariaiHantei service;
 

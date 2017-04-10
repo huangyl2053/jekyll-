@@ -6,12 +6,12 @@
 package jp.co.ndensan.reams.db.dbc.service.report.futanwariaisho;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.business.report.futanwariaisho.FutanWariaiShoDivParameter;
-import jp.co.ndensan.reams.db.dbc.business.report.futanwariaisho.FutanWariaiShoProperty;
-import jp.co.ndensan.reams.db.dbc.business.report.futanwariaisho.FutanWariaiShoReport;
+import jp.co.ndensan.reams.db.dbd.business.report.futanwariaisho.FutanWariaiShoDivParameter;
+import jp.co.ndensan.reams.db.dbd.business.report.futanwariaisho.FutanWariaiShoProperty;
+import jp.co.ndensan.reams.db.dbd.business.report.futanwariaisho.FutanWariaiShoReport;
 import jp.co.ndensan.reams.db.dbc.definition.reportid.ReportIdDBC;
-import jp.co.ndensan.reams.db.dbc.entity.report.source.futanwariaisho.FutanWariaiShoSource;
-import jp.co.ndensan.reams.db.dbc.service.core.futanwariaisho.FutanWariaisho;
+import jp.co.ndensan.reams.db.dbd.entity.report.source.futanwariaisho.FutanWariaiShoSource;
+import jp.co.ndensan.reams.db.dbd.service.core.futanwariaisho.FutanWariaisho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;

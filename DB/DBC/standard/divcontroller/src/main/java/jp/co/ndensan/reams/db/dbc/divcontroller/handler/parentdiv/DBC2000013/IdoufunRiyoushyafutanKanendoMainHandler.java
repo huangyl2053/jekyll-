@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.handler.parentdiv.DBC2000013;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180030.DBC180030_KanendoRiyoshaFutanwariaiHanteiParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD180030.DBD180030_KanendoRiyoshaFutanwariaiHanteiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.message.DbcErrorMessages;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000013.IdoufunRiyoushyafutanKanendoDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBC;
@@ -119,14 +119,14 @@ public class IdoufunRiyoushyafutanKanendoMainHandler {
      *
      * @return parameter　DBC180030_KanendoRiyoshaFutanwariaiHanteiParameter
      */
-    public DBC180030_KanendoRiyoshaFutanwariaiHanteiParameter setParameter() {
+    public DBD180030_KanendoRiyoshaFutanwariaiHanteiParameter setParameter() {
         FlexibleDate date = new FlexibleDate(dateTime.getDate().toDateString());
         FlexibleYear 処理年度 = NUM_SEVEN < date.getMonthValue() ? date.getYear() : date.getYear().minusYear(NUM_ONE);
         RDateTime 抽出開始日時 = RDateTime.convertFrom(div.getTxtKonkaiKaishiDate().getValue(), div.getTxtKonkaiKaishiTime().getValue());
         RDateTime 抽出終了日時 = RDateTime.convertFrom(div.getTxtKonkaiShuryoDate().getValue(), div.getTxtKonkaiShuryoTime().getValue());
         RString 月日 = DbBusinessConfig.get(ConfigNameDBC.利用者負担割合判定管理_年度終了月日, RDate.getNowDate(), SubGyomuCode.DBC介護給付);
         RString 年月日 = 処理年度.plusYear(NUM_ONE).toDateString().concat(月日);
-        DBC180030_KanendoRiyoshaFutanwariaiHanteiParameter parameter = new DBC180030_KanendoRiyoshaFutanwariaiHanteiParameter();
+        DBD180030_KanendoRiyoshaFutanwariaiHanteiParameter parameter = new DBD180030_KanendoRiyoshaFutanwariaiHanteiParameter();
         parameter.set処理日時(dateTime);
         parameter.set基準日(div.getTxtKonkaiShuryoDate().getValue());
         parameter.set対象年度(処理年度);

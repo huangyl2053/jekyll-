@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.flow;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180011.FutanWariaiHanteiIchiranProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180011.KonkaiFutanWariaiIchiranTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180011.MaeFutanWariaiHanteiIchiranTempProcess;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180011.DBC180011_RiyoshaFutanwariaiHanteiIchiranSubParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD180011.DBD180011_RiyoshaFutanwariaiHanteiIchiranSubParameter;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.futanwariaihanteiichiran.FutanWariaiHanteiIchiranProcessParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
  *
  * @reamsid_L DBC-4980-031 yuanzhenxia
  */
-public class DBC180011_RiyoshaFutanwariaiHanteiIchiranSub extends BatchFlowBase<DBC180011_RiyoshaFutanwariaiHanteiIchiranSubParameter> {
+public class DBC180011_RiyoshaFutanwariaiHanteiIchiranSub extends BatchFlowBase<DBD180011_RiyoshaFutanwariaiHanteiIchiranSubParameter> {
 
     private static final String 今回利用者負担割合判定TEMPへ登録する = "creatKonkaiFutanWariaiIchiranTemp";
     private static final String 前回利用者負担割合判定TEMPへ登録する = "creatMaeFutanWariaiIchiranTemp";

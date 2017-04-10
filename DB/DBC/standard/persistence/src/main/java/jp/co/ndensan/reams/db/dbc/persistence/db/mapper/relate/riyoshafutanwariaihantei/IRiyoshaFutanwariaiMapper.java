@@ -6,22 +6,22 @@
 package jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.riyoshafutanwariaihantei;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc180020.DBC180020MyBatisParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.DbT3115SakuseiEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.FutanWariaiHanteiJohoEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.FutanWariaiRelateEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.HanteiTaishoshaDaichoEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.HihokenshaNoEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.RiyoshaFutanWariaiTempUnionEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.TsukibetsuHanteiTaishoshaDaichoEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.HanteiTaishoshaTempEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.KonkaiRiyoshaFutanWariaiJohoTempEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.RiyoshaFutanWariaiMeisaiTempEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.SeikatsuHogoGaitoJohoTempEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.SetaiHaakuEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.SetaiShotokuEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.SetainJohoTempEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.TsukibetsuFutanWariaiTempEntity;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd180020.DBD180020MyBatisParameter;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.DbT3115SakuseiEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.FutanWariaiHanteiJohoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.FutanWariaiRelateEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.HanteiTaishoshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.HihokenshaNoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.RiyoshaFutanWariaiTempUnionEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.TsukibetsuHanteiTaishoshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.temptables.HanteiTaishoshaTempEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.temptables.KonkaiRiyoshaFutanWariaiJohoTempEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.temptables.RiyoshaFutanWariaiMeisaiTempEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.temptables.SeikatsuHogoGaitoJohoTempEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.temptables.SetaiHaakuEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.temptables.SetaiShotokuEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.temptables.SetainJohoTempEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.temptables.TsukibetsuFutanWariaiTempEntity;
 
 /**
  * 利用者負担割合DB検索用のエンティティです。
@@ -38,7 +38,7 @@ public interface IRiyoshaFutanwariaiMapper {
      *
      * @return 世帯員把握入力Temp
      */
-    List<SetaiHaakuEntity> select世帯員把握入力(DBC180020MyBatisParameter parameter);
+    List<SetaiHaakuEntity> select世帯員把握入力(DBD180020MyBatisParameter parameter);
 
     /**
      * 世帯員情報Tempの作成。<br/ >
@@ -47,7 +47,7 @@ public interface IRiyoshaFutanwariaiMapper {
      * @param parameter DBC180020MyBatisParameter
      * @return 世帯員把握入力Temp
      */
-    List<SetainJohoTempEntity> select世帯員情報(DBC180020MyBatisParameter parameter);
+    List<SetainJohoTempEntity> select世帯員情報(DBD180020MyBatisParameter parameter);
 
     /**
      * 世帯員情報Tempの作成。<br/ >
@@ -56,7 +56,7 @@ public interface IRiyoshaFutanwariaiMapper {
      * @param parameter DBC180020MyBatisParameter
      * @return 世帯員把握入力Temp
      */
-    List<SetainJohoTempEntity> select世帯員追加(DBC180020MyBatisParameter parameter);
+    List<SetainJohoTempEntity> select世帯員追加(DBD180020MyBatisParameter parameter);
 
     /**
      * 判定対象者の追加。<br/ >
@@ -65,7 +65,7 @@ public interface IRiyoshaFutanwariaiMapper {
      * @param parameter DBC180020MyBatisParameter
      * @return List<HanteiTaishoshaDaichoEntity>
      */
-    List<HanteiTaishoshaDaichoEntity> select判定対象者追加(DBC180020MyBatisParameter parameter);
+    List<HanteiTaishoshaDaichoEntity> select判定対象者追加(DBD180020MyBatisParameter parameter);
 
     /**
      * 生活保護該当情報の作成<br/ >
@@ -74,7 +74,7 @@ public interface IRiyoshaFutanwariaiMapper {
      * @param parameter DBC180020MyBatisParameter
      * @return List<SeikatsuHogoGaitoJohoTempEntity>
      */
-    List<SeikatsuHogoGaitoJohoTempEntity> select生活保護該当情報作成(DBC180020MyBatisParameter parameter);
+    List<SeikatsuHogoGaitoJohoTempEntity> select生活保護該当情報作成(DBD180020MyBatisParameter parameter);
 
     /**
      * 月別判定対象者Tempの作成<br/ >
@@ -83,7 +83,7 @@ public interface IRiyoshaFutanwariaiMapper {
      * @param parameter DBC180020MyBatisParameter
      * @return List<TsukibetsuHanteiTaishoshaDaichoEntity>
      */
-    List<TsukibetsuHanteiTaishoshaDaichoEntity> select月別判定対象者作成(DBC180020MyBatisParameter parameter);
+    List<TsukibetsuHanteiTaishoshaDaichoEntity> select月別判定対象者作成(DBD180020MyBatisParameter parameter);
 
     /**
      * 月別判定対象者Tempの作成二回目<br/ >
@@ -92,7 +92,7 @@ public interface IRiyoshaFutanwariaiMapper {
      * @param parameter DBC180020MyBatisParameter
      * @return List<TsukibetsuHanteiTaishoshaDaichoEntity>
      */
-    List<TsukibetsuHanteiTaishoshaDaichoEntity> select月別判定対象者作成二回目(DBC180020MyBatisParameter parameter);
+    List<TsukibetsuHanteiTaishoshaDaichoEntity> select月別判定対象者作成二回目(DBD180020MyBatisParameter parameter);
 
     /**
      * 負担割合判定年次の作成<br/ >
@@ -101,7 +101,7 @@ public interface IRiyoshaFutanwariaiMapper {
      * @param parameter DBC180020MyBatisParameter
      * @return List<FutanWariaiHanteiJohoEntity>
      */
-    List<FutanWariaiHanteiJohoEntity> select負担割合判定年次(DBC180020MyBatisParameter parameter);
+    List<FutanWariaiHanteiJohoEntity> select負担割合判定年次(DBD180020MyBatisParameter parameter);
 
     /**
      * 負担割合判定月次の作成<br/ >
@@ -110,7 +110,7 @@ public interface IRiyoshaFutanwariaiMapper {
      * @param parameter DBC180020MyBatisParameter
      * @return List<FutanWariaiHanteiJohoEntity>
      */
-    List<FutanWariaiHanteiJohoEntity> select負担割合判定月次(DBC180020MyBatisParameter parameter);
+    List<FutanWariaiHanteiJohoEntity> select負担割合判定月次(DBD180020MyBatisParameter parameter);
 
     /**
      * 負担割合判定マージの作成<br/ >
@@ -119,7 +119,7 @@ public interface IRiyoshaFutanwariaiMapper {
      * @param parameter DBC180020MyBatisParameter
      * @return List<RiyoshaFutanWariaiTempUnionEntity>
      */
-    List<RiyoshaFutanWariaiTempUnionEntity> select負担割合判定マージ(DBC180020MyBatisParameter parameter);
+    List<RiyoshaFutanWariaiTempUnionEntity> select負担割合判定マージ(DBD180020MyBatisParameter parameter);
 
     /**
      * 月別負担割合作成新の作成<br/ >
@@ -128,7 +128,7 @@ public interface IRiyoshaFutanwariaiMapper {
      * @param parameter DBC180020MyBatisParameter
      * @return List<TsukibetsuFutanWariaiTempEntity>
      */
-    List<TsukibetsuFutanWariaiTempEntity> select月別負担割合作成新(DBC180020MyBatisParameter parameter);
+    List<TsukibetsuFutanWariaiTempEntity> select月別負担割合作成新(DBD180020MyBatisParameter parameter);
 
     /**
      * 月別負担割合作成現の作成<br/ >
@@ -137,7 +137,7 @@ public interface IRiyoshaFutanwariaiMapper {
      * @param parameter DBC180020MyBatisParameter
      * @return List<TsukibetsuFutanWariaiTempEntity>
      */
-    List<TsukibetsuFutanWariaiTempEntity> select月別負担割合作成現(DBC180020MyBatisParameter parameter);
+    List<TsukibetsuFutanWariaiTempEntity> select月別負担割合作成現(DBD180020MyBatisParameter parameter);
 
     /**
      * 負担割合と明細の作成<br/ >
@@ -146,7 +146,7 @@ public interface IRiyoshaFutanwariaiMapper {
      * @param parameter DBC180020MyBatisParameter
      * @return List<FutanWariaiRelateEntity>
      */
-    List<FutanWariaiRelateEntity> select負担割合と明細(DBC180020MyBatisParameter parameter);
+    List<FutanWariaiRelateEntity> select負担割合と明細(DBD180020MyBatisParameter parameter);
 
     /**
      * 負担割合根拠の作成<br/ >
@@ -155,7 +155,7 @@ public interface IRiyoshaFutanwariaiMapper {
      * @param parameter DBC180020MyBatisParameter
      * @return List<DbT3115SakuseiEntity>
      */
-    List<DbT3115SakuseiEntity> select負担割合根拠(DBC180020MyBatisParameter parameter);
+    List<DbT3115SakuseiEntity> select負担割合根拠(DBD180020MyBatisParameter parameter);
 
     /**
      * selectAllのメソッドです。<br/ >

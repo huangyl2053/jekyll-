@@ -16,8 +16,8 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180010.ShoriKekkaKakun
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180010.SinseicyuDateDeleteProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180010.SogoJigyoTaishoshaTempProcess;
 import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180010.DBC180010_NenjiRiyoshaFutanwariaiHanteiParameter;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180011.DBC180011_RiyoshaFutanwariaiHanteiIchiranSubParameter;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180022.DBC180022_RiyoshaFutanwariaiHanteiSubParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD180011.DBD180011_RiyoshaFutanwariaiHanteiIchiranSubParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD180022.DBD180022_RiyoshaFutanwariaiHanteiSubParameter;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -116,7 +116,7 @@ public class DBC180010_NenjiRiyoshaFutanwariaiHantei extends BatchFlowBase<DBC18
      */
     @Step(利用者負担割合判定)
     protected IBatchFlowCommand riyoshaFutanWariaiHantei() {
-        DBC180022_RiyoshaFutanwariaiHanteiSubParameter parameter = new DBC180022_RiyoshaFutanwariaiHanteiSubParameter();
+        DBD180022_RiyoshaFutanwariaiHanteiSubParameter parameter = new DBD180022_RiyoshaFutanwariaiHanteiSubParameter();
         parameter.setTaishoNendo(getParameter().get対象年度());
         parameter.setKijunbi(getParameter().get基準日());
         parameter.setShoriKubun(getParameter().get処理区分());
@@ -135,7 +135,7 @@ public class DBC180010_NenjiRiyoshaFutanwariaiHantei extends BatchFlowBase<DBC18
      */
     @Step(負担割合判定一覧出力)
     protected IBatchFlowCommand futanwariaiHantei() {
-        DBC180011_RiyoshaFutanwariaiHanteiIchiranSubParameter parameter = new DBC180011_RiyoshaFutanwariaiHanteiIchiranSubParameter();
+        DBD180011_RiyoshaFutanwariaiHanteiIchiranSubParameter parameter = new DBD180011_RiyoshaFutanwariaiHanteiIchiranSubParameter();
         parameter.setTaishoNendo(getParameter().get対象年度());
         parameter.setKijunbi(getParameter().get基準日());
         parameter.setShoriKubun(getParameter().get処理区分());

@@ -31,7 +31,10 @@ public enum DbdQuestionMessages implements IMessageGettable {
     非課税年金再処理確認(9, "\"再処理前\"に変更される処理月があります。再処理前に設定後、再処理を実行すると、"
             + "取込済みの年月の非課税年金対象者情報は全て初期化されます。再処理前に設定してよろしいですか？"),
     再発行確認(10, "?は発行済です。この帳票を発行してもよろしいですか？"),
-    処理実行の確認(50, "処理を実行してもよろしいですか？", ButtonSelectPattern.OKCancel);
+    処理実行の確認(50, "処理を実行してもよろしいですか？", ButtonSelectPattern.OKCancel),
+    編集クリア確認(11, "編集されています。クリアしてよろしいですか？"),
+    負担割合証単票発行確認(12, "負担割合証を単票発行しますか？<br>"
+            + "単票発行した場合、発行日、交付日は画面で指定した日付で更新され、「単票発行で発行済」の状態となります。");
     private final RString message;
     private final int no;
     private final ButtonSelectPattern buttonSelectPattern;

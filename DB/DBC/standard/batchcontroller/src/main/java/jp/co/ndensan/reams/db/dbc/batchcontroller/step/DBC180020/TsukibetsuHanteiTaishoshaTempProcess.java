@@ -6,11 +6,11 @@
 package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.dbc180020.DBC180020MyBatisParameter;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc180020.DBC180020ProcessParameter;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.HihokenshaNoEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.TsukibetsuHanteiTaishoshaDaichoEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.HanteiTaishoshaTempEntity;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.dbd180020.DBD180020MyBatisParameter;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd180020.DBD180020ProcessParameter;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.HihokenshaNoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.TsukibetsuHanteiTaishoshaDaichoEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.temptables.HanteiTaishoshaTempEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3105SogoJigyoTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT1001HihokenshaDaichoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT4001JukyushaDaichoEntity;
@@ -43,7 +43,7 @@ public class TsukibetsuHanteiTaishoshaTempProcess extends BatchProcessBase<Tsuki
     private static final RString TABLENAME被保険者番号 = new RString("HanteiHihokenshaNoTemp");
     private static final RString PATH = new RString("jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate."
             + "riyoshafutanwariaihantei.IRiyoshaFutanwariaiMapper.select月別判定対象者作成");
-    private DBC180020ProcessParameter parameter;
+    private DBD180020ProcessParameter parameter;
     @BatchWriter
     private BatchEntityCreatedTempTableWriter 月別判定対象者Temp;
     @BatchWriter
@@ -57,7 +57,7 @@ public class TsukibetsuHanteiTaishoshaTempProcess extends BatchProcessBase<Tsuki
 
     @Override
     protected IBatchReader createReader() {
-        DBC180020MyBatisParameter mbp = parameter.toMyBatisParameter();
+        DBD180020MyBatisParameter mbp = parameter.toMyBatisParameter();
         return new BatchDbReader(PATH, mbp);
     }
 

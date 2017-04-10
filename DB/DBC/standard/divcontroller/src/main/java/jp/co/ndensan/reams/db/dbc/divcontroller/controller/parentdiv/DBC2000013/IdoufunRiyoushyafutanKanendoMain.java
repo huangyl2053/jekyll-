@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbc.divcontroller.controller.parentdiv.DBC2000013;
 
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180030.DBC180030_KanendoRiyoshaFutanwariaiHanteiParameter;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD180030.DBD180030_KanendoRiyoshaFutanwariaiHanteiParameter;
 import jp.co.ndensan.reams.db.dbc.definition.mybatisprm.idoufunriyoushyafutankanendo.IdoufunRiyoushyafutanKanendoMybatisParameter;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000013.DBC2000013TransitionEventName;
 import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC2000013.IdoufunRiyoushyafutanKanendoDiv;
@@ -68,7 +68,7 @@ public class IdoufunRiyoushyafutanKanendoMain {
      * @param div コントロールdiv
      * @return レスポンスデータ
      */
-    public ResponseData<DBC180030_KanendoRiyoshaFutanwariaiHanteiParameter> onClick_btnJikkou(IdoufunRiyoushyafutanKanendoDiv div) {
+    public ResponseData<DBD180030_KanendoRiyoshaFutanwariaiHanteiParameter> onClick_btnJikkou(IdoufunRiyoushyafutanKanendoDiv div) {
         return ResponseData.of(getHandler(div).setParameter()).forwardWithEventName(DBC2000013TransitionEventName.終了).respond();
     }
 

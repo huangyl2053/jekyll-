@@ -13,10 +13,10 @@ import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.FutanWariaiKonk
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.FutanWariaiLoginProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.TsukibetsuFutanWariaiGenTempProcess;
 import jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180020.TsukibetsuFutanWariaiNewTempProcess;
-import jp.co.ndensan.reams.db.dbc.business.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHanteiUtil;
-import jp.co.ndensan.reams.db.dbc.definition.batchprm.DBC180025.DBC180025_RiyoshaFutanwariaiHanteiSubGetsujiShoriParameter;
-import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc180020.DBC180020ProcessParameter;
-import jp.co.ndensan.reams.db.dbc.service.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHantei;
+import jp.co.ndensan.reams.db.dbd.business.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHanteiUtil;
+import jp.co.ndensan.reams.db.dbd.definition.batchprm.DBD180025.DBD180025_RiyoshaFutanwariaiHanteiSubGetsujiShoriParameter;
+import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd180020.DBD180020ProcessParameter;
+import jp.co.ndensan.reams.db.dbd.service.core.riyoshafutanwariaihantei.RiyoshaFutanWariaiHantei;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -30,7 +30,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RYear;
  * @reamsid_L DBC-4950-030 liuyang
  */
 public class DBC180025_RiyoshaFutanwariaiHanteiSubGetsujiShori
-        extends BatchFlowBase<DBC180025_RiyoshaFutanwariaiHanteiSubGetsujiShoriParameter> {
+        extends BatchFlowBase<DBD180025_RiyoshaFutanwariaiHanteiSubGetsujiShoriParameter> {
 
     private static final String CLEAR今回利用者負担割合情報 = "clearKonkaiRiyoshaFutanWariaiJohoTempProcess";
     private static final String 負担割合判定月次 = "futanWariaiHanteiGetuziProcess";
@@ -40,9 +40,9 @@ public class DBC180025_RiyoshaFutanwariaiHanteiSubGetsujiShori
     private static final String 負担割合登録 = "futanWariaiLoginProcess";
     private static final String 負担割合根拠登録 = "futanWariaiKonkyoLoginProcess";
 
-    private DBC180020ProcessParameter processPrm;
+    private DBD180020ProcessParameter processPrm;
     private int kijunbiSize;
-    private DBC180020ProcessParameter loopProcessPrm;
+    private DBD180020ProcessParameter loopProcessPrm;
     private RiyoshaFutanWariaiHanteiUtil util;
     private RiyoshaFutanWariaiHantei service;
 
