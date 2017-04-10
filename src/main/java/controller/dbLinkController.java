@@ -12,7 +12,7 @@ public class dbLinkController {
 		try{
 			Class.forName("com.mysql.jdbc.Driver");
 			String url="jdbc:mysql://localhost:3306/nature";
-			_Conn = DriverManager.getConnection(url,"root","root");
+			_Conn = DriverManager.getConnection(url,"root","");
 			_Stmt = _Conn.createStatement(); 
 			return _Stmt;
 		}catch(Exception e1){

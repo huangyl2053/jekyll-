@@ -25,7 +25,7 @@ public class loginController {
 			Class.forName("com.mysql.jdbc.Driver");
 			String url="jdbc:mysql://localhost:3306/nature";
 			Connection conn;
-			conn = DriverManager.getConnection(url,"root","root");
+			conn = DriverManager.getConnection(url,"root","");
 			Statement stmt = conn.createStatement(); 
 			
 			String sql = "select * from user"; 
