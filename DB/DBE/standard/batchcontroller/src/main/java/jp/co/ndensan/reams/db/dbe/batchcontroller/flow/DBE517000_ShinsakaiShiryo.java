@@ -10,7 +10,6 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.OutputJokenhyoFactoryProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.shiryoshinsakai.ShinsakaiJohoUpdateProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE517000.DBE517000_ShinsakaiShiryoParameter;
-import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
@@ -31,7 +30,7 @@ public class DBE517000_ShinsakaiShiryo extends BatchFlowBase<DBE517000_Shinsakai
     private static final String 審査会情報更新 = "kousin";
     private static final String 出力条件表出力 = "outputJokenhyoFactory";
     private static final RString 選択 = new RString("1");
-    private Map<RString, RString> 出力帳票一覧Map = new HashMap<>();
+    private final Map<RString, RString> 出力帳票一覧Map = new HashMap<>();
 
     @Override
     protected void defineFlow() {

@@ -31,7 +31,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomo
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku05;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku14;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijikoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJokyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItemEntity;
@@ -41,6 +40,9 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.log.applog._Logger;
+import jp.co.ndensan.reams.uz.uza.log.applog.gyomu._GyomuLogData;
 
 /**
  * 事務局一次判定結果票のEntityの編集クラスです。
@@ -124,7 +126,15 @@ public class IchijihanteikekkahyoItemSetteiA3 {
         settei.setサービスの状況(entity, 項目, 予防給付, 介護給付, サービス状況フラグ, 共通情報, path);
 
         項目.set概況調査テキスト_イメージ区分(共通情報.getGaikyoChosaTextImageKubun());
-        項目.set概況特記のテキスト(共通情報.getTokki());
+        RString gaikyoTokki = 共通情報.isJimukyoku() ? 共通情報.getTokki() : 共通情報.getMaskedTokki();
+        _Logger.gyomuLog(_GyomuLogData.LogType.Info, 共通情報.isJimukyoku() ? "※事務局用" : "※委員用");
+        _Logger.gyomuLog(_GyomuLogData.LogType.Info,
+                new RStringBuilder().append("概況特記：").append(共通情報.getTokki() == null ? RString.EMPTY : 共通情報.getTokki()).toString()
+        );
+        _Logger.gyomuLog(_GyomuLogData.LogType.Info,
+                new RStringBuilder().append("概況特記マスク：").append(共通情報.getMaskedTokki() == null ? RString.EMPTY : 共通情報.getMaskedTokki()).toString()
+        );
+        項目.set概況特記のテキスト(gaikyoTokki == null ? RString.EMPTY : gaikyoTokki);
         if (共通情報.isJimukyoku()) {
             項目.set概況特記のイメージ(DBEImageUtil.getOriginalImageFilePath(path, IMAGEFILENAME_概況調査特記));
         } else {

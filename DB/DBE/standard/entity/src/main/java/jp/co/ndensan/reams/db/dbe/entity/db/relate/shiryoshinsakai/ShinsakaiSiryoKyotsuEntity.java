@@ -34,6 +34,7 @@ public class ShinsakaiSiryoKyotsuEntity {
     private FlexibleDate shinsakaiKaisaiYMD;
     private RString gaikyoChosaTextImageKubun;
     private RString tokki;
+    private RString maskedTokki;
     private RString riyoShisetsuShimei;
     private RString riyoShisetsuJusho;
     private RString riyoShisetsuTelNo;

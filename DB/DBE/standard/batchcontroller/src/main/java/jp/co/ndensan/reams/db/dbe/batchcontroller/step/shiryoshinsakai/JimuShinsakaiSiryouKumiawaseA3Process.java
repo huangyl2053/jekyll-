@@ -34,7 +34,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.IsHaishi;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijikoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJokyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItemEntity;
@@ -227,13 +226,13 @@ public class JimuShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBas
                 IchijihanteikekkahyoItemSetteiA3 一次判定結果票Item = new IchijihanteikekkahyoItemSetteiA3();
                 IchijihanteikekkahyoA3Entity 一次判定結果票Entity = 一次判定結果票Item.set項目(
                         entity,
-                        調査票調査項目, 
+                        調査票調査項目,
                         前回調査票調査項目,
                         主治医意見書情報,
                         前回主治医意見書,
                         予防給付サービス利用状況,
                         介護給付サービス利用状況,
-                        サービス状況フラグ, 
+                        サービス状況フラグ,
                         データ件数,
                         審査会資料共通Entity,
                         主治医意見書,
