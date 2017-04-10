@@ -427,6 +427,7 @@ public class ShikakuShutokuIdoTotal {
             }
             row = new dgShikakuShutokuRireki_Row();
             row.setState(追加);
+            row.getShosai().setDisabled(true);
             row.setDaNo(daNo);
             row.getShutokuDate().setValue(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
                     getShikakuShutokuInput().getTxtShutokuDate().getValue());

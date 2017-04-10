@@ -57,6 +57,9 @@ public class SikakuIdouTeisei {
      * @return ResponseData<SikakuIdouTeiseiDiv>
      */
     public ResponseData<SikakuIdouTeiseiDiv> onLoad(SikakuIdouTeiseiDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         getHandler(div).onLoad(getKey().get被保険者番号(), getKey().get識別コード());
 
         if (div.getShikakuShutokuJoho().getCcdShikakuTokusoRireki().getDataGridDataSource().isEmpty()) {

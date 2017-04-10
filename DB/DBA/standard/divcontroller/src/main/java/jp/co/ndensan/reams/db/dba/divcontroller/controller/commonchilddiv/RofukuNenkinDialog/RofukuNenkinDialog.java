@@ -47,7 +47,7 @@ public class RofukuNenkinDialog {
         } else {
             Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> roreiFukushiNenkinJukyusha
                     = DataPassingConverter.deserialize(div.getSaveData(), Models.class);
-            div.getCcdRofukuNenkinRireki().initialize(roreiFukushiNenkinJukyusha);
+            div.getCcdRofukuNenkinRireki().initialize(roreiFukushiNenkinJukyusha, shikibetsuCode);
             setState(div);
         }
 
