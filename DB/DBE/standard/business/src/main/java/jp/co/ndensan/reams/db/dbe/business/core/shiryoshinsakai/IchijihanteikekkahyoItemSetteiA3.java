@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiry
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.TokkijikoIchiranJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.util.ObjectUtil;
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.INinteichosaKomokuMapping;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping02A;
@@ -40,9 +41,6 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.log.applog._Logger;
-import jp.co.ndensan.reams.uz.uza.log.applog.gyomu._GyomuLogData;
 
 /**
  * 事務局一次判定結果票のEntityの編集クラスです。
@@ -126,19 +124,12 @@ public class IchijihanteikekkahyoItemSetteiA3 {
         settei.setサービスの状況(entity, 項目, 予防給付, 介護給付, サービス状況フラグ, 共通情報, path);
 
         項目.set概況調査テキスト_イメージ区分(共通情報.getGaikyoChosaTextImageKubun());
-        RString gaikyoTokki = 共通情報.isJimukyoku() ? 共通情報.getTokki() : 共通情報.getMaskedTokki();
-        _Logger.gyomuLog(_GyomuLogData.LogType.Info, 共通情報.isJimukyoku() ? "※事務局用" : "※委員用");
-        _Logger.gyomuLog(_GyomuLogData.LogType.Info,
-                new RStringBuilder().append("概況特記：").append(共通情報.getTokki() == null ? RString.EMPTY : 共通情報.getTokki()).toString()
-        );
-        _Logger.gyomuLog(_GyomuLogData.LogType.Info,
-                new RStringBuilder().append("概況特記マスク：").append(共通情報.getMaskedTokki() == null ? RString.EMPTY : 共通情報.getMaskedTokki()).toString()
-        );
-        項目.set概況特記のテキスト(gaikyoTokki == null ? RString.EMPTY : gaikyoTokki);
         if (共通情報.isJimukyoku()) {
+            項目.set概況特記のテキスト(ObjectUtil.defaultIfNull(共通情報.getTokki(), RString.EMPTY));
             項目.set概況特記のイメージ(DBEImageUtil.getOriginalImageFilePath(path, IMAGEFILENAME_概況調査特記));
         } else {
-            項目.set概況特記のイメージ(DBEImageUtil.getMaskOrOriginalImageFilePath(path, IMAGEFILENAME_概況調査特記));
+            項目.set概況特記のテキスト(RString.EMPTY);
+            項目.set概況特記のイメージ(RString.EMPTY);
         }
 
         IchijihanteiekkahyoTokkijiko tokkijiko = new IchijihanteiekkahyoTokkijiko(特記情報, 共通情報, path);
