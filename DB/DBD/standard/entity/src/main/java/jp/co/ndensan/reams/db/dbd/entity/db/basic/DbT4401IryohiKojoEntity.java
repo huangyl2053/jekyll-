@@ -20,7 +20,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
  */
 public class DbT4401IryohiKojoEntity extends DbTableEntityBase<DbT4401IryohiKojoEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
-
     @TableName
     public static final RString TABLE_NAME = new RString("DbT4401IryohiKojo");
 
@@ -50,7 +49,7 @@ public class DbT4401IryohiKojoEntity extends DbTableEntityBase<DbT4401IryohiKojo
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -59,7 +58,7 @@ public class DbT4401IryohiKojoEntity extends DbTableEntityBase<DbT4401IryohiKojo
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -68,7 +67,7 @@ public class DbT4401IryohiKojoEntity extends DbTableEntityBase<DbT4401IryohiKojo
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -77,16 +76,17 @@ public class DbT4401IryohiKojoEntity extends DbTableEntityBase<DbT4401IryohiKojo
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -95,7 +95,7 @@ public class DbT4401IryohiKojoEntity extends DbTableEntityBase<DbT4401IryohiKojo
 
     /**
      * 被保険者番号のgetメソッドです。
-     *
+     * 
      * @return 被保険者番号
      */
     public HihokenshaNo getHihokenshaNo() {
@@ -104,7 +104,7 @@ public class DbT4401IryohiKojoEntity extends DbTableEntityBase<DbT4401IryohiKojo
 
     /**
      * 被保険者番号のsetメソッドです。
-     *
+     * 
      * @param hihokenshaNo 被保険者番号
      */
     public void setHihokenshaNo(@Nonnull HihokenshaNo hihokenshaNo) {
@@ -113,7 +113,7 @@ public class DbT4401IryohiKojoEntity extends DbTableEntityBase<DbT4401IryohiKojo
 
     /**
      * 控除対象年のgetメソッドです。
-     *
+     * 
      * @return 控除対象年
      */
     public FlexibleYear getKojoTaishoNen() {
@@ -122,7 +122,7 @@ public class DbT4401IryohiKojoEntity extends DbTableEntityBase<DbT4401IryohiKojo
 
     /**
      * 控除対象年のsetメソッドです。
-     *
+     * 
      * @param kojoTaishoNen 控除対象年
      */
     public void setKojoTaishoNen(@Nonnull FlexibleYear kojoTaishoNen) {
@@ -133,7 +133,7 @@ public class DbT4401IryohiKojoEntity extends DbTableEntityBase<DbT4401IryohiKojo
      * データ区分のgetメソッドです。
      * <br/>
      * <br/>1：おむつ使用証明書発行、2：主治医意見書の確認書発行
-     *
+     * 
      * @return データ区分
      */
     public RString getDataKubun() {
@@ -144,7 +144,7 @@ public class DbT4401IryohiKojoEntity extends DbTableEntityBase<DbT4401IryohiKojo
      * データ区分のsetメソッドです。
      * <br/>
      * <br/>1：おむつ使用証明書発行、2：主治医意見書の確認書発行
-     *
+     * 
      * @param dataKubun データ区分
      */
     public void setDataKubun(@Nonnull RString dataKubun) {
@@ -153,7 +153,7 @@ public class DbT4401IryohiKojoEntity extends DbTableEntityBase<DbT4401IryohiKojo
 
     /**
      * 登録年月日のgetメソッドです。
-     *
+     * 
      * @return 登録年月日
      */
     public FlexibleDate getTorokuYMD() {
@@ -162,7 +162,7 @@ public class DbT4401IryohiKojoEntity extends DbTableEntityBase<DbT4401IryohiKojo
 
     /**
      * 登録年月日のsetメソッドです。
-     *
+     * 
      * @param torokuYMD 登録年月日
      */
     public void setTorokuYMD(@Nonnull FlexibleDate torokuYMD) {
@@ -171,7 +171,7 @@ public class DbT4401IryohiKojoEntity extends DbTableEntityBase<DbT4401IryohiKojo
 
     /**
      * 申請年月日のgetメソッドです。
-     *
+     * 
      * @return 申請年月日
      */
     public FlexibleDate getShinseiYMD() {
@@ -180,7 +180,7 @@ public class DbT4401IryohiKojoEntity extends DbTableEntityBase<DbT4401IryohiKojo
 
     /**
      * 申請年月日のsetメソッドです。
-     *
+     * 
      * @param shinseiYMD 申請年月日
      */
     public void setShinseiYMD(@Nonnull FlexibleDate shinseiYMD) {
@@ -189,7 +189,7 @@ public class DbT4401IryohiKojoEntity extends DbTableEntityBase<DbT4401IryohiKojo
 
     /**
      * 認定有効期間開始年月日のgetメソッドです。
-     *
+     * 
      * @return 認定有効期間開始年月日
      */
     public FlexibleDate getNinteiYukoKikanKaishiYMD() {
@@ -198,7 +198,7 @@ public class DbT4401IryohiKojoEntity extends DbTableEntityBase<DbT4401IryohiKojo
 
     /**
      * 認定有効期間開始年月日のsetメソッドです。
-     *
+     * 
      * @param ninteiYukoKikanKaishiYMD 認定有効期間開始年月日
      */
     public void setNinteiYukoKikanKaishiYMD(@Nonnull FlexibleDate ninteiYukoKikanKaishiYMD) {
@@ -207,7 +207,7 @@ public class DbT4401IryohiKojoEntity extends DbTableEntityBase<DbT4401IryohiKojo
 
     /**
      * 認定有効期間終了年月日のgetメソッドです。
-     *
+     * 
      * @return 認定有効期間終了年月日
      */
     public FlexibleDate getNinteiYukoKikanShuryoYMD() {
@@ -216,7 +216,7 @@ public class DbT4401IryohiKojoEntity extends DbTableEntityBase<DbT4401IryohiKojo
 
     /**
      * 認定有効期間終了年月日のsetメソッドです。
-     *
+     * 
      * @param ninteiYukoKikanShuryoYMD 認定有効期間終了年月日
      */
     public void setNinteiYukoKikanShuryoYMD(@Nonnull FlexibleDate ninteiYukoKikanShuryoYMD) {
@@ -225,7 +225,7 @@ public class DbT4401IryohiKojoEntity extends DbTableEntityBase<DbT4401IryohiKojo
 
     /**
      * 主治医意見書受領年月日のgetメソッドです。
-     *
+     * 
      * @return 主治医意見書受領年月日
      */
     public FlexibleDate getShujiiIkenshoJuryoYMD() {
@@ -234,7 +234,7 @@ public class DbT4401IryohiKojoEntity extends DbTableEntityBase<DbT4401IryohiKojo
 
     /**
      * 主治医意見書受領年月日のsetメソッドです。
-     *
+     * 
      * @param shujiiIkenshoJuryoYMD 主治医意見書受領年月日
      */
     public void setShujiiIkenshoJuryoYMD(@Nonnull FlexibleDate shujiiIkenshoJuryoYMD) {
@@ -245,7 +245,7 @@ public class DbT4401IryohiKojoEntity extends DbTableEntityBase<DbT4401IryohiKojo
      * 日常生活自立度のgetメソッドです。
      * <br/>
      * <br/>1:「B1」、2:「B2」、3:「C1」、4:「C2」、5：以外を登録する
-     *
+     * 
      * @return 日常生活自立度
      */
     public RString getNichijoSeikatsuJiritsudo() {
@@ -256,7 +256,7 @@ public class DbT4401IryohiKojoEntity extends DbTableEntityBase<DbT4401IryohiKojo
      * 日常生活自立度のsetメソッドです。
      * <br/>
      * <br/>1:「B1」、2:「B2」、3:「C1」、4:「C2」、5：以外を登録する
-     *
+     * 
      * @param nichijoSeikatsuJiritsudo 日常生活自立度
      */
     public void setNichijoSeikatsuJiritsudo(@Nonnull RString nichijoSeikatsuJiritsudo) {
@@ -267,7 +267,7 @@ public class DbT4401IryohiKojoEntity extends DbTableEntityBase<DbT4401IryohiKojo
      * 尿失禁の発生のgetメソッドです。
      * <br/>
      * <br/>True:有、False:無
-     *
+     * 
      * @return 尿失禁の発生
      */
     public boolean getNyoshikkinHassei() {
@@ -278,7 +278,7 @@ public class DbT4401IryohiKojoEntity extends DbTableEntityBase<DbT4401IryohiKojo
      * 尿失禁の発生のsetメソッドです。
      * <br/>
      * <br/>True:有、False:無
-     *
+     * 
      * @param nyoshikkinHassei 尿失禁の発生
      */
     public void setNyoshikkinHassei(@Nonnull boolean nyoshikkinHassei) {
@@ -287,7 +287,7 @@ public class DbT4401IryohiKojoEntity extends DbTableEntityBase<DbT4401IryohiKojo
 
     /**
      * 発行年月日のgetメソッドです。
-     *
+     * 
      * @return 発行年月日
      */
     public FlexibleDate getHakkoYMD() {
@@ -296,7 +296,7 @@ public class DbT4401IryohiKojoEntity extends DbTableEntityBase<DbT4401IryohiKojo
 
     /**
      * 発行年月日のsetメソッドです。
-     *
+     * 
      * @param hakkoYMD 発行年月日
      */
     public void setHakkoYMD(@Nonnull FlexibleDate hakkoYMD) {
@@ -305,7 +305,7 @@ public class DbT4401IryohiKojoEntity extends DbTableEntityBase<DbT4401IryohiKojo
 
     /**
      * 論理削除フラグのgetメソッドです。
-     *
+     * 
      * @return 論理削除フラグ
      */
     public boolean getLogicalDeletedFlag() {
@@ -314,7 +314,7 @@ public class DbT4401IryohiKojoEntity extends DbTableEntityBase<DbT4401IryohiKojo
 
     /**
      * 論理削除フラグのsetメソッドです。
-     *
+     * 
      * @param logicalDeletedFlag 論理削除フラグ
      */
     public void setLogicalDeletedFlag(@Nonnull boolean logicalDeletedFlag) {
@@ -323,9 +323,10 @@ public class DbT4401IryohiKojoEntity extends DbTableEntityBase<DbT4401IryohiKojo
 
     /**
      * このエンティティの主キーが他の{@literal DbT4401IryohiKojoEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT4401IryohiKojoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT4401IryohiKojoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT4401IryohiKojoEntity other) {
@@ -365,7 +366,6 @@ public class DbT4401IryohiKojoEntity extends DbTableEntityBase<DbT4401IryohiKojo
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
@@ -374,4 +374,5 @@ public class DbT4401IryohiKojoEntity extends DbTableEntityBase<DbT4401IryohiKojo
     }
 
 // </editor-fold>
+
 }
