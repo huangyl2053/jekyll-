@@ -19,7 +19,7 @@ import javax.annotation.Nonnull;
  * <br/> 国保連インターフェース管理
  */
 public class DbT3104KokuhorenInterfaceKanriEntity extends DbTableEntityBase<DbT3104KokuhorenInterfaceKanriEntity> implements IDbAccessable {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3104KokuhorenInterfaceKanri");
 
@@ -126,7 +126,7 @@ public class DbT3104KokuhorenInterfaceKanriEntity extends DbTableEntityBase<DbT3
     /**
      * 交換情報識別番号のgetメソッドです。
      * <br/>
-     * <br/>交換情報識別番号の上3桁
+     * <br/>通常は交換情報識別番号の上3桁をセット、下1桁は1つの処理を分けて処理したい場合の区別用（埼玉県の高額合算）
      * 
      * @return 交換情報識別番号
      */
@@ -137,7 +137,7 @@ public class DbT3104KokuhorenInterfaceKanriEntity extends DbTableEntityBase<DbT3
     /**
      * 交換情報識別番号のsetメソッドです。
      * <br/>
-     * <br/>交換情報識別番号の上3桁
+     * <br/>通常は交換情報識別番号の上3桁をセット、下1桁は1つの処理を分けて処理したい場合の区別用（埼玉県の高額合算）
      * 
      * @param kokanShikibetsuNo 交換情報識別番号
      */
@@ -657,5 +657,6 @@ public class DbT3104KokuhorenInterfaceKanriEntity extends DbTableEntityBase<DbT3
     }
 
 // </editor-fold>
+
 
 }

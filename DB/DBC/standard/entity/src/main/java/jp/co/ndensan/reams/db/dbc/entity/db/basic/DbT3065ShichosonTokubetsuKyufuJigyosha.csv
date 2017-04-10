@@ -1,11 +1,9 @@
 ﻿jigyoshaNo,DbUDD004JigyoshaNo,JigyoshaNo,,,,,市町村特別給付用事業者番号,A
 serviceCode,DbUDD007ServiceCode,ServiceCode,,,,,市町村特別給付用サービスコード,A
 rirekiNo,int2,int,,,,,履歴番号,A
-idoKubun,varchar,RString,,,,,介護国保連ＩＦ異動区分,A
-idoYMD,UDD015YMD,FlexibleDate,,,,,介護国保連ＩＦ異動年月日,A
-teiseiKubun,varchar,RString,,,,,介護国保連ＩＦ訂正区分,A
-teiseiYMD,UDD015YMD,FlexibleDate,,,,,介護国保連ＩＦ訂正年月日,A
-hojinShubetsu,varchar,RString,,,,,介護国保連ＩＦ法人種別,A
+idoKubun,varchar,RString,,,,,異動区分,A
+idoYMD,UDD015YMD,FlexibleDate,,,,,異動年月日,A
+hojinShubetsu,varchar,RString,,,,,法人種別,A
 shinseishaNameKanji,varchar,RString,,,,,申請者氏名（漢字）,A
 shinseishaNameKana,varchar,RString,,,,,申請者氏名（カナ）,A
 shinseishaYubinNo,UDD003YubinNo,YubinNo,,,,,申請者郵便番号,A
@@ -35,11 +33,8 @@ serviceJigyoshoJigyoKaisiYMD,UDD015YMD,FlexibleDate,,,,,サービス事業所事
 serviceJigyoshoJigyoKyushiYMD,UDD015YMD,FlexibleDate,,,,,サービス事業所事業休止年月日,A
 serviceJigyoshoJigyoHaishiYMD,UDD015YMD,FlexibleDate,,,,,サービス事業所事業廃止年月日,A
 serviceJigyoshoJigyoSaikaiYMD,UDD015YMD,FlexibleDate,,,,,サービス事業所事業再開年月日,A
-shokisaiHokenshaNo,DbUDD003HokenshaNo,HokenshaNo,,,,,介護保険証記載保険者番号,A
 juryoIninKubu,varchar,RString,,,,,受領委任区分,A
 torokuKaishiYMD,UDD015YMD,FlexibleDate,,,,,市町村特別給付登録開始年月日,A
 torokuShuryoYMD,UDD015YMD,FlexibleDate,,,,,市町村特別給付登録終了年月日,A
 seikatsuhogoShiteiFlag,bool,boolean,,,,,生活保護法による指定の有,A
-shichosonCode,UDD023LasdecCode,LasdecCode,,,,,市町村コード,A
-chiikiKubun,varchar,RString,,,,,地域区分,A
 logicalDeletedFlag,bool,boolean,,,,,論理削除フラグ,A

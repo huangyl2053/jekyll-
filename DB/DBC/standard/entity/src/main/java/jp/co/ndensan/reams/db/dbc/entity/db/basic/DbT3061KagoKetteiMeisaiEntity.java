@@ -475,4 +475,5 @@ public class DbT3061KagoKetteiMeisaiEntity extends DbTableEntityBase<DbT3061Kago
 // </editor-fold>
 
 
+
 }

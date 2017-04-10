@@ -103,7 +103,7 @@ public class JigyoKogakuShinseikanriMasterUpdateProcess extends BatchProcessBase
         dbt3111Entity.setHihokenshaNo(entity.get支給申請().getHihokenshaNo());
         dbt3111Entity.setServiceTeikyoYM(entity.get支給申請().getServiceTeikyoYM());
         dbt3111Entity.setShoKisaiHokenshaNo(entity.get支給申請().getShoKisaiHokenshaNo());
-        dbt3111Entity.setRirekiNo(Decimal.ONE.add(entity.get給付対象者合計().getRirekiNo()));
+        dbt3111Entity.setRirekiNo(Decimal.ONE.add(entity.get給付対象者合計().getRirekiNo()).intValue());
         dbt3111Entity.setKetteiYMD(entity.get申請情報().getKetteiYMDJoho());
         dbt3111Entity.setHonninShiharaiGaku(entity.get申請情報().getHonninShiharaiGakuJoho());
         dbt3111Entity.setShiharaiKubunCode(entity.get申請情報().getHanteiKekkaShikyuKubunCodeJoho());

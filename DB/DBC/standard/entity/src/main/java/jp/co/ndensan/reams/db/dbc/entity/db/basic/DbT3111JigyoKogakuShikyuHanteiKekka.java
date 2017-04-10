@@ -6,8 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 事業高額介護サービス費支給判定結果テーブルの項目定義クラスです。
  */
 public enum DbT3111JigyoKogakuShikyuHanteiKekka implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.3.9">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     /**
      * insertDantaiCd
      */
@@ -56,6 +55,10 @@ public enum DbT3111JigyoKogakuShikyuHanteiKekka implements IColumnDefinition {
      * 履歴番号
      */
     rirekiNo(5, 0),
+    /**
+     * 履歴枝番
+     */
+    rirekiEdaNo(5, 0),
     /**
      * 決定年月日
      */
@@ -110,6 +113,7 @@ public enum DbT3111JigyoKogakuShikyuHanteiKekka implements IColumnDefinition {
     furikomiMeisaishoSakuseiYMD(2147483647, 0),
     /**
      * 決定通知リアル発行区分
+     * <br/>0:未発行、1:発行済
      */
     ketteiTsuchiHakkoKubun(1, 0);
 
@@ -123,7 +127,7 @@ public enum DbT3111JigyoKogakuShikyuHanteiKekka implements IColumnDefinition {
 
     /**
      * 項目の最大長のgetメソッドです。
-     *
+     * 
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -132,7 +136,7 @@ public enum DbT3111JigyoKogakuShikyuHanteiKekka implements IColumnDefinition {
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     *
+     * 
      * @return 小数点以下の桁数
      */
     public int getScale() {

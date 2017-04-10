@@ -608,4 +608,5 @@ public class DbT3096JutakuKaishuRiyushoTesuryoShukeiEntity extends DbTableEntity
 
 // </editor-fold>
 
+
 }
