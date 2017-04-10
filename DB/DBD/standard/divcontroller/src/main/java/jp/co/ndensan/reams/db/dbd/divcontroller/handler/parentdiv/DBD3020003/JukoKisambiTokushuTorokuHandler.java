@@ -127,8 +127,8 @@ public class JukoKisambiTokushuTorokuHandler {
         List<dgShunoJokyo_Row> rowList = new ArrayList<>();
         for (TainoKiSummary tainoKiSummary : 表示用リスト) {
             dgShunoJokyo_Row row = new dgShunoJokyo_Row();
-            row.getChoteiNendo().setValue(new FlexibleDate(tainoKiSummary.get調定年度().wareki().
-                    eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString().concat(年度)));
+            row.getChoteiNendo().setValue(tainoKiSummary.get調定年度().wareki().
+                    eraType(EraType.KANJI).firstYear(FirstYear.ICHI_NEN).toDateString().concat(年度));
 
             row.getChoteiGaku().setValue(tainoKiSummary.get調定額());
             row.getShunyuGaku().setValue(tainoKiSummary.get収入額());

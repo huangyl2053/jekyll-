@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class JukoKisambiTokushuTorokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -36,10 +36,10 @@ public class JukoKisambiTokushuTorokuDiv extends Panel {
     private JikoKisambiDiv JikoKisambi;
     @JsonProperty("ccdShikakuKihon")
     private KaigoShikakuKihonDiv ccdShikakuKihon;
-    @JsonProperty("ccdKanryoMessage")
-    private KaigoKanryoMessageDiv ccdKanryoMessage;
     @JsonProperty("ccdAtenaInfo")
     private KaigoAtenaInfoDiv ccdAtenaInfo;
+    @JsonProperty("ccdKanryoMessage")
+    private KaigoKanryoMessageDiv ccdKanryoMessage;
     @JsonProperty("hdnShoKisaiHokenshaNo")
     private RString hdnShoKisaiHokenshaNo;
     @JsonProperty("hdnChoteiNendo")
@@ -97,21 +97,21 @@ public class JukoKisambiTokushuTorokuDiv extends Panel {
     }
 
     /*
-     * getccdKanryoMessage
-     * @return ccdKanryoMessage
-     */
-    @JsonProperty("ccdKanryoMessage")
-    public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
-        return ccdKanryoMessage;
-    }
-
-    /*
      * getccdAtenaInfo
      * @return ccdAtenaInfo
      */
     @JsonProperty("ccdAtenaInfo")
     public IKaigoAtenaInfoDiv getCcdAtenaInfo() {
         return ccdAtenaInfo;
+    }
+
+    /*
+     * getccdKanryoMessage
+     * @return ccdKanryoMessage
+     */
+    @JsonProperty("ccdKanryoMessage")
+    public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
+        return ccdKanryoMessage;
     }
 
     /*
