@@ -21,6 +21,7 @@
          "DbT3057KogakuShikyuHanteiKekka"."serviceTeikyoYM" as "dbT3057KogakuShikyuHanteiKekka_serviceTeikyoYM",
          "DbT3057KogakuShikyuHanteiKekka"."shoKisaiHokenshaNo" as "dbT3057KogakuShikyuHanteiKekka_shoKisaiHokenshaNo",
          "DbT3057KogakuShikyuHanteiKekka"."rirekiNo" as "dbT3057KogakuShikyuHanteiKekka_rirekiNo",
+         "DbT3057KogakuShikyuHanteiKekka"."rirekiEdaNo" as "dbT3057KogakuShikyuHanteiKekka_rirekiEdaNo",
          "DbT3057KogakuShikyuHanteiKekka"."insertDantaiCd" as "dbT3057KogakuShikyuHanteiKekka_insertDantaiCd",
          "DbT3057KogakuShikyuHanteiKekka"."insertTimestamp" as "dbT3057KogakuShikyuHanteiKekka_insertTimestamp",
          "DbT3057KogakuShikyuHanteiKekka"."insertReamsLoginId" as "dbT3057KogakuShikyuHanteiKekka_insertReamsLoginId",
@@ -51,6 +52,7 @@
         <id property="serviceTeikyoYM" column="dbT3057KogakuShikyuHanteiKekka_serviceTeikyoYM" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearMonthTypeHandler"/>
         <id property="shoKisaiHokenshaNo" column="dbT3057KogakuShikyuHanteiKekka_shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HokenshaNoTypeHandler"/>
         <id property="rirekiNo" column="dbT3057KogakuShikyuHanteiKekka_rirekiNo" />
+        <id property="rirekiEdaNo" column="dbT3057KogakuShikyuHanteiKekka_rirekiEdaNo" />
         <result property="insertDantaiCd" column="dbT3057KogakuShikyuHanteiKekka_insertDantaiCd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="insertTimestamp" column="dbT3057KogakuShikyuHanteiKekka_insertTimestamp" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler"/>
         <result property="insertReamsLoginId" column="dbT3057KogakuShikyuHanteiKekka_insertReamsLoginId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
