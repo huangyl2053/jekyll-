@@ -287,6 +287,7 @@ public class ShikakuHenkoRirekiHandler {
             result.add(setHihokenshaDaicho(被保険者台帳情報, row));
         } else if (div.getInputMode().equals(ViewExecutionStatus.Modify.getValue())) {
             RString 状態 = 修正状態;
+            RString hihokenshaNo = div.getHihokenshaNo() == null ? RString.EMPTY : div.getHihokenshaNo();
             if (div.getDgHenko().getClickedItem().getState().equals(追加状態)) {
                 状態 = 追加状態;
             }
@@ -305,8 +306,8 @@ public class ShikakuHenkoRirekiHandler {
                     div.getDdlHenkoSochimotoHokensha().getSelectedValue(),
                     div.getDdlHenkoKyuHokensha().getSelectedValue(),
                     処理日時,
-                    被保険者台帳情報.get被保険者番号().getColumnValue(),
-                    被保険者台帳情報.get識別コード().getColumnValue(),
+                    被保険者台帳情報.get被保険者番号() == null ? hihokenshaNo : 被保険者台帳情報.get被保険者番号().getColumnValue(),
+                    被保険者台帳情報.get識別コード() == null ? hihokenshaNo : 被保険者台帳情報.get識別コード().getColumnValue(),
                     get市町村コード(),
                     異動日,
                     被保険者台帳情報.get枝番()
@@ -339,6 +340,10 @@ public class ShikakuHenkoRirekiHandler {
             hihokenshaDaichoBuilder.set旧市町村コード(new LasdecCode(get市町村コード()));
             hihokenshaDaichoBuilder.set識別コード(new ShikibetsuCode(get識別コード()));
         }
+        if (row.getHihokenshaNo() != null && !row.getHihokenshaNo().isEmpty()) {
+            hihokenshaDaichoBuilder.set被保険者番号(new HihokenshaNo(row.getHihokenshaNo()));
+        }
+        hihokenshaDaichoBuilder.set市町村コード(new LasdecCode(row.getShichosonCode()));
         return hihokenshaDaichoBuilder.build();
     }
 

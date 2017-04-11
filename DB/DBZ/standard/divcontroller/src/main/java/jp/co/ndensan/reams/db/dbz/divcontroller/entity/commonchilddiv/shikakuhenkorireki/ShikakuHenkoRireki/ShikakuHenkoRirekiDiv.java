@@ -590,6 +590,12 @@ public class ShikakuHenkoRirekiDiv extends Panel implements IShikakuHenkoRirekiD
     public void initialize(ShikibetsuCode 識別コード, IItemList<HihokenshaDaicho> hihoData) {
         getHandler().initialize(識別コード, hihoData);
     }
+    
+    @Override
+    public void initialize(ShikibetsuCode 識別コード, IItemList<HihokenshaDaicho> hihoData, HihokenshaNo hihokenshaNo) {
+        this.hihokenshaNo = hihokenshaNo.getColumnValue();
+        getHandler().initialize(識別コード, hihoData);
+    }
 
     private ShikakuHenkoRirekiHandler getHandler() {
         return new ShikakuHenkoRirekiHandler(this);
