@@ -85,7 +85,7 @@ public class PostMainPanel {
      */
     public ResponseData<PostMainPanelDiv> onClick_btnTorikomi(PostMainPanelDiv div) {
         div.getFileUpload().setVisible(true);
-        UIContainerID = ResponseHolder.getMenuID();
+        UIContainerID = ResponseHolder.getUIContainerId();
         if (UIContainerID.equals(DBDUC05100)) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNJIKOKOKUHO, true);
         }
@@ -111,7 +111,7 @@ public class PostMainPanel {
      */
     public ResponseData<PostMainPanelDiv> onClick_btnCancel(PostMainPanelDiv div) {
         div.getFileUpload().setVisible(false);
-        UIContainerID = ResponseHolder.getMenuID();
+        UIContainerID = ResponseHolder.getUIContainerId();
         if (UIContainerID.equals(DBDUC05100)) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNJIKOKOKUHO, false);
         }
@@ -148,7 +148,7 @@ public class PostMainPanel {
             getHandler(div).setTime(ファイル日時);
         }
         div.getFileUpload().setVisible(false);
-        UIContainerID = ResponseHolder.getMenuID();
+        UIContainerID = ResponseHolder.getUIContainerId();
         if (UIContainerID.equals(DBDUC05100)) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNJIKOKOKUHO, false);
         }

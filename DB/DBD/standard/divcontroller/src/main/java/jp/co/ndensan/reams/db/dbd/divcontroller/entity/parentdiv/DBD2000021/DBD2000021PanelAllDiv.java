@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
 /**
- * DBC2000021PanelAll のクラスファイル
+ * DBD2000021PanelAll のクラスファイル
  *
  * @reamsid_L DBC-5010-010 lihang
  */

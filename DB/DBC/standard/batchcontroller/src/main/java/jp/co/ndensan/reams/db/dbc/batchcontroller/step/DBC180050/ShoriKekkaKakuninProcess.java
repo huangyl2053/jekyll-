@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbc.batchcontroller.step.DBC180050;
 import jp.co.ndensan.reams.db.dbc.definition.core.koseitaishokyufujisseki.KoseiTaishoKyufuJisseki_ErrorKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.dbc180050.ShoriKekkaKakuninListProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.dbc180050.ShoriKekkaKakuninCsvEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.relate.nenjiriyoshafutanwariaihantei.DbWT1801ShoriKekkaKakuninListEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.relate.nenjiriyoshafutanwariaihantei.DbWT1801ShoriKekkaKakuninListEntity;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;

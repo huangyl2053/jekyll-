@@ -24,14 +24,14 @@ import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
- * バッチ設計_DBC130010_国保資格異動情報取込(取込確認CSVファイル出力)
+ * バッチ設計_DBD130010_国保資格異動情報取込(取込確認CSVファイル出力)
  *
  * @reamsid_L DBC-3020-030 dengwei
  */
 public class KokuhoCsvFyiiruSyutuRyokuProcess extends BatchProcessBase<TorikomiKokuhoJyohoResultEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc130010.IKokuhoShikakuIdoInMapper.get取込国保情報Temp");
+            "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.dbd130010.IKokuhoShikakuIdoInMapper.get取込国保情報Temp");
     @BatchWriter
     private CsvWriter<KokuhoJyohoTorikomiKakuNinCsvEntity> csvWriter;
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBZ000001"));
@@ -68,7 +68,7 @@ public class KokuhoCsvFyiiruSyutuRyokuProcess extends BatchProcessBase<TorikomiK
     @Override
     protected void afterExecute() {
         csvWriter.close();
-        manager.spool(SubGyomuCode.DBC介護給付, eucFilePath);
+        manager.spool(SubGyomuCode.DBD介護受給, eucFilePath);
     }
 
     private KokuhoJyohoTorikomiKakuNinCsvEntity getCsvEntity(TorikomiKokuhoJyohoEntity entity) {

@@ -158,7 +158,7 @@ public class FutanWariaisho {
             IShikibetsuTaishoSearchKey 識別対象検索キー = builder.build();
             IKojinFinder finder = ShikibetsuTaishoService.getKojinFinder();
             List<IKojin> kojinList = finder.get個人s(識別対象検索キー);
-            ChohyoSeigyoKyotsu 帳票共通情報 = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBC介護給付,
+            ChohyoSeigyoKyotsu 帳票共通情報 = new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBD介護受給,
                     ReportIdDBD.DBD100065.getReportId());
             EditedKojin 編集後個人 = null;
             if (kojinList != null && !kojinList.isEmpty()) {
@@ -178,7 +178,7 @@ public class FutanWariaisho {
         GyomuKoyuKeyRiyoKubun 業務固有キー利用区分 = GyomuKoyuKeyRiyoKubun.利用しない;
         SofusakiRiyoKubun 送付先利用区分 = SofusakiRiyoKubun.利用する;
         IAtesakiGyomuHanteiKey 宛先業務判定キー
-                = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBC介護給付);
+                = AtesakiGyomuHanteiKeyFactory.createInstace(GyomuCode.DB介護保険, SubGyomuCode.DBD介護受給);
         IAtesakiPSMSearchKey searchKey = new AtesakiPSMSearchKeyBuilder(宛先業務判定キー)
                 .set識別コード(識別コード)
                 .set業務固有キー利用区分(業務固有キー利用区分)

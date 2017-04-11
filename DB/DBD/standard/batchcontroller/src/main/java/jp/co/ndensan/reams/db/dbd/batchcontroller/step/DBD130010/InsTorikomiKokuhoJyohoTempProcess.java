@@ -32,7 +32,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringUtil;
 
 /**
- * バッチ設計_DBC130010_国保資格異動情報取込（取込国保情報Tempに登録）
+ * バッチ設計_DBD130010_国保資格異動情報取込（取込国保情報Tempに登録）
  *
  * @reamsid_L DBC-3020-030 dengwei
  */

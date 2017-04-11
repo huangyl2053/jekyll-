@@ -19,14 +19,14 @@ import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * バッチ設計_DBC130010_国保資格異動情報取込(国保資格情報に登録)
+ * バッチ設計_DBD130010_国保資格異動情報取込(国保資格情報に登録)
  *
  * @reamsid_L DBC-3020-030 dengwei
  */
 public class InsertKokuhoShikakuJyohoProcess extends BatchProcessBase<KokuhoShikakuJyohoInpotoyoEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc130010.IKokuhoShikakuIdoInMapper.get国保資格情報インポート用Entitｙリスト");
+            "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.dbd130010.IKokuhoShikakuIdoInMapper.get国保資格情報インポート用Entitｙリスト");
     @BatchWriter
     private IBatchTableWriter<DbT7123KokuhoShikakuInfoEntity> 国保資格情報Writer;
     private InsKokuhoShikakuJyohoProcessParameter parameter;

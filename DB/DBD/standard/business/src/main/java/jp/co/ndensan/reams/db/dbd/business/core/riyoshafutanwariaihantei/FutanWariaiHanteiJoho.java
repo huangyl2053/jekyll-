@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2512KaigoShotokuNewestEntit
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 
 /**
- * ビジネス設計_DBCMNK1002_利用者負担割合判定（共通）の負担割合判定情報エンティティです。
+ * ビジネス設計_DBDMNK1002_利用者負担割合判定（共通）の負担割合判定情報エンティティです。
  *
  * @reamsid_L DBC-4950-032 liuyang
  */

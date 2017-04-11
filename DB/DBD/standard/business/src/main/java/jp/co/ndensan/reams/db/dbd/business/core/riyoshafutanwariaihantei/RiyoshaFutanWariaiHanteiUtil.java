@@ -168,7 +168,7 @@ public class RiyoshaFutanWariaiHanteiUtil {
     /**
      * set対象年度開始終了日のメソッドです。
      *
-     * @param param DBC180020MyBatisParameter
+     * @param param DBD180020MyBatisParameter
      */
     public void set対象年度開始終了日(DBD180020MyBatisParameter param) {
         RString 対象年度 = param.get対象年度();
@@ -182,12 +182,12 @@ public class RiyoshaFutanWariaiHanteiUtil {
     }
 
     /**
-     * DBC180020ProcessParameterを取得します。
+     * DBD180020ProcessParameterを取得します。
      *
-     * @param param DBC180022_RiyoshaFutanwariaiHanteiSubParameter
+     * @param param DBD180022_RiyoshaFutanwariaiHanteiSubParameter
      * @param 異動 boolean
      * @param index int
-     * @return DBC180020ProcessParameter
+     * @return DBD180020ProcessParameter
      */
     public DBD180020ProcessParameter toProcessParameter(DBD180022_RiyoshaFutanwariaiHanteiSubParameter param,
             boolean 異動, int index) {
@@ -211,11 +211,11 @@ public class RiyoshaFutanWariaiHanteiUtil {
     }
 
     /**
-     * DBC180020ProcessParameterを取得します。
+     * DBD180020ProcessParameterを取得します。
      *
-     * @param param DBC180022_RiyoshaFutanwariaiHanteiSubParameter
+     * @param param DBD180022_RiyoshaFutanwariaiHanteiSubParameter
      * @param index int
-     * @return DBC180020ProcessParameter
+     * @return DBD180020ProcessParameter
      */
     public DBD180020ProcessParameter toProcessParameter(DBD180022_RiyoshaFutanwariaiHanteiSubParameter param,
             int index) {
@@ -233,10 +233,10 @@ public class RiyoshaFutanWariaiHanteiUtil {
     }
 
     /**
-     * DBC180020ProcessParameterを取得します。
+     * DBD180020ProcessParameterを取得します。
      *
-     * @param param DBC180022_RiyoshaFutanwariaiHanteiSubParameter
-     * @return DBC180020ProcessParameter
+     * @param param DBD180022_RiyoshaFutanwariaiHanteiSubParameter
+     * @return DBD180020ProcessParameter
      */
     public DBD180020ProcessParameter toProcessParameter(DBD180022_RiyoshaFutanwariaiHanteiSubParameter param) {
         return new DBD180020ProcessParameter(

@@ -12,7 +12,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * DBC180020MyBatisParameterのクラスです。
+ * DBD180020MyBatisParameterのクラスです。
  *
  * @reamsid_L DBC-4950-030 liuyang
  */
@@ -55,13 +55,13 @@ public class DBD180020MyBatisParameter implements IMyBatisParameter {
     private RString 対象終了日七月;
 
     /**
-     * DBC180020MyBatisParameterのコンストラクタです。
+     * DBD180020MyBatisParameterのコンストラクタです。
      */
     public DBD180020MyBatisParameter() {
     }
 
     /**
-     * DBC180020MyBatisParameterのコンストラクタです。
+     * DBD180020MyBatisParameterのコンストラクタです。
      *
      * @param 判定基準日 RString
      * @param 対象年度 RString
@@ -84,7 +84,7 @@ public class DBD180020MyBatisParameter implements IMyBatisParameter {
     }
 
     /**
-     * DBC180020MyBatisParameterのコンストラクタです。
+     * DBD180020MyBatisParameterのコンストラクタです。
      *
      * @param 対象開始日 RString
      * @param 対象終了日 RString
@@ -97,7 +97,7 @@ public class DBD180020MyBatisParameter implements IMyBatisParameter {
     }
 
     /**
-     * DBC180020MyBatisParameterのコンストラクタです。
+     * DBD180020MyBatisParameterのコンストラクタです。
      *
      * @param 判定基準日 RString
      * @param 対象年度 RString

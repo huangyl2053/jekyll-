@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * バッチ設計_DBC130010_国保資格異動情報取込
+ * バッチ設計_DBD130010_国保資格異動情報取込
  *
  * @reamsid_L DBC-3020-030 dengwei
  */

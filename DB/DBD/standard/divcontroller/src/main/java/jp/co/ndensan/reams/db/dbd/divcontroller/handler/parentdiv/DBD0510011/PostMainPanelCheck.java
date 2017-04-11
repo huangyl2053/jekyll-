@@ -47,8 +47,8 @@ public class PostMainPanelCheck {
     private static final RString 対象のファイル = new RString("対象のファイル");
     private static final RString 国保取込ファイルのフォーマット = new RString("国保取込ファイルのフォーマット");
     private static final RString 後期高齢取込ファイルのフォーマット = new RString("後期高齢取込ファイルのフォーマット");
-    private static final RString DBCMN82001 = new RString("DBCMN82001");
-    private static final RString DBCMN82002 = new RString("DBCMN82002");
+    private static final RString DBDUC05100 = new RString("DBDUC05100");
+    private static final RString DBDUC05101 = new RString("DBDUC05101");
     private static final RString NUM_00 = new RString("00");
     private static final RString NUM_1 = new RString("1");
     private static final RString NUM_2 = new RString("2");
@@ -86,7 +86,7 @@ public class PostMainPanelCheck {
     public void validateCheck() {
         国保情報Check();
         Code 導入形態コード = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務).get導入形態コード();
-        if (ResponseHolder.getMenuID().equals(DBCMN82002)) {
+        if (ResponseHolder.getUIContainerId().equals(DBDUC05101)) {
             RString 後期ＩＦ種類 = DbBusinessConfig.get(ConfigNameDBC.国保_後期高齢ＩＦ_後期ＩＦ種類, RDate.getNowDate(),
                     SubGyomuCode.DBC介護給付);
             if (導入形態コード.toString().equals(NUM_120.toString())) {
@@ -117,7 +117,7 @@ public class PostMainPanelCheck {
     public void validateCheckNew() {
         国保情報CheckNew();
         Code 導入形態コード = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務).get導入形態コード();
-        if (ResponseHolder.getMenuID().equals(DBCMN82002)) {
+        if (ResponseHolder.getUIContainerId().equals(DBDUC05101)) {
             RString 後期ＩＦ種類 = DbBusinessConfig.get(ConfigNameDBC.国保_後期高齢ＩＦ_後期ＩＦ種類, RDate.getNowDate(),
                     SubGyomuCode.DBC介護給付);
             if (導入形態コード.toString().equals(NUM_120.toString())) {
@@ -147,7 +147,7 @@ public class PostMainPanelCheck {
         List<UzT0885SharedFileEntryEntity> 国保情報List;
         RString 国保ＩＦ種類 = DbBusinessConfig.get(ConfigNameDBC.国保_後期高齢ＩＦ_国保ＩＦ種類, RDate.getNowDate(),
                 SubGyomuCode.DBC介護給付);
-        if (ResponseHolder.getMenuID().equals(DBCMN82001)) {
+        if (ResponseHolder.getUIContainerId().equals(DBDUC05100)) {
             if (導入形態コード.toString().equals(NUM_120.toString())) {
                 国保情報List = SharedFile.searchSharedFile(単一国保情報);
                 単一messeges(国保情報List);
@@ -174,7 +174,7 @@ public class PostMainPanelCheck {
         List<UzT0885SharedFileEntryEntity> 国保情報List;
         RString 国保ＩＦ種類 = DbBusinessConfig.get(ConfigNameDBC.国保_後期高齢ＩＦ_国保ＩＦ種類, RDate.getNowDate(),
                 SubGyomuCode.DBC介護給付);
-        if (ResponseHolder.getMenuID().equals(DBCMN82001)) {
+        if (ResponseHolder.getUIContainerId().equals(DBDUC05100)) {
             if (導入形態コード.toString().equals(NUM_120.toString())) {
                 国保情報List = SharedFile.searchSharedFile(単一国保情報);
                 単一messeges(国保情報List);
@@ -267,20 +267,20 @@ public class PostMainPanelCheck {
             try (BufferedReader bufferedReader = new BufferedReader(read)) {
                 RString hasread = new RString(bufferedReader.readLine());
                 if (hasread.isEmpty()) {
-                    if (ResponseHolder.getMenuID().equals(DBCMN82002)) {
+                    if (ResponseHolder.getUIContainerId().equals(DBDUC05101)) {
                         throw new ApplicationException(UrErrorMessages.不正.getMessage()
                                 .replace(後期高齢取込ファイルのフォーマット.toString()).evaluate());
                     }
-                    if (ResponseHolder.getMenuID().equals(DBCMN82001)) {
+                    if (ResponseHolder.getUIContainerId().equals(DBDUC05100)) {
                         throw new ApplicationException(UrErrorMessages.不正.getMessage()
                                 .replace(国保取込ファイルのフォーマット.toString()).evaluate());
                     }
                 } else {
-                    if (hasread.toString().getBytes(Encode.SJIS.getName()).length != num && ResponseHolder.getMenuID().equals(DBCMN82002)) {
+                    if (hasread.toString().getBytes(Encode.SJIS.getName()).length != num && ResponseHolder.getUIContainerId().equals(DBDUC05101)) {
                         throw new ApplicationException(UrErrorMessages.不正.getMessage()
                                 .replace(後期高齢取込ファイルのフォーマット.toString()).evaluate());
                     }
-                    if (hasread.toString().getBytes(Encode.SJIS.getName()).length != num && ResponseHolder.getMenuID().equals(DBCMN82001)) {
+                    if (hasread.toString().getBytes(Encode.SJIS.getName()).length != num && ResponseHolder.getUIContainerId().equals(DBDUC05100)) {
                         throw new ApplicationException(UrErrorMessages.不正.getMessage()
                                 .replace(国保取込ファイルのフォーマット.toString()).evaluate());
                     } else {
@@ -316,7 +316,7 @@ public class PostMainPanelCheck {
      * @param 市町村コード RString
      */
     public void 市町村コード(int 長さ判定, Code 導入形態コード, RString hasread, int from, dgShichoson_Row row, RString 市町村コード) {
-        if (ResponseHolder.getMenuID().equals(DBCMN82001) && 長さ判定 == INT_2) {
+        if (ResponseHolder.getUIContainerId().equals(DBDUC05100) && 長さ判定 == INT_2) {
             市町村コード = 市町村コード.substring(0, NUM_5);
             if (!get指定位置な文字列(hasread, from, NUM_5).equals(市町村コード)) {
                 messeges();
@@ -345,11 +345,11 @@ public class PostMainPanelCheck {
      */
     public void messeges() {
 
-        if (ResponseHolder.getMenuID().equals(DBCMN82002)) {
+        if (ResponseHolder.getUIContainerId().equals(DBDUC05101)) {
             throw new ApplicationException(UrErrorMessages.不正.getMessage()
                     .replace(後期高齢取込ファイルのフォーマット.toString()).evaluate());
         }
-        if (ResponseHolder.getMenuID().equals(DBCMN82001)) {
+        if (ResponseHolder.getUIContainerId().equals(DBDUC05100)) {
             throw new ApplicationException(UrErrorMessages.不正.getMessage()
                     .replace(国保取込ファイルのフォーマット.toString()).evaluate());
         }

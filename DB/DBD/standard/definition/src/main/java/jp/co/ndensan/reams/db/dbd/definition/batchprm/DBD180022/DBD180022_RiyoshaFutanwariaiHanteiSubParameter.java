@@ -21,7 +21,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * バッチ設計_DBCMNK1002_利用者負担割合判定（共通）のバッチパラメータです。
+ * バッチ設計_DBDMNK1002_利用者負担割合判定（共通）のバッチパラメータです。
  *
  * @reamsid_L DBC-4950-030 liuyang
  */
@@ -57,11 +57,11 @@ public class DBD180022_RiyoshaFutanwariaiHanteiSubParameter extends BatchParamet
     private List<RString> 対象終了日;
 
     /**
-     * toDBC180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameterのメソッドです。
+     * toDBD180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameterのメソッドです。
      *
-     * @return DBC180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter
+     * @return DBD180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter
      */
-    public DBD180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter toDBC180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter() {
+    public DBD180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter toDBD180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter() {
         DBD180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter parameter
                 = new DBD180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter();
         parameter.setTaishoNendo(this.getTaishoNendo());
@@ -81,11 +81,11 @@ public class DBD180022_RiyoshaFutanwariaiHanteiSubParameter extends BatchParamet
     }
 
     /**
-     * toDBC180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishoshaParameterのメソッドです。
+     * toDBD180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishoshaParameterのメソッドです。
      *
-     * @return DBC180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishoshaParameter
+     * @return DBD180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishoshaParameter
      */
-    public DBD180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishoshaParameter toDBC180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishoshaParameter() {
+    public DBD180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishoshaParameter toDBD180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishoshaParameter() {
         DBD180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishoshaParameter parameter
                 = new DBD180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishoshaParameter();
         parameter.setTaishoNendo(this.getTaishoNendo());
@@ -105,11 +105,11 @@ public class DBD180022_RiyoshaFutanwariaiHanteiSubParameter extends BatchParamet
     }
 
     /**
-     * toDBC180025_RiyoshaFutanwariaiHanteiSubGetsujiShoriParameterのメソッドです。
+     * toDBD180025_RiyoshaFutanwariaiHanteiSubGetsujiShoriParameterのメソッドです。
      *
-     * @return DBC180025_RiyoshaFutanwariaiHanteiSubGetsujiShoriParameter
+     * @return DBD180025_RiyoshaFutanwariaiHanteiSubGetsujiShoriParameter
      */
-    public DBD180025_RiyoshaFutanwariaiHanteiSubGetsujiShoriParameter toDBC180025_RiyoshaFutanwariaiHanteiSubGetsujiShoriParameter() {
+    public DBD180025_RiyoshaFutanwariaiHanteiSubGetsujiShoriParameter toDBD180025_RiyoshaFutanwariaiHanteiSubGetsujiShoriParameter() {
         DBD180025_RiyoshaFutanwariaiHanteiSubGetsujiShoriParameter parameter
                 = new DBD180025_RiyoshaFutanwariaiHanteiSubGetsujiShoriParameter();
         parameter.setTaishoNendo(this.getTaishoNendo());

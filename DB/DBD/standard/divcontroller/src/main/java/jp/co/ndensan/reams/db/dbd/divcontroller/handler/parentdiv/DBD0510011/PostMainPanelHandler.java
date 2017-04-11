@@ -47,8 +47,8 @@ public class PostMainPanelHandler {
     private static final RString NUM_111 = new RString("111");
     private static final RString NUM_112 = new RString("112");
     private static final RString NUM_120 = new RString("120");
-    private static final RString DBCMN82001 = new RString("DBCMN82001");
-    private static final RString DBCMN82002 = new RString("DBCMN82002");
+    private static final RString DBDUC05100 = new RString("DBDUC05100");
+    private static final RString DBDUC05101 = new RString("DBDUC05101");
     private static final RString NUM_1 = new RString("1");
     private static final int NUM_8 = 8;
     private static final int NUM_14 = 14;
@@ -104,14 +104,14 @@ public class PostMainPanelHandler {
                     getShichosonSecurityJoho(GyomuBunrui.介護事務).get市町村情報().get市町村コード().toString()));
             ShoriDateKanri 処理日付管理マスタ;
             ShoriDateKanriManager manager = new ShoriDateKanriManager();
-            if (ResponseHolder.getMenuID().equals(DBCMN82001) && SharedFile.searchSharedFile(単一国保情報) != null
+            if (ResponseHolder.getUIContainerId().equals(DBDUC05100) && SharedFile.searchSharedFile(単一国保情報) != null
                     && SharedFile.searchSharedFile(単一国保情報).size() > 0 && SharedFile.searchSharedFile(単一国保情報).get(0) != null) {
                 処理日付管理マスタ = manager.get処理日付管理マスタ(国保情報取り込み, 処理枝番);
                 処理日付管理マスタnull処理(処理日付管理マスタ, 処理日付管理マスタに国保の情報);
                 List<UzT0885SharedFileEntryEntity> 国保情報List = SharedFile.searchSharedFile(単一国保情報);
                 setTime(国保情報List.get(0).getSharedFileId());
             }
-            if (ResponseHolder.getMenuID().equals(DBCMN82002) && SharedFile.searchSharedFile(広域後期情報) != null
+            if (ResponseHolder.getUIContainerId().equals(DBDUC05101) && SharedFile.searchSharedFile(広域後期情報) != null
                     && SharedFile.searchSharedFile(広域後期情報).size() > 0 && SharedFile.searchSharedFile(広域後期情報).get(0) != null) {
                 処理日付管理マスタ = manager.get処理日付管理マスタ(後期高齢者情報取り込み, 処理枝番);
                 処理日付管理マスタnull処理(処理日付管理マスタ, 処理日付管理マスタに後期高齢の情報);
@@ -221,14 +221,14 @@ public class PostMainPanelHandler {
             }
             items.setShichosonShikibetuID(new RString(item.get(NUM_4).toString()));
             RString 後期 = 後期情報.replace(定値_処理枝番, NUM_00.concat(items.getShichosonShikibetuID()));
-            if (ResponseHolder.getMenuID().equals(DBCMN82002) && SharedFile.searchSharedFile(後期) != null
+            if (ResponseHolder.getUIContainerId().equals(DBDUC05101) && SharedFile.searchSharedFile(後期) != null
                     && SharedFile.searchSharedFile(後期).size() > 0 && SharedFile.searchSharedFile(後期).get(0) != null) {
                 List<UzT0885SharedFileEntryEntity> 後期情報List = SharedFile.searchSharedFile(後期);
                 items.setFileNitiji(new RString(DateConverter.toWarekiHalf_Zero(後期情報List.get(0).getSharedFileId().getDate()).toString().
                         concat(RString.HALF_SPACE.toString()).concat(DateConverter.getTime141(後期情報List.get(0).getSharedFileId().getTime()).toString())));
             }
             RString 国保 = 国保情報.replace(定値_処理枝番, NUM_00.concat(items.getShichosonShikibetuID()));
-            if (ResponseHolder.getMenuID().equals(DBCMN82001) && SharedFile.searchSharedFile(国保) != null
+            if (ResponseHolder.getUIContainerId().equals(DBDUC05100) && SharedFile.searchSharedFile(国保) != null
                     && SharedFile.searchSharedFile(国保).size() > 0 && SharedFile.searchSharedFile(国保).get(0) != null) {
                 List<UzT0885SharedFileEntryEntity> 国保情報List = SharedFile.searchSharedFile(国保);
                 items.setFileNitiji(new RString(DateConverter.toWarekiHalf_Zero(国保情報List.get(0).getSharedFileId().getDate()).toString().
@@ -276,7 +276,7 @@ public class PostMainPanelHandler {
     private List<List> 市町村識別ID00処理() {
         List<List> resultList = null;
         PostMainPanelFinder finder = PostMainPanelFinder.createInstance();
-        if (ResponseHolder.getMenuID().equals(DBCMN82001)) {
+        if (ResponseHolder.getUIContainerId().equals(DBDUC05100)) {
             Map<String, Object> parameter = createParameter(true, false);
             resultList = finder.getPostMainPanel(parameter);
             if (resultList == null) {
@@ -284,7 +284,7 @@ public class PostMainPanelHandler {
                         .replace(処理日付管理マスタに国保の情報.toString()).evaluate());
             }
         } else {
-            if (ResponseHolder.getMenuID().equals(DBCMN82002)) {
+            if (ResponseHolder.getUIContainerId().equals(DBDUC05101)) {
                 Map<String, Object> parameter = createParameter(false, true);
                 resultList = finder.getPostMainPanel(parameter);
                 if (resultList == null) {
@@ -299,7 +299,7 @@ public class PostMainPanelHandler {
     private List<List> 市町村識別ID処理(RString 市町村識別ID) {
         List<List> resultList = null;
         PostMainPanelFinder finder = PostMainPanelFinder.createInstance();
-        if (ResponseHolder.getMenuID().equals(DBCMN82001)) {
+        if (ResponseHolder.getUIContainerId().equals(DBDUC05100)) {
             PostMainPanelMybatisParameter parameter = PostMainPanelMybatisParameter.
                     creatParameter(国保情報取り込み, new RString(市町村識別ID.toString()));
             resultList = finder.getPostMainPanel(parameter);
@@ -308,7 +308,7 @@ public class PostMainPanelHandler {
                         .replace(処理日付管理マスタに国保の情報.toString()).evaluate());
             }
         } else {
-            if (ResponseHolder.getMenuID().equals(DBCMN82002)) {
+            if (ResponseHolder.getUIContainerId().equals(DBDUC05101)) {
                 PostMainPanelMybatisParameter parameter = PostMainPanelMybatisParameter.
                         creatParameter(後期高齢者情報取り込み, new RString(市町村識別ID.toString()));
                 resultList = finder.getPostMainPanel(parameter);

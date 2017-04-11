@@ -16,11 +16,12 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
- * DBC2000022PanelAll のクラスファイル 
- * 
+ * DBD2000022PanelAll のクラスファイル
+ *
  * @author 自動生成
  */
 public class DBD2000022PanelAllDiv extends Panel {
+
     // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-04_20-51-13">
     /*
      * [ private の作成 ]
@@ -246,7 +247,7 @@ public class DBD2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlNendo(DropDownList ddlNendo) {
+    public void setDdlNendo(DropDownList ddlNendo) {
         this.getPanelHyoji().setDdlNendo(ddlNendo);
     }
 
@@ -256,7 +257,7 @@ public class DBD2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlRirekiNo(DropDownList ddlRirekiNo) {
+    public void setDdlRirekiNo(DropDownList ddlRirekiNo) {
         this.getPanelHyoji().setDdlRirekiNo(ddlRirekiNo);
     }
 
@@ -266,7 +267,7 @@ public class DBD2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnHyoji(Button btnHyoji) {
+    public void setBtnHyoji(Button btnHyoji) {
         this.getPanelHyoji().setBtnHyoji(btnHyoji);
     }
 
@@ -276,7 +277,7 @@ public class DBD2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnClear(Button btnClear) {
+    public void setBtnClear(Button btnClear) {
         this.getPanelHyoji().setBtnClear(btnClear);
     }
 
@@ -286,7 +287,7 @@ public class DBD2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtHanteibi(TextBoxDate txtHanteibi) {
+    public void setTxtHanteibi(TextBoxDate txtHanteibi) {
         this.getPanelHyoji().setTxtHanteibi(txtHanteibi);
     }
 
@@ -296,7 +297,7 @@ public class DBD2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtHanteiKubun(TextBox txtHanteiKubun) {
+    public void setTxtHanteiKubun(TextBox txtHanteiKubun) {
         this.getPanelHyoji().setTxtHanteiKubun(txtHanteiKubun);
     }
 
@@ -306,7 +307,7 @@ public class DBD2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnSeikatsuHogo(ButtonDialog btnSeikatsuHogo) {
+    public void setBtnSeikatsuHogo(ButtonDialog btnSeikatsuHogo) {
         this.getPanelHyoji().setBtnSeikatsuHogo(btnSeikatsuHogo);
     }
 
@@ -316,7 +317,7 @@ public class DBD2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnAddBefore(Button btnAddBefore) {
+    public void setBtnAddBefore(Button btnAddBefore) {
         this.getPanelEditButton().setBtnAddBefore(btnAddBefore);
     }
 
@@ -326,7 +327,7 @@ public class DBD2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnAddNext(Button btnAddNext) {
+    public void setBtnAddNext(Button btnAddNext) {
         this.getPanelEditButton().setBtnAddNext(btnAddNext);
     }
 
@@ -336,7 +337,7 @@ public class DBD2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnEdit(Button btnEdit) {
+    public void setBtnEdit(Button btnEdit) {
         this.getPanelEditButton().setBtnEdit(btnEdit);
     }
 
@@ -346,7 +347,7 @@ public class DBD2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlShikaku(DropDownList ddlShikaku) {
+    public void setDdlShikaku(DropDownList ddlShikaku) {
         this.getPanelEdit().setDdlShikaku(ddlShikaku);
     }
 
@@ -356,7 +357,7 @@ public class DBD2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlFutanWariai(DropDownList ddlFutanWariai) {
+    public void setDdlFutanWariai(DropDownList ddlFutanWariai) {
         this.getPanelEdit().setDdlFutanWariai(ddlFutanWariai);
     }
 
@@ -366,7 +367,7 @@ public class DBD2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTekiyoKaishibi(TextBoxDate txtTekiyoKaishibi) {
+    public void setTxtTekiyoKaishibi(TextBoxDate txtTekiyoKaishibi) {
         this.getPanelEdit().setTxtTekiyoKaishibi(txtTekiyoKaishibi);
     }
 
@@ -376,7 +377,7 @@ public class DBD2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtTekiyoShuryobi(TextBoxDate txtTekiyoShuryobi) {
+    public void setTxtTekiyoShuryobi(TextBoxDate txtTekiyoShuryobi) {
         this.getPanelEdit().setTxtTekiyoShuryobi(txtTekiyoShuryobi);
     }
 
@@ -386,7 +387,7 @@ public class DBD2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtHonninGokeiShotoku(TextBoxNum txtHonninGokeiShotoku) {
+    public void setTxtHonninGokeiShotoku(TextBoxNum txtHonninGokeiShotoku) {
         this.getPanelEdit().setTxtHonninGokeiShotoku(txtHonninGokeiShotoku);
     }
 
@@ -396,7 +397,7 @@ public class DBD2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtSetaiinsu(TextBoxNum txtSetaiinsu) {
+    public void setTxtSetaiinsu(TextBoxNum txtSetaiinsu) {
         this.getPanelEdit().setTxtSetaiinsu(txtSetaiinsu);
     }
 
@@ -406,7 +407,7 @@ public class DBD2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtNenkinShunyuGokei(TextBoxNum txtNenkinShunyuGokei) {
+    public void setTxtNenkinShunyuGokei(TextBoxNum txtNenkinShunyuGokei) {
         this.getPanelEdit().setTxtNenkinShunyuGokei(txtNenkinShunyuGokei);
     }
 
@@ -416,7 +417,7 @@ public class DBD2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtSonotaGokei(TextBoxNum txtSonotaGokei) {
+    public void setTxtSonotaGokei(TextBoxNum txtSonotaGokei) {
         this.getPanelEdit().setTxtSonotaGokei(txtSonotaGokei);
     }
 
@@ -426,7 +427,7 @@ public class DBD2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtBiko(TextBoxMultiLine txtBiko) {
+    public void setTxtBiko(TextBoxMultiLine txtBiko) {
         this.getPanelEdit().setTxtBiko(txtBiko);
     }
 
@@ -436,7 +437,7 @@ public class DBD2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setPanelEditItem(PanelEditItemDiv PanelEditItem) {
+    public void setPanelEditItem(PanelEditItemDiv PanelEditItem) {
         this.getPanelEdit().setPanelEditItem(PanelEditItem);
     }
 
@@ -446,7 +447,7 @@ public class DBD2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnCancel(Button btnCancel) {
+    public void setBtnCancel(Button btnCancel) {
         this.getPanelEdit().getPanelEditItem().setBtnCancel(btnCancel);
     }
 
@@ -456,7 +457,7 @@ public class DBD2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setBtnKakutei(Button btnKakutei) {
+    public void setBtnKakutei(Button btnKakutei) {
         this.getPanelEdit().getPanelEditItem().setBtnKakutei(btnKakutei);
     }
 
@@ -466,7 +467,7 @@ public class DBD2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setChkShokkenHenko(CheckBoxList chkShokkenHenko) {
+    public void setChkShokkenHenko(CheckBoxList chkShokkenHenko) {
         this.getPanelHosokuItem().setChkShokkenHenko(chkShokkenHenko);
     }
 
@@ -476,7 +477,7 @@ public class DBD2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setChkShoHakkoFuyo(CheckBoxList chkShoHakkoFuyo) {
+    public void setChkShoHakkoFuyo(CheckBoxList chkShoHakkoFuyo) {
         this.getPanelHosokuItem().setChkShoHakkoFuyo(chkShoHakkoFuyo);
     }
 
@@ -486,7 +487,7 @@ public class DBD2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKijunbi(TextBoxDate txtKijunbi) {
+    public void setTxtKijunbi(TextBoxDate txtKijunbi) {
         this.getPanelHosokuItem().setTxtKijunbi(txtKijunbi);
     }
 
@@ -496,7 +497,7 @@ public class DBD2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlHakkoKubun(DropDownList ddlHakkoKubun) {
+    public void setDdlHakkoKubun(DropDownList ddlHakkoKubun) {
         this.getPanelHosokuItem().setDdlHakkoKubun(ddlHakkoKubun);
     }
 
@@ -506,7 +507,7 @@ public class DBD2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtHakkobi(TextBoxDate txtHakkobi) {
+    public void setTxtHakkobi(TextBoxDate txtHakkobi) {
         this.getPanelHosokuItem().setTxtHakkobi(txtHakkobi);
     }
 
@@ -516,7 +517,7 @@ public class DBD2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setTxtKofubi(TextBoxDate txtKofubi) {
+    public void setTxtKofubi(TextBoxDate txtKofubi) {
         this.getPanelHosokuItem().setTxtKofubi(txtKofubi);
     }
 
@@ -526,7 +527,7 @@ public class DBD2000022PanelAllDiv extends Panel {
     }
 
     @JsonIgnore
-    public void  setDdlKofuJiyu(DropDownList ddlKofuJiyu) {
+    public void setDdlKofuJiyu(DropDownList ddlKofuJiyu) {
         this.getPanelHosokuItem().setDdlKofuJiyu(ddlKofuJiyu);
     }
 

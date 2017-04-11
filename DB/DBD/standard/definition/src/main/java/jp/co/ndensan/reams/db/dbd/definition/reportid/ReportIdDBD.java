@@ -335,7 +335,11 @@ public enum ReportIdDBD {
     /**
      * 負担割合証（カット紙）
      */
-    DBD100065(new ReportId("DBD100065_FutanWariaiSho"), new RString("負担割合証（カット紙）"));
+    DBD100065(new ReportId("DBD100065_FutanWariaiSho"), new RString("負担割合証（カット紙）")),
+    /**
+     * 負担割合判定一覧表帳票ＩＤです。
+     */
+    DBD200089(new ReportId("DBD200089_FutanWariaiHanteiIchiran"), new RString("負担割合判定一覧表"));
 
     private final ReportId reportId;
     private final RString reportName;

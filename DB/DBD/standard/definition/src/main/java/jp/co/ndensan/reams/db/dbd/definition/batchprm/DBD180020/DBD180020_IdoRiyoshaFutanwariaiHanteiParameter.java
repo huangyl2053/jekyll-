@@ -62,7 +62,8 @@ public class DBD180020_IdoRiyoshaFutanwariaiHanteiParameter extends BatchParamet
     /**
      * processのパラメータを生成します。
      *
-     * @return parameter DBC180021_RiyoshaFutanwariaiHanteiIdoDataSelectSubParameter
+     * @return parameter
+     * DBD180021_RiyoshaFutanwariaiHanteiIdoDataSelectSubParameter
      */
     public DBD180021_RiyoshaFutanwariaiHanteiIdoDataSelectSubParameter toIdoDateTyuushutuKyoutsuuParameter() {
         DBD180021_RiyoshaFutanwariaiHanteiIdoDataSelectSubParameter parameter = new DBD180021_RiyoshaFutanwariaiHanteiIdoDataSelectSubParameter();
@@ -85,7 +86,7 @@ public class DBD180020_IdoRiyoshaFutanwariaiHanteiParameter extends BatchParamet
     /**
      * processのパラメータを生成します。
      *
-     * @return parameter DBC180022_RiyoshaFutanwariaiHanteiSubParameter
+     * @return parameter DBD180022_RiyoshaFutanwariaiHanteiSubParameter
      */
     public DBD180022_RiyoshaFutanwariaiHanteiSubParameter toRiyoshaFutanwariaiHanteiCommonFlowParameter() {
         DBD180022_RiyoshaFutanwariaiHanteiSubParameter parameter = new DBD180022_RiyoshaFutanwariaiHanteiSubParameter();
@@ -108,9 +109,10 @@ public class DBD180020_IdoRiyoshaFutanwariaiHanteiParameter extends BatchParamet
     /**
      * processのパラメータを生成します。
      *
-     * @return parameter DBC180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter
+     * @return parameter
+     * DBD180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter
      */
-    public DBD180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter toDBC180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter() {
+    public DBD180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter toDBD180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter() {
         DBD180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter parameter
                 = new DBD180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter();
         parameter.setTaishoNendo(this.getTaishoNendo());
@@ -132,9 +134,10 @@ public class DBD180020_IdoRiyoshaFutanwariaiHanteiParameter extends BatchParamet
     /**
      * processのパラメータを生成します。
      *
-     * @return parameter DBC180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter
+     * @return parameter
+     * DBD180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter
      */
-    public DBD180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishoshaParameter toDBC180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishoshaParameter() {
+    public DBD180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishoshaParameter toDBD180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishoshaParameter() {
         DBD180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishoshaParameter parameter
                 = new DBD180024_RiyoshaFutanwariaiHanteiSubTsukibetsuTaishoshaParameter();
         parameter.setTaishoNendo(this.getTaishoNendo());
@@ -156,9 +159,10 @@ public class DBD180020_IdoRiyoshaFutanwariaiHanteiParameter extends BatchParamet
     /**
      * processのパラメータを生成します。
      *
-     * @return parameter DBC180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter
+     * @return parameter
+     * DBD180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter
      */
-    public DBD180025_RiyoshaFutanwariaiHanteiSubGetsujiShoriParameter toDBC180025_RiyoshaFutanwariaiHanteiSubGetsujiShoriParameter() {
+    public DBD180025_RiyoshaFutanwariaiHanteiSubGetsujiShoriParameter toDBD180025_RiyoshaFutanwariaiHanteiSubGetsujiShoriParameter() {
         DBD180025_RiyoshaFutanwariaiHanteiSubGetsujiShoriParameter parameter
                 = new DBD180025_RiyoshaFutanwariaiHanteiSubGetsujiShoriParameter();
         parameter.setTaishoNendo(this.getTaishoNendo());
@@ -180,7 +184,7 @@ public class DBD180020_IdoRiyoshaFutanwariaiHanteiParameter extends BatchParamet
     /**
      * processのパラメータを生成します。
      *
-     * @return parameter DBC180011_RiyoshaFutanwariaiHanteiIchiranSubParameter
+     * @return parameter DBD180011_RiyoshaFutanwariaiHanteiIchiranSubParameter
      */
     public DBD180011_RiyoshaFutanwariaiHanteiIchiranSubParameter toFutanWariaiIchiranFlowParameter() {
         DBD180011_RiyoshaFutanwariaiHanteiIchiranSubParameter parameter = new DBD180011_RiyoshaFutanwariaiHanteiIchiranSubParameter();

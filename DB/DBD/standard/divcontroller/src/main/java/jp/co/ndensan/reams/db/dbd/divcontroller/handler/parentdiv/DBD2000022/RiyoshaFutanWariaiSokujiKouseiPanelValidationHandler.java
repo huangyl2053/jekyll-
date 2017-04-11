@@ -44,7 +44,7 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelValidationHandler {
     /**
      * 初期化処理です。
      *
-     * @param div DBC2000022PanelAllDiv
+     * @param div DBD2000022PanelAllDiv
      */
     public RiyoshaFutanWariaiSokujiKouseiPanelValidationHandler(DBD2000022PanelAllDiv div) {
         this.div = div;
