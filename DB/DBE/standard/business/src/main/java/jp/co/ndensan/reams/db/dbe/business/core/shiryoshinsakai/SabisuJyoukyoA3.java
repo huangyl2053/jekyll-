@@ -31,7 +31,6 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ItiziHanteiEn
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku09B;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.INinteichosaKomokuMapping;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping09B;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
@@ -73,18 +72,11 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJo
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.image.BarImageType;
 import jp.co.ndensan.reams.uz.uza.image.EachBarImage;
 import jp.co.ndensan.reams.uz.uza.image.StackBarImage;
-import jp.co.ndensan.reams.uz.uza.io.Directory;
-import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -137,8 +129,8 @@ public class SabisuJyoukyoA3 {
     private static final RString 加算 = new RString("＋");
     private static final RString 等号 = new RString("＝");
     private static final int 基準時間算出用_10 = 10;
-    private static final int 基準時間算出用_5 = 5;
-    private static final int 基準時間算出用_12 = 12;
+    private static final float 基準時間算出用_5 = 5.0f;
+    private static final float 基準時間算出用_12 = 12.0f;
     private final boolean is調査意見書比較結果印字する;
     private final RString 印字する = new RString("1");
 
@@ -1297,7 +1289,7 @@ public class SabisuJyoukyoA3 {
         } else if (1 == score.indexOf(COMMA)) {
             scoreBuilder.append(RString.HALF_SPACE).append(RString.HALF_SPACE).append(score);
         } else {
-            scoreBuilder.append(score);            
+            scoreBuilder.append(score);
         }
         return scoreBuilder.substringEmptyOnError(0, 5);
     }
@@ -2019,6 +2011,6 @@ public class SabisuJyoukyoA3 {
     }
 
     private int getNumber(int 各基準時間) {
-        return 各基準時間 * 基準時間算出用_5 / 基準時間算出用_12;
+        return Math.round(各基準時間 * 基準時間算出用_5 / 基準時間算出用_12);
     }
 }
