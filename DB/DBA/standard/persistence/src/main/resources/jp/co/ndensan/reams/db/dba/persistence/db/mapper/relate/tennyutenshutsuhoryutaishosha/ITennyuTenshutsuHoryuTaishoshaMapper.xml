@@ -47,7 +47,47 @@
         WHERE EXISTS (SELECT * FROM rgdb."DbT7051KoseiShichosonMaster" DbT7051
         WHERE SUBSTR(DbT7051."shichosonCode", 1, 5) = SUBSTR("DbT1010TennyushutsuHoryuTaishosha"."zenkokuJushoCode" , 1, 5))
     </select>
-
+    
+    <select resultOrdered="true" id="get転出保留対象者情報" resultMap="resultMap_TenshutsuHoryuTaishoshaRelateEntity"
+            parameterType="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" fetchSize="500">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.allColumns_DbT1001HihokenshaDaicho" />,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1011TenshutsuHoryuTaishoshaMapper.allColumns_DbT1011TenshutsuHoryuTaishosha" />
+        FROM rgdb."DbT1011TenshutsuHoryuTaishosha"
+        INNER JOIN (
+          SELECT *
+          FROM (
+            SELECT *, ROW_NUMBER() OVER (PARTITION BY "hihokenshaNo" ORDER BY "hihokenshaNo", "idoYMD" DESC, "edaNo" DESC) AS DbT1001_RRKNO
+            FROM rgdb."DbT1001HihokenshaDaicho"
+          ) AS "DbT1001HihokenshaDaicho"
+          WHERE DbT1001_RRKNO = '1'
+        ) AS "DbT1001HihokenshaDaicho"
+        ON "DbT1011TenshutsuHoryuTaishosha"."shikibetsuCode" = "DbT1001HihokenshaDaicho"."shikibetsuCode"
+        WHERE "DbT1011TenshutsuHoryuTaishosha"."shikibetsuCode" = #{識別コード}
+        ORDER BY "DbT1011TenshutsuHoryuTaishosha"."rirekiNo" DESC
+        LIMIT (1)
+    </select>
+    
+    <select resultOrdered="true" id="get転入保留対象者情報" resultMap="resultMap_TennyushutsuHoryuTaishoshaRelateEntity"
+            parameterType="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler" fetchSize="500">
+        SELECT
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1001HihokenshaDaichoMapper.allColumns_DbT1001HihokenshaDaicho" />,
+        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT1010TennyushutsuHoryuTaishoshaMapper.allColumns_DbT1010TennyushutsuHoryuTaishosha" />
+        FROM rgdb."DbT1010TennyushutsuHoryuTaishosha"
+        INNER JOIN (
+          SELECT *
+          FROM (
+            SELECT *, ROW_NUMBER() OVER (PARTITION BY "hihokenshaNo" ORDER BY "idoYMD" DESC, "edaNo" DESC) AS DbT1001_RRKNO
+            FROM rgdb."DbT1001HihokenshaDaicho"
+          ) AS "DbT1001HihokenshaDaicho"
+          WHERE DbT1001_RRKNO = '1'
+        ) AS "DbT1001HihokenshaDaicho"
+        ON "DbT1010TennyushutsuHoryuTaishosha"."shikibetsuCode" = "DbT1001HihokenshaDaicho"."shikibetsuCode"
+        WHERE "DbT1010TennyushutsuHoryuTaishosha"."shikibetsuCode" = #{識別コード}
+        ORDER BY "DbT1010TennyushutsuHoryuTaishosha"."rirekiNo" DESC
+        LIMIT (1)
+    </select>
+    
     <resultMap id="resultMap_TenshutsuHoryuTaishoshaRelateEntity"
                type="jp.co.ndensan.reams.db.dba.entity.db.relate.tennyutenshutsuhoryu.TenshutsuHoryuTaishoshaRelateEntity"
                autoMapping="true">

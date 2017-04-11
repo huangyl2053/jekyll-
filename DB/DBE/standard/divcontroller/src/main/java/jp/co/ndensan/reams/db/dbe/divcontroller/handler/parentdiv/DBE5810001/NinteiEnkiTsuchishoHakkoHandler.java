@@ -10,15 +10,19 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteienkitsuchishohakko.DgHakkotaishoshaRow;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteienkitsuchishohakko.NinteiEnkiTsuchishoHakkoBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE581001.DBE581001_EnkitsuchiParameter;
+import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import static jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5810001.DBE5810001StateName.検索;
 import static jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5810001.DBE5810001StateName.通知書;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5810001.NinteiEnkiTsuchishoHakkoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5810001.dgHakkotaishosha_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteienkitsuchishohakko.NinteiEnkiTsuchishoHakkoManager;
+import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoDbT5101Child;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -28,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
@@ -95,7 +100,20 @@ public class NinteiEnkiTsuchishoHakkoHandler {
         div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         div.getTxtInsatsuDate().setValue(RDate.getNowDate());
         CommonButtonHolder.setDisabledByCommonButtonFieldName(一覧表を発行する_FileName, true);
-        div.getCcdNinteiEnkiTsuchishoBunshoBango().initialize(new ReportId(帳票分類ID));
+
+        ShichosonSecurityJohoFinder shichosonSecurityFinder = ShichosonSecurityJohoFinder.createInstance();
+        ShichosonSecurityJoho securityJoho = shichosonSecurityFinder.getShichosonSecurityJoho(GyomuBunrui.介護認定);
+        RString 証記載保険者番号 = securityJoho.get市町村情報().get証記載保険者番号().value();
+        ReportId 帳票ID = ReportIdDBE.DBE581001.getReportId();
+
+        if (securityJoho.get導入形態コード().equals(DonyuKeitaiCode.認定広域)) {
+            RStringBuilder 帳票IDBuilder = new RStringBuilder();
+            帳票IDBuilder.append(帳票ID.value()).append(new RString("_")).append(証記載保険者番号);
+            帳票ID = new ReportId(帳票IDBuilder.toRString());
+        }
+
+        div.getCcdNinteiEnkiTsuchishoBunshoBango().initialize(帳票ID);
+
     }
 
     private void clear検索条件() {

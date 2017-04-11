@@ -304,13 +304,16 @@ public class HoshuMasutaKoshinValidationHandler {
         if (既に存在開始年月.isEmpty() && 既に存在終了年月.isEmpty()) {
             return true;
         } else if (既に存在開始年月.isEmpty()) {
-            if (既に存在終了年月.isBeforeOrEquals(新規作成終了年月)) {
+            if (!既に存在終了年月.isEmpty() && 既に存在終了年月.isBeforeOrEquals(新規作成終了年月)) {
                 return true;
             }
         } else if (既に存在終了年月.isEmpty()) {
-            if (既に存在開始年月.isBeforeOrEquals(新規作成終了年月)) {
+            if (!既に存在開始年月.isEmpty() && 既に存在開始年月.isBeforeOrEquals(新規作成終了年月)) {
                 return true;
             }
+        }
+        if (新規作成開始年月.isBeforeOrEquals(既に存在終了年月) && 既に存在開始年月.isBeforeOrEquals(新規作成終了年月)) {
+            return true;
         }
         return 新規作成開始年月.isBeforeOrEquals(既に存在終了年月) && 既に存在開始年月.isBeforeOrEquals(新規作成開始年月)
                 || 新規作成終了年月.isBeforeOrEquals(既に存在終了年月) && 既に存在開始年月.isBeforeOrEquals(新規作成終了年月);
@@ -335,13 +338,27 @@ public class HoshuMasutaKoshinValidationHandler {
         }
         return validationMessages;
     }
-    
+
+    /**
+     * validationMessage和暦に変換不可を返す。
+     *
+     * @param textBoxFlexibleYearMonth TextBoxFlexibleYearMonth
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs validate和暦に変換不可(TextBoxFlexibleYearMonth textBoxFlexibleYearMonth) {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        validationMessages.add(new ValidationMessageControlPair(RRVMessages.和暦に変換不可,
+                textBoxFlexibleYearMonth));
+        return validationMessages;
+    }
+
     private static enum RRVMessages implements IValidationMessage {
 
         期間が不正(UrErrorMessages.期間が不正_追加メッセージあり２, "開始年月", "終了年月"),
         既に存在(UrErrorMessages.既に存在, "データ"),
         期間が重複(UrErrorMessages.期間が重複),
-        審査委員コードエラー(DbeErrorMessages.審査委員コードエラー);
+        審査委員コードエラー(DbeErrorMessages.審査委員コードエラー),
+        和暦に変換不可(DbeErrorMessages.和暦に変換不可);
 
         private final Message message;
 

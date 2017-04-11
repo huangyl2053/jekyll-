@@ -20,10 +20,6 @@ var DBZ;
                 return "onclick_BtnClear";
             };
 
-            Events.close_Dialog = function () {
-                return "close_Dialog";
-            };
-
             Events.select_BtnSenTaKu = function () {
                 return "select_BtnSenTaKu";
             };
@@ -34,6 +30,10 @@ var DBZ;
 
             Events.select_BtnSakujo = function () {
                 return "select_BtnSakujo";
+            };
+
+            Events.close_Dialog = function () {
+                return "close_Dialog";
             };
             return Events;
         })();
@@ -131,16 +131,16 @@ var DBZ;
                 return new UZA.Button(this.convFiledName("btnClear"));
             };
 
-            Controls.prototype.btnYameru = function () {
-                return new UZA.Button(this.convFiledName("btnYameru"));
-            };
-
             Controls.prototype.JigyoshaItirann = function () {
                 return new UZA.Panel(this.convFiledName("JigyoshaItirann"));
             };
 
             Controls.prototype.dgJigyoshaItiran = function () {
                 return new UZA.DataGrid(this.convFiledName("dgJigyoshaItiran"));
+            };
+
+            Controls.prototype.btnYameru = function () {
+                return new UZA.Button(this.convFiledName("btnYameru"));
             };
             return Controls;
         })();

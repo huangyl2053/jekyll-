@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.HokenshaDDLPattem;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
@@ -34,7 +35,6 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -78,13 +78,14 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
      */
     public void onload() {
         div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定, HokenshaDDLPattem.全市町村以外);
+        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
+        div.getCcdHokenshaList().setSelectedShichosonIfExist(市町村セキュリティ情報.get市町村情報().get市町村コード());
         div.getRadKensakuHoho().setSelectedKey(KensakuHoho.被保険者から検索する場合.key);
         div.getShinseiJohoIchiran().setIsOpen(false);
         div.getRadHizukeHani().setSelectedKey(DATE_SOURCE_KEY0);
         div.getTxtShiteiHizukeRange().setDisabled(true);
         div.getSerchFromHohokensha().setDisplayNone(false);
         div.getSerchFromShinchokuJokyo().setDisplayNone(true);
-        set検索条件切替(false);
         init最大表示件数();
         setDisable();
         set広域用切替();
@@ -101,33 +102,28 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         }
     }
 
-    public void set検索条件切替(boolean is検索結果表示) {
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("btnSearch"), !is検索結果表示);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(BTNPRINT, is検索結果表示);
-        CommonButtonHolder.setVisibleByCommonButtonFieldName(BTNRESEARCH, is検索結果表示);
-        div.getKensakuJoken().setDisplayNone(is検索結果表示);
-        div.getShinseiJohoIchiran().setDisplayNone(!is検索結果表示);
-    }
-
     /**
      * 検索する場合、選択変更します。
      */
     public void radKensakuHohoChange() {
+        ShoKisaiHokenshaNo 証記載保険者番号 = div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号();
         switch (get検索方法()) {
             case 進捗状況から検索する場合:
                 div.getSerchFromHohokensha().setDisplayNone(true);
                 div.getSerchFromShinchokuJokyo().setDisplayNone(false);
                 div.getSerchFromShinchokuJokyo().setIsOpen(true);
                 div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
-                return;
+                break;
             case 被保険者から検索する場合:
                 div.getSerchFromHohokensha().setDisplayNone(false);
                 div.getSerchFromHohokensha().setIsOpen(true);
                 div.getSerchFromShinchokuJokyo().setDisplayNone(true);
                 div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定, HokenshaDDLPattem.全市町村以外);
-                return;
-            default:
+                break;
         }
+        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
+        div.getCcdHokenshaList().setSelectedShichosonIfExist(市町村セキュリティ情報.get市町村情報().get市町村コード());
+        div.getCcdHokenshaList().setSelectedShoKisaiHokenshaNoIfExist(証記載保険者番号);
     }
 
     /**
@@ -174,7 +170,6 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
         for (YokaigoNinteiShinchokuJoho joho : searchResult.records()) {
             dg_row.add(setRow(joho));
         }
-        set検索条件切替(true);
         div.getDgShinseiJoho().setDataSource(dg_row);
         div.getDgShinseiJoho().getGridSetting().setLimitRowCount(get最大取得件数());
         div.getDgShinseiJoho().getGridSetting().setSelectedRowCount(searchResult.totalCount());
@@ -218,7 +213,10 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
                     row.getKaigoNinteiShinsakaiYoteiDay().getValue() == null ? RString.EMPTY : row.getKaigoNinteiShinsakaiYoteiDay().getValue().toDateString(),
                     row.getHihokenshaJusho(),
                     row.getNinteiChosain(),
-                    row.getShujiiName());
+                    row.getShujiiName(),
+                    row.getShoKisaiHokenshaNo(),
+                    row.getShinseishoKanriNo()
+            );
             list.add(item);
         }
         return list;
@@ -227,7 +225,8 @@ public class YokaigoNinteiShinchokuJohoShokaiHandler {
     private dgShinseiJoho_Row setRow(YokaigoNinteiShinchokuJoho joho) {
         dgShinseiJoho_Row row = new dgShinseiJoho_Row();
         row.setHokensha(nullToEmpty(joho.get市町村名称()));
-        row.setHihokenshaNo(joho.get被保険者番号() == null ? RString.EMPTY : joho.get被保険者番号().getColumnValue());
+        row.setShoKisaiHokenshaNo(joho.get証記載保険者番号() == null ? RString.EMPTY : joho.get証記載保険者番号());
+        row.setHihokenshaNo(joho.get被保険者番号() == null ? RString.EMPTY : joho.get被保険者番号());
         row.setShimei(nullToEmpty(joho.get被保険者氏名()));
         row.setHihoKubun(HihokenshaKubunCode.to名称OrDefault(joho.get被保険者区分コード(), RString.EMPTY));
         if (joho.get認定申請年月日() == null || joho.get認定申請年月日().isEmpty()) {

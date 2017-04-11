@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -49,6 +50,7 @@ public class ShikakuHenkouIdou {
     private final GappeijiJutokuKaijoRirekiCreator rirekiCreator;
 
     private static final RString MENUID_52002 = new RString("DBAMN52002");
+    private static final RString COMMON_BUTTON_UPDATE = new RString("btnUpdate");
 
     /**
      * コンストラクタです。
@@ -67,6 +69,9 @@ public class ShikakuHenkouIdou {
      * @return ResponseData<ShikakuHenkouIdouDiv>
      */
     public ResponseData<ShikakuHenkouIdouDiv> onLoad(ShikakuHenkouIdouDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         div.getCcdKaigoAtenaInfo().initialize(key.get識別コード());
         if (key.get被保険者番号() == null) {
@@ -76,6 +81,12 @@ public class ShikakuHenkouIdou {
         }
         HihokenshaShutokuJyoho hihokensha = shutokuManager.getSaishinDeta(
                 key.get識別コード(), key.get被保険者番号());
+        if (hihokensha == null) {
+            div.setDisabled(true);
+            div.getKihonJoho().getCcdKaigoAtenaInfo().getAtenaInfoDiv().setDisabled(true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_UPDATE, true);
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
+        }
         getHandler(div).load(hihokensha);
         if (!RealInitialLocker.tryGetLock(create排他キー())) {
             div.setReadOnly(true);

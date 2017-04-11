@@ -16,7 +16,8 @@ public enum DBA2030011StateName implements IStateEnumerations {
 
     NoChange(""),
     初期状態("初期状態"),
-    完了状態("完了状態");
+    完了状態("完了状態"),
+    転出転入保留対象者管理_初期状態("転出転入保留対象者管理_初期状態");
 
     private final RString name;
 

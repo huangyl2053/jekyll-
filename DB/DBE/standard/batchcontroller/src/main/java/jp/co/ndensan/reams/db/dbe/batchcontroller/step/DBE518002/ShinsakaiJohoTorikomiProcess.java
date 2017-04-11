@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE518002;
 
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinsakaikekkadatatorikomi.DataTorikomiEdit;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteishinsakaikekkadatatorikomi.ShinsakaiKekkaDataTorikomiMybatisParameter;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5501ShinsakaiKaisaiYoteiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomimobile.TempShinsakaiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteishinsakaikekkadatatorikomi.IShinsakaiKekkaDataTorikomiMapper;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5511ShinsakaiKaisaiKekkaJohoEntity;
@@ -32,6 +33,8 @@ public class ShinsakaiJohoTorikomiProcess extends BatchProcessBase<TempShinsakai
 
     @BatchWriter
     BatchPermanentTableWriter<DbT5511ShinsakaiKaisaiKekkaJohoEntity> dbT5511Writer;
+    @BatchWriter
+    BatchPermanentTableWriter<DbT5501ShinsakaiKaisaiYoteiJohoEntity> dbT5501Writer;
 
     @Override
     protected void beforeExecute() {
@@ -42,6 +45,7 @@ public class ShinsakaiJohoTorikomiProcess extends BatchProcessBase<TempShinsakai
     @Override
     protected void createWriter() {
         dbT5511Writer = new BatchPermanentTableWriter(DbT5511ShinsakaiKaisaiKekkaJohoEntity.class);
+        dbT5501Writer = new BatchPermanentTableWriter(DbT5501ShinsakaiKaisaiYoteiJohoEntity.class);
     }
 
     @Override
@@ -55,6 +59,7 @@ public class ShinsakaiJohoTorikomiProcess extends BatchProcessBase<TempShinsakai
             mybatisParameter = ShinsakaiKekkaDataTorikomiMybatisParameter.createParam(
                 RString.EMPTY, entity.get介護認定審査会開催番号(), RString.EMPTY);
             DbT5511ShinsakaiKaisaiKekkaJohoEntity t5511Entity = mapper.getShinsakaiJoho(mybatisParameter);
+            DbT5501ShinsakaiKaisaiYoteiJohoEntity t5501Entity = mapper.getShinsakaiKaisaiYotei(mybatisParameter);
             try {
                 if (null == t5511Entity) {
                     dbT5511Writer.insert(edit.insertDbT5511Entity(entity));
@@ -63,6 +68,9 @@ public class ShinsakaiJohoTorikomiProcess extends BatchProcessBase<TempShinsakai
                 }
             } catch (Exception ex) {
                 System.out.println(ex);
+            }
+            if (null != t5501Entity) {
+                dbT5501Writer.update(edit.updateDbT5501Entity(t5501Entity));
             }
         }
     }

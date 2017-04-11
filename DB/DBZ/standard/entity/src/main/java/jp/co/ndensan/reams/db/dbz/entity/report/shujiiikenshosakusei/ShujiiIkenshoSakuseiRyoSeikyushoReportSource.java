@@ -100,7 +100,7 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoReportSource implements IReportSour
     //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
 // </editor-fold>
     @ReportPerson(id = "X")
-    public ShikibetsuCode shikibetuCode;
+    public ShikibetsuCode 識別コード;
     @ReportExpandedInfo(id = "X")
-    public ExpandedInformation shokenshaNo;
+    public ExpandedInformation 拡張情報;
 }

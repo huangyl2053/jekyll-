@@ -41,4 +41,13 @@ public interface IIChiJiPanTeiSyoRiMapper {
      * @return DbT5116IchijiHanteiKekkaJohoEntity 要介護認定一次判定結果情報
      */
     List<DbT5116IchijiHanteiKekkaJohoEntity> get要介護認定一次判定結果情報(IChiJiPanTeiSyoRiParameter parameter);
+
+    /**
+     * 認定調査結果入手一次判定結果情報の検索。
+     *
+     * @param parameter IChiJiPanTeiSyoRiParameter
+     * @return DbT5116IchijiHanteiKekkaJohoEntity 要介護認定一次判定結果情報
+     */
+    List<DbT5116IchijiHanteiKekkaJohoEntity> get一次判定結果情報_調査結果(IChiJiPanTeiSyoRiParameter parameter);
+
 }

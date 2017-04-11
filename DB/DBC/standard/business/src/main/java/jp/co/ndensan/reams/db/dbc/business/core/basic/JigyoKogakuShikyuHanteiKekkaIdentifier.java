@@ -9,7 +9,6 @@ import java.io.Serializable;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import lombok.Value;
 
 /**
@@ -22,7 +21,7 @@ public class JigyoKogakuShikyuHanteiKekkaIdentifier implements Serializable {
     private final HihokenshaNo 被保険者番号;
     private final FlexibleYearMonth サービス提供年月;
     private final HokenshaNo 証記載保険者番号;
-    private final Decimal 履歴番号;
+    private final int 履歴番号;
 
     /**
      * コンストラクタです。
@@ -35,7 +34,7 @@ public class JigyoKogakuShikyuHanteiKekkaIdentifier implements Serializable {
     public JigyoKogakuShikyuHanteiKekkaIdentifier(HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
             HokenshaNo 証記載保険者番号,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         this.被保険者番号 = 被保険者番号;
         this.サービス提供年月 = サービス提供年月;
         this.証記載保険者番号 = 証記載保険者番号;

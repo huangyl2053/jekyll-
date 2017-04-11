@@ -28,6 +28,10 @@ var DBZ;
                 return "onClick_btnToroku";
             };
 
+            Events.onClick_btnCancel = function () {
+                return "onClick_btnCancel";
+            };
+
             Events.onClick_btnModoru = function () {
                 return "onClick_btnModoru";
             };
@@ -76,7 +80,7 @@ var DBZ;
             };
 
             Controls.prototype.txtShinsakaiIinCode = function () {
-                return new UZA.TextBox(this.convFiledName("txtShinsakaiIinCode"));
+                return new UZA.TextBoxCode(this.convFiledName("txtShinsakaiIinCode"));
             };
 
             Controls.prototype.btnShinsakaiIinGuide = function () {
@@ -97,6 +101,14 @@ var DBZ;
 
             Controls.prototype.btnToroku = function () {
                 return new UZA.Button(this.convFiledName("btnToroku"));
+            };
+
+            Controls.prototype.btnCancel = function () {
+                return new UZA.Button(this.convFiledName("btnCancel"));
+            };
+
+            Controls.prototype.horizonLine1 = function () {
+                return new UZA.HorizontalLine(this.convFiledName("horizonLine1"));
             };
 
             Controls.prototype.btnModoru = function () {

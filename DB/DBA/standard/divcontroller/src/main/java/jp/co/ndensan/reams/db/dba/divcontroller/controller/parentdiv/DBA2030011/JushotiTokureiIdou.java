@@ -6,18 +6,24 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA2030011;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.business.core.tennyutenshutsuhoryu.TennyuHoryuTaisho;
+import jp.co.ndensan.reams.db.dba.business.core.tennyutenshutsuhoryu.TenshutsuHoryuTaisho;
+import jp.co.ndensan.reams.db.dba.definition.message.DbaQuestionMessages;
 import jp.co.ndensan.reams.db.dbz.business.core.hihokenshadaicho.HihokenshaShutokuJyoho;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2030011.DBA2030011StateName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2030011.DBA2030011TransitionEventName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA2030011.JushotiTokureiIdouDiv;
 import jp.co.ndensan.reams.db.dbz.service.core.hihokenshadaicho.HihokenshaShikakuShutokuManager;
 import jp.co.ndensan.reams.db.dba.service.core.jushotitokureiidou.JushotiTokureiIdouFinder;
+import jp.co.ndensan.reams.db.dba.service.core.tennyutenshutsuhoryutaishosha.TennyuTenshutsuHoryuTaishoshaManager;
 import jp.co.ndensan.reams.db.dbx.business.core.shichosonsecurity.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.business.core.TennyushutsuHoryuTaishosha;
+import jp.co.ndensan.reams.db.dbz.business.core.TenshutsuHoryuTaishosha;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -30,9 +36,11 @@ import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 被保険者台帳管理（住所地特例異動）クラスです。
@@ -53,6 +61,7 @@ public class JushotiTokureiIdou {
     private static final RString DBAMN25001_届出により適用 = new RString("DBAMN25001");
     private static final RString DBAMN25002_届出により解除 = new RString("DBAMN25002");
     private static final RString DBAMN25003_届出により施設変更 = new RString("DBAMN25003");
+    private static final RString DBAMN61002_転入転出保留対象者管理 = new RString("DBAMN61002");
     private LockingKey 前排他ロックキー;
     private final HihokenshaShikakuShutokuManager hihokenshaShikakuShutoku = HihokenshaShikakuShutokuManager.createInstance();
     private final JushotiTokureiIdouFinder jushotiTokureiIdouFinder = JushotiTokureiIdouFinder.createInstance();
@@ -82,6 +91,15 @@ public class JushotiTokureiIdou {
         if (DBAMN25003_届出により施設変更.equals(UrControlDataFactory.createInstance().getMenuID())) {
             div.getCcdHihosyosai().住所地特例表示タイプ(資格異動モード);
             前排他ロックキー = new LockingKey("ShikakuJutokuShikakuIdo、HihokenshaNo");
+        }
+        if (DBAMN61002_転入転出保留対象者管理.equals(UrControlDataFactory.createInstance().getMenuID())) {
+//            Todo:広域ユーザー導入時に実装。転出保留対象か、転入保留対象か状態にて区別する。
+            if (DBA2030011StateName.転出転入保留対象者管理_初期状態.getName().equals(ResponseHolder.getState())) {
+                div.getCcdHihosyosai().住所地特例表示タイプ(適用モード);
+            } else {
+                div.getCcdHihosyosai().住所地特例表示タイプ(解除モード);
+            }
+            前排他ロックキー = new LockingKey("ShikakuJutokuTekiyo、HihokenshaNo");
         }
         div.getCcdHihosyosai().資格関連異動表示モード(照会モード);
         div.getCcdHihosyosai().施設入退所表示モード(表示モード);
@@ -120,30 +138,100 @@ public class JushotiTokureiIdou {
         if (!ResponseHolder.isReRequest()) {
             return ResponseData.of(div).addMessage(UrQuestionMessages.処理実行の確認.getMessage()).respond();
         }
+
+        if (new RString(UrInformationMessages.保存終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return ResponseData.of(div).forwardWithEventName(DBA2030011TransitionEventName.完了).respond();
+        }
+
+        TennyuTenshutsuHoryuTaishoshaManager 転入出保留対象者Manager = InstanceProvider.create(TennyuTenshutsuHoryuTaishoshaManager.class);
+        if (new RString(DbaQuestionMessages.保留対象取消確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            TenshutsuHoryuTaisho 転出保留対象者情報 = ViewStateHolder.get(ViewStateKeys.転出保留対象者, TenshutsuHoryuTaisho.class);
+            TennyuHoryuTaisho 転入保留対象者情報 = ViewStateHolder.get(ViewStateKeys.転入保留対象者, TennyuHoryuTaisho.class);
+            TenshutsuHoryuTaishosha 転出保留対象者 = null;
+            TennyushutsuHoryuTaishosha 転入保留対象者 = null;
+            if (転出保留対象者情報 != null) {
+                転出保留対象者 = 転出保留対象者情報.get転出保留対象者();
+            }
+            if (転入保留対象者情報 != null) {
+                転入保留対象者 = 転入保留対象者情報.get転入保留対象者();
+            }
+            if (転出保留対象者 != null) {
+                転入出保留対象者Manager.delete転出保留対象者(転出保留対象者);
+            }
+            if (転入保留対象者 != null) {
+                転入出保留対象者Manager.delete転入保留対象者(転入保留対象者);
+            }
+            RealInitialLocker.release(前排他ロックキー);
+            if (DBAMN61002_転入転出保留対象者管理.equals(UrControlDataFactory.createInstance().getMenuID())) {
+                return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
+            } else {
+                return ResponseData.of(div).setState(DBA2030011StateName.完了状態);
+            }
+        }
+
+        if (new RString(DbaQuestionMessages.保留対象取消確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            RealInitialLocker.release(前排他ロックキー);
+            if (DBAMN61002_転入転出保留対象者管理.equals(UrControlDataFactory.createInstance().getMenuID())) {
+                return ResponseData.of(div).forwardWithEventName(DBA2030011TransitionEventName.完了).respond();
+            } else {
+                return ResponseData.of(div).setState(DBA2030011StateName.完了状態);
+            }
+        }
+
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            RealInitialLocker.release(前排他ロックキー);
             div.getCcdHihosyosai().施設入退所保存処理();
+            TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+            ShikibetsuCode 識別コード = key.get識別コード();
+            Message message = null;
+            RString completeMessage = RString.EMPTY;
             if (DBAMN25001_届出により適用.equals(UrControlDataFactory.createInstance().getMenuID())) {
                 適用情報の保存(div);
-                div.getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage()
-                        .replace("資格適用処理").evaluate()), RString.EMPTY, RString.EMPTY, true);
-                return ResponseData.of(div).setState(DBA2030011StateName.完了状態);
+                message = 転入出保留対象者Manager.check転出保留対象者(識別コード);
+                completeMessage = new RString("資格適用処理");
             }
             if (DBAMN25002_届出により解除.equals(UrControlDataFactory.createInstance().getMenuID())) {
                 解除情報の保存(div);
-                div.getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage()
-                        .replace("資格解除処理").evaluate()), RString.EMPTY, RString.EMPTY, true);
-                return ResponseData.of(div).setState(DBA2030011StateName.完了状態);
+                message = 転入出保留対象者Manager.check転入保留対象者(識別コード);
+                completeMessage = new RString("資格解除処理");
             }
             if (DBAMN25003_届出により施設変更.equals(UrControlDataFactory.createInstance().getMenuID())) {
                 変更情報の保存(div);
+                RealInitialLocker.release(前排他ロックキー);
                 div.getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage()
                         .replace("資格変更処理").evaluate()), RString.EMPTY, RString.EMPTY, true);
                 return ResponseData.of(div).setState(DBA2030011StateName.完了状態);
             }
+            if (DBAMN61002_転入転出保留対象者管理.equals(UrControlDataFactory.createInstance().getMenuID())) {
+//                Todo:広域ユーザー導入時に実装。転出保留対象か、転入保留対象か状態にて区別する。
+                if (DBA2030011StateName.転出転入保留対象者管理_初期状態.getName().equals(ResponseHolder.getMenuID())) {
+                    適用情報の保存(div);
+                    message = 転入出保留対象者Manager.check転出保留対象者(識別コード);
+                } else {
+                    解除情報の保存(div);
+                    message = 転入出保留対象者Manager.check転入保留対象者(識別コード);
+                }
+            }
+            if (message != null) {
+                return ResponseData.of(div).addMessage(message).respond();
+            } else {
+                RealInitialLocker.release(前排他ロックキー);
+                if (RString.isNullOrEmpty(completeMessage)) {
+                    return ResponseData.of(div).forwardWithEventName(DBA2030011TransitionEventName.完了).respond();
+                }
+                setCompleteMessage(div, completeMessage);
+                return ResponseData.of(div).setState(DBA2030011StateName.完了状態);
+            }
         }
         return ResponseData.of(div).respond();
+    }
+
+    private void setCompleteMessage(JushotiTokureiIdouDiv div, RString message) {
+        div.getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage()
+                .replace(message.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
     }
 
     /**

@@ -16,8 +16,8 @@ var DBE;
                 return "onClick_btnInput";
             };
 
-            Events.onChange_txtTokkiJiko = function () {
-                return "onChange_txtTokkiJiko";
+            Events.onClick_btnAddRemban = function () {
+                return "onClick_btnAddRemban";
             };
 
             Events.onClick_btnSave = function () {
@@ -36,12 +36,20 @@ var DBE;
                 return "onClick_btnDeleteCancel";
             };
 
-            Events.onClick_btnReturn = function () {
-                return "onClick_btnReturn";
+            Events.onClick_dgTokkiBtnModify = function () {
+                return "onClick_dgTokkiBtnModify";
             };
 
-            Events.onClick_btnUpdateCancel = function () {
-                return "onClick_btnUpdateCancel";
+            Events.onClick_dgTokkiBtnDelete = function () {
+                return "onClick_dgTokkiBtnDelete";
+            };
+
+            Events.onClick_btnUpdateReturn = function () {
+                return "onClick_btnUpdateReturn";
+            };
+
+            Events.onClick_btnCancelReturn = function () {
+                return "onClick_btnCancelReturn";
             };
             return Events;
         })();
@@ -91,6 +99,10 @@ var DBE;
                 return new UZA.Button(this.convFiledName("btnInput"));
             };
 
+            Controls.prototype.btnAddRemban = function () {
+                return new UZA.Button(this.convFiledName("btnAddRemban"));
+            };
+
             Controls.prototype.txtTokkiJiko = function () {
                 return new UZA.TextBoxMultiLine(this.convFiledName("txtTokkiJiko"));
             };
@@ -115,12 +127,12 @@ var DBE;
                 return new UZA.DataGrid(this.convFiledName("dgTokkiJikoJoho"));
             };
 
-            Controls.prototype.btnReturn = function () {
-                return new UZA.Button(this.convFiledName("btnReturn"));
+            Controls.prototype.btnUpdateReturn = function () {
+                return new UZA.Button(this.convFiledName("btnUpdateReturn"));
             };
 
-            Controls.prototype.btnUpdateCancel = function () {
-                return new UZA.Button(this.convFiledName("btnUpdateCancel"));
+            Controls.prototype.btnCancelReturn = function () {
+                return new UZA.Button(this.convFiledName("btnCancelReturn"));
             };
             return Controls;
         })();

@@ -37,7 +37,7 @@
      "layoutName": "DBD5520001",
      "layoutTitle": "特殊処理　履歴修正",
      "eventName": "対象者一覧へ戻る",
-     "destroy": false,
+     "destroy": true,
      "condition": "",
      "toLayoutSubGyomuCode": "DBZ",
      "toLayoutName": "DBZ0200001",

@@ -1,8 +1,12 @@
 package jp.co.ndensan.reams.db.dbz.entity.report.shujiiikensho;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 主治医意見書作成依頼書のReportSourceです。
@@ -114,5 +118,9 @@ public class ShujiiIkenshoSakuseiIraishoReportSource implements IReportSource {
     public RString atenaRenban;
     @ReportItem(name = "remban", length = 4, order = 998)
     public RString remban;
+    @ReportPerson(id = "X")
+    public ShikibetsuCode 識別コード;
+    @ReportExpandedInfo(id = "X")
+    public ExpandedInformation 拡張情報;
 // </editor-fold>
 }

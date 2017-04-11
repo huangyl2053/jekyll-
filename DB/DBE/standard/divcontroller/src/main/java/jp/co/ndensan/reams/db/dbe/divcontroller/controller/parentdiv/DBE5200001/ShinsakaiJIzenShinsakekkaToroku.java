@@ -5,8 +5,11 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5200001;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE526001.DBE526001_ShinsakaiJIzenShinsakekkaIchiranParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5200001.DBE5200001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5200001.ShinsakaiJIzenShinsakekkaTorokuDiv;
@@ -20,12 +23,11 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
-import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -37,26 +39,30 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class ShinsakaiJIzenShinsakekkaToroku {
 
-    private final RString 出力名 = new RString("JizenShinsaKekka");
-    private final RString 下線 = new RString("_");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
-    private static final RString CSV_TAIPU = new RString(".csv");
-    private boolean 終了フラグ = true;
-    private boolean ヌルフラグ = true;
     private static final RString 事前審査結果 = new RString("事前審査結果を上書きしても");
+
+    private enum ViewStateKeysDBE5200001 {
+
+        ファイルs(ArrayList.class);
+
+        private ViewStateKeysDBE5200001(Class<?> type) {
+        }
+    }
 
     /**
      * 画面の初期化です。
      *
      * @param div 画面情報
-     * @return ResponseData<ShinsakaiJIzenShinsakekkaTorokuDiv>
+     * @return ResponseData
      */
     public ResponseData<ShinsakaiJIzenShinsakekkaTorokuDiv> onLoad(ShinsakaiJIzenShinsakekkaTorokuDiv div) {
-        if (!RString.isNullOrEmpty(ViewStateHolder.get(ViewStateKeys.開催番号, RString.class))) {
+        RString kaisaiNo = ViewStateHolder.get(ViewStateKeys.開催番号, RString.class);
+        if (!RString.isNullOrEmpty(kaisaiNo)) {
             getHandler(div).set事前審査会用結果(ShinsakaiJIzenShinsakekkaIchiranFinder.createInstance()
-                    .get事前審査会用結果(ViewStateHolder.get(ViewStateKeys.開催番号, RString.class)).records());
+                    .get事前審査会用結果(kaisaiNo).records());
             getHandler(div).set事前審査結果(ShinsakaiJIzenShinsakekkaIchiranFinder.createInstance().
-                    get事前審査結果(ViewStateHolder.get(ViewStateKeys.開催番号, RString.class)).records());
+                    get事前審査結果(kaisaiNo).records());
         }
         return ResponseData.of(div).respond();
     }
@@ -64,54 +70,81 @@ public class ShinsakaiJIzenShinsakekkaToroku {
     /**
      * 事前審査結果取込を実行する
      *
-     * @param requestDiv 画面情報
-     * @return ResponseData<ShinsakaiJIzenShinsakekkaTorokuDiv>
+     * @param div 画面情報
+     * @param fileData ファイルs
+     * @return ResponseData
      */
-    public ResponseData onclick_btnGetResult(ShinsakaiJIzenShinsakekkaTorokuDiv requestDiv) {
-
-        List<RString> 審査員 = ShinsakaiJIzenShinsakekkaIchiranFinder.createInstance().
-                get審査員(ViewStateHolder.get(ViewStateKeys.開催番号, RString.class)).records();
-        List<RString> fileName = setFileName(ViewStateHolder.get(ViewStateKeys.開催番号, RString.class), 審査員);
-        ValidationMessageControlPairs vallidation = getValidationHandler(requestDiv)
-                .入力チェック_btnGetResult(new RStringBuilder(Path.getTmpDirectoryPath()), fileName);
-        if (vallidation.iterator().hasNext()) {
-            return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
-        }
+    public ResponseData onclick_btnGetResult(ShinsakaiJIzenShinsakekkaTorokuDiv div, FileData[] fileData) {
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.確認_汎用.getMessage().replace(事前審査結果.toString()).getCode(),
                     UrQuestionMessages.確認_汎用.getMessage().replace(事前審査結果.toString()).evaluate());
-            return ResponseData.of(requestDiv).addMessage(message).respond();
+            ValidationMessageControlPairs vallidation = getValidationHandler(div)
+                    .validateUploadedFiles(fileData, ViewStateHolder.get(ViewStateKeys.開催番号, RString.class));
+            if (vallidation.existsError()) {
+                return ResponseData.of(div).addValidationMessages(vallidation).respond();
+            }
+            ViewStateHolder.remove(ViewStateKeysDBE5200001.ファイルs);
+            ViewStateHolder.put(ViewStateKeysDBE5200001.ファイルs, toFiles(fileData));
+            return ResponseData.of(div).addMessage(message).respond();
         }
+
         if (new RString(UrQuestionMessages.確認_汎用.getMessage().replace(事前審査結果.toString()).getCode())
                 .equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            fileName = getValidationHandler(requestDiv).getIsExistsFile(new RStringBuilder(Path.getTmpDirectoryPath()), fileName);
-            RStringBuilder emptyName = new RStringBuilder();
-            for (RString name : fileName) {
-                List<ShinsakaikekkaIchiranInputCsvEntity> csvEntityList = モバイルデータ取込(name);
-                if (!csvEntityList.isEmpty()) {
-                    ヌルフラグ = false;
-                } else {
-                    emptyName.append(name);
+            List<File> files = ViewStateHolder.get(ViewStateKeysDBE5200001.ファイルs, ArrayList.class);
+            Map<String, List<ShinsakaikekkaIchiranInputCsvEntity>> parsed = new HashMap<>();
+            for (File file : files) {
+                parsed.put(file.getName(), モバイルデータ取込(file.getPath()));
+            }
+            ValidationMessageControlPairs vallidations = getValidationHandler(div).ヌルチェック_btnGetResult(parsed);
+            if (vallidations.existsError()) {
+                return ResponseData.of(div).addValidationMessages(vallidations).respond();
+            }
+
+            boolean notExsitsError = true;
+            for (List<ShinsakaikekkaIchiranInputCsvEntity> result : parsed.values()) {
+                if (!getHandler(div).onclick_btnGetResult(result)) {
+                    notExsitsError = false;
                 }
             }
-            if (ヌルフラグ) {
-                ValidationMessageControlPairs vallidations = getValidationHandler(requestDiv).
-                        ヌルチェック_btnGetResult(emptyName.toRString());
-                return ResponseData.of(requestDiv).addValidationMessages(vallidations).respond();
-            }
-            for (RString name : fileName) {
-                List<ShinsakaikekkaIchiranInputCsvEntity> csvEntityList = モバイルデータ取込(name);
-                if (!getHandler(requestDiv).onclick_btnGetResult(csvEntityList)) {
-                    終了フラグ = false;
-                }
-            }
-            if (終了フラグ) {
-                return ResponseData.of(requestDiv).addMessage(UrInformationMessages.正常終了.getMessage()
+            if (notExsitsError) {
+                return ResponseData.of(div).addMessage(UrInformationMessages.正常終了.getMessage()
                         .replace("事前審査結果登録")).respond();
             }
         }
-        return onLoad(requestDiv);
+        return onLoad(div);
+    }
+
+    private static ArrayList<File> toFiles(FileData[] fileData) {
+        ArrayList<File> list = new ArrayList<>();
+        for (FileData f : fileData) {
+            list.add(new File(f.getFilePath().toString()));
+        }
+        return list;
+    }
+
+    private List<ShinsakaikekkaIchiranInputCsvEntity> モバイルデータ取込(String filePath) {
+        return readCsvFileBy(new CsvReader.InstanceBuilder(new RString(filePath), ShinsakaikekkaIchiranInputCsvEntity.class)
+                .setDelimiter(CSV_WRITER_DELIMITER)
+                .setEncode(Encode.SJIS)
+                .hasHeader(false)
+                .setNewLine(NewLine.CRLF)
+                .build()
+        );
+    }
+
+    private List<ShinsakaikekkaIchiranInputCsvEntity> readCsvFileBy(CsvReader<ShinsakaikekkaIchiranInputCsvEntity> csvReader) {
+        List<ShinsakaikekkaIchiranInputCsvEntity> csvEntityList = new ArrayList<>();
+        while (true) {
+            ShinsakaikekkaIchiranInputCsvEntity entity = csvReader.readLine();
+            if (entity != null) {
+                csvEntityList.add(entity);
+            } else {
+                break;
+            }
+        }
+        csvReader.close();
+        return csvEntityList;
     }
 
     /**
@@ -131,7 +164,6 @@ public class ShinsakaiJIzenShinsakekkaToroku {
      * @return ResponseData
      */
     public ResponseData onclick_btnToBeforeDocument(ShinsakaiJIzenShinsakekkaTorokuDiv div) {
-
         if (div.getPublicationResult().getDgBeforeShinsakaiResult().getDataSource().isEmpty()) {
             DBE526001_ShinsakaiJIzenShinsakekkaIchiranParameter paramter = new DBE526001_ShinsakaiJIzenShinsakekkaIchiranParameter(
                     ViewStateHolder.get(ViewStateKeys.開催番号, RString.class));
@@ -141,39 +173,6 @@ public class ShinsakaiJIzenShinsakekkaToroku {
                     .getJizenShinsakaiShiryoPublication().getPublicationTargetShinsakai().getTxtShinsakaiKaisaiNo().getValue());
             return ResponseData.of(paramter).respond();
         }
-
-    }
-
-    private List<ShinsakaikekkaIchiranInputCsvEntity> モバイルデータ取込(RString fileName) {
-        RString pathName = Path.getTmpDirectoryPath();
-        RString filePath = Path.combinePath(pathName, fileName);
-        CsvReader csvReader = new CsvReader.InstanceBuilder(filePath, ShinsakaikekkaIchiranInputCsvEntity.class)
-                .setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).hasHeader(false)
-                .setNewLine(NewLine.CRLF).build();
-        return readCsvFile(csvReader);
-    }
-
-    private List<ShinsakaikekkaIchiranInputCsvEntity> readCsvFile(CsvReader csvReader) {
-        List<ShinsakaikekkaIchiranInputCsvEntity> csvEntityList = new ArrayList<>();
-        while (true) {
-            ShinsakaikekkaIchiranInputCsvEntity entity = (ShinsakaikekkaIchiranInputCsvEntity) csvReader.readLine();
-            if (entity != null) {
-                csvEntityList.add(entity);
-            } else {
-                break;
-            }
-        }
-        csvReader.close();
-        return csvEntityList;
-    }
-
-    private List<RString> setFileName(RString 審査会番号, List<RString> 審査会委員コードリスト) {
-        List<RString> fileNameList = new ArrayList();
-        for (RString 審査会委員コード : 審査会委員コードリスト) {
-            fileNameList.add(new RStringBuilder(出力名).append(下線).append(審査会番号).append(下線)
-                    .append(審査会委員コード).append(CSV_TAIPU).toRString());
-        }
-        return fileNameList;
     }
 
     private ShinsakaiJIzenShinsakekkaTorokuValidationHandler getValidationHandler(ShinsakaiJIzenShinsakekkaTorokuDiv div) {

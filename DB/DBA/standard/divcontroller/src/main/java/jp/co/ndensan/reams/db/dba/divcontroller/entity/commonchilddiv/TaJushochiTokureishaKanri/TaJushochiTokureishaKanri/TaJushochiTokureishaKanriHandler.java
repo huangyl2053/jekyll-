@@ -125,7 +125,12 @@ public class TaJushochiTokureishaKanriHandler {
                     set他市町村住所地特例情報入力エリア(最新適用情報, 親画面状態);
                 }
                 ViewStateHolder.put(ViewStateKeys.台帳種別表示, new RString("台帳種別表示有り"));
+                div.getTxtNyusyobi().setRequired(true);
+                div.getTxtTekiyobi().setRequired(true);
+                div.getTxtTekiyoTodokedebi().setRequired(true);
+                div.getDdlTekiyoJiyo().setRequired(true);
                 div.getCcdShisetsuJoho().initialize();
+                div.getCcdShisetsuJoho().getTxtNyuryokuShisetsuKodo().setRequired(true);
                 break;
             case Kaijyo:
                 div.getDdlKaijyoJiyo().setDataSource(set解除事由());
@@ -141,8 +146,11 @@ public class TaJushochiTokureishaKanriHandler {
                 }
                 div.getTxtTasyobi().clearValue();
                 div.getTxtKaijyobi().clearValue();
+                div.getTxtKaijyobi().setRequired(true);
                 div.getTxtKaijyoTodokedebi().clearValue();
+                div.getTxtKaijyoTodokedebi().setRequired(true);
                 div.getDdlKaijyoJiyo().setSelectedKey(RString.EMPTY);
+                div.getDdlKaijyoJiyo().setRequired(true);
                 ViewStateHolder.put(ViewStateKeys.台帳種別表示, new RString("台帳種別表示有り"));
                 break;
             case ShisetuHenko:
@@ -158,13 +166,13 @@ public class TaJushochiTokureishaKanriHandler {
     /**
      * 「追加する」ボタンを押下する場合、他市町村住所地特例情報入力エリア全項目をクリアします。
      */
-    public void onClick_BtnAdd() {
-        div.setStrate(状態_追加);
-        set他市町村住所地特例情報入力エリア活性の設定();
-        clear他市町村住所地特例情報入力エリア();
-        div.getDdlTekiyoJiyo().setDataSource(set適用事由());
-        div.getDdlKaijyoJiyo().setDataSource(set解除事由());
-    }
+//    public void onClick_BtnAdd() {
+//        div.setStrate(状態_追加);
+//        set他市町村住所地特例情報入力エリア活性の設定();
+//        clear他市町村住所地特例情報入力エリア();
+//        div.getDdlTekiyoJiyo().setDataSource(set適用事由());
+//        div.getDdlKaijyoJiyo().setDataSource(set解除事由());
+//    }
 
     /**
      * 「選択」ボタンを押下する場合、選択した行の適用情報を他市町村住所地特例情報入力エリアへ設定します。

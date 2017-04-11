@@ -15,6 +15,11 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun99;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.NinteiShinseishaFinderDiv;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -690,6 +695,38 @@ public class ShinseiKensakuHandler {
             if (申請時_コード != null) {
                 row.setShinseikubunshinseiji(NinteiShinseiShinseijiKubunCode.toValue(申請時_コード.value()).get名称());
             }
+            
+            FlexibleDate 認定日 = business.get二次判定年月日();
+            if (認定日 != null && !認定日.isEmpty()) {
+                TextBoxDate ninteibi = new TextBoxDate();
+                ninteibi.setValue(new RDate(認定日.toString()));
+                row.setNinteibi(ninteibi);
+            }
+            
+            Code 介護度 = business.get二次判定要介護状態区分コード();
+            Code 厚労省IF識別コード = business.get厚労省IF識別コード();
+            if (介護度 != null && !Code.EMPTY.equals(介護度) && 厚労省IF識別コード != null && !Code.EMPTY.equals(厚労省IF識別コード)) {
+                RString kaigodo = get二次判定結果(厚労省IF識別コード.getColumnValue(), 介護度.getColumnValue());
+                if (!RString.isNullOrEmpty(kaigodo)) {
+                    row.setKaigodo(kaigodo);
+                }
+                
+            }
+            
+            FlexibleDate 認定開始日 = business.get二次判定認定有効開始年月日();
+            if (認定開始日 != null && !FlexibleDate.EMPTY.equals(認定開始日)) {
+                TextBoxDate ninteiKaishibi = new TextBoxDate();
+                ninteiKaishibi.setValue(new RDate(認定開始日.toString()));
+                row.setNinteiKaishibi(ninteiKaishibi);
+            }
+            
+            FlexibleDate 認定終了日 = business.get二次判定認定有効終了年月日();
+            if (認定終了日 != null && !FlexibleDate.EMPTY.equals(認定終了日)) {
+                TextBoxDate ninteiShuryobi = new TextBoxDate();
+                ninteiShuryobi.setValue(new RDate(認定終了日.toString()));
+                row.setNinteiShuryobi(ninteiShuryobi);
+            }
+            
             YubinNo 郵便番号 = business.get郵便番号();
             if (郵便番号 != null) {
                 row.setYubinno(郵便番号.getEditedYubinNo());
@@ -728,5 +765,22 @@ public class ShinseiKensakuHandler {
         TextBoxNum textBoxNum = new TextBoxNum();
         textBoxNum.setValue(num);
         return textBoxNum;
+    }
+
+    private RString get二次判定結果(RString 厚労省IF識別コード, RString 二次判定要介護状態区分コード) {
+        RString 二次判定結果;
+        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(厚労省IF識別コード)) {
+            二次判定結果 = YokaigoJotaiKubun99.toValue(二次判定要介護状態区分コード).get名称();
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(厚労省IF識別コード)) {
+            二次判定結果 = YokaigoJotaiKubun02.toValue(二次判定要介護状態区分コード).get名称();
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(厚労省IF識別コード)) {
+            二次判定結果 = YokaigoJotaiKubun06.toValue(二次判定要介護状態区分コード).get名称();
+        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード)
+                || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コード)) {
+            二次判定結果 = YokaigoJotaiKubun09.toValue(二次判定要介護状態区分コード).get名称();
+        } else {
+            二次判定結果 = YokaigoJotaiKubun99.toValue(二次判定要介護状態区分コード).get名称();
+        }
+        return 二次判定結果;
     }
 }

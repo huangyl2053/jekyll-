@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbz.business.report.chosairaiichiranhyo;
 
 import jp.co.ndensan.reams.db.dbz.entity.report.chosairaiichiranhyo.ChosaIraiIchiranhyoReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -14,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 認定調査依頼一覧表ボディEditorです。
@@ -114,6 +117,8 @@ class ChosaIraiIchiranhyoBodyEditor implements IChosaIraiIchiranhyoEditor {
         source.shichosoncode = item.getShichosonCode();
         source.chosaitakusakicode = item.getChosaItakusakiCode();
         source.pageCountForItakusaki = new RString(pageCount);
+        source.識別コード = new ShikibetsuCode(item.getShokisaiHokenshaNo().substring(0, 5).concat(item.getListIchiranhyo_3()));
+        source.拡張情報 = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.getShinseishoKanriNo());
         return source;
     }
 

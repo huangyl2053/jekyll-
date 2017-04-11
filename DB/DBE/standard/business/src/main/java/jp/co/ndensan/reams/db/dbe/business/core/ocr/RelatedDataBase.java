@@ -9,7 +9,10 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResult.Type;
+import jp.co.ndensan.reams.db.dbe.definition.core.TorisageKubun;
+import static jp.co.ndensan.reams.db.dbe.definition.core.TorisageKubun.認定申請有効;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.TreatmentWhenIchijiHanteiZumi;
 import static jp.co.ndensan.reams.db.dbe.definition.core.ocr.TreatmentWhenIchijiHanteiZumi.エラーとする;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
@@ -79,6 +82,11 @@ public abstract class RelatedDataBase implements IRelatedData {
     protected abstract boolean had二次判定();
 
     /**
+     * @return 取下区分
+     */
+    protected abstract TorisageKubun get取下区分();
+
+    /**
      * {@link RelatedDataBase}生成時の処理状況を持ちます。
      */
     protected interface IContext {
@@ -118,6 +126,11 @@ public abstract class RelatedDataBase implements IRelatedData {
         if (had二次判定()) {
             return createResults(context.getOcrData(), IProcessingResult.Type.ERROR, OcrTorikomiMessages.審査結果登録済み);
         }
+        TorisageKubun torisageKubun = get取下区分();
+        if (torisageKubun != null && torisageKubun != TorisageKubun.認定申請有効) {
+            return createResults(context.getOcrData(), IProcessingResult.Type.ERROR, OcrTorikomiMessages.取下げOr却下
+                    .replaced(toMessageAsPassive(torisageKubun).toString()));
+        }
         if (had一次判定()) {
             switch (context.get一次判定済時処理()) {
                 case エラーとする:
@@ -138,6 +151,24 @@ public abstract class RelatedDataBase implements IRelatedData {
             }
         }
         return false;
+    }
+
+    private static final RString TORISAGE = new RString("取下げられ");
+    private static final RString KYAKKA = new RString("却下され");
+    private static final RString KUHEN_KYAKKA = new RString("区分変更却下され");
+
+    private static RString toMessageAsPassive(TorisageKubun torisageKubun) {
+        Objects.requireNonNull(torisageKubun);
+        switch (torisageKubun) {
+            case 取下げ:
+                return TORISAGE;
+            case 却下:
+                return KYAKKA;
+            case 区分変更却下:
+                return KUHEN_KYAKKA;
+            default:
+        }
+        return TORISAGE;
     }
 
     /**

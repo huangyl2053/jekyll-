@@ -3,20 +3,24 @@ package jp.co.ndensan.reams.db.dba.divcontroller.entity.commonchilddiv.TaJushoch
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Fri Sep 02 10:35:21 JST 2016
+ * Thu Apr 06 16:38:50 JST 2017 
  */
+
+
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 
+
 /**
- * dgJushochiTokureiRireki_Row のクラスファイル
- *
+ * dgJushochiTokureiRireki_Row のクラスファイル 
+ * 
  * @author 自動生成
  */
+
 public class dgJushochiTokureiRireki_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-16_09-04-03">
 
     private RString jotai;
     private TextBoxDate tekiyoYMD;

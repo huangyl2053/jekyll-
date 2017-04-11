@@ -70,6 +70,8 @@ class SyujiyikenshosakuseyiraihakouBodyEditor implements ISyujiyikenshosakuseyir
         source.joken4 = iraiDateTime1.toRString();
         source.cityCode = item.getListHakkoIchiranhyo_1_3();
         source.cityName = item.getListHakkoIchiranhyo_1_4();
+        source.識別コード = item.get識別コード();
+        source.拡張情報 = item.get拡張情報();
         return source;
     }
 }

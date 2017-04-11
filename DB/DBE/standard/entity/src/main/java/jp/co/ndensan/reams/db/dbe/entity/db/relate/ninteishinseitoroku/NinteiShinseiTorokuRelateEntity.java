@@ -65,6 +65,7 @@ public class NinteiShinseiTorokuRelateEntity {
     private RString 調査員への連絡事項;
     private ShikibetsuCode 識別コード;
     private LasdecCode 市町村コード;
+    private RString 証記載保険者番号;
     private Code 申請届出代行区分コード;
     private RString 申請届出者氏名;
     private RString 申請届出者氏名カナ;

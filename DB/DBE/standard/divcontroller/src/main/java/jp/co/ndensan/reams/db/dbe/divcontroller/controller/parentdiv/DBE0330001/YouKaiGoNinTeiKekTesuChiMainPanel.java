@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.HokenshaDDLPattem;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.service.core.shishosecurityjoho.ShishoSecurityJoho;
@@ -54,7 +55,9 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
      * @return ResponseData
      */
     public ResponseData<YouKaiGoNinTeiKekTesuChiMainPanelDiv> onLoad(YouKaiGoNinTeiKekTesuChiMainPanelDiv div) {
-        div.getCcdHokensha().loadHokenshaList(GyomuBunrui.介護認定);
+        div.getCcdHokensha().loadHokenshaList(GyomuBunrui.介護認定, HokenshaDDLPattem.全市町村以外);
+        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
+        div.getCcdHokensha().setSelectedShichosonIfExist(市町村セキュリティ情報.get市町村情報().get市町村コード());
         HokenshaSummary 選択保険者 = div.getCcdHokensha().getSelectedItem();
         div.getCcdShujiiIryokikanAndShujiiInput().initialize(
                 div.getCcdHokensha().getSelectedItem().get市町村コード(),

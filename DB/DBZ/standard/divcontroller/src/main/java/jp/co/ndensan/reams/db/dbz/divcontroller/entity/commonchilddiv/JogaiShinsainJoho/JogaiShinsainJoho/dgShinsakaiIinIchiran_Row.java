@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.JogaiShin
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Feb 16 15:14:36 JST 2017 
+ * Fri Mar 24 13:28:37 JST 2017 
  */
 
 
@@ -19,30 +19,39 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 
 public class dgShinsakaiIinIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-06_05-07-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-24_05-18-54">
 
+    private RString state;
     private RString shinsakaiIinCode;
     private RString shimei;
     private RString shozokuKikan;
 
     public dgShinsakaiIinIchiran_Row() {
         super();
+        this.state = RString.EMPTY;
         this.shinsakaiIinCode = RString.EMPTY;
         this.shimei = RString.EMPTY;
         this.shozokuKikan = RString.EMPTY;
+        this.setOriginalData("state", state);
         this.setOriginalData("shinsakaiIinCode", shinsakaiIinCode);
         this.setOriginalData("shimei", shimei);
         this.setOriginalData("shozokuKikan", shozokuKikan);
     }
 
-    public dgShinsakaiIinIchiran_Row(RString shinsakaiIinCode, RString shimei, RString shozokuKikan) {
+    public dgShinsakaiIinIchiran_Row(RString state, RString shinsakaiIinCode, RString shimei, RString shozokuKikan) {
         super();
+        this.setOriginalData("state", state);
         this.setOriginalData("shinsakaiIinCode", shinsakaiIinCode);
         this.setOriginalData("shimei", shimei);
         this.setOriginalData("shozokuKikan", shozokuKikan);
+        this.state = state;
         this.shinsakaiIinCode = shinsakaiIinCode;
         this.shimei = shimei;
         this.shozokuKikan = shozokuKikan;
+    }
+
+    public RString getState() {
+        return state;
     }
 
     public RString getShinsakaiIinCode() {
@@ -55,6 +64,11 @@ public class dgShinsakaiIinIchiran_Row extends DataRow {
 
     public RString getShozokuKikan() {
         return shozokuKikan;
+    }
+
+    public void setState(RString state) {
+        this.setOriginalData("state", state);
+        this.state = state;
     }
 
     public void setShinsakaiIinCode(RString shinsakaiIinCode) {

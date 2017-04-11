@@ -233,7 +233,7 @@ public class DBE224001_NinteichosaDataOutput extends BatchFlowBase<DBE224001_Nin
      */
     @Step(NINTEICHOSAFILEOUTPUT)
     protected IBatchFlowCommand callNinteiChosaFileOutput() {
-        return simpleBatch(NinteiChosaFileOutputProcess.class)
+        return loopBatch(NinteiChosaFileOutputProcess.class)
                 .arguments(getParameter().toNinteiChosaFileOutputProcessParamter()).define();
     }
 

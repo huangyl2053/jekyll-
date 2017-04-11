@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.report.saichekkuhyo;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import lombok.Getter;
 
 /**
@@ -100,6 +102,8 @@ public class SaiChekkuhyoItem {
     private final RString listRokugun_12;
     private final RString listJiritsudo_1;
     private final RString listJiritsudo_2;
+    private final ShikibetsuCode 識別コード;
+    private final ExpandedInformation 拡張情報;
 
     /**
      * コンストラクタです。
@@ -187,6 +191,8 @@ public class SaiChekkuhyoItem {
      * @param listRokugun_12 カテーテル
      * @param listJiritsudo_1 障害高齢者自立度
      * @param listJiritsudo_2 認知症高齢者自立度
+     * @param 識別コード
+     * @param 拡張情報
      */
     public SaiChekkuhyoItem(
             RString zenkaiIchijiHantei,
@@ -271,7 +277,9 @@ public class SaiChekkuhyoItem {
             RString listRokugun_11,
             RString listRokugun_12,
             RString listJiritsudo_1,
-            RString listJiritsudo_2
+            RString listJiritsudo_2,
+            ShikibetsuCode 識別コード,
+            ExpandedInformation 拡張情報
     ) {
         this.zenkaiIchijiHantei = zenkaiIchijiHantei;
         this.hihokenshaKubun = hihokenshaKubun;
@@ -356,6 +364,8 @@ public class SaiChekkuhyoItem {
         this.listRokugun_12 = listRokugun_12;
         this.listJiritsudo_1 = listJiritsudo_1;
         this.listJiritsudo_2 = listJiritsudo_2;
+        this.識別コード = 識別コード;
+        this.拡張情報 = 拡張情報;
     }
 
     /**
@@ -368,6 +378,8 @@ public class SaiChekkuhyoItem {
      * @param zenkaiNijiHantei 前回二次判定結果
      * @param zenkaiNijihanteiYMD 前回二次判定日
      * @param seinengappi 生年月日
+     * @param 識別コード
+     * @param 拡張情報
      *
      */
     public SaiChekkuhyoItem(
@@ -377,7 +389,9 @@ public class SaiChekkuhyoItem {
             RString age,
             RString zenkaiNijiHantei,
             RString zenkaiNijihanteiYMD,
-            RString seinengappi
+            RString seinengappi,
+            ShikibetsuCode 識別コード,
+            ExpandedInformation 拡張情報
     ) {
         this.zenkaiIchijiHantei = zenkaiIchijiHantei;
         this.hihokenshaKubun = hihokenshaKubun;
@@ -462,5 +476,7 @@ public class SaiChekkuhyoItem {
         this.listRokugun_12 = RString.EMPTY;
         this.listJiritsudo_1 = RString.EMPTY;
         this.listJiritsudo_2 = RString.EMPTY;
+        this.識別コード = 識別コード;
+        this.拡張情報 = 拡張情報;
     }
 }

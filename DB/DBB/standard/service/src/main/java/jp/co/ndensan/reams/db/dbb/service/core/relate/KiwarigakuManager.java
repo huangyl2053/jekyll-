@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbb.service.core.relate;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.ca.cax.business.core.shuno.Shuno;
-import jp.co.ndensan.reams.ca.cax.service.core.shuno.ShunoManager;
+import jp.co.ndensan.reams.ca.cax.business.core.shuno.shuno.Shuno;
+import jp.co.ndensan.reams.ca.cax.service.core.shuno.shuno.ShunoManager;
 import jp.co.ndensan.reams.ca.cax.service.core.shuno.ShunoService;
 import jp.co.ndensan.reams.db.dbb.business.core.Kiwarigaku;
 import jp.co.ndensan.reams.db.dbb.business.core.KiwarigakuCalculator;
@@ -39,7 +39,7 @@ public class KiwarigakuManager {
      */
     public KiwarigakuManager() {
         this.dac = InstanceProvider.create(KibetsuChoteiKyotsuDac.class);
-        this.manager = ShunoService.getShunoManager();
+        this.manager = ShunoService.get収納Manager();
     }
 
     /**

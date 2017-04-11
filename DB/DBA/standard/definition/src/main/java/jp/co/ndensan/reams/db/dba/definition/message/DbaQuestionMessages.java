@@ -18,7 +18,8 @@ import static jp.co.ndensan.reams.db.dbz.definition.message.MessageCreateHelper.
 public enum DbaQuestionMessages implements IMessageGettable {
 
     資格取得確認(3, "資格取得を行ってもよろしいですか？"),
-    医療保険登録確認(4, "医療保険情報が登録されていません。よろしいですか？");
+    医療保険登録確認(4, "医療保険情報が登録されていません。よろしいですか？"),
+    保留対象取消確認(5, "?です。<br>?よろしいですか？");
 
     private final Message message;
 

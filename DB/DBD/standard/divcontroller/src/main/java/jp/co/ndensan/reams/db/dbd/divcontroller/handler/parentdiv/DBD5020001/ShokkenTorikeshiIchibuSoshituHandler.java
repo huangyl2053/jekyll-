@@ -184,7 +184,7 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
             return null;
         }
 
-        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
+        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
         if (null == 市町村セキュリティ情報) {
             return null;
         }
@@ -342,15 +342,17 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
         介護認定申請基本情報入力Div.initialize();
         介護認定申請基本情報入力Div.setRadShinseishoKubun(今回情報.get要支援申請の区分受給());
         介護認定申請基本情報入力Div.setTxtShinseiYMD(convertFlexibleDateToRDate(今回情報.get認定申請年月日受給()));
-        介護認定申請基本情報入力Div.setShinseiKubunHorei(
+        if (!convertCodeToRString(今回情報.get認定申請区分法令コード受給()).equals(RString.EMPTY)) {
+            介護認定申請基本情報入力Div.setShinseiKubunHorei(
                 NinteiShinseiHoreiCode.toValue(convertCodeToRString(今回情報.get認定申請区分法令コード受給())));
-
+        }
         介護認定申請基本情報入力Div.setShinseiKubunShinseiji(
                 NinteiShinseiShinseijiKubunCode.toValue(convertCodeToRString(今回情報.get認定申請区分申請時コード受給())));
-
         介護認定申請基本情報入力Div.setHihokenshaKubun(HihokenshaKubunCode.toValue(今回情報.get被保険者区分コード受給()));
 
-        介護認定申請基本情報入力Div.setTokuteiShippei(TokuteiShippei.toValue(convertCodeToRString(今回情報.get二号特定疾病コード受給())));
+        if (!convertCodeToRString(今回情報.get二号特定疾病コード受給()).equals(RString.EMPTY)) {
+            介護認定申請基本情報入力Div.setTokuteiShippei(TokuteiShippei.toValue(convertCodeToRString(今回情報.get二号特定疾病コード受給())));
+        }
         介護認定申請基本情報入力Div.setShisho(new ShishoCode(今回情報.get支所コード受給()));
         介護認定申請基本情報入力Div.setNinteiShinseRiyuTeikeibun(今回情報.get認定申請理由受給());
         介護認定申請基本情報入力Div.setShinseiShubetsu(JukyuShinseiJiyu.toValue(convertCodeToRString(今回情報.get受給申請事由())));
@@ -410,7 +412,8 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
             iNinteiShinseiTodokedeshaDiv.getTxtTelNo().setDomain(電話番号);
 
             YubinNo 郵便番号 = 今回情報.get申請届出者郵便番号();
-            iNinteiShinseiTodokedeshaDiv.getCcdZenkokuJushoInput().load(new ZenkokuJushoCode(今回情報.get申請届出者住所()), 郵便番号);
+            // TODO 総叩きテストのため一時コメントアウト
+            // iNinteiShinseiTodokedeshaDiv.getCcdZenkokuJushoInput().load(new ZenkokuJushoCode(今回情報.get申請届出者住所()), 郵便番号);
         }
         iNinteiShinseiTodokedeshaDiv.set状態(new RString(NinteiShinseiTodokedeshaDiv.ShoriType.ShokaiMode.toString()));
 
@@ -633,7 +636,9 @@ public class ShokkenTorikeshiIchibuSoshituHandler {
         result = get連絡後文字列(result, getServiceNameByServiceCode(介護認定情報.get指定サービス種類28()));
         result = get連絡後文字列(result, getServiceNameByServiceCode(介護認定情報.get指定サービス種類29()));
         result = get連絡後文字列(result, getServiceNameByServiceCode(介護認定情報.get指定サービス種類30()));
-        result = result.substring(1);
+        if (result != null && !RString.EMPTY.equals(result)) {
+            result = result.substring(1);
+        }
         return result;
     }
 

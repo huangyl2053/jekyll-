@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.db.dbe.service.core.ikensho.ninteichosaitakusakimaste
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -44,7 +43,6 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -102,9 +100,7 @@ public class NinteichosaItakusakiMain {
      */
     public ResponseData<NinteichosaItakusakiMainDiv> onBlur_kinyuKikanCode(NinteichosaItakusakiMainDiv div) {
         getHandler(div).setKozaJoho();
-        if (div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関() != null) {
-            div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShu().setSelectedKey(SELECTKEY_空白);
-        }
+        div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShu().setSelectedKey(SELECTKEY_空白);
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenBan().clearValue();
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenMei().clearValue();
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().clearValue();
@@ -142,9 +138,7 @@ public class NinteichosaItakusakiMain {
      */
     public ResponseData<NinteichosaItakusakiMainDiv> onOkClose_KinyuKikan(NinteichosaItakusakiMainDiv div) {
         getHandler(div).setKozaJoho();
-        if (div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関() != null) {
-            div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShu().setSelectedKey(SELECTKEY_空白);
-        }
+        div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShu().setSelectedKey(SELECTKEY_空白);
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenBan().clearValue();
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenMei().clearValue();
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().clearValue();
@@ -251,6 +245,7 @@ public class NinteichosaItakusakiMain {
      * @return ResponseData<NinteichosaItakusakiMainDiv>
      */
     public ResponseData<NinteichosaItakusakiMainDiv> onSelectByModifyButton_dgSonotaKikanIchiran(NinteichosaItakusakiMainDiv div) {
+        getHandler(div).clearChosaitakusakiJohoInput();
         div.getChosaitakusakiJohoInput().setState(状態_修正);
         getHandler(div).setDisabledFalseToShujiiJohoInputMeisai();
         dgSonotaKikanIchiran_Row row = div.getSonotaKikanichiran().getDgSonotaKikanIchiran().getClickedItem();
@@ -271,6 +266,7 @@ public class NinteichosaItakusakiMain {
      * @return ResponseData<NinteichosaItakusakiMainDiv>
      */
     public ResponseData<NinteichosaItakusakiMainDiv> onSelectByDeleteButton_dgSonotaKikanIchiran(NinteichosaItakusakiMainDiv div) {
+        getHandler(div).clearChosaitakusakiJohoInput();
         div.getChosaitakusakiJohoInput().setState(状態_削除);
         dgSonotaKikanIchiran_Row row = div.getSonotaKikanichiran().getDgSonotaKikanIchiran().getActiveRow();
         getHandler(div).setChosaitakusakiJohoInput(row);
@@ -288,6 +284,7 @@ public class NinteichosaItakusakiMain {
      * @return ResponseData<NinteichosaItakusakiMainDiv>
      */
     public ResponseData<NinteichosaItakusakiMainDiv> onSelectByDlbClick_dgSonotaKikanIchiran(NinteichosaItakusakiMainDiv div) {
+        getHandler(div).clearChosaitakusakiJohoInput();
         dgSonotaKikanIchiran_Row row = div.getSonotaKikanichiran().getDgSonotaKikanIchiran().getActiveRow();
         getHandler(div).setChosaitakusakiJohoInput(row);
         ViewStateHolder.put(ViewStateKeys.その他機関マスタ選択行, row);
@@ -575,14 +572,14 @@ public class NinteichosaItakusakiMain {
             if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode())
                     .equals(ResponseHolder.getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                getHandler(div).load();
                 return ResponseData.of(div).setState(DBE9050001StateName.検索);
             }
         } else {
-            getHandler(div).load();
+            if (!DBE9050001StateName.一覧.toString().equals(ResponseHolder.getState().toString())) {
+                getHandler(div).load();
+            }
             return ResponseData.of(div).setState(DBE9020001StateName.検索);
         }
-//        getHandler(div).load();
         return ResponseData.of(div).respond();
     }
 

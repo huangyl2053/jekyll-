@@ -48,6 +48,8 @@ class CenterSoshinTaishoshaIchiranEditor implements ICenterSoshinTaishoshaIchira
         editListTaishoshaIchiran_9(source);
         editListTaishoshaIchiran_10(source);
         editListTaishoshaIchiran_11(source);
+        source.識別コード = item.getShikibetsuCode();
+        source.拡張情報 = item.getExpandedInformation();
         return source;
     }
 

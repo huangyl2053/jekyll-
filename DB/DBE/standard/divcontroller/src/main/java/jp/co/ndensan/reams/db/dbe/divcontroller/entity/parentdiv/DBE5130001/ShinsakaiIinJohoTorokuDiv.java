@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class ShinsakaiIinJohoTorokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-13_05-12-42">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -569,37 +569,37 @@ public class ShinsakaiIinJohoTorokuDiv extends Panel {
 
     @JsonIgnore
     public ShozokuKikanIchiranDiv getShozokuKikanIchiran() {
-        return this.getShinsakaiIinJohoTorokuInput().getShozokuKikanIchiran();
+        return this.getShinsakaiIinJohoTorokuInput().getRenrakusakiKinyuKikan().getShozokuKikanIchiran();
     }
 
     @JsonIgnore
     public void  setShozokuKikanIchiran(ShozokuKikanIchiranDiv ShozokuKikanIchiran) {
-        this.getShinsakaiIinJohoTorokuInput().setShozokuKikanIchiran(ShozokuKikanIchiran);
+        this.getShinsakaiIinJohoTorokuInput().getRenrakusakiKinyuKikan().setShozokuKikanIchiran(ShozokuKikanIchiran);
     }
 
     @JsonIgnore
     public Button getBtnShozokuKikanAdd() {
-        return this.getShinsakaiIinJohoTorokuInput().getShozokuKikanIchiran().getBtnShozokuKikanAdd();
+        return this.getShinsakaiIinJohoTorokuInput().getRenrakusakiKinyuKikan().getShozokuKikanIchiran().getBtnShozokuKikanAdd();
     }
 
     @JsonIgnore
     public void  setBtnShozokuKikanAdd(Button btnShozokuKikanAdd) {
-        this.getShinsakaiIinJohoTorokuInput().getShozokuKikanIchiran().setBtnShozokuKikanAdd(btnShozokuKikanAdd);
+        this.getShinsakaiIinJohoTorokuInput().getRenrakusakiKinyuKikan().getShozokuKikanIchiran().setBtnShozokuKikanAdd(btnShozokuKikanAdd);
     }
 
     @JsonIgnore
     public DataGrid<dgShozokuKikanIchiran_Row> getDgShozokuKikanIchiran() {
-        return this.getShinsakaiIinJohoTorokuInput().getShozokuKikanIchiran().getDgShozokuKikanIchiran();
+        return this.getShinsakaiIinJohoTorokuInput().getRenrakusakiKinyuKikan().getShozokuKikanIchiran().getDgShozokuKikanIchiran();
     }
 
     @JsonIgnore
     public void  setDgShozokuKikanIchiran(DataGrid<dgShozokuKikanIchiran_Row> dgShozokuKikanIchiran) {
-        this.getShinsakaiIinJohoTorokuInput().getShozokuKikanIchiran().setDgShozokuKikanIchiran(dgShozokuKikanIchiran);
+        this.getShinsakaiIinJohoTorokuInput().getRenrakusakiKinyuKikan().getShozokuKikanIchiran().setDgShozokuKikanIchiran(dgShozokuKikanIchiran);
     }
 
     @JsonIgnore
     public IHokenshaListDiv getCcdHokenshaDDL() {
-        return this.getShinsakaiIinJohoTorokuInput().getShozokuKikanIchiran().getCcdHokenshaDDL();
+        return this.getShinsakaiIinJohoTorokuInput().getRenrakusakiKinyuKikan().getShozokuKikanIchiran().getCcdHokenshaDDL();
     }
 
     @JsonIgnore

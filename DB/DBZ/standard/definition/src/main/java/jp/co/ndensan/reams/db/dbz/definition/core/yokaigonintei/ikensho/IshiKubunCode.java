@@ -65,4 +65,17 @@ public enum IshiKubunCode {
         }
         throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("医師区分コード"));
     }
+
+    /**
+     * @param code コード
+     * @return 指定のコードが存在する場合、{@code true}.
+     */
+    public static boolean existsCode(RString code) {
+        for (IshiKubunCode ishiKubunCode : IshiKubunCode.values()) {
+            if (ishiKubunCode.code.equals(code)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

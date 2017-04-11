@@ -23,7 +23,8 @@ import lombok.Setter;
 public class YokaigoNinteiShinchokuJohoShokaiRelateEntity {
 
     private RString shichosonMeisho;
-    private ShinseishoKanriNo hihokenshaNo;
+    private RString shoKisaiHokenshaNo;
+    private RString hihokenshaNo;
     private RString hihokenshaName;
     private RString hihokenshaKubunCode;
     private FlexibleDate ninteiShinseiYMD;

@@ -655,6 +655,8 @@ public class TaishouWaritsukeHandler {
             } else if (厚労省IF識別コード.equals(厚労省IF識別コード_99)) {
                 前回二次判定 = YokaigoJotaiKubun99.toValue(code.value()).get名称();
             }
+        } else {
+            前回二次判定 = RString.EMPTY;
         }
         return 前回二次判定;
     }
@@ -670,6 +672,8 @@ public class TaishouWaritsukeHandler {
             } else if (厚労省IF識別コード.equals(厚労省IF識別コード_99)) {
                 前回一次判定 = IchijiHanteiKekkaCode99.toValue(code.value()).get名称();
             }
+        } else {
+            前回一次判定 = RString.EMPTY;
         }
         return 前回一次判定;
     }
@@ -685,6 +689,8 @@ public class TaishouWaritsukeHandler {
             } else if (厚労省IF識別コード.equals(厚労省IF識別コード_99)) {
                 今回一次判定 = IchijiHanteiKekkaCode99.toValue(code.value()).get名称();
             }
+        } else {
+            今回一次判定 = RString.EMPTY;
         }
         return 今回一次判定;
     }
@@ -704,11 +710,9 @@ public class TaishouWaritsukeHandler {
         RString 意見書_寝たきり度;
         RString 意見書_認知度;
         RString 再調査;
-        RString 今回一次判定 = RString.EMPTY;
-        RString 前回一次判定 = RString.EMPTY;
-        RString 前回二次判定 = RString.EMPTY;
-        Icon test = new Icon();
-        test.setIcon(IconType.Info);
+        RString 今回一次判定;
+        RString 前回一次判定;
+        RString 前回二次判定;
         Icon オブザーバーチェック_主治医;
         Icon オブザーバーチェック_調査員;
         Icon オブザーバーチェック_入所施設;
@@ -724,6 +728,9 @@ public class TaishouWaritsukeHandler {
             オブザーバーチェック_調査員 = new Icon();
             オブザーバーチェック_入所施設 = new Icon();
             オブザーバーチェック_その他 = new Icon();
+            今回一次判定 = RString.EMPTY;
+            前回一次判定 = RString.EMPTY;
+            前回二次判定 = RString.EMPTY;
             try {
                 優先 = kohoshaIchiran.get介護認定審査会優先振分区分コード().getColumnValue().equals(new RString("1"))
                         ? ShinsakaiYusenWaritsukeKubunCode.toValue(kohoshaIchiran.get介護認定審査会優先振分区分コード().getColumnValue()).get名称()

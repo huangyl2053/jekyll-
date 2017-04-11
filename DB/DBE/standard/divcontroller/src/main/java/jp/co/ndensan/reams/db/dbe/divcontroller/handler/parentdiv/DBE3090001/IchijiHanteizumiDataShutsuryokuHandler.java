@@ -65,6 +65,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.report.SourceDataCollection;
 
 /**
  * 画面設計_DBE3090001_一次判定データ出力Handlerです。
@@ -474,16 +475,17 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
      * @param dbt5304Entity List<ShujiiIkenshoIkenItem>
      * @param 前回dbt5304Entity List<ShujiiIkenshoIkenItem>
      * @param 認定調査特記事項番号リスト List<NinteichosahyoTokkijiko>
+     * @return SourceDataCollection SourceDataCollection
      */
-    public void set帳票(List<IchijiHanteizumiDataBusiness> 一次判定結果list,
+    public SourceDataCollection set帳票(List<IchijiHanteizumiDataBusiness> 一次判定結果list,
             List<NinteichosahyoServiceJokyo> 認定調査票概況調査リスト, List<NinteichosahyoServiceJokyoFlag> 認定調査票フラグリスト,
             List<NinteichosahyoChosaItem> 認定調査票調査項目リスト, List<NinteichosahyoChosaItem> 前回調査項目リスト,
             List<ShujiiIkenshoIkenItem> dbt5304Entity, List<ShujiiIkenshoIkenItem> 前回dbt5304Entity,
             List<NinteichosahyoTokkijiko> 認定調査特記事項番号リスト) {
         IchijiHanteizumiDataShutsuryoku shutsuryoku = new IchijiHanteizumiDataShutsuryoku();
         IchijihanteikekkahyoBusiness a4Data = new IchijihanteikekkahyoBusiness();
+        IchijihanteikekkahyoPrintService printService = new IchijihanteikekkahyoPrintService();
         for (IchijiHanteizumiDataBusiness business : 一次判定結果list) {
-            IchijihanteikekkahyoPrintService printService = new IchijihanteikekkahyoPrintService();
             a4Data.setタイトル(new RString("一次判定結果票"));
             if (business.get一次判定結果情報().get作成年月日() != null) {
                 a4Data.set作成日_元号(new FlexibleDate(business.get一次判定結果情報().get作成年月日()).wareki().eraType(EraType.KANJI).getEra());
@@ -517,11 +519,19 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
             }
             a4Data.set合議体番号(business.get一次判定結果情報().get合議体番号());
             a4Data.set審査順(business.get一次判定結果情報().get審査会審査順());
-            a4Data.set被保険者区分(HihokenshaKubunCode.toValue(business.get一次判定結果情報().get被保険者区分コード()).get名称());
-            a4Data.set申請区分(NinteiShinseiShinseijiKubunCode.toValue(business.get一次判定結果情報().get申請区分申()).get名称());
+            if (!RString.isNullOrEmpty(business.get一次判定結果情報().get被保険者区分コード())) {
+                a4Data.set被保険者区分(HihokenshaKubunCode.toValue(business.get一次判定結果情報().get被保険者区分コード()).get名称());
+            }
+            if (!RString.isNullOrEmpty(business.get一次判定結果情報().get申請区分申())) {
+                a4Data.set申請区分(NinteiShinseiShinseijiKubunCode.toValue(business.get一次判定結果情報().get申請区分申()).get名称());
+            }
             a4Data.set年齢(business.get一次判定結果情報().get年齢());
-            a4Data.set性別(Seibetsu.toValue(business.get一次判定結果情報().get性別()).get名称());
-            a4Data.set現在の状況(GenzainoJokyoCode.toValue(business.get一次判定結果情報().get施設利用()).get名称());
+            if (!RString.isNullOrEmpty(business.get一次判定結果情報().get性別())) {
+                a4Data.set性別(Seibetsu.toValue(business.get一次判定結果情報().get性別()).get名称());
+            }
+            if (!RString.isNullOrEmpty(business.get一次判定結果情報().get施設利用())) {
+                a4Data.set現在の状況(GenzainoJokyoCode.toValue(business.get一次判定結果情報().get施設利用()).get名称());
+            }
             a4Data.set前々回要介護度(shutsuryoku.set要介護状態区分コード(business.get一次判定結果情報().get厚労省IF識別コード(),
                     business.get一次判定結果情報().get前々回要介護度()));
             a4Data.set前々回認定有効期間(business.get一次判定結果情報().get前々回認定有効期間());
@@ -546,7 +556,9 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
             a4Data.set事業者名(business.get一次判定結果情報().get事業者名称());
             a4Data.set認定調査員番号(business.get一次判定結果情報().get認定調査員コード());
             a4Data.set認定調査員氏名(business.get一次判定結果情報().get調査員氏名());
-            a4Data.set認定調査員資格(Sikaku.toValue(business.get一次判定結果情報().get調査員資格()).get名称());
+            if (!RString.isNullOrEmpty(business.get一次判定結果情報().get調査員資格())) {
+                a4Data.set認定調査員資格(Sikaku.toValue(business.get一次判定結果情報().get調査員資格()).get名称());
+            }
             a4Data.set医療機関番号(business.get一次判定結果情報().get主治医医療機関コード());
             a4Data.set医療機関名称(business.get一次判定結果情報().get医療機関名称());
             a4Data.set主治医番号(business.get一次判定結果情報().get主治医コード());
@@ -558,7 +570,9 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
             a4Data.set認定有効期間(business.get一次判定結果情報().get認定有効期間());
             a4Data.set認定有効期間開始年月日(business.get一次判定結果情報().get認定有効期間開始年月日());
             a4Data.set認定有効期間終了年月日(business.get一次判定結果情報().get認定有効期間終了年月日());
-            a4Data.set特定疾病名(TokuteiShippei.toValue(business.get一次判定結果情報().get特定疾病()).get名称());
+            if (!RString.isNullOrEmpty(business.get一次判定結果情報().get特定疾病())) {
+                a4Data.set特定疾病名(TokuteiShippei.toValue(business.get一次判定結果情報().get特定疾病()).get名称());
+            }
             if (business.get一次判定結果情報().get要介護状態像例コード() != null) {
                 a4Data.set状態像名称(YokaigoJotaizoReiCode.toValue(business.get一次判定結果情報().get要介護状態像例コード()).get名称());
             }
@@ -595,8 +609,9 @@ public class IchijiHanteizumiDataShutsuryokuHandler {
             a4Data.set現在のサービス状況(shutsuryoku.setサービス状況(business, 認定調査票概況調査リスト, 認定調査票フラグリスト));
             set帳票印刷(a4Data, business, shutsuryoku, 認定調査票調査項目リスト, 前回調査項目リスト,
                     dbt5304Entity, 前回dbt5304Entity, 認定調査特記事項番号リスト);
-            printService.print(a4Data);
+//            printService.print(a4Data);
         }
+        return printService.print(a4Data);
     }
 
     private void set帳票印刷(IchijihanteikekkahyoBusiness a4Data, IchijiHanteizumiDataBusiness business,

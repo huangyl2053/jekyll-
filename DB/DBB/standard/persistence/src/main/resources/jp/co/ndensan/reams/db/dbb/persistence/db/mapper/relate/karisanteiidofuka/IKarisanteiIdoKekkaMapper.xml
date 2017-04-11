@@ -37,8 +37,18 @@
              koza.*
         FROM 
              master 
-        INNER JOIN 
-            rgua."UaFt200FindShikibetsuTaisho"('1','','1','DB','0','','','','','','','','','','','0','0','','','','',
+        INNER JOIN
+             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
+                (
+                    SELECT
+                        ARRAY_AGG(CAST (master."shikibetsuCode" AS TEXT))
+                    FROM
+                        master
+                )
+             <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
+             AS "ShikibetsuTaisho"
+             <!--
+             rgua."UaFt200FindShikibetsuTaisho"('1','','1','DB','0','','','','','','','','','','','0','0','','','','',
                     '','','0','0','','','','','','','','','','0','','1','1','1','1','1','1', '1','1','1','1', '1','','',
                     '','','','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','',
                    (
@@ -47,6 +57,7 @@
                     FROM
                         master
                    )) AS "ShikibetsuTaisho"
+             -->             
               ON "ShikibetsuTaisho"."shikibetsuCode" = master."shikibetsuCode"
         LEFT OUTER JOIN
             (<include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IKozaRelateMapper.tokuteiKozaSearch" />) AS koza

@@ -104,7 +104,7 @@ public class NinteiChosainJikanMaster {
     public ResponseData<NinteiChosainJikanMasterDiv> btnPrevious(NinteiChosainJikanMasterDiv div) {
         FlexibleDate 設定年月 = div.getTxtSettingMonth().getValue();
         div.getTxtSettingMonth().setValue(設定年月.minusMonth(1));
-        Code 調査地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey());
+        Code 調査地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey().substring(0, 5));
         RString 認定調査委託先コード = div.getTxtNinteiChosaItakusakiCode().getValue();
         RString 認定調査員コード = div.getTxtNinteiChosainCode().getValue();
 
@@ -145,7 +145,7 @@ public class NinteiChosainJikanMaster {
     public ResponseData<NinteiChosainJikanMasterDiv> btnNext(NinteiChosainJikanMasterDiv div) {
         FlexibleDate 設定年月 = div.getTxtSettingMonth().getValue();
         div.getTxtSettingMonth().setValue(設定年月.plusMonth(1));
-        Code 調査地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey());
+        Code 調査地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey().substring(0, 5));
         RString 認定調査委託先コード = div.getTxtNinteiChosaItakusakiCode().getValue();
         RString 認定調査員コード = div.getTxtNinteiChosainCode().getValue();
         if (認定調査委託先コード == null || 認定調査委託先コード.isEmpty()
@@ -183,7 +183,7 @@ public class NinteiChosainJikanMaster {
      * @return ResponseData<NinteiChosainJikanMasterDiv>
      */
     public ResponseData<NinteiChosainJikanMasterDiv> ddlHenkou(NinteiChosainJikanMasterDiv div) {
-        div.getMainPanel().getSearchConditionPanel().setTaishoChikuKey(div.getDdlTaishoChiku().getSelectedKey());
+        div.getMainPanel().getSearchConditionPanel().setTaishoChikuKey(div.getDdlTaishoChiku().getSelectedKey().substring(0, 5));
         getHandler(div).onLoad(div.getTxtSettingMonth().getValue());
         return ResponseData.of(div).setState(DBE2020006StateName.編集);
     }
@@ -215,7 +215,7 @@ public class NinteiChosainJikanMaster {
      */
     public ResponseData<NinteiChosainJikanMasterDiv> onOkClose_btnSenTaKuSearch(NinteiChosainJikanMasterDiv div) {
         KijuntsukiShichosonjohoiDataPassModel models = DataPassingConverter.deserialize(div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
-        Code 調査地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey());
+        Code 調査地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey().substring(0, 5));
         div.getTxtNinteiChosaItakusakiCode().setValue(models.get委託先コード());
         div.getTxtNinteiChosaItakusakiName().setValue(models.get委託先名());
         div.getTxtNinteiChosainCode().setValue(models.get調査員コード());
@@ -511,7 +511,7 @@ public class NinteiChosainJikanMaster {
      * @return ResponseData<NinteiChosainJikanMasterDiv>
      */
     public ResponseData<NinteiChosainJikanMasterDiv> btnDelete(NinteiChosainJikanMasterDiv div) {
-        Code 調査地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey());
+        Code 調査地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey().substring(0, 5));
         RString 認定調査委託先コード = div.getTxtNinteiChosaItakusakiCode().getValue();
         RString 認定調査員コード = div.getTxtNinteiChosainCode().getValue();
         LasdecCode 市町村コード = new LasdecCode(div.getMainPanel().getSearchConditionPanel().getHiddenShichosonCode());
@@ -552,7 +552,7 @@ public class NinteiChosainJikanMaster {
      * @return ResponseData<NinteiChosainJikanMasterDiv>
      */
     public ResponseData<NinteiChosainJikanMasterDiv> btnCreate(NinteiChosainJikanMasterDiv div) {
-        Code 調査地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey());
+        Code 調査地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey().substring(0, 5));
         RString 認定調査委託先コード = div.getTxtNinteiChosaItakusakiCode().getValue();
         RString 認定調査員コード = div.getTxtNinteiChosainCode().getValue();
         LasdecCode 市町村コード = new LasdecCode(div.getMainPanel().getSearchConditionPanel().getHiddenShichosonCode());
@@ -648,7 +648,7 @@ public class NinteiChosainJikanMaster {
      */
     public ResponseData<NinteiChosainJikanMasterDiv> btnSave(NinteiChosainJikanMasterDiv div) {
         Seireki 設定年月 = div.getTxtSettingMonth().getValue().seireki();
-        Code 調査地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey());
+        Code 調査地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey().substring(0, 5));
         RString 認定調査委託先コード = div.getTxtNinteiChosaItakusakiCode().getValue();
         RString 認定調査員コード = div.getTxtNinteiChosainCode().getValue();
         LasdecCode 市町村コード = new LasdecCode(div.getMainPanel().getSearchConditionPanel().getHiddenShichosonCode());
@@ -711,7 +711,7 @@ public class NinteiChosainJikanMaster {
             RString 調査時間枠,
             RString 時間枠) {
         if (編集状態_既存.equals(編集状態の設定(調査時間枠))) {
-            Code 調査地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey());
+            Code 調査地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey().substring(0, 5));
             RString 認定調査委託先コード = div.getTxtNinteiChosaItakusakiCode().getValue();
             RString 認定調査員コード = div.getTxtNinteiChosainCode().getValue();
             LasdecCode 市町村コード = new LasdecCode(div.getMainPanel().getSearchConditionPanel().getHiddenShichosonCode());
@@ -784,7 +784,7 @@ public class NinteiChosainJikanMaster {
                 Integer.parseInt(date2.getYear().toString()),
                 Integer.parseInt(date2.getMonth().toString()),
                 Integer.parseInt(編集データ.getDate().toString()));
-        Code 調査地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey());
+        Code 調査地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey().substring(0, 5));
         RString 認定調査委託先コード = div.getTxtNinteiChosaItakusakiCode().getValue();
         RString 認定調査員コード = div.getTxtNinteiChosainCode().getValue();
         LasdecCode 市町村コード = new LasdecCode(div.getMainPanel().getSearchConditionPanel().getHiddenShichosonCode());
@@ -1305,7 +1305,7 @@ public class NinteiChosainJikanMaster {
     private void set一括設定Model(FlexibleDate 予定年月日, RString 認定調査予定開始時間, RString 認定調査予定終了時間, RString 時間枠,
             NinteiChosainJikanMasterDiv div) {
 
-        Code 調査地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey());
+        Code 調査地区コード = new Code(div.getDdlTaishoChiku().getSelectedKey().substring(0, 5));
         RString 認定調査委託先コード = div.getTxtNinteiChosaItakusakiCode().getValue();
         RString 認定調査員コード = div.getTxtNinteiChosainCode().getValue();
         LasdecCode 市町村コード = new LasdecCode(div.getMainPanel().getSearchConditionPanel().getHiddenShichosonCode());

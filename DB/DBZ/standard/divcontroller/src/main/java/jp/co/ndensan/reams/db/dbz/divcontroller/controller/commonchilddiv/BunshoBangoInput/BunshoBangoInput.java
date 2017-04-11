@@ -24,7 +24,24 @@ public class BunshoBangoInput {
      */
     public ResponseData<BunshoBangoInputDiv> onClick_BtnGetBunshoNo(BunshoBangoInputDiv div) {
         RString 文書番号 = getHandler(div).get自動採番文書番号();
+        if (!RString.isNullOrEmpty(文書番号) && Boolean.parseBoolean(div.getHdnPadZeroFlag().toString())) {
+            文書番号 = getHandler(div).get前Zero処理文書番号(文書番号);
+        }
         div.getTxtBunshoNo().setValue(文書番号);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     *
+     * @param div BunshoBangoInputDiv
+     * @return ResponseData<BunshoBangoInputDiv>
+     */
+    public ResponseData<BunshoBangoInputDiv> onBlur_txtBunshoNo(BunshoBangoInputDiv div) {
+        RString bunshoNo = div.getTxtBunshoNo().getValue();
+        if (!RString.isNullOrEmpty(bunshoNo) && Boolean.parseBoolean(div.getHdnPadZeroFlag().toString())) {
+            bunshoNo = getHandler(div).get前Zero処理文書番号(bunshoNo);
+            div.getTxtBunshoNo().setValue(bunshoNo);
+        }
         return ResponseData.of(div).respond();
     }
 

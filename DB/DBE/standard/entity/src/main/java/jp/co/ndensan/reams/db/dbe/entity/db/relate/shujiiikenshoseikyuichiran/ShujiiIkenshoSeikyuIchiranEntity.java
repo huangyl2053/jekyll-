@@ -5,8 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshoseikyuichiran;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,4 +37,6 @@ public class ShujiiIkenshoSeikyuIchiranEntity {
     private RString 主治医意見書作成料;
     private RString 主治医意見書別途診療費;
     private FlexibleDate 報酬支払年月日;
+    private ShikibetsuCode 識別コード;
+    private ExpandedInformation 拡張情報;
 }

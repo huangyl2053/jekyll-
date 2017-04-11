@@ -34,6 +34,16 @@ public interface IShikakuHenkoRirekiDiv extends ICommonChildDivBaseProperties {
      * @param hihoData 被保険者台帳情報から資格変更情報を抽出したデータ
      */
     void initialize(ShikibetsuCode 識別コード, IItemList<HihokenshaDaicho> hihoData);
+    
+    /**
+     * 資格変更履歴の初期化処理をします。資格変更情報Gridに設定する情報を外部から受け取ります。
+     *
+     * @param 識別コード 対象者の識別コード
+     * @param hihoData 被保険者台帳情報から資格変更情報を抽出したデータ
+     * @param hihokenshaNo 被保険者番号
+     * 
+     */
+    void initialize(ShikibetsuCode 識別コード, IItemList<HihokenshaDaicho> hihoData, HihokenshaNo hihokenshaNo);
 
     /**
      * 変更履歴グリッドのデータを取得します。
@@ -72,7 +82,7 @@ public interface IShikakuHenkoRirekiDiv extends ICommonChildDivBaseProperties {
     boolean is追加済み();
 
     DataGrid<dgHenko_Row> getDgHenko();
-
+    
     /**
      * 明細の状態を設定します。
      *

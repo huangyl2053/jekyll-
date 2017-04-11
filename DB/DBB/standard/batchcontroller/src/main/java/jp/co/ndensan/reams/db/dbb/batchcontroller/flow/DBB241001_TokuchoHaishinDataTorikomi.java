@@ -139,6 +139,6 @@ public class DBB241001_TokuchoHaishinDataTorikomi extends BatchFlowBase<DBB24100
     private UEXT00010NenkinTokuchoJohoTorikomiProcessParameter
             toUEXT00010NenkinTokuchoJohoTorikomiProcessParameter() {
         return new UEXT00010NenkinTokuchoJohoTorikomiProcessParameter(null, null, null, null, null, null, null,
-                filePath);
+                filePath, GyomuCode.DB介護保険);
     }
 }

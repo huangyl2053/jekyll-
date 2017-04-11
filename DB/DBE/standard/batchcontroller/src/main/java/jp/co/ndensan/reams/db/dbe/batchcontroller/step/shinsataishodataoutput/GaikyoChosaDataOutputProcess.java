@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinsataishodataoutput;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.core.util.accesslog.ExpandedInformations;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsataishodataoutput.GaikyoChosaDataMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shinsataishodataoutput.ShinsaTaishoDataOutPutProcessParammeter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsataishodataoutput.GaikyoChosaData5207_08_09_10RelateEntity;
@@ -13,6 +14,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsataishodataoutput.Gaikyo
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsataishodataoutput.GaikyoChosaDataRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsataishodataoutput.GaikyoChosaDataZenkaiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsataishodataoutput.IShinsaTaishoDataOutPutMapper;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaJisshiBashoCode;
@@ -40,10 +42,12 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJo
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5209NinteichosahyoKinyuItemEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5210NinteichosahyoShisetsuRiyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.api.EucOtherInfo;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -52,12 +56,21 @@ import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
  * 概況調査データのCSV出力処理クラスです。
  */
 public class GaikyoChosaDataOutputProcess extends BatchProcessBase<GaikyoChosaDataRelateEntity> {
+
+    public static final RString ACCESS_LOG_UUID;
+
+    static {
+        ACCESS_LOG_UUID = new RString("accessLogUUID");
+    }
 
     private static final RString MYBATIS_SELECT_ID = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinsataishodataoutput.IShinsaTaishoDataOutPutMapper."
@@ -92,10 +105,13 @@ public class GaikyoChosaDataOutputProcess extends BatchProcessBase<GaikyoChosaDa
     private IShinsaTaishoDataOutPutMapper mapper;
     @BatchWriter
     private CsvWriter<GaikyoChosaDataEucCsvEntity> eucCsvWriter;
+    private DbAccessLogger accessLogger;
+    private OutputParameter<AccessLogUUID> accessLogUUID;
 
     @Override
     protected void initialize() {
         eucFilePath = Path.combinePath(processParamter.getTempPath(), EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, EUC_ENTITY_ID.toRString()));
+        accessLogger = new DbAccessLogger();
     }
 
     @Override
@@ -121,11 +137,16 @@ public class GaikyoChosaDataOutputProcess extends BatchProcessBase<GaikyoChosaDa
     @Override
     protected void process(GaikyoChosaDataRelateEntity entity) {
         eucCsvWriter.writeLine(createCsvEntity(entity));
+        accessLogger.store(new ShoKisaiHokenshaNo(entity.get証記載保険者番号()), entity.get被保険者番号(),
+                ExpandedInformations.fromValue(entity.get申請書管理番号())
+        );
     }
 
     @Override
     protected void afterExecute() {
         eucCsvWriter.close();
+        accessLogUUID = new OutputParameter();
+        accessLogUUID.setValue(accessLogger.flushByEUC(UzUDE0835SpoolOutputType.EucOther));
     }
 
     private GaikyoChosaDataEucCsvEntity createCsvEntity(GaikyoChosaDataRelateEntity entity) {
@@ -140,7 +161,7 @@ public class GaikyoChosaDataOutputProcess extends BatchProcessBase<GaikyoChosaDa
         csvEntity.set認定申請区分_申請時_コード(entity.get認定申請区分_申請時_コード());
         csvEntity.set認定申請区分_申請時(
                 RString.isNullOrEmpty(entity.get認定申請区分_申請時_コード())
-                ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分_申請時_コード()).get略称());
+                        ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(entity.get認定申請区分_申請時_コード()).get略称());
         csvEntity.set被保険者氏名(entity.get被保険者氏名());
         csvEntity.set被保険者氏名カナ(entity.get被保険者氏名カナ());
         csvEntity.set生年月日(entity.get生年月日());
@@ -159,18 +180,18 @@ public class GaikyoChosaDataOutputProcess extends BatchProcessBase<GaikyoChosaDa
         csvEntity.set概況特記テキスト_イメージ区分コード(entity.get概況特記テキスト_イメージ区分コード());
         csvEntity.set概況特記テキスト_イメージ区分(
                 RString.isNullOrEmpty(entity.get概況特記テキスト_イメージ区分コード())
-                ? RString.EMPTY : TokkijikoTextImageKubun.toValue(entity.get概況特記テキスト_イメージ区分コード()).get名称());
+                        ? RString.EMPTY : TokkijikoTextImageKubun.toValue(entity.get概況特記テキスト_イメージ区分コード()).get名称());
         csvEntity.set認定調査依頼区分コード(entity.get認定調査依頼区分コード());
         csvEntity.set認定調査依頼区分(
                 RString.isNullOrEmpty(entity.get認定調査依頼区分コード())
-                ? RString.EMPTY : NinteiChousaIraiKubunCode.toValue(entity.get認定調査依頼区分コード()).get名称());
+                        ? RString.EMPTY : NinteiChousaIraiKubunCode.toValue(entity.get認定調査依頼区分コード()).get名称());
         csvEntity.set認定調査回数(entity.get認定調査回数());
         csvEntity.set認定調査実施年月日(entity.get認定調査実施年月日());
         csvEntity.set認定調査受領年月日(entity.get認定調査受領年月日());
         csvEntity.set認定調査区分コード(entity.get認定調査区分コード());
         csvEntity.set認定調査区分(
                 RString.isNullOrEmpty(entity.get認定調査区分コード())
-                ? RString.EMPTY : ChosaKubun.toValue(entity.get認定調査区分コード()).get名称());
+                        ? RString.EMPTY : ChosaKubun.toValue(entity.get認定調査区分コード()).get名称());
         csvEntity.set認定調査実施場所コード(entity.get認定調査実施場所コード());
         csvEntity.set認定調査実施場所(ChosaJisshiBashoCode.toValue(entity.get認定調査実施場所コード()).get名称());
         csvEntity.set認定調査実施場所名称(entity.get認定調査実施場所名称());
@@ -182,12 +203,12 @@ public class GaikyoChosaDataOutputProcess extends BatchProcessBase<GaikyoChosaDa
         csvEntity.set認定調査_サービス区分コード(entity.get認定調査_サービス区分コード());
         csvEntity.set認定調査_サービス区分(
                 RString.isNullOrEmpty(entity.get認定調査_サービス区分コード())
-                ? RString.EMPTY : ServiceKubunCode.toValue(entity.get認定調査_サービス区分コード()).get名称());
+                        ? RString.EMPTY : ServiceKubunCode.toValue(entity.get認定調査_サービス区分コード()).get名称());
         csvEntity.set利用施設名(entity.get利用施設名());
         csvEntity.set利用施設住所(entity.get利用施設住所());
         csvEntity.set利用施設電話番号(entity.get利用施設電話番号());
         csvEntity.set利用施設郵便番号(entity.get利用施設郵便番号());
-        csvEntity.set特記(entity.get特記());
+        csvEntity.set特記(convert改行(entity.get特記()));
         csvEntity.set認定調査特記事項受付年月日(entity.get認定調査特記事項受付年月日());
         csvEntity.set認定調査特記事項受領年月日(entity.get認定調査特記事項受領年月日());
         csvEntity.set住宅改修_改修箇所(entity.get住宅改修_改修箇所());
@@ -196,11 +217,11 @@ public class GaikyoChosaDataOutputProcess extends BatchProcessBase<GaikyoChosaDa
         csvEntity.set認定調査認知症高齢者の日常生活自立度コード(entity.get認定調査認知症高齢者の日常生活自立度コード());
         csvEntity.set認定調査認知症高齢者の日常生活自立度(
                 RString.isNullOrEmpty(entity.get認定調査認知症高齢者の日常生活自立度コード())
-                ? RString.EMPTY : NinchishoNichijoSeikatsuJiritsudoCode.toValue(entity.get認定調査認知症高齢者の日常生活自立度コード()).get名称());
+                        ? RString.EMPTY : NinchishoNichijoSeikatsuJiritsudoCode.toValue(entity.get認定調査認知症高齢者の日常生活自立度コード()).get名称());
         csvEntity.set認定調査障害高齢者の日常生活自立度コード(entity.get認定調査障害高齢者の日常生活自立度コード());
         csvEntity.set認定調査障害高齢者の日常生活自立度(
                 RString.isNullOrEmpty(entity.get認定調査障害高齢者の日常生活自立度コード())
-                ? RString.EMPTY : ShogaiNichijoSeikatsuJiritsudoCode.toValue(entity.get認定調査障害高齢者の日常生活自立度コード()).get名称());
+                        ? RString.EMPTY : ShogaiNichijoSeikatsuJiritsudoCode.toValue(entity.get認定調査障害高齢者の日常生活自立度コード()).get名称());
         csvEntity.setステータス(RString.EMPTY);
         csvEntity.set中間評価項目得点第1群(entity.get中間評価項目得点第1群());
         csvEntity.set中間評価項目得点第2群(entity.get中間評価項目得点第2群());
@@ -210,36 +231,36 @@ public class GaikyoChosaDataOutputProcess extends BatchProcessBase<GaikyoChosaDa
         csvEntity.set被保険者区分コード(entity.get被保険者区分コード());
         csvEntity.set被保険者区分名称(
                 RString.isNullOrEmpty(entity.get被保険者区分コード())
-                ? RString.EMPTY : HihokenshaKubunCode.toValue(entity.get被保険者区分コード()).get略称());
+                        ? RString.EMPTY : HihokenshaKubunCode.toValue(entity.get被保険者区分コード()).get略称());
         csvEntity.set認知症自立度Ⅱ以上の蓋然性(entity.get認知症自立度Ⅱ以上の蓋然性());
         csvEntity.set給付区分コード(entity.get給付区分コード());
         csvEntity.set給付区分(
                 RString.isNullOrEmpty(entity.get給付区分コード())
-                ? RString.EMPTY : SuiteiKyufuKubunCode.toValue(entity.get給付区分コード()).get名称());
+                        ? RString.EMPTY : SuiteiKyufuKubunCode.toValue(entity.get給付区分コード()).get名称());
         csvEntity.set状態の安定性コード(entity.get状態の安定性コード());
         csvEntity.set状態の安定性(
                 RString.isNullOrEmpty(entity.get状態の安定性コード())
-                ? RString.EMPTY : JotaiAnteiseiCode.toValue(entity.get状態の安定性コード()).get名称());
+                        ? RString.EMPTY : JotaiAnteiseiCode.toValue(entity.get状態の安定性コード()).get名称());
         csvEntity.set二号特定疾病コード(entity.get二号特定疾病コード());
         csvEntity.set認定申請理由(entity.get認定申請理由());
         csvEntity.set要介護認定一次判定結果コード(entity.get要介護認定一次判定結果認知症加算コード());
         if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(entity.get厚労省IF識別コード())) {
             csvEntity.set要介護認定一次判定結果(
                     RString.isNullOrEmpty(entity.get要介護認定一次判定結果認知症加算コード())
-                    ? RString.EMPTY : IchijiHanteiKekkaCode02.toValue(entity.get要介護認定一次判定結果認知症加算コード()).get名称());
+                            ? RString.EMPTY : IchijiHanteiKekkaCode02.toValue(entity.get要介護認定一次判定結果認知症加算コード()).get名称());
         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(entity.get厚労省IF識別コード())) {
             csvEntity.set要介護認定一次判定結果(
                     RString.isNullOrEmpty(entity.get要介護認定一次判定結果認知症加算コード())
-                    ? RString.EMPTY : IchijiHanteiKekkaCode06.toValue(entity.get要介護認定一次判定結果認知症加算コード()).get名称());
+                            ? RString.EMPTY : IchijiHanteiKekkaCode06.toValue(entity.get要介護認定一次判定結果認知症加算コード()).get名称());
         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(entity.get厚労省IF識別コード())
                 || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(entity.get厚労省IF識別コード())) {
             csvEntity.set要介護認定一次判定結果(
                     RString.isNullOrEmpty(entity.get要介護認定一次判定結果認知症加算コード())
-                    ? RString.EMPTY : IchijiHanteiKekkaCode09.toValue(entity.get要介護認定一次判定結果認知症加算コード()).get名称());
+                            ? RString.EMPTY : IchijiHanteiKekkaCode09.toValue(entity.get要介護認定一次判定結果認知症加算コード()).get名称());
         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(entity.get厚労省IF識別コード())) {
             csvEntity.set要介護認定一次判定結果(
                     RString.isNullOrEmpty(entity.get要介護認定一次判定結果認知症加算コード())
-                    ? RString.EMPTY : IchijiHanteiKekkaCode99.toValue(entity.get要介護認定一次判定結果認知症加算コード()).get名称());
+                            ? RString.EMPTY : IchijiHanteiKekkaCode99.toValue(entity.get要介護認定一次判定結果認知症加算コード()).get名称());
         }
         csvEntity.set要介護認定等基準時間(entity.get要介護認定等基準時間().add(entity.get要介護認定等基準時間_認知症加算()));
         csvEntity.set要介護認定等基準時間_食事(entity.get要介護認定等基準時間_食事());
@@ -411,10 +432,10 @@ public class GaikyoChosaDataOutputProcess extends BatchProcessBase<GaikyoChosaDa
         for (DbT5209NinteichosahyoKinyuItemEntity 記入項目 : 記入項目リスト) {
             if (記入項目.getRemban() == 連番1) {
                 csvEntity.set記入項目連番01(記入項目.getRemban());
-                csvEntity.setサービスの状況記入01(記入項目.getServiceJokyoKinyu());
+                csvEntity.setサービスの状況記入01(convert改行(記入項目.getServiceJokyoKinyu()));
             } else if (記入項目.getRemban() == 連番2) {
                 csvEntity.set記入項目連番02(記入項目.getRemban());
-                csvEntity.setサービスの状況記入02(記入項目.getServiceJokyoKinyu());
+                csvEntity.setサービスの状況記入02(convert改行(記入項目.getServiceJokyoKinyu()));
             }
         }
         return csvEntity;
@@ -541,40 +562,46 @@ public class GaikyoChosaDataOutputProcess extends BatchProcessBase<GaikyoChosaDa
                 csvEntity.set主治医認定調査認知症高齢者の日常生活自立度コード(主治医意見書意見項目.getIkenItem());
                 csvEntity.set主治医認定調査認知症高齢者の日常生活自立度(
                         RString.isNullOrEmpty(主治医意見書意見項目.getIkenItem())
-                        ? RString.EMPTY : IkenKomoku03.toValue(主治医意見書意見項目.getIkenItem()).get名称());
+                                ? RString.EMPTY : IkenKomoku03.toValue(主治医意見書意見項目.getIkenItem()).get名称());
             }
             if (主治医意見書意見項目.getRemban() == 連番13) {
                 csvEntity.set主治医認定調査障害高齢者の日常生活自立度コード(主治医意見書意見項目.getIkenItem());
                 csvEntity.set主治医認定調査障害高齢者の日常生活自立度(
                         RString.isNullOrEmpty(主治医意見書意見項目.getIkenItem())
-                        ? RString.EMPTY : IkenKomoku02.toValue(主治医意見書意見項目.getIkenItem()).get名称());
+                                ? RString.EMPTY : IkenKomoku02.toValue(主治医意見書意見項目.getIkenItem()).get名称());
             }
             if (主治医意見書意見項目.getRemban() == 連番15) {
                 csvEntity.set短期記憶内容コード(主治医意見書意見項目.getIkenItem());
                 csvEntity.set短期記憶内容(
                         RString.isNullOrEmpty(主治医意見書意見項目.getIkenItem())
-                        ? RString.EMPTY : IkenKomoku04.toValue(主治医意見書意見項目.getIkenItem()).get名称());
+                                ? RString.EMPTY : IkenKomoku04.toValue(主治医意見書意見項目.getIkenItem()).get名称());
             }
             if (主治医意見書意見項目.getRemban() == 連番16) {
                 csvEntity.set認知能力内容コード(主治医意見書意見項目.getIkenItem());
                 csvEntity.set認知能力内容(
                         RString.isNullOrEmpty(主治医意見書意見項目.getIkenItem())
-                        ? RString.EMPTY : IkenKomoku05.toValue(主治医意見書意見項目.getIkenItem()).get名称());
+                                ? RString.EMPTY : IkenKomoku05.toValue(主治医意見書意見項目.getIkenItem()).get名称());
             }
             if (主治医意見書意見項目.getRemban() == 連番17) {
                 csvEntity.set伝達能力内容コード(主治医意見書意見項目.getIkenItem());
                 csvEntity.set伝達能力内容(
                         RString.isNullOrEmpty(主治医意見書意見項目.getIkenItem())
-                        ? RString.EMPTY : IkenKomoku06.toValue(主治医意見書意見項目.getIkenItem()).get名称());
+                                ? RString.EMPTY : IkenKomoku06.toValue(主治医意見書意見項目.getIkenItem()).get名称());
             }
             if (主治医意見書意見項目.getRemban() == 連番69) {
                 csvEntity.set食事行為内容コード(主治医意見書意見項目.getIkenItem());
                 csvEntity.set食事行為内容(
                         RString.isNullOrEmpty(主治医意見書意見項目.getIkenItem())
-                        ? RString.EMPTY : IkenKomoku14.toValue(主治医意見書意見項目.getIkenItem()).get名称());
+                                ? RString.EMPTY : IkenKomoku14.toValue(主治医意見書意見項目.getIkenItem()).get名称());
             }
         }
 
         return csvEntity;
+    }
+
+    private static RString convert改行(RString text) {
+        return (text != null)
+                ? new RStringBuilder(text).replace("\r", "").replace("\n", "↓").toRString()
+                : RString.EMPTY;
     }
 }

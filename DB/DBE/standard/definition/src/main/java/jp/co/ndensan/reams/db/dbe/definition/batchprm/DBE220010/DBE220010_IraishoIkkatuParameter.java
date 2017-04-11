@@ -144,7 +144,8 @@ public class DBE220010_IraishoIkkatuParameter extends BatchParameterBase {
                 iraiToYMD,
                 shujiiikenshoSakuseiIrai,
                 shujiiIkensho,
-                shujiiIkenshoSakuseiIraiList);
+                shujiiIkenshoSakuseiIraiList,
+                shoKisaiHokenshaNo);
     }
 
     /**
@@ -157,7 +158,8 @@ public class DBE220010_IraishoIkkatuParameter extends BatchParameterBase {
                 iraiToYMD,
                 ninteioChosaIraisho,
                 ninteiChosahyo,
-                ninteiChosaIraiList);
+                ninteiChosaIraiList,
+                shoKisaiHokenshaNo);
     }
 
     /**

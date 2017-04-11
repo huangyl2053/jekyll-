@@ -37,6 +37,11 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 
 /**
  * 完了処理・主治医意見書入手のHandlerクラスです。
@@ -262,5 +267,18 @@ public class IkenshogetHandler {
             }
         }
         意見書入手List();
+    }
+
+    /**
+     * アクセスログを出力するためのPersonalDataを取得するメソッドです。
+     *
+     * @param 証記載保険者番号 RString
+     * @param 被保険者番号 RString
+     * @param 申請書管理番号 RString
+     * @return PersonalData
+     */
+    public Optional<PersonalData> getPersonalData(RString 証記載保険者番号, RString 被保険者番号, RString 申請書管理番号) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号);
+        return Optional.of(PersonalData.of(new ShikibetsuCode(証記載保険者番号.substring(0, 5).concat(被保険者番号)), expandedInfo));
     }
 }

@@ -27,6 +27,7 @@ public class KekkatsuchiIchiranhyoEntity {
     private RString shinsakaiNo;
     private FlexibleDate shinsakaiKaisaiYMD;
     private RDateTime printTimeStamp;
+    private RString shinseishoKanriNo;
     private RString hokenshaName;
     private RString shinseiYMD;
     private RString hihokenshaNo;

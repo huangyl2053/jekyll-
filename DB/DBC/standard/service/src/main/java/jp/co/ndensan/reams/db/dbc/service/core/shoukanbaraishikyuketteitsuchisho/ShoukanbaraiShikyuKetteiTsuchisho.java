@@ -690,8 +690,11 @@ public class ShoukanbaraiShikyuKetteiTsuchisho {
     private void setKoza(ShoukanbaraiShikyuketteiTsuuchisho entity, long 口座ID, ShikibetsuCode 識別コード) {
         IKoza 口座;
         ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
-        IKozaSearchKey searchKey = new KozaSearchKeyBuilder().setサブ業務コード(SubGyomuCode.DBC介護給付)
-                .set業務コード(GyomuCode.DB介護保険).set識別コード(識別コード).set口座ID(口座ID).build();
+        IKozaSearchKey searchKey = new KozaSearchKeyBuilder()
+                .setサブ業務コード(SubGyomuCode.DBC介護給付)
+                .set業務コード(GyomuCode.DB介護保険)
+                .set識別コード(識別コード)
+                .set口座ID(口座ID).build();
         IKozaManager iKozaManager = KozaService.createKozaManager();
         if (chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBC介護給付, 通知文情報帳票ID).is口座マスク有無()) {
             口座 = iKozaManager.getマスク済口座(searchKey).isEmpty() ? null : iKozaManager.getマスク済口座(searchKey).get(0);

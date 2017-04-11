@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosadataoutput;
 
+import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosadataoutput.NinteiChosaFileOutputMybitisParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -17,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class NinteiChosaFileOutputProcessParamter implements IBatchProcessParameter {
 
+    private final List<RString> shinseishoKanriNoList;
     private final RString shichosonCode;
     private final RString addedFileName;
     private final RString tempFilePath;
@@ -24,14 +26,17 @@ public class NinteiChosaFileOutputProcessParamter implements IBatchProcessParame
     /**
      * コンストラクタです。
      *
+     * @param shinseishoKanriNoList
      * @param shichosonCode
      * @param addedFileName
      * @param tempFilePath
      */
     public NinteiChosaFileOutputProcessParamter(
+            List<RString> shinseishoKanriNoList,
             RString shichosonCode,
             RString addedFileName,
             RString tempFilePath) {
+        this.shinseishoKanriNoList = shinseishoKanriNoList;
         this.shichosonCode = shichosonCode;
         this.addedFileName = addedFileName;
         this.tempFilePath = tempFilePath;
@@ -43,6 +48,6 @@ public class NinteiChosaFileOutputProcessParamter implements IBatchProcessParame
      * @return NinteiChosaDataOutputBatchMybitisParameter
      */
     public NinteiChosaFileOutputMybitisParameter toNinteiChosaFileOutputMybitisParameter() {
-        return NinteiChosaFileOutputMybitisParameter.createSelectByKeyParam(shichosonCode, addedFileName, tempFilePath);
+        return NinteiChosaFileOutputMybitisParameter.createSelectByKeyParam(shinseishoKanriNoList);
     }
 }

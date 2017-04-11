@@ -61,6 +61,8 @@ public class ChosahyoTokkijikoFreeEditorImpl implements IChosahyoTokkijikoFreeEd
         source.hihokenshaNo9 = business.getHihokenshaNo9();
         source.hihokenshaNo10 = business.getHihokenshaNo10();
         source.hihokenshaName = business.getHihokenshaName();
+        source.識別コード = business.get識別コード();
+        source.拡張情報 = business.get拡張情報();
         return source;
     }
 }

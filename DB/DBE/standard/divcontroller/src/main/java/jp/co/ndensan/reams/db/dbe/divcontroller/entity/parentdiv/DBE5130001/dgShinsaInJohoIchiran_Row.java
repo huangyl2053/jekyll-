@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Thu Mar 02 21:51:48 JST 2017 
+ * Fri Mar 17 11:15:13 JST 2017 
  */
 
 
@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  */
 
 public class dgShinsaInJohoIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-13_05-12-42">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
 
     private RString status;
     private RString shinsainCode;
@@ -47,6 +47,7 @@ public class dgShinsaInJohoIchiran_Row extends DataRow {
     private RString kozaMeigininKana;
     private RString kozaMeiginin;
     private RString shikakuCodeCode;
+    private RString shozokuKikanIchiran;
 
     public dgShinsaInJohoIchiran_Row() {
         super();
@@ -75,6 +76,7 @@ public class dgShinsaInJohoIchiran_Row extends DataRow {
         this.kozaMeigininKana = RString.EMPTY;
         this.kozaMeiginin = RString.EMPTY;
         this.shikakuCodeCode = RString.EMPTY;
+        this.shozokuKikanIchiran = RString.EMPTY;
         this.setOriginalData("status", status);
         this.setOriginalData("shinsainCode", shinsainCode);
         this.setOriginalData("shinsakaiIinKaishiYMD", shinsakaiIinKaishiYMD);
@@ -100,9 +102,10 @@ public class dgShinsaInJohoIchiran_Row extends DataRow {
         this.setOriginalData("kozaMeigininKana", kozaMeigininKana);
         this.setOriginalData("kozaMeiginin", kozaMeiginin);
         this.setOriginalData("shikakuCodeCode", shikakuCodeCode);
+        this.setOriginalData("shozokuKikanIchiran", shozokuKikanIchiran);
     }
 
-    public dgShinsaInJohoIchiran_Row(RString status, RString shinsainCode, TextBoxDate shinsakaiIinKaishiYMD, TextBoxDate shinsakaiIinShuryoYMD, RString shimei, RString kanaShimei, RString seibetsu, TextBoxDate barthYMD, RString shikakuCode, RString jokyo, RString biko, RString shinsakaiChikuCode, RString yubinNo, RString yusoKubun, RString jusho, TextBoxDate haishiYMD, RString telNo1, RString faxNo, RString kinyuKikanCode, RString kinyuKikanShitenCode, RString yokinShubetsu, RString kozaNo, RString kozaMeigininKana, RString kozaMeiginin, RString shikakuCodeCode) {
+    public dgShinsaInJohoIchiran_Row(RString status, RString shinsainCode, TextBoxDate shinsakaiIinKaishiYMD, TextBoxDate shinsakaiIinShuryoYMD, RString shimei, RString kanaShimei, RString seibetsu, TextBoxDate barthYMD, RString shikakuCode, RString jokyo, RString biko, RString shinsakaiChikuCode, RString yubinNo, RString yusoKubun, RString jusho, TextBoxDate haishiYMD, RString telNo1, RString faxNo, RString kinyuKikanCode, RString kinyuKikanShitenCode, RString yokinShubetsu, RString kozaNo, RString kozaMeigininKana, RString kozaMeiginin, RString shikakuCodeCode, RString shozokuKikanIchiran) {
         super();
         this.setOriginalData("status", status);
         this.setOriginalData("shinsainCode", shinsainCode);
@@ -129,6 +132,7 @@ public class dgShinsaInJohoIchiran_Row extends DataRow {
         this.setOriginalData("kozaMeigininKana", kozaMeigininKana);
         this.setOriginalData("kozaMeiginin", kozaMeiginin);
         this.setOriginalData("shikakuCodeCode", shikakuCodeCode);
+        this.setOriginalData("shozokuKikanIchiran", shozokuKikanIchiran);
         this.status = status;
         this.shinsainCode = shinsainCode;
         this.shinsakaiIinKaishiYMD = shinsakaiIinKaishiYMD;
@@ -154,6 +158,7 @@ public class dgShinsaInJohoIchiran_Row extends DataRow {
         this.kozaMeigininKana = kozaMeigininKana;
         this.kozaMeiginin = kozaMeiginin;
         this.shikakuCodeCode = shikakuCodeCode;
+        this.shozokuKikanIchiran = shozokuKikanIchiran;
     }
 
     public RString getStatus() {
@@ -254,6 +259,10 @@ public class dgShinsaInJohoIchiran_Row extends DataRow {
 
     public RString getShikakuCodeCode() {
         return shikakuCodeCode;
+    }
+
+    public RString getShozokuKikanIchiran() {
+        return shozokuKikanIchiran;
     }
 
     public void setStatus(RString status) {
@@ -379,6 +388,11 @@ public class dgShinsaInJohoIchiran_Row extends DataRow {
     public void setShikakuCodeCode(RString shikakuCodeCode) {
         this.setOriginalData("shikakuCodeCode", shikakuCodeCode);
         this.shikakuCodeCode = shikakuCodeCode;
+    }
+
+    public void setShozokuKikanIchiran(RString shozokuKikanIchiran) {
+        this.setOriginalData("shozokuKikanIchiran", shozokuKikanIchiran);
+        this.shozokuKikanIchiran = shozokuKikanIchiran;
     }
 
     // </editor-fold>

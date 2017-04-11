@@ -162,12 +162,11 @@ public class ShokanbaraiSashitomeTaishoshaIchiranOutputProcess extends BatchKeyB
         }
         IKozaSearchKey searchKey = new KozaSearchKeyBuilder()
                 .set業務コード(GyomuCode.DB介護保険)
-                .setサブ業務コード(SubGyomuCode.DBC介護給付)
                 .set科目コード(科目コード)
                 .set基準日(FlexibleDate.getNowDate()).build();
         List<KamokuCode> kamokuList = new ShunoKamokuAuthority().
                 get参照権限科目コード(UrControlDataFactory.createInstance().getLoginInfo().getUserId());
-        
+
         ShokanKetteiTsuchiShoKetteiTsuchiIchiranParameter parameter
                 = ShokanKetteiTsuchiShoKetteiTsuchiIchiranParameter.toMybatisParameter(出力順, 資格区分, psmShikibetsuTaisho,
                         key.getPSM検索キー(), 宛先builder.build(), searchKey, kamokuList);

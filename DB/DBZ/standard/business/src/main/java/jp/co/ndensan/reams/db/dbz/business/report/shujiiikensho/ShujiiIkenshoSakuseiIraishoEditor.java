@@ -82,6 +82,8 @@ public class ShujiiIkenshoSakuseiIraishoEditor implements IShujiiIkenshoSakuseiI
         source.tsuchibun2 = item.getTsuchibun2();
         source.remban = item.getRemban();
         source.shoriName = item.getShoriName();
+        source.識別コード = item.get識別コード();
+        source.拡張情報 = item.get拡張情報();
         return source;
     }
 }

@@ -35,6 +35,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.shujiiikenshoiraishokai.ShujiiIke
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.Image;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteichosairaishokai.NinteiChosaIraiShokaiMaster;
@@ -42,6 +43,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.Ren
 import jp.co.ndensan.reams.db.dbz.business.core.shinsakaijohokojin.KaisaiKekkaAndBashoJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.accesslog.ExpandedInformations;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 //import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
 //import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
@@ -59,6 +61,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShienShi
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiTodokedeDaikoKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.TorisageKubunCode;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ImageManager;
 import jp.co.ndensan.reams.db.dbz.service.core.ninteichosairaishokai.NinteiChosaIraiShokaiFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.shinsakaijohokojin.ShinsakaiJohoKojinFinder;
@@ -66,6 +69,8 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -130,6 +135,17 @@ public class KojinJokyoShokaiHandler {
         getchkShiteii(kojinJokyoShokaiList);
         getKojinJokyoShokai1(kojinJokyoShokaiList);
         getKojinJokyoShokai2(kojinJokyoShokaiList);
+        setAccessLog(kojinJokyoShokaiList);
+    }
+    
+    private void setAccessLog(List<KojinJokyoShokaiResult> kojinJokyoShokaiList) {
+        RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        RString 被保険者番号 = kojinJokyoShokaiList.get(0).get被保番号();
+        ShoKisaiHokenshaNo 証記載保険者番号 = new ShoKisaiHokenshaNo(kojinJokyoShokaiList.get(0).get保険者番号());
+        DbAccessLogger accessLog = new DbAccessLogger();
+        ExpandedInformation expandedInfo = ExpandedInformations.申請書管理番号.fromValue(申請書管理番号);
+        accessLog.store(証記載保険者番号, 被保険者番号, expandedInfo);
+        accessLog.flushBy(AccessLogType.照会);        
     }
 
     /**
@@ -597,6 +613,9 @@ public class KojinJokyoShokaiHandler {
         jokyohyoEntity.setKonnkai_22(new RString(kojinJokyoShokaiList.get(0).get今回センター送信年月日().toString()));
         jokyohyoEntity.setZennkai_22(new RString(kojinJokyoShokaiList.get(0).get前回センター送信年月日().toString()));
         jokyohyoEntity.setZennnoma_22(new RString(kojinJokyoShokaiList.get(0).get前々回センター送信年月日().toString()));
+        
+        jokyohyoEntity.setShinseishoKanriNo(new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class)));
+        jokyohyoEntity.setShoKisaiHokenshaNo(new ShoKisaiHokenshaNo(div.getCcdNinteiShinseishaKihonInfo().get証記載保険者番号()));
         return jokyohyoEntity;
     }
 }

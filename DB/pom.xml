@@ -43,15 +43,16 @@
         <!-- UZ -->
         <jp.co.ndensan.reams.uzVersion>1.19.4</jp.co.ndensan.reams.uzVersion>
         <!-- 公開系 -->
-        <jp.co.ndensan.reams.urVersion>1.17.1-SNAPSHOT</jp.co.ndensan.reams.urVersion>
+        <jp.co.ndensan.reams.urVersion>1.17.1</jp.co.ndensan.reams.urVersion>
         <jp.co.ndensan.reams.uaxVersion>1.16.0</jp.co.ndensan.reams.uaxVersion>
         <jp.co.ndensan.reams.uexVersion>1.14.1</jp.co.ndensan.reams.uexVersion>
-        <jp.co.ndensan.reams.uxxVersion>1.17.1-SNAPSHOT</jp.co.ndensan.reams.uxxVersion>
+        <jp.co.ndensan.reams.uxxVersion>1.17.1</jp.co.ndensan.reams.uxxVersion>
         <jp.co.ndensan.reams.caxVersion>1.16.0</jp.co.ndensan.reams.caxVersion>
         <jp.co.ndensan.reams.aaxVersion>1.14.0</jp.co.ndensan.reams.aaxVersion>
         <jp.co.ndensan.reams.dzxVersion>1.17.0</jp.co.ndensan.reams.dzxVersion>
         <!-- <jp.co.ndensan.reams.uaVersion>1.13.3</jp.co.ndensan.reams.uaVersion> -->
         <jp.co.ndensan.reams.bbVersion>1.17.0</jp.co.ndensan.reams.bbVersion>
+        <jp.co.ndensan.reams.ucxVersion>1.14.1</jp.co.ndensan.reams.ucxVersion>
         <!-- other -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -150,6 +151,19 @@
                 <groupId>jp.co.ndensan.reams.ue.uex</groupId>
                 <artifactId>UexBatchController</artifactId>
                 <version>${jp.co.ndensan.reams.uexVersion}</version>
+            </dependency>
+            <!-- UCX -->
+            <dependency>
+                <artifactId>UcxDefinition</artifactId>
+                <groupId>jp.co.ndensan.reams.uc.ucx</groupId>
+                <type>jar</type>
+                <version>${jp.co.ndensan.reams.ucxVersion}</version>
+            </dependency>
+            <dependency>
+                <artifactId>UcxEntity</artifactId>
+                <groupId>jp.co.ndensan.reams.uc.ucx</groupId>
+                <type>jar</type>
+                <version>${jp.co.ndensan.reams.ucxVersion}</version>
             </dependency>
             <!-- UXX -->
             <dependency>

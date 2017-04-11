@@ -109,25 +109,27 @@ public class NinteiChosainMasterHandler {
     public void setChosainIchiran(List<NinteiChosainMaster> ninteiChosainMasterList) {
         List<dgChosainIchiran_Row> dataGridList = new ArrayList<>();
         for (NinteiChosainMaster ninteiChosainMaster : ninteiChosainMasterList) {
-            dataGridList.add(createDgChosainIchiranRow(
-                    RString.EMPTY,
-                    ninteiChosainMaster.get市町村コード(),
-                    ninteiChosainMaster.get市町村名称(),
-                    ninteiChosainMaster.get認定調査員コード(),
-                    ninteiChosainMaster.get調査員氏名(),
-                    ninteiChosainMaster.get調査員氏名カナ(),
-                    ninteiChosainMaster.get認定調査委託先コード(),
-                    ninteiChosainMaster.get事業者名称(),
-                    ninteiChosainMaster.get性別(),
-                    ninteiChosainMaster.get地区コード(),
-                    ninteiChosainMaster.get調査員資格(),
-                    ninteiChosainMaster.get調査可能人数_月(),
-                    ninteiChosainMaster.is状況フラグ(),
-                    ninteiChosainMaster.get郵便番号(),
-                    ninteiChosainMaster.get住所(),
-                    ninteiChosainMaster.get電話番号(),
-                    ninteiChosainMaster.getFAX番号(),
-                    ninteiChosainMaster.get所属機関名称()));
+            if (ninteiChosainMaster.get認定調査員コード() != null && !ninteiChosainMaster.get認定調査員コード().isEmpty()) {
+                dataGridList.add(createDgChosainIchiranRow(
+                        RString.EMPTY,
+                        ninteiChosainMaster.get市町村コード(),
+                        ninteiChosainMaster.get市町村名称(),
+                        ninteiChosainMaster.get認定調査員コード(),
+                        ninteiChosainMaster.get調査員氏名(),
+                        ninteiChosainMaster.get調査員氏名カナ(),
+                        ninteiChosainMaster.get認定調査委託先コード(),
+                        ninteiChosainMaster.get事業者名称(),
+                        ninteiChosainMaster.get性別(),
+                        ninteiChosainMaster.get地区コード(),
+                        ninteiChosainMaster.get調査員資格(),
+                        ninteiChosainMaster.get調査可能人数_月(),
+                        ninteiChosainMaster.is状況フラグ(),
+                        ninteiChosainMaster.get郵便番号(),
+                        ninteiChosainMaster.get住所(),
+                        ninteiChosainMaster.get電話番号(),
+                        ninteiChosainMaster.getFAX番号(),
+                        ninteiChosainMaster.get所属機関名称()));
+            }
         }
         div.getChosainIchiran().getDgChosainIchiran().setDataSource(dataGridList);
     }

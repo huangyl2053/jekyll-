@@ -39,4 +39,7 @@ public class SonoTashiryoEntity {
     private RString 審査日_月;
     private RString 審査日_日;
     private RString その他資料イメージ;
+    private RString temp_保険者番号;
+    private RString temp_被保険者番号;
+    private RString temp_申請書管理番号;
 }

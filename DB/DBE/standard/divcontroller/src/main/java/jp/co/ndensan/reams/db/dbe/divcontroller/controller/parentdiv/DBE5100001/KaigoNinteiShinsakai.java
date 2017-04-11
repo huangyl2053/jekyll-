@@ -180,11 +180,6 @@ public class KaigoNinteiShinsakai {
                 row.getTaishoNinzu().setValue(shinsakaiKaisai.get介護認定審査会実施人数());
                 row.setOnseiKiroku(shinsakaiKaisai.get音声記録());
                 row.getDataShutsuryoku().setValue(shinsakaiKaisai.getモバイルデータ出力年月日());
-//                if (shinsakaiKaisai.is資料作成済フラグ()) {
-//                    row.setShiryoSakuseiKubun(IsShiryoSakuseiZumi.toValue(shinsakaiKaisai.is資料作成済フラグ()).get名称());
-//                } else {
-//                    row.setShiryoSakuseiKubun(RString.EMPTY);
-//                }
                 row.setShiryoSakuseiKubun(shinsakaiKaisai.get資料作成状況());
                 if (!RString.isNullOrEmpty(shinsakaiKaisai.get介護認定審査会進捗状況())) {
                     row.setShinchokuJokyo(ShinsakaiShinchokuJokyo.toValue(shinsakaiKaisai.get介護認定審査会進捗状況()).get画面表示名称());
@@ -208,7 +203,7 @@ public class KaigoNinteiShinsakai {
             time = time.padZeroToLeft(LENGTH_4);
             return RTime.of(Integer.valueOf(time.substring(0, 2).toString()), Integer.valueOf(time.substring(2).toString()));
         }
-        return RTime.of(0, 0, 0, 0);
+        return null;
     }
 
     private ResponseData<KaigoNinteiShinsakaiDiv> onActive_return(KaigoNinteiShinsakaiDiv div, RString uiContainerID) {

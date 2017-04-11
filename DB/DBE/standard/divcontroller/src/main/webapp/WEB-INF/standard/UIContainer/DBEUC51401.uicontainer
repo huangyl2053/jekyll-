@@ -37,7 +37,7 @@
      "layoutName": "DBE5140001",
      "layoutTitle": "介護認定審査会開催予定登録",
      "eventName": "スケジュール表発行",
-     "destroy": true,
+     "destroy": false,
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE5140003",

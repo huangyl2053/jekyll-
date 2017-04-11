@@ -451,8 +451,8 @@ public class KougakuSabisuhiShikyuuShinnseiTouroku {
                 = 事業高額介護サービス費支給判定結果Dac.selectAllByKey(被保険者番号, サービス提供年月);
         if (支給申請list != null && !支給申請list.isEmpty()) {
             for (DbT3111JigyoKogakuShikyuHanteiKekkaEntity entity : 支給申請list) {
-                if (履歴番号 < entity.getRirekiNo().intValue()) {
-                    履歴番号 = entity.getRirekiNo().intValue();
+                if (履歴番号 < entity.getRirekiNo()) {
+                    履歴番号 = entity.getRirekiNo();
                 }
             }
         }

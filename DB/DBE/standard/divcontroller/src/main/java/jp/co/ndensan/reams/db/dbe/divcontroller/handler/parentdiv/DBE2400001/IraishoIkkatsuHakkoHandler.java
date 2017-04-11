@@ -19,6 +19,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.HokenshaDDLPattem;
+import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.service.core.kaigiatesakijushosettei.KaigoAtesakiJushoSetteiFinder;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
@@ -99,8 +101,11 @@ public class IraishoIkkatsuHakkoHandler {
                 .get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         div.getTxtIkenshoDispMax().setMaxValue(new Decimal(DbBusinessConfig
                 .get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
-        div.getCcdNinteiChosaHokensha().loadHokenshaList(GyomuBunrui.介護認定);
-        div.getCcdShujiiIkenshoHokensha().loadHokenshaList(GyomuBunrui.介護認定);
+        div.getCcdNinteiChosaHokensha().loadHokenshaList(GyomuBunrui.介護認定, HokenshaDDLPattem.全市町村以外);
+        div.getCcdShujiiIkenshoHokensha().loadHokenshaList(GyomuBunrui.介護認定, HokenshaDDLPattem.全市町村以外);
+        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
+        div.getCcdNinteiChosaHokensha().setSelectedShichosonIfExist(市町村セキュリティ情報.get市町村情報().get市町村コード());
+        div.getCcdShujiiIkenshoHokensha().setSelectedShichosonIfExist(市町村セキュリティ情報.get市町村情報().get市町村コード());
     }
 
     /**
@@ -267,7 +272,9 @@ public class IraishoIkkatsuHakkoHandler {
             List<RString> selectKeys = new ArrayList<>();
             selectKeys.add(COMMON_SELECTED);
             div.getChkNinteiChosaIraisho().setSelectedItemsByKey(selectKeys);
-            div.getCcdNinteiChosaHokensha().loadHokenshaList(GyomuBunrui.介護認定);
+            div.getCcdNinteiChosaHokensha().loadHokenshaList(GyomuBunrui.介護認定, HokenshaDDLPattem.全市町村以外);
+            ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
+            div.getCcdNinteiChosaHokensha().setSelectedShichosonIfExist(市町村セキュリティ情報.get市町村情報().get市町村コード());
             div.getChkNinteiChosahyo().setSelectedItemsByKey(selectKeys);
             div.getTxtChosaDispMax().clearValue();
             div.getTxtChosaDispMax().setValue(new Decimal(DbBusinessConfig
@@ -279,7 +286,9 @@ public class IraishoIkkatsuHakkoHandler {
             List<RString> selectKeys = new ArrayList<>();
             selectKeys.add(COMMON_SELECTED);
             div.getChkShujiiikenshoSakuseiIrai().setSelectedItemsByKey(selectKeys);
-            div.getCcdShujiiIkenshoHokensha().loadHokenshaList(GyomuBunrui.介護認定);
+            div.getCcdShujiiIkenshoHokensha().loadHokenshaList(GyomuBunrui.介護認定, HokenshaDDLPattem.全市町村以外);
+            ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
+            div.getCcdShujiiIkenshoHokensha().setSelectedShichosonIfExist(市町村セキュリティ情報.get市町村情報().get市町村コード());
             div.getChkShujiiIkensho().setSelectedItemsByKey(selectKeys);
             div.getTxtIkenshoDispMax().clearValue();
             div.getTxtIkenshoDispMax().setValue(new Decimal(DbBusinessConfig
@@ -339,7 +348,7 @@ public class IraishoIkkatsuHakkoHandler {
 
         if (!div.getChkIkenshoSeikyusho().isDisplayNone()) {
             RString 初期選択_請求書 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成依頼_初期選択_請求書, 基準日, SubGyomuCode.DBE認定支援, 保険者市町村コード);
-            if (選択.equals(初期選択_請求書)) {
+            if (!選択.equals(連動印刷) && 選択.equals(初期選択_請求書)) {
                 請求書選択selectedKeys.add(意見書チェックボックス_請求書);
             }
         }

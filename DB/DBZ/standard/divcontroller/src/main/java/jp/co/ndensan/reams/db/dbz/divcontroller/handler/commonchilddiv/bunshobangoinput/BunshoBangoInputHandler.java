@@ -88,7 +88,7 @@ public class BunshoBangoInputHandler {
                 }
             }
         }
-        div.getTxtBunshoNo().setPaddingZero(bunshoNo.get文書番号編集区分() == UrUDE005NoEditPattern.前ゼロ編集);
+        div.setHdnPadZeroFlag(new RString(bunshoNo.get文書番号編集区分() == UrUDE005NoEditPattern.前ゼロ編集));
         div.setHdnPadSpaceFlag(new RString(bunshoNo.get文書番号編集区分() == UrUDE005NoEditPattern.前スペース編集));
 
         if (bunshoNo.is文書番号出力()) {
@@ -146,4 +146,7 @@ public class BunshoBangoInputHandler {
                 .toRString();
     }
 
+    public RString get前Zero処理文書番号(RString bunshoNo) {
+        return bunshoNo.padZeroToLeft(div.getTxtBunshoNo().getMaxLength());
+    }
 }

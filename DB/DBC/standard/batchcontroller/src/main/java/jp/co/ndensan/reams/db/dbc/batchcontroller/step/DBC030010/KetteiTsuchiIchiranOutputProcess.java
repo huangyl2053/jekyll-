@@ -124,7 +124,7 @@ public class KetteiTsuchiIchiranOutputProcess extends BatchKeyBreakBase<ShokanKe
             出力順 = 出力順.replace(ORDER_BY, RString.EMPTY);
         }
         get出力順項目();
-        
+
         ChohyoSeigyoHanyoManager 帳票制御汎用Manager = new ChohyoSeigyoHanyoManager();
         RString 資格区分 = null;
 
@@ -144,7 +144,7 @@ public class KetteiTsuchiIchiranOutputProcess extends BatchKeyBreakBase<ShokanKe
         宛先builder.set基準日(batchPram.getHakkoYMD());
         宛先builder.set送付先利用区分(SofusakiRiyoKubun.利用する);
         宛先builder.set代納人利用区分(DainoRiyoKubun.利用しない);
-        
+
         ShikibetsuTaishoPSMSearchKeyBuilder key2 = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登外優先);
         IShikibetsuTaishoPSMSearchKey psmShikibetsuTaisho = key2.build();
 
@@ -158,22 +158,23 @@ public class KetteiTsuchiIchiranOutputProcess extends BatchKeyBreakBase<ShokanKe
         }
         IKozaSearchKey searchKey = new KozaSearchKeyBuilder()
                 .set業務コード(GyomuCode.DB介護保険)
-                .setサブ業務コード(SubGyomuCode.DBC介護給付)
                 .set科目コード(科目コード)
                 .set基準日(FlexibleDate.getNowDate()).build();
         List<KamokuCode> kamokuList = new ShunoKamokuAuthority().
                 get参照権限科目コード(UrControlDataFactory.createInstance().getLoginInfo().getUserId());
-        
+
         ShokanKetteiTsuchiShoKetteiTsuchiIchiranParameter parameter
                 = ShokanKetteiTsuchiShoKetteiTsuchiIchiranParameter.toMybatisParameter(出力順, 資格区分, psmShikibetsuTaisho,
                         key.getPSM検索キー(), 宛先builder.build(), searchKey, kamokuList);
         return new BatchDbReader(帳票取得SQL, parameter);
     }
+
     private ChohyoSeigyoKyotsu get帳票制御共通情報() {
         ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
         return chohyoSeigyoKyotsuManager.get帳票制御共通(SubGyomuCode.DBC介護給付,
                 new ReportId(ReportIdDBC.DBC100002_2.getReportId().value()));
     }
+
     @Override
     protected void createWriter() {
         batchWrite = BatchReportFactory.createBatchReportWriter(ReportIdDBC.DBC200023.getReportId().value())
@@ -183,12 +184,11 @@ public class KetteiTsuchiIchiranOutputProcess extends BatchKeyBreakBase<ShokanKe
 
     @Override
     protected void usualProcess(ShokanKetteiTsuchiShoShiharaiRelateEntity entity) {
-        
+
         ShokanKetteiTsuchiShoShiharai データ = new ShokanKetteiTsuchiShoShiharai(entity);
         帳票データリスト.add(データ);
-        personalDataList.add(toPersonalData(entity));         
+        personalDataList.add(toPersonalData(entity));
     }
-
 
     @Override
     protected void afterExecute() {
@@ -204,10 +204,11 @@ public class KetteiTsuchiIchiranOutputProcess extends BatchKeyBreakBase<ShokanKe
     }
 
     private PersonalData toPersonalData(ShokanKetteiTsuchiShoShiharaiRelateEntity entity) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"), 
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0003"),
                 new RString("被保険者番号"), new RString(entity.getHiHokenshaNo().toString()));
         return PersonalData.of(entity.getShikibetsuCode(), expandedInfo);
     }
+
     private RString get出力順(ReportId 帳票分類ID, RString 出力順ID) {
 
         if (RString.isNullOrEmpty(出力順ID)) {

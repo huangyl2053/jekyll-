@@ -122,7 +122,7 @@ public class InsJigyoKogakuProcess extends BatchProcessBase<FurikomimeisaiFuriko
         一時entity.setServiceTeikyoYM(判定結果entity.getServiceTeikyoYM());
         一時entity.setTaishoNendo(FlexibleYear.EMPTY);
         一時entity.setShikyuShinseishoSeiriNo(RString.EMPTY);
-        一時entity.setRirekiNo(判定結果entity.getRirekiNo().intValue());
+        一時entity.setRirekiNo(判定結果entity.getRirekiNo());
         一時entity.setShoKisaiHokenshaNo(判定結果entity.getShoKisaiHokenshaNo());
         RString 決定通知番号;
         Decimal 振込金額;
@@ -184,7 +184,7 @@ public class InsJigyoKogakuProcess extends BatchProcessBase<FurikomimeisaiFuriko
         if (TWO.equals(parameter.get支払方法())) {
             口座名寄せキー = 判定結果entity.getHihokenshaNo().getColumnValue().padZeroToLeft(INT_10)
                     .concat(判定結果entity.getServiceTeikyoYM().toDateString().padZeroToLeft(INT_6))
-                    .concat(RSTRING_21ZERO).concat(new RString(判定結果entity.getRirekiNo().intValue()).padZeroToLeft(INT_4));
+                    .concat(RSTRING_21ZERO).concat(new RString(判定結果entity.getRirekiNo()).padZeroToLeft(INT_4));
         } else {
             口座名寄せキー = RString.EMPTY;
         }

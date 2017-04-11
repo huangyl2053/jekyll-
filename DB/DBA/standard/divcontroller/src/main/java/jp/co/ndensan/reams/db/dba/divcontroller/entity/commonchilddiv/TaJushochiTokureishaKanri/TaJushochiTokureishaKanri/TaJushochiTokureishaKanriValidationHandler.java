@@ -51,7 +51,7 @@ public class TaJushochiTokureishaKanriValidationHandler {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         dgJushochiTokureiRireki_Row 最新の適用情報 = new dgJushochiTokureiRireki_Row();
         if (div.getDgJushochiTokureiRireki().getDataSource() != null
-            && !div.getDgJushochiTokureiRireki().getDataSource().isEmpty()) {
+                && !div.getDgJushochiTokureiRireki().getDataSource().isEmpty()) {
             最新の適用情報 = div.getDgJushochiTokureiRireki().getDataSource().get(0);
         }
 
@@ -61,30 +61,30 @@ public class TaJushochiTokureishaKanriValidationHandler {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日, div.getTxtTekiyobi()));
                 } else {
                     if (状態_追加.equals(div.getStrate())
-                        && 最新の適用情報 != null && 最新の適用情報.getTekiyoYMD().getValue() != null && !RowState.Deleted.equals(最新の適用情報.getRowState())
-                        && (!div.getTxtTekiyobi().getValue().isBefore(最新の適用情報.getTekiyoYMD().getValue()))) {
+                            && 最新の適用情報 != null && 最新の適用情報.getTekiyoYMD().getValue() != null && !RowState.Deleted.equals(最新の適用情報.getRowState())
+                            && (!div.getTxtTekiyobi().getValue().isBefore(最新の適用情報.getTekiyoYMD().getValue()))) {
                         validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日と最新の適用情報の整合性チェック, div.getTxtTekiyobi()));
                     }
                 }
                 if (div.getTxtKaijyobi().getValue() != null && (div.getDdlKaijyoJiyo().getSelectedKey() == null
-                                                                || div.getDdlKaijyoJiyo().getSelectedKey().isEmpty())) {
+                        || div.getDdlKaijyoJiyo().getSelectedKey().isEmpty())) {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.解除事由, div.getDdlKaijyoJiyo()));
                 }
                 if (div.getDdlTekiyoJiyo().getSelectedKey() == null
-                    || div.getDdlTekiyoJiyo().getSelectedKey().isEmpty()) {
+                        || div.getDdlTekiyoJiyo().getSelectedKey().isEmpty()) {
                     validPairs.add(new ValidationMessageControlPair(RRVMessages.適用事由, div.getDdlTekiyoJiyo()));
                 }
                 if (div.getTxtKaijyobi().getValue() != null && div.getTxtTekiyobi().getValue() != null
-                    && (div.getTxtKaijyobi().getValue().isBefore(div.getTxtTekiyobi().getValue()))) {
+                        && (div.getTxtKaijyobi().getValue().isBefore(div.getTxtTekiyobi().getValue()))) {
                     validPairs.add(new ValidationMessageControlPair(
                             RRVMessages.適用日と解除日の整合性チェック, div.getTxtKaijyobi(), div.getTxtTekiyobi()));
                 }
 
                 if (div.getDgJushochiTokureiRireki().getDataSource() != null
-                    && !div.getDgJushochiTokureiRireki().getDataSource().isEmpty()) {
+                        && !div.getDgJushochiTokureiRireki().getDataSource().isEmpty()) {
                     for (dgJushochiTokureiRireki_Row row : div.getDgJushochiTokureiRireki().getDataSource()) {
                         if (div.getSelectData().equals(new RString(String.valueOf(row.getId())))
-                            || RowState.Deleted.equals(row.getRowState())) {
+                                || RowState.Deleted.equals(row.getRowState())) {
                             continue;
                         }
                         if (row.getKaijoYMD().getValue() == null) {
@@ -102,9 +102,9 @@ public class TaJushochiTokureishaKanriValidationHandler {
                                 }
                             } else {
                                 if (div.getTxtTekiyobi().getValue() != null && div.getTxtKaijyobi().getValue() != null
-                                    && row.getTekiyoYMD().getValue() != null && row.getKaijoYMD().getValue() != null
-                                    && row.getTekiyoYMD().getValue().isBeforeOrEquals(div.getTxtKaijyobi().getValue())
-                                    && div.getTxtTekiyobi().getValue().isBeforeOrEquals(row.getKaijoYMD().getValue())) {
+                                        && row.getTekiyoYMD().getValue() != null && row.getKaijoYMD().getValue() != null
+                                        && row.getTekiyoYMD().getValue().isBeforeOrEquals(div.getTxtKaijyobi().getValue())
+                                        && div.getTxtTekiyobi().getValue().isBeforeOrEquals(row.getKaijoYMD().getValue())) {
                                     validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複));
                                 }
                             }
@@ -114,47 +114,69 @@ public class TaJushochiTokureishaKanriValidationHandler {
             }
             if (状態_適用.equals(親画面状態)) {
 
-                if (div.getTxtNyusyobi().getValue() == null) {
-                    validPairs.add(new ValidationMessageControlPair(RRVMessages.入所日, div.getTxtNyusyobi()));
-                }
-                if (div.getTxtTekiyobi().getValue() == null) {
-                    validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日, div.getTxtTekiyobi()));
-                } else {
+//                if (div.getTxtNyusyobi().getValue() == null) {
+//                    validPairs.add(new ValidationMessageControlPair(RRVMessages.入所日, div.getTxtNyusyobi()));
+//                }
+//                if (div.getTxtTekiyobi().getValue() == null) {
+//                    validPairs.add(new ValidationMessageControlPair(RRVMessages.適用日, div.getTxtTekiyobi()));
+//                } else {
+//                    if (最新の適用情報 != null && 最新の適用情報.getKaijoYMD().getValue() != null
+//                        && (div.getTxtTekiyobi().getValue().isBefore(最新の適用情報.getKaijoYMD().getValue()))) {
+//                        validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複));
+//                    }
+//                }
+                if (div.getTxtTekiyobi().getValue() != null) {
                     if (最新の適用情報 != null && 最新の適用情報.getKaijoYMD().getValue() != null
-                        && (div.getTxtTekiyobi().getValue().isBefore(最新の適用情報.getKaijoYMD().getValue()))) {
+                            && (div.getTxtTekiyobi().getValue().isBefore(最新の適用情報.getKaijoYMD().getValue()))) {
                         validPairs.add(new ValidationMessageControlPair(RRVMessages.期間が重複));
                     }
                 }
 
-                if (div.getTxtTekiyoTodokedebi().getValue() == null) {
-                    validPairs.add(new ValidationMessageControlPair(RRVMessages.適用届出日, div.getTxtTekiyoTodokedebi()));
-                }
-
-                if (div.getDdlTekiyoJiyo().getSelectedKey() == null
-                    || div.getDdlTekiyoJiyo().getSelectedKey().isEmpty()) {
-                    validPairs.add(new ValidationMessageControlPair(RRVMessages.適用事由, div.getDdlTekiyoJiyo()));
-                }
-
-                if (div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo() != null
-                    && !div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo().isEmpty()
-                    && div.getTxtNyusyobi().getValue() == null) {
-                    validPairs.add(new ValidationMessageControlPair(RRVMessages.入所日の必須チェック, div.getTxtNyusyobi()));
-                }
-
-                if ((div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo() == null
-                     || div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo().isEmpty())
-                    && div.getTxtNyusyobi().getValue() != null) {
-                    validPairs.add(new ValidationMessageControlPair(RRVMessages.入所施設の必須チェック));
-                }
+//                if (div.getTxtTekiyoTodokedebi().getValue() == null) {
+//                    validPairs.add(new ValidationMessageControlPair(RRVMessages.適用届出日, div.getTxtTekiyoTodokedebi()));
+//                }
+//
+//                if (div.getDdlTekiyoJiyo().getSelectedKey() == null
+//                        || div.getDdlTekiyoJiyo().getSelectedKey().isEmpty()) {
+//                    validPairs.add(new ValidationMessageControlPair(RRVMessages.適用事由, div.getDdlTekiyoJiyo()));
+//                }
+//
+//                if (div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo() != null
+//                        && !div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo().isEmpty()
+//                        && div.getTxtNyusyobi().getValue() == null) {
+//                    validPairs.add(new ValidationMessageControlPair(RRVMessages.入所日の必須チェック, div.getTxtNyusyobi()));
+//                }
+//
+//                if ((div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo() == null
+//                        || div.getCcdShisetsuJoho().getNyuryokuShisetsuKodo().isEmpty())
+//                        && div.getTxtNyusyobi().getValue() != null) {
+//                    validPairs.add(new ValidationMessageControlPair(RRVMessages.入所施設の必須チェック));
+//                }
             }
             if (状態_解除.equals(親画面状態)) {
-                if (div.getTxtKaijyobi().getValue() == null) {
-                    validPairs.add(new ValidationMessageControlPair(RRVMessages.解除日, div.getTxtKaijyobi()));
-                } else {
-                    if (div.getDdlKaijyoJiyo().getSelectedKey() == null
-                        || div.getDdlKaijyoJiyo().getSelectedKey().isEmpty()) {
-                        validPairs.add(new ValidationMessageControlPair(RRVMessages.解除事由));
-                    }
+//                if (div.getTxtKaijyobi().getValue() == null) {
+//                    validPairs.add(new ValidationMessageControlPair(RRVMessages.解除日, div.getTxtKaijyobi()));
+//                } else {
+//                    if (div.getDdlKaijyoJiyo().getSelectedKey() == null
+//                            || div.getDdlKaijyoJiyo().getSelectedKey().isEmpty()) {
+//                        validPairs.add(new ValidationMessageControlPair(RRVMessages.解除事由));
+//                    }
+//                    if ((div.getTxtTasyobi().getValue() == null || 最新の適用情報.getNyushoYMD().getValue() == null)) {
+//                    } else {
+//                        if (最新の適用情報.getNyushoYMD().getValue().compareTo(div.getTxtTasyobi().getValue()) > 0) {
+//                            validPairs.add(new ValidationMessageControlPair(
+//                                    RRVMessages.入所日と退所日の整合性チェック, div.getTxtTasyobi()));
+//                        }
+//                    }
+//                    if ((div.getTxtKaijyobi().getValue() == null || 最新の適用情報.getTekiyoYMD().getValue() == null)) {
+//                    } else {
+//                        if (最新の適用情報.getTekiyoYMD().getValue().compareTo(div.getTxtKaijyobi().getValue()) > 0) {
+//                            validPairs.add(new ValidationMessageControlPair(
+//                                    RRVMessages.適用日と解除日の整合性日付チェック, div.getTxtKaijyobi()));
+//                        }
+//                    }
+//                }
+                if (div.getTxtKaijyobi().getValue() != null) {
                     if ((div.getTxtTasyobi().getValue() == null || 最新の適用情報.getNyushoYMD().getValue() == null)) {
                     } else {
                         if (最新の適用情報.getNyushoYMD().getValue().compareTo(div.getTxtTasyobi().getValue()) > 0) {

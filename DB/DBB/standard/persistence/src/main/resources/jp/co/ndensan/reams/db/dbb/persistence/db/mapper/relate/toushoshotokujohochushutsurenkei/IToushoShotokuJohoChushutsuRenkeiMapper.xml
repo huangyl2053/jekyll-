@@ -45,7 +45,18 @@
              <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho"/>
         FROM 
              master 
-        LEFT JOIN rgua."UaFt200FindShikibetsuTaisho"('','','0','DB','0','','','','','','','','','','','','1','',''
+        LEFT
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
+            (
+                   SELECT
+                        ARRAY_AGG(CAST (master."DbT2008KaigoShoto_shikibetsuCode" AS TEXT))
+                    FROM
+                        master
+            )
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />             
+        AS "ShikibetsuTaisho"
+        <!-- 
+             JOIN rgua."UaFt200FindShikibetsuTaisho"('','','0','DB','0','','','','','','','','','','','','1','',''
             ,'','','','','0','0','','','','','','','','','','0','','1','1','1','1','1','1','1','1','1','1','1','','','',''
             ,'','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', 
              (
@@ -54,6 +65,7 @@
                     FROM
                         master
                 ) ) AS "ShikibetsuTaisho"
+        -->
         ON master."DbT2008KaigoShoto_shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"
         ${出力順}
     </select>

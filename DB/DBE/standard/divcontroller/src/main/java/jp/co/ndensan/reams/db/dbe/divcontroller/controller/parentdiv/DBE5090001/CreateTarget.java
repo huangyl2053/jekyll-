@@ -23,22 +23,21 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5090001.Cre
 import jp.co.ndensan.reams.db.dbe.service.core.createtarget.CreateTargetManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
-import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDescriptor;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDownload;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.euc.cooperation.EucDownload;
+import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -46,8 +45,12 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
+import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -217,15 +220,17 @@ public class CreateTarget {
      * @return ResponseData<CreateTargetDiv>
      */
     public ResponseData<CreateTargetDiv> onClick_btnKensaku(CreateTargetDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         ValidationMessageControlPairs validPair = getValidationHandler(div).入力チェック();
         if (validPair.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validPair).respond();
         }
         CreateTargetMapperParameter param = getHandler(div).createParam();
         SearchResult<CreateTargetBusiness> business = CreateTargetManager.createInstance().get対象者一覧情報(param);
-        ValidationMessageControlPairs validPairs = getValidationHandler(div).データチェック(business.records());
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        if (!ResponseHolder.isReRequest() && business.records().isEmpty()) {
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
         }
         getHandler(div).onClick_btnKensaku(business);
         return ResponseData.of(div).setState(DBE5090001StateName.検索結果);
@@ -249,10 +254,11 @@ public class CreateTarget {
      * @return ResponseData<CreateTargetDiv>
      */
     public IDownLoadServletResponse onClick_btnOutputCsv(CreateTargetDiv div, IDownLoadServletResponse response) {
+        FileSpoolManager manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, new RString("DBE509001"), UzUDE0831EucAccesslogFileType.Csv);
+        List<PersonalData> personalDataList = new ArrayList<>();
         RString ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定支援センター送信ファイル名,
                 RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         List<dgCreateTargetSummary_Row> rowList = div.getDgCreateTargetSummary().getDataSource();
-        DbAccessLogger accessLog = new DbAccessLogger();
         List<RString> shinsei = new ArrayList();
         for (dgCreateTargetSummary_Row row : rowList) {
             if (row.getSelected()) {
@@ -304,7 +310,7 @@ public class CreateTarget {
             List<CreateTargetBusiness> 前回サービス項目List = dataMap.get(前回サービス項目.get申請書管理番号()).get前回サービスの状況();
             前回サービス項目List.add(前回サービス項目);
         }
-        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), ファイル名);
+        RString filePath = Path.combinePath(manager.getEucOutputDirectry(), ファイル名);
         try (CsvWriter<CreateTargetCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(false).build()) {
@@ -314,18 +320,24 @@ public class CreateTarget {
                 CreateTargetManager.createInstance().update(business.getCsvBusiness().get申請書管理番号());
                 CreateTargetManager.createInstance().insertUpdate(business.getCsvBusiness().get申請書管理番号());
 
-                ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(business.getCsvBusiness().get保険者番号());
-                ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.getCsvBusiness().get申請書管理番号());
-                accessLog.store(shoKisaiHokenshaNo, business.getCsvBusiness().get被保険者番号(), expandedInfo);
+                personalDataList.add(toPersonalData(business.getCsvBusiness().get保険者番号(),
+                        business.getCsvBusiness().get被保険者番号(), business.getCsvBusiness().get申請書管理番号()));
             }
-            accessLog.flushBy(AccessLogType.照会);
             csvWriter.close();
         }
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(ファイル名));
         sfd = SharedFile.defineSharedFile(sfd);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
-        SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
-        return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, ファイル名), response);
+        SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
+        AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+        manager.spool(filePath, accessLogUUID);
+        return EucDownload.directAccessDownload(SubGyomuCode.DBE認定支援, manager.getSharedFileName(), manager.getSharedFileId(), response);
+    }
+
+    private PersonalData toPersonalData(RString 証記載保険者番号, RString 被保険者番号, RString 申請書管理番号) {
+        ShikibetsuCode shikibetsuCode = new ShikibetsuCode(証記載保険者番号.substring(0, 5).concat(被保険者番号));
+        ExpandedInformation expandedInformation = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号);
+        return PersonalData.of(shikibetsuCode, expandedInformation);
     }
 
     /**
@@ -343,24 +355,26 @@ public class CreateTarget {
     private CreateTargetCsvEntity get主治医意見書(CreateTargetDataBusiness business, CreateTargetCsvEntity data) {
         if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(business.getCsvBusiness().get識別コード())
                 || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(business.getCsvBusiness().get識別コード())) {
-            data.set意見書短期記憶(get意見書項目(business.get主治医意見書(), 連番2));
-            data.set意見書認知能力(get意見書項目(business.get主治医意見書(), 連番3));
-            data.set意見書伝達能力(get意見書項目(business.get主治医意見書(), 連番4));
-            data.set意見書食事行為(get意見書項目(business.get主治医意見書(), 連番5));
-            data.set意見書認知症高齢者の日常生活自立度(get意見書項目(business.get主治医意見書(), 連番1));
+            data.set意見書短期記憶(get意見書項目(business.get主治医意見書(), 連番16));
+            data.set意見書認知能力(get意見書項目(business.get主治医意見書(), 連番17));
+            data.set意見書伝達能力(get意見書項目(business.get主治医意見書(), 連番18));
+            data.set意見書食事行為(get意見書項目(business.get主治医意見書(), 連番19));
+            data.set意見書認知症高齢者の日常生活自立度(get意見書項目(business.get主治医意見書(), 連番15));
         } else {
-            data.set意見書短期記憶(get意見書項目(business.get主治医意見書(), 連番1));
-            data.set意見書認知能力(get意見書項目(business.get主治医意見書(), 連番2));
-            data.set意見書伝達能力(get意見書項目(business.get主治医意見書(), 連番3));
-            data.set意見書食事行為(get意見書項目(business.get主治医意見書(), 連番6));
-            data.set意見書認知症高齢者の日常生活自立度(get意見書項目(business.get主治医意見書(), 連番0));
+            data.set意見書短期記憶(get意見書項目(business.get主治医意見書(), 連番15));
+            data.set意見書認知能力(get意見書項目(business.get主治医意見書(), 連番16));
+            data.set意見書伝達能力(get意見書項目(business.get主治医意見書(), 連番17));
+            data.set意見書食事行為(get意見書項目(business.get主治医意見書(), 連番69));
+            data.set意見書認知症高齢者の日常生活自立度(get意見書項目(business.get主治医意見書(), 連番14));
         }
         return data;
     }
 
     private RString get意見書項目(List<CreateTargetBusiness> business, int 連番) {
-        if (連番 < business.size()) {
-            return business.get(連番).get項目();
+        for (CreateTargetBusiness item : business) {
+            if (連番 == item.get連番()) {
+                return item.get項目();
+            }
         }
         return RString.EMPTY;
     }

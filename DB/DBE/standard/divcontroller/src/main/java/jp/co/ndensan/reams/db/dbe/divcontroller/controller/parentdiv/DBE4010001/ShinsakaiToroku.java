@@ -20,28 +20,28 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisai.ShinsakaiKaisai;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeInformationMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeWarningMessages;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDescriptor;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDownload;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.euc.api.EucOtherInfo;
+import jp.co.ndensan.reams.uz.uza.euc.cooperation.EucDownload;
+import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -51,12 +51,16 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
+import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -74,8 +78,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
 public class ShinsakaiToroku {
 
     private static final RString CSVファイルID_審査会登録一覧 = new RString("DBE401001");
-    private final RString 介護認定審査会登録 = new RString("完了処理・介護認定審査会登録");
-    private final RString 介護認定審査会割当 = new RString("完了処理・介護認定審査会割当");
+    private final RString 介護認定審査会登録 = new RString("基本運用・介護認定審査会登録");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
     private static final RString 割付未完了のみ = new RString("割付未完了分のみ");
@@ -129,9 +132,11 @@ public class ShinsakaiToroku {
      * @return ResponseData<ShinsakaiTorokuDiv>
      */
     public IDownLoadServletResponse onClick_btnRyooutput(ShinsakaiTorokuDiv div, IDownLoadServletResponse response) {
+        FileSpoolManager manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, CSVファイルID_審査会登録一覧, UzUDE0831EucAccesslogFileType.Csv);
+        List<PersonalData> personalDataList = new ArrayList<>();
+        RString spoolWorkPath = manager.getEucOutputDirectry();
         RString 出力名 = EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, CSVファイルID_審査会登録一覧);
-        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), 出力名);
-        DbAccessLogger accessLog = new DbAccessLogger();
+        RString filePath = Path.combinePath(spoolWorkPath, 出力名);
         try (CsvWriter<ShinsakaiTorokuCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).
                 setDelimiter(EUC_WRITER_DELIMITER).
@@ -143,18 +148,23 @@ public class ShinsakaiToroku {
             List<dgNinteiTaskList_Row> dataList = div.getDgNinteiTaskList().getSelectedItems();
             for (dgNinteiTaskList_Row row : dataList) {
                 csvWriter.writeLine(getCsvData(row));
-                ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
-                        row.getShinseishoKanriNo());
-                accessLog.store(new ShoKisaiHokenshaNo(row.getShoKisaiHokenshaNo()), row.getHihoNumber(), expandedInfo);
+                personalDataList.add(toPersonalData(row.getShoKisaiHokenshaNo(), row.getHihoNumber(), row.getShinseishoKanriNo()));
             }
             csvWriter.close();
         }
         SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(出力名));
         sfd = SharedFile.defineSharedFile(sfd);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
-        accessLog.flushBy(AccessLogType.照会);
+        AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+        manager.spool(filePath, accessLogUUID);
         SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
-        return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, 出力名), response);
+        return EucDownload.directAccessDownload(SubGyomuCode.DBE認定支援, manager.getSharedFileName(), manager.getSharedFileId(), response);
+    }
+    
+    private PersonalData toPersonalData(RString 証記載保険者番号, RString 被保険者番号, RString 申請書管理番号) {
+        ShikibetsuCode shikibetsuCode = new ShikibetsuCode(証記載保険者番号.substring(0, 5).concat(被保険者番号));
+        ExpandedInformation expandedInformation = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号);
+        return PersonalData.of(shikibetsuCode, expandedInformation);
     }
 
     /**
@@ -218,7 +228,7 @@ public class ShinsakaiToroku {
             Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> models
                     = ViewStateHolder.get(ViewStateKeys.タスク一覧_要介護認定完了情報, Models.class);
             getHandler(div).要介護認定完了更新(models);
-            div.getCcdKanryoMsg().setMessage(new RString(UrInformationMessages.正常終了.getMessage().
+            div.getCcdKanryoMsg().setMessage(new RString(DbeInformationMessages.基本運用_完了.getMessage().
                     replace(介護認定審査会登録.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
             div.getBtnShinsakekkakanryooutput().setDisplayNone(true);
             return ResponseData.of(div).setState(DBE4010001StateName.完了);
@@ -343,51 +353,30 @@ public class ShinsakaiToroku {
     }
 
     /**
-     * 保存するボタンクリックイベントです。
+     * 「審査会を保存する」ボタンクリックイベントです。
      *
      * @param div ShinsakaiTorokuDiv
      * @return ResponseData<ShinsakaiTorokuDiv>
      */
     public ResponseData<ShinsakaiTorokuDiv> onClick_btnSave(ShinsakaiTorokuDiv div) {
-        ValidationMessageControlPairs 対象者データ有無チェック = getValidationHandler(div).対象者データ有無チェック();
-        List<dgNinteiTaskList_Row> 修正リスト = get修正リスト(div);
-        if (修正リスト.isEmpty()) {
-            return ResponseData.of(div).addValidationMessages(対象者データ有無チェック).respond();
-        }
-
         if (!ResponseHolder.isReRequest()) {
+            if (get修正リスト(div).isEmpty()) {
+                return ResponseData.of(div).addValidationMessages(getValidationHandler(div).対象者データ有無チェック()).respond();
+            }
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
                     UrQuestionMessages.保存の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
-        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
+
+        if (new RString(UrInformationMessages.保存終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+            return onLoad(div);
+        }
+        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            getHandler(div).onClick_btnSave(修正リスト);
-            div.getCcdKanryoMsg().setMessage(new RString(UrInformationMessages.正常終了.getMessage().
-                    replace(介護認定審査会割当.toString()).evaluate()), RString.EMPTY, RString.EMPTY, true);
-            div.getBtnShinsakekkakanryooutput().setDisplayNone(true);
-            return ResponseData.of(div).setState(DBE4010001StateName.完了);
-
+            getHandler(div).onClick_btnSave(get修正リスト(div));
+            return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
         }
-        return ResponseData.of(div).setState(DBE4010001StateName.登録);
-    }
-
-    /**
-     * 継続ボタン押下動作です。
-     *
-     * @param div ShinsakaiTorokuDiv
-     * @return ResponseData<ShinsakaiTorokuDiv>
-     */
-    public ResponseData<ShinsakaiTorokuDiv> onClick_btnContinue(ShinsakaiTorokuDiv div) {
-        DBE4010001StateName stateName;
-        if (UIコンテナID_DBEUC51601.equals(UrControlDataFactory.createInstance().getUIContainerId())) {
-            stateName = DBE4010001StateName.完了のみ登録;
-        } else {
-            stateName = DBE4010001StateName.登録;
-        }
-        getHandler(div).onLoad(ResponseHolder.getState());
-        return ResponseData.of(div).setState(stateName);
+        return ResponseData.of(div).respond();
     }
 
     private List<dgNinteiTaskList_Row> get修正リスト(ShinsakaiTorokuDiv div) {

@@ -50,6 +50,7 @@ public class ChosahyoJissekiIchiranEntity implements IChosahyoJissekiIchiranCsvE
     @CsvField(order = 13, name = "単価")
     private final RString 単価;
 
+    private final RString 申請書管理番号;
     /**
      * コンストラクタです。
      *
@@ -66,6 +67,7 @@ public class ChosahyoJissekiIchiranEntity implements IChosahyoJissekiIchiranCsvE
      * @param 調査区分 調査区分
      * @param 訪問の種類 訪問の種類
      * @param 単価
+     * @param 申請書管理番号 RString
      */
     public ChosahyoJissekiIchiranEntity(
             RString 保険者番号,
@@ -80,7 +82,8 @@ public class ChosahyoJissekiIchiranEntity implements IChosahyoJissekiIchiranCsvE
             RString 入手日,
             RString 調査区分,
             RString 訪問の種類,
-            RString 単価) {
+            RString 単価,
+            RString 申請書管理番号) {
         this.保険者番号 = 保険者番号;
         this.保険者名称 = 保険者名称;
         this.調査機関コード = 調査機関コード;
@@ -94,6 +97,7 @@ public class ChosahyoJissekiIchiranEntity implements IChosahyoJissekiIchiranCsvE
         this.調査区分 = 調査区分;
         this.訪問の種類 = 訪問の種類;
         this.単価 = 単価;
+        this.申請書管理番号 = 申請書管理番号;
     }
 
     public ChosahyoJissekiIchiranEntity(ChosahyoJissekiIchiranRelateEntity relateEntity) {
@@ -108,6 +112,7 @@ public class ChosahyoJissekiIchiranEntity implements IChosahyoJissekiIchiranCsvE
         this.調査実施日 = dateFormat(relateEntity.get認定調査実施年月日());
         this.入手日 = dateFormat(relateEntity.get認定調査受領年月日());
         this.調査区分 = ChosaKubun.toValue(relateEntity.get認定調査区分コード()).get名称();
+        this.申請書管理番号 = relateEntity.get申請書管理番号();
         if (relateEntity.is訪問の種類()) {
             this.訪問の種類 = new RString("居宅");
         } else {

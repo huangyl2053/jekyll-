@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.chosairaihakkoichiranhyo;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,4 +33,6 @@ public class ChosaIraiHakkoIchiranhyoBodyItem {
     private RString 代表者名;
     private RString 連絡先;
     private RString 調査員名;
+    private ShikibetsuCode 識別コード;
+    private ExpandedInformation 拡張情報;
 }

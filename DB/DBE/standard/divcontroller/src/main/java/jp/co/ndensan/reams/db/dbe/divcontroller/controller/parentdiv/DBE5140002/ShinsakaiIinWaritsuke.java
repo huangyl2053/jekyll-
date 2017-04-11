@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoh
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinwaritsuke.ShinsakaiIinKoseIchiran;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinwaritsuke.ShinsakaiKaisaiYoteiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinwaritsuke.ShinsakaiiinJoho;
+import jp.co.ndensan.reams.db.dbe.definition.core.exclusion.LockingKeys;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.KaigoninteiShinsakaiGichoKubunCode;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140002.DBE5140002StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140002.ShinsakaiIinWaritsukeDiv;
@@ -23,15 +24,18 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5140002.Shi
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai2.ShinsakaiKaisaiYoteiJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakai2.ShinsakaiiinJohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -44,6 +48,7 @@ import jp.co.ndensan.reams.uz.uza.util.Models;
  */
 public class ShinsakaiIinWaritsuke {
 
+    private static final RString FIELD_NAME_BTN_HOZON = new RString("btnHozon");
     private static final int 時刻桁数 = 4;
     private final RString 開催番号;
     private final RString 開催年月日;
@@ -67,6 +72,9 @@ public class ShinsakaiIinWaritsuke {
      * @return ResponseData
      */
     public ResponseData<ShinsakaiIinWaritsukeDiv> onLoad(ShinsakaiIinWaritsukeDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         List<ShinsakaiKaisaiYoteiJoho> kaisaiYoteiJohoList = kaisaiYoteiJohomanager
                 .search審査会開催予定情報Of開催番号(開催番号).records();
         getHandler(div).onLoad(kaisaiYoteiJohoList, 開催番号);
@@ -75,6 +83,11 @@ public class ShinsakaiIinWaritsuke {
         Models<ShinsakaiWariateIinJoho2Identifier, ShinsakaiWariateIinJoho2> models
                 = Models.create(iinJohomanager.searchByKaisaiNo(開催番号).records());
         getHandler(div).setShinsakaiIinDataGrid(iinKoseList, iinJoholist);
+        if (!RealInitialLocker.tryGetLock(LockingKeys.介護認定審査会開催番号.appended(開催番号))) {
+            div.setReadOnly(true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(FIELD_NAME_BTN_HOZON, true);
+            return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
+        }
         ViewStateHolder.put(ViewStateKeys.介護認定審査会割当委員情報_一覧, models);
         return ResponseData.of(div).respond();
     }
@@ -144,6 +157,7 @@ public class ShinsakaiIinWaritsuke {
      * @return ResponseData
      */
     public ResponseData<ShinsakaiIinWaritsukeDiv> onClick_ModoruBtn(ShinsakaiIinWaritsukeDiv div) {
+        RealInitialLocker.release(LockingKeys.介護認定審査会開催番号.appended(開催番号));
         return ResponseData.of(div).respond();
     }
 
@@ -154,15 +168,15 @@ public class ShinsakaiIinWaritsuke {
      * @return ResponseData
      */
     public ResponseData<ShinsakaiIinWaritsukeDiv> onClick_HozonnBtn(ShinsakaiIinWaritsukeDiv div) {
-        ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForHozonnBtn();
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
-        }
         if (!ResponseHolder.isReRequest()) {
+            ValidationMessageControlPairs validPairs = getValidationHandler(div).validateForHozonnBtn();
+            if (validPairs.existsError()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
             return ResponseData.of(div).addMessage(UrQuestionMessages.保存の確認.getMessage()).respond();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            getHandler(div).前排他制御処理();
+
             Models<ShinsakaiWariateIinJoho2Identifier, ShinsakaiWariateIinJoho2> models
                     = ViewStateHolder.get(ViewStateKeys.介護認定審査会割当委員情報_一覧, Models.class);
             for (ShinsakaiWariateIinJoho2 iinJoho : models) {
@@ -187,7 +201,6 @@ public class ShinsakaiIinWaritsuke {
                 builder.build().isAdded();
                 iinJohomanager.save(builder.build().toEntity());
             }
-            getHandler(div).前排他解除処理();
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(div).setState(DBE5140002StateName.初期表示);

@@ -29,6 +29,7 @@ public class NinteiChosaKekkaTorikomiOcrRelateEntity {
     private RString 申請区分;
     private RString 厚労省IF識別コード;
     private RString 申請書管理番号;
+    private RString 取下区分コード;
     private int 認定調査依頼履歴番号;
     private RDateTime イメージ共有ファイルID;
     private RString 認定調査委託先コード;

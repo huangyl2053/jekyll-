@@ -1,0 +1,32 @@
+﻿{
+ "uiContainerName": "DBDUC05101",
+ "displayWizard": false,
+ "subGyomuCode": "DBD",
+ "steps": [
+  {
+   "id": 1,
+   "name": "国保後期の取込処理",
+   "transitionList": [
+    {
+     "id": "1",
+     "type": "start",
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBD",
+     "toLayoutName": "DBD0510011",
+     "toLayoutTitle": "国保資格異動情報取込",
+     "toState": "後期"
+    },
+    {
+     "id": "2",
+     "type": "end",
+     "layoutSubGyomuCode": "DBD",
+     "layoutName": "DBD0510011",
+     "layoutTitle": "国保資格異動情報取込",
+     "eventName": "完了",
+     "destroy": false,
+     "condition": ""
+    }
+   ]
+  }
+ ]
+}

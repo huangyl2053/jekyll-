@@ -27,6 +27,8 @@ public class SinseiTorisageDiv extends Panel {
     private TextBoxDate txtTorisageDate;
     @JsonProperty("txtTorisageJiyu")
     private TextBox txtTorisageJiyu;
+    @JsonProperty("btnTorisageTeikeibun")
+    private ButtonDialog btnTorisageTeikeibun;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -86,6 +88,24 @@ public class SinseiTorisageDiv extends Panel {
     @JsonProperty("txtTorisageJiyu")
     public void setTxtTorisageJiyu(TextBox txtTorisageJiyu) {
         this.txtTorisageJiyu = txtTorisageJiyu;
+    }
+
+    /*
+     * getbtnTorisageTeikeibun
+     * @return btnTorisageTeikeibun
+     */
+    @JsonProperty("btnTorisageTeikeibun")
+    public ButtonDialog getBtnTorisageTeikeibun() {
+        return btnTorisageTeikeibun;
+    }
+
+    /*
+     * setbtnTorisageTeikeibun
+     * @param btnTorisageTeikeibun btnTorisageTeikeibun
+     */
+    @JsonProperty("btnTorisageTeikeibun")
+    public void setBtnTorisageTeikeibun(ButtonDialog btnTorisageTeikeibun) {
+        this.btnTorisageTeikeibun = btnTorisageTeikeibun;
     }
 
     // </editor-fold>

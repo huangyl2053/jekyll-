@@ -4,18 +4,19 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.kaigoates
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
+
+import java.util.HashSet;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ICommonChildDivMode;
 import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jp.co.ndensan.reams.uz.uza.ui.binding.ButtonDialog;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Mode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 
 /**
  * KaigoAtesakiJushoSettei のクラスファイル
@@ -23,8 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets._CommonChildDivModeUtil;
  * @reamsid_L DBU-3990-030 wanghui
  */
 public class KaigoAtesakiJushoSetteiDiv extends Panel implements IKaigoAtesakiJushoSetteiDiv {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -259,7 +259,7 @@ public class KaigoAtesakiJushoSetteiDiv extends Panel implements IKaigoAtesakiJu
             DisplayJushoSetteiRad[] enumArray = DisplayJushoSetteiRad.values();
 
             for (DisplayJushoSetteiRad enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -274,11 +274,11 @@ public class KaigoAtesakiJushoSetteiDiv extends Panel implements IKaigoAtesakiJu
     }
 
     public DisplayJushoSetteiRad getMode_DisplayJushoSetteiRad() {
-        return (DisplayJushoSetteiRad) _CommonChildDivModeUtil.getMode(this.modes, DisplayJushoSetteiRad.class);
+        return (DisplayJushoSetteiRad) _CommonChildDivModeUtil.getMode( this.modes, DisplayJushoSetteiRad.class );
     }
 
-    public void setMode_DisplayJushoSetteiRad(DisplayJushoSetteiRad value) {
-        _CommonChildDivModeUtil.setMode(this.modes, DisplayJushoSetteiRad.class, value);
+    public void setMode_DisplayJushoSetteiRad( DisplayJushoSetteiRad value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, DisplayJushoSetteiRad.class , value );
     }
 
     // </editor-fold>

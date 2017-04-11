@@ -249,7 +249,6 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
         }
         IKozaSearchKey kozaSearchKey = new KozaSearchKeyBuilder()
                 .set業務コード(GyomuCode.DB介護保険)
-                .setサブ業務コード(SubGyomuCode.DBC介護給付)
                 .set科目コード(科目コード)
                 .set基準日(FlexibleDate.getNowDate()).build();
         List<KamokuCode> kamokuList = new ShunoKamokuAuthority().
@@ -336,6 +335,7 @@ public class JigyoKogakuKetteiTsuchishoYoteiSakuseiProcess extends BatchKeyBreak
         personalDataList.add(toPersonalData(entity));
 
     }
+
     private RString get編集住所(KogakuServiceReportEntity entity, ChohyoSeigyoKyotsu 帳票制御共通情報) {
         Association 地方公共団体 = AssociationFinderFactory.createInstance().getAssociation();
         EditedAtesaki 編集後宛先 = JushoHenshu.create編集後宛先(AtesakiFactory.createInstance(entity.get宛先()), 地方公共団体, 帳票制御共通情報);

@@ -47,7 +47,7 @@
         "atenaIdobi"
     </sql>
 
-    <resultMap id="ResultMap_RiyoshaFutanWariaiMeisaiTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.RiyoshaFutanWariaiMeisaiTempEntity" autoMapping="true">
+    <resultMap id="ResultMap_RiyoshaFutanWariaiMeisaiTempEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.temptables.RiyoshaFutanWariaiMeisaiTempEntity" autoMapping="true">
         <result property="nendo" column="RiyoshaFutanWariaiMeisaiTemp_nendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <result property="hihokenshaNo" column="RiyoshaFutanWariaiMeisaiTemp_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="edaNo" column="RiyoshaFutanWariaiMeisaiTemp_edaNo" />

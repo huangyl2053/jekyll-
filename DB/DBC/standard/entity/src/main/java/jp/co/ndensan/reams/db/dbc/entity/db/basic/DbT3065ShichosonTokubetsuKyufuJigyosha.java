@@ -6,8 +6,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * 市町村特別給付サービス事業者テーブルの項目定義クラスです。
  */
 public enum DbT3065ShichosonTokubetsuKyufuJigyosha implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
-
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     /**
      * insertDantaiCd
      */
@@ -53,15 +52,15 @@ public enum DbT3065ShichosonTokubetsuKyufuJigyosha implements IColumnDefinition 
      */
     rirekiNo(5, 0),
     /**
-     * 介護国保連ＩＦ異動区分
+     * 異動区分
      */
     idoKubun(2, 0),
     /**
-     * 介護国保連ＩＦ異動年月日
+     * 異動年月日
      */
     idoYMD(2147483647, 0),
     /**
-     * 介護国保連ＩＦ法人種別
+     * 法人種別
      */
     hojinShubetsu(2, 0),
     /**
@@ -211,7 +210,7 @@ public enum DbT3065ShichosonTokubetsuKyufuJigyosha implements IColumnDefinition 
 
     /**
      * 項目の最大長のgetメソッドです。
-     *
+     * 
      * @return 項目の最大長
      */
     public int getMaxLength() {
@@ -220,7 +219,7 @@ public enum DbT3065ShichosonTokubetsuKyufuJigyosha implements IColumnDefinition 
 
     /**
      * 小数点以下の桁数のgetメソッドです。
-     *
+     * 
      * @return 小数点以下の桁数
      */
     public int getScale() {

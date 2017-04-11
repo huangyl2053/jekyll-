@@ -33,7 +33,7 @@ import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB3110001.Prin
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB3110001.ShinseiJokyoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB3110001.ShinseiinfoDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB3110001.TorikeshiInfoDiv;
-import jp.co.ndensan.reams.db.dbb.service.core.basic.ChoshuHohoManager;
+import jp.co.ndensan.reams.db.dbx.service.core.basic.ChoshuHohoManager;
 import jp.co.ndensan.reams.db.dbb.service.core.fuka.fukakeisan.FukaKeisan;
 import jp.co.ndensan.reams.db.dbb.service.core.fukajoho.fukajoho.FukaJohoManager;
 import jp.co.ndensan.reams.db.dbb.service.core.kaigohokenryogemmen.KaigoHokenryoGemmen;

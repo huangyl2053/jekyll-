@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.basic.NinteiKeikakuJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiIinJogaiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseitoroku.NinteiShinseiTorokuResult;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseitoroku.RirekiJohoResult;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteishinchokujohoshokai.HihokenshaJohoParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5590ShinsakaiIinJogaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinseitoroku.NinteiShinseiTorokuRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinseitoroku.RirekiJohoRelateEntity;
@@ -20,6 +21,9 @@ import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5590ShinsakaiIinJogaiJ
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteishinseitoroku.INinteiShinseiTorokuMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.db.dbx.persistence.db.basic.DbT7051KoseiShichosonMasterDac;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.IryohokenKanyuJokyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
@@ -31,6 +35,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5120ShinseitodokedeJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5150RenrakusakiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT1008IryohokenKanyuJokyoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5102NinteiKekkaJohoDac;
@@ -38,6 +44,8 @@ import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5105NinteiKanryoJohoDa
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5120ShinseitodokedeJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5121ShinseiRirekiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5150RenrakusakiJohoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5201NinteichosaIraiJohoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5301ShujiiIkenshoIraiJohoDac;
 import jp.co.ndensan.reams.ua.uax.business.core.psm.ShikibetsuTaishoSearchEntityHolder;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
@@ -50,6 +58,7 @@ import jp.co.ndensan.reams.ua.uax.entity.db.basic.UaFt200FindShikibetsuTaishoEnt
 import jp.co.ndensan.reams.ua.uax.persistence.db.basic.UaFt200FindShikibetsuTaishoFunctionDac;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -76,6 +85,9 @@ public class NinteiShinseiTorokuManager {
     private final DbT5123NinteiKeikakuJohoDac dbt5123Dac;
     private final DbT5102NinteiKekkaJohoDac dbt5102Dac;
     private final DbT5105NinteiKanryoJohoDac dbt5105Dac;
+    private final DbT5201NinteichosaIraiJohoDac dbt5201Dac;
+    private final DbT5301ShujiiIkenshoIraiJohoDac dbt5301Dac;
+    private final DbT7051KoseiShichosonMasterDac dbt7051Dac;
 
     /**
      * コンストラクタです。
@@ -91,6 +103,9 @@ public class NinteiShinseiTorokuManager {
         this.dbt5123Dac = InstanceProvider.create(DbT5123NinteiKeikakuJohoDac.class);
         this.dbt5102Dac = InstanceProvider.create(DbT5102NinteiKekkaJohoDac.class);
         this.dbt5105Dac = InstanceProvider.create(DbT5105NinteiKanryoJohoDac.class);
+        this.dbt5201Dac = InstanceProvider.create(DbT5201NinteichosaIraiJohoDac.class);
+        this.dbt5301Dac = InstanceProvider.create(DbT5301ShujiiIkenshoIraiJohoDac.class);
+        this.dbt7051Dac = InstanceProvider.create(DbT7051KoseiShichosonMasterDac.class);
     }
 
     /**
@@ -102,7 +117,9 @@ public class NinteiShinseiTorokuManager {
             DbT5590ShinsakaiIinJogaiJohoDac dbt5590Dac, DbT5101NinteiShinseiJohoDac dbt5101Dac,
             DbT5121ShinseiRirekiJohoDac dbt5121Dac, DbT1008IryohokenKanyuJokyoDac dbt1008Dac,
             DbT5120ShinseitodokedeJohoDac dbt5120Dac, DbT5102NinteiKekkaJohoDac dbt5102Dac,
-            DbT5123NinteiKeikakuJohoDac dbt5123Dac, DbT5105NinteiKanryoJohoDac dbt5105Dac) {
+            DbT5123NinteiKeikakuJohoDac dbt5123Dac, DbT5105NinteiKanryoJohoDac dbt5105Dac,
+            DbT5201NinteichosaIraiJohoDac dbt5201Dac, DbT5301ShujiiIkenshoIraiJohoDac dbt5301Dac,
+            DbT7051KoseiShichosonMasterDac dbt7051Dac) {
         this.mapperProvider = mapperProvider;
         this.dbt5150Dac = dbt5150Dac;
         this.dbt5590Dac = dbt5590Dac;
@@ -113,6 +130,9 @@ public class NinteiShinseiTorokuManager {
         this.dbt5123Dac = dbt5123Dac;
         this.dbt5102Dac = dbt5102Dac;
         this.dbt5105Dac = dbt5105Dac;
+        this.dbt5201Dac = dbt5201Dac;
+        this.dbt5301Dac = dbt5301Dac;
+        this.dbt7051Dac = dbt7051Dac;
     }
 
     /**
@@ -273,6 +293,22 @@ public class NinteiShinseiTorokuManager {
         DbT5121ShinseiRirekiJohoEntity entity = dbt5121Dac.selectByKey(申請書管理番号);
         if (entity != null) {
             return entity.getZenkaiShinseishoKanriNo();
+        }
+        return null;
+    }
+
+    /**
+     * 申請書管理番号により、前回申請管理番号の取得
+     *
+     * @param 証記載保険者番号 証記載保険者番号
+     * @param 被保険者番号 被保険者番号
+     * @return 前回申請管理番号
+     */
+    public ShinseishoKanriNo get前回申請管理番号(RString 証記載保険者番号, RString 被保険者番号) {
+        RString 前回申請管理番号
+                = mapperProvider.create(INinteiShinseiTorokuMapper.class).getZenkaiShinseishoKanriNo(HihokenshaJohoParamter.createParameter(証記載保険者番号, 被保険者番号));
+        if (前回申請管理番号 != null && !前回申請管理番号.isEmpty()) {
+            return new ShinseishoKanriNo(前回申請管理番号);
         }
         return null;
     }
@@ -478,4 +514,41 @@ public class NinteiShinseiTorokuManager {
                 被保険者番号, 認定申請年月日, 申請書区分, 認定申請区分_申請時_コード, 認定申請区分_法令_コード);
         return null != retList && !retList.isEmpty();
     }
+    
+    /**
+     * データ存在チェック
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return TRUE:有り FALSE:なし
+     */
+    public boolean has調査依頼データ(ShinseishoKanriNo 申請書管理番号) {
+        List<DbT5201NinteichosaIraiJohoEntity> retList = dbt5201Dac.selectBy申請書管理番号(申請書管理番号);
+        return null != retList && !retList.isEmpty();
+    }
+    
+    /**
+     * データ存在チェック
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return TRUE:有り FALSE:なし
+     */
+    public boolean has意見書依頼データ(ShinseishoKanriNo 申請書管理番号) {
+        List<DbT5301ShujiiIkenshoIraiJohoEntity> retList = dbt5301Dac.selectBy申請書管理番号(申請書管理番号);
+        return null != retList && !retList.isEmpty();
+    }
+    
+    /**
+     * 市町村コードを取得します。
+     *
+     * @param 証記載保険者番号 証記載保険者番号
+     * @return 市町村コード
+     */
+    public LasdecCode get市町村コード(RString 証記載保険者番号) {
+        List<DbT7051KoseiShichosonMasterEntity> entityList = dbt7051Dac.getshichosonMeisho(new ShoKisaiHokenshaNo(証記載保険者番号));
+        if (!entityList.isEmpty()) {
+            return entityList.get(0).getShichosonCode();
+        }
+        return LasdecCode.EMPTY;
+    }
+    
 }

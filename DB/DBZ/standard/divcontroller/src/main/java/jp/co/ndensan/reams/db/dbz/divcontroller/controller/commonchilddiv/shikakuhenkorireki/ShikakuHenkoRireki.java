@@ -198,17 +198,18 @@ public class ShikakuHenkoRireki {
      */
     public ResponseData<ShikakuHenkoRirekiDiv> onClick_btnHenkoKakutei(ShikakuHenkoRirekiDiv henkoRirekiDiv) {
         Models<HihokenshaDaichoIdentifier, HihokenshaDaicho> result = ViewStateHolder.get(ViewStateKeys.被保険者台帳情報, Models.class);
-
+       
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
 
         validationMessages.add(TextBoxFlexibleDateValidator.validate暦上日(henkoRirekiDiv.getHenkoInput().getTxtHenkoDate()));
         validationMessages.add(TextBoxFlexibleDateValidator.validate暦上日(henkoRirekiDiv.getHenkoInput().getTxtHenkoTodokedeDate()));
 
         FlexibleDate idoDate = FlexibleDate.MAX;
+        HihokenshaNo hihokenshaNo = henkoRirekiDiv.getHihokenshaNo() == null ? HihokenshaNo.EMPTY : new HihokenshaNo(henkoRirekiDiv.getHihokenshaNo());
         if (!henkoRirekiDiv.getTxtHenkoDate().getValue().isEmpty()) {
             idoDate = henkoRirekiDiv.getTxtHenkoDate().getValue();
         }
-        HihokenshaDaicho hihokenshaDaicho = new HihokenshaDaicho(HihokenshaNo.EMPTY, idoDate, new RString("0001"));
+        HihokenshaDaicho hihokenshaDaicho = new HihokenshaDaicho(hihokenshaNo, idoDate, new RString("0001"));
         if (!result.values().isEmpty()) {
             if (henkoRirekiDiv.getInputMode().equals(ViewExecutionStatus.Add.getValue())) {
                 hihokenshaDaicho = getHandler(henkoRirekiDiv).getTsuikaEntity(result);

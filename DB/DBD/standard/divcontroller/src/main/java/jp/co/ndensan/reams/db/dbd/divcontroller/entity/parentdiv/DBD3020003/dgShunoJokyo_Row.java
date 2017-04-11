@@ -3,14 +3,14 @@ package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD3020003;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Sep 13 17:07:46 CST 2016 
+ * Mon Apr 10 13:54:12 JST 2017 
  */
 
 
 
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 
@@ -21,10 +21,10 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 
 public class dgShunoJokyo_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
 
     private RString jotai;
-    private TextBoxFlexibleDate choteiNendo;
+    private TextBox choteiNendo;
     private TextBoxNum choteiGaku;
     private TextBoxNum shunyuGaku;
     private TextBoxNum jikoToraiMinogaku;
@@ -37,7 +37,7 @@ public class dgShunoJokyo_Row extends DataRow {
     public dgShunoJokyo_Row() {
         super();
         this.jotai = RString.EMPTY;
-        this.choteiNendo = new TextBoxFlexibleDate();
+        this.choteiNendo = new TextBox();
         this.choteiGaku = new TextBoxNum();
         this.shunyuGaku = new TextBoxNum();
         this.jikoToraiMinogaku = new TextBoxNum();
@@ -58,7 +58,7 @@ public class dgShunoJokyo_Row extends DataRow {
         this.setOriginalData("seirekiChoteiNendo", seirekiChoteiNendo);
     }
 
-    public dgShunoJokyo_Row(RString jotai, TextBoxFlexibleDate choteiNendo, TextBoxNum choteiGaku, TextBoxNum shunyuGaku, TextBoxNum jikoToraiMinogaku, RString ki, RString nokigen, RString jikoKisanYMD, RString jikoKisanYMDKubun, RString seirekiChoteiNendo) {
+    public dgShunoJokyo_Row(RString jotai, TextBox choteiNendo, TextBoxNum choteiGaku, TextBoxNum shunyuGaku, TextBoxNum jikoToraiMinogaku, RString ki, RString nokigen, RString jikoKisanYMD, RString jikoKisanYMDKubun, RString seirekiChoteiNendo) {
         super();
         this.setOriginalData("jotai", jotai);
         this.setOriginalData("choteiNendo", choteiNendo);
@@ -86,7 +86,7 @@ public class dgShunoJokyo_Row extends DataRow {
         return jotai;
     }
 
-    public TextBoxFlexibleDate getChoteiNendo() {
+    public TextBox getChoteiNendo() {
         return choteiNendo;
     }
 
@@ -127,7 +127,7 @@ public class dgShunoJokyo_Row extends DataRow {
         this.jotai = jotai;
     }
 
-    public void setChoteiNendo(TextBoxFlexibleDate choteiNendo) {
+    public void setChoteiNendo(TextBox choteiNendo) {
         this.setOriginalData("choteiNendo", choteiNendo);
         this.choteiNendo = choteiNendo;
     }

@@ -92,16 +92,18 @@
         LEFT JOIN rgdb."DbT5033ShinsakaiIinHoshuTanka" AS T5033A
         ON
         ( CASE T5503."kaigoninteiShinsakaiGichoKubunCode"
-        WHEN '1' THEN T5033A."kaigoNinteiShinsaIinShubetsu" = '11'
-        ELSE T5033A."kaigoNinteiShinsaIinShubetsu" = '12'
+        WHEN '1' THEN T5033A."kaigoNinteiShinsaIinShubetsu" = '12'
+        ELSE T5033A."kaigoNinteiShinsaIinShubetsu" = '11'
         END )
         AND T5033A."kaishiYM" <![CDATA[<=]]> SUBSTRING(T5511."shinsakaiKaisaiYMD", 1, 6)
         AND SUBSTRING(T5511."shinsakaiKaisaiYMD", 1, 6) <![CDATA[<=]]> T5033A."shuryoYM"
         LEFT JOIN rgdb."DbT5033ShinsakaiIinHoshuTanka" AS T5033B
         ON
-        ( CASE T5503."kaigoninteiShinsakaiGichoKubunCode"
+        ( CASE T5594."shinsakaiIinShikakuCode"
         WHEN '01' THEN T5033B."kaigoNinteiShinsaIinShubetsu" = '21'
-        WHEN '02' THEN T5033B."kaigoNinteiShinsaIinShubetsu" = '21'
+        <if test="is歯科医師含む">
+            WHEN '02' THEN T5033B."kaigoNinteiShinsaIinShubetsu" = '21'
+        </if>
         ELSE T5033B."kaigoNinteiShinsaIinShubetsu" = '22'
         END )
         AND T5033B."kaishiYM" <![CDATA[<=]]> SUBSTRING(T5511."shinsakaiKaisaiYMD", 1, 6)

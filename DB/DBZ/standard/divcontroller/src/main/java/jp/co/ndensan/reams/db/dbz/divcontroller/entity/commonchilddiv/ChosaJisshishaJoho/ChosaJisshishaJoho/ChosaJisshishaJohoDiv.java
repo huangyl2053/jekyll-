@@ -48,10 +48,10 @@ public class ChosaJisshishaJohoDiv extends Panel implements IChosaJisshishaJohoD
     private TextBoxDate txtChosaJisshiDate;
     @JsonProperty("ddlChosaJisshiBasho")
     private DropDownList ddlChosaJisshiBasho;
-    @JsonProperty("txtJisshiBashoMeisho")
-    private TextBox txtJisshiBashoMeisho;
     @JsonProperty("Image")
     private ImageDiv Image;
+    @JsonProperty("txtJisshiBashoMeisho")
+    private TextBox txtJisshiBashoMeisho;
     @JsonProperty("txtKinyushaCode")
     private TextBoxCode txtKinyushaCode;
     @JsonProperty("btnChosainGuide")
@@ -198,24 +198,6 @@ public class ChosaJisshishaJohoDiv extends Panel implements IChosaJisshishaJohoD
     }
 
     /*
-     * gettxtJisshiBashoMeisho
-     * @return txtJisshiBashoMeisho
-     */
-    @JsonProperty("txtJisshiBashoMeisho")
-    public TextBox getTxtJisshiBashoMeisho() {
-        return txtJisshiBashoMeisho;
-    }
-
-    /*
-     * settxtJisshiBashoMeisho
-     * @param txtJisshiBashoMeisho txtJisshiBashoMeisho
-     */
-    @JsonProperty("txtJisshiBashoMeisho")
-    public void setTxtJisshiBashoMeisho(TextBox txtJisshiBashoMeisho) {
-        this.txtJisshiBashoMeisho = txtJisshiBashoMeisho;
-    }
-
-    /*
      * getImage
      * @return Image
      */
@@ -231,6 +213,24 @@ public class ChosaJisshishaJohoDiv extends Panel implements IChosaJisshishaJohoD
     @JsonProperty("Image")
     public void setImage(ImageDiv Image) {
         this.Image = Image;
+    }
+
+    /*
+     * gettxtJisshiBashoMeisho
+     * @return txtJisshiBashoMeisho
+     */
+    @JsonProperty("txtJisshiBashoMeisho")
+    public TextBox getTxtJisshiBashoMeisho() {
+        return txtJisshiBashoMeisho;
+    }
+
+    /*
+     * settxtJisshiBashoMeisho
+     * @param txtJisshiBashoMeisho txtJisshiBashoMeisho
+     */
+    @JsonProperty("txtJisshiBashoMeisho")
+    public void setTxtJisshiBashoMeisho(TextBox txtJisshiBashoMeisho) {
+        this.txtJisshiBashoMeisho = txtJisshiBashoMeisho;
     }
 
     /*

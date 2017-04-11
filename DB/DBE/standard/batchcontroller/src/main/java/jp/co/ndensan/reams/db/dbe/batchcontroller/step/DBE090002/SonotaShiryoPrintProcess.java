@@ -18,8 +18,6 @@ import jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteijohoteikyo.YokaigoNi
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -31,7 +29,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
@@ -44,8 +41,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.api.ReportInfo;
 
@@ -93,12 +88,10 @@ public class SonotaShiryoPrintProcess extends BatchProcessBase<YokaigoNinteiJoho
     private static final RString 総合事業未実施 = new RString("総合事業未実施");
     private static final RString 総合事業実施済 = new RString("総合事業実施済");
     private static final RString SEPARATOR = new RString("/");
-    private DbAccessLogger accessLog;
 
     @Override
     protected void initialize() {
         finder = YokaigoNinteiJohoTeikyoFinder.createInstance();
-        accessLog = new DbAccessLogger();
     }
 
     @Override
@@ -119,54 +112,41 @@ public class SonotaShiryoPrintProcess extends BatchProcessBase<YokaigoNinteiJoho
             RString 共有フォルダ名 = entity.get保険者番号().concat(entity.get被保険者番号());
             ReadOnlySharedFileEntryDescriptor descriptor = get共有ファイルエントリ情報(共有フォルダ名, イメージ共有ファイルID);
             RString path = getFilePath(descriptor);
-
-            ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.get申請書管理番号());
             RString イメージファイルパスA = getAイメージファイルパス(descriptor, path);
             if (!イメージファイルパスA.isEmpty()) {
                 SonoTashiryoEntity sonoTashiryoEntity = SonoTashiryoEntityEditor.edit(entity, イメージファイルパスA);
                 SonoTashiryoReport report = new SonoTashiryoReport(sonoTashiryoEntity);
                 report.writeBy(reportSourceWriter);
-                accessLog.store(new ShoKisaiHokenshaNo(entity.get保険者番号()), entity.get被保険者番号(), expandedInfo);
             }
-
             RString イメージファイルパスB = getBイメージファイルパス(descriptor, path);
             if (!イメージファイルパスB.isEmpty()) {
                 SonoTashiryoEntity sonoTashiryoEntity = SonoTashiryoEntityEditor.edit(entity, イメージファイルパスB);
                 SonoTashiryoReport report = new SonoTashiryoReport(sonoTashiryoEntity);
                 report.writeBy(reportSourceWriter);
-                accessLog.store(new ShoKisaiHokenshaNo(entity.get保険者番号()), entity.get被保険者番号(), expandedInfo);
             }
-
             RString イメージファイルパスC = getCイメージファイルパス(descriptor, path);
             if (!イメージファイルパスC.isEmpty()) {
                 SonoTashiryoEntity sonoTashiryoEntity = SonoTashiryoEntityEditor.edit(entity, イメージファイルパスC);
                 SonoTashiryoReport report = new SonoTashiryoReport(sonoTashiryoEntity);
                 report.writeBy(reportSourceWriter);
-                accessLog.store(new ShoKisaiHokenshaNo(entity.get保険者番号()), entity.get被保険者番号(), expandedInfo);
             }
-
             RString イメージファイルパスD = getDイメージファイルパス(descriptor, path);
             if (!イメージファイルパスD.isEmpty()) {
                 SonoTashiryoEntity sonoTashiryoEntity = SonoTashiryoEntityEditor.edit(entity, イメージファイルパスD);
                 SonoTashiryoReport report = new SonoTashiryoReport(sonoTashiryoEntity);
                 report.writeBy(reportSourceWriter);
-                accessLog.store(new ShoKisaiHokenshaNo(entity.get保険者番号()), entity.get被保険者番号(), expandedInfo);
             }
-
             RString イメージファイルパスE = getEイメージファイルパス(descriptor, path);
             if (!イメージファイルパスE.isEmpty()) {
                 SonoTashiryoEntity sonoTashiryoEntity = SonoTashiryoEntityEditor.edit(entity, イメージファイルパスE);
                 SonoTashiryoReport report = new SonoTashiryoReport(sonoTashiryoEntity);
                 report.writeBy(reportSourceWriter);
-                accessLog.store(new ShoKisaiHokenshaNo(entity.get保険者番号()), entity.get被保険者番号(), expandedInfo);
             }
-
             RString イメージファイルパスF = getFイメージファイルパス(descriptor, path);
             if (!イメージファイルパスF.isEmpty()) {
                 SonoTashiryoEntity sonoTashiryoEntity = SonoTashiryoEntityEditor.edit(entity, イメージファイルパスF);
                 SonoTashiryoReport report = new SonoTashiryoReport(sonoTashiryoEntity);
                 report.writeBy(reportSourceWriter);
-                accessLog.store(new ShoKisaiHokenshaNo(entity.get保険者番号()), entity.get被保険者番号(), expandedInfo);
             }
         }
     }
@@ -174,7 +154,6 @@ public class SonotaShiryoPrintProcess extends BatchProcessBase<YokaigoNinteiJoho
     @Override
     protected void afterExecute() {
         set出力条件表();
-        accessLog.flushBy(AccessLogType.照会);
     }
 
     private RString getAイメージファイルパス(ReadOnlySharedFileEntryDescriptor descriptor, RString path) {

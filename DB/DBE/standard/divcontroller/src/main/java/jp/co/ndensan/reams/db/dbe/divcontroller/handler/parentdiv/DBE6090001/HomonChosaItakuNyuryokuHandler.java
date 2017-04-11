@@ -107,7 +107,7 @@ public class HomonChosaItakuNyuryokuHandler {
                 dgchosain_Row.setChosainKanaShimei(nullToEmpty(business.get調査員氏名カナ()));
                 if (RString.isNullOrEmpty(business.get調査員資格())) {
                     dgchosain_Row.setChosainShikaku(nullToEmpty(business.get調査員資格()));
-                }else{
+                } else {
                     dgchosain_Row.setChosainShikaku(Sikaku.toValue(nullToEmpty(business.get調査員資格())).get名称());
                 }
                 dgchosain_Row.setShozokuKikanName(nullToEmpty(business.get所属機関名称()));
@@ -178,24 +178,25 @@ public class HomonChosaItakuNyuryokuHandler {
      *
      */
     public void set状態_更新() {
-        div.getTxtShinseibi().setValue(toFlexibleDate(div.getDgShinsakaiIin().getClickedItem().getShinseibi()));
-        div.getCcdChosaItakusakiAndChosainInput().initialize(単純照会状態, div.getDgShinsakaiIin().getClickedItem().getNintechosaItakusakiCode(),
-                div.getDgShinsakaiIin().getClickedItem().getNinteiChosaItakusaki(),
-                div.getDgShinsakaiIin().getClickedItem().getNinteichosainCode(),
-                div.getDgShinsakaiIin().getClickedItem().getNinteiChosain());
-        div.getTxtNinteiChosaIraiNengappi().setValue(toFlexibleDate(div.getDgShinsakaiIin().getClickedItem().getJisshiNengappi()));
-        div.getTxtNinteiChosaJisshiNengappi().setValue(toFlexibleDate(div.getDgShinsakaiIin().getClickedItem().getIraiNengappi()));
-        div.getTxtNinteiJuryoNengappi().setValue(toFlexibleDate(div.getDgShinsakaiIin().getClickedItem().getJuryoNengappi()));
-        div.getTxtHomonShurui().setValue(div.getDgShinsakaiIin().getClickedItem().getShurui() == null
-                ? RString.EMPTY : div.getDgShinsakaiIin().getClickedItem().getShurui());
-        div.getTxtNinteiChosaItakuryo().setValue(toDecimal(div.getDgShinsakaiIin().getClickedItem().getNinteiChosaItakuryo()));
-        div.getTxtShiharaiMemo().setValue(div.getDgShinsakaiIin().getClickedItem().getShiharaiMemo());
-        if (銀行振込.equals(div.getDgShinsakaiIin().getClickedItem().getFurikomi())) {
+        dgShinsakaiIin_Row row = div.getDgShinsakaiIin().getSelectedItems().get(0);
+        div.getTxtShinseibi().setValue(toFlexibleDate(row.getShinseibi()));
+        div.getCcdChosaItakusakiAndChosainInput().initialize(単純照会状態, row.getNintechosaItakusakiCode(),
+                row.getNinteiChosaItakusaki(),
+                row.getNinteichosainCode(),
+                row.getNinteiChosain());
+        div.getTxtNinteiChosaIraiNengappi().setValue(toFlexibleDate(row.getJisshiNengappi()));
+        div.getTxtNinteiChosaJisshiNengappi().setValue(toFlexibleDate(row.getIraiNengappi()));
+        div.getTxtNinteiJuryoNengappi().setValue(toFlexibleDate(row.getJuryoNengappi()));
+        div.getTxtHomonShurui().setValue(row.getShurui() == null
+                ? RString.EMPTY : row.getShurui());
+        div.getTxtNinteiChosaItakuryo().setValue(toDecimal(row.getNinteiChosaItakuryo()));
+        div.getTxtShiharaiMemo().setValue(row.getShiharaiMemo());
+        if (銀行振込.equals(row.getFurikomi())) {
             div.getRadGinkoFurikomi().setSelectedKey(銀行振込_出力済);
         } else {
             div.getRadGinkoFurikomi().setSelectedKey(銀行振込_出力未);
         }
-        if (div.getDgShinsakaiIin().getClickedItem().getRaiRirekiNo().isNullOrEmpty()) {
+        if (RString.isNullOrEmpty(row.getRaiRirekiNo())) {
             div.setHdt状態(状態_追加);
         } else {
             div.setHdt状態(状態_更新);
@@ -209,18 +210,19 @@ public class HomonChosaItakuNyuryokuHandler {
      * 一覧状態「削除」の編集です。
      */
     public void set状態_削除() {
-        div.getTxtShinseibi().setValue(toFlexibleDate(div.getDgShinsakaiIin().getClickedItem().getShinseibi()));
-        div.getCcdChosaItakusakiAndChosainInput().initialize(単純照会状態, div.getDgShinsakaiIin().getClickedItem().getNintechosaItakusakiCode(),
-                div.getDgShinsakaiIin().getClickedItem().getNinteiChosaItakusaki(),
-                div.getDgShinsakaiIin().getClickedItem().getNinteichosainCode(),
-                div.getDgShinsakaiIin().getClickedItem().getNinteiChosain());
-        div.getTxtNinteiChosaIraiNengappi().setValue(toFlexibleDate(div.getDgShinsakaiIin().getClickedItem().getJisshiNengappi()));
-        div.getTxtNinteiChosaJisshiNengappi().setValue(toFlexibleDate(div.getDgShinsakaiIin().getClickedItem().getIraiNengappi()));
-        div.getTxtNinteiJuryoNengappi().setValue(toFlexibleDate(div.getDgShinsakaiIin().getClickedItem().getJuryoNengappi()));
-        div.getTxtHomonShurui().setValue(div.getDgShinsakaiIin().getClickedItem().getShurui());
-        div.getTxtNinteiChosaItakuryo().setValue(toDecimal(div.getDgShinsakaiIin().getClickedItem().getNinteiChosaItakuryo()));
-        div.getTxtShiharaiMemo().setValue(div.getDgShinsakaiIin().getClickedItem().getShiharaiMemo());
-        if (銀行振込.equals(div.getDgShinsakaiIin().getClickedItem().getFurikomi())) {
+        dgShinsakaiIin_Row row = div.getDgShinsakaiIin().getSelectedItems().get(0);
+        div.getTxtShinseibi().setValue(toFlexibleDate(row.getShinseibi()));
+        div.getCcdChosaItakusakiAndChosainInput().initialize(単純照会状態, row.getNintechosaItakusakiCode(),
+                row.getNinteiChosaItakusaki(),
+                row.getNinteichosainCode(),
+                row.getNinteiChosain());
+        div.getTxtNinteiChosaIraiNengappi().setValue(toFlexibleDate(row.getJisshiNengappi()));
+        div.getTxtNinteiChosaJisshiNengappi().setValue(toFlexibleDate(row.getIraiNengappi()));
+        div.getTxtNinteiJuryoNengappi().setValue(toFlexibleDate(row.getJuryoNengappi()));
+        div.getTxtHomonShurui().setValue(row.getShurui());
+        div.getTxtNinteiChosaItakuryo().setValue(toDecimal(row.getNinteiChosaItakuryo()));
+        div.getTxtShiharaiMemo().setValue(row.getShiharaiMemo());
+        if (銀行振込.equals(row.getFurikomi())) {
             div.getRadGinkoFurikomi().setSelectedKey(銀行振込_出力済);
         } else {
             div.getRadGinkoFurikomi().setSelectedKey(銀行振込_出力未);
@@ -236,7 +238,7 @@ public class HomonChosaItakuNyuryokuHandler {
      */
     public void setbtnToroku() {
         List<dgShinsakaiIin_Row> dgChosainList = div.getDgShinsakaiIin().getDataSource();
-        int rowCount = div.getDgShinsakaiIin().getClickedItem().getId();
+        int rowCount = div.getDgShinsakaiIin().getSelectedItems().get(0).getId();
         dgShinsakaiIin_Row row = dgChosainList.get(rowCount);
         if (状態_更新.equals(div.getHdt状態())) {
             row.setNinteiChosaItakuryo(DecimalFormatter.toコンマ区切りRString(div.getTxtNinteiChosaItakuryo().getValue(), 0));

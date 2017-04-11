@@ -10,7 +10,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaN
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.not;
@@ -35,7 +34,7 @@ public class JigyoKogakuShikyuHanteiKekkaTest extends DbcTestBase {
     private static HihokenshaNo 主キー名1;
     private static FlexibleYearMonth 主キー名2;
     private static HokenshaNo 主キー名3;
-    private static Decimal 主キー名4;
+    private static int 主キー名4;
 
     @BeforeClass
     public static void setUpClass() {

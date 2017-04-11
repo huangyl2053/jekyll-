@@ -33,6 +33,19 @@
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>
             <artifactId>DbzPersistence</artifactId>
         </dependency>
+        <!-- UCX -->
+        <dependency>
+            <artifactId>UcxDefinition</artifactId>
+            <groupId>jp.co.ndensan.reams.uc.ucx</groupId>
+            <type>jar</type>
+            <version>${jp.co.ndensan.reams.ucxVersion}</version>
+        </dependency>
+        <dependency>
+            <artifactId>UcxEntity</artifactId>
+            <groupId>jp.co.ndensan.reams.uc.ucx</groupId>
+            <type>jar</type>
+            <version>${jp.co.ndensan.reams.ucxVersion}</version>
+        </dependency>
         <!-- テスト -->
         <dependency>
             <groupId>jp.co.ndensan.reams.db.dbz</groupId>

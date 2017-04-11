@@ -170,7 +170,8 @@ public class ShinseiKensakuMapperParameter {
     private boolean isNowPhaseNijiHantei;
     // 月次処理
     private boolean isNowPhaseGetsureiShori;
-
+    
+    
     private boolean isShinseiUketsukeKanryo;
     private boolean isShinseiUketsukeMiKanryo;
     private boolean isChosaIraiKanryo;

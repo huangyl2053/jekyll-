@@ -451,7 +451,7 @@
         "ShikyugakuUpdateTemp"."kubun" IN ( '1', '2', '3', '4')
     </select>
 
-    <select id="get処理日付管理マスタ" parameterType="jp.co.ndensan.reams.db.dbc.definition.mybatisprm.nenjiriyoshafutanwariaihantei.NenjiRiyoshaFutanwariaiHanteiMybaticParameter"
+    <select id="get処理日付管理マスタ" parameterType="jp.co.ndensan.reams.db.dbd.definition.mybatisprm.nenjiriyoshafutanwariaihantei.NenjiRiyoshaFutanwariaiHanteiMybaticParameter"
             resultType="jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7022ShoriDateKanriEntity" resultOrdered="true" fetchSize="500">
         SELECT
         *

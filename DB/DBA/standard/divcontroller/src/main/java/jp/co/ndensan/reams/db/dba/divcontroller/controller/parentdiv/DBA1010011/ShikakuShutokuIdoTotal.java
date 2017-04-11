@@ -6,22 +6,29 @@
 package jp.co.ndensan.reams.db.dba.divcontroller.controller.parentdiv.DBA1010011;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import jp.co.ndensan.reams.db.dba.business.core.tennyutenshutsuhoryu.TennyuHoryuTaisho;
+import jp.co.ndensan.reams.db.dba.definition.message.DbaQuestionMessages;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.DBA1010011StateName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.DBA1010011TransitionEventName;
 import jp.co.ndensan.reams.db.dba.divcontroller.entity.parentdiv.DBA1010011.ShikakuShutokuIdoTotalDiv;
 import jp.co.ndensan.reams.db.dba.divcontroller.handler.parentdiv.DBA1010011.ShiKaKuSyuToKuIdouTotalHandler;
 import jp.co.ndensan.reams.db.dba.service.core.tajushochito.TaJushochiTokureiChecker;
 import jp.co.ndensan.reams.db.dba.service.core.tekiyojogaisha.TekiyoJogaishaChecker;
+import jp.co.ndensan.reams.db.dba.service.core.tennyutenshutsuhoryutaishosha.TennyuTenshutsuHoryuTaishoshaManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
+import jp.co.ndensan.reams.db.dbz.business.core.TennyushutsuHoryuTaishosha;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzInformationMessages;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShikakuTokusoRireki.dgShikakuShutokuRireki_Row;
 import jp.co.ndensan.reams.db.dbz.divcontroller.validations.TextBoxFlexibleDateValidator;
 import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
@@ -42,6 +49,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 資格取得異動の対象者情報を表示するためのDivControllerです。
@@ -56,6 +64,8 @@ public class ShikakuShutokuIdoTotal {
     private static final RString RONEN = new RString("老福年金");
     private static final RString SHISETSU = new RString("施設入退所");
     private static final RString 追加 = new RString("追加");
+    private static final RString 状態_照会 = new RString("照会");
+    private static final RString UIコンテナID_転入出保留対象者管理 = new RString("DBAUC17001");
 
     private static final RString COMMON_BUTTON_RESEARCH = new RString("btnUpdate");
 
@@ -73,6 +83,11 @@ public class ShikakuShutokuIdoTotal {
         TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
         ShikibetsuCode shikibetsuCode = key.get識別コード();
         HihokenshaNo hihokenshaNo = key.get被保険者番号();
+        HihokenshaDaichoManager manager = HihokenshaDaichoManager.createInstance();
+        List<HihokenshaDaicho> hihoDaichoList = manager.get最新被保険者台帳(hihokenshaNo);
+        ArrayList<HihokenshaDaicho> serialHihoDaicho = new ArrayList<>();
+        serialHihoDaicho.addAll(hihoDaichoList);
+        ViewStateHolder.put(ViewStateKeys.対象者_被保険者台帳情報, serialHihoDaicho);
 
         if (validateShikibetsuCode(shikibetsuCode)) {
             div.setDisabled(true);
@@ -181,12 +196,50 @@ public class ShikakuShutokuIdoTotal {
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
+
+        if (new RString(UrInformationMessages.保存終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            return ResponseData.of(div).forwardWithEventName(DBA1010011TransitionEventName.完了).respond();
+        }
+
+        TennyuTenshutsuHoryuTaishoshaManager 転入出保留対象者Manager = InstanceProvider.create(TennyuTenshutsuHoryuTaishoshaManager.class);
+        RString UIコンテナID = ResponseHolder.getUIContainerId();
+        if (new RString(DbaQuestionMessages.保留対象取消確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            TennyuHoryuTaisho 転入保留対象者情報 = ViewStateHolder.get(ViewStateKeys.転入保留対象者, TennyuHoryuTaisho.class);
+            TennyushutsuHoryuTaishosha 転入出保留対象者情報 = 転入保留対象者情報.get転入保留対象者();
+            転入出保留対象者Manager.delete転入保留対象者(転入出保留対象者情報);
+            releaseLock(div);
+            if (UIコンテナID_転入出保留対象者管理.equals(UIコンテナID)) {
+                return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
+            } else {
+                return ResponseData.of(div).setState(DBA1010011StateName.完了状態);
+            }
+        }
+
+        if (new RString(DbaQuestionMessages.保留対象取消確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+            releaseLock(div);
+            if (UIコンテナID_転入出保留対象者管理.equals(UIコンテナID)) {
+                return ResponseData.of(div).forwardWithEventName(DBA1010011TransitionEventName.完了).respond();
+            } else {
+                return ResponseData.of(div).setState(DBA1010011StateName.完了状態);
+            }
+        }
+
         if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             createHandler(div).save();
+            TaishoshaKey key = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
+            ShikibetsuCode 識別コード = key.get識別コード();
+            Message message = 転入出保留対象者Manager.check転入保留対象者(識別コード);
+            if (message != null) {
+                return ResponseData.of(div).addMessage(message).respond();
+            } else {
             releaseLock(div);
             div.getComplete().getCcdComplete().setSuccessMessage(new RString(UrInformationMessages.保存終了.getMessage().evaluate()));
             return ResponseData.of(div).setState(DBA1010011StateName.完了状態);
+        }
         }
         return ResponseData.of(div).respond();
     }
@@ -244,16 +297,16 @@ public class ShikakuShutokuIdoTotal {
      */
     public ResponseData<ShikakuShutokuIdoTotalDiv> onClick_btnSyouHoSo(ShikakuShutokuIdoTotalDiv div) {
 //<<<<<<< HEAD
-        releaseLock(div);
-        createHandler(div).setパラメータ();
+//        releaseLock(div);
+//        createHandler(div).setパラメータ();
 //=======
-//        前排他ロックキー = new LockingKey(createHandler(div).get前排他キー());
-//        RealInitialLocker.release(前排他ロックキー);
-//        TaishoshaKey key = ViewStateHolder.get(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class);
-//        ViewStateHolder.put(ViewStateKeys.識別コード, key.get識別コード());
-//        ViewStateHolder.put(ViewStateKeys.被保険者番号, key.get被保険者番号());
-//        ViewStateHolder.put(ViewStateKeys.状態, 状態_照会);
-//        ViewStateHolder.put(ViewStateKeys.資格得喪情報, createHandler(div).setパラメータ());
+        前排他ロックキー = new LockingKey(createHandler(div).get前排他キー());
+        RealInitialLocker.release(前排他ロックキー);
+        TaishoshaKey key = ViewStateHolder.get(jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys.資格対象者, TaishoshaKey.class);
+        ViewStateHolder.put(ViewStateKeys.識別コード, key.get識別コード());
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, key.get被保険者番号());
+        ViewStateHolder.put(ViewStateKeys.状態, 状態_照会);
+        ViewStateHolder.put(ViewStateKeys.資格得喪情報, createHandler(div).setパラメータ());
 //>>>>>>> origin/sync
         return ResponseData.of(div).forwardWithEventName(DBA1010011TransitionEventName.詳細へ).respond();
     }
@@ -342,7 +395,7 @@ public class ShikakuShutokuIdoTotal {
                 compareToDate = row.getSoshitsuDate();
             }
             // 期間重複チェック
-            if (!div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
+            if (rowList.size() > 1 && !div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
                     getShikakuShutokuInput().getTxtShutokuDate().getValue().isEmpty()
                     && div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
                     getShikakuShutokuInput().getTxtShutokuDate().getValue().compareTo(compareToDate.getValue()) <= 0) {
@@ -374,6 +427,7 @@ public class ShikakuShutokuIdoTotal {
             }
             row = new dgShikakuShutokuRireki_Row();
             row.setState(追加);
+            row.getShosai().setDisabled(true);
             row.setDaNo(daNo);
             row.getShutokuDate().setValue(div.getShikakuShutokuJoho().getShikakuTokusoRirekiMain().
                     getShikakuShutokuInput().getTxtShutokuDate().getValue());

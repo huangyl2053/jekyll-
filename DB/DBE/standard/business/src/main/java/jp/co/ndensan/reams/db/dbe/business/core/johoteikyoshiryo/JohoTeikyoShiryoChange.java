@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.chosa.ChohyoAtesakiKeisho;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -39,6 +40,7 @@ public final class JohoTeikyoShiryoChange {
      * @param 文書番号 文書番号
      * @param 宛先情報 宛先情報
      * @param ページ番号 ページ番号
+     * 
      * @return 介護認定結果情報提供票（主治医）
      */
     public static JohoTeikyoShiryo createBusiness(YouKaiGoNinTeiKekTesuChiRelateEntity entity,
@@ -77,7 +79,10 @@ public final class JohoTeikyoShiryoChange {
                                 RDate.getNowDate(), SubGyomuCode.DBE認定支援)).get名称(),
                 entity.getHihokenshaNo(),
                 通知文.get(2),
-                宛先情報.getTemp_宛名郵便番号().value());
+                宛先情報.getTemp_宛名郵便番号().value(),
+                entity.getShinseishoKanriNo(),
+                entity.getHihokenshaNo(),
+                entity.getShoKisaiHokenshaNo());
         return headItem;
 
     }

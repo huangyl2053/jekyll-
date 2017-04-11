@@ -29,6 +29,8 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiT
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.TorisageKubunCode;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInput.KaigoNinteiShinseiKihonJohoInputDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseiTodokedesha.NinteiShinseiTodokedesha.NinteiShinseiTodokedeshaDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.chosaitakusakiandchosaininput.ChosaItakusakiAndChosainInput.ChosaItakusakiAndChosainInputDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIryokikanandshujiiinput.ShujiiIryokikanAndShujiiInput.ShujiiIryokikanAndShujiiInputDiv;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.AgeCalculator;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.DateOfBirthFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.dateofbirth.IDateOfBirth;
@@ -64,7 +66,7 @@ public class NinteiShinseiTorokuHandler {
     private static final RString みなし２号対象 = new RString("みなし２号");
     private static final RString KEY1 = new RString("key1");
     private static final RString 四マスタ管理方法_構成市町村 = new RString("1");
-
+    private static final RString 照会状態 = new RString("ShokaiMode");
     /**
      * コンストラクタです。
      *
@@ -82,19 +84,20 @@ public class NinteiShinseiTorokuHandler {
      * @param 管理番号 申請書管理番号
      * @param 被保険者番号 被保険者番号
      * @param 介護導入形態 介護導入形態
+     * @param 市町村コード 市町村コード
      */
     public void loadUpdate(NinteiShinseiTorokuResult result, ShinseishoKanriNo 管理番号,
-            RString 被保険者番号, RString 介護導入形態) {
+            RString 被保険者番号, RString 介護導入形態, LasdecCode 市町村コード) {
         div.getBtnIryohokenGuide().setDisabled(true);
         div.getBtnNyuinAndShisetsuNyusho().setDisabled(true);
         div.getCcdKaigoNinteiShinseiKihon().initialize();
         div.getCcdZenkaiNinteiKekkaJoho().onLoad(SubGyomuCode.DBE認定支援, 管理番号, new RString("1"));
         div.getCcdShinseiSonotaJohoInput().initialize();
 
+        if (市町村コード != null) {
+            div.getCcdShikakuInfo().initialize(市町村コード.value(), 被保険者番号);
+        }
         if (result != null) {
-            if (result.get市町村コード() != null) {
-                div.getCcdShikakuInfo().initialize(result.get市町村コード().value(), 被保険者番号);
-            }
             setCommonDiv(result, 管理番号);
         } else {
             div.getCcdShujiiIryokikanAndShujiiInput().initialize(LasdecCode.EMPTY,
@@ -514,6 +517,12 @@ public class NinteiShinseiTorokuHandler {
         if (result.get二号特定疾病コード() != null && !result.get二号特定疾病コード().isEmpty()) {
             div.getCcdKaigoNinteiShinseiKihon().setTokuteiShippei(TokuteiShippei.toValue(result.get二号特定疾病コード().value()));
         }
+        if (HihokenshaKubunCode.第２号被保険者.getコード().equals(result.get被保険者区分コード()) 
+                || HihokenshaKubunCode.生活保護.getコード().equals(result.get被保険者区分コード())) {
+            div.getCcdKaigoNinteiShinseiKihon().setRequiredForDdlTokuteiShippei(true);
+        } else {
+            div.getCcdKaigoNinteiShinseiKihon().setRequiredForDdlTokuteiShippei(false);
+        }
         div.getCcdKaigoNinteiShinseiKihon().setServiceSakujoTeikeibun(result.get申請サービス削除の理由());
         div.getCcdKaigoNinteiShinseiKihon().setNinteiShinseRiyuTeikeibun(result.get認定申請理由());
     }
@@ -596,6 +605,49 @@ public class NinteiShinseiTorokuHandler {
             ((ChoikiInputDiv) div.getCcdShinseiTodokedesha().getCcdChoikiInput()).setDisplayNone(ninteiTandokuDounyuFlag);
             div.getCcdShinseiTodokedesha().set状態(new RString(NinteiShinseiTodokedeshaDiv.DisplayType.管外.toString()));
         }
+    }
+    
+    /**
+     * 照会状態を設定します。
+     * 
+     */
+    public void setShokai() {
+        div.getRadMode().setDisabled(true);
+        div.getPnlShinseishaJoho().setReadOnly(true);
+        div.getPnlEnki().setReadOnly(true);
+        div.getPnlNinteiShinseiDetail().getCcdKaigoNinteiShinseiKihon().setDisabled(true);
+        div.getPnlNinteiShinseiDetail().getCcdShinseiTodokedesha().setDisabled(true);
+        div.getPnlNinteiShinseiDetail().getServiceDel().setReadOnly(true);
+        div.getPnlNinteiShinseiDetail().getSinseiTorisage().setDisabled(true);
+        div.getPnlNinteiShinseiDetail().getCcdZenkaiNinteiKekkaJoho().setReadOnly(true);
+        div.getPnlNinteiShinseiDetail().getCcdNinteiInput().setReadOnly(true);
+        div.getPnlNinteiShinseiDetail().getCcdShinseiSonotaJohoInput().setReadOnly(true);
+        div.getPnlNinteiShinseiDetail().getHomonSaki().setReadOnly(true);
+        div.getPnlNinteiShinseiDetail().getShisetsuJoho().setReadOnly(true);
+        div.getPnlNinteiShinseiDetail().getChkNinteiTsuchishoDoi().setReadOnly(true);
+        div.getPnlNinteiShinseiDetail().getChkJohoTeikyoDoi().setReadOnly(true);
+        div.getPnlNinteiShinseiDetail().getDdlShinsakaiYusenKubun().setDisabled(true);
+        div.getPnlNinteiShinseiDetail().getDdlWariateKubun().setDisabled(true);
+        div.getPnlNinteiShinseiDetail().getCcdShujiiIryokikanAndShujiiInput().getBtnIryokikanGuide().setDisabled(true);
+        div.getPnlNinteiShinseiDetail().getCcdShujiiIryokikanAndShujiiInput().getBtnShujiiGuide().setDisabled(true);
+        div.getPnlNinteiShinseiDetail().getCcdShujiiIryokikanAndShujiiInput().getTxtIryoKikanCode().setDisabled(true);
+        div.getPnlNinteiShinseiDetail().getCcdShujiiIryokikanAndShujiiInput().getTxtIryoKikanName().setDisabled(true);
+        div.getPnlNinteiShinseiDetail().getCcdShujiiIryokikanAndShujiiInput().getTxtShujiiCode().setDisabled(true);
+        div.getPnlNinteiShinseiDetail().getCcdShujiiIryokikanAndShujiiInput().getTxtShujiiName().setDisabled(true);
+        ((ShujiiIryokikanAndShujiiInputDiv) div.getPnlNinteiShinseiDetail().getCcdShujiiIryokikanAndShujiiInput()).getBtnZenkaiIrokikanJoho().setDisabled(true);
+        ((ShujiiIryokikanAndShujiiInputDiv) div.getPnlNinteiShinseiDetail().getCcdShujiiIryokikanAndShujiiInput()).getBtnClear().setDisabled(true);
+        ((ShujiiIryokikanAndShujiiInputDiv) div.getPnlNinteiShinseiDetail().getCcdShujiiIryokikanAndShujiiInput()).getBtnShujiiRenrakuJiko().setDisabled(false);
+        ((ShujiiIryokikanAndShujiiInputDiv) div.getPnlNinteiShinseiDetail().getCcdShujiiIryokikanAndShujiiInput()).getChkShiteii().setDisabled(true);
+        if (RString.isNullOrEmpty(div.getPnlNinteiShinseiDetail().getCcdShujiiIryokikanAndShujiiInput().getRenrakuJiko())) {
+            ((ShujiiIryokikanAndShujiiInputDiv) div.getPnlNinteiShinseiDetail().getCcdShujiiIryokikanAndShujiiInput()).getBtnShujiiRenrakuJiko().setDisabled(true);
+        }
+        div.getPnlNinteiShinseiDetail().getCcdChodsItakusakiAndChosainInput().initialize(照会状態);
+        ((ChosaItakusakiAndChosainInputDiv) div.getPnlNinteiShinseiDetail().getCcdChodsItakusakiAndChosainInput()).getBtnChosainRenrakuJiko().setDisabled(false);
+        if (RString.isNullOrEmpty(div.getPnlNinteiShinseiDetail().getCcdChodsItakusakiAndChosainInput().getChosainRenrakuJiko())) {
+            ((ChosaItakusakiAndChosainInputDiv) div.getPnlNinteiShinseiDetail().getCcdChodsItakusakiAndChosainInput()).getBtnChosainRenrakuJiko().setDisabled(true);
+        }
+        div.setHdnRenrakusakiReadOnly(new RString("1"));
+        div.setHdnJogaiMode(RString.EMPTY);
     }
 
     private RDate flexibleDateToRDate(FlexibleDate date) {

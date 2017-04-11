@@ -183,6 +183,16 @@ public class tabShinseishaJohoDiv extends TabContainer {
     }
 
     @JsonIgnore
+    public ButtonDialog getBtnTorisageTeikeibun() {
+        return this.getTplShinseijoho().getSinseiTorisage().getBtnTorisageTeikeibun();
+    }
+
+    @JsonIgnore
+    public void  setBtnTorisageTeikeibun(ButtonDialog btnTorisageTeikeibun) {
+        this.getTplShinseijoho().getSinseiTorisage().setBtnTorisageTeikeibun(btnTorisageTeikeibun);
+    }
+
+    @JsonIgnore
     public ShujiiAndShujiiIryoKikanDiv getShujiiAndShujiiIryoKikan() {
         return this.getTplShinseijoho().getShujiiAndShujiiIryoKikan();
     }
@@ -323,11 +333,6 @@ public class tabShinseishaJohoDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
-        return this.getTplShinseijoho().getCcdShinseiTodokedesha();
-    }
-
-    @JsonIgnore
     public IKaigoNinteiShinseiKihonJohoInputDiv getCcdKaigoNinteiShinseiKihon() {
         return this.getTplShinseijoho().getCcdKaigoNinteiShinseiKihon();
     }
@@ -338,13 +343,18 @@ public class tabShinseishaJohoDiv extends TabContainer {
     }
 
     @JsonIgnore
-    public INinteiInputDiv getCcdNinteiInput() {
-        return this.getTplShinseijoho().getCcdNinteiInput();
+    public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
+        return this.getTplShinseijoho().getCcdShinseiTodokedesha();
     }
 
     @JsonIgnore
     public IShinseiSonotaJohoInputDiv getCcdShinseiSonotaJohoInput() {
         return this.getTplShinseijoho().getCcdShinseiSonotaJohoInput();
+    }
+
+    @JsonIgnore
+    public INinteiInputDiv getCcdNinteiInput() {
+        return this.getTplShinseijoho().getCcdNinteiInput();
     }
 
     @JsonIgnore

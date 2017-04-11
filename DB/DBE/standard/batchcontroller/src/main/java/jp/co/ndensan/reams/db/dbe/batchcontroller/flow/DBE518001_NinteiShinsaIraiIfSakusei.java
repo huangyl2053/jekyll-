@@ -16,6 +16,8 @@ import jp.co.ndensan.reams.db.dbe.definition.batchprm.shinsataishodataoutput.Shi
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 
 /**
  * 認定審査会割当委員情報出力（モバイル）のバッチフロークラスです。
@@ -106,8 +108,10 @@ public class DBE518001_NinteiShinsaIraiIfSakusei extends BatchFlowBase<ShinsaTai
      */
     @Step(ファイル出力)
     protected IBatchFlowCommand callファイル出力() {
+        AccessLogUUID accessLogUUID = getResult(AccessLogUUID.class, new RString(概況調査データ出力),
+                GaikyoChosaDataOutputProcess.ACCESS_LOG_UUID);
         return simpleBatch(ShinsakaiFileOutputProcess.class)
-                .arguments(getParameter().toShinsaTaishoDataOutProcessParammeter()).define();
+                .arguments(getParameter().toShinsakaiFileOutputProcessParameter(accessLogUUID)).define();
     }
 
     /**

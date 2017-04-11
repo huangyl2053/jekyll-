@@ -27,8 +27,8 @@ public final class YokaigoNinteiParamter {
     private static final RString DATE_SOURCE_KEY1 = new RString("key1");
     private static final RString DATE_SOURCE_KEY2 = new RString("key2");
     private static final RString DATE_SOURCE_KEY3 = new RString("key3");
-    private final RString shichosonCode;
-    private final boolean shichosonCodeFlag;
+    private final RString shoKisaiHokenshaNo;
+    private final boolean shoKisaiHokenshaNoFlag;
     private final boolean radKensakuHohoKey0;
     private final boolean radKensakuHohoKey1;
     private final RString shiteiHizukeForm;
@@ -69,8 +69,8 @@ public final class YokaigoNinteiParamter {
     /**
      * コンストラクタです。
      *
-     * @param shichosonCode 市町村コード
-     * @param shichosonCodeFlag 市町村コードFlag
+     * @param shoKisaiHokenshaNo 証記載保険者番号
+     * @param shoKisaiHokenshaNoFlag 証記載保険者番号Flag
      * @param radKensakuHohoKey0 被保険者から検索
      * @param radKensakuHohoKey1 進捗状況から検索
      * @param shiteiHizukeForm 画面入力した日付From
@@ -107,8 +107,8 @@ public final class YokaigoNinteiParamter {
      * @param maximumDisplayNumber 最大表示件数
      */
     private YokaigoNinteiParamter(
-            RString shichosonCode,
-            boolean shichosonCodeFlag,
+            RString shoKisaiHokenshaNo,
+            boolean shoKisaiHokenshaNoFlag,
             boolean radKensakuHohoKey0,
             boolean radKensakuHohoKey1,
             RString shiteiHizukeForm,
@@ -145,8 +145,8 @@ public final class YokaigoNinteiParamter {
             RString torisageKubunCode,
             RString tuujou,
             RString ennki) {
-        this.shichosonCode = shichosonCode;
-        this.shichosonCodeFlag = shichosonCodeFlag;
+        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
+        this.shoKisaiHokenshaNoFlag = shoKisaiHokenshaNoFlag;
         this.radKensakuHohoKey0 = radKensakuHohoKey0;
         this.radKensakuHohoKey1 = radKensakuHohoKey1;
         this.shiteiHizukeForm = shiteiHizukeForm;
@@ -188,7 +188,7 @@ public final class YokaigoNinteiParamter {
     /**
      * 申請者一覧内容検索のパラメータを作成します。
      *
-     * @param shichosonCode 市町村コード
+     * @param shoKisaiHokenshaNo 証記載保険者番号
      * @param radKensakuHoho 検索方法
      * @param shiteiHizukeForm 指定日付From
      * @param shiteiHizukeTo 指定日付To
@@ -209,7 +209,7 @@ public final class YokaigoNinteiParamter {
      * @param maximumDisplayNumber 最大表示件数
      * @return YokaigoNinteiParamter
      */
-    public static YokaigoNinteiParamter createParamter(RString shichosonCode,
+    public static YokaigoNinteiParamter createParamter(RString shoKisaiHokenshaNo,
             RString radKensakuHoho,
             RString shiteiHizukeForm,
             RString shiteiHizukeTo,
@@ -234,8 +234,8 @@ public final class YokaigoNinteiParamter {
                 RStringUtil.removeSqlSpecialChars(shimei)
         ));
         return new YokaigoNinteiParamter(
-                shichosonCode,
-                !shichosonCode.isEmpty(),
+                shoKisaiHokenshaNo,
+                !shoKisaiHokenshaNo.isEmpty(),
                 DATE_SOURCE_KEY0.equals(radKensakuHoho),
                 DATE_SOURCE_KEY1.equals(radKensakuHoho),
                 shiteiHizukeForm,

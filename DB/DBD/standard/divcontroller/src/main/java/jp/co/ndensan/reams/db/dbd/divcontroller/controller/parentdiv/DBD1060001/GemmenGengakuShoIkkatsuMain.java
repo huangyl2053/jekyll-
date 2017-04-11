@@ -27,7 +27,7 @@ public class GemmenGengakuShoIkkatsuMain {
 
     private static final RString FUTANBATCH_ID = new RString("DBD103010_FutanGendoGakuNinteiIkkatsuHakko");
     private static final RString SHAKAIBATCH_ID = new RString("DBD103020_ShakaiFukushiHojinKeigenIkkatsuHakko");
-    private static final RString BATCH_ID = new RString("BatchID");
+    private static final RString BATCH_ID = new RString("ExecutionBatchId");
 
     /**
      * 画面の初期化。

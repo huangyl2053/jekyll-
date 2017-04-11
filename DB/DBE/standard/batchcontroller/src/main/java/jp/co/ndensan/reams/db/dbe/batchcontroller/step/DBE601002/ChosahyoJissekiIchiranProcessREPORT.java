@@ -60,7 +60,6 @@ public class ChosahyoJissekiIchiranProcessREPORT extends BatchProcessBase<Chosah
     @BatchWriter
     private BatchReportWriter<ChosahyoJissekiIchiranReportSource> batchWrite;
     private ReportSourceWriter<ChosahyoJissekiIchiranReportSource> reportSourceWriter;
-    private DbAccessLogger accessLog;
 
     @Override
     protected void beforeExecute() {
@@ -68,7 +67,6 @@ public class ChosahyoJissekiIchiranProcessREPORT extends BatchProcessBase<Chosah
         Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
         導入団体コード = 導入団体クラス.getLasdecCode_().value();
         市町村名 = 導入団体クラス.get市町村名();
-        accessLog = new DbAccessLogger();
     }
 
     @Override
@@ -95,15 +93,12 @@ public class ChosahyoJissekiIchiranProcessREPORT extends BatchProcessBase<Chosah
 
     @Override
     protected void process(ChosahyoJissekiIchiranRelateEntity relateEntity) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), relateEntity.get申請書管理番号());
-        accessLog.store(new ShoKisaiHokenshaNo(relateEntity.get証記載保険者番号()), relateEntity.get被保険者番号(), expandedInfo);
         ChosahyoJissekiIchiranReport report = new ChosahyoJissekiIchiranReport(ChosahyoJissekiIchiranChange.createSyohyoData(relateEntity));
         report.writeBy(reportSourceWriter);
     }
 
     @Override
     protected void afterExecute() {
-        accessLog.flushBy(AccessLogType.照会);
         帳票バッチ出力条件リストの出力();
     }
 

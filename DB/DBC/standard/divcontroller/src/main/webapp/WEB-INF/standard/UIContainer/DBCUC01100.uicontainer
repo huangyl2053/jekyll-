@@ -67,44 +67,6 @@
      "eventName": "完了",
      "destroy": false,
      "condition": ""
-    },
-    {
-     "id": "6",
-     "type": "ordinal",
-     "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC0110011",
-     "layoutTitle": "居宅サービス計画作成依頼届出情報登録",
-     "eventName": "資格者証発行",
-     "destroy": true,
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBU",
-     "toLayoutName": "DBU0420011",
-     "toLayoutTitle": "資格者証発行",
-     "toState": "資格者証"
-    },
-    {
-     "id": "7",
-     "type": "ordinal",
-     "layoutSubGyomuCode": "DBC",
-     "layoutName": "DBC0110011",
-     "layoutTitle": "居宅サービス計画作成依頼届出情報登録",
-     "eventName": "被保険者証発行",
-     "destroy": true,
-     "condition": "",
-     "toLayoutSubGyomuCode": "DBU",
-     "toLayoutName": "DBU0420011",
-     "toLayoutTitle": "資格者証発行",
-     "toState": "被保険者証"
-    },
-    {
-     "id": "8",
-     "type": "end",
-     "layoutSubGyomuCode": "DBU",
-     "layoutName": "DBU0420011",
-     "layoutTitle": "資格者証発行",
-     "eventName": "処理完了",
-     "destroy": false,
-     "condition": ""
     }
    ]
   }

@@ -26,7 +26,9 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -34,14 +36,12 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.report.api.ReportInfo;
@@ -70,32 +70,18 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
     NinteiChosaTokusokuTaishoshaIchiranhyoItem item;
     private boolean outputCsv;
     private ShujiiIkenTokusokujoHakkoReportProcessParameter processPrm;
+    private List<PersonalData> personalDataList;
     private static final RString CSVファイル名 = new RString("主治医意見書督促対象者一覧表.csv");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE233002"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
-    private static final RString CSVタイトル = new RString("主治医意見書督促対象者一覧");
-    private static final RString 市町村コード = new RString("市町村コード");
-    private static final RString 市町村名称 = new RString("市町村名称");
-    private static final RString 番号 = new RString("No");
-    private static final RString 保険者名 = new RString("保険者名");
-    private static final RString 被保険者番号 = new RString("被保険者番号");
-    private static final RString 被保険者氏名カナ = new RString("被保険者氏名カナ");
-    private static final RString 被保険者氏名 = new RString("被保険者氏名");
-    private static final RString 申請日 = new RString("申請日");
-    private static final RString 督促状発行日 = new RString("督促状発行日");
-    private static final RString 主治医コード = new RString("主治医コード");
-    private static final RString 氏名 = new RString("主治医氏名");
-    private static final RString 医療機関コード = new RString("主治医医療機関コード");
-    private static final RString 事業者名称 = new RString("主治医医療機関名称");
-    private static final RString 事業者住所 = new RString("主治医医療機関住所");
-    private static final RString 事業者電話番号 = new RString("主治医医療機関電話番号");
     private static final RString 改頁キー = new RString("cityCode");
     private static int index = 1;
 
     @Override
     protected void initialize() {
         itemList = new ArrayList();
+        personalDataList = new ArrayList<>();
         outputCsv = processPrm.getTemp_CSV出力().equals(new RString("1"));
         super.initialize();
     }
@@ -127,40 +113,9 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
     }
 
     @Override
-    protected void beforeExecute() {
-        if (outputCsv) {
-            csvWriter.writeLine(new ShujiiIkenTokusokujoCsvEntity(
-                    CSVタイトル, null, null, null, null,
-                    null, null, null, null,
-                    null, null, null, null, null, null));
-            RStringBuilder systemDateTime = new RStringBuilder();
-            RDateTime datetime = RDate.getNowDateTime();
-            systemDateTime.append(datetime.getDate().wareki().eraType(EraType.KANJI).
-                    firstYear(FirstYear.GAN_NEN).
-                    separator(Separator.JAPANESE).
-                    fillType(FillType.BLANK).toDateString());
-            systemDateTime.append(RString.HALF_SPACE);
-            systemDateTime.append(String.format("%02d", datetime.getHour()));
-            systemDateTime.append(new RString("時"));
-            systemDateTime.append(String.format("%02d", datetime.getMinute()));
-            systemDateTime.append(new RString("分"));
-            systemDateTime.append(String.format("%02d", datetime.getSecond()));
-            systemDateTime.append(new RString("秒"));
-            csvWriter.writeLine(new ShujiiIkenTokusokujoCsvEntity(
-                    systemDateTime.toRString(),
-                    null, null, null, null,
-                    null, null, null, null,
-                    null, null, null, null, null, null));
-            csvWriter.writeLine(new ShujiiIkenTokusokujoCsvEntity(
-                    番号, 市町村コード, 市町村名称, 保険者名, 被保険者番号, 被保険者氏名カナ, 被保険者氏名, 申請日, 督促状発行日,
-                    医療機関コード, 事業者名称, 事業者住所, 事業者電話番号, 主治医コード, 氏名));
-        }
-    }
-
-    @Override
     protected void process(ShujiiIkenTokusokujoHakkoRelateEntity entity) {
-        item = new NinteiChosaTokusokuTaishoshaIchiranhyoItem(entity.getTemp_市町村コード() == null ? RString.EMPTY : entity.getTemp_市町村コード()
-                .getColumnValue(),
+        item = new NinteiChosaTokusokuTaishoshaIchiranhyoItem(
+                entity.getTemp_市町村コード() == null ? RString.EMPTY : entity.getTemp_市町村コード().getColumnValue(),
                 entity.getTemp_市町村名称(),
                 entity.getTemp_市町村名称(),
                 entity.getTemp_被保険者番号(),
@@ -171,7 +126,9 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
                 entity.getTemp_主治医氏名() == null ? RString.EMPTY : entity.getTemp_主治医氏名(),
                 entity.getTemp_事業者名称(),
                 entity.getTemp_事業者住所(),
-                entity.getTemp_事業者電話番号() == null ? RString.EMPTY : entity.getTemp_事業者電話番号().getColumnValue());
+                entity.getTemp_事業者電話番号() == null ? RString.EMPTY : entity.getTemp_事業者電話番号().getColumnValue(),
+                entity.getTemp_保険者番号(),
+                new RString(entity.getTemp_申請書管理番号().toString()));
         itemList.add(item);
         NinteiChosaTokusokuTaishoshaIchiranhyoReport report = new NinteiChosaTokusokuTaishoshaIchiranhyoReport(item, index);
         report.writeBy(reportSourceWriter);
@@ -181,8 +138,15 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
                     entity.getTemp_医療機関コード() == null ? RString.EMPTY : entity.getTemp_医療機関コード(),
                     entity.getTemp_主治医コード() == null ? RString.EMPTY : entity.getTemp_主治医コード(),
                     index));
+            personalDataList.add(toPersonalData(entity.getTemp_保険者番号(), entity.getTemp_被保険者番号(), new RString(entity.getTemp_申請書管理番号().toString())));
         }
         index = index + 1;
+    }
+
+    private PersonalData toPersonalData(RString 証記載保険者番号, RString 被保険者番号, RString 申請書管理番号) {
+        ShikibetsuCode shikibetsuCode = new ShikibetsuCode(証記載保険者番号.substring(0, 5).concat(被保険者番号));
+        ExpandedInformation expandedInformation = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号);
+        return PersonalData.of(shikibetsuCode, expandedInformation);
     }
 
     private ShujiiIkenTokusokujoCsvEntity createCsvEntity(NinteiChosaTokusokuTaishoshaIchiranhyoItem item,
@@ -215,7 +179,8 @@ public class ShujiiIkenTokusokujoHakkoReportProcess extends BatchProcessBase<Shu
         OutputJokenhyoFactory.createInstance(帳票出力条件表パラメータ).print();
         if (outputCsv) {
             csvWriter.close();
-            manager.spool(eucFilePath);
+            AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+            manager.spool(eucFilePath, accessLogUUID);
         }
     }
 }

@@ -6,31 +6,36 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5240001;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.chosaocrtorikomi.ChosaOCRTorikomiBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ninteikekkajoho.NinteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.OcrTorikomiUtil;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaikekkajoho.ShinsakaiKaisaiKekkaJoho2;
+import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OcrDataType;
+import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OcrFiles;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5240001.ChosaOCRTorikomiMainDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5240001.TorikomiData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5240001.TorikomiEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5240001.dgChosahyoTorikomiKekka_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
-import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
-import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.dokuji.NijiHanteiKekkaInputHoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode99;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.uz.uza.batch.externalcharacter.reader.CsvListReader;
+import jp.co.ndensan.reams.uz.uza.batch.externalcharacter.reader.CsvListReaderParameter;
+import jp.co.ndensan.reams.uz.uza.batch.externalcharacter.reader.CsvListReaderParameterBuilder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
+import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
-import jp.co.ndensan.reams.uz.uza.io.Path;
-import jp.co.ndensan.reams.uz.uza.io.csv.CsvListReader;
-import jp.co.ndensan.reams.uz.uza.io.csv.CsvReader;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -50,7 +55,6 @@ public class ChosaOCRTorikomiHandler {
 
     private static final RString 空白 = RString.EMPTY;
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
-    private static final RString ファイル名 = new RString("OCRSHINSA.CSV");
     private final Code 識別コード_09A = new Code("09A");
     private final Code 識別コード_09B = new Code("09B");
     private final Code 識別コード_99A = new Code("99A");
@@ -125,10 +129,45 @@ public class ChosaOCRTorikomiHandler {
     /**
      * 審査結果OCRを取込ボタンを押します。
      *
+     * @param sfed 共有ファイルエントリ
      * @return CSVData
      */
-    public List<TorikomiData> onClick_Ikensho() {
-        return getCSVファイル();
+    public List<TorikomiData> perseShinsaKekkaCsv(SharedFileEntryDescriptor sfed) {
+        if (sfed == null) {
+            return Collections.emptyList();
+        }
+        return getCSVファイル(sfed);
+    }
+
+    private List<TorikomiData> getCSVファイル(SharedFileEntryDescriptor sfed) {
+        Map<OcrDataType, OcrFiles> filesByType = OcrTorikomiUtil.copyToLocalAndGroupingByType(
+                ReadOnlySharedFileEntryDescriptor.fromString(sfed.toString())
+        );
+        RString csvFilePath = filesByType.get(OcrDataType.二次判定結果記入シート).findCsvFilePath();
+        List<TorikomiData> list = new ArrayList<>();
+        if (csvFilePath.isEmpty()) {
+            return list;
+        }
+        try (CsvListReader reader = new CsvListReader(param(csvFilePath))) {
+            while (true) {
+                List<RString> aLine = reader.readLine();
+                if (aLine == null || aLine.isEmpty()) {
+                    break;
+                }
+                list.add(TorikomiData.of(aLine));
+            }
+        }
+        return list;
+    }
+
+    private static CsvListReaderParameter param(RString csvFilePath) {
+        return new CsvListReaderParameterBuilder(csvFilePath)
+                .enclosure(RString.EMPTY)
+                .colDelimiter(CSV_WRITER_DELIMITER)
+                .rowDelimiter(NewLine.CRLF)
+                .encode(Encode.UTF_8)
+                .hasHeader(false)
+                .build();
     }
 
     /**
@@ -192,10 +231,15 @@ public class ChosaOCRTorikomiHandler {
     }
 
     private int rStringToInt(RString data) {
-        if (data != null) {
-            return Integer.valueOf(data.toString());
+        //TODO 暫定対応のため、修正が必要。例外をキャッチしない。例外がスローされるのは、おそらく、引数に設定する元の編集がおかしい。
+        try {
+            if (data != null) {
+                return Integer.valueOf(data.toString());
+            }
+            return 0;
+        } catch (Exception e) {
+            return 0;
         }
-        return 0;
     }
 
     private FlexibleDate get認定有効期間開始日(TorikomiEntity data) {
@@ -458,33 +502,6 @@ public class ChosaOCRTorikomiHandler {
         return 判定結果;
     }
 
-    private List<TorikomiData> getCSVファイル() {
-        RString imagePath = Path.combinePath(Path.getRootPath(空白), DbBusinessConfig
-                .get(ConfigNameDBE.OCRアップロード用ファイル格納パス, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
-        RString csvReaderPath = Path.combinePath(imagePath, ファイル名);
-        CsvReader csvReader = new CsvReader.InstanceBuilder(csvReaderPath, TorikomiData.class)
-                .setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.UTF_8)
-                .hasHeader(false).setNewLine(NewLine.CRLF).build();
-        return readCsvFile(csvReader, csvReaderPath);
-    }
-
-    private List<TorikomiData> readCsvFile(CsvReader csvReader, RString csvReaderPath) {
-        CsvListReader read = new CsvListReader.InstanceBuilder(csvReaderPath).build();
-        List<TorikomiData> csvEntityList = new ArrayList<>();
-        while (true) {
-            TorikomiData entity = (TorikomiData) csvReader.readLine();
-            if (entity != null) {
-                entity.set項目数(read.readLine().size());
-                csvEntityList.add(entity);
-            } else {
-                break;
-            }
-        }
-        csvReader.close();
-        read.close();
-        return csvEntityList;
-    }
-
     /**
      * 要介護認定結果情報を設定します。
      *
@@ -499,7 +516,7 @@ public class ChosaOCRTorikomiHandler {
         if (row.getNinteiYukoKikan() != null) {
             認定有効期間 = Integer.valueOf(row.getNinteiYukoKikan().toString());
         }
-        return ninteiKekkaJoho.createBuilderForEdit().set二次判定年月日(new FlexibleDate(get審査会開催日(data.get審査会開催日())))
+        return ninteiKekkaJoho.createBuilderForEdit().set二次判定年月日(get審査会開催日(data.get審査会開催日()))
                 .set二次判定要介護状態区分コード(get二次判定要介護状態区分コード(data, row))
                 .set二次判定認定有効期間(認定有効期間)
                 .set二次判定認定有効開始年月日(new FlexibleDate(dateFormat34(row.getNinteiYukoKikanKaishiYMD())))
@@ -584,7 +601,7 @@ public class ChosaOCRTorikomiHandler {
      */
     public ShinsakaiWariateIinJoho editShinsakaiWariateIinJoho(ShinsakaiWariateIinJoho shinsakaiWariateIinJoho, dgChosahyoTorikomiKekka_Row row,
             TorikomiEntity data, RString 審査会開催番号) {
-        return shinsakaiWariateIinJoho.createBuilderForEdit().set介護認定審査会開催年月日(new FlexibleDate(get審査会開催日(data.get審査会開催日())))
+        return shinsakaiWariateIinJoho.createBuilderForEdit().set介護認定審査会開催年月日(get審査会開催日(data.get審査会開催日()))
                 .set委員遅刻有無(false)
                 .set委員出席時間(data.get開催開始時間())
                 .set委員早退有無(false)
@@ -609,7 +626,7 @@ public class ChosaOCRTorikomiHandler {
      */
     public ShinsakaiKaisaiKekkaJoho2 editShinsakaiKaisaiKekkaJoho(ShinsakaiKaisaiKekkaJoho2 kekkaJoho, dgChosahyoTorikomiKekka_Row row, TorikomiEntity data) {
         return kekkaJoho.createBuilderForEdit().set合議体番号(data.get合議体番号())
-                .set介護認定審査会開催年月日(new FlexibleDate(get審査会開催日(data.get審査会開催日())))
+                .set介護認定審査会開催年月日(get審査会開催日(data.get審査会開催日()))
                 .set介護認定審査会開始時刻(data.get開催開始時間())
                 .set介護認定審査会終了時刻(data.get開催終了時間())
                 .set介護認定審査会開催場所コード(data.get介護認定審査会開催予定場所コード())
@@ -618,15 +635,17 @@ public class ChosaOCRTorikomiHandler {
                 .build();
     }
 
-    private RString get審査会開催日(RString data) {
-        RStringBuilder builder1 = new RStringBuilder();
-        builder1.append(new RString("平成"));
-        builder1.append(data.substring(0, 2));
-        builder1.append(new RString("年"));
-        RStringBuilder builder2 = new RStringBuilder();
-        builder2.append(new RDate(builder1.toString()).seireki().toDateString().substring(0, INDEX_4));
-        builder2.append(data.substring(2));
-        return builder2.toRString();
+    private FlexibleDate get審査会開催日(RString data) {
+//        RStringBuilder builder1 = new RStringBuilder();
+//        builder1.append(new RString("平成"));
+//        builder1.append(data.substring(0, 2));
+//        builder1.append(new RString("年"));
+//        RStringBuilder builder2 = new RStringBuilder();
+//        builder2.append(new RDate(builder1.toString()).seireki().toDateString().substring(0, INDEX_4));
+//        builder2.append(data.substring(2));
+//        return builder2.toRString();
+//        return data;
+        return FlexibleDate.getNowDate();
     }
 
     private int get所要時間合計(TorikomiEntity data) {

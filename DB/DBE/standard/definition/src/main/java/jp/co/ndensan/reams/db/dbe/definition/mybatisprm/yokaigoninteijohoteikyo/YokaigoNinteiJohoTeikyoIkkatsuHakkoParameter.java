@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteijohoteikyo;
 
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -20,8 +19,8 @@ public class YokaigoNinteiJohoTeikyoIkkatsuHakkoParameter {
 
     private final RString 保険者番号;
     private final boolean use二次判定日;
-    private final RDate 二次判定日From;
-    private final RDate 二次判定日To;
+    private final RString 二次判定日From;
+    private final RString 二次判定日To;
     private final boolean use被保険者番号;
     private final RString 被保険者番号;
     private final boolean include被保険者未同意;
@@ -42,7 +41,7 @@ public class YokaigoNinteiJohoTeikyoIkkatsuHakkoParameter {
      * @param 最大表示件数 最大表示件数
      */
     public YokaigoNinteiJohoTeikyoIkkatsuHakkoParameter(RString 保険者番号,
-            boolean use二次判定日, RDate 二次判定日From, RDate 二次判定日To, boolean use被保険者番号,
+            boolean use二次判定日, RString 二次判定日From, RString 二次判定日To, boolean use被保険者番号,
             RString 被保険者番号, boolean include被保険者未同意, int 最大表示件数) {
         this.保険者番号 = 保険者番号;
         this.use二次判定日 = use二次判定日;

@@ -72,6 +72,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikan;
 import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikanShiten;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
 
 /**
  * 主治医医療機関情報処理のクラスです。
@@ -286,9 +287,7 @@ public class ShujiiIryoKikanMaster {
      */
     public ResponseData<ShujiiIryoKikanMasterDiv> onBlur_kinyuKikanCode(ShujiiIryoKikanMasterDiv div) {
         getHandler(div).setKozaJoho();
-        if (div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関() != null) {
-            div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu().setSelectedKey(SELECTKEY_空白);
-        }
+        div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu().setSelectedKey(SELECTKEY_空白);
         div.getShujiiJohoInput().getKozaJoho().getTxtTenBan().clearValue();
         div.getShujiiJohoInput().getKozaJoho().getTxtTenMei().clearValue();
         div.getShujiiJohoInput().getKozaJoho().getTxtGinkoKozaNo().clearValue();
@@ -326,9 +325,7 @@ public class ShujiiIryoKikanMaster {
      */
     public ResponseData<ShujiiIryoKikanMasterDiv> onOkClose_KinyuKikan(ShujiiIryoKikanMasterDiv div) {
         getHandler(div).setKozaJoho();
-        if (div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関() != null) {
-            div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu().setSelectedKey(SELECTKEY_空白);
-        }
+        div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu().setSelectedKey(SELECTKEY_空白);
         div.getShujiiJohoInput().getKozaJoho().getTxtTenBan().clearValue();
         div.getShujiiJohoInput().getKozaJoho().getTxtTenMei().clearValue();
         div.getShujiiJohoInput().getKozaJoho().getTxtGinkoKozaNo().clearValue();
@@ -345,6 +342,7 @@ public class ShujiiIryoKikanMaster {
      */
     public ResponseData<ShujiiIryoKikanMasterDiv> onSelectByModifyButton_dgShujiiIchiran(
             ShujiiIryoKikanMasterDiv div) {
+        getHandler(div).clearShujiiIryoKikanJohoToMeisai();
         div.getShujiiJohoInput().setState(状態_修正);
         getHandler(div).setDisabledFalse();
         dgShujiiIchiran_Row row = div.getShujiiIchiran().getDgShujiiIchiran().getActiveRow();
@@ -367,6 +365,7 @@ public class ShujiiIryoKikanMaster {
      */
     public ResponseData<ShujiiIryoKikanMasterDiv> onSelectByDeleteButton_dgShujiiIchiran(
             ShujiiIryoKikanMasterDiv div) {
+        getHandler(div).clearShujiiIryoKikanJohoToMeisai();
         div.getShujiiJohoInput().setState(状態_削除);
         dgShujiiIchiran_Row row = div.getShujiiIchiran().getDgShujiiIchiran().getActiveRow();
         getHandler(div).setShujiiJohoToMeisai(row);
@@ -384,6 +383,7 @@ public class ShujiiIryoKikanMaster {
      */
     public ResponseData<ShujiiIryoKikanMasterDiv> onSelectByDlbClick_dgShujiiIchiran(ShujiiIryoKikanMasterDiv div) {
         dgShujiiIchiran_Row row = div.getShujiiIchiran().getDgShujiiIchiran().getActiveRow();
+        getHandler(div).clearShujiiIryoKikanJohoToMeisai();
         getHandler(div).setShujiiJohoToMeisai(row);
         if (状態_修正.equals(row.getJotai())) {
             div.getShujiiJohoInput().getTxtShujiiIryoKikanCode().setDisabled(true);
@@ -634,10 +634,11 @@ public class ShujiiIryoKikanMaster {
         DropDownList 預金種別 = div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu();
         TextBoxCode 口座番号 = div.getShujiiJohoInput().getKozaJoho().getTxtGinkoKozaNo();
         TextBoxKana 口座名義人 = div.getShujiiJohoInput().getKozaJoho().getTxtKozaMeiginin();
+        boolean 金融機関コードexist = !RString.EMPTY.equals(div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().getColumnValue());
         boolean 預金種別exist = !RString.EMPTY.equals(預金種別.getSelectedValue());
         boolean 口座番号exist = !RString.EMPTY.equals(口座番号.getValue());
         boolean 口座名義人exist = !RString.EMPTY.equals(口座名義人.getValue());
-        if (預金種別exist || 口座番号exist || 口座名義人exist || 金融機関exist) {
+        if (預金種別exist || 口座番号exist || 口座名義人exist || 金融機関exist || 金融機関コードexist) {
             ValidationMessageControlPairs validPairs = div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().validResult金融機関();
 
             if (!預金種別exist) {
@@ -649,9 +650,28 @@ public class ShujiiIryoKikanMaster {
             if (!口座名義人exist) {
                 validPairs.add(new ValidationMessageControlPair(validationErrorMessage.口座名義人, 口座名義人));
             }
-
             if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
+        }
+        if (div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput() != null) {
+            if (div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().isゆうちょ銀行()) {
+                TextBoxCode 店番 = div.getShujiiJohoInput().getKozaJoho().getTxtTenBan();
+                TextBox 店名 = div.getShujiiJohoInput().getKozaJoho().getTxtTenMei();
+                boolean 店番exist = !RString.EMPTY.equals(店番.getValue());
+                boolean 店名exist = !RString.EMPTY.equals(店名.getValue());
+                if (預金種別exist || 口座番号exist || 口座名義人exist || 金融機関exist || 店番exist || 店名exist) {
+                    ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+                    if (!店番exist) {
+                        validPairs.add(new ValidationMessageControlPair(validationErrorMessage.店番, 店番));
+                    }
+                    if (!店名exist) {
+                        validPairs.add(new ValidationMessageControlPair(validationErrorMessage.店名, 店番));
+                    }
+                    if (validPairs.iterator().hasNext()) {
+                        return ResponseData.of(div).addValidationMessages(validPairs).respond();
+                    }
+                }
             }
         }
 
@@ -714,11 +734,14 @@ public class ShujiiIryoKikanMaster {
                 .setState(DBE9010001StateName.医療機関一覧);
     }
 
-    private enum validationErrorMessage implements IValidationMessage {
+    private static enum validationErrorMessage implements IValidationMessage {
 
         預金種別(UrErrorMessages.必須項目),
         口座番号(UrErrorMessages.必須項目),
-        口座名義人(UrErrorMessages.必須項目);
+        口座名義人(UrErrorMessages.必須項目),
+        店番(UrErrorMessages.必須項目),
+        店名(UrErrorMessages.不正, "店番");
+
         private final Message message;
 
         private validationErrorMessage(IMessageGettable message, String... replacements) {
@@ -756,13 +779,14 @@ public class ShujiiIryoKikanMaster {
             if (new RString(UrQuestionMessages.検索画面遷移の確認.getMessage().getCode()).equals(ResponseHolder.
                     getMessageCode())
                     && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-                onLoad(div);
                 div.getShujiiSearch().setDisabled(false);
                 ViewStateHolder.put(ViewStateKeys.モード, 検索モード);
                 return ResponseData.of(div).setState(DBE9010001StateName.検索);
             }
         } else {
-            onLoad(div);
+            if (!DBE9010001StateName.医療機関一覧.toString().equals(ResponseHolder.getState().toString())) {
+                onLoad(div);
+            }
             div.getShujiiSearch().setDisabled(false);
             ViewStateHolder.put(ViewStateKeys.モード, 検索モード);
             return ResponseData.of(div).setState(DBE9010001StateName.検索);

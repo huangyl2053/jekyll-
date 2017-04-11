@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbb.business.core.choshuhoho.ChoshuHohoResult;
 import jp.co.ndensan.reams.db.dbb.definition.core.choshuhoho.ChoshuHoho;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0540001.MainPanelDiv;
 import jp.co.ndensan.reams.db.dbb.divcontroller.entity.parentdiv.DBB0540001.choshuHouhou_Row;
-import jp.co.ndensan.reams.db.dbb.service.core.basic.ChoshuHohoManager;
+import jp.co.ndensan.reams.db.dbx.service.core.basic.ChoshuHohoManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.choteijiyu.ChoteiJiyuCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.searchkey.KaigoFukaKihonSearchKey;

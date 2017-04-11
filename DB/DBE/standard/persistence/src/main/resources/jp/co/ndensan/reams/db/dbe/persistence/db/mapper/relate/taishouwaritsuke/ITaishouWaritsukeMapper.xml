@@ -61,8 +61,8 @@
         DbT5101."zenkaiYukoKikanStart" AS 前回認定有効期間_開始,
         DbT5101."zenkaiYukoKikanEnd" AS 前回認定有効期間_終了,
         DbT5116."ichijiHanteiYMD" AS 要介護認定一次判定年月日,
-        DbT5116."ichijiHanteiKekkaCode" AS 要介護認定一次判定結果コード,
-        DbT5116_Zenkai."ichijiHanteiKekkaCode" AS 要介護認定前回一次判定結果コード,
+        DbT5116."ichijiHanteiKekkaNinchishoKasanCode" AS 要介護認定一次判定結果コード,
+        DbT5116_Zenkai."ichijiHanteiKekkaNinchishoKasanCode" AS 要介護認定前回一次判定結果コード,
         DbT5102_Zenkai."nijiHanteiYokaigoJotaiKubunCode" AS 二次判定要介護状態区分コード,
         DbT5105."maskingKanryoYMD" AS マスキング完了年月日,
         DbT5105."ninteiShinsakaiWariateKanryoYMD" AS 認定審査会割付完了年月日,
@@ -166,7 +166,7 @@
         INNER JOIN rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121
         ON DbT5101."shinseishoKanriNo"=DbT5121."shinseishoKanriNo"
         LEFT OUTER JOIN rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_Zenkai
-        ON DbT5121."shinseishoKanriNo"=DbT5101_Zenkai."shinseishoKanriNo"
+        ON DbT5121."zenkaiShinseishoKanriNo"=DbT5101_Zenkai."shinseishoKanriNo"
         LEFT OUTER JOIN rgdb."DbT5102NinteiKekkaJoho" AS DbT5102_Zenkai
         ON DbT5101_Zenkai."shinseishoKanriNo"=DbT5102_Zenkai."shinseishoKanriNo"
         LEFT OUTER JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS DbT5116_Zenkai
@@ -229,8 +229,8 @@
         DbT5101."zenkaiYukoKikanStart" AS 前回認定有効期間_開始,
         DbT5101."zenkaiYukoKikanEnd" AS 前回認定有効期間_終了,
         DbT5116."ichijiHanteiYMD" AS 要介護認定一次判定年月日,
-        DbT5116."ichijiHanteiKekkaCode" AS 要介護認定一次判定結果コード,
-        DbT5116_Zenkai."ichijiHanteiKekkaCode" AS 要介護認定前回一次判定結果コード,
+        DbT5116."ichijiHanteiKekkaNinchishoKasanCode" AS 要介護認定一次判定結果コード,
+        DbT5116_Zenkai."ichijiHanteiKekkaNinchishoKasanCode" AS 要介護認定前回一次判定結果コード,
         DbT5102_Zenkai."nijiHanteiYokaigoJotaiKubunCode" AS 二次判定要介護状態区分コード,
         DbT5105."maskingKanryoYMD" AS マスキング完了年月日,
         DbT7051."shichosonMeisho" AS 市町村名称,
@@ -302,7 +302,7 @@
         INNER JOIN rgdb."DbT5121ShinseiRirekiJoho" AS DbT5121
         ON DbT5101."shinseishoKanriNo"=DbT5121."shinseishoKanriNo"
         LEFT OUTER JOIN rgdb."DbT5101NinteiShinseiJoho" AS DbT5101_Zenkai
-        ON DbT5121."shinseishoKanriNo"=DbT5101_Zenkai."shinseishoKanriNo"
+        ON DbT5121."zenkaiShinseishoKanriNo"=DbT5101_Zenkai."shinseishoKanriNo"
         LEFT OUTER JOIN rgdb."DbT5102NinteiKekkaJoho" AS DbT5102_Zenkai
         ON DbT5101_Zenkai."shinseishoKanriNo"=DbT5102_Zenkai."shinseishoKanriNo"
         LEFT OUTER JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" AS DbT5116_Zenkai
@@ -354,6 +354,7 @@
             rgdb."DbT5504ShinsakaiWariateJohoKenshu" AS DbT5504 
             WHERE 
             DbT5504."shinsakaiKaisaiNo" = #{kaisaiNo}
+            AND DbT5101."shinseishoKanriNo" = DbT5504."shinseishoKanriNo"
             )
         </if>
         <if test="isItijiHannteiAto">

@@ -30,6 +30,7 @@ public class ImageinputRelateEntity {
     private boolean 施設入所の有無;
     private RString 申請書管理番号;
     private boolean 論理削除フラグ;
+    private RString 取下区分コード;
     private RDateTime イメージ共有ファイルID;
     private RString 主治医コード;
     private RString 主治医氏名;
@@ -40,6 +41,7 @@ public class ImageinputRelateEntity {
     private RString 主治医意見書依頼区分;
     private int 主治医意見書作成依頼履歴番号;
     private FlexibleDate 意見書作成依頼完了日;
+    private RString 作成料請求区分;
     private FlexibleDate 認定審査会完了日;
     private Boolean 仮一次判定区分;
     private List<DbT5302ShujiiIkenshoJohoEntity> 主治医意見書情報;

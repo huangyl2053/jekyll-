@@ -60,7 +60,6 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
@@ -118,6 +117,7 @@ public class ShujiiIkenshoTorokuTotal {
     private static final RString イメージファイルが存在区分_マスキング有 = new RString("2");
     private static final RString 厚労省IF識別番号_09B = new RString("09B");
     private final ShujiiIryokikanAndShujiiGuideFinder finder;
+    private static final RString 保存するボタン = new RString("btnIkenshoSave");
 
     /**
      * コンストラクタです。
@@ -228,10 +228,16 @@ public class ShujiiIkenshoTorokuTotal {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(COMMON_BUTTON_UPDATE, true);
             return ResponseData.of(div).setState(DBE2310001StateName.初期表示);
         }
-        RStringBuilder 前排他制御開催番号 = new RStringBuilder();
-        前排他制御開催番号.append("DBEShinseishoKanriNo");
-        前排他制御開催番号.append(管理番号);
-        前排他ロックキー(前排他制御開催番号.toRString());
+        if (!new RString(UrErrorMessages.排他_他のユーザが使用中.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+            RStringBuilder 前排他制御開催番号 = new RStringBuilder();
+            前排他制御開催番号.append("DBEShinseishoKanriNo");
+            前排他制御開催番号.append(管理番号);
+            if (!RealInitialLocker.tryGetLock(new LockingKey(前排他制御開催番号.toRString()))) {
+                div.setReadOnly(true);
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(保存するボタン, true);
+                return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
+            }
+        }
         div.getRadJotaiKubun().setSelectedKey(登録_修正);
 
         return ResponseData.of(div).respond();
@@ -828,6 +834,7 @@ public class ShujiiIkenshoTorokuTotal {
             getHandler(div).要介護認定完了情報更新(ninteiKanryoJoho);
         }
         ninteiManager.save(ninteiShinseiJoho);
+        アクセスログ(div, 管理番号);
     }
 
     private void setShujiiIkenshoJohoCommon(ShujiiIkenshoJohoBuilder shujiiIkenshoBuilder, ShujiiIkenshoTorokuTotalDiv div) {
@@ -924,16 +931,18 @@ public class ShujiiIkenshoTorokuTotal {
         return new ShujiiIkenshoTorokuHandler(div);
     }
 
-    private void 前排他ロックキー(RString 排他ロックキー) {
-        LockingKey 前排他ロックキー = new LockingKey(排他ロックキー);
-        if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
-            throw new PessimisticLockingException();
-        }
-    }
-
     private void 前排他キーの解除(RString 排他) {
         LockingKey 排他キー = new LockingKey(排他);
         RealInitialLocker.release(排他キー);
+    }
+
+    private void アクセスログ(ShujiiIkenshoTorokuTotalDiv div, ShinseishoKanriNo 管理番号) {
+        RString 被保険者番号 = div.getCcdNinteiShinseishaKihonInfo().get被保険者番号();
+        RString 証記載保険者番号 = div.getCcdNinteiShinseishaKihonInfo().get証記載保険者番号();
+        DbAccessLogger accessLog = new DbAccessLogger();
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 管理番号.value());
+        accessLog.store(new ShoKisaiHokenshaNo(証記載保険者番号), 被保険者番号, expandedInfo);
+        accessLog.flushBy(AccessLogType.更新);
     }
 
 }

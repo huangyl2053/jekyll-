@@ -89,6 +89,8 @@ public class NinteiShinseiTorokuDiv extends Panel {
     private RString hdnShishoCode;
     @JsonProperty("hdnTeikeibun")
     private RString hdnTeikeibun;
+    @JsonProperty("hdnTorisageTeikeibun")
+    private RString hdnTorisageTeikeibun;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -583,6 +585,24 @@ public class NinteiShinseiTorokuDiv extends Panel {
     }
 
     /*
+     * gethdnTorisageTeikeibun
+     * @return hdnTorisageTeikeibun
+     */
+    @JsonProperty("hdnTorisageTeikeibun")
+    public RString getHdnTorisageTeikeibun() {
+        return hdnTorisageTeikeibun;
+    }
+
+    /*
+     * sethdnTorisageTeikeibun
+     * @param hdnTorisageTeikeibun hdnTorisageTeikeibun
+     */
+    @JsonProperty("hdnTorisageTeikeibun")
+    public void setHdnTorisageTeikeibun(RString hdnTorisageTeikeibun) {
+        this.hdnTorisageTeikeibun = hdnTorisageTeikeibun;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -771,6 +791,16 @@ public class NinteiShinseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
+    public ButtonDialog getBtnTorisageTeikeibun() {
+        return this.getPnlNinteiShinseiDetail().getTabShinseishaJoho().getTplShinseijoho().getSinseiTorisage().getBtnTorisageTeikeibun();
+    }
+
+    @JsonIgnore
+    public void  setBtnTorisageTeikeibun(ButtonDialog btnTorisageTeikeibun) {
+        this.getPnlNinteiShinseiDetail().getTabShinseishaJoho().getTplShinseijoho().getSinseiTorisage().setBtnTorisageTeikeibun(btnTorisageTeikeibun);
+    }
+
+    @JsonIgnore
     public ShujiiAndShujiiIryoKikanDiv getShujiiAndShujiiIryoKikan() {
         return this.getPnlNinteiShinseiDetail().getTabShinseishaJoho().getTplShinseijoho().getShujiiAndShujiiIryoKikan();
     }
@@ -911,11 +941,6 @@ public class NinteiShinseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
-        return this.getPnlNinteiShinseiDetail().getTabShinseishaJoho().getTplShinseijoho().getCcdShinseiTodokedesha();
-    }
-
-    @JsonIgnore
     public IKaigoNinteiShinseiKihonJohoInputDiv getCcdKaigoNinteiShinseiKihon() {
         return this.getPnlNinteiShinseiDetail().getTabShinseishaJoho().getTplShinseijoho().getCcdKaigoNinteiShinseiKihon();
     }
@@ -926,13 +951,18 @@ public class NinteiShinseiTorokuDiv extends Panel {
     }
 
     @JsonIgnore
-    public INinteiInputDiv getCcdNinteiInput() {
-        return this.getPnlNinteiShinseiDetail().getTabShinseishaJoho().getTplShinseijoho().getCcdNinteiInput();
+    public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
+        return this.getPnlNinteiShinseiDetail().getTabShinseishaJoho().getTplShinseijoho().getCcdShinseiTodokedesha();
     }
 
     @JsonIgnore
     public IShinseiSonotaJohoInputDiv getCcdShinseiSonotaJohoInput() {
         return this.getPnlNinteiShinseiDetail().getTabShinseishaJoho().getTplShinseijoho().getCcdShinseiSonotaJohoInput();
+    }
+
+    @JsonIgnore
+    public INinteiInputDiv getCcdNinteiInput() {
+        return this.getPnlNinteiShinseiDetail().getTabShinseishaJoho().getTplShinseijoho().getCcdNinteiInput();
     }
 
     @JsonIgnore

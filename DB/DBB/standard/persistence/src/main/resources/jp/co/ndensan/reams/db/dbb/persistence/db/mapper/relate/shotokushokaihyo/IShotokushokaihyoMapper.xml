@@ -75,10 +75,14 @@
         min("ShikibetsuTaisho"."torokuIdoYMD") AS min登録異動年月日,
         min("ShikibetsuTaisho"."torokuTodokedeYMD") AS min登録届出年月日,
         "ShikibetsuTaisho"."currentFlag" AS 最新フラグ
-        FROM   
+        FROM  
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
+        AS "ShikibetsuTaisho"
+        <!-- 
         rgua."UaFt200FindShikibetsuTaisho"('3','','0','DB','0','','','','','','','','','','','0','0','','','','','',''
         ,'0','0','','','','','','','','','','0','','1','1','1','1','1','1','1','1','1','1','1','','','','','','','','0'
         ,'0','','','0','0','0','','','','','','','','','','','','','','','','','','', '{  }' ) AS "ShikibetsuTaisho"
+        -->
         WHERE "ShikibetsuTaisho"."torokuJiyuCode"='10'
         AND #{処理年度_0102}<![CDATA[<=]]>"ShikibetsuTaisho"."torokuIdoYMD"
         <if test="出力対象 == 1 || 出力対象 == 3">
@@ -153,10 +157,15 @@
         "FindShikibetsuTaisho"."torokuJiyuCode" AS 登録事由コード,
         min("FindShikibetsuTaisho"."torokuIdoYMD") AS min登録異動年月日,
         min("FindShikibetsuTaisho"."torokuTodokedeYMD") AS min登録届出年月日,
-        "FindShikibetsuTaisho"."currentFlag" AS 最新フラグ
-        FROM rgua."UaFt200FindShikibetsuTaisho"('2',#{処理年度_0101},'1','DB','0','','','','','','','','','','','0','0','',''
+        "FindShikibetsuTaisho"."currentFlag" AS 最新フラグ     
+        FROM
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
+        AS "FindShikibetsuTaisho"
+        <!--
+        rgua."UaFt200FindShikibetsuTaisho"('2',#{処理年度_0101},'1','DB','0','','','','','','','','','','','0','0','',''
         ,'','','','','0','0','','','','','','','','','','0','','1','1','1','1','1','1','1','1','1','1','1','','','',''
         ,'','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','','{  }') AS "FindShikibetsuTaisho"
+        -->
         INNER JOIN
         rgdb."DbV1001HihokenshaDaicho" AS "DbV1001HihokenshaDaicho"
         ON "DbV1001HihokenshaDaicho"."jushochiTokureiFlag"='1'
@@ -204,9 +213,14 @@
         WHERE "shikibetsuCode" IN(
         SELECT
         A."shikibetsuCode"
-        FROM rgua."UaFt200FindShikibetsuTaisho"('2',#{処理年度_0101},'1','DB','0','','','','','','','','','','','0','0','',''
+        FROM 
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
+        AS A
+        <!--
+        rgua."UaFt200FindShikibetsuTaisho"('2',#{処理年度_0101},'1','DB','0','','','','','','','','','','','0','0','',''
         ,'','','','','0','0','','','','','','','','','','0','','1','1','1','1','1','1','1','1','1','1','1','','','',''
         ,'','','','0','0','','','0','0','0','','','','','','','','','','','','','','','','','','','{  }') AS A
+        -->
         WHERE
         A."juminJotaiCode"='1'
         GROUP BY A."shikibetsuCode"
@@ -305,9 +319,13 @@
         '' AS "koikinaiTokureiSochimotoShichosonCode",					
         #{システム日付} AS "fukaKijunYMD"
         FROM
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
+        AS "ShikibetsuTaisho"
+        <!--
         rgua."UaFt200FindShikibetsuTaisho"('1','','1','DB','0','', '','','','','','','','','','0','0','','','','','','','0','0',''
         ,'','','','','','','','','0','','1','1','1','1','1','1','1','1','1','1','1','','','','','','','','0','0','','','0','0','0',''
         ,'','','','','','','','','','','','','','','','','', '{  }' ) AS "ShikibetsuTaisho"
+        -->
         WHERE
         "ShikibetsuTaisho"."juminJotaiCode"='1'
         AND "ShikibetsuTaisho"."currentFlag" = TRUE
@@ -567,6 +585,16 @@
         master."seibetsuCode"
         FROM master
         INNER JOIN 
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
+            (
+                 SELECT
+                        ARRAY_AGG(CAST (master."shikibetsuCode" AS TEXT))
+                 FROM
+                        master
+            )
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
+        AS C
+        <!--
         rgua."UaFt200FindShikibetsuTaisho"('1','','1','DB','0','', '','','','','','','','','','0','0','','','','','','','0','0',''
         ,'','','','','','','','','0','','1','1','1','1','1','1','1','1','1','1','1','','','','','','','','0','0','','','0','0','0',''
         ,'','','','','','','','','','','','','','','','','', (
@@ -575,8 +603,19 @@
                     FROM
                         master
                    )) AS C
+        -->
         ON master."shikibetsuCode"=C."shikibetsuCode"
         INNER JOIN 
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
+            (
+                SELECT
+                        ARRAY_AGG(CAST (master."shikibetsuCode" AS TEXT))
+                FROM
+                        master
+            )      
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
+        AS D
+        <!--
         rgua."UaFt200FindShikibetsuTaisho"('1','','0','DB','0','', '','','','','','','','','','0','0','','','','','','','0','0',''
         ,'','','','','','','','','0','','1','1','1','1','1','1','1','1','1','1','1','','','','','','','','0','0','','','0','0','0',''
         ,'','','','','','','','','','','','','','','','','', (
@@ -585,6 +624,7 @@
                     FROM
                         master
                    )) AS D
+        -->
         ON master."shikibetsuCode"=D."shikibetsuCode"
         WHERE
         NOT (EXISTS
@@ -884,6 +924,16 @@
         END AS "shichosonCode"
         FROM master
         INNER JOIN 
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
+            (
+                    SELECT
+                        ARRAY_AGG(CAST (master."shikibetsuCode" AS TEXT))
+                    FROM
+                        master
+            )     
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
+        AS C
+        <!--
         rgua."UaFt200FindShikibetsuTaisho"('1','','1','DB','0','', '','','','','','','','','','0','0','','','','','','','0','0',''
         ,'','','','','','','','','0','','1','1','1','1','1','1','1','1','1','1','1','','','','','','','','0','0','','','0','0','0',''
         ,'','','','','','','','','','','','','','','','','', (
@@ -892,6 +942,7 @@
                     FROM
                         master
                    )) AS C
+        -->
         ON master."shikibetsuCode"=C."shikibetsuCode"
         ORDER BY master."shokaisakiLasdecCode",
                  master."setaiCode",

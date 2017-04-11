@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.johoteikyoshiryo;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -46,6 +47,9 @@ public class JohoTeikyoShiryo {
     private final RString sonota;
     private final RString tsuchibun2;
     private final RString yubinNo;
+    private final RString shinseishoKanriNo;
+    private final RString hihokenshaNo;
+    private final ShoKisaiHokenshaNo shoKisaiHokenshaNo;
 
     /**
      * インスタンスを生成します。
@@ -78,6 +82,9 @@ public class JohoTeikyoShiryo {
      * @param sonota 宛名その他
      * @param tsuchibun2 通知文２
      * @param yubinNo 宛名郵便番号
+     * @param shinseishoKanriNo RString
+     * @param hihokenshaNo RString
+     * @param shoKisaiHokenshaNo ShoKisaiHokenshaNo
      */
     public JohoTeikyoShiryo(RDate hakkoYMD,
             RString title,
@@ -106,7 +113,10 @@ public class JohoTeikyoShiryo {
             RString meishoFuyo,
             RString sonota,
             RString tsuchibun2,
-            RString yubinNo) {
+            RString yubinNo,
+            RString shinseishoKanriNo,
+            RString hihokenshaNo,
+            ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
         this.hakkoYMD = hakkoYMD;
         this.title = title;
         this.tsuchibun1 = tsuchibun1;
@@ -135,5 +145,8 @@ public class JohoTeikyoShiryo {
         this.sonota = sonota;
         this.tsuchibun2 = tsuchibun2;
         this.yubinNo = yubinNo;
+        this.shinseishoKanriNo = shinseishoKanriNo;
+        this.hihokenshaNo = hihokenshaNo;
+        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
     }
 }

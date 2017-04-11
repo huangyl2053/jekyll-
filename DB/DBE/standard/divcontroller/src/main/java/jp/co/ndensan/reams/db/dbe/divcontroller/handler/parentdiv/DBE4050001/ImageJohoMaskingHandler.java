@@ -51,7 +51,6 @@ import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedAppendOption;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -185,7 +184,6 @@ public class ImageJohoMaskingHandler {
      */
     public void setDataGrid(List<ImageJohoMaskingResult> resultList) {
         List<dgImageMaskShoriTaishosha_Row> rowList = new ArrayList<>();
-        DbAccessLogger accessLog = new DbAccessLogger();
         for (ImageJohoMaskingResult result : resultList) {
             dgImageMaskShoriTaishosha_Row row = new dgImageMaskShoriTaishosha_Row();
             row.set保険者(result.get証記載保険者番号());
@@ -233,12 +231,8 @@ public class ImageJohoMaskingHandler {
             } else {
                 row.setマスキング完了済(RString.EMPTY);
             }
-            ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(result.get証記載保険者番号());
-            ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), result.get申請書管理番号().value());
-            accessLog.store(shoKisaiHokenshaNo, result.get被保険者番号(), expandedInfo);
             rowList.add(row);
         }
-        accessLog.flushBy(AccessLogType.照会);
         div.getDgImageMaskShoriTaishosha().setDataSource(rowList);
     }
 
@@ -258,9 +252,18 @@ public class ImageJohoMaskingHandler {
     }
 
     /**
+     * 検索条件入力値をクリアする
+     */
+    public void clearAndDisableSearchYMD() {
+        div.getTxtSearchYMD().clearFromValue();
+        div.getTxtSearchYMD().clearToValue();
+        div.getTxtSearchYMD().setDisabled(true);
+    }
+
+    /**
      * イメージ情報パネルの設定
      */
-    public void setMeisai() {
+    public boolean setMeisai() {
         DbAccessLogger accessLog = new DbAccessLogger();
         dgImageMaskShoriTaishosha_Row taishoshaRow = div.getDgImageMaskShoriTaishosha().getClickedItem();
         RString outputImagePath = Directory.createTmpDirectory();
@@ -270,6 +273,8 @@ public class ImageJohoMaskingHandler {
         RString ファイル名 = taishoshaRow.get保険者().concat(taishoshaRow.get被保番号());
         RDateTime 共有ファイルID = RDateTime.parse(taishoshaRow.get共有ファイルID().toString());
 
+        ViewStateHolder.put(ViewStateKeys.証記載保険者番号, taishoshaRow.get保険者());
+        ViewStateHolder.put(ViewStateKeys.被保険者番号, taishoshaRow.get被保番号());
         ViewStateHolder.put(ViewStateKeys.共有ファイル名, ファイル名);
         ViewStateHolder.put(ViewStateKeys.イメージ共有ファイルID, 共有ファイルID);
         ViewStateHolder.put(ViewStateKeys.申請書管理番号, taishoshaRow.get申請書管理番号());
@@ -286,11 +291,11 @@ public class ImageJohoMaskingHandler {
             throw new ApplicationException(UrErrorMessages.対象データなし.getMessage());
         }
 
-        前排他ロックキー(前排他用文字列.concat(taishoshaRow.get申請書管理番号()));
+        boolean succeedLock = 前排他ロックキー(前排他用文字列.concat(taishoshaRow.get申請書管理番号()));
 
         ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(taishoshaRow.get保険者());
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), taishoshaRow.get申請書管理番号());
-        accessLog.store(shoKisaiHokenshaNo, taishoshaRow.get保険者(), expandedInfo);
+        ExpandedInformation expandedInformation = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), taishoshaRow.get申請書管理番号());
+        accessLog.store(shoKisaiHokenshaNo, taishoshaRow.get被保番号(), expandedInformation);
 
         File file = new File(imagePath.toString());
         List<dgImageMaskingTaisho_Row> rowList = new ArrayList<>();
@@ -300,8 +305,10 @@ public class ImageJohoMaskingHandler {
         setTxetMaskingTaisho(rowList);
         setTextGaikyo(rowList);
         Collections.sort(rowList, 表示順);
+        div.getDgImageMaskingTaisho().setReadOnly(!succeedLock);
         div.getDgImageMaskingTaisho().setDataSource(rowList);
         accessLog.flushBy(AccessLogType.照会);
+        return succeedLock;
     }
 
     private List<dgImageMaskingTaisho_Row> setMaskingTaisho(File file, List<dgImageMaskingTaisho_Row> rowList) {
@@ -491,6 +498,7 @@ public class ImageJohoMaskingHandler {
      * マスキングデータの保存を行います
      */
     public void update() {
+        DbAccessLogger accessLog = new DbAccessLogger();
         imageJohoManager = IkenshoImageJohoManager.createInstance();
         tokkijikoManager = NinteichosahyoTokkijikoManager.createInstance();
         gaikyoManager = GaikyoChosaTokkiManager.createInstance();
@@ -506,6 +514,12 @@ public class ImageJohoMaskingHandler {
             }
         }
         RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
+        RString 証記載保険者番号 = ViewStateHolder.get(ViewStateKeys.証記載保険者番号, RString.class);
+        RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
+        ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(証記載保険者番号);
+        ExpandedInformation expandedInformation = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号);
+        accessLog.store(shoKisaiHokenshaNo, 被保険者番号, expandedInformation);
+        accessLog.flushBy(AccessLogType.更新);
         前排他キーの解除(前排他用文字列.concat(申請書管理番号));
     }
 
@@ -839,11 +853,9 @@ public class ImageJohoMaskingHandler {
         ViewStateHolder.put(ViewStateKeys.被保険者番号, row.get被保番号());
     }
 
-    private void 前排他ロックキー(RString 排他ロックキー) {
+    private boolean 前排他ロックキー(RString 排他ロックキー) {
         LockingKey 前排他ロックキー = new LockingKey(排他ロックキー);
-        if (!RealInitialLocker.tryGetLock(前排他ロックキー)) {
-            throw new PessimisticLockingException();
-        }
+        return RealInitialLocker.tryGetLock(前排他ロックキー);
     }
 
     private void 前排他キーの解除(RString 排他) {

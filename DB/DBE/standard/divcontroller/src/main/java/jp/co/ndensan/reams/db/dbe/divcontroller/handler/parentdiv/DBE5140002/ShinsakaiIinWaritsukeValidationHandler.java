@@ -5,15 +5,24 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5140002;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho2;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140002.ShinsakaiIinWaritsukeDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140002.dgShinsakaiIinKoseiIchiran_Row;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.message.DbzErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.Models;
 
 /**
  * 介護認定審査会開催予定登録のバリデーションチェッククラスです。
@@ -92,7 +101,36 @@ public class ShinsakaiIinWaritsukeValidationHandler {
             validPairs.add(new ValidationMessageControlPair(
                     IdocheckMessages.Validate審査会委員構成一覧データなし, div.getWaritsuke().getDgShinsakaiIinKoseiIchiran()));
         }
+        if (!hasChanged(div)) {
+            validPairs.add(new ValidationMessageControlPair(
+                    IdocheckMessages.Validate編集なしで更新不可, div.getWaritsuke().getDgShinsakaiIinKoseiIchiran()));
+        }
         return validPairs;
+    }
+
+    private static boolean hasChanged(ShinsakaiIinWaritsukeDiv div) {
+        Set<RString> before = findKoseiIinCodesBefore(
+                ViewStateHolder.get(ViewStateKeys.介護認定審査会割当委員情報_一覧, Models.class));
+        Set<RString> after = findKoseiIinCodesAfter(
+                div.getWaritsuke().getDgShinsakaiIinKoseiIchiran().getDataSource()
+        );
+        return !before.equals(after);
+    }
+
+    private static Set<RString> findKoseiIinCodesBefore(Iterable<? extends ShinsakaiWariateIinJoho2> iinJohos) {
+        Set<RString> set = new HashSet<>();
+        for (ShinsakaiWariateIinJoho2 o : iinJohos) {
+            set.add(o.get介護認定審査会委員コード());
+        }
+        return set;
+    }
+
+    private static Set<RString> findKoseiIinCodesAfter(List<dgShinsakaiIinKoseiIchiran_Row> list) {
+        Set<RString> set = new HashSet<>();
+        for (dgShinsakaiIinKoseiIchiran_Row row : list) {
+            set.add(row.getShinsakaiIinCode());
+        }
+        return set;
     }
 
     private static enum IdocheckMessages implements IValidationMessage {
@@ -101,7 +139,9 @@ public class ShinsakaiIinWaritsukeValidationHandler {
         Validate未選択(UrErrorMessages.選択されていない, "審査会委員"),
         Validate審査会委員一覧データなし(UrErrorMessages.対象データなし_追加メッセージあり, "審査会委員一覧"),
         Validate一覧は少なくとも5人(DbeErrorMessages.審査会委員構成一覧は少なくとも5人),
-        Validate全体表示不可(DbzErrorMessages.実行不可, "基準日が未入力", "全体を表示");
+        Validate全体表示不可(DbzErrorMessages.実行不可, "基準日が未入力", "全体を表示"),
+        Validate編集なしで更新不可(UrErrorMessages.編集なしで更新不可);
+
         private final Message message;
 
         private IdocheckMessages(IMessageGettable message, String... replacements) {

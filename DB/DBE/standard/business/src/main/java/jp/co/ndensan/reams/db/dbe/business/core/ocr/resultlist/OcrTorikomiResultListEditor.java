@@ -42,17 +42,17 @@ public final class OcrTorikomiResultListEditor implements AutoCloseable {
     private final FileSpoolManager spoolManager;
     private final RString filePath;
     private final CsvWriterWrapper csvWriter;
-    private boolean closes;
+    private boolean hasClosed;
 
     /**
      * インスタンスを生成します。
      */
     public OcrTorikomiResultListEditor() {
         this.spoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
-                EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Other);
+                EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         this.filePath = Path.combinePath(this.spoolManager.getEucOutputDirectry(), FILE_NAME);
         this.csvWriter = new CsvWriterWrapper(this.filePath);
-        this.closes = false;
+        this.hasClosed = false;
     }
 
     /**
@@ -62,7 +62,7 @@ public final class OcrTorikomiResultListEditor implements AutoCloseable {
      * @param o {@link OcrTorikomiResult 取込結果}の{@link Collection}
      */
     public void writeMultiLine(Collection<? extends OcrTorikomiResult> o) {
-        if (closes) {
+        if (hasClosed) {
             throw new IllegalStateException("すでにcloseされたインスタンスです。 要修正：close()メソッドのコール後にwriteLine()が呼ばれている箇所");
         }
         List<OcrTorikomiKekkaCsvEntity> list = new ArrayList<>();
@@ -98,7 +98,7 @@ public final class OcrTorikomiResultListEditor implements AutoCloseable {
      */
     @Override
     public void close() {
-        this.closes = true;
+        this.hasClosed = true;
         if (csvWriter == null) {
             return;
         }

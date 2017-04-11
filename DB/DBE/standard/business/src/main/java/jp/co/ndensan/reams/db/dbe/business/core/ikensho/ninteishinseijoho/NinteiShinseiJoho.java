@@ -120,6 +120,15 @@ public class NinteiShinseiJoho
     }
 
     /**
+     * 申請書管理番号を返します。
+     *
+     * @return 申請書管理番号
+     */
+    public ShinseishoKanriNo get申請書管理番号() {
+        return entity.getShinseishoKanriNo();
+    }
+
+    /**
      * 厚労省IF識別コードを返します。
      *
      * @return 厚労省IF識別コード

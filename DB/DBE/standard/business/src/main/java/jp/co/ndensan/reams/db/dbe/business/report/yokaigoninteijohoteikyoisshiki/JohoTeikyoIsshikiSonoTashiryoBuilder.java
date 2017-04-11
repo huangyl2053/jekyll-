@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.yokaigoninteijohoteikyoisshiki
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.SonoTashiryoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.yokaigoninteijohoteikyoisshiki.YokaigoNinteiJohoTeikyoIsshikiReportSource;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
@@ -39,7 +40,8 @@ public class JohoTeikyoIsshikiSonoTashiryoBuilder implements IJohoTeikyoIsshikiB
     public YokaigoNinteiJohoTeikyoIsshikiReportSource build() {
         YokaigoNinteiJohoTeikyoIsshikiReportSource source = new YokaigoNinteiJohoTeikyoIsshikiReportSource();
         source.hokenshaNo = item.get保険者番号();
-        source.hihokennshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), item.get被保険者番号());
+        source.識別コード = new ShikibetsuCode(item.getTemp_保険者番号().substring(0, 5).concat(item.getTemp_被保険者番号()));
+        source.拡張情報 = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.getTemp_申請書管理番号());
         source.hihokenshaNo = item.get被保険者番号();
         source.hihokenshaName = item.get被保険者氏名();
         source.shinseiGengo = item.get申請日_元号();

@@ -4,7 +4,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.bunshoban
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -24,21 +23,19 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
  * @author 自動生成
  */
 public class BunshoBangoInputDiv extends Panel implements IBunshoBangoInputDiv {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-
     @JsonProperty("txtBunshoKigo")
     private TextBox txtBunshoKigo;
     @JsonProperty("txtBunshoHeader")
     private TextBox txtBunshoHeader;
     @JsonProperty("txtBunshoNo")
-    private TextBoxCode txtBunshoNo;
+    private TextBox txtBunshoNo;
     @JsonProperty("txtBunshoFooter")
     private TextBox txtBunshoFooter;
     @JsonProperty("btnGetBunshoNo")
@@ -47,6 +44,8 @@ public class BunshoBangoInputDiv extends Panel implements IBunshoBangoInputDiv {
     private RString hdnPadSpaceFlag;
     @JsonProperty("hdnChihoKokyoDantaiCode")
     private RString hdnChihoKokyoDantaiCode;
+    @JsonProperty("hdnPadZeroFlag")
+    private RString hdnPadZeroFlag;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -95,7 +94,7 @@ public class BunshoBangoInputDiv extends Panel implements IBunshoBangoInputDiv {
      * @return txtBunshoNo
      */
     @JsonProperty("txtBunshoNo")
-    public TextBoxCode getTxtBunshoNo() {
+    public TextBox getTxtBunshoNo() {
         return txtBunshoNo;
     }
 
@@ -104,7 +103,7 @@ public class BunshoBangoInputDiv extends Panel implements IBunshoBangoInputDiv {
      * @param txtBunshoNo txtBunshoNo
      */
     @JsonProperty("txtBunshoNo")
-    public void setTxtBunshoNo(TextBoxCode txtBunshoNo) {
+    public void setTxtBunshoNo(TextBox txtBunshoNo) {
         this.txtBunshoNo = txtBunshoNo;
     }
 
@@ -181,6 +180,24 @@ public class BunshoBangoInputDiv extends Panel implements IBunshoBangoInputDiv {
     }
 
     /*
+     * gethdnPadZeroFlag
+     * @return hdnPadZeroFlag
+     */
+    @JsonProperty("hdnPadZeroFlag")
+    public RString getHdnPadZeroFlag() {
+        return hdnPadZeroFlag;
+    }
+
+    /*
+     * sethdnPadZeroFlag
+     * @param hdnPadZeroFlag hdnPadZeroFlag
+     */
+    @JsonProperty("hdnPadZeroFlag")
+    public void setHdnPadZeroFlag(RString hdnPadZeroFlag) {
+        this.hdnPadZeroFlag = hdnPadZeroFlag;
+    }
+
+    /*
      * [共有子DIVモード]
      */
     @JsonProperty("modes")
@@ -202,7 +219,7 @@ public class BunshoBangoInputDiv extends Panel implements IBunshoBangoInputDiv {
             DisplayType[] enumArray = DisplayType.values();
 
             for (DisplayType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -217,11 +234,11 @@ public class BunshoBangoInputDiv extends Panel implements IBunshoBangoInputDiv {
     }
 
     public DisplayType getMode_DisplayType() {
-        return (DisplayType) _CommonChildDivModeUtil.getMode(this.modes, DisplayType.class);
+        return (DisplayType) _CommonChildDivModeUtil.getMode( this.modes, DisplayType.class );
     }
 
-    public void setMode_DisplayType(DisplayType value) {
-        _CommonChildDivModeUtil.setMode(this.modes, DisplayType.class, value);
+    public void setMode_DisplayType( DisplayType value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, DisplayType.class , value );
     }
 
     // </editor-fold>

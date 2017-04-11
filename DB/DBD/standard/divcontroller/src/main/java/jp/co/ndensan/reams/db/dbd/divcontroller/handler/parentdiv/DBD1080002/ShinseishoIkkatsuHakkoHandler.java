@@ -21,7 +21,10 @@ import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShu
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.shotoku.SetaiKazeiKubun;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
@@ -71,8 +74,10 @@ public class ShinseishoIkkatsuHakkoHandler {
         } else {
             把握情報 = manager.select把握情報(把握処理ID);
         }
+        ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先);
+        builder.set基準日(把握情報.get基準日());
         KouhoushaJohoParameter parameter = new KouhoushaJohoParameter(把握情報.get基準日(), 把握情報.getバッチ処理日時(),
-                把握情報.get減免減額種類());
+                把握情報.get減免減額種類(), builder.build());
         KouhoushaJohoService kouhoushaJohoSerive = KouhoushaJohoService.creatInstence();
         List<KouhoushaJoho> 候補者情報List = kouhoushaJohoSerive.find候補者情報(parameter);
         div.getGenmenShinseiHaakuList().getDdlShoriTimestamp().setDataSource(getDataSource(把握情報.get減免減額種類()));

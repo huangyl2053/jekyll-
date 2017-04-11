@@ -5,6 +5,12 @@ var DBE;
             function ModeController(fieldName) {
                 this.fieldName = fieldName;
                 this.controls = new TokkiJikoInput.Controls(fieldName);
+                this.controls.txtTokkiJiko()._control.getJQueryElement(true)[0].addEventListener("keypress", function (e) {
+                    if (e.keyCode === 13) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                }, true);
             }
             ModeController.prototype.Properties = function () {
                 return new UZA.CommonChildDiv(this.fieldName);

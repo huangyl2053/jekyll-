@@ -11,8 +11,10 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoS
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaKanaMeisho;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 主治医意見書作成依頼(手動)_主治医意見書依頼該当者履歴一覧のビジネスクラスです。
@@ -126,5 +128,23 @@ public class IkenshoirairirekiIchiran {
             return IkenshoSakuseiKaisuKubun.toValue(entity.getIkenshoSakuseiKaisuKubun().getKey()).get名称();
         }
         return RString.EMPTY;
+    }
+
+    /**
+     * 識別コードを取得します。
+     *
+     * @return 継続区分
+     */
+    public ShikibetsuCode get識別コード() {
+        return entity.get識別コード();
+    }
+
+    /**
+     * 継続区分を取得します。
+     *
+     * @return 継続区分
+     */
+    public ExpandedInformation get拡張情報() {
+        return entity.get拡張情報();
     }
 }

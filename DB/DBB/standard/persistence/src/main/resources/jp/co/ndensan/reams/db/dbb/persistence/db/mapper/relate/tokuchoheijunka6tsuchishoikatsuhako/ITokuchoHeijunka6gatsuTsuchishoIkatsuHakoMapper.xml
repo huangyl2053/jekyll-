@@ -114,7 +114,7 @@
         FROM
         "DbT2015KeisangoJohoTemp" AS "DbT2015KeisangoJohoTemp"
         INNER JOIN
-        rgua."UaFt250FindAtesaki"('DB','DBB','','false','false','','true','true','true','true','') AS "Atesaki"
+        rgua."UaFt250FindAtesaki"('DB','DBB','','false','false','','true','true','true','true','','{}') AS "Atesaki"
         ON
         "Atesaki"."shikibetsuCode" = "DbT2015KeisangoJohoTemp"."shikibetsuCode"
         LEFT JOIN
@@ -149,6 +149,16 @@
       FROM
           master
       INNER JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
+            ( 
+                SELECT
+                    ARRAY_AGG(CAST ("keisangoJohoTemp_shikibetsuCode" AS TEXT))
+                FROM 
+                    master
+           )
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
+        AS "ShikibetsuTaish"
+      <!--
         rgua."UaFt200FindShikibetsuTaisho"('','',false,'DB',false,'','','','','','','','','','','',true,
         '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,true,
         '','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
@@ -158,7 +168,8 @@
            FROM 
              master
            ) 
-         ) AS "ShikibetsuTaisho"	
+         ) AS "ShikibetsuTaish"
+    -->
         ON
         "ShikibetsuTaisho"."shikibetsuCode" = master."keisangoJohoTemp_shikibetsuCode"
     </select>
@@ -177,7 +188,7 @@
         FROM
         rgdb."DbT2015KeisangoJoho" AS "DbT2015KeisangoJoho"
         INNER JOIN
-        rgua."UaFt250FindAtesaki"('DB','DBB','','false','false','','true','true','true','true','') AS "Atesaki"
+        rgua."UaFt250FindAtesaki"('DB','DBB','','false','false','','true','true','true','true','','{}') AS "Atesaki"
         ON
         "Atesaki"."shikibetsuCode" = "DbT2015KeisangoJoho"."shikibetsuCode"
         LEFT JOIN
@@ -212,6 +223,16 @@
       <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
       FROM master
       INNER JOIN
+      <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
+            ( 
+                SELECT
+                    ARRAY_AGG(CAST ("keisangoJohoTemp_shikibetsuCode" AS TEXT))
+                FROM 
+                    master
+           )
+      <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
+      AS "ShikibetsuTaisho"
+      <!--
         rgua."UaFt200FindShikibetsuTaisho"('','',false,'DB',false,'','','','','','','','','','','',true,
         '','','','','','','',true,'','','','','','','','','','','',true,true,true,true,true,true,true,true,true,true,true,
         '','','','','','','','',true,'','',true,true,true,'','','','','','','','','','','','','','','','','','',
@@ -221,7 +242,8 @@
            FROM 
              master
            ) 
-         ) AS "ShikibetsuTaisho"	
+         ) AS "ShikibetsuTaisho"
+      -->	
         ON
         "ShikibetsuTaisho"."shikibetsuCode" = master."keisangoJohoTemp_shikibetsuCode"
     

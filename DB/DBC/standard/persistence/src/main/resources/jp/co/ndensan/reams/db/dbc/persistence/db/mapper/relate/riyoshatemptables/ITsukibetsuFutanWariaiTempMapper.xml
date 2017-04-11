@@ -60,7 +60,7 @@
         "TsukibetsuFutanWariaiGenTemp"."futanwariaiKubunJul"as "TsukibetsuFutanWariaiGenTemp_futanwariaiKubunJul"
     </sql>
 
-    <resultMap id="ResultMap_TsukibetsuFutanWariaiTempEntityShin" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.TsukibetsuFutanWariaiTempEntity" autoMapping="true">
+    <resultMap id="ResultMap_TsukibetsuFutanWariaiTempEntityShin" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.temptables.TsukibetsuFutanWariaiTempEntity" autoMapping="true">
         <result property="taishoNendo" column="TsukibetsuFutanWariaiNewTemp_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hihokenshaNo" column="TsukibetsuFutanWariaiNewTemp_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="rirekiNo" column="TsukibetsuFutanWariaiNewTemp_rirekiNo" />
@@ -79,7 +79,7 @@
         <result property="futanwariaiKubunJul" column="TsukibetsuFutanWariaiNewTemp_futanwariaiKubunJul" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
-    <resultMap id="ResultMap_TsukibetsuFutanWariaiTempEntityGen" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.TsukibetsuFutanWariaiTempEntity" autoMapping="true">
+    <resultMap id="ResultMap_TsukibetsuFutanWariaiTempEntityGen" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.temptables.TsukibetsuFutanWariaiTempEntity" autoMapping="true">
         <result property="taishoNendo" column="TsukibetsuFutanWariaiGenTemp_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hihokenshaNo" column="TsukibetsuFutanWariaiGenTemp_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="rirekiNo" column="TsukibetsuFutanWariaiGenTemp_rirekiNo" />
@@ -98,7 +98,7 @@
         <result property="futanwariaiKubunJul" column="TsukibetsuFutanWariaiGenTemp_futanwariaiKubunJul" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
-    <resultMap id="ResultMap_TsukibetsuFutanWariaiTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.TsukibetsuFutanWariaiTempEntity" autoMapping="true">
+    <resultMap id="ResultMap_TsukibetsuFutanWariaiTempEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.temptables.TsukibetsuFutanWariaiTempEntity" autoMapping="true">
         <result property="taishoNendo" column="TsukibetsuFutanWariaiTemp_taishoNendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hihokenshaNo" column="TsukibetsuFutanWariaiTemp_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="rirekiNo" column="TsukibetsuFutanWariaiTemp_rirekiNo" />

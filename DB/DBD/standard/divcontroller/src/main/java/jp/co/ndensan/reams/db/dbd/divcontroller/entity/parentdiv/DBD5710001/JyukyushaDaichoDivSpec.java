@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbd.divcontroller.entity.parentdiv.DBD5710001;
 
-import jp.co.ndensan.reams.ur.urz.divcontroller.entity.commonchilddiv.chohyoshutsuryokujun.ChohyoShutsuryokujun.ChohyoShutsuryokujunDiv;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.core.validation.IPredicate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -24,7 +23,8 @@ public enum JyukyushaDaichoDivSpec implements IPredicate<JyukyushaDaichoDiv> {
                  * 今回抽出対象期間今回の非空必須チェックです。
                  *
                  * @param div 受給者台帳リストDiv
-                 * @return true:今回が非空です、false:「今回抽出対象開始日付」と「今回抽出対象終了日付」がいずれか空白の場合。
+                 * @return
+                 * true:今回が非空です、false:「今回抽出対象開始日付」と「今回抽出対象終了日付」がいずれか空白の場合。
                  */
 
                 @Override
@@ -43,7 +43,8 @@ public enum JyukyushaDaichoDivSpec implements IPredicate<JyukyushaDaichoDiv> {
                  *
                  * @param pairs バリデーションコントロール
                  * @param div JyukyushaDaichoDiv
-                 * @return true:「今回抽出対象開始日付」>「今回抽出対象終了日付」がではありません,false:「今回抽出対象開始日付」>「今回抽出対象終了日付」の場合。
+                 * @return
+                 * true:「今回抽出対象開始日付」>「今回抽出対象終了日付」がではありません,false:「今回抽出対象開始日付」>「今回抽出対象終了日付」の場合。
                  */
                 @Override
                 public boolean apply(JyukyushaDaichoDiv div) {
@@ -92,7 +93,8 @@ public enum JyukyushaDaichoDivSpec implements IPredicate<JyukyushaDaichoDiv> {
                  *
                  * @param pairs バリデーションコントロール
                  * @param div JyukyushaDaichoDiv
-                 * @return true:「被保険者番号（From）」＞「被保険者番号（To）」がではありません、false:「被保険者番号（From）」＞「被保険者番号（To）」の場合。
+                 * @return
+                 * true:「被保険者番号（From）」＞「被保険者番号（To）」がではありません、false:「被保険者番号（From）」＞「被保険者番号（To）」の場合。
                  */
                 @Override
                 public boolean apply(JyukyushaDaichoDiv div) {
@@ -116,8 +118,8 @@ public enum JyukyushaDaichoDivSpec implements IPredicate<JyukyushaDaichoDiv> {
                  */
                 @Override
                 public boolean apply(JyukyushaDaichoDiv div) {
-                    RString 出力順 = new RString(((ChohyoShutsuryokujunDiv) div.getShutsuryokuSort()).getSelected出力順().get出力順ID().toString());
-                    return !出力順.isEmpty();
+//                    RString 出力順 = new RString(div.getShutsuryokuSort().getSelected出力順().get出力順ID().toString());
+                    return div.getShutsuryokuSort().getSelected出力順() != null;
                 }
             },
     異動抽出対象一つでも選択していない場合チェック {

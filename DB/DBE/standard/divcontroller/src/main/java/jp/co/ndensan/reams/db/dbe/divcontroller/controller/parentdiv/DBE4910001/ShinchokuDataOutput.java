@@ -103,11 +103,7 @@ public class ShinchokuDataOutput {
 
             return ResponseData.of(div).addValidationMessages(validation).respond();
         }
-        if (結果情報.equals(div.getRadKubun().getSelectedKey())) {
-            調査員情報Lis = finder.get結果情報検索(getHandler(div).createParam(div)).records();
-        } else if (進捗情報.equals(div.getRadKubun().getSelectedKey())) {
-            調査員情報Lis = finder.get進捗情報検索(getHandler(div).createParam(div)).records();
-        }
+        調査員情報Lis = finder.get進捗情報検索(getHandler(div).createParam(div)).records();
         getHandler(div).setdgShinchokuIchiran(調査員情報Lis);
         if (div.getDgShinchokuIchiran().getDataSource() == null
                 || div.getDgShinchokuIchiran().getDataSource().isEmpty()) {

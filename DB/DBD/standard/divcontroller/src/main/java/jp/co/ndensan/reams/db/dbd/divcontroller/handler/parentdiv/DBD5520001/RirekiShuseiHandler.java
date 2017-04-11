@@ -518,7 +518,9 @@ public class RirekiShuseiHandler {
             row.getYukoKaishi().setValue(flexToRDate(business.get受給者台帳().get認定有効期間開始年月日()));
             row.getYukoShuryo().setValue(flexToRDate(business.get受給者台帳().get認定有効期間終了年月日()));
             row.setKyusochi(business.get受給者台帳().is旧措置者フラグ());
-            row.setShinsakaiIken(business.get要介護認定結果情報().get介護認定審査会意見());
+            if (business.get要介護認定結果情報() != null) {
+                row.setShinsakaiIken(business.get要介護認定結果情報().get介護認定審査会意見());
+            }
             row.setDeserializedBusiness(DataPassingConverter.serialize(business));
             row.getUpdateCount().setValue(new Decimal(business.getUpdateCount()));
             rowList.add(row);

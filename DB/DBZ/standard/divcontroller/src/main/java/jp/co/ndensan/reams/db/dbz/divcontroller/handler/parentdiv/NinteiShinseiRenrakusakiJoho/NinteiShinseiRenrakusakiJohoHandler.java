@@ -255,7 +255,7 @@ public class NinteiShinseiRenrakusakiJohoHandler {
 
     private void set修正の一覧() {
         List<dgRenrakusakiIchiran_Row> dateSoruce = div.getDgRenrakusakiIchiran().getDataSource();
-        TextBoxNum num = setRenban(dateSoruce); 
+        TextBoxNum num = div.getDgRenrakusakiIchiran().getClickedItem().getRenban(); 
         TextBoxNum yusen = new TextBoxNum(); 
         yusen.setValue(div.getTxtYusenJuni().getValue());
         dgRenrakusakiIchiran_Row row = new dgRenrakusakiIchiran_Row(num,
@@ -332,7 +332,9 @@ public class NinteiShinseiRenrakusakiJohoHandler {
                         joho = joho.createBuilderForEdit().set支所コード(new ShishoCode(row.getSisyo())).build();
                         joho = joho.createBuilderForEdit().set連絡先氏名カナ(new AtenaKanaMeisho(row.getKanaShimei())).build();
                         joho = joho.createBuilderForEdit().set連絡先郵便番号(new YubinNo(row.getYuubinBango())).build();
-                        dbdBusiness.set(i, joho.modifiedModel());
+                        if (joho.hasChanged()) {
+                            dbdBusiness.set(i, joho.modifiedModel());
+                        }
                     }
                 }
             }

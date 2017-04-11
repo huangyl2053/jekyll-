@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.IColumnDefinition;
  * <br/> 国保連インターフェース管理
  */
 public enum DbT3104KokuhorenInterfaceKanri implements IColumnDefinition {
-// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.2">
+// <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
     /**
      * insertDantaiCd
      */
@@ -46,9 +46,9 @@ public enum DbT3104KokuhorenInterfaceKanri implements IColumnDefinition {
     shoriYM(2147483647, 0),
     /**
      * 交換情報識別番号
-     * <br/>交換情報識別番号の上3桁
+     * <br/>通常は交換情報識別番号の上3桁をセット、下1桁は1つの処理を分けて処理したい場合の区別用（埼玉県の高額合算）
      */
-    kokanShikibetsuNo(3, 0),
+    kokanShikibetsuNo(4, 0),
     /**
      * 送付取込区分
      * <br/>1:送付 2:取込 3:それ以外
@@ -83,23 +83,23 @@ public enum DbT3104KokuhorenInterfaceKanri implements IColumnDefinition {
     /**
      * ファイル名称１
      */
-    fileName1(20, 0),
+    fileName1(30, 0),
     /**
      * ファイル名称２
      */
-    fileName2(20, 0),
+    fileName2(30, 0),
     /**
      * ファイル名称３
      */
-    fileName3(20, 0),
+    fileName3(30, 0),
     /**
      * ファイル名称４
      */
-    fileName4(20, 0),
+    fileName4(30, 0),
     /**
      * ファイル名称５
      */
-    fileName5(20, 0),
+    fileName5(30, 0),
     /**
      * ファイル件数１
      */

@@ -8,12 +8,16 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE9010001;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9010001.ShujiiIryoKikanMasterDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9010001.dgShujiiIchiran_Row;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import static jp.co.ndensan.reams.uz.uza.definition.enumeratedtype.message.MessageCreateHelper.toCode;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 
 /**
  * 主治医医療機関マスタ画面のバリデーションハンドラークラスです。
@@ -74,6 +78,23 @@ public class KoseiShujiiIryoKikanMasterValidationHandler {
     }
 
     /**
+     * 確定するボタンを押下するとき、バリデーションチェックを行う。
+     *
+     * @param 状態 状態
+     * @return validPairs バリデーション結果
+     */
+    public ValidationMessageControlPairs validateForKakutei(RString 状態) {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        if (状態_追加.equals(状態) || 状態_修正.equals(状態)) {
+            if (!is口座情報あり_必須項目入力あり(div)) {
+                validPairs.add(new ValidationMessageControlPair(
+                        new IdocheckMessages(UrErrorMessages.入力値が不正_追加メッセージあり, "口座情報"), div.getShujiiJohoInput().getKozaJoho()));
+            }
+        }
+        return validPairs;
+    }
+
+    /**
      * 保存するボタンを押下するとき、バリデーションチェックを行う。
      *
      */
@@ -115,6 +136,44 @@ public class KoseiShujiiIryoKikanMasterValidationHandler {
         return false;
     }
 
+    private boolean is口座情報あり_必須項目入力あり(ShujiiIryoKikanMasterDiv div) {
+        if (div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput() == null) {
+            return true;
+        }
+        if (div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().isゆうちょ銀行()) {
+            if (!div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().isEmpty()
+                    || !div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu().getSelectedValue().isEmpty()
+                    || !div.getShujiiJohoInput().getKozaJoho().getTxtTenBan().getValue().isEmpty()
+                    || !div.getShujiiJohoInput().getKozaJoho().getTxtGinkoKozaNo().getValue().isEmpty()
+                    || !div.getShujiiJohoInput().getKozaJoho().getTxtKozaMeiginin().getValue().isEmpty()
+                    || !div.getShujiiJohoInput().getKozaJoho().getTxtKanjiMeiginin().getValue().isEmpty()) {
+                return !div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().isEmpty()
+                        && !div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu().getSelectedValue().isEmpty()
+                        && !div.getShujiiJohoInput().getKozaJoho().getTxtTenBan().getValue().isEmpty()
+                        && !div.getShujiiJohoInput().getKozaJoho().getTxtTenMei().getValue().isEmpty()
+                        && !div.getShujiiJohoInput().getKozaJoho().getTxtGinkoKozaNo().getValue().isEmpty()
+                        && !div.getShujiiJohoInput().getKozaJoho().getTxtKozaMeiginin().getValue().isEmpty()
+                        && !div.getShujiiJohoInput().getKozaJoho().getTxtKanjiMeiginin().getValue().isEmpty();
+            }
+        } else {
+            if (!div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().isEmpty()
+                    || !div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().isEmpty()
+                    || !div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu().getSelectedValue().isEmpty()
+                    || !div.getShujiiJohoInput().getKozaJoho().getTxtGinkoKozaNo().getValue().isEmpty()
+                    || !div.getShujiiJohoInput().getKozaJoho().getTxtKozaMeiginin().getValue().isEmpty()
+                    || !div.getShujiiJohoInput().getKozaJoho().getTxtKanjiMeiginin().getValue().isEmpty()) {
+                return !div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().isEmpty()
+                        && !div.getShujiiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().isEmpty()
+                        && !div.getShujiiJohoInput().getKozaJoho().getDdlYokinShubetsu().getSelectedValue().isEmpty()
+                        && !div.getShujiiJohoInput().getKozaJoho().getTxtGinkoKozaNo().getValue().isEmpty()
+                        && !div.getShujiiJohoInput().getKozaJoho().getTxtKozaMeiginin().getValue().isEmpty()
+                        && !div.getShujiiJohoInput().getKozaJoho().getTxtKanjiMeiginin().getValue().isEmpty();
+            }
+        }
+        return true;
+
+    }
+
     private enum InfoMesssages implements IMessageGettable {
 
         該当データなし(1, "該当データが存在しません。"),
@@ -137,6 +196,20 @@ public class KoseiShujiiIryoKikanMasterValidationHandler {
         @Override
         public Message getMessage() {
             return new InformationMessage(toCode("I", no), message.toString());
+        }
+    }
+    
+    private static class IdocheckMessages implements IValidationMessage {
+
+        private final Message message;
+
+        public IdocheckMessages(IMessageGettable message, String... replacements) {
+            this.message = message.getMessage().replace(replacements);
+        }
+
+        @Override
+        public Message getMessage() {
+            return message;
         }
     }
 }

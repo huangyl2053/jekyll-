@@ -57,16 +57,16 @@ public class tplShinseijohoDiv extends TabPanel {
     private DropDownList ddlShinsakaiYusenKubun;
     @JsonProperty("ddlWariateKubun")
     private DropDownList ddlWariateKubun;
-    @JsonProperty("ccdShinseiTodokedesha")
-    private NinteiShinseiTodokedeshaDiv ccdShinseiTodokedesha;
     @JsonProperty("ccdKaigoNinteiShinseiKihon")
     private KaigoNinteiShinseiKihonJohoInputDiv ccdKaigoNinteiShinseiKihon;
     @JsonProperty("ccdZenkaiNinteiKekkaJoho")
     private ZenkaiNinteiKekkaJohoDiv ccdZenkaiNinteiKekkaJoho;
-    @JsonProperty("ccdNinteiInput")
-    private NinteiInputDiv ccdNinteiInput;
+    @JsonProperty("ccdShinseiTodokedesha")
+    private NinteiShinseiTodokedeshaDiv ccdShinseiTodokedesha;
     @JsonProperty("ccdShinseiSonotaJohoInput")
     private ShinseiSonotaJohoInputDiv ccdShinseiSonotaJohoInput;
+    @JsonProperty("ccdNinteiInput")
+    private NinteiInputDiv ccdNinteiInput;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -273,15 +273,6 @@ public class tplShinseijohoDiv extends TabPanel {
     }
 
     /*
-     * getccdShinseiTodokedesha
-     * @return ccdShinseiTodokedesha
-     */
-    @JsonProperty("ccdShinseiTodokedesha")
-    public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
-        return ccdShinseiTodokedesha;
-    }
-
-    /*
      * getccdKaigoNinteiShinseiKihon
      * @return ccdKaigoNinteiShinseiKihon
      */
@@ -300,12 +291,12 @@ public class tplShinseijohoDiv extends TabPanel {
     }
 
     /*
-     * getccdNinteiInput
-     * @return ccdNinteiInput
+     * getccdShinseiTodokedesha
+     * @return ccdShinseiTodokedesha
      */
-    @JsonProperty("ccdNinteiInput")
-    public INinteiInputDiv getCcdNinteiInput() {
-        return ccdNinteiInput;
+    @JsonProperty("ccdShinseiTodokedesha")
+    public INinteiShinseiTodokedeshaDiv getCcdShinseiTodokedesha() {
+        return ccdShinseiTodokedesha;
     }
 
     /*
@@ -315,6 +306,15 @@ public class tplShinseijohoDiv extends TabPanel {
     @JsonProperty("ccdShinseiSonotaJohoInput")
     public IShinseiSonotaJohoInputDiv getCcdShinseiSonotaJohoInput() {
         return ccdShinseiSonotaJohoInput;
+    }
+
+    /*
+     * getccdNinteiInput
+     * @return ccdNinteiInput
+     */
+    @JsonProperty("ccdNinteiInput")
+    public INinteiInputDiv getCcdNinteiInput() {
+        return ccdNinteiInput;
     }
 
     /*
@@ -368,6 +368,16 @@ public class tplShinseijohoDiv extends TabPanel {
     @JsonIgnore
     public void  setTxtTorisageJiyu(TextBox txtTorisageJiyu) {
         this.getSinseiTorisage().setTxtTorisageJiyu(txtTorisageJiyu);
+    }
+
+    @JsonIgnore
+    public ButtonDialog getBtnTorisageTeikeibun() {
+        return this.getSinseiTorisage().getBtnTorisageTeikeibun();
+    }
+
+    @JsonIgnore
+    public void  setBtnTorisageTeikeibun(ButtonDialog btnTorisageTeikeibun) {
+        this.getSinseiTorisage().setBtnTorisageTeikeibun(btnTorisageTeikeibun);
     }
 
     @JsonIgnore

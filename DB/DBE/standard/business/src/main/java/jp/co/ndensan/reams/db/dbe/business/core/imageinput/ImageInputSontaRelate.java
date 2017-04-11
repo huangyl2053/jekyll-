@@ -12,6 +12,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IOcrData;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResults;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.RelatedDataBase;
+import jp.co.ndensan.reams.db.dbe.definition.core.TorisageKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.TreatmentWhenIchijiHanteiZumi;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.imageinput.ImageInputSontaRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
@@ -87,11 +88,14 @@ public class ImageInputSontaRelate extends RelatedDataBase {
         return IRAI_NAME;
     }
 
-    /**
-     * @return 申請書管理番号
-     */
+    @Override
     public ShinseishoKanriNo get申請書管理番号() {
         return this.entity.getShinseishoKanriNo();
+    }
+
+    @Override
+    protected TorisageKubun get取下区分() {
+        return TorisageKubun.toValue(this.entity.getTorisageKubunCode());
     }
 
     /**

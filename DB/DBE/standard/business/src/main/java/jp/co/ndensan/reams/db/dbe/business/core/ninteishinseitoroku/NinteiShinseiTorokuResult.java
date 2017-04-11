@@ -470,6 +470,15 @@ public class NinteiShinseiTorokuResult {
     }
     
     /**
+     * 証記載保険者番号を取得します。
+     *
+     * @return 証記載保険者番号
+     */
+    public RString get証記載保険者番号() {
+        return entity.get証記載保険者番号();
+    }
+    
+    /**
      * 延期通知発行年月日を取得します。
      *
      * @return 延期通知発行年月日

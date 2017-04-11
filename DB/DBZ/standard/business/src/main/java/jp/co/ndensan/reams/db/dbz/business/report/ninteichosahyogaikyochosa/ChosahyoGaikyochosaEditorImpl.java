@@ -6,11 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.business.report.ninteichosahyogaikyochosa;
 
 import jp.co.ndensan.reams.db.dbz.entity.report.ninteichosahyogaikyochosa.ChosahyoGaikyochosaReportSource;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 要介護認定調査票（概況調査）のEditorです。
@@ -44,7 +40,6 @@ public class ChosahyoGaikyochosaEditorImpl implements IChosahyoGaikyochosaEditor
     }
 
     private ChosahyoGaikyochosaReportSource editSource(ChosahyoGaikyochosaReportSource source) {
-        source.shikibetuCode = ShikibetsuCode.EMPTY;
         RStringBuilder builder = new RStringBuilder();
         builder.append(item.getHishokenshaNo1());
         builder.append(item.getHishokenshaNo2());
@@ -56,7 +51,6 @@ public class ChosahyoGaikyochosaEditorImpl implements IChosahyoGaikyochosaEditor
         builder.append(item.getHishokenshaNo8());
         builder.append(item.getHishokenshaNo9());
         builder.append(item.getHishokenshaNo10());
-        source.hishokenshaNo = new ExpandedInformation(Code.EMPTY, new RString("被保険者番号"), builder.toRString());
         source.hokenshaNo1 = item.getHokenshaNo1();
         source.hokenshaNo2 = item.getHokenshaNo2();
         source.hokenshaNo3 = item.getHokenshaNo3();
@@ -141,6 +135,8 @@ public class ChosahyoGaikyochosaEditorImpl implements IChosahyoGaikyochosaEditor
         source.hihokenshaNo8 = item.getHihokenshaNo8();
         source.hihokenshaNo9 = item.getHihokenshaNo9();
         source.hihokenshaNo10 = item.getHihokenshaNo10();
+        source.識別コード = item.get識別コード();
+        source.拡張情報 = item.get拡張情報();
         source.layoutIndex = layoutIndex;
         return source;
     }

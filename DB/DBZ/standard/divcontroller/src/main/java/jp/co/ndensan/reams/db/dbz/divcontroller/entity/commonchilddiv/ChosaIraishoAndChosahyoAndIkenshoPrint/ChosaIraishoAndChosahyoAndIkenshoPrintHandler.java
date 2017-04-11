@@ -36,7 +36,6 @@ import jp.co.ndensan.reams.db.dbz.business.report.shujiiikenshosakusei.ShujiiIke
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosa.ChohyoAtesakiKeisho;
 import jp.co.ndensan.reams.db.dbz.definition.core.gamensenikbn.GamenSeniKbn;
-import jp.co.ndensan.reams.db.dbz.definition.core.ikenshosakuseiryo.IkenshoSakuseiRyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping09A;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping09B;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
@@ -53,16 +52,20 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.Sakuseir
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.RensakusakiTsuzukigara;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ShujiiIkenshoHoshuTankaParameter;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.ikenshoprint.ShujiiIkenshoHoshuTankaEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteiShinseiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.kaigiatesakijushosettei.KaigoAtesakiJushoSetteiFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.teikeibunhenkan.KaigoTextHenkanRuleCreator;
 import jp.co.ndensan.reams.db.dbz.service.core.util.report.ReportUtil;
 import jp.co.ndensan.reams.ur.urz.business.core.teikeibunhenkan.ITextHenkanRule;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -76,6 +79,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.lang.Wareki;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
@@ -144,6 +148,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
     private static final RString IFSHIKIBETSUCODE02A = new RString("02A");
     private static final RString IFSHIKIBETSUCODE06A = new RString("06A");
     private static final RString IFSHIKIBETSUCODE09A = new RString("09A");
+    private static final RString IFSHIKIBETSUCODE09B = new RString("09B");
     private final ChosaIraishoAndChosahyoAndIkenshoPrintDiv div;
 
     /**
@@ -628,7 +633,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         business.get訪問調査先電話番号(),
                         認定申請年月日,
                         set認定調査提出期限(business),
-                        通知文.containsKey(2) ? 通知文.get(2) : RString.EMPTY
+                        通知文.containsKey(2) ? 通知文.get(2) : RString.EMPTY,
+                        new ShikibetsuCode(div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value().substring(0, 5).concat(business.get被保険者番号())),
+                        new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), row.getShinseishoKanriNo())
                 );
                 chosaIraishoHeadItemList.add(item);
             }
@@ -661,7 +668,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
         for (ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business : list) {
             RString 認定申請区分 = business.get認定申請区分_申請時_コード();
             if (!RString.isNullOrEmpty(認定申請区分)) {
-                認定申請区分 = NinteiShinseiShinseijiKubunCode.toValue(認定申請区分).get名称();
+                認定申請区分 = NinteiShinseiShinseijiKubunCode.toValue(認定申請区分).get略称();
             }
             ChosaIraiIchiranhyoBodyItem item = new ChosaIraiIchiranhyoBodyItem(
                     div.getTxtHakkoYMD().getValue().wareki().eraType(EraType.KANJI).
@@ -697,7 +704,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                     business.get電話番号(),
                     set認定調査提出期限(business),
                     business.get市町村コード(),
-                    business.get認定調査委託先コード()
+                    business.get認定調査委託先コード(),
+                    business.get申請書管理番号(),
+                    business.get保険者番号()
             );
             chosaIraishoHeadItemList.add(item);
         }
@@ -835,7 +844,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         被保険者番号リスト.get(INDEX_6),
                         被保険者番号リスト.get(INDEX_7),
                         被保険者番号リスト.get(INDEX_8),
-                        被保険者番号リスト.get(INDEX_9));
+                        被保険者番号リスト.get(INDEX_9),
+                        new ShikibetsuCode(business.get証記載保険者番号().substring(0, 5).concat(business.get被保険者番号())),
+                        new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.get申請書管理番号()));
                 itemList.add(item);
             }
         }
@@ -880,7 +891,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         被保険者番号リスト.get(INDEX_6),
                         被保険者番号リスト.get(INDEX_7),
                         被保険者番号リスト.get(INDEX_8),
-                        被保険者番号リスト.get(INDEX_9));
+                        被保険者番号リスト.get(INDEX_9),
+                        new ShikibetsuCode(ninteiShinseiJoho.get証記載保険者番号().substring(0, 5).concat(ninteiShinseiJoho.get被保険者番号())),
+                        new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), new RString(ninteiShinseiJoho.get申請書管理番号().toString())));
                 itemList.add(item);
             }
         }
@@ -926,7 +939,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         被保険者番号リスト.get(INDEX_8),
                         被保険者番号リスト.get(INDEX_9),
                         被保険者番号リスト.get(1),
-                        ninteiShinseiJoho.get被保険者氏名() == null ? RString.EMPTY : ninteiShinseiJoho.get被保険者氏名().value());
+                        ninteiShinseiJoho.get被保険者氏名() == null ? RString.EMPTY : ninteiShinseiJoho.get被保険者氏名().value(),
+                        new ShikibetsuCode(ninteiShinseiJoho.get証記載保険者番号().substring(0, 5).concat(ninteiShinseiJoho.get被保険者番号())),
+                        new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), new RString(ninteiShinseiJoho.get申請書管理番号().toString())));
                 itemList.add(item);
             }
         }
@@ -972,7 +987,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         被保険者番号リスト.get(INDEX_8),
                         被保険者番号リスト.get(INDEX_9),
                         被保険者番号リスト.get(1),
-                        ninteiShinseiJoho.get被保険者氏名() == null ? RString.EMPTY : ninteiShinseiJoho.get被保険者氏名().value());
+                        ninteiShinseiJoho.get被保険者氏名() == null ? RString.EMPTY : ninteiShinseiJoho.get被保険者氏名().value(),
+                        new ShikibetsuCode(ninteiShinseiJoho.get証記載保険者番号().substring(0, 5).concat(ninteiShinseiJoho.get被保険者番号())),
+                        new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), new RString(ninteiShinseiJoho.get申請書管理番号().toString())));
                 itemList.add(item);
             }
         }
@@ -1084,7 +1101,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                             前回連番Map.get(NinteichosaKomokuMapping09A.じょくそうの処置.getコード()),
                             前回連番Map.get(NinteichosaKomokuMapping09A.カテーテル.getコード()),
                             ShogaiNichijoSeikatsuJiritsudoCode.toValue(business.get障害高齢者自立度コード()).get名称(),
-                            NinchishoNichijoSeikatsuJiritsudoCode.toValue(business.get認知症高齢者自立度コード()).get名称()
+                            NinchishoNichijoSeikatsuJiritsudoCode.toValue(business.get認知症高齢者自立度コード()).get名称(),
+                            new ShikibetsuCode(business.get証記載保険者番号().substring(0, 5).concat(business.get被保険者番号())),
+                            new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.get申請書管理番号())
                     ));
                 } else if (KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(businessList.get(数字_0).get厚労省IF識別コード())) {
                     for (ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business : businessList) {
@@ -1175,7 +1194,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                             前回連番Map.get(NinteichosaKomokuMapping09B.じょくそうの処置.getコード()),
                             前回連番Map.get(NinteichosaKomokuMapping09B.カテーテル.getコード()),
                             ShogaiNichijoSeikatsuJiritsudoCode.toValue(business.get障害高齢者自立度コード()).get名称(),
-                            NinchishoNichijoSeikatsuJiritsudoCode.toValue(business.get認知症高齢者自立度コード()).get名称()
+                            NinchishoNichijoSeikatsuJiritsudoCode.toValue(business.get認知症高齢者自立度コード()).get名称(),
+                            new ShikibetsuCode(business.get証記載保険者番号().substring(0, 5).concat(business.get被保険者番号())),
+                            new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.get申請書管理番号())
                     ));
                 } else {
                     ChosaIraishoAndChosahyoAndIkenshoPrintBusiness business = businessList.get(0);
@@ -1186,7 +1207,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                             business.get年齢(),
                             get判定結果(business.get厚労省IF識別コード(), business.get二次判定要介護状態区分コード()),
                             business.get二次判定年月日(),
-                            business.get生年月日()
+                            business.get生年月日(),
+                            new ShikibetsuCode(business.get証記載保険者番号().substring(0, 5).concat(business.get被保険者番号())),
+                            new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.get申請書管理番号())
                     ));
                 }
             } else {
@@ -1199,7 +1222,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                             new RString(ninteiShinseiJoho.get年齢()),
                             RString.EMPTY,
                             RString.EMPTY,
-                            new RString(ninteiShinseiJoho.get生年月日().toString())
+                            new RString(ninteiShinseiJoho.get生年月日().toString()),
+                            new ShikibetsuCode(div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value().substring(0, 5).concat(row.getHihokenshaBango())),
+                            new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), row.getShinseishoKanriNo())
                     ));
                 } else {
                     itemList.add(new SaiChekkuhyoItem(
@@ -1209,7 +1234,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                             RString.EMPTY,
                             RString.EMPTY,
                             RString.EMPTY,
-                            RString.EMPTY
+                            RString.EMPTY,
+                            new ShikibetsuCode(div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value().substring(0, 5).concat(row.getHihokenshaBango())),
+                            new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), row.getShinseishoKanriNo())
                     ));
                 }
             }
@@ -1274,7 +1301,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE230001.getReportId(), KamokuCode.EMPTY, 通知書定型文パターン番号);
                 item.setTitle(通知文Map.containsKey(0) ? 通知文Map.get(0) : RString.EMPTY);
                 item.setTsuchibun1(通知文Map.containsKey(1) ? 通知文Map.get(1) : RString.EMPTY);
-                item.setShinseiKubun(NinteiShinseiShinseijiKubunCode.toValue(business.get認定申請区分_申請時_コード()).get名称());
+                item.setShinseiKubun(NinteiShinseiShinseijiKubunCode.toValue(business.get認定申請区分_申請時_コード()).get略称());
 
                 List<RString> 被保険者番号リスト = get被保険者番号(business.get被保険者番号());
                 item.setHihokenshaNo1(被保険者番号リスト.get(0));
@@ -1315,6 +1342,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 }
                 item.setTsuchibun2(通知文Map.containsKey(2) ? 通知文Map.get(2) : RString.EMPTY);
                 item.setShoriName(IkenshoIraiKubun.toValue(business.get主治医意見書依頼区分()).get名称());
+                item.set識別コード(new ShikibetsuCode(div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value().substring(0, 5).concat(business.get被保険者番号())));
+                item.set拡張情報(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), row.getShinseishoKanriNo()));
                 itemList.add(item);
             }
         }
@@ -1380,7 +1409,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                     Seibetsu.toValue(business.get性別()).get名称(),
                     提出期限,
                     business.get主治医医療機関コード(),
-                    business.get市町村コード());
+                    business.get市町村コード(),
+                    new ShikibetsuCode(div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value().substring(0, 5).concat(business.get被保険者番号())),
+                    new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.get申請書管理番号()));
             itemList.add(item);
         }
         return itemList;
@@ -1395,6 +1426,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
         List<ShujiiIkenshoSakuseiRyoSeikyushoItem> itemList = new ArrayList<>();
         RString 作成料印字 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成料請求書_作成料_印字有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援,
                 div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
+        ShujiiIkenshoHoshuTankaParameter param = ShujiiIkenshoHoshuTankaParameter.createParameter();
+        List<ShujiiIkenshoHoshuTankaEntity> 意見書作成料リスト = ChosaIraishoAndChosahyoAndIkenshoPrintFinder.createInstance().get主治医意見書作成料報酬単価(param);
         for (dgShujiiIkensho_Row row : div.getDgShujiiIkensho().getDataSource()) {
             ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter
                     = ChosaIraishoAndChosahyoAndIkenshoPrintParameter.createParameter(row.getShinseishoKanriNo());
@@ -1407,10 +1440,21 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 item.setGengo(div.getTxtHakkoYMD().getValue().wareki().eraType(EraType.KANJI).
                         firstYear(FirstYear.GAN_NEN).separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString());
                 item.setAtesakiHokenshaName(business.get保険者名());
-                item.setShinkiZaitakuKingaku(IkenshoSakuseiRyo.toValue(IKENSHOSAKUSEIRYO_11).get名称());
-                item.setShinkiShisetsuKingaku(IkenshoSakuseiRyo.toValue(IKENSHOSAKUSEIRYO_12).get名称());
-                item.setKeizokuZaitakuKingaku(IkenshoSakuseiRyo.toValue(IKENSHOSAKUSEIRYO_21).get名称());
-                item.setKeizokuShisetsuKingaku(IkenshoSakuseiRyo.toValue(IKENSHOSAKUSEIRYO_22).get名称());
+                for (ShujiiIkenshoHoshuTankaEntity 意見書作成料 : 意見書作成料リスト) {
+                    if (new Code("1").equals(意見書作成料.getZaitakuShisetsuKubun())) {
+                        if (new Code("1").equals(意見書作成料.getIkenshoSakuseiKaisuKubun())) {
+                            item.setShinkiZaitakuKingaku(new RString(意見書作成料.getTanka().toString()));
+                        } else if (new Code("2").equals(意見書作成料.getIkenshoSakuseiKaisuKubun())) {
+                            item.setKeizokuZaitakuKingaku(new RString(意見書作成料.getTanka().toString()));
+                        }
+                    } else if (new Code("2").equals(意見書作成料.getZaitakuShisetsuKubun())) {
+                        if (new Code("1").equals(意見書作成料.getIkenshoSakuseiKaisuKubun())) {
+                            item.setShinkiShisetsuKingaku(new RString(意見書作成料.getTanka().toString()));
+                        } else if (new Code("2").equals(意見書作成料.getIkenshoSakuseiKaisuKubun())) {
+                            item.setKeizokuShisetsuKingaku(new RString(意見書作成料.getTanka().toString()));
+                        }
+                    }
+                }
                 List<RString> 保険者番号リスト = get被保険者番号(business.get被保険者番号());
                 item.setHihokenshaNo1(保険者番号リスト.get(0));
                 item.setHihokenshaNo2(保険者番号リスト.get(1));
@@ -1470,9 +1514,17 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 }
                 item.setSeikyuIryokikanName(business.get医療機関名称());
                 item.setSeikyuIryokikanDaihyoName(business.get代表者名());
-                item.setSeikyuIryokikanYubinNo(business.get医療機関郵便番号());
+                RString yubinNo;
+                if (!RString.isNullOrEmpty(business.get医療機関郵便番号())) {
+                    yubinNo = new YubinNo(business.get医療機関郵便番号()).getEditedYubinNo();
+                } else {
+                    yubinNo = RString.EMPTY;
+                }
+                item.setSeikyuIryokikanYubinNo(yubinNo);
                 item.setSeikyuIryokikanJusho(business.get医療機関住所());
                 item.setSeikyuIryokikanTel(business.get医療機関電話番号());
+                item.set識別コード(new ShikibetsuCode(div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value().substring(0, 5).concat(business.get被保険者番号())));
+                item.set拡張情報(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), row.getShinseishoKanriNo()));
                 itemList.add(item);
             }
         }
@@ -1545,6 +1597,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 item.setBirthGengoMeiji(年号.startsWith(元号_明治) ? RString.EMPTY : HOUSI);
                 item.setBirthGengoTaisho(年号.startsWith(元号_大正) ? RString.EMPTY : HOUSI);
                 item.setBirthGengoShowa(年号.startsWith(元号_昭和) ? RString.EMPTY : HOUSI);
+                item.set識別コード(new ShikibetsuCode(div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value().substring(0, 5).concat(business.get被保険者番号())));
+                item.set拡張情報(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), row.getShinseishoKanriNo()));
                 itemList.add(item);
             }
         }
@@ -1705,7 +1759,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         get受診日時または期間(),
                         受診場所,
                         通知文.get(2),
-                        getConfigValue(ConfigNameDBE.介護保険診断命令書)
+                        getConfigValue(ConfigNameDBE.介護保険診断命令書),
+                        new ShikibetsuCode(div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value().substring(0, 5).concat(business.get被保険者番号())),
+                        new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), row.getShinseishoKanriNo())
                 );
                 itemList.add(item);
             }
@@ -1785,6 +1841,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                 item.setCustomerBarCode(RString.EMPTY);
             }
             item.setSonota(row.getHohokenshaBango());
+            item.set識別コード(new ShikibetsuCode(div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value().substring(0, 5).concat(row.getHohokenshaBango())));
+            item.set拡張情報(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), row.getShinseishoKanriNo()));
             itemList.add(item);
         }
         return itemList;
@@ -1930,7 +1988,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
         RString 判定結果 = RString.EMPTY;
         if (IFSHIKIBETSUCODE99A.equals(厚労省IF識別コード)) {
             判定結果 = IchijiHanteiKekkaCode99.toValue(判定結果コード).get名称();
-        } else if (IFSHIKIBETSUCODE09A.equals(厚労省IF識別コード)) {
+        } else if (IFSHIKIBETSUCODE09A.equals(厚労省IF識別コード) || IFSHIKIBETSUCODE09B.equals(厚労省IF識別コード)) {
             判定結果 = IchijiHanteiKekkaCode09.toValue(判定結果コード).get名称();
         } else if (IFSHIKIBETSUCODE06A.equals(厚労省IF識別コード)) {
             判定結果 = IchijiHanteiKekkaCode06.toValue(判定結果コード).get名称();

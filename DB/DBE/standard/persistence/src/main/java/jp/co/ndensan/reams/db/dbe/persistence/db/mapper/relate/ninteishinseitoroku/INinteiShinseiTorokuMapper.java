@@ -5,8 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteishinseitoroku;
 
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteishinchokujohoshokai.HihokenshaJohoParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinseitoroku.NinteiShinseiTorokuRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinseitoroku.RirekiJohoRelateEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -31,6 +33,14 @@ public interface INinteiShinseiTorokuMapper {
      * @return 申請情報
      */
     RirekiJohoRelateEntity getDataForCom(RString 申請書管理番号);
+
+    /**
+     * 証記載保険者番号、被保険者番号から、申請情報データを取得します。
+     *
+     * @param param 被保険者情報検索条件
+     * @return 申請書管理番号
+     */
+    RString getZenkaiShinseishoKanriNo(HihokenshaJohoParamter param);
             
     /**
      * DbT5101を削除します。

@@ -88,6 +88,8 @@ public class IkenshokinyuyoshiOCRomoteEditorImpl implements IIkenshokinyuyoshiOC
         source.iryokikanJusho = business.getIryokikanAdress();
         source.iryokikanFaxNo = business.getIryokikanFax();
         source.layout = Layouts.鑑;
+        source.識別コード = business.get識別コード();
+        source.拡張情報 = business.get拡張情報();
         return source;
     }
 }

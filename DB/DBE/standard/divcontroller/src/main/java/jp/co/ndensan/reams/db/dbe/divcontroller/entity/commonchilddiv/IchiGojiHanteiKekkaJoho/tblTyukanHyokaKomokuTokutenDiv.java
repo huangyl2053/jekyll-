@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tblTyukanHyokaKomokuTokutenDiv extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -292,7 +292,7 @@ public class tblTyukanHyokaKomokuTokutenDiv extends TablePanel {
  * @author 自動生成
  */
 class celDai1gunHeaderAttblTyukanHyokaKomokuTokuten extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     @JsonProperty("lblDai1gun")
     private Label lblDai1gun;
 
@@ -322,7 +322,7 @@ class celDai1gunHeaderAttblTyukanHyokaKomokuTokuten extends TableCell {
  * @author 自動生成
  */
 class celDai2gunHeaderAttblTyukanHyokaKomokuTokuten extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     @JsonProperty("lblDai2gun")
     private Label lblDai2gun;
 
@@ -352,7 +352,7 @@ class celDai2gunHeaderAttblTyukanHyokaKomokuTokuten extends TableCell {
  * @author 自動生成
  */
 class celDai3gunHeaderAttblTyukanHyokaKomokuTokuten extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     @JsonProperty("lblDai3gun")
     private Label lblDai3gun;
 
@@ -382,7 +382,7 @@ class celDai3gunHeaderAttblTyukanHyokaKomokuTokuten extends TableCell {
  * @author 自動生成
  */
 class celDai4gunHeaderAttblTyukanHyokaKomokuTokuten extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     @JsonProperty("lblDai4gun")
     private Label lblDai4gun;
 
@@ -412,7 +412,7 @@ class celDai4gunHeaderAttblTyukanHyokaKomokuTokuten extends TableCell {
  * @author 自動生成
  */
 class celDai5gunHeaderAttblTyukanHyokaKomokuTokuten extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     @JsonProperty("lblDai5gun")
     private Label lblDai5gun;
 
@@ -442,7 +442,7 @@ class celDai5gunHeaderAttblTyukanHyokaKomokuTokuten extends TableCell {
  * @author 自動生成
  */
 class celDai1gunAttblTyukanHyokaKomokuTokuten extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     @JsonProperty("txtDai1gun")
     private TextBoxNum txtDai1gun;
 
@@ -472,7 +472,7 @@ class celDai1gunAttblTyukanHyokaKomokuTokuten extends TableCell {
  * @author 自動生成
  */
 class celDai2gunAttblTyukanHyokaKomokuTokuten extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     @JsonProperty("txtDai2gun")
     private TextBoxNum txtDai2gun;
 
@@ -502,7 +502,7 @@ class celDai2gunAttblTyukanHyokaKomokuTokuten extends TableCell {
  * @author 自動生成
  */
 class celDai3gunAttblTyukanHyokaKomokuTokuten extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     @JsonProperty("txtDai3gun")
     private TextBoxNum txtDai3gun;
 
@@ -532,7 +532,7 @@ class celDai3gunAttblTyukanHyokaKomokuTokuten extends TableCell {
  * @author 自動生成
  */
 class celDai4gunAttblTyukanHyokaKomokuTokuten extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     @JsonProperty("txtDai4gun")
     private TextBoxNum txtDai4gun;
 
@@ -562,7 +562,7 @@ class celDai4gunAttblTyukanHyokaKomokuTokuten extends TableCell {
  * @author 自動生成
  */
 class celDai5gunAttblTyukanHyokaKomokuTokuten extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     @JsonProperty("txtDai5gun")
     private TextBoxNum txtDai5gun;
 

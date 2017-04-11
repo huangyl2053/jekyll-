@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.kojinshinchokujokyohyo;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -123,4 +125,6 @@ public class KojinShinchokuJokyohyoJoho {
     private RString konnkai_22;
     private RString zennkai_22;
     private RString zennnoma_22;
+    private ShinseishoKanriNo shinseishoKanriNo;
+    private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
 }

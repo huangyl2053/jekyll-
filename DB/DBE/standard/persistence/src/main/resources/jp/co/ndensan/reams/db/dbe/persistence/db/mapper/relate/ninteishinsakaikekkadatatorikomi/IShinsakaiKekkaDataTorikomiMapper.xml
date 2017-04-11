@@ -112,4 +112,15 @@
         WHERE
         DbT5511."shinsakaiKaisaiNo" = #{介護認定審査会開催番号}
     </select>
+
+    <select resultOrdered="true" id="getShinsakaiKaisaiYotei"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteishinsakaikekkadatatorikomi.ShinsakaiKekkaDataTorikomiMybatisParameter"
+            resultType="jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5501ShinsakaiKaisaiYoteiJohoEntity" fetchSize="500">
+        SELECT
+        *
+        FROM
+        rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS DbT5501
+        WHERE
+        DbT5501."shinsakaiKaisaiNo" = #{介護認定審査会開催番号}
+    </select>
 </mapper>

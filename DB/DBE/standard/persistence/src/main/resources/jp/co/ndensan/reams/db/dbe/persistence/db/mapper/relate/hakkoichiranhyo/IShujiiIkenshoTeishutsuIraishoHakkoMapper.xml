@@ -334,6 +334,8 @@
         SELECT
         CASE WHEN(lag(T5101."hihokenshaNo",1) OVER (ORDER BY T5101."hihokenshaNo" ASC, T5101."ninteiShinseiYMD" DESC) = T5101."hihokenshaNo") 
         THEN FALSE ELSE TRUE END AS chokkin
+        , T5101."shinseishoKanriNo"
+        , T5101."shoKisaiHokenshaNo"
         , T5101."hihokenshaNo"
         , T5101."hihokenshaKana"
         , T5101."hihokenshaName"
@@ -397,6 +399,8 @@
         
         SELECT 
         CASE WHEN "chokkin" THEN '直近' ELSE '' END AS "直近区分"
+        , CASE WHEN "chokkin" OR mod = '1' THEN "shinseishoKanriNo" ELSE '' END AS "shinseishoKanriNo"
+        , CASE WHEN "chokkin" OR mod = '1' THEN "shoKisaiHokenshaNo" ELSE '' END AS "shoKisaiHokenshaNo"
         , CASE WHEN "chokkin" OR mod = '1' THEN "hihokenshaNo" ELSE '' END AS "hihokenshaNo"
         , CASE WHEN "chokkin" OR mod = '1' THEN "hihokenshaKana" ELSE '' END AS "hihokenshaKana"
         , CASE WHEN "chokkin" OR mod = '1' THEN "hihokenshaName" ELSE '' END AS "hihokenshaName"

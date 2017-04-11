@@ -187,6 +187,10 @@ public class NenreiKaikyubetsuYokaigodoJokyoHandler {
         List<KeyValueDataSource> dataSourceList = new ArrayList<>();
         RString ログインユーザID = ControlDataHolder.getUserId();
         List<AuthorityItem> authorityItemList = ShichosonSecurityJoho.getShichosonShikibetsuId(ログインユーザID);
+        if (authorityItemList == null || authorityItemList.isEmpty()) {
+            dataSourceList.add(new KeyValueDataSource(RString.EMPTY, RString.EMPTY));
+            return dataSourceList;
+        }
         RString 市町村識別ID = authorityItemList.get(0).getItemId();
         if (!識別ID.equals(市町村識別ID)) {
             KoseiShichosonJoho 構成市町村情報 = ShichosonSecurityJoho.getKouseiShichosonJoho(市町村識別ID);

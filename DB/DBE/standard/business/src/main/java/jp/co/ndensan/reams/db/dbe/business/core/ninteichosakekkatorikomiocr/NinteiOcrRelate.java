@@ -12,6 +12,7 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.RelatedDataBase;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IOcrData;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResults;
+import jp.co.ndensan.reams.db.dbe.definition.core.TorisageKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.TreatmentWhenIchijiHanteiZumi;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosakekkatorikomiocr.NinteiChosaKekkaTorikomiOcrRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -69,21 +70,17 @@ public class NinteiOcrRelate extends RelatedDataBase {
     }
 
     /**
-     * 申請書管理番号を取得します。
+     * 申請書管理番号を返します。
      *
      * @return 申請書管理番号
      */
-    public RString get申請書管理番号() {
+    public RString get申請書管理番号Value() {
         return entity.get申請書管理番号();
     }
 
-    /**
-     * 申請書翰林番号を{@link ShinseishoKanriNo}型で返します。
-     *
-     * @return 申請書翰林番号({@link ShinseishoKanriNo}型)
-     */
-    public ShinseishoKanriNo getShinseishoKanriNo() {
-        return new ShinseishoKanriNo(get申請書管理番号());
+    @Override
+    public ShinseishoKanriNo get申請書管理番号() {
+        return new ShinseishoKanriNo(get申請書管理番号Value());
     }
 
     /**
@@ -215,6 +212,11 @@ public class NinteiOcrRelate extends RelatedDataBase {
     @Override
     protected RString get依頼名() {
         return IRAI_NAME;
+    }
+
+    @Override
+    protected TorisageKubun get取下区分() {
+        return TorisageKubun.toValue(this.entity.get取下区分コード());
     }
 
     /**

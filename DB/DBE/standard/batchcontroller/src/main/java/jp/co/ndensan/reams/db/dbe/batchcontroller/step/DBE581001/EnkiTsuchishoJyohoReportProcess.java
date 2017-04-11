@@ -128,7 +128,7 @@ public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT5101Nin
         FlexibleDate 発行日 = get通知書発行日(dbtEntity.getShinseishoKanriNo().value());
         entity.set文書番号(parameter.get文書番号());
         NinshoshaSource ninshoshaSource = ReportUtil.get認証者情報(
-                SubGyomuCode.DBD介護受給,
+                SubGyomuCode.DBE認定支援,
                 REPORT_DBE581001,
                 発行日,
                 NinshoshaDenshikoinshubetsuCode.保険者印.getコード(),
@@ -144,27 +144,27 @@ public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT5101Nin
         entity.set公印省略(ninshoshaSource.koinShoryaku);
         entity.set公印文字列(ninshoshaSource.koinMojiretsu);
         Map<Integer, RString> map = ReportUtil.get通知文(
-                SubGyomuCode.DBD介護受給,
+                SubGyomuCode.DBE認定支援,
                 REPORT_DBE581001,
                 KamokuCode.EMPTY,
                 1);
         entity.set通知文1(map.get(1));
         entity.set通知文2(map.get(2));
         map = ReportUtil.get通知文(
-                SubGyomuCode.DBD介護受給,
+                SubGyomuCode.DBE認定支援,
                 REPORT_DBE581001,
                 KamokuCode.EMPTY,
                 2);
         entity.setフフォント大(map.get(2));
         map = ReportUtil.get通知文(
-                SubGyomuCode.DBD介護受給,
+                SubGyomuCode.DBE認定支援,
                 REPORT_DBE581001,
                 KamokuCode.EMPTY,
                 INT_3);
         entity.setフォント混在_1(map.get(2));
         entity.setフォント混在_2(map.get(INT_3));
         map = ReportUtil.get通知文(
-                SubGyomuCode.DBD介護受給,
+                SubGyomuCode.DBE認定支援,
                 REPORT_DBE581001,
                 KamokuCode.EMPTY,
                 INT_4);
@@ -257,7 +257,7 @@ public class EnkiTsuchishoJyohoReportProcess extends BatchProcessBase<DbT5101Nin
     }
 
     private ChohyoSeigyoKyotsu get帳票共通情報(ReportId reportId) {
-        return new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBD介護受給, reportId);
+        return new ChohyoSeigyoKyotsuManager().get帳票制御共通(SubGyomuCode.DBE認定支援, reportId);
     }
 
     @Override

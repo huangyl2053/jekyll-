@@ -24,6 +24,7 @@ import lombok.Setter;
 public final class ShinsaiinJissekiIchiranMybitisParamter implements IMyBatisParameter {
 
     private final boolean batchFlag;
+    private final boolean is歯科医師含む;
     private final boolean 審査会開催日FROMFlag;
     private final FlexibleDate 審査会開催日FROM;
     private final boolean 審査会開催日TOFlag;
@@ -33,6 +34,7 @@ public final class ShinsaiinJissekiIchiranMybitisParamter implements IMyBatisPar
     private final List<ShinsaiinJissekiIchiranKey> keyJoho;
 
     private ShinsaiinJissekiIchiranMybitisParamter(boolean batchFlag,
+            boolean is歯科医師含む,
             boolean 審査会開催日FROMFlag,
             FlexibleDate 審査会開催日FROM,
             boolean 審査会開催日TOFlag,
@@ -41,6 +43,7 @@ public final class ShinsaiinJissekiIchiranMybitisParamter implements IMyBatisPar
             int 件数,
             List<ShinsaiinJissekiIchiranKey> keyJoho) {
         this.batchFlag = batchFlag;
+        this.is歯科医師含む = is歯科医師含む;
         this.審査会開催日FROMFlag = 審査会開催日FROMFlag;
         this.審査会開催日FROM = 審査会開催日FROM;
         this.審査会開催日TOFlag = 審査会開催日TOFlag;
@@ -54,6 +57,7 @@ public final class ShinsaiinJissekiIchiranMybitisParamter implements IMyBatisPar
      * 審査会委員実績データの取得のパラメータを作成します。
      *
      * @param batchFlag batchFlag
+     * @param is歯科医師含む boolean
      * @param 審査会開催日FROM 審査会開催日FROM
      * @param 審査会開催日TO 審査会開催日TO
      * @param 最大表示件数 最大表示件数
@@ -61,11 +65,13 @@ public final class ShinsaiinJissekiIchiranMybitisParamter implements IMyBatisPar
      * @return 審査会委員実績データの取得パラメータ
      */
     public static ShinsaiinJissekiIchiranMybitisParamter createParamter(boolean batchFlag,
+            boolean is歯科医師含む,
             FlexibleDate 審査会開催日FROM,
             FlexibleDate 審査会開催日TO,
             RString 最大表示件数,
             List<ShinsaiinJissekiIchiranKey> keyJoho) {
         return new ShinsaiinJissekiIchiranMybitisParamter(batchFlag,
+                is歯科医師含む,
                 !審査会開催日FROM.isEmpty(),
                 審査会開催日FROM,
                 !審査会開催日TO.isEmpty(),
@@ -79,16 +85,19 @@ public final class ShinsaiinJissekiIchiranMybitisParamter implements IMyBatisPar
      * 介護認定審査会委員報酬集計表データの取得のパラメータを作成します。
      *
      * @param batchFlag batchFlag
+     * @param is歯科医師含む boolean
      * @param 審査会開催日FROM 審査会開催日FROM
      * @param 審査会開催日TO 審査会開催日TO
      * @param keyJoho 介護認定審査会委員報酬集計表のキー情報
      * @return 介護認定審査会委員報酬集計表データの取得パラメータ
      */
     public static ShinsaiinJissekiIchiranMybitisParamter createParamter(boolean batchFlag,
+            boolean is歯科医師含む,
             FlexibleDate 審査会開催日FROM,
             FlexibleDate 審査会開催日TO,
             List<ShinsaiinJissekiIchiranKey> keyJoho) {
         return new ShinsaiinJissekiIchiranMybitisParamter(batchFlag,
+                is歯科医師含む,
                 !審査会開催日FROM.isEmpty(),
                 審査会開催日FROM,
                 !審査会開催日TO.isEmpty(),

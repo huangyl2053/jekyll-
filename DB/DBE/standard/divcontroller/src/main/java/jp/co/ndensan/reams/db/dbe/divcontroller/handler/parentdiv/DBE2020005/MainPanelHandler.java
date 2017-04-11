@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.ChikuNinteiChosainIdentifi
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuide.ChosaItakusakiAndChosainGuideDiv;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
@@ -344,6 +345,7 @@ public class MainPanelHandler {
         model.set委託先名(RString.EMPTY);
         model.set調査員コード(RString.EMPTY);
         model.set調査員名(RString.EMPTY);
+        model.set対象モード(new RString(ChosaItakusakiAndChosainGuideDiv.TaishoMode.Itakusaki.name()));
         div.setHdnDataPass(DataPassingConverter.serialize(model));
     }
 
@@ -371,6 +373,7 @@ public class MainPanelHandler {
         model.set委託先名(RString.EMPTY);
         model.set調査員コード(div.getNinteiChosainInput().getTxtNinteiChosainCode().getValue());
         model.set調査員名(RString.EMPTY);
+        model.set対象モード(new RString(ChosaItakusakiAndChosainGuideDiv.TaishoMode.Chosain.name()));
         div.setHdnDataPass(DataPassingConverter.serialize(model));
     }
 

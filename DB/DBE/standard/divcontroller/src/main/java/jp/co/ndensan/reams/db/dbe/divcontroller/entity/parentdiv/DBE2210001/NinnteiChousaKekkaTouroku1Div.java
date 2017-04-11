@@ -37,6 +37,10 @@ public class NinnteiChousaKekkaTouroku1Div extends Panel {
     private NinteiChosaNyuryokuDiv NinteiChosaNyuryoku;
     @JsonProperty("ccdKanryoMessage")
     private KaigoKanryoMessageDiv ccdKanryoMessage;
+    @JsonProperty("ichijiHanteiArgument")
+    private RString ichijiHanteiArgument;
+    @JsonProperty("ichijiHanteiResult")
+    private RString ichijiHanteiResult;
     @JsonProperty("hidden登録業務コード")
     private RString hidden登録業務コード;
     @JsonProperty("hidden登録グループコード")
@@ -73,6 +77,8 @@ public class NinnteiChousaKekkaTouroku1Div extends Panel {
     private RString hdnChosaIraiRirekiNo;
     @JsonProperty("hdnOperation")
     private RString hdnOperation;
+    @JsonProperty("ichijiHanteiKekka")
+    private RString ichijiHanteiKekka;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -105,6 +111,42 @@ public class NinnteiChousaKekkaTouroku1Div extends Panel {
     @JsonProperty("ccdKanryoMessage")
     public IKaigoKanryoMessageDiv getCcdKanryoMessage() {
         return ccdKanryoMessage;
+    }
+
+    /*
+     * getichijiHanteiArgument
+     * @return ichijiHanteiArgument
+     */
+    @JsonProperty("ichijiHanteiArgument")
+    public RString getIchijiHanteiArgument() {
+        return ichijiHanteiArgument;
+    }
+
+    /*
+     * setichijiHanteiArgument
+     * @param ichijiHanteiArgument ichijiHanteiArgument
+     */
+    @JsonProperty("ichijiHanteiArgument")
+    public void setIchijiHanteiArgument(RString ichijiHanteiArgument) {
+        this.ichijiHanteiArgument = ichijiHanteiArgument;
+    }
+
+    /*
+     * getichijiHanteiResult
+     * @return ichijiHanteiResult
+     */
+    @JsonProperty("ichijiHanteiResult")
+    public RString getIchijiHanteiResult() {
+        return ichijiHanteiResult;
+    }
+
+    /*
+     * setichijiHanteiResult
+     * @param ichijiHanteiResult ichijiHanteiResult
+     */
+    @JsonProperty("ichijiHanteiResult")
+    public void setIchijiHanteiResult(RString ichijiHanteiResult) {
+        this.ichijiHanteiResult = ichijiHanteiResult;
     }
 
     /*
@@ -432,6 +474,24 @@ public class NinnteiChousaKekkaTouroku1Div extends Panel {
     }
 
     /*
+     * getichijiHanteiKekka
+     * @return ichijiHanteiKekka
+     */
+    @JsonProperty("ichijiHanteiKekka")
+    public RString getIchijiHanteiKekka() {
+        return ichijiHanteiKekka;
+    }
+
+    /*
+     * setichijiHanteiKekka
+     * @param ichijiHanteiKekka ichijiHanteiKekka
+     */
+    @JsonProperty("ichijiHanteiKekka")
+    public void setIchijiHanteiKekka(RString ichijiHanteiKekka) {
+        this.ichijiHanteiKekka = ichijiHanteiKekka;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -455,13 +515,13 @@ public class NinnteiChousaKekkaTouroku1Div extends Panel {
     }
 
     @JsonIgnore
-    public INinteiShinseiRenrakusakiKihonDiv getCcdNinteiShinseiRenrakusakiKihon() {
-        return this.getNinteiChosaNyuryoku().getChosaTaisho().getCcdNinteiShinseiRenrakusakiKihon();
+    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
+        return this.getNinteiChosaNyuryoku().getChosaTaisho().getCcdNinteiShinseishaKihonInfo();
     }
 
     @JsonIgnore
-    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
-        return this.getNinteiChosaNyuryoku().getChosaTaisho().getCcdNinteiShinseishaKihonInfo();
+    public INinteiShinseiRenrakusakiKihonDiv getCcdNinteiShinseiRenrakusakiKihon() {
+        return this.getNinteiChosaNyuryoku().getChosaTaisho().getCcdNinteiShinseiRenrakusakiKihon();
     }
 
     @JsonIgnore
@@ -1007,6 +1067,36 @@ public class NinnteiChousaKekkaTouroku1Div extends Panel {
     @JsonIgnore
     public void  setBtnClear(Button btnClear) {
         this.getNinteiChosaNyuryoku().setBtnClear(btnClear);
+    }
+
+    @JsonIgnore
+    public Button getBtnIchijiHanteiValidate() {
+        return this.getNinteiChosaNyuryoku().getBtnIchijiHanteiValidate();
+    }
+
+    @JsonIgnore
+    public void  setBtnIchijiHanteiValidate(Button btnIchijiHanteiValidate) {
+        this.getNinteiChosaNyuryoku().setBtnIchijiHanteiValidate(btnIchijiHanteiValidate);
+    }
+
+    @JsonIgnore
+    public Button getBtnHanteishoriAto() {
+        return this.getNinteiChosaNyuryoku().getBtnHanteishoriAto();
+    }
+
+    @JsonIgnore
+    public void  setBtnHanteishoriAto(Button btnHanteishoriAto) {
+        this.getNinteiChosaNyuryoku().setBtnHanteishoriAto(btnHanteishoriAto);
+    }
+
+    @JsonIgnore
+    public Button getBtnIchijiHantei() {
+        return this.getNinteiChosaNyuryoku().getBtnIchijiHantei();
+    }
+
+    @JsonIgnore
+    public void  setBtnIchijiHantei(Button btnIchijiHantei) {
+        this.getNinteiChosaNyuryoku().setBtnIchijiHantei(btnIchijiHantei);
     }
 
     // </editor-fold>

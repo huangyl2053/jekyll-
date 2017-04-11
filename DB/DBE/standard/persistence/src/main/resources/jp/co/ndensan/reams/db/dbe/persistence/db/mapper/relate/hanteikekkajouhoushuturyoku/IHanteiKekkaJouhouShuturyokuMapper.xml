@@ -199,7 +199,6 @@
         <if test="useChikuCode">
             AND DbT5101."chikuCode" = #{chikuCode}
         </if>
-        AND DbT5101."shisetsuNyushoFlag" = #{shisetsuNyushoFlag}
 
         <if test="useNinteiChosaItakusakiCode">
             AND DbT5101."ninteiChosaItakusakiCode" = #{ninteiChosaItakusakiCode}

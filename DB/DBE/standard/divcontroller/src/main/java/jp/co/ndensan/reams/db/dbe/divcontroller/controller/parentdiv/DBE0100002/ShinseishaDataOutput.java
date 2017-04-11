@@ -18,14 +18,10 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0100002.Shi
 import jp.co.ndensan.reams.db.dbe.service.core.shinseikensaku.ShinseiKensakuFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -166,7 +162,8 @@ public class ShinseishaDataOutput {
      * @return ResponseData
      */
     public ResponseData<ShinseishaDataOutputDiv> onClick_btnShokai(ShinseishaDataOutputDiv div) {
-        ViewStateHolder.put(ViewStateKeys.申請書管理番号, div.getDgShinseiJoho().getClickedItem().getShinseishoKanriNo());
+        dgShinseiJoho_Row row = div.getDgShinseiJoho().getClickedItem();
+        ViewStateHolder.put(ViewStateKeys.申請書管理番号, row.getShinseishoKanriNo());
         return ResponseData.of(div).respond();
     }
 
@@ -194,19 +191,12 @@ public class ShinseishaDataOutput {
         }
         SearchResult<ShinseiKensakuBusiness> searchResult
                 = ShinseiKensakuFinder.createInstance().getShinseiKensaku(getHandler(div).createSearchParameter(hihokenshaNo));
-        DbAccessLogger accessLogger = new DbAccessLogger();
         if (!searchResult.records().isEmpty()) {
             int lastShinseiYmdIndex = findLastIndex(searchResult);
             div.getCcdNinteishinseishaFinder()
                     .updateSaikinShorisha(hihokenshaNo, searchResult.records().get(lastShinseiYmdIndex).get被保険者氏名().value());
             div.getCcdNinteishinseishaFinder().reloadSaikinShorisha();
             getHandler(div).set申請一覧データグリッド(searchResult);
-            for (dgShinseiJoho_Row row : div.getDgShinseiJoho().getDataSource()) {
-                ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
-                        row.getShinseishoKanriNo());
-                accessLogger.store(new ShoKisaiHokenshaNo(row.getShoKisaiHokenshaNo()), row.getHihokenshaNo(), expandedInfo);
-            }
-            accessLogger.flushBy(AccessLogType.照会);
         } else {
             div.getDgShinseiJoho().setDataSource(Collections.<dgShinseiJoho_Row>emptyList());
             return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();

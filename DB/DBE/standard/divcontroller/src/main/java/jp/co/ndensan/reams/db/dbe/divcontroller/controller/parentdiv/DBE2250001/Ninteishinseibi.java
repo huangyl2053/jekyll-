@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.GaikyoTokki;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoChosaItem;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoGaikyoChosa;
@@ -34,26 +33,25 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoServiceJokyo
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoShisetsuRiyo;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoTokkijiko;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
-import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDescriptor;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDownload;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.euc.api.EucOtherInfo;
+import jp.co.ndensan.reams.uz.uza.euc.cooperation.EucDownload;
+import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.FileSystem;
@@ -69,10 +67,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.lang.SystemException;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
+import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -152,13 +154,6 @@ public class Ninteishinseibi {
         getHandler(div).set認定調査一覧データグリッド(基本調査データCsvEntityList,
                 filePath_概況特記データ, filePath_特記情報データ, 認定調査結果入手_必須調査票);
 
-        DbAccessLogger accessLogger = new DbAccessLogger();
-        for (ChosaKekkaNyuryokuCsvEntity entity : 基本調査データCsvEntityList) {
-            ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
-                    entity.get申請書管理番号());
-            accessLogger.store(new ShoKisaiHokenshaNo(entity.get証記載保険者番号()), entity.get被保険者番号(), expandedInfo);
-        }
-        accessLogger.flushBy(AccessLogType.更新);
         Directory.deleteWorkDirectory(WORKFOLDERNAME.toString());
         return ResponseData.of(div).respond();
     }
@@ -181,8 +176,10 @@ public class Ninteishinseibi {
      * @return IDownLoadServletResponse
      */
     public IDownLoadServletResponse onClick_btnErrorListOutput(NinteishinseibiDiv div, IDownLoadServletResponse response) {
+        FileSpoolManager manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, エラーリスト_EUCENTITYID, UzUDE0831EucAccesslogFileType.Csv);
         RString 出力名 = EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, エラーリスト_EUCENTITYID);
-        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), 出力名);
+        RString filePath = Path.combinePath(manager.getEucOutputDirectry(), 出力名);
+        List<PersonalData> personalDataList = new ArrayList<>();
         try (CsvWriter<NinteichosaIchiranErrorListCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath)
                 .canAppend(false)
@@ -194,14 +191,23 @@ public class Ninteishinseibi {
                 .build()) {
             for (dgNinteiChosaData_Row row : getHandler(div).getNG行()) {
                 csvWriter.writeLine(editErrorListCsvEntity(row));
+                personalDataList.add(toPersonalData(row));
             }
             csvWriter.close();
         }
         SharedFileDescriptor descriptor = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(出力名));
         descriptor = SharedFile.defineSharedFile(descriptor);
         CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
-        SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(descriptor, new FilesystemPath(filePath), opts);
-        return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, 出力名), response);
+        SharedFile.copyToSharedFile(descriptor, new FilesystemPath(filePath), opts);
+        AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+        manager.spool(filePath, accessLogUUID);
+        return EucDownload.directAccessDownload(SubGyomuCode.DBE認定支援, manager.getSharedFileName(), manager.getSharedFileId(), response);
+    }
+
+    private PersonalData toPersonalData(dgNinteiChosaData_Row row) {
+        ShikibetsuCode shikibetsuCode = new ShikibetsuCode(row.getShokisaiHokenshaNo().substring(0, 5).concat(row.getHihokenshaNo().getValue()));
+        ExpandedInformation expandedInformation = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), row.getShinseishoKanriNo());
+        return PersonalData.of(shikibetsuCode, expandedInformation);
     }
 
     /**

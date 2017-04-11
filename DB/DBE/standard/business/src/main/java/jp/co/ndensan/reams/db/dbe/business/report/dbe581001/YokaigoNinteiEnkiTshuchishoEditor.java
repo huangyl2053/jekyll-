@@ -88,13 +88,13 @@ class YokaigoNinteiEnkiTshuchishoEditor implements IYokaigoNinteiEnkiTshuchishoE
             if (enkiMikomiKaishiYMD != null && !enkiMikomiKaishiYMD.isEmpty() && enkiMikomiKaishiYMD.isWareki()) {
                 source.shoriMikomiKaishiYMD = enkiMikomiKaishiYMD
                         .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                        .separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             }
             FlexibleDate enkiMikomiShuryoYMD = dbT5101entity.getEnkiMikomiShuryoYMD();
             if (enkiMikomiShuryoYMD != null && !enkiMikomiShuryoYMD.isEmpty() && enkiMikomiShuryoYMD.isWareki()) {
                 source.shoriMikomiShuryoYMD = enkiMikomiShuryoYMD
                         .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN)
-                        .separator(Separator.JAPANESE).fillType(FillType.ZERO).toDateString();
+                        .separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
             }
         }
 

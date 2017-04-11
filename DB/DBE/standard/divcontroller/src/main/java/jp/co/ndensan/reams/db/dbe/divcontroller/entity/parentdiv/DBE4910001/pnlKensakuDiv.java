@@ -16,15 +16,13 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class pnlKensakuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-12-15_08-21-11">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("radKubun")
-    private RadioButton radKubun;
     @JsonProperty("txtZenkaiChuishutsuRange")
     private TextBoxDateRange txtZenkaiChuishutsuRange;
     @JsonProperty("txtChuishutsuRange")
@@ -35,8 +33,6 @@ public class pnlKensakuDiv extends Panel {
     private Button btnHihokensha;
     @JsonProperty("btnJokenClear")
     private Button btnJokenClear;
-    @JsonProperty("btnKensaku")
-    private Button btnKensaku;
     @JsonProperty("ccdHokenshaList")
     private HokenshaListDiv ccdHokenshaList;
 
@@ -46,24 +42,6 @@ public class pnlKensakuDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
-    /*
-     * getradKubun
-     * @return radKubun
-     */
-    @JsonProperty("radKubun")
-    public RadioButton getRadKubun() {
-        return radKubun;
-    }
-
-    /*
-     * setradKubun
-     * @param radKubun radKubun
-     */
-    @JsonProperty("radKubun")
-    public void setRadKubun(RadioButton radKubun) {
-        this.radKubun = radKubun;
-    }
-
     /*
      * gettxtZenkaiChuishutsuRange
      * @return txtZenkaiChuishutsuRange
@@ -152,24 +130,6 @@ public class pnlKensakuDiv extends Panel {
     @JsonProperty("btnJokenClear")
     public void setBtnJokenClear(Button btnJokenClear) {
         this.btnJokenClear = btnJokenClear;
-    }
-
-    /*
-     * getbtnKensaku
-     * @return btnKensaku
-     */
-    @JsonProperty("btnKensaku")
-    public Button getBtnKensaku() {
-        return btnKensaku;
-    }
-
-    /*
-     * setbtnKensaku
-     * @param btnKensaku btnKensaku
-     */
-    @JsonProperty("btnKensaku")
-    public void setBtnKensaku(Button btnKensaku) {
-        this.btnKensaku = btnKensaku;
     }
 
     /*

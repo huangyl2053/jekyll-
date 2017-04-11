@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteiimagesakujo;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImagekanriJoho;
+import jp.co.ndensan.reams.db.dbe.definition.core.util.accesslog.ExpandedInformations;
 import jp.co.ndensan.reams.db.dbe.definition.core.yokaigoninteiimagekanri.DeletionMethod;
 import jp.co.ndensan.reams.db.dbe.definition.core.yokaigoninteiimagekanri.OperationTarget;
 import jp.co.ndensan.reams.db.dbe.definition.core.yokaigoninteiimagekanri.OperationTargets;
@@ -19,13 +20,16 @@ import jp.co.ndensan.reams.db.dbe.persistence.db.basic.DbT5602ShujiiIkenshoHoshu
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.yokaigoninteiimagesakujo.IYokaigoninteiimagesakujoMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.entity.SharedFileEntryInfoEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 
@@ -149,6 +153,10 @@ public class YokaigoninteiimagesakujoManager {
         for (OperationTarget t : 処理対象s) {
             _updateOrDelete(イメージ管理情報, t);
         }
+        DbAccessLogger accessLogger = new DbAccessLogger();
+        accessLogger.store(new ShoKisaiHokenshaNo(イメージ管理情報.get証記載保険者番号()), イメージ管理情報.get被保険者番号(),
+                ExpandedInformations.fromShinseishoKanriNo(イメージ管理情報.get申請書管理番号()));
+        accessLogger.flushBy(AccessLogType.更新);
     }
 
     private void _updateOrDelete(ImagekanriJoho imageKanriInfo, OperationTarget target) {

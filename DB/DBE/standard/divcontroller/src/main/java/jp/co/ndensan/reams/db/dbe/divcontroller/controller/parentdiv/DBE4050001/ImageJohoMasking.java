@@ -16,10 +16,10 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE4050001.dgIm
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE4050001.ImageJohoMaskingHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE4050001.ImageJohoMaskingValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -89,12 +89,30 @@ public class ImageJohoMasking {
      * @return ResponseData<イメージ情報マスキングDiv>
      */
     public ResponseData<ImageJohoMaskingDiv> onClick_btnTaishoKensaku(ImageJohoMaskingDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         List<ImageJohoMaskingResult> resultList = getHandler(div).get対象者for画面();
         if (!ResponseHolder.isReRequest() && resultList.isEmpty()) {
-            throw new ApplicationException(UrInformationMessages.該当データなし.getMessage());
+            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
         }
         getHandler(div).setDataGrid(resultList);
         return ResponseData.of(div).setState(DBE4050001StateName.検索結果表示);
+    }
+
+    /**
+     * 画面検索条件より、処理対象者データを取得する
+     *
+     * @param div イメージ情報マスキングDiv
+     * @return ResponseData<イメージ情報マスキングDiv>
+     */
+    public ResponseData<ImageJohoMaskingDiv> onChange_ddlKensakuTaisho(ImageJohoMaskingDiv div) {
+        if (new RString("0").equals(div.getDdlKensakuTaisho().getSelectedKey())) {
+            getHandler(div).clearAndDisableSearchYMD();
+        } else {
+            div.getTxtSearchYMD().setDisabled(false);
+        }
+        return ResponseData.of(div).respond();
     }
 
     /**
@@ -115,7 +133,9 @@ public class ImageJohoMasking {
      * @return ResponseData<イメージ情報マスキングDiv>
      */
     public ResponseData<ImageJohoMaskingDiv> onSelectBySelectButton_dgImageMaskShoriTaishosha(ImageJohoMaskingDiv div) {
-        getHandler(div).setMeisai();
+        if (!ResponseHolder.isReRequest() && !getHandler(div).setMeisai()) {
+            return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
+        }
         getHandler(div).setDisabledStateToButton();
         if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC20801)) {
             return ResponseData.of(div).setState(DBE4050001StateName.イメージ表示完了処理);

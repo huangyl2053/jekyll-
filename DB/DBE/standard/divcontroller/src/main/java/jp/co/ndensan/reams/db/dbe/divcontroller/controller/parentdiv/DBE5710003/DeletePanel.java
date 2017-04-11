@@ -100,12 +100,12 @@ public class DeletePanel {
         if (ExclusiveLock.isLocked(ResponseHolder.getUIContainerId())) {
             throw new ApplicationException(DbeErrorMessages.バッチとの機能間排他.getMessage());
         }
-
         if (!ResponseHolder.isReRequest()) {
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.削除の確認.getMessage().getCode(),
                     UrQuestionMessages.削除の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
+
         if (new RString(UrInformationMessages.削除終了.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             boolean existsAnyImages
@@ -118,20 +118,21 @@ public class DeletePanel {
         if (new RString(DbeInformationMessages.削除可能なイメージ情報なし.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
             return ResponseData.of(div).forwardWithEventName(DBE5710003TransitionEventName.要介護認定イメージ情報管理へ戻る).respond();
         }
+        if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+            if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
+                return ResponseData.of(div).respond();
+            }
 
-        ValidationMessageControlPairs controlPairs = getValidationHandler(div).validateInput();
-        if (controlPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(controlPairs).respond();
-        }
-        ImagekanriJoho imageKanriJoho = ViewStateHolder.get(ViewStateKeys.イメージ情報, ImagekanriJoho.class);
-        OperationTargets targets = getMapper(div).toOperationTargets();
-        ValidationMessageControlPairs イメージ削除チェック = getValidationHandler(div).validateDeletable(targets, imageKanriJoho);
-        if (イメージ削除チェック.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(イメージ削除チェック).respond();
-        }
-        if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode())
-                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+            ValidationMessageControlPairs controlPairs = getValidationHandler(div).validateInput();
+            if (controlPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(controlPairs).respond();
+            }
+            ImagekanriJoho imageKanriJoho = ViewStateHolder.get(ViewStateKeys.イメージ情報, ImagekanriJoho.class);
+            OperationTargets targets = getMapper(div).toOperationTargets();
+            ValidationMessageControlPairs イメージ削除チェック = getValidationHandler(div).validateDeletable(targets, imageKanriJoho);
+            if (イメージ削除チェック.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(イメージ削除チェック).respond();
+            }
             ImageDeletor.deleteImageFiles(imageKanriJoho, targets);
             YokaigoninteiimagesakujoManager.createInstance().updateOrDelete(imageKanriJoho, targets);
             return ResponseData.of(div).addMessage(UrInformationMessages.削除終了.getMessage()).respond();

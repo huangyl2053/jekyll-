@@ -13,7 +13,9 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinjoho.shinsakaiiinjoh
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinjoho.shinsakaiiinjoho.ShinsakaiIinJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaiiinjoho.shinsakaiiinjoho.ShozokuKikanIchiranFinderBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaiiinjoho.ShinsakaiIinJohoMapperParameter;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001.KozaJohoDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001.ShinsakaiIinJohoTorokuDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001.ShozokuKikanIchiran;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001.dgShinsaInJohoIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5130001.dgShozokuKikanIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaiiinjoho.shinsakaiiinjoho.ShinsakaiIinJohoManager;
@@ -41,6 +43,7 @@ import jp.co.ndensan.reams.db.dbz.service.core.chosaitakusakiandchosaininput.Cho
 import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichosonJohoFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.shujiiiryokikanandshujiiinput.ShujiiIryokikanAndShujiiInputFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.sonotakikanguide.SoNoTaKikanGuideFinder;
+import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikan;
 import jp.co.ndensan.reams.ua.uax.business.core.kinyukikan.KinyuKikanShiten;
 import jp.co.ndensan.reams.ua.uax.business.core.koza.YokinShubetsuPattern;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -64,6 +67,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.VerticalScrollPosition;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Comparators;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
+import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
  * 介護認定審査会委員情報のハンドラークラスです。
@@ -263,6 +267,21 @@ public class ShinsakaiIinJohoTorokuHandler {
                 new KinyuKikanCode(div.getDgShinsaInJohoIchiran().getClickedItem().getKinyuKikanCode()),
                 new KinyuKikanShitenCode(div.getDgShinsaInJohoIchiran().getClickedItem().getKinyuKikanShitenCode()),
                 FlexibleDate.getNowDate());
+        initKozaJoho();
+        if (div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関() == null) {
+            return;
+        }
+        if (div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().isゆうちょ銀行()) {
+            RString tenBan = div.getDgShinsaInJohoIchiran().getClickedItem().getKinyuKikanShitenCode();
+            div.getKozaJoho().getTxtTenBan().setValue(tenBan);
+            if (!RString.isNullOrEmpty(tenBan)) {
+                RString shitenMeisho = getShitenMeisho(tenBan);
+                if (!RString.EMPTY.equals(tenBan)) {
+                    div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getTxtTenMei().
+                            setValue(shitenMeisho);
+                }
+            }
+        }
         div.getKozaJoho().getDdlYokinShubetsu().setSelectedKey(div.getDgShinsaInJohoIchiran().getClickedItem().getYokinShubetsu());
         div.getKozaJoho().getTxtGinkoKozaNo().setValue(div.getDgShinsaInJohoIchiran().getClickedItem().getKozaNo());
         div.getKozaJoho().getTxtKozaMeiginin().setValue(div.getDgShinsaInJohoIchiran().getClickedItem().getKozaMeigininKana());
@@ -396,6 +415,8 @@ public class ShinsakaiIinJohoTorokuHandler {
         div.getKozaJoho().getTxtGinkoKozaNo().clearValue();
         div.getKozaJoho().getTxtKozaMeiginin().clearValue();
         div.getKozaJoho().getTxtKanjiMeiginin().clearValue();
+        div.getKozaJoho().getTxtTenBan().clearValue();
+        div.getKozaJoho().getTxtTenMei().clearValue();
     }
 
     /**
@@ -443,7 +464,8 @@ public class ShinsakaiIinJohoTorokuHandler {
                     .concat(nullToEmpty(row.getNinteiChosainCode()))
                     .concat(nullToEmpty(row.getShujiiIryoKikanCode().getValue()))
                     .concat(nullToEmpty(row.getShujiiCode()))
-                    .concat((row.getSonotaKikanCode().getValue())))) {
+                    .concat(row.getSonotaKikanCode().getValue())
+                    .concat(row.getJotai()))) {
                 return true;
             }
         }
@@ -495,7 +517,13 @@ public class ShinsakaiIinJohoTorokuHandler {
         shinsakaiIinJohoBuilder.set電話番号(div.getTxtTelNo1().getDomain());
         shinsakaiIinJohoBuilder.setFAX番号(div.getTxtFaxNo().getDomain());
         shinsakaiIinJohoBuilder.set金融機関コード(div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode());
-        shinsakaiIinJohoBuilder.set金融機関支店コード(div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode());
+        if (div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput() != null) {
+            if (!div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().isゆうちょ銀行()) {
+                shinsakaiIinJohoBuilder.set金融機関支店コード(div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode());
+            } else {
+                shinsakaiIinJohoBuilder.set金融機関支店コード(new KinyuKikanShitenCode(div.getKozaJoho().getTxtTenBan().getValue()));
+            }
+        }
         shinsakaiIinJohoBuilder.set預金種別(div.getKozaJoho().getDdlYokinShubetsu().getSelectedKey());
         shinsakaiIinJohoBuilder.set口座番号(div.getKozaJoho().getTxtGinkoKozaNo().getValue());
         shinsakaiIinJohoBuilder.set口座名義人カナ(new AtenaKanaMeisho(div.getKozaJoho().getTxtKozaMeiginin().getValue()));
@@ -506,6 +534,9 @@ public class ShinsakaiIinJohoTorokuHandler {
     private ShinsakaiIinJoho setViewStateBy所属機関一覧(ShinsakaiIinJohoTorokuDiv div, ShinsakaiIinJohoBuilder shinsakaiIinJohoBuilder) {
         int i = 0;
         for (dgShozokuKikanIchiran_Row row : div.getDgShozokuKikanIchiran().getDataSource()) {
+            if (状態_削除.equals(row.getJotai())) {
+                continue;
+            }
             if (RString.isNullOrEmpty(row.getNinteiItakusakiCode().getValue())
                     && RString.isNullOrEmpty(row.getShujiiIryoKikanCode().getValue())
                     && RString.isNullOrEmpty(row.getSonotaKikanCode().getValue())) {
@@ -532,7 +563,7 @@ public class ShinsakaiIinJohoTorokuHandler {
      * @param eventJotai 状態
      * @param jotai
      */
-    public void setShinsakiToIchiran(RString eventJotai, RString jotai) {
+    public void setShinsakiToIchiran(RString eventJotai, RString jotai, RString 所属機関一覧) {
         dgShinsaInJohoIchiran_Row row = new dgShinsaInJohoIchiran_Row();
         if (!状態_追加.equals(eventJotai) && ViewStateHolder.get(ViewStateKeys.介護認定審査会委員登録情報, dgShinsaInJohoIchiran_Row.class) != null) {
             row = ViewStateHolder.get(ViewStateKeys.介護認定審査会委員登録情報, dgShinsaInJohoIchiran_Row.class);
@@ -567,6 +598,7 @@ public class ShinsakaiIinJohoTorokuHandler {
         row.setKozaNo(div.getKozaJoho().getTxtGinkoKozaNo().getValue());
         row.setKozaMeigininKana(div.getKozaJoho().getTxtKozaMeiginin().getValue());
         row.setKozaMeiginin(div.getKozaJoho().getTxtKanjiMeiginin().getValue());
+        row.setShozokuKikanIchiran(所属機関一覧);
 
         if (状態_追加.equals(eventJotai)) {
             row.setStatus(eventJotai);
@@ -616,7 +648,8 @@ public class ShinsakaiIinJohoTorokuHandler {
                 .concat(nullToEmpty(row.getNinteiChosainCode()))
                 .concat(nullToEmpty(row.getShujiiIryoKikanCode().getValue()))
                 .concat(nullToEmpty(row.getShujiiCode()))
-                .concat((row.getSonotaKikanCode().getValue())));
+                .concat((row.getSonotaKikanCode().getValue()))
+                .concat(row.getJotai()));
         所属機関.add(row);
         div.getDgShozokuKikanIchiran().setDataSource(所属機関);
         div.getDgShozokuKikanIchiran().setVerticalScrollPosition(VerticalScrollPosition.BOTTOM);
@@ -756,11 +789,10 @@ public class ShinsakaiIinJohoTorokuHandler {
             ShinsakaiIinJoho shinsakaiIinJoho = 審査会委員情報.next();
             if (shinsakaiIinJoho.get介護認定審査会委員コード().equals(div.getDgShinsaInJohoIchiran().getClickedItem().getShinsainCode())) {
                 List<dgShozokuKikanIchiran_Row> 所属機関 = new ArrayList<>();
-                if (shinsakaiIinJoho.getKaigoNinteiShinsakaiIinShozokuKikanJohoList().size() == div.getDgShozokuKikanIchiran().getDataSource().size()
-                        || (初回選択時.equals(div.getDgShinsaInJohoIchiran().getClickedItem().getStatus()) && div.getDgShozokuKikanIchiran().getDataSource().isEmpty())) {
+                if (RString.isNullOrEmpty(div.getDgShinsaInJohoIchiran().getClickedItem().getShozokuKikanIchiran())) {
                     所属機関 = set所属機関(shinsakaiIinJoho, 所属機関, 所属機関一覧);
                 } else {
-                    所属機関 = div.getDgShozokuKikanIchiran().getDataSource();
+                    所属機関 = (List<dgShozokuKikanIchiran_Row>) DataPassingConverter.deserialize(div.getDgShinsaInJohoIchiran().getClickedItem().getShozokuKikanIchiran(), ShozokuKikanIchiran.class);
                 }
                 div.getDgShozokuKikanIchiran().setDataSource(sort所属機関dg(所属機関));
                 break;
@@ -837,7 +869,8 @@ public class ShinsakaiIinJohoTorokuHandler {
                     .concat(nullToEmpty(row.getNinteiChosainCode()))
                     .concat(nullToEmpty(row.getShujiiIryoKikanCode().getValue()))
                     .concat(nullToEmpty(row.getShujiiCode()))
-                    .concat((row.getSonotaKikanCode().getValue())));
+                    .concat(row.getSonotaKikanCode().getValue())
+                    .concat(row.getJotai()));
             所属機関.add(row);
         }
         return 所属機関;
@@ -863,7 +896,8 @@ public class ShinsakaiIinJohoTorokuHandler {
                     .concat(nullToEmpty(row.getNinteiChosainCode()))
                     .concat(nullToEmpty(row.getShujiiIryoKikanCode().getValue()))
                     .concat(nullToEmpty(row.getShujiiCode()))
-                    .concat((row.getSonotaKikanCode().getValue())));
+                    .concat((row.getSonotaKikanCode().getValue()))
+                    .concat(row.getJotai()));
             所属機関.add(row);
         }
         return 所属機関;
@@ -929,32 +963,42 @@ public class ShinsakaiIinJohoTorokuHandler {
         div.getBtnShozokuKikanAdd().setDisabled(false);
     }
 
-    public void setKozaJoho() {
-        if (div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関() == null) {
-            return;
-        }
-        List<YokinShubetsuPattern> yokinShubetsuPatternlist = div.getShinsakaiIinJohoTorokuInput().getKozaJoho().
-                getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関().get預金種別リスト();
+    /**
+     * 口座情報Divを初期化します。
+     * <p/>
+     * 金融機関が設定済みの場合、その金融機関がゆうちょ銀行かどうかにより、店番と店名の表示・非表示、また、預金種目か預金種別かを変更します。
+     */
+    public void initKozaJoho() {
+        div.getKozaJoho().getTxtTenBan().clearValue();
+        div.getKozaJoho().getTxtTenMei().clearValue();
+        div.getKozaJoho().getTxtGinkoKozaNo().clearValue();
+        div.getKozaJoho().getTxtKozaMeiginin().clearValue();
+        div.getKozaJoho().getTxtKanjiMeiginin().clearValue();
+
         List<KeyValueDataSource> yokinShubetsuList = new ArrayList<>();
         yokinShubetsuList.add(new KeyValueDataSource(SELECTKEY_空白, RString.EMPTY));
-        for (YokinShubetsuPattern yokinShubetsuPattern : yokinShubetsuPatternlist) {
+        KinyuKikan kinyuKikan = div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関();
+        if (kinyuKikan == null) {
+            div.getKozaJoho().getDdlYokinShubetsu().setDataSource(yokinShubetsuList);
+            div.getKozaJoho().getDdlYokinShubetsu().setSelectedIndex(0);
+            changePanelStateByIsゆうちょ銀行OrNot(div.getKozaJoho(), false);
+            return;
+        }
+        for (YokinShubetsuPattern yokinShubetsuPattern : kinyuKikan.get預金種別リスト()) {
             KeyValueDataSource keyValueDataSource = new KeyValueDataSource();
             keyValueDataSource.setKey(yokinShubetsuPattern.get預金種別コード());
             keyValueDataSource.setValue(yokinShubetsuPattern.get預金種別略称());
             yokinShubetsuList.add(keyValueDataSource);
         }
-        div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getDdlYokinShubetsu().setDataSource(yokinShubetsuList);
-        if (div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput() != null) {
-            if (div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().isゆうちょ銀行()) {
-                div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getDdlYokinShubetsu().setLabelLText(預金種目);
-                div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getTxtTenBan().setDisplayNone(false);
-                div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getTxtTenMei().setDisplayNone(false);
-            } else {
-                div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getDdlYokinShubetsu().setLabelLText(預金種別);
-                div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getTxtTenBan().setDisplayNone(true);
-                div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getTxtTenMei().setDisplayNone(true);
-            }
-        }
+        div.getKozaJoho().getDdlYokinShubetsu().setDataSource(yokinShubetsuList);
+        div.getKozaJoho().getDdlYokinShubetsu().setSelectedIndex(0);
+        changePanelStateByIsゆうちょ銀行OrNot(div.getKozaJoho(), div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().isゆうちょ銀行());
+    }
+
+    private static void changePanelStateByIsゆうちょ銀行OrNot(KozaJohoDiv div, boolean isゆうちょ銀行) {
+        div.getDdlYokinShubetsu().setLabelLText(isゆうちょ銀行 ? 預金種目 : 預金種別);
+        div.getTxtTenBan().setDisplayNone(!isゆうちょ銀行);
+        div.getTxtTenMei().setDisplayNone(!isゆうちょ銀行);
     }
 
     public RString getShitenMeisho(RString shitenCode) {

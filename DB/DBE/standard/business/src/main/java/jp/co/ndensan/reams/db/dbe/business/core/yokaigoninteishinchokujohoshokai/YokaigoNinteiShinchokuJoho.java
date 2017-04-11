@@ -38,11 +38,18 @@ public class YokaigoNinteiShinchokuJoho implements Serializable {
     }
 
     /**
+     * @return 証記載保険者番号
+     */
+    public RString get証記載保険者番号() {
+        return entity.getShoKisaiHokenshaNo();
+    }
+
+    /**
      * 被保険者番号を取得します。
      *
      * @return 被保険者番号
      */
-    public ShinseishoKanriNo get被保険者番号() {
+    public RString get被保険者番号() {
         return entity.getHihokenshaNo();
     }
 
@@ -388,14 +395,14 @@ public class YokaigoNinteiShinchokuJoho implements Serializable {
     public RString get申請書管理番号() {
         return entity.getShinseishoKanriNo();
     }
-    
+
     /**
      * 認定調査依頼履歴番号を取得します。
      *
      * @return 認定調査依頼履歴番号
      */
     public int get認定調査依頼履歴番号() {
-        return entity.getNinteichosaIraiRirekiNo() ;
+        return entity.getNinteichosaIraiRirekiNo();
     }
 
 }

@@ -6,8 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.business.report.kaigokekkataishouichiran;
 
 import jp.co.ndensan.reams.db.dbe.entity.report.source.KekkatsuchiTaishoshaIchiranReportSource;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -15,7 +13,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 要介護認定結果通知書対象者一覧表ボディEditorです。
@@ -42,7 +39,7 @@ class KaigoKekkaTaishouIchiranBodyEditor implements IKaigoKekkaTaishouIchiranEdi
 
     private KekkatsuchiTaishoshaIchiranReportSource editBody(KekkatsuchiTaishoshaIchiranReportSource source) {
 
-        source.shikibetuCode = ShikibetsuCode.EMPTY;
+        source.識別コード = item.get識別コード();
         source.listKekkatsuchi_1 = new RString(item.getIndex());
         source.listKekkatsuchi_2 = item.getListKekkatsuchi_2();
         RStringBuilder listKekkatsuchi_3 = new RStringBuilder();
@@ -55,7 +52,7 @@ class KaigoKekkaTaishouIchiranBodyEditor implements IKaigoKekkaTaishouIchiranEdi
             source.listKekkatsuchi_4 = new RDate(item.getListKekkatsuchi_4().toString()).wareki().toDateString();
         }
         source.listKekkatsuchi_5 = item.getListKekkatsuchi_5();
-        source.hishokenshaNo = new ExpandedInformation(new Code("0003"), new RString("被保険者番号"), item.getListKekkatsuchi_5());
+        source.拡張情報 = item.get拡張情報();
         source.listKekkatsuchi_6 = item.getListKekkatsuchi_6();
         source.listKekkatsuchi_7 = item.getListKekkatsuchi_7();
         RStringBuilder listKekkatsuchi_8 = new RStringBuilder();

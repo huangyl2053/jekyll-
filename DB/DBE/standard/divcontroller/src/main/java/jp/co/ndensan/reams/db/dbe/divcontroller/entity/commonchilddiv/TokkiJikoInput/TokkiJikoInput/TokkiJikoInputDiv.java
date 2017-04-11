@@ -41,6 +41,10 @@ public class TokkiJikoInputDiv extends Panel implements ITokkiJikoInputDiv {
     private RString hdnRadSelectedKey;
     @JsonProperty("hdnTokkiJiko")
     private RString hdnTokkiJiko;
+    @JsonProperty("hdnSelectedRowId")
+    private RString hdnSelectedRowId;
+    @JsonProperty("hdnChangeTokkiJiko")
+    private RString hdnChangeTokkiJiko;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -157,6 +161,42 @@ public class TokkiJikoInputDiv extends Panel implements ITokkiJikoInputDiv {
     }
 
     /*
+     * gethdnSelectedRowId
+     * @return hdnSelectedRowId
+     */
+    @JsonProperty("hdnSelectedRowId")
+    public RString getHdnSelectedRowId() {
+        return hdnSelectedRowId;
+    }
+
+    /*
+     * sethdnSelectedRowId
+     * @param hdnSelectedRowId hdnSelectedRowId
+     */
+    @JsonProperty("hdnSelectedRowId")
+    public void setHdnSelectedRowId(RString hdnSelectedRowId) {
+        this.hdnSelectedRowId = hdnSelectedRowId;
+    }
+
+    /*
+     * gethdnChangeTokkiJiko
+     * @return hdnChangeTokkiJiko
+     */
+    @JsonProperty("hdnChangeTokkiJiko")
+    public RString getHdnChangeTokkiJiko() {
+        return hdnChangeTokkiJiko;
+    }
+
+    /*
+     * sethdnChangeTokkiJiko
+     * @param hdnChangeTokkiJiko hdnChangeTokkiJiko
+     */
+    @JsonProperty("hdnChangeTokkiJiko")
+    public void setHdnChangeTokkiJiko(RString hdnChangeTokkiJiko) {
+        this.hdnChangeTokkiJiko = hdnChangeTokkiJiko;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
@@ -202,6 +242,16 @@ public class TokkiJikoInputDiv extends Panel implements ITokkiJikoInputDiv {
     @JsonIgnore
     public void  setBtnInput(Button btnInput) {
         this.getTokkiJikoNyuryoku().setBtnInput(btnInput);
+    }
+
+    @JsonIgnore
+    public Button getBtnAddRemban() {
+        return this.getTokkiJikoNyuryoku().getBtnAddRemban();
+    }
+
+    @JsonIgnore
+    public void  setBtnAddRemban(Button btnAddRemban) {
+        this.getTokkiJikoNyuryoku().setBtnAddRemban(btnAddRemban);
     }
 
     @JsonIgnore
@@ -265,23 +315,23 @@ public class TokkiJikoInputDiv extends Panel implements ITokkiJikoInputDiv {
     }
 
     @JsonIgnore
-    public Button getBtnReturn() {
-        return this.getTokkiJikoNyuryoku().getBtnReturn();
+    public Button getBtnUpdateReturn() {
+        return this.getTokkiJikoNyuryoku().getBtnUpdateReturn();
     }
 
     @JsonIgnore
-    public void  setBtnReturn(Button btnReturn) {
-        this.getTokkiJikoNyuryoku().setBtnReturn(btnReturn);
+    public void  setBtnUpdateReturn(Button btnUpdateReturn) {
+        this.getTokkiJikoNyuryoku().setBtnUpdateReturn(btnUpdateReturn);
     }
 
     @JsonIgnore
-    public Button getBtnUpdateCancel() {
-        return this.getTokkiJikoNyuryoku().getBtnUpdateCancel();
+    public Button getBtnCancelReturn() {
+        return this.getTokkiJikoNyuryoku().getBtnCancelReturn();
     }
 
     @JsonIgnore
-    public void  setBtnUpdateCancel(Button btnUpdateCancel) {
-        this.getTokkiJikoNyuryoku().setBtnUpdateCancel(btnUpdateCancel);
+    public void  setBtnCancelReturn(Button btnCancelReturn) {
+        this.getTokkiJikoNyuryoku().setBtnCancelReturn(btnCancelReturn);
     }
 
     // </editor-fold>

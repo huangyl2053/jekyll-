@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.flow;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE013001.DBE013001_IkenshoInfoPrintParameter;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestBase;
 import jp.co.ndensan.reams.uz.uza.batch.BatchExitStatus;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReamsDonyuDantaiCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core._ControlData;
@@ -58,13 +59,13 @@ public class DBE013001_IkenshoInfoPrintTest extends DbeTestBase {
 
     private static DBE013001_IkenshoInfoPrintParameter createBatchParameter() {
         DBE013001_IkenshoInfoPrintParameter parameter = new DBE013001_IkenshoInfoPrintParameter();
-        parameter.set主治医意見書作成依頼変更者一覧表フラグ(true);
+        parameter.set主治医意見書作成依頼変更者一覧表フラグ(false);
         parameter.set主治医意見書作成依頼変更者一覧表申請日From(new FlexibleDate(2016, 1, 1));
         parameter.set主治医意見書作成依頼変更者一覧表申請日To(new FlexibleDate(2016, 12, 31));
-        parameter.set主治医意見書作成料請求一覧表フラグ(false);
+        parameter.set主治医意見書作成料請求一覧表フラグ(true);
         parameter.set主治医意見書作成料請求一覧表作成条件(new RString("1"));
-        parameter.set主治医意見書作成料請求一覧表処理日From(new FlexibleDate(2016, 12, 1));
-        parameter.set主治医意見書作成料請求一覧表処理日To(new FlexibleDate(2016, 12, 31));
+        parameter.set主治医意見書作成料請求一覧表処理日From(new FlexibleDate(2017, 3, 1));
+        parameter.set主治医意見書作成料請求一覧表処理日To(new FlexibleDate(2017, 3, 31));
         parameter.set主治医意見書依頼未処理者一覧表フラグ(false);
         parameter.set主治医意見書依頼未処理者一覧表申請日From(new FlexibleDate(2016, 12, 1));
         parameter.set主治医意見書依頼未処理者一覧表申請日To(new FlexibleDate(2016, 12, 31));
@@ -77,6 +78,8 @@ public class DBE013001_IkenshoInfoPrintTest extends DbeTestBase {
         parameter.set主治医意見書５項目確認一覧表フラグ(false);
         parameter.set主治医意見書５項目確認一覧表作成条件(new RString("2"));
         parameter.set主治医意見書５項目確認一覧表審査会(new RString("111111"));
+        parameter.set市町村コード(LasdecCode.EMPTY);
+        parameter.set市町村名(RString.EMPTY);
 
         return parameter;
     }

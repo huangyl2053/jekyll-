@@ -13,10 +13,13 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.tokkitext1a4.TokkiTextEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.tokkitext1a4.TokkiText1ReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 特記事項Builderクラスです。
@@ -133,28 +136,8 @@ class TokkiText1A4Builder implements ITokkiText1A4Builder {
             source.tokkiText14 = getイメージ04(entity.get特記事項リスト(), (count / 30) * 15 + 連番_13);
             source.tokkiText15 = getイメージ04(entity.get特記事項リスト(), (count / 30) * 15 + 連番_14);
         }
-//        List<RString> 特記事項 = new ArrayList<>();
-//        RStringBuilder 特記事項builder = new RStringBuilder();
-//        RString new番号 = RString.EMPTY;
-//        RString old番号 = RString.EMPTY;
-//        for (TokkiTextEntity tokkiTextEntity : entity.get特記事項リスト()) {
-//            new番号 = tokkiTextEntity.get特記事項番号();
-//            if (!new番号.equals(old番号)) {
-//                if (!RString.isNullOrEmpty(特記事項builder.toRString())) {
-//                    特記事項.add(特記事項builder.toRString());
-//                }
-//                特記事項builder = new RStringBuilder();
-//                特記事項builder.append(tokkiTextEntity.get特記事項());
-//            } else {
-//                特記事項builder.append(System.lineSeparator());
-//                特記事項builder.append(tokkiTextEntity.get特記事項());
-//            }
-//            old番号 = new番号;
-//        }
-//        if (new番号.equals(old番号)) {
-//            特記事項.add(特記事項builder.toRString());
-//        }
-//        set特記事項リスト(特記事項, source);
+        source.識別コード = new ShikibetsuCode(entity.getTemp_保険者番号().substring(0, 5).concat(entity.getTemp_被保険者番号()));
+        source.拡張情報 = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.getTemp_申請書管理番号());
         return source;
     }
 

@@ -158,6 +158,9 @@ public final class NinteiChosaTokkiImageEntityEditor {
         ninteiChosaTokkiImageEntity.set保険者番号(entity.get保険者番号());
         ninteiChosaTokkiImageEntity.set被保険者番号(entity.get被保険者番号());
         ninteiChosaTokkiImageEntity.set被保険者氏名(entity.get被保険者氏名());
+        ninteiChosaTokkiImageEntity.setTemp_保険者番号(entity.get保険者番号());
+        ninteiChosaTokkiImageEntity.setTemp_被保険者番号(entity.get被保険者番号());
+        ninteiChosaTokkiImageEntity.setTemp_申請書管理番号(entity.get申請書管理番号());
         ninteiChosaTokkiImageEntity.set申請日_元号(entity.get認定申請年月日() == null ? RString.EMPTY : entity.get認定申請年月日()
                 .wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getEra());
         ninteiChosaTokkiImageEntity.set申請日_年(entity.get認定申請年月日() == null ? RString.EMPTY : entity.get認定申請年月日()
