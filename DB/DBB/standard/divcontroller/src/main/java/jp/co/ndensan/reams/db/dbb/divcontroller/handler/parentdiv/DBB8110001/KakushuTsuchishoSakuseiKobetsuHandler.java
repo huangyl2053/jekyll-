@@ -1373,10 +1373,13 @@ public class KakushuTsuchishoSakuseiKobetsuHandler {
             Kitsuki 期月 = koseiTsukiHantei.find更正月(RDate.getNowDate());
             KitsukiList 期月リスト = fuchoKiUtil.get期月リスト().filteredLater期(期月.get期AsInt());
             for (Kitsuki 期と月 : 期月リスト.toList()) {
+                if (期と月.get期().equals(new RString("00"))) {
+                    break;
+                }
                 keyValueDataSource.add(new KeyValueDataSource(期と月.get期(), 期と月.get表記().asX期括弧X月()));
             }
             div.getTsuchishoSakuseiKobetsu().getYufuriKobetsu().getDdlYufuriShuturyokuKi().setDataSource(keyValueDataSource);
-            div.getTsuchishoSakuseiKobetsu().getYufuriKobetsu().getDdlYufuriShuturyokuKi().setSelectedKey(期月.get期());
+            //div.getTsuchishoSakuseiKobetsu().getYufuriKobetsu().getDdlYufuriShuturyokuKi().setSelectedKey(期月.get期());
             div.getTsuchishoSakuseiKobetsu().getWrapYufuriKobetsu().setDisplayNone(false);
             div.getTsuchishoSakuseiKobetsu().getWrapYufuriKobetsu().getChkPublishYufuriKobetsu().setSelectedItemsByKey(key);
             div.getTsuchishoSakuseiKobetsu().getYufuriKobetsu().setDisplayNone(false);
