@@ -97,7 +97,7 @@ public class RiyoshaFutanWariaiSokujiKouseiPanelHandler {
     /**
      * 利用者負担割合即時更正_修正のコンストラクタです。
      *
-     * @param div DBC2000022PanelAllDiv
+     * @param div DBD2000022PanelAllDiv
      */
     public RiyoshaFutanWariaiSokujiKouseiPanelHandler(DBD2000022PanelAllDiv div) {
         this.div = div;

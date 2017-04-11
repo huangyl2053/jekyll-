@@ -15,7 +15,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * DBCMNK1002利用者負担割合のプロセスパラメータです。
+ * DBDMNK1002利用者負担割合のプロセスパラメータです。
  *
  * @reamsid_L DBC-4950-031 liuyang
  */
@@ -38,7 +38,7 @@ public class DBD180020ProcessParameter implements IBatchProcessParameter {
     private boolean 異動;
 
     /**
-     * DBC180020ProcessParameterのコンストラクタです。
+     * DBD180020ProcessParameterのコンストラクタです。
      *
      * @param taishoNendo 対象年度
      * @param 異動 boolean
@@ -62,7 +62,7 @@ public class DBD180020ProcessParameter implements IBatchProcessParameter {
     }
 
     /**
-     * DBC180020ProcessParameterのコンストラクタです。
+     * DBD180020ProcessParameterのコンストラクタです。
      *
      * @param taishoNendo 対象年度
      * @param kijunbi 基準日
@@ -95,7 +95,7 @@ public class DBD180020ProcessParameter implements IBatchProcessParameter {
     }
 
     /**
-     * DBC180020ProcessParameterのコンストラクタです。
+     * DBD180020ProcessParameterのコンストラクタです。
      *
      * @param taishoNendo 対象年度
      * @param kijunbi 基準日
@@ -134,7 +134,7 @@ public class DBD180020ProcessParameter implements IBatchProcessParameter {
     /**
      * toMyBatisParameterのメソッドです。
      *
-     * @return DBC180020MyBatisParameter
+     * @return DBD180020MyBatisParameter
      */
     public DBD180020MyBatisParameter toMyBatisParameter() {
         return new DBD180020MyBatisParameter(hanteiKijunbi.get(hanteiKijunbiIndex),
@@ -147,7 +147,7 @@ public class DBD180020ProcessParameter implements IBatchProcessParameter {
      * toMyBatisParameterのメソッドです。
      *
      * @param index int
-     * @return DBC180020MyBatisParameter
+     * @return DBD180020MyBatisParameter
      */
     public DBD180020MyBatisParameter toMyBatisParameter(int index) {
         return new DBD180020MyBatisParameter(hanteiKijunbi.get(index),
@@ -160,7 +160,7 @@ public class DBD180020ProcessParameter implements IBatchProcessParameter {
      * toMyBatisParameterのメソッドです。
      *
      * @param 異動 boolean
-     * @return DBC180020MyBatisParameter
+     * @return DBD180020MyBatisParameter
      */
     public DBD180020MyBatisParameter toMyBatisParameter(boolean 異動) {
         DBD180020MyBatisParameter param;
@@ -178,7 +178,7 @@ public class DBD180020ProcessParameter implements IBatchProcessParameter {
      * toMyBatisParameterのメソッドです。
      *
      * @param taishoShuryoYMD List<RString>
-     * @return DBC180020MyBatisParameter
+     * @return DBD180020MyBatisParameter
      */
     public DBD180020MyBatisParameter toMyBatisParameter(List<RString> taishoShuryoYMD) {
         return new DBD180020MyBatisParameter(hanteiKijunbi.get(hanteiKijunbiIndex),

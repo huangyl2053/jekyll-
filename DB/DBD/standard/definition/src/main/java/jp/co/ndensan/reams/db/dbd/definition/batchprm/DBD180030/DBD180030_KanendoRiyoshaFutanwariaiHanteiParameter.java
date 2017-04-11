@@ -76,7 +76,8 @@ public class DBD180030_KanendoRiyoshaFutanwariaiHanteiParameter extends BatchPar
     /**
      * processのパラメータを生成します。
      *
-     * @return parameter DBC180021_RiyoshaFutanwariaiHanteiIdoDataSelectSubParameter
+     * @return parameter
+     * DBD180021_RiyoshaFutanwariaiHanteiIdoDataSelectSubParameter
      */
     public DBD180021_RiyoshaFutanwariaiHanteiIdoDataSelectSubParameter toIdoDateTyuushutuKyoutsuuParameter() {
         DBD180021_RiyoshaFutanwariaiHanteiIdoDataSelectSubParameter parameter = new DBD180021_RiyoshaFutanwariaiHanteiIdoDataSelectSubParameter();
@@ -100,7 +101,7 @@ public class DBD180030_KanendoRiyoshaFutanwariaiHanteiParameter extends BatchPar
     /**
      * processのパラメータを生成します。
      *
-     * @return parameter DBC180022_RiyoshaFutanwariaiHanteiSubParameter
+     * @return parameter DBD180022_RiyoshaFutanwariaiHanteiSubParameter
      */
     public DBD180022_RiyoshaFutanwariaiHanteiSubParameter toRiyoshaFutanwariaiHanteiCommonFlowParameter() {
         DBD180022_RiyoshaFutanwariaiHanteiSubParameter parameter = new DBD180022_RiyoshaFutanwariaiHanteiSubParameter();
@@ -120,7 +121,7 @@ public class DBD180030_KanendoRiyoshaFutanwariaiHanteiParameter extends BatchPar
     /**
      * processのパラメータを生成します。
      *
-     * @return parameter DBC180011_RiyoshaFutanwariaiHanteiIchiranSubParameter
+     * @return parameter DBD180011_RiyoshaFutanwariaiHanteiIchiranSubParameter
      */
     public DBD180011_RiyoshaFutanwariaiHanteiIchiranSubParameter toFutanWariaiIchiranFlowParameter() {
         DBD180011_RiyoshaFutanwariaiHanteiIchiranSubParameter parameter = new DBD180011_RiyoshaFutanwariaiHanteiIchiranSubParameter();

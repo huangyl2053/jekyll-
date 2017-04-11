@@ -25,7 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class InsKokuhoShikakuJyohoProcess extends BatchProcessBase<TorikomiKokiKoreshaJyohoImportEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc130020.IKokikoreishaShikakuIdoInMapper.get取込後期高齢者情報インポート用Entityリスト");
+            "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.dbd130020.IKokikoreishaShikakuIdoInMapper.get取込後期高齢者情報インポート用Entityリスト");
     private static final RString 履歴番号 = new RString("0001");
     @BatchWriter
     private IBatchTableWriter<DbT7124KokiKoreishaInfoEntity> 現在後期高齢者情報Writer;

@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class UpdTorikomiKokiKoreshaJyohoTemp1Processs extends BatchProcessBase<KokiKoreshaJyohoRealEntity> {
 
     private static final RString MYBATIS_SELECT_ID = new RString(
-            "jp.co.ndensan.reams.db.dbc.persistence.db.mapper.relate.dbc130020.IKokikoreishaShikakuIdoInMapper.get取込後期高齢者情報");
+            "jp.co.ndensan.reams.db.dbd.persistence.db.mapper.relate.dbd130020.IKokikoreishaShikakuIdoInMapper.get取込後期高齢者情報");
     private static final RString ＩＦ種類_電算 = new RString("1");
     private static final RString ＩＦ種類_電算２ = new RString("2");
     private static final RString エラーコード_13 = new RString("13");

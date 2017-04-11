@@ -7,8 +7,8 @@ package jp.co.ndensan.reams.db.dbc.service.core.syokanbaraihishikyushinsei;
 
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShikibetsuNoKanri;
 import jp.co.ndensan.reams.db.dbc.business.core.basic.ShomeishoNyuryokuFlag;
-import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKanryoKubunType;
-import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKubunType;
+import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.ShomeishoNyuryokuKanryoKubunType;
+import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.ShomeishoNyuryokuKubunType;
 import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3118ShikibetsuNoKanriEntity;
 import jp.co.ndensan.reams.db.dbc.persistence.db.basic.DbT3118ShikibetsuNoKanriDac;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;

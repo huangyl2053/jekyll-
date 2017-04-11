@@ -34,8 +34,8 @@ public class DBD2000021PanelAll {
     /**
      * 画面初期化のメソッドです。
      *
-     * @param div DBC2000021PanelAllDiv
-     * @return ResponseData DBC2000021PanelAllDiv
+     * @param div DBD2000021PanelAllDiv
+     * @return ResponseData DBD2000021PanelAllDiv
      */
     public ResponseData<DBD2000021PanelAllDiv> onLoad(DBD2000021PanelAllDiv div) {
         TaishoshaKey 引継ぎデータ = ViewStateHolder.get(ViewStateKeys.資格対象者, TaishoshaKey.class);
@@ -51,8 +51,8 @@ public class DBD2000021PanelAll {
     /**
      * 基準日設定のメソッドです。
      *
-     * @param div DBC2000021PanelAllDiv
-     * @return ResponseData DBC2000021PanelAllDiv
+     * @param div DBD2000021PanelAllDiv
+     * @return ResponseData DBD2000021PanelAllDiv
      */
     public ResponseData<DBD2000021PanelAllDiv> onChange_ddlNendo(DBD2000021PanelAllDiv div) {
         getHandler(div).set基準日();
@@ -62,8 +62,8 @@ public class DBD2000021PanelAll {
     /**
      * 新規判定実行のメソッドです。
      *
-     * @param div DBC2000021PanelAllDiv
-     * @return ResponseData DBC2000021PanelAllDiv
+     * @param div DBD2000021PanelAllDiv
+     * @return ResponseData DBD2000021PanelAllDiv
      */
     public ResponseData<DBD2000021PanelAllDiv> onClick_btnJikko(DBD2000021PanelAllDiv div) {
 
@@ -84,8 +84,8 @@ public class DBD2000021PanelAll {
     /**
      * 再検索のメソッドです。
      *
-     * @param div DBC2000021PanelAllDiv
-     * @return ResponseData DBC2000021PanelAllDiv
+     * @param div DBD2000021PanelAllDiv
+     * @return ResponseData DBD2000021PanelAllDiv
      */
     public ResponseData<DBD2000021PanelAllDiv> onClick_btnReSearch(DBD2000021PanelAllDiv div) {
         return ResponseData.of(div).forwardWithEventName(DBD2000021TransitionEventName.再検索).respond();
@@ -95,8 +95,8 @@ public class DBD2000021PanelAll {
      * 検索結果一覧に遷移するのメソッドです。
      *
      *
-     * @param div DBC2000021PanelAllDiv
-     * @return ResponseData DBC2000021PanelAllDiv
+     * @param div DBD2000021PanelAllDiv
+     * @return ResponseData DBD2000021PanelAllDiv
      */
     public ResponseData<DBD2000021PanelAllDiv> onClick_btnSearchResult(DBD2000021PanelAllDiv div) {
         return ResponseData.of(div).forwardWithEventName(DBD2000021TransitionEventName.検索結果一覧).respond();

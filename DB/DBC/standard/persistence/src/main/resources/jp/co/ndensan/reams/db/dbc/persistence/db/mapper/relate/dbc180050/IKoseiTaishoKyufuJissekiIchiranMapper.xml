@@ -367,7 +367,7 @@
     </select>
 
     <select resultOrdered="true" id="get処理結果確認リスト"
-            resultType="jp.co.ndensan.reams.db.dbc.entity.db.relate.nenjiriyoshafutanwariaihantei.DbWT1801ShoriKekkaKakuninListEntity" fetchSize="500">
+            resultType="jp.co.ndensan.reams.db.dbd.entity.db.relate.nenjiriyoshafutanwariaihantei.DbWT1801ShoriKekkaKakuninListEntity" fetchSize="500">
         SELECT
         *
         FROM

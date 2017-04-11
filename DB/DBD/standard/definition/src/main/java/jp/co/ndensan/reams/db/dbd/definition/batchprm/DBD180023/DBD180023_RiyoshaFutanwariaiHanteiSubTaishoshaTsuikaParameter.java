@@ -19,7 +19,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * バッチ設計_DBCMNK1002_利用者負担割合判定（共通）のバッチパラメータです。
+ * バッチ設計_DBDMNK1002_利用者負担割合判定（共通）のバッチパラメータです。
  *
  * @reamsid_L DBC-4950-030 liuyang
  */
@@ -55,11 +55,11 @@ public class DBD180023_RiyoshaFutanwariaiHanteiSubTaishoshaTsuikaParameter exten
     private List<RString> 対象終了日;
 
     /**
-     * toDBC180022_RiyoshaFutanwariaiHanteiSubParameterのメソッドです。
+     * toDBD180022_RiyoshaFutanwariaiHanteiSubParameterのメソッドです。
      *
-     * @return DBC180022_RiyoshaFutanwariaiHanteiSubParameter
+     * @return DBD180022_RiyoshaFutanwariaiHanteiSubParameter
      */
-    public DBD180022_RiyoshaFutanwariaiHanteiSubParameter toDBC180022_RiyoshaFutanwariaiHanteiSubParameter() {
+    public DBD180022_RiyoshaFutanwariaiHanteiSubParameter toDBD180022_RiyoshaFutanwariaiHanteiSubParameter() {
         DBD180022_RiyoshaFutanwariaiHanteiSubParameter parameter = new DBD180022_RiyoshaFutanwariaiHanteiSubParameter();
         parameter.setTaishoNendo(this.getTaishoNendo());
         parameter.setKijunbi(this.getKijunbi());
