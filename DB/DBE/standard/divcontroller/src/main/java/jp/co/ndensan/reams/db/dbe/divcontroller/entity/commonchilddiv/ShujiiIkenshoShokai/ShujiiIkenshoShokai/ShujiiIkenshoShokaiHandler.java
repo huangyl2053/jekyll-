@@ -228,7 +228,7 @@ public class ShujiiIkenshoShokaiHandler {
     }
 
     private void set主治医医療機関主治医(List<ShujiiIkenshoJohoShokaiBusiness> shujiiIkenshoJohoShokaiBusinessList) {
-        div.getTxtShujiiIryoKikanCode().setValue(shujiiIkenshoJohoShokaiBusinessList.get(0).getShujiiCode());
+        div.getTxtShujiiIryoKikanCode().setValue(shujiiIkenshoJohoShokaiBusinessList.get(0).getShujiiIryoKikanCode());
         div.getTxtShujiiIryoKikanName().setValue(shujiiIkenshoJohoShokaiBusinessList.get(0).getIryoKikanMeisho());
         div.getTxtShujiiCode().setValue(shujiiIkenshoJohoShokaiBusinessList.get(0).getShujiiCode());
         div.getTxtShujiiName().setValue(shujiiIkenshoJohoShokaiBusinessList.get(0).getShujiiName());
