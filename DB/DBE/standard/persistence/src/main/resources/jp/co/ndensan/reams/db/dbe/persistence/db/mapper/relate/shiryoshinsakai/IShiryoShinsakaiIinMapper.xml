@@ -327,17 +327,6 @@
         "DbT5205NinteichosahyoTokkijiko"."ninteichosaTokkijikoNo"
         , "DbT5205NinteichosahyoTokkijiko"."ninteichosaTokkijikoRemban"
     </select>
-    
-    <resultMap id="Result_TokkijikoIchiranJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.TokkijikoIchiranJohoRelateEntity" autoMapping="true">
-        <id property="認定調査票特記事項Entity.shinseishoKanriNo" column="dbT5205NinteichosahyoTokkijiko_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" />
-        <id property="認定調査票特記事項Entity.ninteichosaRirekiNo" column="dbt5205NinteichosahyoTokkijiko_ninteichosaRirekiNo" />
-        <id property="認定調査票特記事項Entity.ninteichosaTokkijikoNo" column="dbt5205NinteichosahyoTokkijiko_ninteichosaTokkijikoNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <id property="認定調査票特記事項Entity.ninteichosaTokkijikoRemban" column="dbt5205NinteichosahyoTokkijiko_ninteichosaTokkijikoRemban" />
-        <id property="認定調査票特記事項Entity.tokkijikoTextImageKubun" column="dbt5205NinteichosahyoTokkijiko_tokkijikoTextImageKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <id property="認定調査票特記事項Entity.genponMaskKubun" column="dbt5205NinteichosahyoTokkijiko_genponMaskKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
-        <result property="maxRemban" column="maxRemban" />
-        <association property="認定調査票特記事項Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5205NinteichosahyoTokkijikoMapper.ResultMap_DbT5205NinteichosahyoTokkijikoEntity"/>
-    </resultMap>
 
     <resultMap id="Result_TokkijikoIchiranJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.TokkijikoIchiranJohoRelateEntity" autoMapping="true">
         <id property="認定調査票特記事項Entity.shinseishoKanriNo" column="dbT5205NinteichosahyoTokkijiko_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler" />
