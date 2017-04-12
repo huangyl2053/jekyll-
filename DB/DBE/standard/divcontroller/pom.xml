@@ -4,7 +4,7 @@
     <parent>
         <groupId>jp.co.ndensan.reams.db.dbe</groupId>
         <artifactId>dbe</artifactId>
-        <version>1.17.4</version>
+        <version>1.18.0-SNAPSHOT</version>
     </parent>
     <artifactId>DbeDivController</artifactId>
     <packaging>war</packaging>
