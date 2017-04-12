@@ -20,8 +20,8 @@
                     ELSE DbT5912ShujiiJoho_Ikensho."shujiiCode"
                 END) AS "shujiiCode",
                 (CASE
-                    WHEN DbT5912ShujiiJoho_Ikensho."shujiiName" is null THEN DbT5912ShujiiJoho."shujiiName"
-                    WHEN DbT5912ShujiiJoho_Ikensho."shujiiName" = '' THEN DbT5912ShujiiJoho."shujiiName"
+                    WHEN DbT5912ShujiiJoho_Ikensho."shujiiCode" is null THEN DbT5912ShujiiJoho."shujiiName"
+                    WHEN DbT5912ShujiiJoho_Ikensho."shujiiCode" = '' THEN DbT5912ShujiiJoho."shujiiName"
                     ELSE DbT5912ShujiiJoho_Ikensho."shujiiName"
                 END) AS"shujiiName",
                 DbT5302ShujiiIkenshoJoho."ikenshoKinyuYMD",
@@ -31,23 +31,23 @@
                     ELSE DbT5911ShujiiIryoKikanJoho_Ikensho."shujiiIryokikanCode"
                 END) AS "shujiiIryokikanCode",
                 (CASE
-                    WHEN DbT5911ShujiiIryoKikanJoho_Ikensho."iryoKikanMeisho" is null THEN  DbT5911ShujiiIryoKikanJoho."iryoKikanMeisho"
-                    WHEN DbT5911ShujiiIryoKikanJoho_Ikensho."iryoKikanMeisho" = '' THEN  DbT5911ShujiiIryoKikanJoho."iryoKikanMeisho"
+                    WHEN DbT5911ShujiiIryoKikanJoho_Ikensho."shujiiIryokikanCode" is null THEN  DbT5911ShujiiIryoKikanJoho."iryoKikanMeisho"
+                    WHEN DbT5911ShujiiIryoKikanJoho_Ikensho."shujiiIryokikanCode" = '' THEN  DbT5911ShujiiIryoKikanJoho."iryoKikanMeisho"
                     ELSE DbT5911ShujiiIryoKikanJoho_Ikensho."iryoKikanMeisho"
                 END) AS "iryoKikanMeisho",
                 (CASE
-                    WHEN DbT5911ShujiiIryoKikanJoho_Ikensho."telNo" is null THEN  DbT5911ShujiiIryoKikanJoho."telNo"
-                    WHEN DbT5911ShujiiIryoKikanJoho_Ikensho."telNo" = '' THEN  DbT5911ShujiiIryoKikanJoho."telNo"
+                    WHEN DbT5911ShujiiIryoKikanJoho_Ikensho."shujiiIryokikanCode" is null THEN  DbT5911ShujiiIryoKikanJoho."telNo"
+                    WHEN DbT5911ShujiiIryoKikanJoho_Ikensho."shujiiIryokikanCode" = '' THEN  DbT5911ShujiiIryoKikanJoho."telNo"
                     ELSE DbT5911ShujiiIryoKikanJoho_Ikensho."telNo"
                 END) AS "telNo",
                (CASE
-                    WHEN DbT5911ShujiiIryoKikanJoho_Ikensho."jusho" is null THEN  DbT5911ShujiiIryoKikanJoho."jusho"
-                    WHEN DbT5911ShujiiIryoKikanJoho_Ikensho."jusho" = '' THEN  DbT5911ShujiiIryoKikanJoho."jusho"
+                    WHEN DbT5911ShujiiIryoKikanJoho_Ikensho."shujiiIryokikanCode" is null THEN  DbT5911ShujiiIryoKikanJoho."jusho"
+                    WHEN DbT5911ShujiiIryoKikanJoho_Ikensho."shujiiIryokikanCode" = '' THEN  DbT5911ShujiiIryoKikanJoho."jusho"
                     ELSE DbT5911ShujiiIryoKikanJoho_Ikensho."jusho"
                 END) AS "jusho",
                 (CASE
-                    WHEN DbT5911ShujiiIryoKikanJoho_Ikensho."faxNo" is null THEN  DbT5911ShujiiIryoKikanJoho."faxNo"
-                    WHEN DbT5911ShujiiIryoKikanJoho_Ikensho."faxNo" = '' THEN  DbT5911ShujiiIryoKikanJoho."faxNo"
+                    WHEN DbT5911ShujiiIryoKikanJoho_Ikensho."shujiiIryokikanCode" is null THEN  DbT5911ShujiiIryoKikanJoho."faxNo"
+                    WHEN DbT5911ShujiiIryoKikanJoho_Ikensho."shujiiIryokikanCode" = '' THEN  DbT5911ShujiiIryoKikanJoho."faxNo"
                     ELSE DbT5911ShujiiIryoKikanJoho_Ikensho."faxNo"
                 END) AS "faxNo",
                 DbT5302ShujiiIkenshoJoho."saishuShinryoYMD",
