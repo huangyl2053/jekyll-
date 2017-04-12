@@ -6,7 +6,6 @@
         <goals>
             <goal>clean</goal>
             <goal>install</goal>
-
         </goals>
         <properties>
             <skipTests>true</skipTests>
@@ -20,7 +19,7 @@
             <goal>versions:set</goal>
         </goals>
         <properties>
-            <newVersion>1.17.3</newVersion>
+            <newVersion>1.17.4</newVersion>
         </properties>
     </action>
 </actions>
