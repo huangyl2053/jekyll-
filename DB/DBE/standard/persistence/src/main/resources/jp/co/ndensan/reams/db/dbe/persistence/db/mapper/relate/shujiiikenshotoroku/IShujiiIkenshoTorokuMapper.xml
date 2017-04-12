@@ -114,7 +114,7 @@
                 rgdb."DbT5911ShujiiIryoKikanJoho" AS DbT5911ShujiiIryoKikanJoho_Ikensho
           ON
                 DbT5302ShujiiIkenshoJoho."shujiiIryoKikanCode" = DbT5911ShujiiIryoKikanJoho_Ikensho."shujiiIryokikanCode"
-                AND DbT5911ShujiiIryoKikanJoho."shichosonCode" = DbT5101NinteiShinseiJoho."shichosonCode"
+                AND DbT5911ShujiiIryoKikanJoho_Ikensho."shichosonCode" = DbT5101NinteiShinseiJoho."shichosonCode"
           <!--INNER JOIN
                 rgdb."DbT5105NinteiKanryoJoho" AS DbT5105NinteiKanryoJoho
           ON
@@ -151,7 +151,7 @@
         rgdb."DbT5116IchijiHanteiKekkaJoho" AS DbT5116IchijiHanteiKekkaJoho
         WHERE
         DbT5116IchijiHanteiKekkaJoho."shinseishoKanriNo" = #{管理番号}
-        AND DbT5116IchijiHanteiKekkaJoho."kariIchijiHanteiKubun" = false 
+        AND DbT5116IchijiHanteiKekkaJoho."kariIchijiHanteiKubun" = false
     </select>
 
     <select resultOrdered="true" id="getIchijiHanteiKanryo"

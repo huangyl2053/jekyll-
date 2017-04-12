@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+﻿﻿<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>jp.co.ndensan.reams.db</groupId>
@@ -36,7 +36,7 @@
         <!--  自業務公開系 DBXのバージョンと一致させること -->
         <jp.co.ndensan.reams.dbxVersion>1.17.1</jp.co.ndensan.reams.dbxVersion>
         <!-- UZ -->
-        <jp.co.ndensan.reams.uzVersion>1.19.9-SNAPSHOT</jp.co.ndensan.reams.uzVersion>
+        <jp.co.ndensan.reams.uzVersion>1.19.12</jp.co.ndensan.reams.uzVersion>
         <!-- 公開系 -->
         <jp.co.ndensan.reams.urVersion>1.17.1-SNAPSHOT</jp.co.ndensan.reams.urVersion>
         <jp.co.ndensan.reams.uaxVersion>1.16.0</jp.co.ndensan.reams.uaxVersion>
