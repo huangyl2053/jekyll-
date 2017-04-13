@@ -484,21 +484,61 @@ public class ShinchokuDataOutputBusiness {
         jokenBuilder = new RStringBuilder();
         jokenBuilder.append(new RString("【被保険者番号リスト】"));
         出力条件List.add(jokenBuilder.toRString());
-        jokenBuilder = new RStringBuilder();
-        int count = 0;
-        for (RString hihokenshaNo : hihokenshaNoList) {
-            jokenBuilder.append(hihokenshaNo);
-            jokenBuilder.append(new RString(","));
-            count++;
-            if (被保険者番号_改行個数 == count) {
-                出力条件List.add(jokenBuilder.toRString());
-                jokenBuilder = new RStringBuilder();
-                count = 0;
+        List<HihokenshaNosRow> rows = toHihokenshaNosRows(hihokenshaNoList, 被保険者番号_改行個数);
+        if (rows.isEmpty()) {
+            return 出力条件List;
+        }
+        int lastIndex = rows.size() - 1;
+        for (int i = 0; i <= lastIndex; i++) {
+            if (i == lastIndex) {
+                出力条件List.add(rows.get(i).toRStringAsLast());
+            } else {
+                出力条件List.add(rows.get(i).toRString());
             }
         }
-        jokenBuilder.delete(jokenBuilder.length() - 1, jokenBuilder.length());
-        出力条件List.add(jokenBuilder.toRString());
         return 出力条件List;
+    }
+
+    private static class HihokenshaNosRow {
+
+        private final List<RString> hihokenshaNos;
+
+        private HihokenshaNosRow(List<RString> list) {
+            this.hihokenshaNos = new ArrayList<>(list);
+        }
+
+        private RString toRString() {
+            RStringBuilder builder = new RStringBuilder();
+            for (RString hihokenshaNo : hihokenshaNos) {
+                builder.append(hihokenshaNo).append(",");
+            }
+            return builder.toRString();
+        }
+
+        private RString toRStringAsLast() {
+            RString row = toRString();
+            if (row.endsWith(",")) {
+                return row.remove(row.length() - 1);
+            }
+            return row;
+        }
+
+    }
+
+    private static List<HihokenshaNosRow> toHihokenshaNosRows(List<RString> hihokenshaNoValues, int numPerRow) {
+        List<HihokenshaNosRow> list = new ArrayList<>();
+        List<RString> rowValues = new ArrayList<>();
+        for (RString value : hihokenshaNoValues) {
+            rowValues.add(value);
+            if (rowValues.size() == numPerRow) {
+                list.add(new HihokenshaNosRow(rowValues));
+                rowValues = new ArrayList<>();
+            }
+        }
+        if (!rowValues.isEmpty()) {
+            list.add(new HihokenshaNosRow(rowValues));
+        }
+        return list;
     }
 
     /**
@@ -535,7 +575,7 @@ public class ShinchokuDataOutputBusiness {
         eucEntity.set前回の認定審査会結果(nullToEmpty(entity.getZenYokaigoKubunCode()));
         eucEntity.set前回の認定有効期間開始(nullToEmpty(entity.getZenkaiYukoKikanStart()));
         eucEntity.set前回の認定有効期間終了(nullToEmpty(entity.getZenkaiYukoKikanEnd()));
-        eucEntity.set主治医医療機関番号(!RString.isNullOrEmpty(entity.getDbT5302_shujiiIryokikanCode()) 
+        eucEntity.set主治医医療機関番号(!RString.isNullOrEmpty(entity.getDbT5302_shujiiIryokikanCode())
                 ? nullToEmpty(entity.getDbT5302_shujiiIryokikanCode()) : nullToEmpty(entity.getDbT5301_shujiiIryokikanCode()));
         eucEntity.set主治医番号(!RString.isNullOrEmpty(entity.getDbT5302_shujiiCode())
                 ? nullToEmpty(entity.getDbT5302_shujiiCode()) : nullToEmpty(entity.getDbT5301_shujiiCode()));
@@ -545,7 +585,7 @@ public class ShinchokuDataOutputBusiness {
         eucEntity.set調査実施日(nullToEmpty(entity.getNinteichosaJisshiYMD()));
         eucEntity.set指定居宅介護支援事業者等番号(!RString.isNullOrEmpty(entity.getDbT5202_chosaItakusakiCode())
                 ? nullToEmpty(entity.getDbT5202_chosaItakusakiCode()) : nullToEmpty(entity.getDbT5201_ninteichosaItakusakiCode()));
-        eucEntity.set委託区分(!RString.isNullOrEmpty(entity.getDbT5202_chosaItakuKubun()) 
+        eucEntity.set委託区分(!RString.isNullOrEmpty(entity.getDbT5202_chosaItakuKubun())
                 ? nullToEmpty(entity.getDbT5202_chosaItakuKubun()) : nullToEmpty(entity.getDbT5201_chosaItakuKubun()));
         eucEntity.set認定調査員番号(!RString.isNullOrEmpty(entity.getDbT5202_chosainCode())
                 ? nullToEmpty(entity.getDbT5202_chosainCode()) : nullToEmpty(entity.getDbT5201_ninteiChosainCode()));
@@ -581,7 +621,7 @@ public class ShinchokuDataOutputBusiness {
         eucEntity.set二次判定結果(nullToEmpty(entity.getNijiHanteiYokaigoJotaiKubunCode()));
         eucEntity.set認定有効期間開始(nullToEmpty(entity.getNijiHanteiNinteiYukoKaishiYMD()));
         eucEntity.set認定有効期間終了(nullToEmpty(entity.getNijiHanteiNinteiYukoShuryoYMD()));
-        eucEntity.set特定疾病コード(!RString.isNullOrEmpty(entity.getNijiHanteiYMD()) 
+        eucEntity.set特定疾病コード(!RString.isNullOrEmpty(entity.getNijiHanteiYMD())
                 ? nullToEmpty(entity.getNigoTokuteiShippeiCode()) : RString.EMPTY);
         eucEntity.set要介護１の場合の状態像(nullToEmpty(entity.getYokaigoJotaizoReiCode()));
         eucEntity.set現在のサービス区分コード(nullToEmpty(entity.getServiceKubunCode()));
