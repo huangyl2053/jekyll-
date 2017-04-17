@@ -597,7 +597,7 @@ public class NinteiShinseirenkeiDataInsert {
             }
             if (entity.getDbt5101TempEntity().get認定申請日() != null 
                     && !entity.getDbt5101TempEntity().get認定申請日().isEmpty() 
-                    && new FlexibleDate(entity.getDbt5101TempEntity().get認定申請日().toString()).isBeforeOrEquals(entity.getDbT5101Entity().getNinteiShinseiYMD())) {
+                    && new FlexibleDate(entity.getDbt5101TempEntity().get認定申請日().toString()).isBefore(entity.getDbT5101Entity().getNinteiShinseiYMD())) {
                 errorBuilder.append(new RString("取込データの認定申請日より新しい認定申請日の申請情報が存在します;"));
             }
             if (entity.getDbT5102Entity() == null

@@ -54,6 +54,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.Shuj
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.JigyoshaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiYukoKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinseiTodokedeDaikoKubunCode;
@@ -101,6 +102,14 @@ public class RenkeiDataTorikomiBusiness {
     private static final RString CODE0 = new RString("0");
     private static final RString CODE1 = new RString("001");
     private static final RString 申請書管理番号_ZERO17 = new RString("00000000000000000");
+    private static final RString ShinseiDaikoKubunCode_地域包括支援センター = new RString("2");
+    private static final RString ShinseiDaikoKubunCode_指定居宅介護支援事務 = new RString("3");
+    private static final RString ShinseiDaikoKubunCode_介護保険施設 = new RString("4");
+    private static final RString ShinseishaKankeiCode_居宅介護支援事業者 = new RString("01");
+    private static final RString ShinseishaKankeiCode_指定介護老人福祉施設 = new RString("02");
+    private static final RString ShinseishaKankeiCode_指定介護老人保健施設 = new RString("03");
+    private static final RString ShinseishaKankeiCode_指定介護療養型医療施設 = new RString("04");
+    private static final RString ShinseishaKankeiCode_地域包括支援センター = new RString("05");
     private static final int 採番番号桁数 = 5;
     private static RString rstring申請書管理番号;
 
@@ -755,27 +764,33 @@ public class RenkeiDataTorikomiBusiness {
     public DbT5120ShinseitodokedeJohoEntity getDbT5120Entity(DbT5101RelateEntity entity, RenkeiDataTorikomiProcessParamter processParamter) {
         DbT5120ShinseitodokedeJohoEntity dbt5120Entity = new DbT5120ShinseitodokedeJohoEntity();
         DbT5101TempEntity dbt5101tempEntity = entity.getDbt5101TempEntity();
+        RString 申請届出代行区分コード = shinseiDaikoKubunCodeToShinseiTodokedeDaikoKubunCode(dbt5101tempEntity.get申請代行区分コード());
         if (processParamter.is厚労省フラグ()) {
             dbt5120Entity.setShinseishoKanriNo(new ShinseishoKanriNo(rstring申請書管理番号));
-            dbt5120Entity.setShinseiTodokedeDaikoKubunCode(new Code(dbt5101tempEntity.get申請代行区分コード()));
+            dbt5120Entity.setShinseiTodokedeDaikoKubunCode(new Code(申請届出代行区分コード));
         } else {
             dbt5120Entity.setShinseishoKanriNo(new ShinseishoKanriNo(rstring申請書管理番号));
-            dbt5120Entity.setShinseiTodokedeDaikoKubunCode(new Code(dbt5101tempEntity.get申請代行区分コード()));
-            if (ShinseiTodokedeDaikoKubunCode.代行.getCode().equals(dbt5101tempEntity.get申請代行区分コード())) {
-                dbt5120Entity.setShinseiTodokedeshaShimei(dbt5101tempEntity.get申請代行事業者名());
-                dbt5120Entity.setShinseiTodokedeshaKanaShimei(dbt5101tempEntity.get申請代行事業者名カナ());
-            } else {
+            dbt5120Entity.setShinseiTodokedeDaikoKubunCode(new Code(申請届出代行区分コード));
+            if (!RString.isNullOrEmpty(dbt5101tempEntity.get申請者氏名())) {
                 dbt5120Entity.setShinseiTodokedeshaShimei(dbt5101tempEntity.get申請者氏名());
                 dbt5120Entity.setShinseiTodokedeshaKanaShimei(dbt5101tempEntity.get申請者氏名カナ());
-                if (!RString.isNullOrEmpty(dbt5101tempEntity.get申請者郵便番号())) {
-                    dbt5120Entity.setShinseiTodokedeshaYubinNo(new YubinNo(dbt5101tempEntity.get申請者郵便番号()));
-                }
-                dbt5120Entity.setShinseiTodokedeshaJusho(dbt5101tempEntity.get申請者住所());
-                if (!RString.isNullOrEmpty(dbt5101tempEntity.get申請者連絡先())) {
-                    dbt5120Entity.setShinseiTodokedeshaTelNo(new TelNo(dbt5101tempEntity.get申請者連絡先()));
-                }
+            } else {
+                dbt5120Entity.setShinseiTodokedeshaShimei(dbt5101tempEntity.get申請代行事業者名());
+                dbt5120Entity.setShinseiTodokedeshaKanaShimei(dbt5101tempEntity.get申請代行事業者名カナ());
             }
-            dbt5120Entity.setShinseiTodokedeshaTsuzukigara(dbt5101tempEntity.get申請者関係コード());
+            if (!RString.isNullOrEmpty(dbt5101tempEntity.get申請者郵便番号())) {
+                dbt5120Entity.setShinseiTodokedeshaYubinNo(new YubinNo(dbt5101tempEntity.get申請者郵便番号()));
+            }
+            dbt5120Entity.setShinseiTodokedeshaJusho(dbt5101tempEntity.get申請者住所());
+            if (!RString.isNullOrEmpty(dbt5101tempEntity.get申請者連絡先())) {
+                dbt5120Entity.setShinseiTodokedeshaTelNo(new TelNo(dbt5101tempEntity.get申請者連絡先()));
+            }
+            dbt5120Entity.setShinseiTodokedeshaTsuzukigara(dbt5101tempEntity.get本人との関係());
+            // TODO:コンフィグによって取り込む取り込まないを制御するようにする(2017/3/21時点では検討中)
+//            if (!RString.isNullOrEmpty(dbt5101tempEntity.get調査委託先コード())) {
+//                dbt5120Entity.setShinseiTodokedeDaikoJigyoshaNo(new JigyoshaNo(dbt5101tempEntity.get調査委託先コード()));
+//            }
+            dbt5120Entity.setJigyoshaKubun(shinseishaKankeiCodeToJigyoshaKubun(dbt5101tempEntity.get申請者関係コード()));
         }
         return dbt5120Entity;
     }
@@ -785,6 +800,33 @@ public class RenkeiDataTorikomiBusiness {
             return new FlexibleDate(value).plusDay(Integer.parseInt(config.toString()));
         }
         return null;
+    }
+    
+    private RString shinseiDaikoKubunCodeToShinseiTodokedeDaikoKubunCode(RString shinseiDaikoKubunCode) {
+        if (shinseiDaikoKubunCode.equals(ShinseiDaikoKubunCode_地域包括支援センター) 
+                || shinseiDaikoKubunCode.equals(ShinseiDaikoKubunCode_指定居宅介護支援事務) 
+                || shinseiDaikoKubunCode.equals(ShinseiDaikoKubunCode_介護保険施設)) {
+            return ShinseiTodokedeDaikoKubunCode.代行.getCode();
+        }
+        return shinseiDaikoKubunCode;
+    }
+    
+    private RString shinseishaKankeiCodeToJigyoshaKubun(RString shinseishaKankeiCode) {
+        if (RString.isNullOrEmpty(shinseishaKankeiCode)) {
+            return JigyoshaKubun.なし.getCode();
+        } else if (ShinseishaKankeiCode_居宅介護支援事業者.equals(shinseishaKankeiCode)) {
+            return JigyoshaKubun.居宅介護支援事業者.getCode();
+        } else if (ShinseishaKankeiCode_指定介護老人福祉施設.equals(shinseishaKankeiCode)) {
+            return JigyoshaKubun.指定介護老人福祉施設.getCode();
+        } else if (ShinseishaKankeiCode_指定介護老人保健施設.equals(shinseishaKankeiCode)) {
+            return JigyoshaKubun.介護老人保健施設.getCode();
+        } else if (ShinseishaKankeiCode_指定介護療養型医療施設.equals(shinseishaKankeiCode)) {
+            return JigyoshaKubun.指定介護療養型医療施設.getCode();
+        } else if (ShinseishaKankeiCode_地域包括支援センター.equals(shinseishaKankeiCode)) {
+            return JigyoshaKubun.地域包括支援センター.getCode();
+        } else {
+            return RString.EMPTY;
+        }
     }
 
     public DbT5102NinteiKekkaJohoEntity getDbT5102Entity(DbT5101RelateEntity entity) {
