@@ -117,9 +117,7 @@ public class IkenshoSakuseiIraiHandler {
         builder.set主治医意見書作成依頼年月日(new FlexibleDate(div.getTxtSakuseiIraiD().getValue().toDateString()));
         builder.set主治医意見書作成期限年月日(FlexibleDate.EMPTY);
         RString 作成料請求区分コード = SakuseiryoSeikyuKubunFinder.createInstance()
-                .search作成料請求区分((new ShinseishoKanriNo(申請書管理番号)),
-                        div.getCcdShujiiInput().getIryoKikanCode(),
-                        div.getCcdShujiiInput().getShujiiCode());
+                .search作成料請求区分(new ShinseishoKanriNo(申請書管理番号));
         Code 作成料請求区分Code = new Code();
         if (!RString.isNullOrEmpty(作成料請求区分コード)) {
             作成料請求区分Code = new Code(作成料請求区分コード);
