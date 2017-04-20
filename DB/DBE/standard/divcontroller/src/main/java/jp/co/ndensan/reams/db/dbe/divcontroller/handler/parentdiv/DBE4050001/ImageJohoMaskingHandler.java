@@ -397,12 +397,14 @@ public class ImageJohoMaskingHandler {
             row.setGaikyoFlag(FLAG_FALSE);
             row.setSortNo(new RString(tokki.get番号()));
             row.setTokkijikoRenban(new RString(item.get認定調査特記事項連番()));
-            if (item.get特記事項マスク() != null && !item.get特記事項マスク().isEmpty()) {
+            if (item.get特記事項マスク() != null) {
                 row.setMaskImagePath(item.get特記事項マスク());
                 row.setHasMask(マスク有);
+                row.setHasMaskShoki(マスク有);
             } else {
                 row.setMaskImagePath(RString.EMPTY);
                 row.setHasMask(RString.EMPTY);
+                row.setHasMaskShoki(RString.EMPTY);
             }
             rowList.add(row);
         }
@@ -428,12 +430,14 @@ public class ImageJohoMaskingHandler {
             row.setGaikyoFlag(FLAG_TRUE);
             row.setSortNo(new RString(tokki.get番号()));
             row.setTokkijikoRenban(new RString("0"));
-            if (gaikyoTokki.get概況調査特記事項マスク() != null && !gaikyoTokki.get概況調査特記事項マスク().isEmpty()) {
+            if (gaikyoTokki.get概況調査特記事項マスク() != null) {
                 row.setMaskImagePath(gaikyoTokki.get概況調査特記事項マスク());
                 row.setHasMask(マスク有);
+                row.setHasMaskShoki(マスク有);
             } else {
                 row.setMaskImagePath(RString.EMPTY);
                 row.setHasMask(RString.EMPTY);
+                row.setHasMaskShoki(RString.EMPTY);
             }
             rowList.add(row);
         }
@@ -451,7 +455,7 @@ public class ImageJohoMaskingHandler {
             }
             row.setEditImagePath(RString.EMPTY);
         }
-        if (!row.getMaskImagePath().isEmpty()) {
+        if (!row.getMaskImagePath().isEmpty() || row.getHasMaskShoki().equals(マスク有)) {
             row.setHasMask(マスク有);
         }
         row.setState(RString.EMPTY);
@@ -478,10 +482,11 @@ public class ImageJohoMaskingHandler {
     public void updateRow(RString newImagePath) {
         dgImageMaskingTaisho_Row row = ViewStateHolder.get(ViewStateKeys.詳細データ, dgImageMaskingTaisho_Row.class);
         row.setEditImagePath(newImagePath);
-        if (row.getMaskImagePath().isEmpty()) {
+        if (row.getMaskImagePath().isEmpty() && row.getHasMaskShoki().isEmpty()) {
             row.setState(状態_追加);
         } else {
             row.setState(状態_修正);
+            row.setHasMask(マスク有);
         }
         div.getDgImageMaskingTaisho().getDataSource().set(row.getId(), row);
         ViewStateHolder.put(ViewStateKeys.詳細データ, row);

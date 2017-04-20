@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.basic.NinteiKeikakuJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiIinJogaiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseitoroku.NinteiShinseiTorokuResult;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseitoroku.RirekiJohoResult;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5123NinteiKeikakuJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5590ShinsakaiIinJogaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinseitoroku.NinteiShinseiTorokuRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinseitoroku.RirekiJohoRelateEntity;
@@ -318,6 +319,20 @@ public class NinteiShinseiTorokuManager {
         DbT5120ShinseitodokedeJohoEntity entity = dbt5120Dac.selectByKey(申請書管理番号);
         if (entity != null) {
             return new ShinseitodokedeJoho(entity);
+        }
+        return null;
+    }
+    
+    /**
+     * 申請書管理番号により、認定計画情報の取得
+     * 
+     * @param 申請書管理番号 申請書管理番号
+     * @return 認定計画情報
+     */
+    public NinteiKeikakuJoho get認定計画情報(ShinseishoKanriNo 申請書管理番号) {
+        DbT5123NinteiKeikakuJohoEntity entity = dbt5123Dac.selectByKey(申請書管理番号);
+        if (entity != null) {
+            return new NinteiKeikakuJoho(entity);
         }
         return null;
     }
