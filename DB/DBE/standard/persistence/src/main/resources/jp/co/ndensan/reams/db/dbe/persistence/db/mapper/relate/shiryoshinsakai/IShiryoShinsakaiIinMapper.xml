@@ -28,6 +28,7 @@
         , dbt5202."riyoShisetsuJusho"
         , dbt5202."riyoShisetsuTelNo"
         , dbt5115."imageSharedFileId"
+        , dbT5210."remban" AS "riyoShisetsuRemban"
         FROM
         <if test="isGogitaiDummyFlag">
             rgdb."DbT5504ShinsakaiWariateJohoKenshu" AS dbt5502
@@ -65,6 +66,19 @@
         LEFT JOIN
             rgdb."DbT5115Image" dbt5115
          ON dbt5115."shinseishoKanriNo" = dbt5101."shinseishoKanriNo"
+        LEFT JOIN
+            rgdb."DbT5210NinteichosahyoShisetsuRiyo" dbT5210
+            ON  dbT5210."shinseishoKanriNo" = dbt5101."shinseishoKanriNo"
+            AND dbT5210."shisetsuRiyoFlag"  = true
+            AND NOT EXISTS (
+                SELECT 1
+                FROM
+                    rgdb."DbT5210NinteichosahyoShisetsuRiyo" dbT5210b
+                WHERE
+                    dbT5210b."shinseishoKanriNo" = dbT5210."shinseishoKanriNo"
+                AND dbT5210b."shisetsuRiyoFlag"  = dbT5210."shisetsuRiyoFlag"
+                AND dbT5210b."remban" > dbT5210."remban"
+            )
         WHERE
             dbt5502."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
         AND dbt5502."shinsakaiOrderKakuteiFlag" = #{isOrderKakuteiFlg}
@@ -96,6 +110,7 @@
         <result property="riyoShisetsuJusho" column="riyoShisetsuJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="riyoShisetsuTelNo" column="riyoShisetsuTelNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="imageSharedFileId" column="imageSharedFileId" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RDateTimeTypeHandler" />
+        <result property="riyoShisetsuRemban" column="riyoShisetsuRemban" />
     </resultMap>
 
     <select id="get開催予定情報" resultMap="Result_KaisaiYoteiJoho"

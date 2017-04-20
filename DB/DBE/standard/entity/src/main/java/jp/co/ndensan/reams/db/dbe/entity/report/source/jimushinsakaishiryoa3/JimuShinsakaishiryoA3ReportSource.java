@@ -680,6 +680,8 @@ public class JimuShinsakaishiryoA3ReportSource implements IReportSource {
     @ReportItem(name = "listYukokikan2_1", length = 19, order = 638)
     public RString listYukokikan2_1;
 
+    @ReportItem(name = "shisetsuType", order = 640)
+    public RString shisetsuType;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
@@ -702,6 +704,7 @@ public class JimuShinsakaishiryoA3ReportSource implements IReportSource {
         LAYOUT_BREAK_KEYS = Collections.unmodifiableList(Arrays.asList(new RString("layout")));
     }
 // </editor-fold>
+
     /**
      * 改ページ条件のキーです。
      */

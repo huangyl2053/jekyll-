@@ -1315,4 +1315,11 @@ public class IchijihanteikekkahyoA3Business {
         }
         return RString.EMPTY;
     }
+
+    /**
+     * @return 利用施設種類
+     */
+    public RString get利用施設種類() {
+        return entity.get利用施設種類();
+    }
 }
