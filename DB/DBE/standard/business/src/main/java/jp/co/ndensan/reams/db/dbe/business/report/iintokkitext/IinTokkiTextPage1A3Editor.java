@@ -166,6 +166,7 @@ public class IinTokkiTextPage1A3Editor implements IIinTokkiTextA3Editor {
         source.sabisuKaisu20 = item.getサービス回数20();
         source.sabisuKaisu21 = item.getサービス回数21();
         source = editSource1(source);
+        source.shisetsuType = item.get利用施設種類();
         source.shisetsuNameTxit = item.get施設名テキスト();
         source.shisetsuAddressTxit = item.get住所テキスト();
         source.shisetsuTelTxit = item.get電話番号テキスト();

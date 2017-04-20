@@ -29,16 +29,16 @@ public class IJimuShiryoShinsakaiIinMapperTest extends DbeTestDacBase {
                 RString.EMPTY, false,
                 /* isSakuseiJokenHani */ false,
                 /* isSakuseiJokenTuika */ false,
-                /*shinsakaiKaisaiNo*/ new RString("20160333"),
+                /*shinsakaiKaisaiNo*/ new RString("20160074"),
                 /*合議体番号*/ 32,
-                new FlexibleDate("20170326"),
+                new FlexibleDate("20161004"),
                 /*isGogitaiDummyFlag*/ false);
         param.setOrderKakuteiFlg(true);
         param.setShoriJotaiKubun0(new RString("0"));
         param.setShoriJotaiKubun3(new RString("3"));
         System.out.println("テスト");
         for (ShinsakaiSiryoKyotsuEntity e : sut.get共通情報(param)) {
-            System.out.println(e.getMaskedTokki());
+            System.out.println(e.getRiyoShisetsuRemban());
         }
     }
 

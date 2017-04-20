@@ -528,6 +528,9 @@ public class IinTokkiTextA3ReportSource implements IReportSource {
     public RString listshujiiikensho_3;
     @ReportItem(name = "listshujiiikensho_4", length = 18, order = 314)
     public RString listshujiiikensho_4;
+
+    @ReportItem(name = "shisetsuType", order = 321)
+    public RString shisetsuType;
     //なし
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
