@@ -711,8 +711,14 @@
                                     FROM   rgdb."DbT5101NinteiShinseiJoho" AS "slv"
                                     WHERE  "mst"."hihokenshaNo" = "slv"."hihokenshaNo"
                                            AND "mst"."shoKisaiHokenshaNo" = "slv"."shoKisaiHokenshaNo"
+                                           AND "slv"."torisageKubunCode" = '1'
+                                           AND ("slv"."shoriJotaiKubun" = '0' 
+                                           OR "slv"."shoriJotaiKubun" = '3')
                                            AND "mst"."ninteiShinseiYMD" <![CDATA[<]]> "slv"."ninteiShinseiYMD"
                                  )
+                       AND "mst"."torisageKubunCode" = '1'
+                       AND ("mst"."shoriJotaiKubun" = '0' 
+                       OR "mst"."shoriJotaiKubun" = '3')
             ) AS "DbT5101NinteiShinseiJoho"
                 ON "DbT5101NinteiShinseiJoho"."hihokenshaNo" = temp."被保険者番号"
                    AND "DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo" = temp."保険者番号"
