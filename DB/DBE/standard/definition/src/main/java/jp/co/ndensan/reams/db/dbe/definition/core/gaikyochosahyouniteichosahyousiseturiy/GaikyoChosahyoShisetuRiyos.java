@@ -14,6 +14,7 @@ import static jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIf
 import static jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009;
 import static jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3;
 import static jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode.認定ｿﾌﾄ99;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
@@ -23,6 +24,44 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 public final class GaikyoChosahyoShisetuRiyos {
 
     private GaikyoChosahyoShisetuRiyos() {
+    }
+
+    /**
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param remban 連番
+     * @return 対応する{@link IGaikyoChosahyoShisetuRiyo}. もしくは、{@code null}.
+     */
+    public static IGaikyoChosahyoShisetuRiyo toValueOrNull(Code 厚労省IF識別コード, Integer remban) {
+        if (厚労省IF識別コード == null || 厚労省IF識別コード.isEmpty() || remban == null) {
+            return null;
+        }
+        return toValueOrNull(厚労省IF識別コード.value(), remban);
+    }
+
+    /**
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param remban 連番
+     * @return 対応する{@link IGaikyoChosahyoShisetuRiyo}. もしくは、{@code null}.
+     */
+    public static IGaikyoChosahyoShisetuRiyo toValueOrNull(RString 厚労省IF識別コード, int remban) {
+        try {
+            switch (KoroshoIfShikibetsuCode.toValue(厚労省IF識別コード)) {
+                case 認定ｿﾌﾄ2009_SP3:
+                    return GaikyoChosahyouNiteichosahyouSisetuRiy09B.toValue(new RString(remban));
+                case 認定ｿﾌﾄ2009:
+                    return GaikyoChosahyouNiteichosahyouSisetuRiy09A.toValue(new RString(remban));
+                case 認定ｿﾌﾄ2006_新要介護認定適用区分が未適用:
+                    return GaikyoChosahyouNiteichosahyouSisetuRiy06A.toValue(new RString(remban));
+                case 認定ｿﾌﾄ2002:
+                    return GaikyoChosahyouNiteichosahyouSisetuRiy02A.toValue(new RString(remban));
+                case 認定ｿﾌﾄ99:
+                    return GaikyoChosahyouNiteichosahyouSisetuRiy99A.toValue(new RString(remban));
+                default:
+                    return null;
+            }
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
     }
 
     /**

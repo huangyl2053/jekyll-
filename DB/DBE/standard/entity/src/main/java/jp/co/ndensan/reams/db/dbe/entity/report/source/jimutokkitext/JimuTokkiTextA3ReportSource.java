@@ -555,6 +555,9 @@ public class JimuTokkiTextA3ReportSource implements IReportSource {
     public RString notes6;
     @ReportItem(name = "oldVersion", length = 3, order = 306)
     public RString oldVersion;
+
+    @ReportItem(name = "shisetsuType", order = 307)
+    public RString shisetsuType;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

@@ -38,6 +38,7 @@ public class ShinsakaiSiryoKyotsuEntity {
     private RString riyoShisetsuShimei;
     private RString riyoShisetsuJusho;
     private RString riyoShisetsuTelNo;
+    private Integer riyoShisetsuRemban;
     private RDateTime imageSharedFileId;
     private RString jutakuKaishu;
     private RString tokubetsuKyufuService;

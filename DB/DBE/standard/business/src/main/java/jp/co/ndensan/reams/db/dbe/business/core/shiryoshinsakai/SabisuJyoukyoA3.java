@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.util.DBEImageUtil;
 import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ChoiceResultItem.ServiceKubun;
+import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouniteichosahyousiseturiy.GaikyoChosahyoShisetuRiyos;
+import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouniteichosahyousiseturiy.IGaikyoChosahyoShisetuRiyo;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk02A;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk06A;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyouk.GaikyoChosahyouServiceJyouk09A;
@@ -559,6 +561,16 @@ public class SabisuJyoukyoA3 {
     }
 
     private void setサービス(IchijihanteikekkahyoA3Entity 項目, ShinsakaiSiryoKyotsuEntity 共通情報, RString path) {
+        if (!共通情報.isJimukyoku()) {
+            return;
+        }
+
+        IGaikyoChosahyoShisetuRiyo g = GaikyoChosahyoShisetuRiyos.toValueOrNull(
+                共通情報.getKoroshoIfShikibetsuCode(), 共通情報.getRiyoShisetsuRemban()
+        );
+        if (g != null) {
+            項目.set利用施設種類(g.get名称());
+        }
         if (TokkijikoTextImageKubun.テキスト.getコード().equals(共通情報.getGaikyoChosaTextImageKubun())) {
             項目.set施設名テキスト(RString.isNullOrEmpty(共通情報.getRiyoShisetsuShimei()) ? RString.EMPTY : 共通情報.getRiyoShisetsuShimei());
             項目.set住所テキスト(RString.isNullOrEmpty(共通情報.getRiyoShisetsuJusho()) ? RString.EMPTY : 共通情報.getRiyoShisetsuJusho());
@@ -2004,7 +2016,7 @@ public class SabisuJyoukyoA3 {
             イメージリストA3.add(new EachBarImage(getNumber(entity.getKijunJikanIryoKanren()), BarImageType.PATTERN8));
         }
         if (0 < getNumber(entity.getKijunJikanNinchishoKasan())) {
-            イメージリストA3.add(new EachBarImage(getNumber(entity.getKijunJikanNinchishoKasan()), BarImageType.PATTERN9));
+            イメージリストA3.add(new EachBarImage(getNumber(entity.getKijunJikanNinchishoKasan()), BarImageType.PATTERN10));
         }
         RString 文件 = new StackBarImage().createHorizontalBarImage(IMAGE_WIDTH, IMAGE_HEIGHT, イメージリストA3);
         項目.set基準時間の積み上げグラフ(文件);

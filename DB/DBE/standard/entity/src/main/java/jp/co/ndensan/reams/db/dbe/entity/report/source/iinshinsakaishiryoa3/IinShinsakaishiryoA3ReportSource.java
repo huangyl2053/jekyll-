@@ -672,6 +672,8 @@ public class IinShinsakaishiryoA3ReportSource implements IReportSource {
     @ReportItem(name = "listYukokikan_1", length = 19, order = 726)
     public RString listYukokikan_1;
 
+    @ReportItem(name = "shisetsuType", order = 730)
+    public RString shisetsuType;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。
