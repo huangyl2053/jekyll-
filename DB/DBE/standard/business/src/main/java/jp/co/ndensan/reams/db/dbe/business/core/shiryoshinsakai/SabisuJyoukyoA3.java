@@ -122,10 +122,6 @@ public class SabisuJyoukyoA3 {
     private static final Code 予防給付サービス = new Code(ServiceKubun.予防.getCode());
     private static final Code 介護給付サービス = new Code(ServiceKubun.介護.getCode());
     private static final RString 単位 = new RString(":");
-    private static final RString 施設名ファイル名 = new RString("C0004_BAK.png");
-    private static final RString 住所ファイル名 = new RString("C0005_BAK.png");
-    private static final RString 電話ファイル名 = new RString("C0006_BAK.png");
-    private static final RString SEPARATOR = new RString("/");
     private static final RString COMMA = new RString(".");
     private static final RString 分 = new RString("分");
     private static final RString 加算 = new RString("＋");
@@ -561,15 +557,15 @@ public class SabisuJyoukyoA3 {
     }
 
     private void setサービス(IchijihanteikekkahyoA3Entity 項目, ShinsakaiSiryoKyotsuEntity 共通情報, RString path) {
-        if (!共通情報.isJimukyoku()) {
-            return;
-        }
-
         IGaikyoChosahyoShisetuRiyo g = GaikyoChosahyoShisetuRiyos.toValueOrNull(
                 共通情報.getKoroshoIfShikibetsuCode(), 共通情報.getRiyoShisetsuRemban()
         );
         if (g != null) {
             項目.set利用施設種類(g.get名称());
+        }
+
+        if (!共通情報.isJimukyoku()) {
+            return;
         }
         if (TokkijikoTextImageKubun.テキスト.getコード().equals(共通情報.getGaikyoChosaTextImageKubun())) {
             項目.set施設名テキスト(RString.isNullOrEmpty(共通情報.getRiyoShisetsuShimei()) ? RString.EMPTY : 共通情報.getRiyoShisetsuShimei());
@@ -1258,7 +1254,7 @@ public class SabisuJyoukyoA3 {
         if (RString.isNullOrEmpty(entity.getHihokenshaKubunCode())) {
             項目.set被保険者区分(RString.EMPTY);
         } else {
-            項目.set被保険者区分(HihokenshaKubunCode.toValue(entity.getHihokenshaKubunCode()).get名称());
+            項目.set被保険者区分(HihokenshaKubunCode.toValue(entity.getHihokenshaKubunCode()).get略称());
             if (HihokenshaKubunCode.第１号被保険者.getコード().equals(entity.getHihokenshaKubunCode())
                     || entity.getNigoTokuteiShippeiCode() == null || entity.getNigoTokuteiShippeiCode().isEmpty()) {
                 項目.set特定疾病名(RString.EMPTY);
