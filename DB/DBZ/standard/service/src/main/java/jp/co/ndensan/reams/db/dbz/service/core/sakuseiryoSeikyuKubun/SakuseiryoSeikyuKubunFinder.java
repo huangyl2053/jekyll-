@@ -43,13 +43,15 @@ public class SakuseiryoSeikyuKubunFinder {
      * 入力された検索条件によって、作成料請求区分コードを取得します。
      *
      * @param 申請書管理番号 ShinseishoKanriNo
+     * @param 主治医医療機関コード RString
+     * @param 主治医コード RString
      * @return 作成料請求区分 RString
      */
     @Transaction
-    public RString search作成料請求区分(ShinseishoKanriNo 申請書管理番号) {
+    public RString search作成料請求区分(ShinseishoKanriNo 申請書管理番号, RString 主治医医療機関コード, RString 主治医コード) {
         RString 作成料請求区分コード;
         ISakuseiryoSeikyuKubunMapper mapper = mapperProvider.create(ISakuseiryoSeikyuKubunMapper.class);
-        SakuseiryoSeikyuKubunParameter parameter = SakuseiryoSeikyuKubunParameter.createParameter(申請書管理番号);
+        SakuseiryoSeikyuKubunParameter parameter = SakuseiryoSeikyuKubunParameter.createParameter(申請書管理番号, 主治医医療機関コード, 主治医コード);
         int 意見書データ = mapper.get意見書データ(parameter);
         int 施設入所有 = mapper.get施設入所有(parameter);
 

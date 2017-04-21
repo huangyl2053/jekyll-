@@ -218,7 +218,9 @@ public class ShujiiIkenshoSakuseiIraiHandler {
         row.setIkenshoSakuseiIraiDay(miwaritsukeShinseishaRow.getIkenshoSakuseiIraiDay());
         row.setIkenshoIraiKubun(miwaritsukeShinseishaRow.getIkenshoIraiKubun());
         RString 作成料請求区分コード = SakuseiryoSeikyuKubunFinder.createInstance()
-                .search作成料請求区分(new ShinseishoKanriNo(miwaritsukeShinseishaRow.getShinseishoKanriNo()));
+                .search作成料請求区分((new ShinseishoKanriNo(miwaritsukeShinseishaRow.getShinseishoKanriNo())),
+                        div.getSearch().getCcdShujiiIryoKikanAndShujiiInput().getTxtIryoKikanCode().getValue(),
+                        div.getSearch().getCcdShujiiIryoKikanAndShujiiInput().getTxtShujiiCode().getValue());
         row.setSakuseiryoSeikyuKubunCode(作成料請求区分コード);
         row.setSakuseiryoSeikyuKubun(get作成料請求区分名称(作成料請求区分コード));
         row.setHokensha(miwaritsukeShinseishaRow.getHokensha());

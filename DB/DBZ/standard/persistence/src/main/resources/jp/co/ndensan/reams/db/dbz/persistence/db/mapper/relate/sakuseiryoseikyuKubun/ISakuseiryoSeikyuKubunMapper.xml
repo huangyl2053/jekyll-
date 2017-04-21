@@ -9,16 +9,23 @@
         SELECT
             count(*)
         FROM
-            rgdb."DbT5101NinteiShinseiJoho" as DbT5101
-        INNER JOIN rgdb."DbT5121ShinseiRirekiJoho" as DbT5121
-            ON DbT5101."shinseishoKanriNo" = DbT5121."shinseishoKanriNo"
-            AND DbT5121."isDeleted" = FALSE
-        INNER JOIN rgdb."DbT5101NinteiShinseiJoho" as DbT5101Zen
-            ON DbT5121."zenkaiShinseishoKanriNo" = DbT5101Zen."shinseishoKanriNo"
-            AND DbT5101."shujiiIryokikanCode" = DbT5101Zen."shujiiIryokikanCode"
-            AND DbT5101."shujiiCode" = DbT5101Zen."shujiiCode"
-            AND DbT5101Zen."isDeleted" = FALSE
-        WHERE	DbT5101."shinseishoKanriNo" =#{申請書管理番号}
+            (SELECT *
+             FROM rgdb."DbT5101NinteiShinseiJoho" as mst
+             WHERE EXISTS
+                 (  SELECT 'x' 
+                    FROM rgdb."DbT5101NinteiShinseiJoho" as slv 
+                    WHERE slv."shinseishoKanriNo"    =#{申請書管理番号}
+                        AND mst."shoKisaiHokenshaNo" = slv."shoKisaiHokenshaNo"
+                        AND mst."hihokenshaNo"       = slv."hihokenshaNo"
+                        AND mst."shichosonCode"      = slv."shichosonCode" 
+                        AND mst."ninteiShinseiYMD"  <![CDATA[<]]> slv."ninteiShinseiYMD"
+                )
+            ) AS DbT5101
+        INNER JOIN
+            rgdb."DbT5302ShujiiIkenshoJoho" AS DbT5302
+            ON DbT5101."shinseishoKanriNo" = DbT5302."shinseishoKanriNo"
+        WHERE DbT5302."shujiiIryoKikanCode" =#{主治医医療機関コード}
+        AND DbT5302."shujiiCode" =#{主治医コード}
     </select>
     
     <select id="get施設入所有" resultType="int"
