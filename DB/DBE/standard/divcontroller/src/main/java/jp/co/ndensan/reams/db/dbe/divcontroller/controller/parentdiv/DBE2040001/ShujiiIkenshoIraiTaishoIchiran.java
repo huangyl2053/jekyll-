@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2040001;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ninteishinseijoho.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ninteishinseijoho.NinteiShinseiJohoBuilder;
@@ -16,6 +17,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.gamensenikbn.GamenSeniKbn;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2040001.DBE2040001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2040001.ShujiiIkenshoIraiTaishoIchiranDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2040001.dgNinteiTaskList_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2040001.ShujiiIkenshoIraiComparatorFactory;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2040001.ShujiiIkenshoIraiCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2040001.ShujiiIkenshoIraiTaishoIchiranHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2040001.ShujiiIkenshoIraiTaishoIchiranValidationHandler;
@@ -188,6 +190,10 @@ public class ShujiiIkenshoIraiTaishoIchiran {
                 hasHeader(true).
                 build()) {
             List<dgNinteiTaskList_Row> rowList = getHandler(div).getSelectedItems();
+            if (!RString.isNullOrEmpty(div.getDgNinteiTaskList().getSortOrder())) {
+                ShujiiIkenshoIraiComparatorFactory comparatorFactory = new ShujiiIkenshoIraiComparatorFactory();
+                Collections.sort(rowList, comparatorFactory.getNinteiTaskListComparator(div.getDgNinteiTaskList().getSortOrder(), div.getDgNinteiTaskList().isIsAscending()));
+            }
             for (dgNinteiTaskList_Row row : rowList) {
                 csvWriter.writeLine(getCsvData(row));
                 ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
