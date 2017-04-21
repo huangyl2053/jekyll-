@@ -680,7 +680,9 @@ public class JimuShinsakaishiryoA3ReportSource implements IReportSource {
     @ReportItem(name = "listYukokikan2_1", length = 19, order = 638)
     public RString listYukokikan2_1;
 
-    @ReportItem(name = "shisetsuType", order = 640)
+    @ReportItem(name = "shisetsuTypeLabel", length = 7, order = 640)
+    public RString shisetsuTypeLabel;
+    @ReportItem(name = "shisetsuType", order = 641)
     public RString shisetsuType;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
