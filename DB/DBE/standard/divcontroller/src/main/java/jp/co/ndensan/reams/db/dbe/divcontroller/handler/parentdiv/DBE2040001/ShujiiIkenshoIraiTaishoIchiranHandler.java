@@ -257,7 +257,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
             row.getIkenshoIraiIkenshoShutsuryokuDay().setValue(null);
             row.getIkenshoIraiKigen().setValue(null);
             RString 作成料請求区分コード = SakuseiryoSeikyuKubunFinder.createInstance()
-                    .search作成料請求区分(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
+                    .search作成料請求区分((new ShinseishoKanriNo(row.getShinseishoKanriNo())), div.getCcdShujiiInput().getIryoKikanCode(), div.getCcdShujiiInput().getShujiiCode());
             row.setSakuseiryoSeikyuKubun(get作成料請求区分名称(作成料請求区分コード));
             dataSource.set(index, row);
         }
@@ -312,7 +312,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
             row.getIkenshoIraiDay().setValue(div.getTxtSakuseiIraiYmd().getValue());
             row.setIkenshoIraiKubun(div.getDdlIraiKubun().getSelectedKey());
             RString 作成料請求区分コード = SakuseiryoSeikyuKubunFinder.createInstance()
-                    .search作成料請求区分(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
+                    .search作成料請求区分((new ShinseishoKanriNo(row.getShinseishoKanriNo())), div.getCcdShujiiInput().getIryoKikanCode(), div.getCcdShujiiInput().getShujiiCode());
             row.setSakuseiryoSeikyuKubun(get作成料請求区分名称(作成料請求区分コード));
             row.setRowState(RowState.Modified);
             row.setCancelButtonState(DataGridButtonState.Enabled);

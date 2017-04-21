@@ -10,15 +10,38 @@
             count(*)
         FROM
             rgdb."DbT5101NinteiShinseiJoho" as DbT5101
-        INNER JOIN rgdb."DbT5121ShinseiRirekiJoho" as DbT5121
-            ON DbT5101."shinseishoKanriNo" = DbT5121."shinseishoKanriNo"
+            INNER JOIN
+                rgdb."DbT5121ShinseiRirekiJoho" as DbT5121
+            ON  DbT5101."shinseishoKanriNo" = DbT5121."shinseishoKanriNo"
             AND DbT5121."isDeleted" = FALSE
-        INNER JOIN rgdb."DbT5101NinteiShinseiJoho" as DbT5101Zen
-            ON DbT5121."zenkaiShinseishoKanriNo" = DbT5101Zen."shinseishoKanriNo"
-            AND DbT5101."shujiiIryokikanCode" = DbT5101Zen."shujiiIryokikanCode"
-            AND DbT5101."shujiiCode" = DbT5101Zen."shujiiCode"
+            INNER JOIN
+                rgdb."DbT5101NinteiShinseiJoho" as DbT5101Zen
+            ON  DbT5121."zenkaiShinseishoKanriNo" = DbT5101Zen."shinseishoKanriNo"
             AND DbT5101Zen."isDeleted" = FALSE
-        WHERE	DbT5101."shinseishoKanriNo" =#{申請書管理番号}
+            INNER JOIN
+                (
+                    SELECT
+                        *
+                    FROM
+                        rgdb."DbT5302ShujiiIkenshoJoho" as mst
+                    WHERE
+                        NOT EXISTS(
+                            SELECT
+                                'x'
+                            FROM
+                                rgdb."DbT5302ShujiiIkenshoJoho" as slv
+                            WHERE
+                                mst."isDeleted" = slv."isDeleted"
+                            AND mst."shinseishoKanriNo" = slv."shinseishoKanriNo"
+                            AND mst."ikenshoIraiRirekiNo" <![CDATA[<]]> slv."ikenshoIraiRirekiNo"
+                        )
+                    AND mst."isDeleted" = FALSE
+                ) AS DbT5302Zen
+            ON  DbT5101Zen."shinseishoKanriNo" = DbT5302Zen."shinseishoKanriNo"
+        WHERE
+            DbT5101."shinseishoKanriNo" =#{申請書管理番号}
+        AND DbT5302Zen."shujiiIryoKikanCode" =#{主治医医療機関コード}
+        AND DbT5302Zen."shujiiCode" =#{主治医コード}
     </select>
     
     <select id="get施設入所有" resultType="int"
