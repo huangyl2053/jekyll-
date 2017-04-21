@@ -182,7 +182,7 @@ public class JimuTokkiTextPage1A3Editor implements IJimuTokkiTextA3Editor {
         source.sabisuKaisu20 = item.getサービス回数20();
         source.sabisuKaisu21 = item.getサービス回数21();
         source.shisetsuType = item.get利用施設種類();
-        if (RString.isNullOrEmpty(source.shisetsuType)) {
+        if (!RString.isNullOrEmpty(source.shisetsuType)) {
             source.shisetsuTypeLabel = new RString("施設種別：");
         }
         source.shisetsuNameTxit = item.get施設名テキスト();

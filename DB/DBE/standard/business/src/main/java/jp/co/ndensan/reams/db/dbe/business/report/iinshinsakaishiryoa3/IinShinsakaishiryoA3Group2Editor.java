@@ -177,7 +177,7 @@ public class IinShinsakaishiryoA3Group2Editor implements IIinShinsakaishiryoA3Ed
         source.sabisuKaisu21 = item.getサービス回数21();
         source = editSource1(source);
         source.shisetsuType = item.get利用施設種類();
-        if (RString.isNullOrEmpty(source.shisetsuType)) {
+        if (!RString.isNullOrEmpty(source.shisetsuType)) {
             source.shisetsuTypeLabel = new RString("施設種別：");
         }
         source.shisetsuNameTxit = item.get施設名テキスト();
