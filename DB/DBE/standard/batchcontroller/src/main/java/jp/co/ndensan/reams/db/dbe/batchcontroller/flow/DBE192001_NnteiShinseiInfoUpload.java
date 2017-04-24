@@ -142,19 +142,19 @@ public class DBE192001_NnteiShinseiInfoUpload extends BatchFlowBase<DBE192001_Nn
             認定調査員ファイル = Path.combinePath(path, 認定調査員ファイル名);
             調査委託先ファイル = Path.combinePath(path, 調査委託先ファイル名);
             認定申請ファイル = Path.combinePath(path, 認定申請ファイル名);
-            if (IF種類_電算.equals(認定申請IF種類)) {
-                call電算標準版_認定申請IF種類(取込み対象ファイルリスト);
-            }
             if (IF種類_電算.equals(マスタIF種類)) {
                 call電算標準版_4マスタIF種類(取込み対象ファイルリスト);
-            }
-            if (IF種類_厚労省.equals(認定申請IF種類)) {
-                getParameter().set厚労省フラグ(true);
-                call厚労省版_認定申請IF種類(取込み対象ファイルリスト);
             }
             if (IF種類_厚労省.equals(マスタIF種類)) {
                 getParameter().set厚労省フラグ(true);
                 call厚労省版_4マスタIF種類(取込み対象ファイルリスト);
+            }
+            if (IF種類_電算.equals(認定申請IF種類)) {
+                call電算標準版_認定申請IF種類(取込み対象ファイルリスト);
+            }
+            if (IF種類_厚労省.equals(認定申請IF種類)) {
+                getParameter().set厚労省フラグ(true);
+                call厚労省版_認定申請IF種類(取込み対象ファイルリスト);
             }
             if (IF種類_東芝版.equals(認定申請IF種類)) {
                 getParameter().set東芝版フラグ(true);
