@@ -9,7 +9,6 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.IchijihanteikekkahyoA3Business;
 import jp.co.ndensan.reams.db.dbe.business.report.jimutokkitext.HanteiKekkaHyoA3ReportFormGroupIndex;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.iintokkitext.IinTokkiTextA3ReportSource;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -167,20 +166,16 @@ public class IinTokkiTextPage1A3Editor implements IIinTokkiTextA3Editor {
         source.sabisuKaisu21 = item.getサービス回数21();
         source = editSource1(source);
         source.shisetsuType = item.get利用施設種類();
-        if (!RString.isNullOrEmpty(source.shisetsuType)) {
-            source.shisetsuTypeLabel = new RString("施設種別：");
-        }
+        source.shisetsuTypeLabel = new RString("施設種別：");
         source.shisetsuNameTxit = item.get施設名テキスト();
         source.shisetsuAddressTxit = item.get住所テキスト();
         source.shisetsuTelTxit = item.get電話番号テキスト();
         source.imgShisetsuName = item.get施設名イメージ();
         source.imgShisetsuAddress = item.get住所イメージ();
         source.imgShisetsuTel = item.get電話番号イメージ();
-        if (!ServiceKubunCode.なし.getコード().equals(item.getServiceKubunCode().getColumnValue())) {
-            source.shisetsuName = new RString("施設名　：");
-            source.jusho = new RString("住所　〒");
-            source.telNo = new RString("TEL");
-        }
+        source.shisetsuName = new RString("施設名　：");
+        source.jusho = new RString("住所　〒");
+        source.telNo = new RString("TEL");
         source.notes1 = item.get凡例1();
         source.notes2 = item.get凡例2();
         source.notes3 = item.get凡例3();

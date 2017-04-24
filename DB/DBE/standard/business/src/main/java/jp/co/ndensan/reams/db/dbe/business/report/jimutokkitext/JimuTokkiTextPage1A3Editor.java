@@ -182,9 +182,7 @@ public class JimuTokkiTextPage1A3Editor implements IJimuTokkiTextA3Editor {
         source.sabisuKaisu20 = item.getサービス回数20();
         source.sabisuKaisu21 = item.getサービス回数21();
         source.shisetsuType = item.get利用施設種類();
-        if (!RString.isNullOrEmpty(source.shisetsuType)) {
-            source.shisetsuTypeLabel = new RString("施設種別：");
-        }
+        source.shisetsuTypeLabel = new RString("施設種別：");
         source.shisetsuNameTxit = item.get施設名テキスト();
         source.shisetsuAddressTxit = item.get住所テキスト();
         source.shisetsuTelTxit = item.get電話番号テキスト();
@@ -195,11 +193,9 @@ public class JimuTokkiTextPage1A3Editor implements IJimuTokkiTextA3Editor {
         if (!RString.isNullOrEmpty(item.get申請書管理番号())) {
             source.shinseishoKanriNo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.get申請書管理番号());
         }
-        if (!ServiceKubunCode.なし.getコード().equals(item.getServiceKubunCode().getColumnValue())) {
-            source.shisetsuName = new RString("施設名　：");
-            source.jusho = new RString("住所　〒");
-            source.telNo = new RString("TEL");
-        }
+        source.shisetsuName = new RString("施設名　：");
+        source.jusho = new RString("住所　〒");
+        source.telNo = new RString("TEL");
         source.notes1 = item.get凡例1();
         source.notes2 = item.get凡例2();
         source.notes3 = item.get凡例3();
