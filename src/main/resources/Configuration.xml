@@ -4,6 +4,7 @@
 <configuration>
     <typeAliases> 
         <typeAlias alias="loginInfo" type="entity.loginInfo"/> 
+        <typeAlias alias="BlogInfo" type="entity.BlogInfo"/> 
     </typeAliases> 
 
     <environments default="development">
@@ -19,6 +20,7 @@
     </environments>
 
     <mappers>
+        <mapper resource="mybatis/mapper/BlogMapper.xml"/>
         <mapper resource="mybatis/mapper/loginInfo.xml"/>
     </mappers>
 </configuration>

@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="save">
+<form method="post" action="save">
 标题：<input type="text" name="title"/>
 <br/>
 内容：<input type="text" name="content"/>
