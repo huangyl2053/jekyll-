@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  * @reamsid_L DBE-3000-100 dongyabin
  */
 public class ChosaJisshishaJohoDiv extends Panel implements IChosaJisshishaJohoDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -48,10 +48,10 @@ public class ChosaJisshishaJohoDiv extends Panel implements IChosaJisshishaJohoD
     private TextBoxDate txtChosaJisshiDate;
     @JsonProperty("ddlChosaJisshiBasho")
     private DropDownList ddlChosaJisshiBasho;
-    @JsonProperty("txtJisshiBashoMeisho")
-    private TextBox txtJisshiBashoMeisho;
     @JsonProperty("Image")
     private ImageDiv Image;
+    @JsonProperty("txtJisshiBashoMeisho")
+    private TextBox txtJisshiBashoMeisho;
     @JsonProperty("txtKinyushaCode")
     private TextBoxCode txtKinyushaCode;
     @JsonProperty("btnChosainGuide")
@@ -198,24 +198,6 @@ public class ChosaJisshishaJohoDiv extends Panel implements IChosaJisshishaJohoD
     }
 
     /*
-     * gettxtJisshiBashoMeisho
-     * @return txtJisshiBashoMeisho
-     */
-    @JsonProperty("txtJisshiBashoMeisho")
-    public TextBox getTxtJisshiBashoMeisho() {
-        return txtJisshiBashoMeisho;
-    }
-
-    /*
-     * settxtJisshiBashoMeisho
-     * @param txtJisshiBashoMeisho txtJisshiBashoMeisho
-     */
-    @JsonProperty("txtJisshiBashoMeisho")
-    public void setTxtJisshiBashoMeisho(TextBox txtJisshiBashoMeisho) {
-        this.txtJisshiBashoMeisho = txtJisshiBashoMeisho;
-    }
-
-    /*
      * getImage
      * @return Image
      */
@@ -231,6 +213,24 @@ public class ChosaJisshishaJohoDiv extends Panel implements IChosaJisshishaJohoD
     @JsonProperty("Image")
     public void setImage(ImageDiv Image) {
         this.Image = Image;
+    }
+
+    /*
+     * gettxtJisshiBashoMeisho
+     * @return txtJisshiBashoMeisho
+     */
+    @JsonProperty("txtJisshiBashoMeisho")
+    public TextBox getTxtJisshiBashoMeisho() {
+        return txtJisshiBashoMeisho;
+    }
+
+    /*
+     * settxtJisshiBashoMeisho
+     * @param txtJisshiBashoMeisho txtJisshiBashoMeisho
+     */
+    @JsonProperty("txtJisshiBashoMeisho")
+    public void setTxtJisshiBashoMeisho(TextBox txtJisshiBashoMeisho) {
+        this.txtJisshiBashoMeisho = txtJisshiBashoMeisho;
     }
 
     /*

@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyotok
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyotokkijiko.NinteichosahyoTokkijikoBuilder;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJohoBuilder;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJohoIdentifier;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiShoriKekka;
 import jp.co.ndensan.reams.db.dbe.business.core.tokkijikoinput.TokkiJikoInputModel;
 import jp.co.ndensan.reams.db.dbe.business.core.util.DBEImageUtil;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImageFileItem;
@@ -28,6 +30,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouniteichosahyous
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouservicejyoukflg.GaikyoChosahyouServiceJyoukFlg09B;
 import jp.co.ndensan.reams.db.dbe.definition.core.kanri.ImageFileName;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoParameter;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichijipanteisyori.IChiJiPanTeiSyoRiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.NinnteiChousaKekkaTouroku1Div;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.dgRiyoServiceJyokyo_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.dgRiyoShisetsu_Row;
@@ -71,7 +74,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode
 import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku09B;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosajisshishajoho.ChosaJisshishaJohoModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping09B;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaJisshiBashoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinchishoNichijoSeikatsuJiritsudoCode;
@@ -110,6 +112,15 @@ import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoFinder;
+import jp.co.ndensan.reams.db.dbe.service.core.ichijipanteisyori.IChiJiPanTeiSyoRiManager;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
+import jp.co.ndensan.reams.uz.uza.util.Models;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5105NinteiKanryoJohoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5121ShinseiRirekiJohoDac;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * 認定調査結果登録1のクラスです。
@@ -199,6 +210,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
     private static final int INDEX_11 = 11;
     private static final int INDEX_12 = 12;
     private static final int INDEX_15 = 15;
+    private final DbT5121ShinseiRirekiJohoDac DbT5121Dac;
 
     /**
      * コンストラクタです。
@@ -207,6 +219,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
      */
     public NinnteiChousaKekkaTouroku1Handler(NinnteiChousaKekkaTouroku1Div div) {
         this.div = div;
+        this.DbT5121Dac = InstanceProvider.create(DbT5121ShinseiRirekiJohoDac.class);
     }
 
     public void onLoad(ShinseishoKanriNo 申請書管理番号, Integer 認定調査履歴番号) {
@@ -224,10 +237,10 @@ public class NinnteiChousaKekkaTouroku1Handler {
 
     private void initialize概況基本調査情報(ShinseishoKanriNo 申請書管理番号, Integer 認定調査履歴番号, TempData 概況調査情報) {
         if (概況調査情報 != null) {
-            基本調査の初期化(申請書管理番号, true);
+            基本調査の初期化(申請書管理番号, true, 認定調査履歴番号);
             ViewStateHolder.put(ViewStateKeys.概況調査テキスト_イメージ区分, 概況調査情報.getTemp_概況調査テキストイメージ区分());
         } else {
-            基本調査の初期化(申請書管理番号, false);
+            基本調査の初期化(申請書管理番号, false, 認定調査履歴番号);
             ViewStateHolder.put(ViewStateKeys.概況調査テキスト_イメージ区分, RString.EMPTY);
             div.getRadUpdateKind().setDisabled(true);
         }
@@ -236,6 +249,155 @@ public class NinnteiChousaKekkaTouroku1Handler {
         概況調査_給付関連情報の初期化(概況調査情報, 申請書管理番号, 認定調査履歴番号);
         initialize一次判定(申請書管理番号);
         特記事項情報の初期化(申請書管理番号, 認定調査履歴番号);
+    }
+
+    public void 編集前調査実施者情報設定() {
+        RStringBuilder builder = new RStringBuilder();
+
+        builder.append(div.getCcdChosaJisshishaJoho().getTxtChosaJisshiDate().getText() != null ? div.getCcdChosaJisshishaJoho().getTxtChosaJisshiDate().getValue() : RString.EMPTY);
+        builder.append(div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho() != null ? div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedKey() : RString.EMPTY);
+        builder.append(div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().getText() != null ? div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().getValue() : RString.EMPTY);
+        builder.append(div.getCcdChosaJisshishaJoho().getTxtShozokuKikanCode().getText() != null ? div.getCcdChosaJisshishaJoho().getTxtShozokuKikanCode().getText() : RString.EMPTY);
+        builder.append(div.getCcdChosaJisshishaJoho().getTxtKinyushaCode().getText() != null ? div.getCcdChosaJisshishaJoho().getTxtKinyushaCode().getText() : RString.EMPTY);
+        builder.append(div.getRadGenzaiservis().getSelectedKey());
+        builder.append(div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getRadJutakuKaishu().getSelectedKey());
+        for (dgRiyoServiceJyokyo_Row row : div.getTabChosaShurui().getDgRiyoServiceJyokyo().getDataSource()) {
+            builder.append(row.getServiceJokyo() != null ? row.getServiceJokyo().getText() : RString.EMPTY);
+        }
+        builder.append(div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getTxtShichosonTokubetsuKyufu().getText() != null
+                ? div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getTxtShichosonTokubetsuKyufu().getText() : RString.EMPTY);
+        builder.append(div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getTxtKyufuIgaiJutakuService().getText() != null
+                ? div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getTxtKyufuIgaiJutakuService().getText() : RString.EMPTY);
+        for (dgRiyoShisetsu_Row row : div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getDgRiyoShisetsu().getDataSource()) {
+            builder.append(new RString(row.getShisetsuRiyoUmu().toString()));
+        }
+        builder.append(div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getGaigyoShisetsuRenrakusaki().getTxtShisetsuMeisdho().getText() != null
+                ? div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getGaigyoShisetsuRenrakusaki().getTxtShisetsuMeisdho().getText() : RString.EMPTY);
+        builder.append(div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getGaigyoShisetsuRenrakusaki().getTxtShisetsuYubinNo().getText() != null
+                ? div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getGaigyoShisetsuRenrakusaki().getTxtShisetsuYubinNo().getText() : RString.EMPTY);
+        builder.append(div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getGaigyoShisetsuRenrakusaki().getTxtShisetsuJusho() != null
+                ? div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getGaigyoShisetsuRenrakusaki().getTxtShisetsuJusho().getDomain().value() : RString.EMPTY);
+        builder.append(div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getGaigyoShisetsuRenrakusaki().getTxtTelNo() != null
+                ? div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getGaigyoShisetsuRenrakusaki().getTxtTelNo().getDomain().value() : RString.EMPTY);
+        builder.append(div.getTabChosaShurui().getGaikyoTokkiInput().getTxtGaikyoTokkiNyuroku().getText() != null
+                ? div.getTabChosaShurui().getGaikyoTokkiInput().getTxtGaikyoTokkiNyuroku().getValue() : RString.EMPTY);
+        builder.append(div.getTxtIchijiHanteiKekka().getText() != null
+                ? div.getTxtIchijiHanteiKekka().getValue() : RString.EMPTY);
+        ArrayList<KihonChosaInput> 第1群List = ViewStateHolder.get(ViewStateKeys.第一群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第2群List = ViewStateHolder.get(ViewStateKeys.第二群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第3群List = ViewStateHolder.get(ViewStateKeys.第三群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第4群List = ViewStateHolder.get(ViewStateKeys.第四群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第5群List = ViewStateHolder.get(ViewStateKeys.第五群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 特別な医療List = ViewStateHolder.get(ViewStateKeys.第六群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 自立度List = ViewStateHolder.get(ViewStateKeys.第七群認定調査基本情報リスト, ArrayList.class);
+        for (KihonChosaInput item : 第1群List) {
+            builder.append(item.get前回認知症高齢者自立度());
+            builder.append(item.get前回調査連番());
+            builder.append(item.get前回調査項目());
+            builder.append(item.get前回障害高齢者自立度());
+            builder.append(item.get申請書管理番号().value());
+            builder.append(item.get認定調査依頼履歴番号());
+            builder.append(item.get認知症高齢者自立度());
+            builder.append(item.get調査連番());
+            builder.append(item.get調査項目());
+            builder.append(item.get障害高齢者自立度());
+            builder.append(item.is特記事項有無());
+        }
+
+        for (KihonChosaInput item : 第2群List) {
+            builder.append(item.get前回認知症高齢者自立度());
+            builder.append(item.get前回調査連番());
+            builder.append(item.get前回調査項目());
+            builder.append(item.get前回障害高齢者自立度());
+            builder.append(item.get申請書管理番号().value());
+            builder.append(item.get認定調査依頼履歴番号());
+            builder.append(item.get認知症高齢者自立度());
+            builder.append(item.get調査連番());
+            builder.append(item.get調査項目());
+            builder.append(item.get障害高齢者自立度());
+            builder.append(item.is特記事項有無());
+        }
+
+        for (KihonChosaInput item : 第3群List) {
+            builder.append(item.get前回認知症高齢者自立度());
+            builder.append(item.get前回調査連番());
+            builder.append(item.get前回調査項目());
+            builder.append(item.get前回障害高齢者自立度());
+            builder.append(item.get申請書管理番号().value());
+            builder.append(item.get認定調査依頼履歴番号());
+            builder.append(item.get認知症高齢者自立度());
+            builder.append(item.get調査連番());
+            builder.append(item.get調査項目());
+            builder.append(item.get障害高齢者自立度());
+            builder.append(item.is特記事項有無());
+        }
+
+        for (KihonChosaInput item : 第4群List) {
+            builder.append(item.get前回認知症高齢者自立度());
+            builder.append(item.get前回調査連番());
+            builder.append(item.get前回調査項目());
+            builder.append(item.get前回障害高齢者自立度());
+            builder.append(item.get申請書管理番号().value());
+            builder.append(item.get認定調査依頼履歴番号());
+            builder.append(item.get認知症高齢者自立度());
+            builder.append(item.get調査連番());
+            builder.append(item.get調査項目());
+            builder.append(item.get障害高齢者自立度());
+            builder.append(item.is特記事項有無());
+        }
+
+        for (KihonChosaInput item : 第5群List) {
+            builder.append(item.get前回認知症高齢者自立度());
+            builder.append(item.get前回調査連番());
+            builder.append(item.get前回調査項目());
+            builder.append(item.get前回障害高齢者自立度());
+            builder.append(item.get申請書管理番号().value());
+            builder.append(item.get認定調査依頼履歴番号());
+            builder.append(item.get認知症高齢者自立度());
+            builder.append(item.get調査連番());
+            builder.append(item.get調査項目());
+            builder.append(item.get障害高齢者自立度());
+            builder.append(item.is特記事項有無());
+        }
+
+        for (KihonChosaInput item : 特別な医療List) {
+            builder.append(item.get前回認知症高齢者自立度());
+            builder.append(item.get前回調査連番());
+            builder.append(item.get前回調査項目());
+            builder.append(item.get前回障害高齢者自立度());
+            builder.append(item.get申請書管理番号().value());
+            builder.append(item.get認定調査依頼履歴番号());
+            builder.append(item.get認知症高齢者自立度());
+            builder.append(item.get調査連番());
+            builder.append(item.get調査項目());
+            builder.append(item.get障害高齢者自立度());
+            builder.append(item.is特記事項有無());
+        }
+
+        for (KihonChosaInput item : 自立度List) {
+            builder.append(item.get前回認知症高齢者自立度());
+            builder.append(item.get前回調査連番());
+            builder.append(item.get前回調査項目());
+            builder.append(item.get前回障害高齢者自立度());
+            builder.append(item.get申請書管理番号().value());
+            builder.append(item.get認定調査依頼履歴番号());
+            builder.append(item.get認知症高齢者自立度());
+            builder.append(item.get調査連番());
+            builder.append(item.get調査項目());
+            builder.append(item.get障害高齢者自立度());
+            builder.append(item.is特記事項有無());
+        }
+        HashMap gaikyoTokkiNyurokuMap = ViewStateHolder.get(ViewStateKeys.特記事項一覧, LinkedHashMap.class);
+        Set<Map.Entry<RString, TokkiJikoInputModel>> set = gaikyoTokkiNyurokuMap.entrySet();
+        Iterator<Map.Entry<RString, TokkiJikoInputModel>> it = set.iterator();
+        while (it.hasNext()) {
+            Map.Entry<RString, TokkiJikoInputModel> entry = it.next();
+            TokkiJikoInputModel value = entry.getValue();
+            builder.append(value.get特記事項());
+            builder.append(value.get特記事項番号());
+            builder.append(value.get特記連番());
+        }
+        ViewStateHolder.put(ViewStateKeys.画面データ, builder.toRString());
     }
 
     private void 特記事項情報の初期化(ShinseishoKanriNo temp_申請書管理番号, int temp_認定調査履歴番号) {
@@ -290,6 +452,8 @@ public class NinnteiChousaKekkaTouroku1Handler {
             div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getRadJutakuKaishu().setSelectedKey(住宅改修_無);
             div.getTabChosaBasho().setSelectedItem(new tplZaitakuDiv());
             div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getDgRiyoServiceJyokyo().setVisible(true);
+            div.getTabChosaShurui().getGaikyoTokkiInput().getTokki().setDisplayNone(true);
+            div.getImageGaigyoShisetsuRenrakusaki().setDisplayNone(true);
         }
         給付サービスの初期設定(申請書管理番号, 認定調査履歴番号);
         利用施設の初期設定(申請書管理番号, 認定調査履歴番号);
@@ -340,6 +504,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
     }
 
     private void 施設関連の詳細設定(TempData 概況調査情報, ShinseishoKanriNo 申請書管理番号, Integer 認定調査履歴番号) {
+        ViewStateHolder.put(ViewStateKeys.概況調査テキスト_イメージ区分, 概況調査情報.getTemp_概況調査テキストイメージ区分());
         if (TokkijikoTextImageKubun.イメージ.getコード().equals(概況調査情報.getTemp_概況調査テキストイメージ区分())) {
             div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getGaigyoShisetsuRenrakusaki().setDisplayNone(true);
             setImage施設連絡先(申請書管理番号, 認定調査履歴番号);
@@ -407,10 +572,12 @@ public class NinnteiChousaKekkaTouroku1Handler {
                     model.set記入者名称(chosainJoho.get調査員氏名());
                 }
             }
+            model.setイメージテキスト区分(ViewStateHolder.get(ViewStateKeys.概況調査テキスト_イメージ区分, RString.class));
+            model.set実施場所ImagePath(ViewStateHolder.get(ViewStateKeys.イメージ情報, RString.class));
         }
     }
 
-    private void 基本調査の初期化(ShinseishoKanriNo 申請書管理番号, boolean isExistsKihonChosaData) {
+    private void 基本調査の初期化(ShinseishoKanriNo 申請書管理番号, boolean isExistsKihonChosaData, Integer 認定調査履歴番号) {
         ArrayList<KihonChosaInput> 第1群List = new ArrayList<>();
         ArrayList<KihonChosaInput> 第2群List = new ArrayList<>();
         ArrayList<KihonChosaInput> 第3群List = new ArrayList<>();
@@ -419,7 +586,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
         ArrayList<KihonChosaInput> 特別な医療List = new ArrayList<>();
         ArrayList<KihonChosaInput> 自立度List = new ArrayList<>();
 
-        RString 初期の基本調査 = 基本調査の初期化(申請書管理番号, isExistsKihonChosaData, 第1群List, 第2群List,
+        RString 初期の基本調査 = 基本調査の初期化(申請書管理番号, 認定調査履歴番号, isExistsKihonChosaData, 第1群List, 第2群List,
                 第3群List, 第4群List, 第5群List, 特別な医療List, 自立度List);
         boolean 前回基本調査項目値あり = new RString("T").equals(初期の基本調査.substring(初期の基本調査.length() - 1, 初期の基本調査.length()));
         ViewStateHolder.put(ViewStateKeys.前回基本調査項目値あり, 前回基本調査項目値あり);
@@ -472,6 +639,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
         RString 実施場所ImagePath = DBEImageUtil.getMaskOrOriginalImageFilePath(出力イメージフォルダパス, ImageFileName.調査実施場所.getImageFileName());
         if (!RString.isNullOrEmpty(実施場所ImagePath)) {
             div.getCcdChosaJisshishaJoho().getImage().getImgChosaJisshiBashoMeisho().setSrc(DBEImageUtil.sanitizePath(実施場所ImagePath));
+            ViewStateHolder.put(ViewStateKeys.イメージ情報, DBEImageUtil.sanitizePath(実施場所ImagePath));
         }
     }
 
@@ -749,7 +917,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
         return map;
     }
 
-    private RString 基本調査の初期化(ShinseishoKanriNo 申請書管理番号, boolean isExistsKihonChosaData,
+    private RString 基本調査の初期化(ShinseishoKanriNo 申請書管理番号, Integer 認定調査履歴番号, boolean isExistsKihonChosaData,
             ArrayList<KihonChosaInput> 第1群List, ArrayList<KihonChosaInput> 第2群List,
             ArrayList<KihonChosaInput> 第3群List, ArrayList<KihonChosaInput> 第4群List, ArrayList<KihonChosaInput> 第5群List,
             ArrayList<KihonChosaInput> 特別な医療List, ArrayList<KihonChosaInput> 自立度List) {
@@ -763,6 +931,9 @@ public class NinnteiChousaKekkaTouroku1Handler {
         List<KihonChosaInput> 認定調査基本情報リスト = new ArrayList<>();
         if (isExistsKihonChosaData) {
             認定調査基本情報リスト = findler.get認定調査基本情報(申請書管理番号);
+        } else {
+            RString 依頼区分コード = ViewStateHolder.get(ViewStateKeys.認定調査依頼区分コード, RString.class);
+            前回申請書管理番号取得(認定調査履歴番号, 依頼区分コード, 申請書管理番号);
         }
 
         if (認定調査基本情報リスト.isEmpty()) {
@@ -847,6 +1018,15 @@ public class NinnteiChousaKekkaTouroku1Handler {
 
         return 基本調査初期データの保存(第1群List, 第2群List, 第3群List, 第4群List, 第5群List,
                 特別な医療List, 認定調査基本情報リスト, 前回基本調査項目値あり, 自立度);
+    }
+
+    private void 前回申請書管理番号取得(Integer 認定調査履歴番号, RString 依頼区分コード, ShinseishoKanriNo 申請書管理番号) throws NullPointerException {
+        List<DbT5121ShinseiRirekiJohoEntity> 申請履歴情報 = DbT5121Dac.select前回申請管理番号(申請書管理番号);
+        if (!申請履歴情報.isEmpty()) {
+            ViewStateHolder.put(ViewStateKeys.申請書管理番号2, 申請履歴情報.get(0).getZenkaiShinseishoKanriNo());
+        } else {
+            ViewStateHolder.put(ViewStateKeys.申請書管理番号2, ShinseishoKanriNo.EMPTY);
+        }
     }
 
     private RString 基本調査初期データの保存(ArrayList<KihonChosaInput> 第1群List, ArrayList<KihonChosaInput> 第2群List,
@@ -1063,48 +1243,41 @@ public class NinnteiChousaKekkaTouroku1Handler {
             ArrayList<KihonChosaInput> 第3群List, ArrayList<KihonChosaInput> 第4群List,
             ArrayList<KihonChosaInput> 第5群List, ArrayList<KihonChosaInput> 特別な医療List, ArrayList<KihonChosaInput> 自立度List) {
 
-        for (KihonChosaInput 基本情報 : 第1群List) {
-            基本情報 = new KihonChosaInput(基本情報.get申請書管理番号(), 基本情報.get認定調査依頼履歴番号(), 基本情報.get認知症高齢者自立度(),
-                    基本情報.get障害高齢者自立度(), 基本情報.get調査連番(),
-                    基本情報.get前回調査項目(), 基本情報.get前回認知症高齢者自立度(), 基本情報.get前回障害高齢者自立度(),
-                    基本情報.get前回調査連番(), 基本情報.get前回調査項目());
+        第1群List.clear();
+        第2群List.clear();
+        第3群List.clear();
+        第4群List.clear();
+        第5群List.clear();
+        特別な医療List.clear();
+        自立度List.clear();
+
+        ShinseishoKanriNo 前回申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号2, ShinseishoKanriNo.class);
+        NinteichosahyoKihonChosaManager ninteichosahyoKihonChosaManager = InstanceProvider.create(NinteichosahyoKihonChosaManager.class);
+        NinteichosahyoKihonChosa 前回認定調査票_基本調査 = ninteichosahyoKihonChosaManager.get認定調査票_基本調査_最大履歴(前回申請書管理番号);
+
+        int 前回認定調査履歴番号 = 前回認定調査票_基本調査.get要介護認定調査履歴番号();
+        NinteichosahyoChosaItemManager ninteichosahyoChosaItemManager = InstanceProvider.create(NinteichosahyoChosaItemManager.class);
+        List<NinteichosahyoChosaItem> 前回認定調査項目リスト
+                = ninteichosahyoChosaItemManager.get認定調査票_基本調査_調査項目List(前回申請書管理番号, 前回認定調査履歴番号);
+
+        for (NinteichosahyoChosaItem 前回認定調査項目 : 前回認定調査項目リスト) {
+            NinteichosaKomokuMapping09B 認定調査項目マッピング = NinteichosaKomokuMapping09B.toValue(new RString(前回認定調査項目.get連番()));
+            if (認定調査項目_第1群.equals(認定調査項目マッピング.get群番号())) {
+                createKihonChosaItemList(前回申請書管理番号, 前回認定調査履歴番号, 前回認定調査票_基本調査, 前回認定調査項目, 第1群List);
+            } else if (認定調査項目_第2群.equals(認定調査項目マッピング.get群番号())) {
+                createKihonChosaItemList(前回申請書管理番号, 前回認定調査履歴番号, 前回認定調査票_基本調査, 前回認定調査項目, 第2群List);
+            } else if (認定調査項目_第3群.equals(認定調査項目マッピング.get群番号())) {
+                createKihonChosaItemList(前回申請書管理番号, 前回認定調査履歴番号, 前回認定調査票_基本調査, 前回認定調査項目, 第3群List);
+            } else if (認定調査項目_第4群.equals(認定調査項目マッピング.get群番号())) {
+                createKihonChosaItemList(前回申請書管理番号, 前回認定調査履歴番号, 前回認定調査票_基本調査, 前回認定調査項目, 第4群List);
+            } else if (認定調査項目_第5群.equals(認定調査項目マッピング.get群番号())) {
+                createKihonChosaItemList(前回申請書管理番号, 前回認定調査履歴番号, 前回認定調査票_基本調査, 前回認定調査項目, 第5群List);
+            } else if (認定調査項目_第6群.equals(認定調査項目マッピング.get群番号())) {
+                createKihonChosaItemList(前回申請書管理番号, 前回認定調査履歴番号, 前回認定調査票_基本調査, 前回認定調査項目, 特別な医療List);
+            }
         }
-        for (KihonChosaInput 基本情報 : 第2群List) {
-            基本情報 = new KihonChosaInput(基本情報.get申請書管理番号(), 基本情報.get認定調査依頼履歴番号(), 基本情報.get認知症高齢者自立度(),
-                    基本情報.get障害高齢者自立度(), 基本情報.get調査連番(),
-                    基本情報.get前回調査項目(), 基本情報.get前回認知症高齢者自立度(), 基本情報.get前回障害高齢者自立度(),
-                    基本情報.get前回調査連番(), 基本情報.get前回調査項目());
-        }
-        for (KihonChosaInput 基本情報 : 第3群List) {
-            基本情報 = new KihonChosaInput(基本情報.get申請書管理番号(), 基本情報.get認定調査依頼履歴番号(), 基本情報.get認知症高齢者自立度(),
-                    基本情報.get障害高齢者自立度(), 基本情報.get調査連番(),
-                    基本情報.get前回調査項目(), 基本情報.get前回認知症高齢者自立度(), 基本情報.get前回障害高齢者自立度(),
-                    基本情報.get前回調査連番(), 基本情報.get前回調査項目());
-        }
-        for (KihonChosaInput 基本情報 : 第4群List) {
-            基本情報 = new KihonChosaInput(基本情報.get申請書管理番号(), 基本情報.get認定調査依頼履歴番号(), 基本情報.get認知症高齢者自立度(),
-                    基本情報.get障害高齢者自立度(), 基本情報.get調査連番(),
-                    基本情報.get前回調査項目(), 基本情報.get前回認知症高齢者自立度(), 基本情報.get前回障害高齢者自立度(),
-                    基本情報.get前回調査連番(), 基本情報.get前回調査項目());
-        }
-        for (KihonChosaInput 基本情報 : 第5群List) {
-            基本情報 = new KihonChosaInput(基本情報.get申請書管理番号(), 基本情報.get認定調査依頼履歴番号(), 基本情報.get認知症高齢者自立度(),
-                    基本情報.get障害高齢者自立度(), 基本情報.get調査連番(),
-                    基本情報.get前回調査項目(), 基本情報.get前回認知症高齢者自立度(), 基本情報.get前回障害高齢者自立度(),
-                    基本情報.get前回調査連番(), 基本情報.get前回調査項目());
-        }
-        for (KihonChosaInput 基本情報 : 特別な医療List) {
-            基本情報 = new KihonChosaInput(基本情報.get申請書管理番号(), 基本情報.get認定調査依頼履歴番号(), 基本情報.get認知症高齢者自立度(),
-                    基本情報.get障害高齢者自立度(), 基本情報.get調査連番(),
-                    基本情報.get前回調査項目(), 基本情報.get前回認知症高齢者自立度(), 基本情報.get前回障害高齢者自立度(),
-                    基本情報.get前回調査連番(), 基本情報.get前回調査項目());
-        }
-        for (KihonChosaInput 基本情報 : 自立度List) {
-            基本情報 = new KihonChosaInput(基本情報.get申請書管理番号(), 基本情報.get認定調査依頼履歴番号(), 基本情報.get前回認知症高齢者自立度(),
-                    基本情報.get前回障害高齢者自立度(), 基本情報.get調査連番(),
-                    基本情報.get調査項目(), 基本情報.get前回認知症高齢者自立度(), 基本情報.get前回障害高齢者自立度(),
-                    基本情報.get前回調査連番(), 基本情報.get前回調査項目());
-        }
+        createKihonChosaList(前回申請書管理番号, 前回認定調査履歴番号, 前回認定調査票_基本調査, 自立度List);
+        createKihonChosaList(前回申請書管理番号, 前回認定調査履歴番号, 前回認定調査票_基本調査, 自立度List);
     }
 
     /**
@@ -1118,53 +1291,52 @@ public class NinnteiChousaKekkaTouroku1Handler {
      * @param 特別な医療List 特別な医療List
      * @param 自立度List 自立度List
      */
-    @SuppressWarnings("unchecked")
-    public void 前回値コピー処理_前回履歴(ArrayList<KihonChosaInput> 第1群List, ArrayList<KihonChosaInput> 第2群List,
-            ArrayList<KihonChosaInput> 第3群List, ArrayList<KihonChosaInput> 第4群List,
-            ArrayList<KihonChosaInput> 第5群List, ArrayList<KihonChosaInput> 特別な医療List, ArrayList<KihonChosaInput> 自立度List) {
-
-        第1群List.clear();
-        第2群List.clear();
-        第3群List.clear();
-        第4群List.clear();
-        第5群List.clear();
-        特別な医療List.clear();
-        自立度List.clear();
-        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-        int 認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
-        int 前回認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class) - 1;
-
-        NinteichosahyoKihonChosaManager ninteichosahyoKihonChosaManager = InstanceProvider.create(NinteichosahyoKihonChosaManager.class);
-        NinteichosahyoKihonChosa 認定調査票_基本調査 = ninteichosahyoKihonChosaManager.get認定調査票_基本調査(申請書管理番号, 前回認定調査履歴番号);
-
-        NinteichosahyoChosaItemManager ninteichosahyoChosaItemManager = InstanceProvider.create(NinteichosahyoChosaItemManager.class);
-        List<NinteichosahyoChosaItem> 認定調査項目リスト = ninteichosahyoChosaItemManager.get認定調査票_基本調査_調査項目List(申請書管理番号, 前回認定調査履歴番号);
-        RString 厚労省IF識別コード = RString.EMPTY;
-        if (認定調査項目リスト != null) {
-            厚労省IF識別コード = 認定調査項目リスト.get(0).get厚労省IF識別コード().value();
-        }
-        if (KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(厚労省IF識別コード)) {
-            for (NinteichosahyoChosaItem 認定調査項目 : 認定調査項目リスト) {
-                NinteichosaKomokuMapping09B 認定調査項目マッピング = NinteichosaKomokuMapping09B.toValue(new RString(認定調査項目.get連番()));
-                if (認定調査項目_第1群.equals(認定調査項目マッピング.get群番号())) {
-                    createKihonChosaItemList(申請書管理番号, 認定調査履歴番号, 認定調査票_基本調査, 認定調査項目, 第1群List);
-                } else if (認定調査項目_第2群.equals(認定調査項目マッピング.get群番号())) {
-                    createKihonChosaItemList(申請書管理番号, 認定調査履歴番号, 認定調査票_基本調査, 認定調査項目, 第2群List);
-                } else if (認定調査項目_第3群.equals(認定調査項目マッピング.get群番号())) {
-                    createKihonChosaItemList(申請書管理番号, 認定調査履歴番号, 認定調査票_基本調査, 認定調査項目, 第3群List);
-                } else if (認定調査項目_第4群.equals(認定調査項目マッピング.get群番号())) {
-                    createKihonChosaItemList(申請書管理番号, 認定調査履歴番号, 認定調査票_基本調査, 認定調査項目, 第4群List);
-                } else if (認定調査項目_第5群.equals(認定調査項目マッピング.get群番号())) {
-                    createKihonChosaItemList(申請書管理番号, 認定調査履歴番号, 認定調査票_基本調査, 認定調査項目, 第5群List);
-                } else if (認定調査項目_第6群.equals(認定調査項目マッピング.get群番号())) {
-                    createKihonChosaItemList(申請書管理番号, 認定調査履歴番号, 認定調査票_基本調査, 認定調査項目, 特別な医療List);
-                }
-            }
-        }
-        createKihonChosaList(申請書管理番号, 認定調査履歴番号, 認定調査票_基本調査, 自立度List);
-        createKihonChosaList(申請書管理番号, 認定調査履歴番号, 認定調査票_基本調査, 自立度List);
-    }
-
+//    @SuppressWarnings("unchecked")
+//    public void 前回値コピー処理_前回履歴(ArrayList<KihonChosaInput> 第1群List, ArrayList<KihonChosaInput> 第2群List,
+//            ArrayList<KihonChosaInput> 第3群List, ArrayList<KihonChosaInput> 第4群List,
+//            ArrayList<KihonChosaInput> 第5群List, ArrayList<KihonChosaInput> 特別な医療List, ArrayList<KihonChosaInput> 自立度List) {
+//
+//        第1群List.clear();
+//        第2群List.clear();
+//        第3群List.clear();
+//        第4群List.clear();
+//        第5群List.clear();
+//        特別な医療List.clear();
+//        自立度List.clear();
+//        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+//        int 認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
+//        int 前回認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class) - 1;
+//
+//        NinteichosahyoKihonChosaManager ninteichosahyoKihonChosaManager = InstanceProvider.create(NinteichosahyoKihonChosaManager.class);
+//        NinteichosahyoKihonChosa 認定調査票_基本調査 = ninteichosahyoKihonChosaManager.get認定調査票_基本調査(申請書管理番号, 前回認定調査履歴番号);
+//
+//        NinteichosahyoChosaItemManager ninteichosahyoChosaItemManager = InstanceProvider.create(NinteichosahyoChosaItemManager.class);
+//        List<NinteichosahyoChosaItem> 認定調査項目リスト = ninteichosahyoChosaItemManager.get認定調査票_基本調査_調査項目List(申請書管理番号, 前回認定調査履歴番号);
+//        RString 厚労省IF識別コード = RString.EMPTY;
+//        if (認定調査項目リスト != null) {
+//            厚労省IF識別コード = 認定調査項目リスト.get(0).get厚労省IF識別コード().value();
+//        }
+//        if (KoroshoInterfaceShikibetsuCode.V09B.getCode().equals(厚労省IF識別コード)) {
+//            for (NinteichosahyoChosaItem 認定調査項目 : 認定調査項目リスト) {
+//                NinteichosaKomokuMapping09B 認定調査項目マッピング = NinteichosaKomokuMapping09B.toValue(new RString(認定調査項目.get連番()));
+//                if (認定調査項目_第1群.equals(認定調査項目マッピング.get群番号())) {
+//                    createKihonChosaItemList(申請書管理番号, 認定調査履歴番号, 認定調査票_基本調査, 認定調査項目, 第1群List);
+//                } else if (認定調査項目_第2群.equals(認定調査項目マッピング.get群番号())) {
+//                    createKihonChosaItemList(申請書管理番号, 認定調査履歴番号, 認定調査票_基本調査, 認定調査項目, 第2群List);
+//                } else if (認定調査項目_第3群.equals(認定調査項目マッピング.get群番号())) {
+//                    createKihonChosaItemList(申請書管理番号, 認定調査履歴番号, 認定調査票_基本調査, 認定調査項目, 第3群List);
+//                } else if (認定調査項目_第4群.equals(認定調査項目マッピング.get群番号())) {
+//                    createKihonChosaItemList(申請書管理番号, 認定調査履歴番号, 認定調査票_基本調査, 認定調査項目, 第4群List);
+//                } else if (認定調査項目_第5群.equals(認定調査項目マッピング.get群番号())) {
+//                    createKihonChosaItemList(申請書管理番号, 認定調査履歴番号, 認定調査票_基本調査, 認定調査項目, 第5群List);
+//                } else if (認定調査項目_第6群.equals(認定調査項目マッピング.get群番号())) {
+//                    createKihonChosaItemList(申請書管理番号, 認定調査履歴番号, 認定調査票_基本調査, 認定調査項目, 特別な医療List);
+//                }
+//            }
+//        }
+//        createKihonChosaList(申請書管理番号, 認定調査履歴番号, 認定調査票_基本調査, 自立度List);
+//        createKihonChosaList(申請書管理番号, 認定調査履歴番号, 認定調査票_基本調査, 自立度List);
+//    }
     private void createKihonChosaItemList(ShinseishoKanriNo 申請書管理番号, int 認定調査履歴番号,
             NinteichosahyoKihonChosa 認定調査票_基本調査, NinteichosahyoChosaItem 認定調査項目, ArrayList<KihonChosaInput> 基本調査List) {
         KihonChosaInput 基本情報 = new KihonChosaInput(申請書管理番号,
@@ -1260,25 +1432,31 @@ public class NinnteiChousaKekkaTouroku1Handler {
             Set<Map.Entry<RString, TokkiJikoInputModel>> set) {
         NinteichosahyoTokkijikoManager dbt5205Manager = InstanceProvider.create(NinteichosahyoTokkijikoManager.class);
         Iterator<Map.Entry<RString, TokkiJikoInputModel>> it = set.iterator();
-        RString 認定調査特記事項番号;
+        RString 前認定調査特記事項番号 = RString.EMPTY;
+        int 認定調査特記事項連番 = 1;
 
         while (it.hasNext()) {
             Map.Entry<RString, TokkiJikoInputModel> entry = it.next();
             TokkiJikoInputModel value = entry.getValue();
-            認定調査特記事項番号 = value.get特記事項番号();
             if (RowState.Deleted.equals(value.getRowState())) {
                 continue;
+            }
+            if (前認定調査特記事項番号.equals(value.get特記事項番号())) {
+                認定調査特記事項連番++;
+            } else {
+                認定調査特記事項連番 = 1;
             }
             NinteichosahyoTokkijiko ninteichosahyoTokkijiko = new NinteichosahyoTokkijiko(
                     temp_申請書管理番号,
                     temp_認定調査履歴番号,
-                    認定調査特記事項番号,
-                    value.get特記連番(),
+                    value.get特記事項番号(),
+                    認定調査特記事項連番,
                     TokkijikoTextImageKubun.テキスト.getコード(),
                     GenponMaskKubun.原本.getCode());
             NinteichosahyoTokkijikoBuilder builder = ninteichosahyoTokkijiko.createBuilderForEdit();
             builder.set特記事項(value.get特記事項());
             dbt5205Manager.save認定調査票_特記情報(builder.build());
+            前認定調査特記事項番号 = value.get特記事項番号();
         }
     }
 
@@ -1294,7 +1472,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
             dbt5201 = dbt5201.modifiedModel();
         }
         NinteichosaIraiJohoBuilder dbt5201Bulid = dbt5201.createBuilderForEdit();
-        if (ChosaKubun.再調査.get名称().equals(div.getCcdChosaJisshishaJoho().getTxtChosaKubun().getValue())) {
+        if (NinteiChousaIraiKubunCode.再調査.get名称().equals(div.getCcdChosaJisshishaJoho().getTxtChosaKubun().getValue())) {
             dbt5201Bulid.set認定調査回数(dbt5201.get認定調査回数() + 1);
         } else {
             dbt5201Bulid.set認定調査回数(1);
@@ -1333,11 +1511,13 @@ public class NinnteiChousaKekkaTouroku1Handler {
         }
         NinteichosahyoGaikyoChosaBuilder dbt5202builder = dbt5202.createBuilderForEdit();
 
-        RString 認定調査区分コード;
-        if (ChosaKubun.新規調査.get名称().equals(div.getCcdChosaJisshishaJoho().getTxtChosaKubun().getValue())) {
-            認定調査区分コード = ChosaKubun.新規調査.getコード();
+        RString 認定調査依頼区分コード;
+        if (NinteiChousaIraiKubunCode.初回.get名称().equals(div.getCcdChosaJisshishaJoho().getTxtChosaKubun().getValue())) {
+            認定調査依頼区分コード = NinteiChousaIraiKubunCode.初回.getコード();
+        } else if (NinteiChousaIraiKubunCode.再調査.get名称().equals(div.getCcdChosaJisshishaJoho().getTxtChosaKubun().getValue())) {
+            認定調査依頼区分コード = NinteiChousaIraiKubunCode.再調査.getコード();
         } else {
-            認定調査区分コード = ChosaKubun.再調査.getコード();
+            認定調査依頼区分コード = NinteiChousaIraiKubunCode.再依頼.getコード();
         }
 
         RString サービス区分コード = div.getRadGenzaiservis().getSelectedKey();
@@ -1351,14 +1531,16 @@ public class NinnteiChousaKekkaTouroku1Handler {
 
         dbt5202builder.set厚労省IF識別コード(new Code(temp_厚労省IF識別コード));
         dbt5202builder.set認定調査依頼区分コード(new Code(temp_認定調査依頼区分コード));
-        if (ChosaKubun.再調査.get名称().equals(div.getCcdChosaJisshishaJoho().getTxtChosaKubun().getValue())) {
+        if (NinteiChousaIraiKubunCode.再調査.get名称().equals(div.getCcdChosaJisshishaJoho().getTxtChosaKubun().getValue())) {
             dbt5202builder.set認定調査回数(dbt5202.get認定調査回数() + 1);
         } else {
             dbt5202builder.set認定調査回数(1);
         }
         dbt5202builder.set認定調査実施年月日(new FlexibleDate(div.getCcdChosaJisshishaJoho().getTxtChosaJisshiDate().getValue().toDateString()));
-        dbt5202builder.set認定調査受領年月日(FlexibleDate.getNowDate());
-        dbt5202builder.set認定調査区分コード(new Code(認定調査区分コード));
+        if (!EntityDataState.Modified.equals(dbt5202builder.getEntityDataState())) {
+            dbt5202builder.set認定調査受領年月日(FlexibleDate.getNowDate());
+        }
+        dbt5202builder.set認定調査区分コード(new Code(認定調査依頼区分コード));
         dbt5202builder.set認定調査委託先コード(new JigyoshaNo(div.getCcdChosaJisshishaJoho().getTxtShozokuKikanCode().getText()));
         dbt5202builder.set認定調査員コード(div.getCcdChosaJisshishaJoho().getTxtKinyushaCode().getText());
         dbt5202builder.set認定調査実施場所コード(new Code(div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedKey()));
@@ -1696,6 +1878,128 @@ public class NinnteiChousaKekkaTouroku1Handler {
             NinteichosahyoServiceJokyoBuilder dbt5207Builder = dbt5207.createBuilderForEdit();
             dbt5207Manager.save認定調査票_概況調査_サービスの状況(dbt5207Builder.build());
         }
+    }
+
+    /**
+     * 対象者一覧を更新します。また、一次判定結果にエラーが出なかったデータのみ、ViewState上のデータも合わせて更新します。
+     *
+     * @param kekkaList 一次判定処理結果List
+     */
+    public void updateGridAndViewStateData(List<IchijiHanteiShoriKekka> kekkaList) {
+        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+        List<RString> shinseishoKanriNoList = new ArrayList<>();
+        shinseishoKanriNoList.add(申請書管理番号.value());
+        IChiJiPanTeiSyoRiParameter parameter = IChiJiPanTeiSyoRiParameter.
+                createParameterOf一次判定完了処理(
+                        ShoKisaiHokenshaNo.EMPTY,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        RString.EMPTY,
+                        FlexibleDate.EMPTY,
+                        FlexibleDate.EMPTY,
+                        Decimal.ZERO,
+                        RString.EMPTY,
+                        shinseishoKanriNoList,
+                        RString.EMPTY);
+        IChiJiPanTeiSyoRiManager manager = IChiJiPanTeiSyoRiManager.createInstance();
+        List<IchijiHanteiKekkaJoho> kekkaJohoList = manager.get一次判定結果情報_調査結果(parameter).records();
+        Models<IchijiHanteiKekkaJohoIdentifier, IchijiHanteiKekkaJoho> models;
+        if (!kekkaJohoList.isEmpty()) {
+            models = Models.create(kekkaJohoList);
+        } else {
+            models = Models.create(new ArrayList<IchijiHanteiKekkaJoho>());
+        }
+        IchijiHanteiShoriKekka kekka = getKekka(kekkaList, 申請書管理番号);
+
+        if (!kekka.isError()) {
+            IchijiHanteiKekkaJoho joho = models.get(kekka.getHanteiKekka().identifier());
+            if (joho == null) {
+                models.add(get一次判定結果情報_仮一次判定区分編集(kekka.getHanteiKekka()));
+            } else {
+                joho = updateIchijiHanteiKekkaJoho(joho, get一次判定結果情報_仮一次判定区分編集(kekka.getHanteiKekka()));
+                models.add(joho);
+            }
+        }
+
+        List<IchijiHanteiKekkaJoho> torokuTaishoList = new ArrayList<>();
+        torokuTaishoList.addAll(models.values());
+        manager.save要介護認定一次判定結果情報List(torokuTaishoList);
+    }
+
+    private IchijiHanteiKekkaJoho get一次判定結果情報_仮一次判定区分編集(IchijiHanteiKekkaJoho ichijiHanteiKekkaJoho) {
+        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+        DbT5105NinteiKanryoJohoDac dbt5105Dac = InstanceProvider.create(DbT5105NinteiKanryoJohoDac.class);
+        DbT5105NinteiKanryoJohoEntity entity = dbt5105Dac.selectByShinseishoKanriNo(申請書管理番号);
+        IchijiHanteiKekkaJohoBuilder builder = ichijiHanteiKekkaJoho.createBuilderForEdit();
+        if (entity != null) {
+            if (entity.getNinteichosaKanryoYMD() == null || entity.getIkenshoTorokuKanryoYMD() == null) {
+                builder.set仮一次判定区分(Boolean.TRUE);
+            } else {
+                builder.set仮一次判定区分(Boolean.FALSE);
+            }
+        } else {
+            builder.set仮一次判定区分(Boolean.TRUE);
+        }
+        return builder.build();
+    }
+
+    private IchijiHanteiKekkaJoho updateIchijiHanteiKekkaJoho(IchijiHanteiKekkaJoho original, IchijiHanteiKekkaJoho updateData) {
+
+        IchijiHanteiKekkaJohoBuilder builder = original.createBuilderForEdit();
+        builder.set仮一次判定区分(updateData.get仮一次判定区分());
+        builder.set要介護認定一次判定年月日(new FlexibleDate(RDate.getNowDate().toDateString()));
+
+        builder.set要介護認定一次判定結果コード(updateData.get要介護認定一次判定結果コード());
+        builder.set要介護認定一次判定結果コード_認知症加算(updateData.get要介護認定一次判定結果コード_認知症加算());
+        builder.set要介護認定一次判定警告コード(updateData.get要介護認定一次判定警告コード());
+
+        builder.set要介護認定等基準時間(updateData.get要介護認定等基準時間());
+        builder.set要介護認定等基準時間_食事(updateData.get要介護認定等基準時間_食事());
+        builder.set要介護認定等基準時間_排泄(updateData.get要介護認定等基準時間_排泄());
+        builder.set要介護認定等基準時間_移動(updateData.get要介護認定等基準時間_移動());
+        builder.set要介護認定等基準時間_清潔保持(updateData.get要介護認定等基準時間_清潔保持());
+        builder.set要介護認定等基準時間_間接ケア(updateData.get要介護認定等基準時間_間接ケア());
+        builder.set要介護認定等基準時間_BPSD関連(updateData.get要介護認定等基準時間_BPSD関連());
+        builder.set要介護認定等基準時間_機能訓練(updateData.get要介護認定等基準時間_機能訓練());
+        builder.set要介護認定等基準時間_医療関連(updateData.get要介護認定等基準時間_医療関連());
+        builder.set要介護認定等基準時間_認知症加算(updateData.get要介護認定等基準時間_認知症加算());
+        builder.set中間評価項目得点第1群(updateData.get中間評価項目得点第1群());
+        builder.set中間評価項目得点第2群(updateData.get中間評価項目得点第2群());
+        builder.set中間評価項目得点第3群(updateData.get中間評価項目得点第3群());
+        builder.set中間評価項目得点第4群(updateData.get中間評価項目得点第4群());
+        builder.set中間評価項目得点第5群(updateData.get中間評価項目得点第5群());
+        builder.set中間評価項目得点第6群(updateData.get中間評価項目得点第6群());
+        builder.set中間評価項目得点第7群(updateData.get中間評価項目得点第7群());
+
+        builder.set要介護認定状態の安定性コード(updateData.get要介護認定状態の安定性コード());
+        builder.set認知症自立度Ⅱ以上の蓋然性(updateData.get認知症自立度Ⅱ以上の蓋然性());
+        builder.set認知機能及び状態安定性から推定される給付区分コード(updateData.get認知機能及び状態安定性から推定される給付区分コード());
+
+        builder.set運動能力の低下していない認知症高齢者の指標コード(Code.EMPTY);
+        builder.set日常生活自立度の組み合わせ_自立(0);
+        builder.set日常生活自立度の組み合わせ_要支援(0);
+        builder.set日常生活自立度の組み合わせ_要介護１(0);
+        builder.set日常生活自立度の組み合わせ_要介護２(0);
+        builder.set日常生活自立度の組み合わせ_要介護３(0);
+        builder.set日常生活自立度の組み合わせ_要介護４(0);
+        builder.set日常生活自立度の組み合わせ_要介護５(0);
+        builder.set認知症高齢者の日常生活自立度の蓋然性評価コード(Code.EMPTY);
+        builder.set認知症高齢者の日常生活自立度の蓋然性評価(0);
+        builder.set一次判定結果送付区分(RString.EMPTY);
+        builder.set一次判定結果送付年月日(FlexibleDate.EMPTY);
+        builder.setチャート(RString.EMPTY);
+        builder.set状態像(RString.EMPTY);
+
+        return builder.build();
+    }
+
+    private IchijiHanteiShoriKekka getKekka(List<IchijiHanteiShoriKekka> kekkaList, ShinseishoKanriNo shinseishoKanriNo) {
+        for (IchijiHanteiShoriKekka kekka : kekkaList) {
+            if (kekka.getShinseishoKanriNo().equals(shinseishoKanriNo)) {
+                return kekka;
+            }
+        }
+        return null;
     }
 
     private void 概況調査特記マスクの削除() {

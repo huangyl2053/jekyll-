@@ -67,16 +67,16 @@ var DBZ;
                 return new UZA.DropDownList(this.convFiledName("ddlChosaJisshiBasho"));
             };
 
-            Controls.prototype.txtJisshiBashoMeisho = function () {
-                return new UZA.TextBox(this.convFiledName("txtJisshiBashoMeisho"));
-            };
-
             Controls.prototype.Image = function () {
                 return new UZA.Panel(this.convFiledName("Image"));
             };
 
             Controls.prototype.imgChosaJisshiBashoMeisho = function () {
                 return new UZA.DynamicImage(this.convFiledName("imgChosaJisshiBashoMeisho"));
+            };
+
+            Controls.prototype.txtJisshiBashoMeisho = function () {
+                return new UZA.TextBox(this.convFiledName("txtJisshiBashoMeisho"));
             };
 
             Controls.prototype.txtKinyushaCode = function () {

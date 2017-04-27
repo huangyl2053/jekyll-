@@ -5,17 +5,33 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2210001;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
+import jp.co.ndensan.reams.db.dbe.business.core.tokkijikoinput.TokkiJikoInputModel;
+import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.NinnteiChousaKekkaTouroku1Div;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.NinnteiChousaKekkaTouroku1DivSpec;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.dgRiyoServiceJyokyo_Row;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.dgRiyoShisetsu_Row;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.kihonchosainput.KihonChosaInput;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidateChain;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessageControlDictionaryBuilder;
 import jp.co.ndensan.reams.uz.uza.core.validation.ValidationMessagesFactory;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessages;
 import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 認定調査結果登録1のバリデーションハンドラークラスです。
@@ -41,7 +57,7 @@ public class NinnteiChousaKekkaTouroku1ValidationHandler {
                 div.getCcdChosaJisshishaJoho().getTxtChosaJisshiDate()).build().check(messages));
         return pairs;
     }
-    
+
     /**
      * 調査実施日の妥当性入力チェックを行います。
      *
@@ -95,7 +111,7 @@ public class NinnteiChousaKekkaTouroku1ValidationHandler {
                 div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho()).build().check(messages));
         return pairs;
     }
-    
+
     /**
      * 所属機関の必須入力チェックを行います。
      *
@@ -241,6 +257,167 @@ public class NinnteiChousaKekkaTouroku1ValidationHandler {
     }
 
     /**
+     * 基本調査の生活自立度の必須入力チェックを行います。
+     *
+     * @param pairs バリデーションコントロール
+     * @param div NinnteiChousaKekkaTouroku1Div
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs validateFor未編集(ValidationMessageControlPairs pairs, NinnteiChousaKekkaTouroku1Div div) {
+
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(div.getCcdChosaJisshishaJoho().getTxtChosaJisshiDate().getText() != null ? div.getCcdChosaJisshishaJoho().getTxtChosaJisshiDate().getValue() : RString.EMPTY);
+        builder.append(div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho() != null ? div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedKey() : RString.EMPTY);
+        builder.append(div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().getText() != null ? div.getCcdChosaJisshishaJoho().getTxtJisshiBashoMeisho().getValue() : RString.EMPTY);
+        builder.append(div.getCcdChosaJisshishaJoho().getTxtShozokuKikanCode().getText() != null ? div.getCcdChosaJisshishaJoho().getTxtShozokuKikanCode().getText() : RString.EMPTY);
+        builder.append(div.getCcdChosaJisshishaJoho().getTxtKinyushaCode().getText() != null ? div.getCcdChosaJisshishaJoho().getTxtKinyushaCode().getText() : RString.EMPTY);
+        builder.append(div.getRadGenzaiservis().getSelectedKey());
+        builder.append(div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getRadJutakuKaishu().getSelectedKey());
+        for (dgRiyoServiceJyokyo_Row row : div.getTabChosaShurui().getDgRiyoServiceJyokyo().getDataSource()) {
+            builder.append(row.getServiceJokyo() != null ? row.getServiceJokyo().getText() : RString.EMPTY);
+        }
+        builder.append(div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getTxtShichosonTokubetsuKyufu().getText() != null
+                ? div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getTxtShichosonTokubetsuKyufu().getText() : RString.EMPTY);
+        builder.append(div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getTxtKyufuIgaiJutakuService().getText() != null
+                ? div.getTabChosaShurui().getTplGaikyoChosa().getTplZaitaku().getTxtKyufuIgaiJutakuService().getText() : RString.EMPTY);
+        for (dgRiyoShisetsu_Row row : div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getDgRiyoShisetsu().getDataSource()) {
+            builder.append(new RString(row.getShisetsuRiyoUmu().toString()));
+        }
+        builder.append(div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getGaigyoShisetsuRenrakusaki().getTxtShisetsuMeisdho().getText() != null
+                ? div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getGaigyoShisetsuRenrakusaki().getTxtShisetsuMeisdho().getText() : RString.EMPTY);
+        builder.append(div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getGaigyoShisetsuRenrakusaki().getTxtShisetsuYubinNo().getText() != null
+                ? div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getGaigyoShisetsuRenrakusaki().getTxtShisetsuYubinNo().getText() : RString.EMPTY);
+        builder.append(div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getGaigyoShisetsuRenrakusaki().getTxtShisetsuJusho() != null
+                ? div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getGaigyoShisetsuRenrakusaki().getTxtShisetsuJusho().getDomain().value() : RString.EMPTY);
+        builder.append(div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getGaigyoShisetsuRenrakusaki().getTxtTelNo() != null
+                ? div.getTabChosaShurui().getTplGaikyoChosa().getTplShisetsu().getGaigyoShisetsuRenrakusaki().getTxtTelNo().getDomain().value() : RString.EMPTY);
+        builder.append(div.getTabChosaShurui().getGaikyoTokkiInput().getTxtGaikyoTokkiNyuroku().getText() != null
+                ? div.getTabChosaShurui().getGaikyoTokkiInput().getTxtGaikyoTokkiNyuroku().getValue() : RString.EMPTY);
+        builder.append(div.getTxtIchijiHanteiKekka().getText() != null
+                ? div.getTxtIchijiHanteiKekka().getValue() : RString.EMPTY);
+        ArrayList<KihonChosaInput> 第1群List = ViewStateHolder.get(ViewStateKeys.第一群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第2群List = ViewStateHolder.get(ViewStateKeys.第二群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第3群List = ViewStateHolder.get(ViewStateKeys.第三群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第4群List = ViewStateHolder.get(ViewStateKeys.第四群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第5群List = ViewStateHolder.get(ViewStateKeys.第五群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 特別な医療List = ViewStateHolder.get(ViewStateKeys.第六群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 自立度List = ViewStateHolder.get(ViewStateKeys.第七群認定調査基本情報リスト, ArrayList.class);
+        for (KihonChosaInput item : 第1群List) {
+            builder.append(item.get前回認知症高齢者自立度());
+            builder.append(item.get前回調査連番());
+            builder.append(item.get前回調査項目());
+            builder.append(item.get前回障害高齢者自立度());
+            builder.append(item.get申請書管理番号().value());
+            builder.append(item.get認定調査依頼履歴番号());
+            builder.append(item.get認知症高齢者自立度());
+            builder.append(item.get調査連番());
+            builder.append(item.get調査項目());
+            builder.append(item.get障害高齢者自立度());
+            builder.append(item.is特記事項有無());
+        }
+
+        for (KihonChosaInput item : 第2群List) {
+            builder.append(item.get前回認知症高齢者自立度());
+            builder.append(item.get前回調査連番());
+            builder.append(item.get前回調査項目());
+            builder.append(item.get前回障害高齢者自立度());
+            builder.append(item.get申請書管理番号().value());
+            builder.append(item.get認定調査依頼履歴番号());
+            builder.append(item.get認知症高齢者自立度());
+            builder.append(item.get調査連番());
+            builder.append(item.get調査項目());
+            builder.append(item.get障害高齢者自立度());
+            builder.append(item.is特記事項有無());
+        }
+
+        for (KihonChosaInput item : 第3群List) {
+            builder.append(item.get前回認知症高齢者自立度());
+            builder.append(item.get前回調査連番());
+            builder.append(item.get前回調査項目());
+            builder.append(item.get前回障害高齢者自立度());
+            builder.append(item.get申請書管理番号().value());
+            builder.append(item.get認定調査依頼履歴番号());
+            builder.append(item.get認知症高齢者自立度());
+            builder.append(item.get調査連番());
+            builder.append(item.get調査項目());
+            builder.append(item.get障害高齢者自立度());
+            builder.append(item.is特記事項有無());
+        }
+
+        for (KihonChosaInput item : 第4群List) {
+            builder.append(item.get前回認知症高齢者自立度());
+            builder.append(item.get前回調査連番());
+            builder.append(item.get前回調査項目());
+            builder.append(item.get前回障害高齢者自立度());
+            builder.append(item.get申請書管理番号().value());
+            builder.append(item.get認定調査依頼履歴番号());
+            builder.append(item.get認知症高齢者自立度());
+            builder.append(item.get調査連番());
+            builder.append(item.get調査項目());
+            builder.append(item.get障害高齢者自立度());
+            builder.append(item.is特記事項有無());
+        }
+
+        for (KihonChosaInput item : 第5群List) {
+            builder.append(item.get前回認知症高齢者自立度());
+            builder.append(item.get前回調査連番());
+            builder.append(item.get前回調査項目());
+            builder.append(item.get前回障害高齢者自立度());
+            builder.append(item.get申請書管理番号().value());
+            builder.append(item.get認定調査依頼履歴番号());
+            builder.append(item.get認知症高齢者自立度());
+            builder.append(item.get調査連番());
+            builder.append(item.get調査項目());
+            builder.append(item.get障害高齢者自立度());
+            builder.append(item.is特記事項有無());
+        }
+
+        for (KihonChosaInput item : 特別な医療List) {
+            builder.append(item.get前回認知症高齢者自立度());
+            builder.append(item.get前回調査連番());
+            builder.append(item.get前回調査項目());
+            builder.append(item.get前回障害高齢者自立度());
+            builder.append(item.get申請書管理番号().value());
+            builder.append(item.get認定調査依頼履歴番号());
+            builder.append(item.get認知症高齢者自立度());
+            builder.append(item.get調査連番());
+            builder.append(item.get調査項目());
+            builder.append(item.get障害高齢者自立度());
+            builder.append(item.is特記事項有無());
+        }
+
+        for (KihonChosaInput item : 自立度List) {
+            builder.append(item.get前回認知症高齢者自立度());
+            builder.append(item.get前回調査連番());
+            builder.append(item.get前回調査項目());
+            builder.append(item.get前回障害高齢者自立度());
+            builder.append(item.get申請書管理番号().value());
+            builder.append(item.get認定調査依頼履歴番号());
+            builder.append(item.get認知症高齢者自立度());
+            builder.append(item.get調査連番());
+            builder.append(item.get調査項目());
+            builder.append(item.get障害高齢者自立度());
+            builder.append(item.is特記事項有無());
+        }
+        HashMap gaikyoTokkiNyurokuMap = ViewStateHolder.get(ViewStateKeys.特記事項一覧, LinkedHashMap.class);
+        Set<Map.Entry<RString, TokkiJikoInputModel>> set = gaikyoTokkiNyurokuMap.entrySet();
+        Iterator<Map.Entry<RString, TokkiJikoInputModel>> it = set.iterator();
+        while (it.hasNext()) {
+            Map.Entry<RString, TokkiJikoInputModel> entry = it.next();
+            TokkiJikoInputModel value = entry.getValue();
+            builder.append(value.get特記事項());
+            builder.append(value.get特記事項番号());
+            builder.append(value.get特記連番());
+        }
+        RString 編集前データ = ViewStateHolder.get(ViewStateKeys.画面データ, RString.class);
+
+        if (編集前データ.equals(builder.toRString())) {
+            pairs.add(new ValidationMessageControlPair(NoInputMessages.未編集のため更新不可));
+        }
+        return pairs;
+    }
+
+    /**
      * 特記事項の必須入力チェックを行います。
      *
      * @param pairs バリデーションコントロール
@@ -258,6 +435,20 @@ public class NinnteiChousaKekkaTouroku1ValidationHandler {
         return pairs;
     }
 
+    /**
+     * 一次判定DLLに渡す引数が正しく作成されたかをチェックします。
+     *
+     * @param div NinnteiChousaKekkaTouroku1Div
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs validate一次判定引数(NinnteiChousaKekkaTouroku1Div div) {
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        if (RString.isNullOrEmpty(div.getIchijiHanteiArgument())) {
+            pairs.add(new ValidationMessageControlPair(NoInputMessages.一次判定引数チェック));
+        }
+        return pairs;
+    }
+
     private static enum NoInputMessages implements IValidationMessage {
 
         調査実施日の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "調査実施日"),
@@ -272,7 +463,10 @@ public class NinnteiChousaKekkaTouroku1ValidationHandler {
         第4群の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "基本調査の第4群"),
         第5群の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "基本調査の第5群"),
         生活自立度の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "基本調査の生活自立度"),
-        特記事項の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "特記事項");
+        特記事項の必須入力(UrErrorMessages.必須項目_追加メッセージあり, "特記事項"),
+        一次判定引数チェック(DbeErrorMessages.一次判定実行不可_申請日),
+        未編集のため更新不可(UrErrorMessages.編集なしで更新不可);
+
         private final Message message;
 
         private NoInputMessages(IMessageGettable message, String... replacements) {
