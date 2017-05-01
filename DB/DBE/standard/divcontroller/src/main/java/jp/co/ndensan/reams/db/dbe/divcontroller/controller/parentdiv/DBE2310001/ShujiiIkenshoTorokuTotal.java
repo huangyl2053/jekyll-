@@ -76,7 +76,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJohoManager;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho;
-import jp.co.ndensan.reams.db.dbe.service.core.shujiiikenshotoroku.ShujiiIkenshoTorokuManager.CheckEditableResult;
+import jp.co.ndensan.reams.db.dbe.service.core.util.KekkaTorokuUtil;
+import jp.co.ndensan.reams.db.dbe.service.core.util.KekkaTorokuUtil.CheckEditableResult;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
@@ -201,7 +202,7 @@ public class ShujiiIkenshoTorokuTotal {
 
         boolean 照会のみ = false;
         if (!ResponseHolder.isReRequest()) {
-            CheckEditableResult result2 = service.checkEditable(管理番号);
+            CheckEditableResult result2 = KekkaTorokuUtil.checkEditable(管理番号);
             if (!result2.is編集可能()) {
                 return ResponseData.of(div).addMessage(result2.getMessage()).respond();
             }
@@ -209,7 +210,7 @@ public class ShujiiIkenshoTorokuTotal {
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
                 && Arrays.asList(
                         CheckEditableResult.審査会結果登録完了済み.getMessageCode(),
-                        CheckEditableResult.意見書書入手完了済み.getMessageCode()
+                        CheckEditableResult.一次判定完了済み.getMessageCode()
                 ).contains(ResponseHolder.getMessageCode())) {
             照会のみ = true;
         }
