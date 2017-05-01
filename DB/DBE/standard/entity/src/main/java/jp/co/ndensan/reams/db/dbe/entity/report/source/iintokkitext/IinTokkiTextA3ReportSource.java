@@ -533,6 +533,9 @@ public class IinTokkiTextA3ReportSource implements IReportSource {
     public RString shisetsuTypeLabel;
     @ReportItem(name = "shisetsuType", order = 322)
     public RString shisetsuType;
+
+    @ReportItem(name = "zenkaiIchijiHanteiKekka", order = 323)
+    public RString zenkaiIchijiHanteiKekka;
     //なし
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
