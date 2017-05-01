@@ -1235,6 +1235,8 @@ public class SabisuJyoukyoA3 {
         項目.set審査人数(new RString(entity.getShinsakaiOrder()));
         項目.set一次判定結果(set一次判定結果(entity.getKoroshoIfShikibetsuCode(),
                 entity.getIchijiHanteiKekkaCode(), entity.getIchijiHanteiKekkaNinchishoKasanCode()));
+        項目.set前回一次判定結果(set一次判定結果(entity.getZKoroshoIfShikibetsuCode(),
+                entity.getZIchijiHanteiKekkaCode(), entity.getZIchijiHanteiKekkaNinchishoKasanCode()));
         項目.set要介護認定等基準時間(get要介護認定等基準時間(entity));
         項目.set前回要介護認定等基準時間(new RString(new Decimal(entity.getZKijunJikan()).divide(基準時間算出用_10)
                 .add(new Decimal(entity.getZKijunJikanNinchishoKasan()).divide(基準時間算出用_10)).toString()));
@@ -1409,7 +1411,6 @@ public class SabisuJyoukyoA3 {
     private RString set一次判定結果(Code 厚労省IF識別コード, Code 一次判定結果コード, Code 一次判定結果コード_認知症加算) {
         RString 一次判定結果 = RString.EMPTY;
         RString 一次判定結果_認知症加算 = RString.EMPTY;
-        RStringBuilder builder = new RStringBuilder();
         if (一次判定結果コード != null && !一次判定結果コード.isEmpty()) {
             if (A_99.equals(厚労省IF識別コード)) {
                 一次判定結果 = YokaigoJotaiKubun99.toValue(一次判定結果コード.getColumnValue()).get名称();
@@ -1432,6 +1433,7 @@ public class SabisuJyoukyoA3 {
                 一次判定結果_認知症加算 = YokaigoJotaiKubun09.toValue(一次判定結果コード_認知症加算.getColumnValue()).get名称();
             }
         }
+        RStringBuilder builder = new RStringBuilder();
         if (一次判定結果.equals(一次判定結果_認知症加算)) {
             return builder.append(一次判定結果).toRString();
         }
