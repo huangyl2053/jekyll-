@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2310001;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ninteishinseijoho.NinteiShinseiJoho;
@@ -29,7 +30,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2310001.Shu
 import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteiKanryoJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.shujiijoho.ShujiiMasterFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.ikensho.ninteishinseijoho.NinteiShinseiJohoManager;
-import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.shujiiikenshotoroku.ShujiiIkenshoTorokuManager;
 import jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteiimagekanri.YokaigoninteiimagekanriFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteiimagesakujo.YokaigoninteiimagesakujoManager;
@@ -76,6 +76,7 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJohoManager;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho;
+import jp.co.ndensan.reams.db.dbe.service.core.shujiiikenshotoroku.ShujiiIkenshoTorokuManager.CheckEditableResult;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
@@ -200,26 +201,16 @@ public class ShujiiIkenshoTorokuTotal {
 
         boolean 照会のみ = false;
         if (!ResponseHolder.isReRequest()) {
-            if (ShinsakaiWariateJohoManager.createInstance().get審査会割当データ(管理番号)) {
-                return ResponseData.of(div).addMessage(DbeErrorMessages.審査会割当済のため処理不可.getMessage()).respond();
+            CheckEditableResult result2 = service.checkEditable(管理番号);
+            if (!result2.is編集可能()) {
+                return ResponseData.of(div).addMessage(result2.getMessage()).respond();
             }
         }
         if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
-                && new RString(DbeErrorMessages.審査会割当済のため処理不可.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
-            照会のみ = true;
-        }
-
-        ShujiiIkenshoTorokuMapperParameter param = ShujiiIkenshoTorokuMapperParameter.createShujiiIkenshoTorokuMapperParameter(管理番号, 履歴番号, 市町村コード);
-        int 一次判定データ = service.getIchijiHantei(param);
-        int 一値判定完了 = service.getIchijiHanteiKanryo(param);
-
-        if (!(一次判定データ == 該当データなし && 一値判定完了 == 該当データなし)
-                && !(new RString(DbeErrorMessages.一次判定済のため処理不可.getMessage().getCode()).equals(ResponseHolder.getMessageCode()))) {
-            return ResponseData.of(div).addMessage(DbeErrorMessages.一次判定済のため処理不可.getMessage()).respond();
-        }
-
-        if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
-                && new RString(DbeErrorMessages.一次判定済のため処理不可.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+                && Arrays.asList(
+                        CheckEditableResult.審査会結果登録完了済み.getMessageCode(),
+                        CheckEditableResult.意見書書入手完了済み.getMessageCode()
+                ).contains(ResponseHolder.getMessageCode())) {
             照会のみ = true;
         }
         if (照会のみ) {
