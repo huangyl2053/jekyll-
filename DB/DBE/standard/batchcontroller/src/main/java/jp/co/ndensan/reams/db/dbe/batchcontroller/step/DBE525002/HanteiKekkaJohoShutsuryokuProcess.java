@@ -109,7 +109,7 @@ public class HanteiKekkaJohoShutsuryokuProcess extends BatchKeyBreakBase<HanteiK
                 entity.getShinseishoKanriNo());
         accessLog.store(shoKisaiHokenshaNo, entity.getHihokenshaNo(), expandedInfo);
         bodyItem = setBodyItem(entity, index);
-        
+
         headItem = KaigoKekkaTaishouIchiranHeadItem.creataKaigoKekkaTaishouIchiranHeadItem(
                 entity.getShichosonMeisho(),
                 processPrm.getChushutsuHoho(),
@@ -125,8 +125,8 @@ public class HanteiKekkaJohoShutsuryokuProcess extends BatchKeyBreakBase<HanteiK
     private KaigoKekkaTaishouIchiranBodyItem setBodyItem(HanteiKekkaJohoShutsuryokuRelateEntity entity, int index) {
         return new KaigoKekkaTaishouIchiranBodyItem(
                 entity.getShinsakaiKaisaiNo(),
-                entity.getShinsakaiKaisaiYMD(),
                 entity.getNinteiShinseiYMD(),
+                entity.getShinsakaiKaisaiYMD(),
                 entity.getHihokenshaNo(),
                 entity.getHihokenshaName(),
                 entity.getHihokenshaKana(),
@@ -219,7 +219,7 @@ public class HanteiKekkaJohoShutsuryokuProcess extends BatchKeyBreakBase<HanteiK
         出力条件List.add(jokenBuilder.toRString());
         return 出力条件List;
     }
-    
+
     private RString dateFormat(RString date) {
         if (RString.isNullOrEmpty(date)) {
             return RString.EMPTY;

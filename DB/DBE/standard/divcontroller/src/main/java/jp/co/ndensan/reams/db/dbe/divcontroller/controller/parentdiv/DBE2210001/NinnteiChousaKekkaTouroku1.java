@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.Ninn
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2210001.dgRiyoShisetsu_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2210001.NinnteiChousaKekkaTouroku1Handler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2210001.NinnteiChousaKekkaTouroku1ValidationHandler;
+import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteiKanryoJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ichijihanteikekkajohosearch.IchijiHanteiKekkaJohoSearchManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosahyo.ninteichosahyotokkijiko.NinteichosahyoTokkijikoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.util.KekkaTorokuUtil;
@@ -37,6 +38,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.kihonchosainput.KihonChosaInput;
 import jp.co.ndensan.reams.db.dbz.definition.core.KoroshoInterfaceShikibetsuCode;
@@ -173,6 +175,7 @@ public class NinnteiChousaKekkaTouroku1 {
             }
         }
         getHandler(div).編集前調査実施者情報設定();
+        ViewStateHolder.put(ViewStateKeys.要介護認定完了情報, NinteiKanryoJohoManager.createInstance().get要介護認定完了情報(申請書管理番号));
         if (概況特記出力しない.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
             if (UICONTAINERID_DBEUC20601.equals(ResponseHolder.getUIContainerId())) {
                 return ResponseData.of(div).setState(DBE2210001StateName.調査結果登録_基本運用_特記なし);
@@ -768,7 +771,7 @@ public class NinnteiChousaKekkaTouroku1 {
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
                 || new RString(UrQuestionMessages.削除の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            更新処理(isDelete, div, kekkaList);
+            更新処理(isDelete, div, kekkaList, ViewStateHolder.get(ViewStateKeys.要介護認定完了情報, NinteiKanryoJoho.class));
             アクセスログ(div, 申請書管理番号);
             前排他キーの解除();
             div.getCcdKanryoMessage().setMessage(
@@ -792,13 +795,12 @@ public class NinnteiChousaKekkaTouroku1 {
         return ResponseData.of(div).respond();
     }
 
-    private void 更新処理(boolean isDelete, NinnteiChousaKekkaTouroku1Div div, List<IchijiHanteiShoriKekka> kekkaList) {
+    private void 更新処理(boolean isDelete, NinnteiChousaKekkaTouroku1Div div, List<IchijiHanteiShoriKekka> kekkaList, NinteiKanryoJoho 完了情報) {
         if (isDelete) {
             getHandler(div).削除処理();
         } else {
             getHandler(div).更新処理();
-            if (UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId())
-                    || UICONTAINERID_DBEUC40501.equals(ResponseHolder.getUIContainerId())) {
+            if (完了情報.get要介護認定一次判定完了年月日() != null && !完了情報.get要介護認定一次判定完了年月日().isEmpty()) {
                 getHandler(div).updateGridAndViewStateData(kekkaList);
             }
         }
