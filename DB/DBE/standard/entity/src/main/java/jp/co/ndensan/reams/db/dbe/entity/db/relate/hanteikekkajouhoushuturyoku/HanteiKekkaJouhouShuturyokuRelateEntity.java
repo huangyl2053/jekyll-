@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkajouhoushuturyoku;
 
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,8 +30,8 @@ public class HanteiKekkaJouhouShuturyokuRelateEntity {
     private RString ninteiShinseiShinseijiKubunCode;
     private RString nijiHanteiYokaigoJotaiKubunCode;
     private RString shinsakaiKaisaiNo;
-    private RString shinsakaiKaisaiYoteiYMD;
-    private RString shinsakaiKaisaiYMD;
-    private RString shinsakaiKekkaJohoChushutsuYMD;
+    private FlexibleDate shinsakaiKaisaiYoteiYMD;
+    private FlexibleDate shinsakaiKaisaiYMD;
+    private FlexibleDate shinsakaiKekkaJohoChushutsuYMD;
 
 }

@@ -205,7 +205,7 @@ public class HanteiKekkaJohoShutsuryokuProcess extends BatchKeyBreakBase<HanteiK
         出力条件List.add(jokenBuilder.toRString());
         jokenBuilder = new RStringBuilder();
         int count = 0;
-        for (RString hihokenshaNo : processPrm.getShinseishoKanriNoList()) {
+        for (RString hihokenshaNo : processPrm.getHihokenshaNoList()) {
             jokenBuilder.append(hihokenshaNo);
             jokenBuilder.append(new RString(","));
             count++;

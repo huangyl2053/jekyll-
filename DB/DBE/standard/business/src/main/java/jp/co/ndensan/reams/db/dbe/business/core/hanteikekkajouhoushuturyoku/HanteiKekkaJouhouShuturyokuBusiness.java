@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.business.core.hanteikekkajouhoushuturyoku;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkajouhoushuturyoku.HanteiKekkaJouhouShuturyokuRelateEntity;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -121,7 +122,7 @@ public class HanteiKekkaJouhouShuturyokuBusiness {
      *
      * @return 開催予定日
      */
-    public RString get開催予定日() {
+    public FlexibleDate get開催予定日() {
         return entity.getShinsakaiKaisaiYoteiYMD();
     }
 
@@ -130,7 +131,7 @@ public class HanteiKekkaJouhouShuturyokuBusiness {
      *
      * @return 開催日
      */
-    public RString get開催日() {
+    public FlexibleDate get開催日() {
         return entity.getShinsakaiKaisaiYMD();
     }
 
@@ -139,7 +140,14 @@ public class HanteiKekkaJouhouShuturyokuBusiness {
      *
      * @return 審査会結果情報抽出年月日
      */
-    public RString get審査会結果情報抽出年月日() {
+    public FlexibleDate get審査会結果情報抽出年月日() {
         return entity.getShinsakaiKekkaJohoChushutsuYMD();
+    }
+
+    /**
+     * @return 開催結果情報が抽出済みの場合、{@code true}.
+     */
+    public boolean had審査会開催結果情報抽出() {
+        return get審査会結果情報抽出年月日() != null && get審査会結果情報抽出年月日().isValid();
     }
 }
