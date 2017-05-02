@@ -1170,6 +1170,8 @@
         , dbt5116Zenkai."kijunJikanKinoKunren" AS zKijunJikanKinoKunren
         , dbt5116Zenkai."kijunJikanIryoKanren" AS zKijunJikanIryoKanren
         , dbt5116Zenkai."kijunJikanNinchishoKasan" AS zKijunJikanNinchishoKasan
+        , dbt5116Zenkai."ichijiHanteiKekkaCode" AS zIchijiHanteiKekkaCode
+        , dbt5116Zenkai."ichijiHanteiKekkaNinchishoKasanCode" AS zIchijiHanteiKekkaNinchishoKasanCode
         , dbt5202."ninteichosaJisshiYMD"
         , dbt5202."chosaJisshiBashoCode"
         , dbt5101."nigoTokuteiShippeiCode"
