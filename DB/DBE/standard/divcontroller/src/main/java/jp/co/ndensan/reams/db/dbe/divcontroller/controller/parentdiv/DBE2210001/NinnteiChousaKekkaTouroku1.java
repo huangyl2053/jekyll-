@@ -31,8 +31,8 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2210001.Nin
 import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteiKanryoJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ichijihanteikekkajohosearch.IchijiHanteiKekkaJohoSearchManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosahyo.ninteichosahyotokkijiko.NinteichosahyoTokkijikoManager;
-import jp.co.ndensan.reams.db.dbe.service.core.util.KekkaTorokuUtil;
-import jp.co.ndensan.reams.db.dbe.service.core.util.KekkaTorokuUtil.CheckEditableResult;
+import jp.co.ndensan.reams.db.dbe.service.core.kekkatoroku.KekkaTorokuUtil;
+import jp.co.ndensan.reams.db.dbe.service.core.kekkatoroku.KekkaTorokuUtil.CheckEditableResult;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
