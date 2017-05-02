@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaIraishoAndChosahyoAndIkenshoPrint;
+package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaIraishoAndChosahyoAndIkenshoPrint.ChosaIraishoAndChosahyoAndIkenshoPrint;
 /*
  * このコードはツールによって生成されました。
  * このファイルへの変更は、再生成時には損失するため
@@ -29,8 +29,6 @@ public class PrintJokenDiv extends Panel {
     private BunshoBangoInputDiv ccdBunshoNo;
     @JsonProperty("chkPrintBlank")
     private CheckBoxList chkPrintBlank;
-    @JsonProperty("chkPrintMatome")
-    private CheckBoxList chkPrintMatome;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -81,24 +79,6 @@ public class PrintJokenDiv extends Panel {
     @JsonProperty("chkPrintBlank")
     public void setChkPrintBlank(CheckBoxList chkPrintBlank) {
         this.chkPrintBlank = chkPrintBlank;
-    }
-
-    /*
-     * getchkPrintMatome
-     * @return chkPrintMatome
-     */
-    @JsonProperty("chkPrintMatome")
-    public CheckBoxList getChkPrintMatome() {
-        return chkPrintMatome;
-    }
-
-    /*
-     * setchkPrintMatome
-     * @param chkPrintMatome chkPrintMatome
-     */
-    @JsonProperty("chkPrintMatome")
-    public void setChkPrintMatome(CheckBoxList chkPrintMatome) {
-        this.chkPrintMatome = chkPrintMatome;
     }
 
     // </editor-fold>

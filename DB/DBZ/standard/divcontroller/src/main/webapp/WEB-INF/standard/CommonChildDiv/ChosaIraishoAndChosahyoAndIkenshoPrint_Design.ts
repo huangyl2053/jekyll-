@@ -1,8 +1,8 @@
-/// <reference path="../../d.ts/jquery.d.ts" />
-/// <reference path="../../d.ts/UzViewControls.d.ts" />
-/// <reference path="../../d.ts/UzaConverter.d.ts" />
-/// <reference path="./../hokenshalist/HokenshaList.ts" />
-/// <reference path="./../BunshoBangoInput/BunshoBangoInput.ts" />
+/// <reference path="../d.ts/jquery.d.ts" />
+/// <reference path="../d.ts/UzViewControls.d.ts" />
+/// <reference path="../d.ts/UzaConverter.d.ts" />
+/// <reference path="./hokenshalist/HokenshaList.ts" />
+/// <reference path="./BunshoBangoInput/BunshoBangoInput.ts" />
 
 module DBZ {
 
@@ -40,6 +40,10 @@ module DBZ {
 
             public static onChange_radJyushinKikan(): string {
                 return "onChange_radJyushinKikan";
+            }
+
+            public static onChange_chkPrintBlank(): string {
+                return "onChange_chkPrintBlank";
             }
 
             public static onChange_radTeishutsuKigen(): string {
@@ -193,6 +197,10 @@ module DBZ {
 
             public chkPrintBlank(): UZA.CheckBoxList {
                 return new UZA.CheckBoxList(this.convFiledName("chkPrintBlank"));
+            }
+
+            public chkPrintMatome(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkPrintMatome"));
             }
 
             public TeishutsuKigen(): UZA.Panel {

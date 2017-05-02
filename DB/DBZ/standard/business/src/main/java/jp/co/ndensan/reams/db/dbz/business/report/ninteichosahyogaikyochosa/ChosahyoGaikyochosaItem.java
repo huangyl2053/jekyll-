@@ -332,9 +332,9 @@ public class ChosahyoGaikyochosaItem {
         this.meiji = meiji;
         this.taisho = taisho;
         this.showa = showa;
-        this.birthYY = birthYY;
-        this.birthMM = birthMM;
-        this.birthDD = birthDD;
+        this.birthYY = !RString.isNullOrEmpty(birthYY) && birthYY.substring(0, 1).equals(new RString("0")) ? birthYY.substring(1) : birthYY;
+        this.birthMM = !RString.isNullOrEmpty(birthMM) && birthMM.substring(0, 1).equals(new RString("0")) ? birthMM.substring(1) : birthMM;
+        this.birthDD = !RString.isNullOrEmpty(birthDD) && birthDD.substring(0, 1).equals(new RString("0")) ? birthDD.substring(1) : birthDD;
         this.age = age;
         this.kazokuRenrakusakiJusho = kazokuRenrakusakiJusho;
         this.kazokuRenrakusakiYubinNo = kazokuRenrakusakiYubinNo;

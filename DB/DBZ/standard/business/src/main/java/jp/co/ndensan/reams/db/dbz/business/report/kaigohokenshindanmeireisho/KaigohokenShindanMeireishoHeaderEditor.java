@@ -94,6 +94,7 @@ public class KaigohokenShindanMeireishoHeaderEditor implements IKaigohokenShinda
         }
         source.jushinArea = item.getJushinArea();
         source.tsuchibun2 = item.getTsuchibun2();
+        source.atenaRemban = item.getAtenaRemban();
         source.識別コード = item.get識別コード();
         source.拡張情報 = item.get拡張情報();
         return source;

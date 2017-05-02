@@ -36,6 +36,10 @@ var DBZ;
                 return "onChange_radJyushinKikan";
             };
 
+            Events.onChange_chkPrintBlank = function () {
+                return "onChange_chkPrintBlank";
+            };
+
             Events.onChange_radTeishutsuKigen = function () {
                 return "onChange_radTeishutsuKigen";
             };
@@ -185,6 +189,10 @@ var DBZ;
 
             Controls.prototype.chkPrintBlank = function () {
                 return new UZA.CheckBoxList(this.convFiledName("chkPrintBlank"));
+            };
+
+            Controls.prototype.chkPrintMatome = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkPrintMatome"));
             };
 
             Controls.prototype.TeishutsuKigen = function () {
