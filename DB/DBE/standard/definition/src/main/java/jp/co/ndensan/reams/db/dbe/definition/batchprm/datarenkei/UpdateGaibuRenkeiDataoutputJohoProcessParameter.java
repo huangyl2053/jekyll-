@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.definition.batchprm.datarenkei;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.centertransmission.CenterTransmissionUpdateMybitisParamter;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.basic.GaibuRenkeiDataoutputJohoMapperParameter;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -69,9 +70,7 @@ public class UpdateGaibuRenkeiDataoutputJohoProcessParameter implements IBatchPr
      *
      * @return CenterTransmissionUpdateMybitisParamter
      */
-    public CenterTransmissionUpdateMybitisParamter toCenterTransmissionUpdateMybitisParamter() {
-        CenterTransmissionUpdateMybitisParamter paramter = new CenterTransmissionUpdateMybitisParamter();
-        paramter.setShinseishoKanriNoList(shinseishoKanriNos);
-        return paramter;
+    public GaibuRenkeiDataoutputJohoMapperParameter toGaibuRenkeiDataoutputJohoMapperParameter() {
+        return GaibuRenkeiDataoutputJohoMapperParameter.searchByShinseishoKanriNos(shinseishoKanriNos);
     }
 }

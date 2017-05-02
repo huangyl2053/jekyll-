@@ -23,8 +23,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class UpdateGaibuRenkeiDataoutputJohoProcess extends BatchProcessBase<DbT7211GaibuRenkeiDataoutputJohoEntity> {
 
-    private static final RString SELECT_NINTEISHINSEIJOHO = new RString("jp.co.ndensan.reams.db.dbe"
-            + ".persistence.db.mapper.relate.centertransmission.ICenterTransmissionMapper.getGaibuRenkeiDataoutputJoho");
+    private static final RString SELECT_NINTEISHINSEIJOHO = new RString("jp.co.ndensan.reams.db.dbz"
+            + ".persistence.db.mapper.basic.IDbT7211GaibuRenkeiDataoutputJohoMapper.searchByParam");
     private UpdateGaibuRenkeiDataoutputJohoProcessParameter parameter;
     private List<RString> 出力された申請書管理番号;
 
@@ -38,7 +38,7 @@ public class UpdateGaibuRenkeiDataoutputJohoProcess extends BatchProcessBase<DbT
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(SELECT_NINTEISHINSEIJOHO, parameter.toCenterTransmissionUpdateMybitisParamter());
+        return new BatchDbReader(SELECT_NINTEISHINSEIJOHO, parameter.toGaibuRenkeiDataoutputJohoMapperParameter());
     }
 
     @Override

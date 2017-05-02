@@ -61,4 +61,18 @@
         rgdb."DbT7211GaibuRenkeiDataoutputJoho"
     </select>
 
+    <select resultOrdered="true" id="searchByParam" resultMap="ResultMap_DbT7211GaibuRenkeiDataoutputJohoEntity"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.basic.GaibuRenkeiDataoutputJohoMapperParameter">
+        SELECT
+        <include refid="allColumns_DbT7211GaibuRenkeiDataoutputJoho"/>
+        FROM
+            rgdb."DbT7211GaibuRenkeiDataoutputJoho"
+        WHERE
+            <if test="searchByShinseishoKanriNos">
+                "shinseishoKanriNo" in
+                <foreach item="shinseishoKanriNo" collection="shinseishoKanriNos" open="(" separator="," close=")">
+                    #{shinseishoKanriNo}
+                </foreach>
+            </if>
+    </select>
 </mapper>

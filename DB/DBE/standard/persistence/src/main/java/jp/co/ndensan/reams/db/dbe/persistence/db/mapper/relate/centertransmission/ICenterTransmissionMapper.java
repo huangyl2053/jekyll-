@@ -91,14 +91,6 @@ public interface ICenterTransmissionMapper {
     List<DbT5101NinteiShinseiJohoEntity> getNinteiShinseiJoho(CenterTransmissionUpdateMybitisParamter paramter);
 
     /**
-     * 外部連携データ抽出情報を取得します。
-     *
-     * @param paramter CenterTransmissionUpdateMybitisParamter
-     * @return List<DbT7211GaibuRenkeiDataoutputJohoEntity>
-     */
-    List<DbT7211GaibuRenkeiDataoutputJohoEntity> getGaibuRenkeiDataoutputJoho(CenterTransmissionUpdateMybitisParamter paramter);
-
-    /**
      * センター送信データ作成の対象者を取得します。
      *
      * @param paramter CenterTransmissionMybitisParamter
