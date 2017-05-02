@@ -68,8 +68,9 @@
         FROM
             rgdb."DbT7211GaibuRenkeiDataoutputJoho"
         WHERE
+            1 = 1
             <if test="searchByShinseishoKanriNos">
-                "shinseishoKanriNo" in
+                AND "shinseishoKanriNo" in
                 <foreach item="shinseishoKanriNo" collection="shinseishoKanriNos" open="(" separator="," close=")">
                     #{shinseishoKanriNo}
                 </foreach>
