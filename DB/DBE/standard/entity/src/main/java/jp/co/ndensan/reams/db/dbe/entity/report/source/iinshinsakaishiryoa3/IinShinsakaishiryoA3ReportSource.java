@@ -407,6 +407,8 @@ public class IinShinsakaishiryoA3ReportSource implements IReportSource {
     public RString listshujiiikensho_3;
     @ReportItem(name = "listshujiiikensho_4", length = 18, order = 252)
     public RString listshujiiikensho_4;
+    @ReportItem(name = "zenkaiIchijiHanteiKekka", order = 253)
+    public RString zenkaiIchijiHanteiKekka;
 
     //DBE517041_GaikyotokkiTextA3
     @ReportItem(name = "gaikyotokkiImg", order = 271)

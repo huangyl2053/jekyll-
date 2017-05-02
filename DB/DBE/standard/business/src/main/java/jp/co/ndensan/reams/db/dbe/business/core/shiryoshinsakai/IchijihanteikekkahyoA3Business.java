@@ -1248,6 +1248,13 @@ public class IchijihanteikekkahyoA3Business {
     }
 
     /**
+     * @return 前回一次判定結果
+     */
+    public RString get前回一次判定結果() {
+        return entity.get前回一次判定結果();
+    }
+
+    /**
      * 凡例文言1を取得します。
      *
      * @return 凡例1

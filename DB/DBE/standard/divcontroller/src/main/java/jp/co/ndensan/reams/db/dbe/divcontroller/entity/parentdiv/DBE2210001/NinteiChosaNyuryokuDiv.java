@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class NinteiChosaNyuryokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -40,6 +40,10 @@ public class NinteiChosaNyuryokuDiv extends Panel {
     private tabChosaShuruiDiv tabChosaShurui;
     @JsonProperty("btnClear")
     private Button btnClear;
+    @JsonProperty("btnIchijiHanteiValidate")
+    private Button btnIchijiHanteiValidate;
+    @JsonProperty("btnHanteishoriAto")
+    private Button btnHanteishoriAto;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -138,16 +142,52 @@ public class NinteiChosaNyuryokuDiv extends Panel {
     }
 
     /*
+     * getbtnIchijiHanteiValidate
+     * @return btnIchijiHanteiValidate
+     */
+    @JsonProperty("btnIchijiHanteiValidate")
+    public Button getBtnIchijiHanteiValidate() {
+        return btnIchijiHanteiValidate;
+    }
+
+    /*
+     * setbtnIchijiHanteiValidate
+     * @param btnIchijiHanteiValidate btnIchijiHanteiValidate
+     */
+    @JsonProperty("btnIchijiHanteiValidate")
+    public void setBtnIchijiHanteiValidate(Button btnIchijiHanteiValidate) {
+        this.btnIchijiHanteiValidate = btnIchijiHanteiValidate;
+    }
+
+    /*
+     * getbtnHanteishoriAto
+     * @return btnHanteishoriAto
+     */
+    @JsonProperty("btnHanteishoriAto")
+    public Button getBtnHanteishoriAto() {
+        return btnHanteishoriAto;
+    }
+
+    /*
+     * setbtnHanteishoriAto
+     * @param btnHanteishoriAto btnHanteishoriAto
+     */
+    @JsonProperty("btnHanteishoriAto")
+    public void setBtnHanteishoriAto(Button btnHanteishoriAto) {
+        this.btnHanteishoriAto = btnHanteishoriAto;
+    }
+
+    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public INinteiShinseiRenrakusakiKihonDiv getCcdNinteiShinseiRenrakusakiKihon() {
-        return this.getChosaTaisho().getCcdNinteiShinseiRenrakusakiKihon();
+    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
+        return this.getChosaTaisho().getCcdNinteiShinseishaKihonInfo();
     }
 
     @JsonIgnore
-    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
-        return this.getChosaTaisho().getCcdNinteiShinseishaKihonInfo();
+    public INinteiShinseiRenrakusakiKihonDiv getCcdNinteiShinseiRenrakusakiKihon() {
+        return this.getChosaTaisho().getCcdNinteiShinseiRenrakusakiKihon();
     }
 
     @JsonIgnore

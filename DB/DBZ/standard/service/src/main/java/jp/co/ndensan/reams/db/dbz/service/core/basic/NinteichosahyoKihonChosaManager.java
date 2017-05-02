@@ -67,6 +67,24 @@ public class NinteichosahyoKihonChosaManager {
     }
 
     /**
+     * 申請書管理番号に合致する最大履歴番号の認定調査票_基本調査を返します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return NinteichosahyoKihonChosa
+     */
+    @Transaction
+    public NinteichosahyoKihonChosa get認定調査票_基本調査_最大履歴(ShinseishoKanriNo 申請書管理番号) {
+        requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage("申請書管理番号"));
+
+        DbT5203NinteichosahyoKihonChosaEntity entity = dac.selectMax認定調査依頼履歴番号ByKey(申請書管理番号);
+        if (entity == null) {
+            return null;
+        }
+        entity.initializeMd5();
+        return new NinteichosahyoKihonChosa(entity);
+    }
+
+    /**
      * 認定調査票_基本調査を全件返します。
      *
      * @return NinteichosahyoKihonChosaの{@code list}

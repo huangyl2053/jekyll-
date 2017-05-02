@@ -408,7 +408,6 @@ public class JimuTokkiTextPage2A3Editor implements IJimuTokkiTextA3Editor {
 //        }
 //        return source;
 //    }
-
     private JimuTokkiTextA3ReportSource set特記事項連番_名称(JimuTokkiTextA3ReportSource source, TokkijikoTextImageKubun 特記事項テキストイメージ区分) {
         setTokkijikoNameOddPage(source, 特記事項テキストイメージ区分);
         setTokkijikoNameEvenPage(source, 特記事項テキストイメージ区分);
@@ -450,7 +449,7 @@ public class JimuTokkiTextPage2A3Editor implements IJimuTokkiTextA3Editor {
 
     private RString get年(FlexibleDate 年月日) {
 
-        return パターン12(年月日).getYear();
+        return パターン12(年月日).getYear().substringEmptyOnError(2, 4);
     }
 
     private RString get月(FlexibleDate 年月日) {

@@ -73,6 +73,7 @@ public class IinTokkiTextPage1A3Editor implements IIinTokkiTextA3Editor {
         source.shinseiKubun = item.get申請区分();
         source.age = get年齢(item.get年齢());
         source.seibetsu = item.get性別();
+        source.zenkaiIchijiHanteiKekka = item.get前回一次判定結果();
         source.zenZenkaiHanteikekka = item.get前々回要介護度();
         source.zenzenkaiYukokikan = item.get前々回認定有効期間();
         source.zZenkaiNijiKaishiYMD = パターン18(item.get前々回認定有効期間開始年月日());

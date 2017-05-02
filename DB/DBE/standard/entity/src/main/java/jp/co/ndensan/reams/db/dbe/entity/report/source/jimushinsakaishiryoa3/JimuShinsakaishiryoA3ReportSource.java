@@ -684,6 +684,9 @@ public class JimuShinsakaishiryoA3ReportSource implements IReportSource {
     public RString shisetsuTypeLabel;
     @ReportItem(name = "shisetsuType", order = 641)
     public RString shisetsuType;
+
+    @ReportItem(name = "zenkaiIchijiHanteiKekka", order = 642)
+    public RString zenkaiIchijiHanteiKekka;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

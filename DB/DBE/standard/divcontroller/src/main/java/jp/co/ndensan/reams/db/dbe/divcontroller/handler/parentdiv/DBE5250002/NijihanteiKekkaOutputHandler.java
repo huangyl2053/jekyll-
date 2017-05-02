@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
@@ -46,6 +47,7 @@ public class NijihanteiKekkaOutputHandler {
     private static final RString 出力済みを含む = new RString("出力済みを含む");
     private static final RString 二次判定日 = new RString("二次判定日");
     private static final RString 認定申請日 = new RString("認定申請日");
+    private static final RString 済 = new RString("済");
 
     /**
      * コンストラクタです。
@@ -114,6 +116,11 @@ public class NijihanteiKekkaOutputHandler {
                 審査会名称.append(new RString("回審査会"));
                 dgFukushiyoguShohin.setKaigoNinteiShinsakaiName(審査会名称.toRString());
                 dgFukushiyoguShohin.setShinseishoKanriNo(jigyoshaInput.get申請書管理番号());
+                dgFukushiyoguShohin.setKaisaiYoteiDay(toTextBoxFlexibleDate(jigyoshaInput.get開催予定日()));
+                dgFukushiyoguShohin.setKaisaiDay(toTextBoxFlexibleDate(jigyoshaInput.get開催日()));
+                if (jigyoshaInput.had審査会開催結果情報抽出()) {
+                    dgFukushiyoguShohin.setDataShutsuryoku(済);
+                }
                 dgTaishoshaIchiranList.add(dgFukushiyoguShohin);
             }
             DataGridSetting gridSetting = nijidiv.getNijihanteiKekkaIchiran().getDgTaishoshaIchiran().getGridSetting();
@@ -129,6 +136,12 @@ public class NijihanteiKekkaOutputHandler {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(連携ボタン, true);
             return false;
         }
+    }
+
+    private static TextBoxFlexibleDate toTextBoxFlexibleDate(FlexibleDate fDate) {
+        TextBoxFlexibleDate txtBox = new TextBoxFlexibleDate();
+        txtBox.setValue(fDate);
+        return txtBox;
     }
 
     /**
@@ -203,14 +216,17 @@ public class NijihanteiKekkaOutputHandler {
      */
     public DBE525002_HanteiKekkaHokenshaParameter setBatchParameter() {
         List<RString> shinseishoKanriNo = new ArrayList<>();
+        List<RString> hihokenshaNo = new ArrayList<>();
         for (dgTaishoshaIchiran_Row row : nijidiv.getNijihanteiKekkaIchiran().getDgTaishoshaIchiran().getDataSource()) {
             if (row.getSelected()) {
+                hihokenshaNo.add(row.getHihokenshaNo().getValue());
                 shinseishoKanriNo.add(row.getShinseishoKanriNo());
             }
         }
         DBE525002_HanteiKekkaHokenshaParameter hanteibatchParameter
                 = new DBE525002_HanteiKekkaHokenshaParameter();
         hanteibatchParameter.setShinseishoKanriNoList(shinseishoKanriNo);
+        hanteibatchParameter.setHihokenshaNoList(shinseishoKanriNo);
         hanteibatchParameter.setFayirukuben(new RString("1"));
         hanteibatchParameter.setHokensha(nijidiv.getKensakuJoken().getCcdHokensha().getSelectedItem().get証記載保険者番号().getColumnValue());
         hanteibatchParameter.setHokenshaName(nijidiv.getKensakuJoken().getCcdHokensha().getSelectedItem().get市町村名称());

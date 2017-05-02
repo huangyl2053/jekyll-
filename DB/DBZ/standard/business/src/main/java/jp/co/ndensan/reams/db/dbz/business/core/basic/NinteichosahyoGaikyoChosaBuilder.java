@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
 /**
  * {@link NinteichosahyoGaikyoChosa}の編集を行うビルダークラスです。
@@ -292,6 +293,15 @@ public class NinteichosahyoGaikyoChosaBuilder {
         requireNonNull(認定調査特記事項受領年月日, UrSystemErrorMessages.値がnull.getReplacedMessage("認定調査特記事項受領年月日"));
         entity.setTokkijikoJuryoYMD(認定調査特記事項受領年月日);
         return this;
+    }
+
+    /**
+     * entityの状態を取得します。
+     *
+     * @return {@link NinteichosahyoGaikyoChosaBuilder}
+     */
+    public EntityDataState getEntityDataState() {
+        return entity.getState();
     }
 
     /**

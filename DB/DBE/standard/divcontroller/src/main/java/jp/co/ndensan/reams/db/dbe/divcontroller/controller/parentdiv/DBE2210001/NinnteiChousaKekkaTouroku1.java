@@ -11,11 +11,12 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteiresult.IchijiHanteiKekkaResultConveter;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosahyo.ninteichosahyotokkijiko.NinteichosahyoTokkijiko;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiShoriKekka;
 import jp.co.ndensan.reams.db.dbe.business.core.tokkijikoinput.TokkiJikoInputComparator;
 import jp.co.ndensan.reams.db.dbe.business.core.tokkijikoinput.TokkiJikoInputModel;
-import jp.co.ndensan.reams.db.dbe.definition.core.NinteichosaIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.kanri.SampleBunshoGroupCodes;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeInformationMessages;
@@ -30,8 +31,8 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2210001.Nin
 import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteiKanryoJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ichijihanteikekkajohosearch.IchijiHanteiKekkaJohoSearchManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosahyo.ninteichosahyotokkijiko.NinteichosahyoTokkijikoManager;
-import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJohoManager;
-import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJohoManager;
+import jp.co.ndensan.reams.db.dbe.service.core.kekkatoroku.KekkaTorokuUtil;
+import jp.co.ndensan.reams.db.dbe.service.core.kekkatoroku.KekkaTorokuUtil.CheckEditableResult;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -53,7 +54,6 @@ import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -61,7 +61,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
-import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
@@ -93,6 +92,18 @@ public class NinnteiChousaKekkaTouroku1 {
     private static final RString UICONTAINERID_DBEUC40501 = new RString("DBEUC40501");
     private static final RString 概況特記出力しない = new RString("2");
     private static final RString 認定調査結果入手_必須調査票_特記事項不要 = new RString("1");
+    private static final RString 保存するボタン = new RString("btnChosaKekkaUpdate");
+    private static final ShinseishoKanriNo DEFAULT前回申請書管理番号 = new ShinseishoKanriNo("00000000000000000");
+    private static final List<RString> ONLOAD_ERROR_MESSAGES;
+
+    static {
+        List<RString> list = new ArrayList<>();
+        list.add(new RString(UrErrorMessages.存在しない.getMessage().getCode()));
+        list.add(new RString(DbeErrorMessages.認定ソフトバージョンエラー.getMessage().getCode()));
+        list.add(CheckEditableResult.一次判定完了済み.getMessageCode());
+        list.add(CheckEditableResult.審査会結果登録完了済み.getMessageCode());
+        ONLOAD_ERROR_MESSAGES = Collections.unmodifiableList(list);
+    }
 
     /**
      * 認定調査結果登録1の初期化。(オンロード)<br/>
@@ -101,23 +112,13 @@ public class NinnteiChousaKekkaTouroku1 {
      * @return レスポンスデータ
      */
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onLoad(NinnteiChousaKekkaTouroku1Div div) {
-        if (new RString(UrErrorMessages.存在しない.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
-                || new RString(DbeErrorMessages.認定ソフトバージョンエラー.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
-                || new RString(DbeErrorMessages.審査会割当済のため処理不可.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
-                || new RString(DbeErrorMessages.一次判定済のため処理不可.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+        if (ONLOAD_ERROR_MESSAGES.contains(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             setDisabledControl_Error(div);
             return ResponseData.of(div).respond();
         }
         ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         Integer 認定調査履歴番号 = ViewStateHolder.get(ViewStateKeys.認定調査履歴番号, Integer.class);
-        boolean gotLock = 前排他キーのセット();
-        if (!gotLock) {
-            throw new PessimisticLockingException();
-        }
         NinteichosaIraiJohoManager ninteiChosaIraiJohoManager = InstanceProvider.create(NinteichosaIraiJohoManager.class);
         NinteichosaIraiJoho 認定調査依頼情報 = ninteiChosaIraiJohoManager.get認定調査依頼情報(申請書管理番号, 認定調査履歴番号);
         if ((!UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId()))
@@ -146,9 +147,6 @@ public class NinnteiChousaKekkaTouroku1 {
         accessLog.store(new ShoKisaiHokenshaNo(証記載保険者番号), 被保険者番号, expandedInfo);
         accessLog.flushBy(AccessLogType.照会);
 
-        if (概況特記出力しない.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
-            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(new RString("btnGaikyoTokkiInput"), true);
-        }
         NinteichosahyoTokkijikoManager manager = InstanceProvider.create(NinteichosahyoTokkijikoManager.class);
         List<NinteichosahyoTokkijiko> 特記事項リスト = manager.get認定調査票_特記情報(申請書管理番号, 認定調査履歴番号);
         boolean isイメージ = false;
@@ -162,24 +160,30 @@ public class NinnteiChousaKekkaTouroku1 {
         if (!isイメージ) {
             div.getNinteiChosaNyuryoku().getTplKihonChosa().getBtnImageTokkiJiko().setDisplayNone(true);
         }
-        ShinsakaiWariateJohoManager shinsakaiWariateManager = InstanceProvider.create(ShinsakaiWariateJohoManager.class);
-        boolean 審査会割当済 = shinsakaiWariateManager.get審査会割当データ(申請書管理番号);
-        if ((!UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId()))
-                && (!UICONTAINERID_DBEUC40501.equals(ResponseHolder.getUIContainerId()))) {
-            if (審査会割当済) {
-                ErrorMessage message = new ErrorMessage(DbeErrorMessages.審査会割当済のため処理不可.getMessage().getCode(),
-                        DbeErrorMessages.審査会割当済のため処理不可.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
+
+        CheckEditableResult result = KekkaTorokuUtil.checkEditable(申請書管理番号);
+        if (!result.is編集可能()) {
+            return ResponseData.of(div).addMessage(result.getMessage()).respond();
+        }
+
+        if (!new RString(UrErrorMessages.排他_他のユーザが使用中.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+            boolean gotLock = 前排他キーのセット();
+            if (!gotLock) {
+                div.setReadOnly(true);
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(保存するボタン, true);
+                return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
             }
         }
-        NinteiKanryoJohoManager ninteiKanryoJohoManager = InstanceProvider.create(NinteiKanryoJohoManager.class);
-        NinteiKanryoJoho 認定完了情報 = ninteiKanryoJohoManager.get要介護認定完了情報(申請書管理番号);
-        if ((!UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId()))
-                && (!UICONTAINERID_DBEUC40501.equals(ResponseHolder.getUIContainerId()))) {
-            if (認定完了情報.get要介護認定一次判定完了年月日() != null) {
-                InformationMessage message = new InformationMessage(DbeErrorMessages.一次判定済のため処理不可.getMessage().getCode(),
-                        DbeErrorMessages.一次判定済のため処理不可.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
+        getHandler(div).編集前調査実施者情報設定();
+        ViewStateHolder.put(ViewStateKeys.要介護認定完了情報, NinteiKanryoJohoManager.createInstance().get要介護認定完了情報(申請書管理番号));
+        if (概況特記出力しない.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
+            if (UICONTAINERID_DBEUC20601.equals(ResponseHolder.getUIContainerId())) {
+                return ResponseData.of(div).setState(DBE2210001StateName.調査結果登録_基本運用_特記なし);
+            } else if (UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId())
+                    || UICONTAINERID_DBEUC40501.equals(ResponseHolder.getUIContainerId())) {
+                return ResponseData.of(div).setState(DBE2210001StateName.調査結果登録_マスキング_特記なし);
+            } else {
+                return ResponseData.of(div).setState(DBE2210001StateName.調査結果登録_特記なし);
             }
         }
         return ResponseData.of(div).respond();
@@ -193,7 +197,14 @@ public class NinnteiChousaKekkaTouroku1 {
      */
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onActive(NinnteiChousaKekkaTouroku1Div div) {
         if (概況特記出力しない.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
-            CommonButtonHolder.setDisplayNoneByCommonButtonFieldName(new RString("btnGaikyoTokkiInput"), true);
+            if (UICONTAINERID_DBEUC20601.equals(ResponseHolder.getUIContainerId())) {
+                return ResponseData.of(div).setState(DBE2210001StateName.調査結果登録_基本運用_特記なし);
+            } else if (UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId())
+                    || UICONTAINERID_DBEUC40501.equals(ResponseHolder.getUIContainerId())) {
+                return ResponseData.of(div).setState(DBE2210001StateName.調査結果登録_マスキング_特記なし);
+            } else {
+                return ResponseData.of(div).setState(DBE2210001StateName.調査結果登録_特記なし);
+            }
         }
         return ResponseData.of(div).respond();
     }
@@ -361,6 +372,23 @@ public class NinnteiChousaKekkaTouroku1 {
      * @return レスポンスデータ
      */
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onBeforeOpenDialog_btnTokkiJiko(NinnteiChousaKekkaTouroku1Div div) {
+        sortTokkiJiko();
+        set画面遷移パラメータ(div);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 「特記事項入力ダイアログ」にて確定して戻ってきた処理です。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<NinnteiChousaKekkaTouroku1Div> onOkClose_btnTokkiJiko(NinnteiChousaKekkaTouroku1Div div) {
+        sortTokkiJiko();
+        return ResponseData.of(div).respond();
+    }
+
+    private void sortTokkiJiko() {
         HashMap<RString, TokkiJikoInputModel> tokkiJikoMap = ViewStateHolder.get(ViewStateKeys.特記事項一覧, LinkedHashMap.class);
         List<TokkiJikoInputModel> tokkiJikoList = new ArrayList<>(tokkiJikoMap.values());
         Collections.sort(tokkiJikoList, new TokkiJikoInputComparator());
@@ -370,9 +398,7 @@ public class NinnteiChousaKekkaTouroku1 {
             newTokkiJikoMap.put(new RString(newTokkiJikoMapKey), model);
             newTokkiJikoMapKey++;
         }
-        set画面遷移パラメータ(div);
         ViewStateHolder.put(ViewStateKeys.特記事項一覧, newTokkiJikoMap);
-        return ResponseData.of(div).respond();
     }
 
     /**
@@ -479,12 +505,9 @@ public class NinnteiChousaKekkaTouroku1 {
      * @return レスポンスデータ
      */
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onClick_btnZenkaiCopy(NinnteiChousaKekkaTouroku1Div div) {
-        RString 認定調査依頼区分コード = ViewStateHolder.get(ViewStateKeys.認定調査依頼区分コード, RString.class);
-        if (!NinteichosaIraiKubun.再調査.getCode().equals(認定調査依頼区分コード)) {
-            boolean 前回基本調査項目値あり = ViewStateHolder.get(ViewStateKeys.前回基本調査項目値あり, Boolean.class);
-            if (!前回基本調査項目値あり) {
-                throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("前回値"));
-            }
+        ShinseishoKanriNo 前回申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号2, ShinseishoKanriNo.class);
+        if (前回申請書管理番号 == null || 前回申請書管理番号.isEmpty() || 前回申請書管理番号.equals(DEFAULT前回申請書管理番号)) {
+            throw new ApplicationException(UrErrorMessages.存在しない.getMessage().replace("前回値"));
         }
         ArrayList<KihonChosaInput> 第1群List = ViewStateHolder.get(ViewStateKeys.第一群認定調査基本情報リスト, ArrayList.class);
         ArrayList<KihonChosaInput> 第2群List = ViewStateHolder.get(ViewStateKeys.第二群認定調査基本情報リスト, ArrayList.class);
@@ -503,11 +526,12 @@ public class NinnteiChousaKekkaTouroku1 {
         }
         if (new RString(DbeWarningMessages.既に基本調査値が存在します_上書き確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            if (NinteichosaIraiKubun.再調査.getCode().equals(認定調査依頼区分コード)) {
-                getHandler(div).前回値コピー処理_前回履歴(第1群List, 第2群List, 第3群List, 第4群List, 第5群List, 特別な医療List, 自立度List);
-            } else {
-                getHandler(div).前回値コピー処理_前回申請(第1群List, 第2群List, 第3群List, 第4群List, 第5群List, 特別な医療List, 自立度List);
-            }
+//            if (NinteichosaIraiKubun.再調査.getCode().equals(認定調査依頼区分コード)) {
+//                getHandler(div).前回値コピー処理_前回履歴(第1群List, 第2群List, 第3群List, 第4群List, 第5群List, 特別な医療List, 自立度List);
+//            } else {
+//                getHandler(div).前回値コピー処理_前回申請(第1群List, 第2群List, 第3群List, 第4群List, 第5群List, 特別な医療List, 自立度List);
+//            }
+            getHandler(div).前回値コピー処理_前回申請(第1群List, 第2群List, 第3群List, 第4群List, 第5群List, 特別な医療List, 自立度List);
             ViewStateHolder.put(ViewStateKeys.第一群認定調査基本情報リスト, 第1群List);
             ViewStateHolder.put(ViewStateKeys.第二群認定調査基本情報リスト, 第2群List);
             ViewStateHolder.put(ViewStateKeys.第三群認定調査基本情報リスト, 第3群List);
@@ -596,28 +620,6 @@ public class NinnteiChousaKekkaTouroku1 {
         set画面遷移パラメータ(div);
         return ResponseData.of(div).forwardWithEventName(DBE2210001TransitionEventName.概況特記入力を表示).respond();
     }
-//
-//    /**
-//     * ボタン「特記事項一覧を表示する」を押下する処理です。（DBE2210003　特記事項一覧画面へ遷移する）
-//     *
-//     * @param div コントロールdiv
-//     * @return レスポンスデータ
-//     */
-//    public ResponseData<NinnteiChousaKekkaTouroku1Div> onClick_btnTokkiJikoIchiran(NinnteiChousaKekkaTouroku1Div div) {
-//
-//        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
-//        getValidationHandler().validateFor調査実施日の必須入力(pairs, div);
-//        getValidationHandler().validateFor調査実施日の妥当性入力(pairs, div);
-//        getValidationHandler().validateFor実施場所の必須入力(pairs, div);
-//        getValidationHandler().validateFor所属機関の必須入力(pairs, div);
-//        getValidationHandler().validateFor記入者の必須入力(pairs, div);
-//        if (pairs.iterator().hasNext()) {
-//            return ResponseData.of(div).addValidationMessages(pairs).respond();
-//        }
-//        前排他キーの解除();
-//        set画面遷移パラメータ(div);
-//        return ResponseData.of(div).forwardWithEventName(DBE2210001TransitionEventName.特記事項一覧を表示).respond();
-//    }
 
     /**
      * ボタン「入力内容をクリアする」を押下する処理です。
@@ -649,6 +651,69 @@ public class NinnteiChousaKekkaTouroku1 {
      * @return レスポンスデータ
      */
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onclick_btnChosaKekkaUpdate(NinnteiChousaKekkaTouroku1Div div) {
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 一次判定処理前のチェック処理・引数作成処理を行います。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<NinnteiChousaKekkaTouroku1Div> onClick_btnIchijiHanteiValidate(NinnteiChousaKekkaTouroku1Div div) {
+
+        ValidationMessageControlPairs pairs = new ValidationMessageControlPairs();
+        getValidationHandler().validateFor第1群の必須入力(pairs, div);
+        getValidationHandler().validateFor第2群の必須入力(pairs, div);
+        getValidationHandler().validateFor第3群の必須入力(pairs, div);
+        getValidationHandler().validateFor第4群の必須入力(pairs, div);
+        getValidationHandler().validateFor第5群の必須入力(pairs, div);
+        getValidationHandler().validateFor生活自立度の必須入力(pairs, div);
+        if (pairs.iterator().hasNext()) {
+            return ResponseData.of(div).addValidationMessages(pairs).respond();
+        }
+
+        IchijiHanteiKekkaJohoSearchManager manager = IchijiHanteiKekkaJohoSearchManager.createIntance();
+
+        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+        ArrayList<KihonChosaInput> 第1群List = ViewStateHolder.get(ViewStateKeys.第一群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第2群List = ViewStateHolder.get(ViewStateKeys.第二群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第3群List = ViewStateHolder.get(ViewStateKeys.第三群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第4群List = ViewStateHolder.get(ViewStateKeys.第四群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 第5群List = ViewStateHolder.get(ViewStateKeys.第五群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 特別な医療List = ViewStateHolder.get(ViewStateKeys.第六群認定調査基本情報リスト, ArrayList.class);
+        ArrayList<KihonChosaInput> 自立度List = ViewStateHolder.get(ViewStateKeys.第七群認定調査基本情報リスト, ArrayList.class);
+        RString hanteiArgument = manager.get一次判定引数(申請書管理番号, 第1群List, 第2群List, 第3群List,
+                第4群List, 第5群List, 特別な医療List, 自立度List);
+
+        div.setIchijiHanteiArgument(hanteiArgument);
+
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 調査結果および一次判定処理結果を保存する処理を行います。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<NinnteiChousaKekkaTouroku1Div> onClick_btnHanteishoriAto(NinnteiChousaKekkaTouroku1Div div) {
+
+        ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
+        RString result = div.getIchijiHanteiResult();
+        if (RString.isNullOrEmpty(result) && (UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId())
+                || UICONTAINERID_DBEUC40501.equals(ResponseHolder.getUIContainerId()))) {
+            return ResponseData.of(div).addMessage(DbeErrorMessages.一次判定失敗.getMessage()).respond();
+        }
+        IchijiHanteiKekkaResultConveter converter = new IchijiHanteiKekkaResultConveter(申請書管理番号, result);
+        List<IchijiHanteiShoriKekka> kekkaList = converter.convert();
+
+        if ((UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId())
+                || UICONTAINERID_DBEUC40501.equals(ResponseHolder.getUIContainerId()))
+                && (kekkaList == null || kekkaList.isEmpty())) {
+            return ResponseData.of(div).addMessage(DbeErrorMessages.一次判定失敗.getMessage()).respond();
+        }
+
         if (new RString(DbeInformationMessages.一次判定再処理.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             return ResponseData.of(div).setState(DBE2210001StateName.完了);
@@ -686,6 +751,7 @@ public class NinnteiChousaKekkaTouroku1 {
             getValidationHandler().validateFor第4群の必須入力(pairs, div);
             getValidationHandler().validateFor第5群の必須入力(pairs, div);
             getValidationHandler().validateFor生活自立度の必須入力(pairs, div);
+            getValidationHandler().validateFor未編集(pairs, div);
             if (!認定調査結果入手_必須調査票_特記事項不要.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))
                     && !div.getNinteiChosaNyuryoku().getTplKihonChosa().getBtnTokkiJiko().isDisplayNone()) {
                 getValidationHandler().validateFor特記事項の必須入力(pairs, div);
@@ -705,11 +771,8 @@ public class NinnteiChousaKekkaTouroku1 {
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
                 || new RString(UrQuestionMessages.削除の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            if (isDelete) {
-                getHandler(div).削除処理();
-            } else {
-                getHandler(div).更新処理();
-            }
+            更新処理(isDelete, div, kekkaList, ViewStateHolder.get(ViewStateKeys.要介護認定完了情報, NinteiKanryoJoho.class));
+            アクセスログ(div, 申請書管理番号);
             前排他キーの解除();
             div.getCcdKanryoMessage().setMessage(
                     new RString(UrInformationMessages.正常終了.getMessage().replace("完了処理・認定調査結果登録").evaluate()), RString.EMPTY, RString.EMPTY, true);
@@ -725,17 +788,22 @@ public class NinnteiChousaKekkaTouroku1 {
                 }
             }
             if (!isDelete) {
-                ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
-                IchijiHanteiKekkaJohoManager ichijiHanteiKekkaJohoManager = InstanceProvider.create(IchijiHanteiKekkaJohoManager.class);
-                IchijiHanteiKekkaJoho 一次判定結果情報 = ichijiHanteiKekkaJohoManager.get要介護認定一次判定結果情報(申請書管理番号);
-                if (一次判定結果情報 != null && !一次判定結果情報.get仮一次判定区分()) {
-                    return ResponseData.of(div).addMessage(DbeInformationMessages.一次判定再処理.getMessage()).respond();
-                }
                 return ResponseData.of(div).setState(DBE2210001StateName.完了);
             }
             return ResponseData.of(div).setState(DBE2210001StateName.完了_削除);
         }
         return ResponseData.of(div).respond();
+    }
+
+    private void 更新処理(boolean isDelete, NinnteiChousaKekkaTouroku1Div div, List<IchijiHanteiShoriKekka> kekkaList, NinteiKanryoJoho 完了情報) {
+        if (isDelete) {
+            getHandler(div).削除処理();
+        } else {
+            getHandler(div).更新処理();
+            if (完了情報.get要介護認定一次判定完了年月日() != null && !完了情報.get要介護認定一次判定完了年月日().isEmpty()) {
+                getHandler(div).updateGridAndViewStateData(kekkaList);
+            }
+        }
     }
 
     /**
@@ -849,6 +917,15 @@ public class NinnteiChousaKekkaTouroku1 {
         } else {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnGaikyoTokkiInput"), true);
         }
+    }
+
+    private void アクセスログ(NinnteiChousaKekkaTouroku1Div div, ShinseishoKanriNo 申請書管理番号) {
+        RString 被保険者番号 = div.getCcdNinteiShinseishaKihonInfo().get被保険者番号();
+        RString 証記載保険者番号 = div.getCcdNinteiShinseishaKihonInfo().get証記載保険者番号();
+        DbAccessLogger accessLog = new DbAccessLogger();
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号.value());
+        accessLog.store(new ShoKisaiHokenshaNo(証記載保険者番号), 被保険者番号, expandedInfo);
+        accessLog.flushBy(AccessLogType.更新);
     }
 
     private NinnteiChousaKekkaTouroku1Handler getHandler(NinnteiChousaKekkaTouroku1Div div) {
