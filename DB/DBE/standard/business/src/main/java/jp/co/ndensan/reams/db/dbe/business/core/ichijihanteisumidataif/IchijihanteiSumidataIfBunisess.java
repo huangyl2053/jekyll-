@@ -5,24 +5,18 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ichijihanteisumidataif;
 
-import java.util.ArrayList;
-import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.ichijihanteisumidataif.IchijihanteiSumidataIftProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteisumidataif.IchijihanteiSumidataIDataShutsuryokuRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteisumidataif.IchijihanteiSumidataIf09AEucEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteisumidataif.IchijihanteiSumidataIfEucEntity;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
 /**
  * 一次判定データ出力Bunisessです。
  *
  * @reamsid_L DBE-1610-020 wanghui
  */
-public class IchijihanteiSumidataIfBunisess {
+class IchijihanteiSumidataIfBunisess {
 
     private final RString 項目 = new RString("0");
     private final RString 予防給付サービス = new RString("1");
@@ -923,60 +917,10 @@ public class IchijihanteiSumidataIfBunisess {
         eucEntity.set前回結果カテーテル(entity.get前回結果カテーテル());
     }
 
-    /**
-     * 出力件数を取得するメッソドです。
-     *
-     * @param 出力件数 出力件数
-     * @return RString
-     */
-    public RString get出力件数(Decimal 出力件数) {
-        RStringBuilder builder = new RStringBuilder();
-        builder.append(DecimalFormatter.toコンマ区切りRString(出力件数, 0));
-        return builder.toRString();
-    }
-
-    /**
-     * 出力条件を作成するメッソドです。
-     *
-     * @param paramter IchijihanteiSumidataIftProcessParamter
-     * @return List<RString> 出力条件List
-     */
-    public List<RString> get出力条件(IchijihanteiSumidataIftProcessParamter paramter) {
-        RStringBuilder jokenBuilder = new RStringBuilder();
-        List<RString> 出力条件List = new ArrayList<>();
-        if (項目.equals(paramter.get日付指定())) {
-            jokenBuilder.append(new RString("【日付指定】　申請日"));
-            出力条件List.add(jokenBuilder.toRString());
-            jokenBuilder = new RStringBuilder();
-            jokenBuilder.append(new RString("【申請日From】"));
-            jokenBuilder.append(new FlexibleDate(paramter.get申請日From()).wareki().toDateString());
-            出力条件List.add(jokenBuilder.toRString());
-            jokenBuilder = new RStringBuilder();
-            jokenBuilder.append(new RString("申請日To"));
-            jokenBuilder.append(new FlexibleDate(paramter.get申請日To()).wareki().toDateString());
-            出力条件List.add(jokenBuilder.toRString());
-        }
-        if (予防給付サービス.equals(paramter.get日付指定())) {
-            jokenBuilder.append(new RString("【日付指定】　一次判定日"));
-            出力条件List.add(jokenBuilder.toRString());
-            jokenBuilder = new RStringBuilder();
-            jokenBuilder.append(new RString("【一次判定日From】"));
-            jokenBuilder.append(new FlexibleDate(paramter.get一次判定日From()).wareki().toDateString());
-            出力条件List.add(jokenBuilder.toRString());
-            jokenBuilder = new RStringBuilder();
-            jokenBuilder.append(new RString("【一次判定日To】"));
-            jokenBuilder.append(new FlexibleDate(paramter.get一次判定日To()).wareki().toDateString());
-            出力条件List.add(jokenBuilder.toRString());
-        }
-        出力条件List.add(jokenBuilder.toRString());
-        return 出力条件List;
-    }
-
     private RString nullchck(RString ogj) {
         if (!RString.isNullOrEmpty(ogj)) {
             return new FlexibleDate(ogj).wareki().toDateString();
         }
         return RString.EMPTY;
-
     }
 }
