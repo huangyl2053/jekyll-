@@ -45,6 +45,10 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtGogitaiName"));
             }
 
+            public txtYoteiYmd(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtYoteiYmd"));
+            }
+
             public txtShinsakaijoMeisho(): UZA.TextBox {
                 return new UZA.TextBox(this.convFiledName("txtShinsakaijoMeisho"));
             }
@@ -57,8 +61,8 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtShinsakaijoChikuMeisho"));
             }
 
-            public txtShinsaKaishiDay(): UZA.TextBoxDate {
-                return new UZA.TextBoxDate(this.convFiledName("txtShinsaKaishiDay"));
+            public txtShinsaKaishiDay(): UZA.TextBoxFlexibleDate {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShinsaKaishiDay"));
             }
 
             public txtShinsaKaishiTime(): UZA.TextBoxTime {

@@ -39,6 +39,10 @@ var DBZ;
                 return new UZA.TextBox(this.convFiledName("txtGogitaiName"));
             };
 
+            Controls.prototype.txtYoteiYmd = function () {
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtYoteiYmd"));
+            };
+
             Controls.prototype.txtShinsakaijoMeisho = function () {
                 return new UZA.TextBox(this.convFiledName("txtShinsakaijoMeisho"));
             };
@@ -52,7 +56,7 @@ var DBZ;
             };
 
             Controls.prototype.txtShinsaKaishiDay = function () {
-                return new UZA.TextBoxDate(this.convFiledName("txtShinsaKaishiDay"));
+                return new UZA.TextBoxFlexibleDate(this.convFiledName("txtShinsaKaishiDay"));
             };
 
             Controls.prototype.txtShinsaKaishiTime = function () {
