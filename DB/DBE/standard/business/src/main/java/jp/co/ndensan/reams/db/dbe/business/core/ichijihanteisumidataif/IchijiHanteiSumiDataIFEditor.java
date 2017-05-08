@@ -13,6 +13,8 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteisumidataif.Ichiji
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteisumidataif.IchijihanteiSumidataIferaEucEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -97,22 +99,71 @@ public class IchijiHanteiSumiDataIFEditor {
         RString getFileName();
 
         /**
-         * @return 編集結果の{@link IchijihanteiSumidataEucEntity}
+         * @return CSVの体裁をとる{@link IchijihanteiSumidataEucEntity entity}への変換結果
          */
-        IchijihanteiSumidataEucEntity createCsvEntity();
+        IchijihanteiSumidataEucEntity toCsvEntity();
 
         /**
          * @return 編集結果が存在する場合、{@code true}.
          */
         boolean exists();
+
+        /**
+         * @return 証記載保険者番号
+         */
+        ShoKisaiHokenshaNo getShoKisaiHokenshaNo();
+
+        /**
+         * @return 被保険者番号
+         */
+        RString getHihokenshaNo();
+
+        /**
+         * @return 申請書管理番号
+         */
+        ShinseishoKanriNo getShinseishoKanriNo();
+
     }
 
-    private final class _09A implements IResult {
+    private static abstract class _ResultBase implements IResult {
 
-        private final IchijihanteiSumidataIDataShutsuryokuRelateEntity in;
+        private final ShoKisaiHokenshaNo shoKisaiHokenshaNo;
+        private final RString hihokenshaNo;
+        private final ShinseishoKanriNo shinseishoKanriNo;
+        private final IchijihanteiSumidataIDataShutsuryokuRelateEntity theEntity;
+
+        protected _ResultBase(IchijihanteiSumidataIDataShutsuryokuRelateEntity entity) {
+            this.shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(entity.get保険者番号());
+            this.hihokenshaNo = entity.get被保険者番号();
+            this.shinseishoKanriNo = new ShinseishoKanriNo(entity.get申請書管理番号());
+            this.theEntity = entity;
+        }
+
+        protected IchijihanteiSumidataIDataShutsuryokuRelateEntity entity() {
+            return this.theEntity;
+        }
+
+        @Override
+        public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
+            return this.shoKisaiHokenshaNo;
+        }
+
+        @Override
+        public RString getHihokenshaNo() {
+            return this.hihokenshaNo;
+        }
+
+        @Override
+        public ShinseishoKanriNo getShinseishoKanriNo() {
+            return this.shinseishoKanriNo;
+        }
+
+    }
+
+    private final class _09A extends _ResultBase {
 
         private _09A(IchijihanteiSumidataIDataShutsuryokuRelateEntity in) {
-            this.in = in;
+            super(in);
         }
 
         @Override
@@ -121,8 +172,8 @@ public class IchijiHanteiSumiDataIFEditor {
         }
 
         @Override
-        public IchijihanteiSumidataEucEntity createCsvEntity() {
-            return new IchijihanteiSumidataIfBunisess().set一次判定済データ09A(this.in);
+        public IchijihanteiSumidataEucEntity toCsvEntity() {
+            return new IchijihanteiSumidataIfBunisess().set一次判定済データ09A(this.entity());
         }
 
         @Override
@@ -132,12 +183,10 @@ public class IchijiHanteiSumiDataIFEditor {
 
     }
 
-    private final class _09B implements IResult {
-
-        private final IchijihanteiSumidataIDataShutsuryokuRelateEntity in;
+    private final class _09B extends _ResultBase {
 
         private _09B(IchijihanteiSumidataIDataShutsuryokuRelateEntity in) {
-            this.in = in;
+            super(in);
         }
 
         @Override
@@ -146,8 +195,8 @@ public class IchijiHanteiSumiDataIFEditor {
         }
 
         @Override
-        public IchijihanteiSumidataEucEntity createCsvEntity() {
-            return new IchijihanteiSumidataIfBunisess().set一次判定済データ09B(this.in);
+        public IchijihanteiSumidataEucEntity toCsvEntity() {
+            return new IchijihanteiSumidataIfBunisess().set一次判定済データ09B(this.entity());
         }
 
         @Override
@@ -165,7 +214,7 @@ public class IchijiHanteiSumiDataIFEditor {
         }
 
         @Override
-        public IchijihanteiSumidataEucEntity createCsvEntity() {
+        public IchijihanteiSumidataEucEntity toCsvEntity() {
             return new IchijihanteiSumidataEucEntity() {
             };
         }
@@ -175,18 +224,32 @@ public class IchijiHanteiSumiDataIFEditor {
             return false;
         }
 
+        @Override
+        public ShoKisaiHokenshaNo getShoKisaiHokenshaNo() {
+            return ShoKisaiHokenshaNo.EMPTY;
+        }
+
+        @Override
+        public RString getHihokenshaNo() {
+            return RString.EMPTY;
+        }
+
+        @Override
+        public ShinseishoKanriNo getShinseishoKanriNo() {
+            return ShinseishoKanriNo.EMPTY;
+        }
+
     }
 
-    private static final class _Error implements IResult {
+    private static final class _Error extends _ResultBase {
 
         private static final RString FILE_NAME_09B = new RString("IchijiHanteiErr_09B.CSV");
         private static final RString FILE_NAME_09A = new RString("IchijiHanteiErr_09A.CSV");
-        private final IchijihanteiSumidataIDataShutsuryokuRelateEntity in;
         private final RString fileName;
         private final RString errorDetail;
 
         private _Error(IchijihanteiSumidataIDataShutsuryokuRelateEntity in, KoroshoIfShikibetsuCode koroshoIfShikibetsuCode, RString errorDetail) {
-            this.in = in;
+            super(in);
             this.fileName = findFileName(koroshoIfShikibetsuCode);
             this.errorDetail = errorDetail;
         }
@@ -208,10 +271,10 @@ public class IchijiHanteiSumiDataIFEditor {
         }
 
         @Override
-        public IchijihanteiSumidataEucEntity createCsvEntity() {
+        public IchijihanteiSumidataEucEntity toCsvEntity() {
             IchijihanteiSumidataIferaEucEntity out = new IchijihanteiSumidataIferaEucEntity();
-            out.set保険者番号(this.in.get保険者番号());
-            out.set被保険者番号(this.in.get被保険者番号());
+            out.set保険者番号(this.getShoKisaiHokenshaNo().value());
+            out.set被保険者番号(this.getHihokenshaNo());
             out.setエラー項目(this.errorDetail);
             return out;
         }
