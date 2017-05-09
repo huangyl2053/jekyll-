@@ -67,6 +67,7 @@ final class NCI231Writer {
      * CSVファイルをスプールします。
      */
     void spool() {
+        this.csvWriter.close();
         this.fsManager.spool(fileName, this.accessLogger.flushByEUC(UzUDE0835SpoolOutputType.EucOther));
     }
 
