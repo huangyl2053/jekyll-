@@ -54,11 +54,11 @@ public class IkenshokinyuyoshiBusiness {
     private RString 他科名;
     private RString その他の他科名;
     private RString 診断名1;
-    private FlexibleDate 発症年月日1;
+    private RString 発症年月日1;
     private RString 診断名2;
-    private FlexibleDate 発症年月日2;
+    private RString 発症年月日2;
     private RString 診断名3;
-    private FlexibleDate 発症年月日3;
+    private RString 発症年月日3;
     private RString 症状安定性;
     private RString 症状不安定時の具体的状況;
     private RString 経過及び治療内容;

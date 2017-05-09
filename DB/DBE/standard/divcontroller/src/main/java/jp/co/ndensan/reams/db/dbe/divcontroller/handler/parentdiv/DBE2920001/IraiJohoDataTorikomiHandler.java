@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.iraijohodatatorikomi.NinteiShinseiJohoIraiJohoData;
 import jp.co.ndensan.reams.db.dbe.business.report.ikenshokinyuyoshioruka.IkenshokinyuyoshiBusiness;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2920001.IraiJohoDataTorikomiCsvData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2920001.IraiJohoDataTorikomiCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2920001.IraiJohoDataTorikomiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2920001.dgTorikomiFileIchiran_Row;
@@ -44,9 +45,9 @@ public class IraiJohoDataTorikomiHandler {
     /**
      * 一覧エリアの設定処理です。
      *
-     * @param csvEntityList List<IraiJohoDataTorikomiCsvEntity>
+     * @param csvEntityList {@link IraiJohoDataTorikomiCsvData}
      */
-    public void set一覧エリア(List<IraiJohoDataTorikomiCsvEntity> csvEntityList) {
+    public void set一覧エリア(IraiJohoDataTorikomiCsvData csvEntityList) {
         List<dgTorikomiFileIchiran_Row> rowlist = new ArrayList<>();
         List<KeyValueDataSource> selectedKeyItems = new ArrayList<>();
         selectedKeyItems.add(new KeyValueDataSource(new RString(0), RString.EMPTY));
@@ -55,9 +56,9 @@ public class IraiJohoDataTorikomiHandler {
             row1.setHokenshaBango(csvEntity.get保険者番号());
             row1.setHihokenshaBango(!RString.isNullOrEmpty(csvEntity.get被保険者番号())
                     ? csvEntity.get被保険者番号().padZeroToLeft(INT_10) : RString.EMPTY);
-            row1.setShinseibi(csvEntity.get申請日());
+            row1.getShinseibi().setValue(new FlexibleDate(csvEntity.get申請日()));
             row1.setHihokenshaShimei(csvEntity.get患者名());
-            row1.setSeninengapi(csvEntity.get生年月日());
+            row1.getSeninengapi().setValue(new FlexibleDate(csvEntity.get生年月日()));
             row1.setSeibetu(Seibetsu.toValue(csvEntity.get性別()).get名称());
             row1.setYubinBangou(csvEntity.get郵便番号());
             row1.setJyusyo(csvEntity.get住所());
@@ -73,6 +74,9 @@ public class IraiJohoDataTorikomiHandler {
             rowlist.add(row2);
         }
         div.getDgTorikomiFileIchiran().setDataSource(rowlist);
+
+        div.getUploadArea().setIsOpen(false);
+        div.getPanelIchiran().setDisplayNone(false);
         CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("nyuryokuCyeku"), true);
         CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("insatu"), true);
         CommonButtonHolder.setVisibleByCommonButtonFieldName(new RString("koushin"), true);
@@ -102,9 +106,9 @@ public class IraiJohoDataTorikomiHandler {
                 row2.setHokenshaBango(nullToEmpty(ninteiShinseiJohoList.get(i).get保険者番号()));
                 row2.setHihokenshaBango(nullToEmpty(!RString.isNullOrEmpty(ninteiShinseiJohoList.get(i).get被保険者番号())
                         ? ninteiShinseiJohoList.get(i).get被保険者番号().padZeroToLeft(INT_10) : RString.EMPTY));
-                row2.setShinseibi(nullToEmpty(ninteiShinseiJohoList.get(i).get認定申請年月日()));
+                row2.getShinseibi().setValue(new FlexibleDate(ninteiShinseiJohoList.get(i).get認定申請年月日()));
                 row2.setHihokenshaShimei(nullToEmpty(ninteiShinseiJohoList.get(i).get被保険者氏名()));
-                row2.setSeninengapi(nullToEmpty(ninteiShinseiJohoList.get(i).get生年月日()));
+                row2.getSeninengapi().setValue(new FlexibleDate(ninteiShinseiJohoList.get(i).get生年月日()));
                 row2.setSeibetu(nullToEmpty(ninteiShinseiJohoList.get(i).get性別()));
                 row2.setYubinBangou(nullToEmpty(ninteiShinseiJohoList.get(i).get郵便番号()));
                 row2.setJyusyo(nullToEmpty(ninteiShinseiJohoList.get(i).get住所()));
@@ -128,9 +132,9 @@ public class IraiJohoDataTorikomiHandler {
                 row2.setHokenshaBango(nullToEmpty(ninteiShinseiJohoList.get(i).get保険者番号()));
                 row2.setHihokenshaBango(nullToEmpty(!RString.isNullOrEmpty(ninteiShinseiJohoList.get(i).get被保険者番号())
                         ? ninteiShinseiJohoList.get(i).get被保険者番号().padZeroToLeft(INT_10) : RString.EMPTY));
-                row2.setShinseibi(nullToEmpty(ninteiShinseiJohoList.get(i).get認定申請年月日()));
+                row2.getShinseibi().setValue(new FlexibleDate(ninteiShinseiJohoList.get(i).get認定申請年月日()));
                 row2.setHihokenshaShimei(nullToEmpty(ninteiShinseiJohoList.get(i).get被保険者氏名()));
-                row2.setSeninengapi(nullToEmpty(ninteiShinseiJohoList.get(i).get生年月日()));
+                row2.getSeninengapi().setValue(new FlexibleDate(ninteiShinseiJohoList.get(i).get生年月日()));
                 row2.setSeibetu(nullToEmpty(ninteiShinseiJohoList.get(i).get性別()));
                 row2.setYubinBangou(nullToEmpty(ninteiShinseiJohoList.get(i).get郵便番号()));
                 row2.setJyusyo(nullToEmpty(ninteiShinseiJohoList.get(i).get住所()));
@@ -192,14 +196,11 @@ public class IraiJohoDataTorikomiHandler {
         business.set他科名(csvEntity.get他科名());
         business.setその他の他科名(csvEntity.getその他の他科名());
         business.set診断名1(csvEntity.get診断名1());
-        business.set発症年月日1(RString.isNullOrEmpty(csvEntity.get発症年月日1())
-                ? FlexibleDate.EMPTY : new FlexibleDate(csvEntity.get発症年月日1()));
+        business.set発症年月日1(csvEntity.get発症年月日1());
         business.set診断名2(csvEntity.get診断名2());
-        business.set発症年月日2(RString.isNullOrEmpty(csvEntity.get発症年月日2())
-                ? FlexibleDate.EMPTY : new FlexibleDate(csvEntity.get発症年月日2()));
+        business.set発症年月日2(csvEntity.get発症年月日2());
         business.set診断名3(csvEntity.get診断名3());
-        business.set発症年月日3(RString.isNullOrEmpty(csvEntity.get発症年月日3())
-                ? FlexibleDate.EMPTY : new FlexibleDate(csvEntity.get発症年月日3()));
+        business.set発症年月日3(csvEntity.get発症年月日3());
         business.set症状安定性(csvEntity.get症状安定性());
         business.set症状不安定時の具体的状況(csvEntity.get症状不安定時の具体的状況());
         business.set経過及び治療内容(csvEntity.get経過及び治療内容());
@@ -290,4 +291,5 @@ public class IraiJohoDataTorikomiHandler {
         }
         return 項目;
     }
+
 }

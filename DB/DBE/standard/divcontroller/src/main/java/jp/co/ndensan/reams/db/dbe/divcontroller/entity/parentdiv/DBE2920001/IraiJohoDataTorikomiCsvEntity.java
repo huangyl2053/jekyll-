@@ -47,10 +47,10 @@ public class IraiJohoDataTorikomiCsvEntity implements Serializable {
     private RString 種別;
     @CsvField(order = 14, name = "記入日")
     private RString 記入日;
-    @CsvField(order = 15, name = "患者名")
-    private RString 患者名;
-    @CsvField(order = 16, name = "患者名かな")
+    @CsvField(order = 15, name = "患者名かな")
     private RString 患者名かな;
+    @CsvField(order = 16, name = "患者名")
+    private RString 患者名;
     @CsvField(order = 17, name = "生年月日")
     private RString 生年月日;
     @CsvField(order = 18, name = "患者_年齢")

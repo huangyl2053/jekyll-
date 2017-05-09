@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2920001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Tue Aug 23 11:58:30 CST 2016 
+ * Tue May 09 15:09:11 JST 2017 
  */
 
 
@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridSetting;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataRow;
 import jp.co.ndensan.reams.uz.uza.ui.binding.CheckBoxList;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 
 
@@ -22,14 +23,14 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  */
 
 public class dgTorikomiFileIchiran_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
 
     private CheckBoxList checkBox;
     private RString hokenshaBango;
     private RString hihokenshaBango;
-    private RString shinseibi;
+    private TextBoxFlexibleDate shinseibi;
     private RString hihokenshaShimei;
-    private RString seninengapi;
+    private TextBoxFlexibleDate seninengapi;
     private RString seibetu;
     private RString yubinBangou;
     private RString jyusyo;
@@ -47,9 +48,9 @@ public class dgTorikomiFileIchiran_Row extends DataRow {
         this.checkBox = new CheckBoxList();
         this.hokenshaBango = RString.EMPTY;
         this.hihokenshaBango = RString.EMPTY;
-        this.shinseibi = RString.EMPTY;
+        this.shinseibi = new TextBoxFlexibleDate();
         this.hihokenshaShimei = RString.EMPTY;
-        this.seninengapi = RString.EMPTY;
+        this.seninengapi = new TextBoxFlexibleDate();
         this.seibetu = RString.EMPTY;
         this.yubinBangou = RString.EMPTY;
         this.jyusyo = RString.EMPTY;
@@ -80,7 +81,7 @@ public class dgTorikomiFileIchiran_Row extends DataRow {
         this.setOriginalData("shujiiIryokikanCode", shujiiIryokikanCode);
     }
 
-    public dgTorikomiFileIchiran_Row(CheckBoxList checkBox, RString hokenshaBango, RString hihokenshaBango, RString shinseibi, RString hihokenshaShimei, RString seninengapi, RString seibetu, RString yubinBangou, RString jyusyo, RString iryouKikanMei, RString shuziiMei, RString shinseishoKanriNo, RString koroshoIfShikibetsuCode, RString kiguusuu, TextBoxNum ikenshoIraiRirekiNo, RString shujiiCode, RString shujiiIryokikanCode) {
+    public dgTorikomiFileIchiran_Row(CheckBoxList checkBox, RString hokenshaBango, RString hihokenshaBango, TextBoxFlexibleDate shinseibi, RString hihokenshaShimei, TextBoxFlexibleDate seninengapi, RString seibetu, RString yubinBangou, RString jyusyo, RString iryouKikanMei, RString shuziiMei, RString shinseishoKanriNo, RString koroshoIfShikibetsuCode, RString kiguusuu, TextBoxNum ikenshoIraiRirekiNo, RString shujiiCode, RString shujiiIryokikanCode) {
         super();
         this.setOriginalData("checkBox", checkBox);
         this.setOriginalData("hokenshaBango", hokenshaBango);
@@ -123,9 +124,9 @@ public class dgTorikomiFileIchiran_Row extends DataRow {
         this.checkBox = CheckBoxList.createInstance(gridSetting.getColumn("checkBox").getCellDetails());
         this.hokenshaBango = RString.EMPTY;
         this.hihokenshaBango = RString.EMPTY;
-        this.shinseibi = RString.EMPTY;
+        this.shinseibi = new TextBoxFlexibleDate();
         this.hihokenshaShimei = RString.EMPTY;
-        this.seninengapi = RString.EMPTY;
+        this.seninengapi = new TextBoxFlexibleDate();
         this.seibetu = RString.EMPTY;
         this.yubinBangou = RString.EMPTY;
         this.jyusyo = RString.EMPTY;
@@ -168,7 +169,7 @@ public class dgTorikomiFileIchiran_Row extends DataRow {
         return hihokenshaBango;
     }
 
-    public RString getShinseibi() {
+    public TextBoxFlexibleDate getShinseibi() {
         return shinseibi;
     }
 
@@ -176,7 +177,7 @@ public class dgTorikomiFileIchiran_Row extends DataRow {
         return hihokenshaShimei;
     }
 
-    public RString getSeninengapi() {
+    public TextBoxFlexibleDate getSeninengapi() {
         return seninengapi;
     }
 
@@ -239,7 +240,7 @@ public class dgTorikomiFileIchiran_Row extends DataRow {
         this.hihokenshaBango = hihokenshaBango;
     }
 
-    public void setShinseibi(RString shinseibi) {
+    public void setShinseibi(TextBoxFlexibleDate shinseibi) {
         this.setOriginalData("shinseibi", shinseibi);
         this.shinseibi = shinseibi;
     }
@@ -249,7 +250,7 @@ public class dgTorikomiFileIchiran_Row extends DataRow {
         this.hihokenshaShimei = hihokenshaShimei;
     }
 
-    public void setSeninengapi(RString seninengapi) {
+    public void setSeninengapi(TextBoxFlexibleDate seninengapi) {
         this.setOriginalData("seninengapi", seninengapi);
         this.seninengapi = seninengapi;
     }
