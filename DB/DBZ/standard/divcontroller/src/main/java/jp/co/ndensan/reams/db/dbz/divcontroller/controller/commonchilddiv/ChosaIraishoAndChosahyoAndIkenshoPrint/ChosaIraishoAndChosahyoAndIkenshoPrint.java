@@ -41,7 +41,6 @@ import jp.co.ndensan.reams.db.dbz.service.core.basic.ShujiiIkenshoIraiJohoManage
 import jp.co.ndensan.reams.db.dbz.service.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintService;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -516,116 +515,125 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
         RString 保険者市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード().value();
         ShoKisaiHokenshaNo 証記載保険者番号 = div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号();
         
-        ChosaIraishoAndChosahyoAndIkenshoPrintHandler handler = getHandler(div);
-        boolean isRyomen = false;
+        
         if (!div.getDgNinteiChosa().getDataSource().isEmpty()) {
-            List<ChosahyoMatomeItem> params = new ArrayList<>();
-            List<RString> 依頼書選択selectedKeys = div.getChkIraisho().getSelectedKeys();
-            List<RString> 調査票選択selectedKeys = div.getChkChosahyoKatamen().getSelectedKeys();
-            List<RString> 調査票両面選択selectedKeys = div.getChkChosahyoRyomen().getSelectedKeys();
-            List<RString> 概況特記選択selectedKeys = div.getChkChosahyoGaikyo().getSelectedKeys();
-            List<RString> 委託特記事項選択selectedKeys = div.getChkChosahyoTokki().getSelectedKeys();
-            int 宛名連番 = 1;
-            for (dgNinteiChosa_Row row : div.getDgNinteiChosa().getDataSource()) {
-                
-                if (依頼書選択selectedKeys.contains(KEY0)) {
-                    ChosahyoMatomeItem item = handler.create認定調査依頼書印刷用パラメータ_個人別(row, 宛名連番);
-                    item.setLayout(ChosahyoMatomeLayout.認定調査依頼書);
-                    params.add(item);
-                }
-    //            if (調査票選択selectedKeys.contains(KEY0) && 調査票選択selectedKeys.contains(KEY1)) {
-    //                add認定調査票両面_概況AND基本調査パラメータ(params, div, row, 保険者市町村コード);
-    //            } else 
-                if (調査票選択selectedKeys.contains(KEY0)) {
-                    add認定調査票_概況調査(params, div, row, 保険者市町村コード);
-                }
-                if (調査票選択selectedKeys.contains(KEY1)) {
-                    add認定調査票_基本調査(params, div, row, 保険者市町村コード);
-                }
-                if (調査票選択selectedKeys.contains(KEY2)) {
-                    add認定調査票_特記事項(params, div, row, 保険者市町村コード);
-                }
-                if (調査票両面選択selectedKeys.contains(KEY0)) {
-                    add認定調査票両面_概況AND基本調査(params, div, row, 保険者市町村コード);
-                    isRyomen = true;
-                }
-                if (調査票両面選択selectedKeys.contains(KEY2)) {
-                    add認定調査票両面_特記事項(params, div, row, 保険者市町村コード);
-                    isRyomen = true;
-                }
-                if (概況特記選択selectedKeys.contains(KEY0)) {
-                    ChosahyoMatomeItem item = handler.create認定調査票_概況調査パラメータ_個人別(row);
-                    item.setLayout(ChosahyoMatomeLayout.認定調査票_概況特記_OCR);
-                    params.add(item);
-                }
-
-                if (委託特記事項選択selectedKeys.contains(KEY0)) {
-                    add認定調査票_特記事項_調査群記載あり(params, div, row, 保険者市町村コード);
-                }
-                if (委託特記事項選択selectedKeys.contains(KEY1)) {
-                    add認定調査票_特記事項_フリー様式(params, div, row, 保険者市町村コード);
-                }
-                宛名連番++;
-            }
-            if (!params.isEmpty()) {
-                printService.print調査票個人別(params, isRyomen, 証記載保険者番号);
-            }
+            callまとめて出力_調査票(div, 保険者市町村コード, 証記載保険者番号, printService);
         }
         
         if (!div.getDgShujiiIkensho().getDataSource().isEmpty()) {
-            int 宛名連番 = 1;
-            int 連番 = 1;
-            List<IkenshoAssortmentItem> params = new ArrayList<>();
-            List<RString> 意見書依頼書選択selectedKeys = div.getChkIkenshoIraisho().getSelectedKeys();
-            List<RString> 意見書選択selectedKeys = div.getChkIkensho().getSelectedKeys();
-            List<RString> 請求書選択selectedKeys = div.getChkIkenshoSeikyusho().getSelectedKeys();
-            List<RString> 診断命令書選択selectedKeys = div.getChkShindanMeireisho().getSelectedKeys();
-            Set<RString> ninteiHantei = new HashSet<>();
-
-            for (dgShujiiIkensho_Row row : div.getDgShujiiIkensho().getDataSource()) {
-                if (意見書依頼書選択selectedKeys.contains(KEY0)) {
-                    ninteiHantei.add(意見書依頼書);
-                    IkenshoAssortmentItem item = handler.create意見書作成依頼書_パラメータ_個人別(row, 宛名連番, 連番);
-                    item.setLayout(IkenshoAssortmentLayout.主治医意見書作成依頼書);
-                    params.add(item);
-                    連番++;
-                }
-                if (意見書依頼書選択selectedKeys.contains(KEY2)) {
-                    連番++;
-                    ninteiHantei.add(意見書提出用);
-                    IkenshoAssortmentItem item = handler.create介護保険指定医依頼兼主治医意見書提出意見書_パラメータ_個人別(row, 宛名連番);
-                    item.setLayout(IkenshoAssortmentLayout.介護保険指定医依頼兼主治医意見書提出依頼書);
-                    params.add(item);
-                }
-
-
-                if (意見書選択selectedKeys.contains(KEY0)) {
-                    連番++;
-                    add主治医意見書記入用紙(params, handler, row, 保険者市町村コード);
-                    isRyomen = true;
-                }
-
-                if (請求書選択selectedKeys.contains(KEY0)) {
-                    連番++;
-                    IkenshoAssortmentItem item = handler.create主治医意見書作成料請求書_パラメータ_個人別(row);
-                    item.setLayout(IkenshoAssortmentLayout.主治医意見書作成料請求書);
-                    params.add(item);
-                }
-
-                if (診断命令書選択selectedKeys.contains(KEY0)) {
-                    連番++;
-                    ninteiHantei.add(命令書);
-                    IkenshoAssortmentItem item = handler.create介護保険診断命令書_パラメータ_個人別(row, 宛名連番);
-                    item.setLayout(IkenshoAssortmentLayout.介護保険診断命令書);
-                    params.add(item);
-                }
-                宛名連番++;
-            }
-            if (!params.isEmpty()) {
-                printService.print意見書個人別(params, isRyomen, ninteiHantei, 証記載保険者番号);
-            }
+            callまとめて出力_意見書(div, 保険者市町村コード, 証記載保険者番号, printService);
         }
         
+    }
+    
+    private void callまとめて出力_調査票(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div, RString 保険者市町村コード, 
+            ShoKisaiHokenshaNo 証記載保険者番号, ChosaIraishoAndChosahyoAndIkenshoPrintService printService) {
+        ChosaIraishoAndChosahyoAndIkenshoPrintHandler handler = getHandler(div);
+        List<ChosahyoMatomeItem> params = new ArrayList<>();
+        List<RString> 依頼書選択selectedKeys = div.getChkIraisho().getSelectedKeys();
+        List<RString> 調査票選択selectedKeys = div.getChkChosahyoKatamen().getSelectedKeys();
+        List<RString> 調査票両面選択selectedKeys = div.getChkChosahyoRyomen().getSelectedKeys();
+        List<RString> 概況特記選択selectedKeys = div.getChkChosahyoGaikyo().getSelectedKeys();
+        List<RString> 委託特記事項選択selectedKeys = div.getChkChosahyoTokki().getSelectedKeys();
+        int 宛名連番 = 1;
+        boolean isRyomen = false;
+        for (dgNinteiChosa_Row row : div.getDgNinteiChosa().getDataSource()) {
+
+            if (依頼書選択selectedKeys.contains(KEY0)) {
+                ChosahyoMatomeItem item = handler.create認定調査依頼書印刷用パラメータ_個人別(row, 宛名連番);
+                item.setLayout(ChosahyoMatomeLayout.認定調査依頼書);
+                params.add(item);
+            }
+            if (調査票選択selectedKeys.contains(KEY0)) {
+                add認定調査票_概況調査(params, div, row, 保険者市町村コード);
+            }
+            if (調査票選択selectedKeys.contains(KEY1)) {
+                add認定調査票_基本調査(params, div, row, 保険者市町村コード);
+            }
+            if (調査票選択selectedKeys.contains(KEY2)) {
+                add認定調査票_特記事項(params, div, row, 保険者市町村コード);
+            }
+            if (調査票両面選択selectedKeys.contains(KEY0)) {
+                add認定調査票両面_概況AND基本調査(params, div, row, 保険者市町村コード);
+                isRyomen = true;
+            }
+            if (調査票両面選択selectedKeys.contains(KEY2)) {
+                add認定調査票両面_特記事項(params, div, row, 保険者市町村コード);
+                isRyomen = true;
+            }
+            if (概況特記選択selectedKeys.contains(KEY0)) {
+                ChosahyoMatomeItem item = handler.create認定調査票_概況調査パラメータ_個人別(row);
+                item.setLayout(ChosahyoMatomeLayout.認定調査票_概況特記_OCR);
+                params.add(item);
+            }
+
+            if (委託特記事項選択selectedKeys.contains(KEY0)) {
+                add認定調査票_特記事項_調査群記載あり(params, div, row, 保険者市町村コード);
+            }
+            if (委託特記事項選択selectedKeys.contains(KEY1)) {
+                add認定調査票_特記事項_フリー様式(params, div, row, 保険者市町村コード);
+            }
+            宛名連番++;
+        }
+        if (!params.isEmpty()) {
+            printService.print調査票個人別(params, isRyomen, 証記載保険者番号);
+        }
+    }
+    
+    private void callまとめて出力_意見書(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div, RString 保険者市町村コード, 
+            ShoKisaiHokenshaNo 証記載保険者番号, ChosaIraishoAndChosahyoAndIkenshoPrintService printService) {
+        ChosaIraishoAndChosahyoAndIkenshoPrintHandler handler = getHandler(div);
+        int 宛名連番 = 1;
+        int 連番 = 1;
+        List<IkenshoAssortmentItem> params = new ArrayList<>();
+        List<RString> 意見書依頼書選択selectedKeys = div.getChkIkenshoIraisho().getSelectedKeys();
+        List<RString> 意見書選択selectedKeys = div.getChkIkensho().getSelectedKeys();
+        List<RString> 請求書選択selectedKeys = div.getChkIkenshoSeikyusho().getSelectedKeys();
+        List<RString> 診断命令書選択selectedKeys = div.getChkShindanMeireisho().getSelectedKeys();
+        Set<RString> ninteiHantei = new HashSet<>();
+        boolean isRyomen = false;
+        for (dgShujiiIkensho_Row row : div.getDgShujiiIkensho().getDataSource()) {
+            if (意見書依頼書選択selectedKeys.contains(KEY0)) {
+                ninteiHantei.add(意見書依頼書);
+                IkenshoAssortmentItem item = handler.create意見書作成依頼書_パラメータ_個人別(row, 宛名連番, 連番);
+                item.setLayout(IkenshoAssortmentLayout.主治医意見書作成依頼書);
+                params.add(item);
+                連番++;
+            }
+            if (意見書依頼書選択selectedKeys.contains(KEY2)) {
+                連番++;
+                ninteiHantei.add(意見書提出用);
+                IkenshoAssortmentItem item = handler.create介護保険指定医依頼兼主治医意見書提出意見書_パラメータ_個人別(row, 宛名連番);
+                item.setLayout(IkenshoAssortmentLayout.介護保険指定医依頼兼主治医意見書提出依頼書);
+                params.add(item);
+            }
+
+
+            if (意見書選択selectedKeys.contains(KEY0)) {
+                連番++;
+                add主治医意見書記入用紙(params, handler, row, 保険者市町村コード);
+                isRyomen = true;
+            }
+
+            if (請求書選択selectedKeys.contains(KEY0)) {
+                連番++;
+                IkenshoAssortmentItem item = handler.create主治医意見書作成料請求書_パラメータ_個人別(row);
+                item.setLayout(IkenshoAssortmentLayout.主治医意見書作成料請求書);
+                params.add(item);
+            }
+
+            if (診断命令書選択selectedKeys.contains(KEY0)) {
+                連番++;
+                ninteiHantei.add(命令書);
+                IkenshoAssortmentItem item = handler.create介護保険診断命令書_パラメータ_個人別(row, 宛名連番);
+                item.setLayout(IkenshoAssortmentLayout.介護保険診断命令書);
+                params.add(item);
+            }
+            宛名連番++;
+        }
+        if (!params.isEmpty()) {
+            printService.print意見書個人別(params, isRyomen, ninteiHantei, 証記載保険者番号);
+        }
     }
     
     private void callまとめて出力_まとめない帳票(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div, ChosaIraishoAndChosahyoAndIkenshoPrintService printService) {

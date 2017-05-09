@@ -667,9 +667,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
     
     /**
      * 認定調査票個人別まとめ印刷です。
-     * @param items
-     * @param isRyomen
-     * @param 証記載保険者番号
+     * @param items List<ChosahyoMatomeItem>
+     * @param isRyomen true:両面印刷する
+     * @param 証記載保険者番号 ShoKisaiHokenshaNo
      */
     public void print調査票個人別(List<ChosahyoMatomeItem> items, boolean isRyomen, ShoKisaiHokenshaNo 証記載保険者番号) {
         ChosahyoMatomeProperty property = new ChosahyoMatomeProperty();
@@ -710,9 +710,18 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
         }
     }
     
-    public void print意見書個人別(List<IkenshoAssortmentItem> items, boolean isRyomen, Set<RString> ninteiHantei, ShoKisaiHokenshaNo 証記載保険者番号) {
+    /**
+     * 意見書まとめて印刷です。
+     * @param items List<IkenshoAssortmentItem>
+     * @param isRyomen true:両面印刷する
+     * @param ninteiHantei チェックした依頼書
+     * @param 証記載保険者番号 ShoKisaiHokenshaNo
+     */
+    public void print意見書個人別(List<IkenshoAssortmentItem> items, boolean isRyomen,
+            Set<RString> ninteiHantei, ShoKisaiHokenshaNo 証記載保険者番号) {
         IkenshoAssortmentProperty property = new IkenshoAssortmentProperty();
-        try (ReportAssembler<IkenshoAssortmentReportSource> assembler = createAssembler(property, reportManager, items.get(0).getLayout().getIndex())) {
+        try (ReportAssembler<IkenshoAssortmentReportSource> assembler
+                = createAssembler(property, reportManager, items.get(0).getLayout().getIndex())) {
             ReportSourceWriter<IkenshoAssortmentReportSource> writer = new ReportSourceWriter(assembler);
             NinshoshaSource ninshoshaSourceIraisho = null;
             NinshoshaSource ninshoshaSourceTeishutsu = null;
@@ -729,7 +738,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
             if (ninteiHantei.contains(意見書依頼書)) {
                 if (is認定広域) {
                     ninshoshaSourceIraisho = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE230001.getReportId(),
-                            FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, writer, 証記載保険者番号);
+                            FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, writer,
+                            証記載保険者番号);
                 } else {
                     ninshoshaSourceIraisho = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE230001.getReportId(),
                             FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, writer);
@@ -738,16 +748,19 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
             if (ninteiHantei.contains(意見書提出用)) {
                 if (is認定広域) {
                     ninshoshaSourceTeishutsu = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE236001.getReportId(),
-                            FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, writer, 証記載保険者番号);
+                            FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, writer, 
+                            証記載保険者番号);
                 } else {
                     ninshoshaSourceTeishutsu = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE236001.getReportId(),
-                            FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, writer, 証記載保険者番号);
+                            FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, writer, 
+                            証記載保険者番号);
                 }
             }
             if (ninteiHantei.contains(命令書)) {
                 if (is認定広域) {
                     ninshoshaSourceMeireisho = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE230002.getReportId(),
-                            FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, writer, 証記載保険者番号);
+                            FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, writer, 
+                            証記載保険者番号);
                 } else {
                     ninshoshaSourceMeireisho = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE230002.getReportId(),
                             FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, writer);

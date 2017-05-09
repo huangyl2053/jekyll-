@@ -7,7 +7,7 @@ import jp.co.ndensan.reams.uz.uza.report.IReportBuilder;
  * 調査票まとめて印刷のビルダです。
  * @author n8438
  */
-public class ChosahyoMatomeBuilder implements IReportBuilder<ChosahyoMatomeReportSource>{
+public class ChosahyoMatomeBuilder implements IReportBuilder<ChosahyoMatomeReportSource> {
     private final ChosahyoMatomeItem item;
     
     /**

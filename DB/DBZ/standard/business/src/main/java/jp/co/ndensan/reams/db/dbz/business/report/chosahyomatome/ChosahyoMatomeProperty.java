@@ -11,11 +11,14 @@ import jp.co.ndensan.reams.uz.uza.report.ReportPropertyBase;
 import jp.co.ndensan.reams.uz.uza.report.data.chart.ReportDynamicChart;
 
 /**
- *
+ * 調査票まとめて印刷のプロパティクラスです。
  * @author n8438
  */
 public class ChosahyoMatomeProperty extends ReportPropertyBase<ChosahyoMatomeReportSource> {
     
+    /**
+     * コンストラクタです。
+     */
     public ChosahyoMatomeProperty() {
         super(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE221061.getReportId());
     }
@@ -30,10 +33,10 @@ public class ChosahyoMatomeProperty extends ReportPropertyBase<ChosahyoMatomeRep
             public ReportLineRecord<ChosahyoMatomeReportSource> occuredBreak(ReportLineRecord<ChosahyoMatomeReportSource> currentRecord,
                                                                                ReportLineRecord<ChosahyoMatomeReportSource> nextRecord,
                                                                                ReportDynamicChart dynamicChart) {
-                int layoutIndex = currentRecord.getSource().layout.index;
+                int layoutIndex = currentRecord.getSource().layout.getIndex();
                 currentRecord.setFormGroupIndex(layoutIndex);
                 if (nextRecord != null && nextRecord.getSource() != null) {
-                    layoutIndex = nextRecord.getSource().layout.index;
+                    layoutIndex = nextRecord.getSource().layout.getIndex();
                     nextRecord.setFormGroupIndex(layoutIndex);
                 }
                 return currentRecord;

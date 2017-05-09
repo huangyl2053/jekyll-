@@ -133,10 +133,14 @@ public class IkenshoAssortmentBuilder implements IReportBuilder<IkenshoAssortmen
         source.seikyugakuIkenshoSakuseiRyo4 = item.getSeikyugakuIkenshoSakuseiRyo4();
         source.gengo = item.getGengo();
         source.atesakiHokenshaName = item.getAtesakiHokenshaName();
-        source.shinkiShisetsuKingaku = RString.isNullOrEmpty(item.getShinkiShisetsuKingaku()) ? Decimal.ZERO : new Decimal(item.getShinkiShisetsuKingaku().toString());
-        source.shinkiZaitakuKingaku = RString.isNullOrEmpty(item.getShinkiZaitakuKingaku()) ? Decimal.ZERO : new Decimal(item.getShinkiZaitakuKingaku().toString());
-        source.keizokuZaitakuKingaku = RString.isNullOrEmpty(item.getKeizokuZaitakuKingaku()) ? Decimal.ZERO : new Decimal(item.getKeizokuZaitakuKingaku().toString());
-        source.keizokuShisetsuKingaku = RString.isNullOrEmpty(item.getKeizokuShisetsuKingaku()) ? Decimal.ZERO : new Decimal(item.getKeizokuShisetsuKingaku().toString());
+        source.shinkiShisetsuKingaku = RString.isNullOrEmpty(item.getShinkiShisetsuKingaku())
+                ? Decimal.ZERO : new Decimal(item.getShinkiShisetsuKingaku().toString());
+        source.shinkiZaitakuKingaku = RString.isNullOrEmpty(item.getShinkiZaitakuKingaku())
+                ? Decimal.ZERO : new Decimal(item.getShinkiZaitakuKingaku().toString());
+        source.keizokuZaitakuKingaku = RString.isNullOrEmpty(item.getKeizokuZaitakuKingaku())
+                ? Decimal.ZERO : new Decimal(item.getKeizokuZaitakuKingaku().toString());
+        source.keizokuShisetsuKingaku = RString.isNullOrEmpty(item.getKeizokuShisetsuKingaku())
+                ? Decimal.ZERO : new Decimal(item.getKeizokuShisetsuKingaku().toString());
         source.hakkoYMD = item.getHakkoYMD();
         source.hihokenshaName1 = item.getHihokenshaName1();
         source.hihokenshaName2 = item.getHihokenshaName2();
@@ -152,5 +156,4 @@ public class IkenshoAssortmentBuilder implements IReportBuilder<IkenshoAssortmen
         source.拡張情報 = item.get拡張情報();
         return source;
     }
-    
 }

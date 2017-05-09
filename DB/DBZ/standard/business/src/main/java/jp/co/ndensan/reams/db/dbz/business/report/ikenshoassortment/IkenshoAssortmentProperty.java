@@ -33,10 +33,10 @@ public class IkenshoAssortmentProperty extends ReportPropertyBase<IkenshoAssortm
             public ReportLineRecord<IkenshoAssortmentReportSource> occuredBreak(ReportLineRecord<IkenshoAssortmentReportSource> currentRecord,
                                                                                ReportLineRecord<IkenshoAssortmentReportSource> nextRecord,
                                                                                ReportDynamicChart dynamicChart) {
-                int layoutIndex = currentRecord.getSource().layout.index;
+                int layoutIndex = currentRecord.getSource().layout.getIndex();
                 currentRecord.setFormGroupIndex(layoutIndex);
                 if (nextRecord != null && nextRecord.getSource() != null) {
-                    layoutIndex = nextRecord.getSource().layout.index;
+                    layoutIndex = nextRecord.getSource().layout.getIndex();
                     nextRecord.setFormGroupIndex(layoutIndex);
                 }
                 return currentRecord;
