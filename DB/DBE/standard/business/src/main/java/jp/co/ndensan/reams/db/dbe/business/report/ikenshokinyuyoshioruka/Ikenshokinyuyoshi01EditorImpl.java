@@ -150,11 +150,11 @@ public class Ikenshokinyuyoshi01EditorImpl implements IIkenshokinyuyoshi01Editor
         }
         source.taSonotakamei = business.getその他の他科名();
         source.shindamName1 = business.get診断名1();
-        source.hasshoYMD1 = パターン12(business.get発症年月日1());
+        source.hasshoYMD1 = Pattern12Converter.convert(business.get発症年月日1());
         source.shindamName2 = business.get診断名2();
-        source.hasshoYMD2 = パターン12(business.get発症年月日2());
+        source.hasshoYMD2 = Pattern12Converter.convert(business.get発症年月日2());
         source.shindamName3 = business.get診断名3();
-        source.hasshoYMD3 = パターン12(business.get発症年月日3());
+        source.hasshoYMD3 = Pattern12Converter.convert(business.get発症年月日3());
         source = set症状安定性(source);
         source.gutaitekiJokyo = business.get症状不安定時の具体的状況();
         return editSource2(source);
