@@ -41,6 +41,7 @@ import jp.co.ndensan.reams.db.dbz.service.core.basic.ShujiiIkenshoIraiJohoManage
 import jp.co.ndensan.reams.db.dbz.service.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintFinder;
 import jp.co.ndensan.reams.db.dbz.service.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintService;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
@@ -84,8 +85,10 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
      */
     public ResponseData<ChosaIraishoAndChosahyoAndIkenshoPrintDiv> onLoad(ChosaIraishoAndChosahyoAndIkenshoPrintDiv div) {
         IkenshoPrintParameterModel model = DataPassingConverter.deserialize(div.getHiddenIuputModel(), IkenshoPrintParameterModel.class);
-        if (model != null) {
+        if (model != null && model.get申請書管理番号リスト() != null) {
             getHandler(div).initialize(model.get申請書管理番号リスト(), model.get市町村コード(), model.get遷移元画面区分());
+        } else if (model != null && model.get申請書管理番号リスト() == null) {
+            getHandler(div).initialize白紙(model.get市町村コード(), model.get遷移元画面区分());
         }
         getHandler(div).setChkShindanMeireisho();
         getHandler(div).setRadJyushinKikan();
@@ -290,7 +293,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
                     DbzErrorMessages.実行不可.getMessage().replace("ページ数が０の", "印刷").evaluate())).respond();
         }
         IkenshoPrintParameterModel model = DataPassingConverter.deserialize(div.getHiddenIuputModel(), IkenshoPrintParameterModel.class);
-        if (model != null) {
+        if (model != null && model.get申請書管理番号リスト() != null) {
             RString 証記載保険者番号 = div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value();
             ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter = ChosaIraishoAndChosahyoAndIkenshoPrintParameter.createParameter(model.get申請書管理番号リスト(),
                     証記載保険者番号);
@@ -598,7 +601,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
 
                 if (意見書選択selectedKeys.contains(KEY0)) {
                     連番++;
-                    isRyomen = add主治医意見書記入用紙(params, handler, row, 保険者市町村コード);
+                    add主治医意見書記入用紙(params, handler, row, 保険者市町村コード);
+                    isRyomen = true;
                 }
 
                 if (請求書選択selectedKeys.contains(KEY0)) {
@@ -859,12 +863,11 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
         }
     }
     
-    private boolean add主治医意見書記入用紙(List<IkenshoAssortmentItem> list, ChosaIraishoAndChosahyoAndIkenshoPrintHandler handler, dgShujiiIkensho_Row row, RString 保険者市町村コード) {
+    private void add主治医意見書記入用紙(List<IkenshoAssortmentItem> list, ChosaIraishoAndChosahyoAndIkenshoPrintHandler handler, dgShujiiIkensho_Row row, RString 保険者市町村コード) {
         RString 表_帳票ID = DbBusinessConfig.get(
                 ConfigNameDBE.主治医意見書_帳票ID_表, RDate.getNowDate(), SubGyomuCode.DBE認定支援, 保険者市町村コード);
         RString 裏_帳票ID = DbBusinessConfig.get(
                 ConfigNameDBE.主治医意見書_帳票ID_裏, RDate.getNowDate(), SubGyomuCode.DBE認定支援, 保険者市町村コード);
-        boolean isRyomen = false;
         
         if (ReportIdDBZ.DBE231001_Katamen_Mono.getReportId().value().equals(表_帳票ID)) {
             IkenshoAssortmentItem item = handler.create主治医意見書記入情報1_パラメータ_個人別(row, true);
@@ -875,8 +878,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
             list.add(item_ura);
         } else if (ReportIdDBZ.DBE231001_Ryomen_Mono.getReportId().value().equals(表_帳票ID)) {
             IkenshoAssortmentItem item = handler.create主治医意見書記入情報1_パラメータ_個人別(row, true);
-            isRyomen = true;
-            item.setLayout(IkenshoAssortmentLayout.主治医意見書記入用紙_両面_白黒_表);
+            item.setLayout(IkenshoAssortmentLayout.主治医意見書記入用紙_片面_白黒_表);
             list.add(item);
             IkenshoAssortmentItem item_ura = handler.create主治医意見書記入情報1_パラメータ_個人別(row, true);
             item_ura.setLayout(IkenshoAssortmentLayout.主治医意見書記入用紙_両面_白黒_裏);
@@ -890,8 +892,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
             list.add(item_ura);
         } else if (ReportIdDBZ.DBE231011_Ryomen_Color.getReportId().value().equals(表_帳票ID)) {
             IkenshoAssortmentItem item = handler.create主治医意見書記入情報1_パラメータ_個人別(row, false);
-            isRyomen = true;
-            item.setLayout(IkenshoAssortmentLayout.主治医意見書記入用紙OCR_両面_カラー表);
+            item.setLayout(IkenshoAssortmentLayout.主治医意見書記入用紙OCR_片面_カラー表);
             list.add(item);
             IkenshoAssortmentItem item_ura = handler.create主治医意見書記入情報1_パラメータ_個人別(row, false);
             item_ura.setLayout(IkenshoAssortmentLayout.主治医意見書記入用紙OCR_両面_カラー裏);
@@ -908,17 +909,14 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
         if (!表_帳票ID.equals(裏_帳票ID)) {
             if (ReportIdDBZ.DBE231012.getReportId().value().equals(裏_帳票ID)) {
                 IkenshoAssortmentItem item_ura = handler.create主治医意見書記入情報1_パラメータ_個人別(row, true);
-                isRyomen = true;
                 item_ura.setLayout(IkenshoAssortmentLayout.主治医意見書記入用紙OCR12);
                 list.add(item_ura);
             } else if (ReportIdDBZ.DBE231014.getReportId().value().equals(裏_帳票ID)) {
                 IkenshoAssortmentItem item_ura = handler.create主治医意見書記入情報1_パラメータ_個人別(row, false);
-                isRyomen = true;
                 item_ura.setLayout(IkenshoAssortmentLayout.主治医意見書記入用紙OCR14);
                 list.add(item_ura);
             }
         }
-        return isRyomen;
     }
     
 

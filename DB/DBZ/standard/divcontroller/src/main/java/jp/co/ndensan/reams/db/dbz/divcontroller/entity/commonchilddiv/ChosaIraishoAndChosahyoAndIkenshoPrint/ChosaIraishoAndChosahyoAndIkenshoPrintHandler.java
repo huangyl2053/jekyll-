@@ -82,7 +82,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.lang.Wareki;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
@@ -303,7 +302,47 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             set主治医意見書作成依頼印刷帳票初期選択(div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
         }
     }
-
+    
+    /**
+     * 依頼書・認定調査票(OCR)・主治医意見書印刷の白紙印刷設定です。
+     * 
+     * @param 市町村コード
+     * @param 遷移元画面区分
+     */
+    public void initialize白紙(LasdecCode 市町村コード, GamenSeniKbn 遷移元画面区分) {
+        div.getCcdHokenshaList().setDisplayNone(false);
+        div.getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
+        div.getCcdHokenshaList().setSelectedShichosonIfExist(市町村コード);
+        div.getCcdHokenshaList().setDisabled(true);
+        if (GamenSeniKbn.認定調査依頼.equals(遷移元画面区分)) {
+            div.getNinteiChosa().setDisplayNone(false);
+            div.getShujiiIkensho().setDisplayNone(true);
+            div.getDgNinteiChosa().setDisplayNone(true);
+            setChk認定調査印刷帳票選択(div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
+            div.getChkIraisho().setDisplayNone(true);
+            div.getChkChosahyoSai().setDisplayNone(true);
+            div.getChkChosahyoTokki().setDisplayNone(true);
+        } else if (GamenSeniKbn.主治医意見書依頼.equals(遷移元画面区分)) {
+            div.getShujiiIkensho().setDisplayNone(false);
+            div.getNinteiChosa().setDisplayNone(true);
+            div.getDgShujiiIkensho().setDisplayNone(true);
+            div.getChkIkenshoIraisho().setDisplayNone(true);
+            div.getChkIkenshoSeikyusho().setDisplayNone(true);
+            div.getChkShindanMeireisho().setDisplayNone(true);
+            List<RString> key0 = new ArrayList<>();
+            key0.add(new RString("0"));
+            div.getChkIkensho().setSelectedItemsByKey(key0);
+        }
+        List<RString> blank = new ArrayList<>();
+        blank.add(new RString("blank"));
+        div.getChkPrintBlank().setSelectedItemsByKey(blank);
+        div.getChkPrintBlank().setDisabled(true);
+        setCheckBoxPrintBlank();
+        div.getChkPrintMatome().setDisplayNone(true);
+        div.getCcdBunshoNo().setDisplayNone(true);
+        div.getTeishutsuKigen().setDisplayNone(true);
+    }
+    
     /**
      * 介護保険診断命令書 チェックボックスの表示制御処理です。
      */
@@ -411,11 +450,16 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             div.getChkIkenshoIraisho().setDisabled(true);
             div.getChkIkenshoSeikyusho().setDisabled(true);
             div.getChkShindanMeireisho().setDisabled(true);
+            div.getShindanMeirei().setDisplayNone(true);
+            div.getTxtHakkoYMD().setDisplayNone(true);
             
             div.getChkPrintMatome().setSelectedItemsByKey(選択状態_空);
             div.getChkPrintMatome().setDisabled(true);
-//            div.getDgNinteiChosa().setVisible(true);
-//            div.getDgShujiiIkensho().setVisible(true);
+            
+            div.getDgNinteiChosa().setDisplayNone(true);
+            div.getDgShujiiIkensho().setDisplayNone(true);
+            
+            div.getTeishutsuKigen().setDisplayNone(true);
         } else {
             div.getChkIraisho().setDisabled(false);
             div.getChkChosahyoSai().setDisabled(false);
@@ -426,8 +470,11 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             div.getChkShindanMeireisho().setDisabled(false);
             
             div.getChkPrintMatome().setDisabled(false);
-//            div.getDgNinteiChosa().setVisible(false);
-//            div.getDgShujiiIkensho().setVisible(false);
+            
+            div.getDgNinteiChosa().setDisplayNone(false);
+            div.getDgShujiiIkensho().setDisplayNone(false);
+            div.getTeishutsuKigen().setDisplayNone(false);
+            div.getTxtHakkoYMD().setDisplayNone(false);
         }
     }
     
@@ -2346,6 +2393,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             item.setHihokenshaNo9(被保険者番号リスト.get(INDEX_8));
             item.setHihokenshaNo10(被保険者番号リスト.get(INDEX_9));
             if (mono) {
+                item.setIryokikanAdress(business.get医療機関住所());
+                item.setIryokikanFax(business.get医療機関FAX番号());
+                item.setIryokikanNameTel(business.get医療機関電話番号());
                 item.setHihokenshaNameKana(business.get被保険者氏名());
             } else {
                 item.setHihokenshaNameKana(business.get被保険者氏名カナ());
@@ -2744,7 +2794,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
     /**
      * 介護保険指定医依頼兼主治医意見書提出意見書まとめて印刷用パラメータを作成します。
      * @param row
-     * @param 連番
+     * @param 宛名連番
      * @return item
      */
     public IkenshoAssortmentItem create介護保険指定医依頼兼主治医意見書提出意見書_パラメータ_個人別(dgShujiiIkensho_Row row, int 宛名連番) {

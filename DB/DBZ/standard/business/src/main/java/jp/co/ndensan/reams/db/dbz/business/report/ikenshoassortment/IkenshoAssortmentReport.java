@@ -45,7 +45,7 @@ public class IkenshoAssortmentReport extends Report<IkenshoAssortmentReportSourc
                     //両面にするレイアウト
                     (item.getLayout() != IkenshoAssortmentLayout.主治医意見書記入用紙OCR_両面_カラー裏 && item.getLayout() != IkenshoAssortmentLayout.主治医意見書記入用紙OCR_片面_カラー裏
                     && item.getLayout() != IkenshoAssortmentLayout.主治医意見書記入用紙_両面_白黒_裏 && item.getLayout() != IkenshoAssortmentLayout.主治医意見書記入用紙_片面_白黒_裏
-                    && item.getLayout() != IkenshoAssortmentLayout.主治医意見書記入用紙_ORCA裏 && item.getLayout() != IkenshoAssortmentLayout.主治医意見書記入用紙OCR14)) {
+                    && item.getLayout() != IkenshoAssortmentLayout.主治医意見書記入用紙OCR14)) {
                 IkenshoAssortmentItem white = new IkenshoAssortmentItem();
                 //空白ページレイアウト
                 white.setLayout(IkenshoAssortmentLayout.主治医意見書_空白ページ);
