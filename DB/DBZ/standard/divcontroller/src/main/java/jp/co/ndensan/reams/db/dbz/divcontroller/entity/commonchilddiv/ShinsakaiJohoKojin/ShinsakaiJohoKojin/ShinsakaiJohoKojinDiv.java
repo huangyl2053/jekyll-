@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxTime;
  * @reamsid_L DBE-3000-070 zhengshukai
  */
 public class ShinsakaiJohoKojinDiv extends Panel implements IShinsakaiJohoKojinDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -35,6 +35,8 @@ public class ShinsakaiJohoKojinDiv extends Panel implements IShinsakaiJohoKojinD
     private TextBox txtShinsakaiNo;
     @JsonProperty("txtGogitaiName")
     private TextBox txtGogitaiName;
+    @JsonProperty("txtYoteiYmd")
+    private TextBoxFlexibleDate txtYoteiYmd;
     @JsonProperty("txtShinsakaijoMeisho")
     private TextBox txtShinsakaijoMeisho;
     @JsonProperty("txtShinsakaijoChikuCode")
@@ -42,7 +44,7 @@ public class ShinsakaiJohoKojinDiv extends Panel implements IShinsakaiJohoKojinD
     @JsonProperty("txtShinsakaijoChikuMeisho")
     private TextBox txtShinsakaijoChikuMeisho;
     @JsonProperty("txtShinsaKaishiDay")
-    private TextBoxDate txtShinsaKaishiDay;
+    private TextBoxFlexibleDate txtShinsaKaishiDay;
     @JsonProperty("txtShinsaKaishiTime")
     private TextBoxTime txtShinsaKaishiTime;
     @JsonProperty("txtShinsaShuryoTime")
@@ -98,6 +100,24 @@ public class ShinsakaiJohoKojinDiv extends Panel implements IShinsakaiJohoKojinD
     @JsonProperty("txtGogitaiName")
     public void setTxtGogitaiName(TextBox txtGogitaiName) {
         this.txtGogitaiName = txtGogitaiName;
+    }
+
+    /*
+     * gettxtYoteiYmd
+     * @return txtYoteiYmd
+     */
+    @JsonProperty("txtYoteiYmd")
+    public TextBoxFlexibleDate getTxtYoteiYmd() {
+        return txtYoteiYmd;
+    }
+
+    /*
+     * settxtYoteiYmd
+     * @param txtYoteiYmd txtYoteiYmd
+     */
+    @JsonProperty("txtYoteiYmd")
+    public void setTxtYoteiYmd(TextBoxFlexibleDate txtYoteiYmd) {
+        this.txtYoteiYmd = txtYoteiYmd;
     }
 
     /*
@@ -159,7 +179,7 @@ public class ShinsakaiJohoKojinDiv extends Panel implements IShinsakaiJohoKojinD
      * @return txtShinsaKaishiDay
      */
     @JsonProperty("txtShinsaKaishiDay")
-    public TextBoxDate getTxtShinsaKaishiDay() {
+    public TextBoxFlexibleDate getTxtShinsaKaishiDay() {
         return txtShinsaKaishiDay;
     }
 
@@ -168,7 +188,7 @@ public class ShinsakaiJohoKojinDiv extends Panel implements IShinsakaiJohoKojinD
      * @param txtShinsaKaishiDay txtShinsaKaishiDay
      */
     @JsonProperty("txtShinsaKaishiDay")
-    public void setTxtShinsaKaishiDay(TextBoxDate txtShinsaKaishiDay) {
+    public void setTxtShinsaKaishiDay(TextBoxFlexibleDate txtShinsaKaishiDay) {
         this.txtShinsaKaishiDay = txtShinsaKaishiDay;
     }
 
