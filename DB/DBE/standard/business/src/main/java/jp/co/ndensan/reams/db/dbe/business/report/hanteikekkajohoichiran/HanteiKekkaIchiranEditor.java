@@ -70,9 +70,9 @@ public class HanteiKekkaIchiranEditor implements IHanteiKekkaIchiranEditor {
         source.listHokenshaNo_1 = item.get証記載保険者番号();
         source.listHihokenshaNo_1 = item.get被保険者番号();
         source.listHihokenshaNo_2 = item.get被保険者氏名();
-        source.listHihokenshaNo_3 = item.getTb_一次判定結果();
+        source.listHihokenshaNo_3 = item.getTb_一次判定結果_加算();
         source.listHihokenshaNo_4 = item.getTb_二次判定要介護状態区分();
-        source.listHihokenshaNo_5 = item.get一次判定結果();
+        source.listHihokenshaNo_5 = item.get一次判定結果_加算();
         source.listHihokenshaNo_6 = item.get二次判定要介護状態区分();
         source.listHihokenshaNo_7 = item.get要介護状態像例コード();
 
