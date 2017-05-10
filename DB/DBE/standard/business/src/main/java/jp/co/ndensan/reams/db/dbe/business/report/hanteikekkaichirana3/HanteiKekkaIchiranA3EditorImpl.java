@@ -86,9 +86,9 @@ public class HanteiKekkaIchiranA3EditorImpl implements IHanteiKekkaIchiranA3Edit
         source.listHanteikekka_11 = entity.get被保険者区分();
         source.listHanteikekka_12 = entity.get認定申請区分_申請時();
         source.listHanteikekka_13 = entity.get認定申請区分_法令();
-        source.listHanteikekka_14 = entity.getTb_一次判定結果();
+        source.listHanteikekka_14 = entity.getTb_一次判定結果_加算();
         source.listHanteikekka_15 = entity.getTb_二次判定要介護状態区分();
-        source.listHanteikekka_16 = entity.get一次判定結果();
+        source.listHanteikekka_16 = entity.get一次判定結果_加算();
         source.listHanteikekka_17 = entity.get二次判定要介護状態区分();
         source.listHanteikekka_18 = entity.get要介護状態像例コード();
         source.listHanteikekka_19 = entity.get状態像内容();
