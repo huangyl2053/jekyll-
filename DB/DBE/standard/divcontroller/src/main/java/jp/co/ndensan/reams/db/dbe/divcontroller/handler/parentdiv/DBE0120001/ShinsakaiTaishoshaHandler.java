@@ -77,11 +77,11 @@ public class ShinsakaiTaishoshaHandler {
             } catch (IllegalArgumentException e) {
                 div.getTxtStatus().setValue(RString.EMPTY);
             }
-            div.getTxtShinsakaiKaijo().setValue(予定情報.getShinsakaiKaisaiBashoName());
-            div.getTxtShinsakaiChiku().setValue(予定情報.getShinsakaiKaisaiBashoCode());
-            if (予定情報.getShinsakaiKaisaiChikuCode() != null) {
+            div.getTxtShinsakaiKaijo().setValue(予定情報.getShinsakaiKaisaiYoteiBashoName());
+            if (予定情報.getShinsakaiKaisaiYoteiChikuCode() != null) {
+                div.getTxtShinsakaiChiku().setValue(予定情報.getShinsakaiKaisaiYoteiChikuCode().value());
                 div.getTxtShinsakauChikuName().setValue(CodeMaster.getCodeRyakusho(SubGyomuCode.DBE認定支援,
-                        new CodeShubetsu(CODESHUBETSU_5001), 予定情報.getShinsakaiKaisaiChikuCode(),
+                        new CodeShubetsu(CODESHUBETSU_5001), 予定情報.getShinsakaiKaisaiYoteiChikuCode(),
                         FlexibleDate.getNowDate()));
             }
             div.getTxtKaisaiDate().setValue(予定情報.getShinsakaiKaisaiYoteiYMD());
@@ -97,8 +97,8 @@ public class ShinsakaiTaishoshaHandler {
                 div.getChkNinchishoOnly().setSelectedItemsByKey(key);
             }
             div.getTxtShinsakaiKaijoKekka().setValue(予定情報.getShinsakaiKaisaiBashoName());
-            div.getTxtShinsakaiChikuKekka().setValue(予定情報.getShinsakaiKaisaiBashoCode());
             if (予定情報.getShinsakaiKaisaiChikuCode() != null) {
+                div.getTxtShinsakaiChikuKekka().setValue(予定情報.getShinsakaiKaisaiChikuCode().value());
                 div.getTxtShinsakauChikuNameKekka().setValue(CodeMaster.getCodeRyakusho(SubGyomuCode.DBE認定支援,
                         new CodeShubetsu(CODESHUBETSU_5001), 予定情報.getShinsakaiKaisaiChikuCode(),
                         FlexibleDate.getNowDate()));

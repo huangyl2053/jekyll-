@@ -76,6 +76,15 @@ public class ShinsakaiTaishoshaBusiness {
     }
 
     /**
+     * 介護認定審査会開催予定場所名称を取得します。
+     *
+     * @return 介護認定審査会開催予定場所名称
+     */
+    public RString getShinsakaiKaisaiYoteiBashoName() {
+        return entity.getShinsakaiKaisaiYoteiBashoName();
+    }
+
+    /**
      * 介護認定審査会開催場所名称を取得します。
      *
      * @return 介護認定審査会開催場所名称
@@ -362,6 +371,15 @@ public class ShinsakaiTaishoshaBusiness {
      */
     public Code getNinteiShinseiShinseijiKubunCode() {
         return entity.getNinteiShinseiShinseijiKubunCode();
+    }
+
+    /**
+     * 介護認定審査会開催予定地区コードを取得します。
+     *
+     * @return 介護認定審査会開催予定地区コード
+     */
+    public Code getShinsakaiKaisaiYoteiChikuCode() {
+        return entity.getShinsakaiKaisaiYoteiChikuCode();
     }
 
     /**
