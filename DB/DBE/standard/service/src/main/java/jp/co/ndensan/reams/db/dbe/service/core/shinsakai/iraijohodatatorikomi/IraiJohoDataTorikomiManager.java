@@ -94,7 +94,8 @@ public class IraiJohoDataTorikomiManager {
     /**
      * {@link InstanceProvider#create}にて生成した{@link IraiJohoDataTorikomiManager}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link IraiJohoDataTorikomiManager}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link IraiJohoDataTorikomiManager}のインスタンス
      */
     public static IraiJohoDataTorikomiManager createInstance() {
         return InstanceProvider.create(IraiJohoDataTorikomiManager.class);
@@ -233,11 +234,11 @@ public class IraiJohoDataTorikomiManager {
             }
             entity.setSonotaJushinKaMei(business.getその他の他科名());
             entity.setShindamMei1(business.get診断名1());
-            entity.setHasshoYMD1(get発症年月日(business.get発症年月日1()));
+            entity.setHasshoYMD1(business.get発症年月日1());
             entity.setShindamMei2(business.get診断名2());
-            entity.setHasshoYMD2(get発症年月日(business.get発症年月日2()));
+            entity.setHasshoYMD2(business.get発症年月日2());
             entity.setShindamMei3(business.get診断名3());
-            entity.setHasshoYMD3(get発症年月日(business.get発症年月日3()));
+            entity.setHasshoYMD3(business.get発症年月日3());
             entity.setAnteisei(business.get症状安定性());
             entity.setFuanteiJokyo(business.get症状不安定時の具体的状況());
             entity.setChiryoNaiyo(business.get経過及び治療内容());
@@ -280,24 +281,17 @@ public class IraiJohoDataTorikomiManager {
         }
         entity.setSonotaJushinKaMei(business.getその他の他科名());
         entity.setShindamMei1(business.get診断名1());
-        entity.setHasshoYMD1(get発症年月日(business.get発症年月日1()));
+        entity.setHasshoYMD1(business.get発症年月日1());
         entity.setShindamMei2(business.get診断名2());
-        entity.setHasshoYMD2(get発症年月日(business.get発症年月日2()));
+        entity.setHasshoYMD2(business.get発症年月日2());
         entity.setShindamMei3(business.get診断名3());
-        entity.setHasshoYMD3(get発症年月日(business.get発症年月日3()));
+        entity.setHasshoYMD3(business.get発症年月日3());
         entity.setAnteisei(business.get症状安定性());
         entity.setFuanteiJokyo(business.get症状不安定時の具体的状況());
         entity.setChiryoNaiyo(business.get経過及び治療内容());
         entity.setTokkiJiko(business.getその他特記事項());
         entity.setState(EntityDataState.Modified);
         return dbT5302Dac.save(entity);
-    }
-
-    private RString get発症年月日(FlexibleDate 発症年月日) {
-        if (発症年月日 == null || 発症年月日.isEmpty()) {
-            return RString.EMPTY;
-        }
-        return new RString(発症年月日.toString());
     }
 
     private int insert要介護認定主治医意見書意見項目(ShinseishoKanriNo 申請書管理番号, int 主治医意見書作成依頼履歴番号,
