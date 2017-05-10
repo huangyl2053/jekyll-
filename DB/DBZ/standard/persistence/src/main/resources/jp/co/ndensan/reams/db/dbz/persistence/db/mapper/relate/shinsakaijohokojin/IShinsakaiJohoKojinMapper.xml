@@ -24,6 +24,7 @@ and open the template in the editor.
         <result property="介護認定審査会開催場所名称" column="shinsakaiKaisaiBashoName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="介護認定審査会開催地区コード" column="shinsakaiKaisaiChikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="開催済み" column="hadKaisai"/>
+        <result property="審査会意見" column="shinsakaiIken" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
     <select resultOrdered="true" id="getKaisaikekkaandbashojoho"
@@ -71,7 +72,8 @@ and open the template in the editor.
             dbT5511."shoyoJikanGokei"                  AS "shoyoJikanGokei",
             dbT5592_dbT5511."shinsakaiKaisaiBashoName" AS "shinsakaiKaisaiBashoName",
             dbT5592_dbT5511."shinsakaiKaisaiChikuCode" AS "shinsakaiKaisaiChikuCode",
-            dbT5511."shinsakaiKaisaiNo" IS NOT NULL    AS "hadKaisai"
+            dbT5511."shinsakaiKaisaiNo" IS NOT NULL    AS "hadKaisai",
+            dbT5102."shinsakaiIken"                    AS "shinsakaiIken"
         FROM
             dbT5501 AS dbT5501
         INNER JOIN (
@@ -99,6 +101,9 @@ and open the template in the editor.
         LEFT JOIN
             rgdb."DbT5592ShinsakaiKaisaiBashoJoho" AS dbT5592_dbT5511
           ON dbT5592_dbT5511."shinsakaiKaisaiBashoCode" = dbT5511."shinsakaiKaisaiBashoCode"
+        LEFT JOIN
+            rgdb."DbT5102NinteiKekkaJoho" AS dbT5102
+          ON dbT5102."shinseishoKanriNo" = #{申請書管理番号}
     </select>
 
     <resultMap id = "WariateIinAndIinJohoEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.shinsakaijohokojin.WariateIinAndIinJohoEntity">

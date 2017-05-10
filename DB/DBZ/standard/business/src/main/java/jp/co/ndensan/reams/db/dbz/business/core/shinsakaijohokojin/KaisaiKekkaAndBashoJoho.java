@@ -141,4 +141,12 @@ public class KaisaiKekkaAndBashoJoho {
                 ? entity.get介護認定審査会開催地区コード()
                 : entity.get開催予定地区コード();
     }
+
+    /**
+     * @return 審査会意見
+     */
+    public RString get審査会意見() {
+        return entity.get審査会意見();
+    }
+
 }
