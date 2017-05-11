@@ -5,8 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei;
 
+import java.util.Objects;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
 /**
  * 一次判定結果を扱うユーティリティです。
@@ -96,4 +98,20 @@ public final class IchijiHanteiKekkaSupport {
         }
         return EMPTY;
     }
+
+    /**
+     * @param 厚労省IF識別コード 厚労省IF識別コード
+     * @param 一次判定結果コード 一次判定結果コード
+     * @param 一次判定結果コード_認知症加算 一次判定結果コード（認知症加算）
+     * @return 一次判定結果の名称。認知症加算後の結果に変化がある場合「略称→略称」の形式
+     */
+    public static RString compose一次判定結果表示名(RString 厚労省IF識別コード, RString 一次判定結果コード, RString 一次判定結果コード_認知症加算) {
+        IIchijiHanteiKekkaCode kekkaName = toValueOrEmpty(厚労省IF識別コード, 一次判定結果コード);
+        if (Objects.equals(一次判定結果コード, 一次判定結果コード_認知症加算) || RString.isNullOrEmpty(一次判定結果コード_認知症加算)) {
+            return kekkaName.get名称();
+        }
+        IIchijiHanteiKekkaCode kasanName = toValueOrEmpty(厚労省IF識別コード, 一次判定結果コード_認知症加算);
+        return new RStringBuilder().append(kekkaName.get略称()).append("→").append(kasanName.get略称()).toRString();
+    }
+
 }

@@ -57,4 +57,6 @@ public class HanteiKekkaIchiranA3Entity {
     private int 項番;
     private RString 出力対象;
     private RString 審査会開催番号;
+    private RString 厚労省IF識別コード;
+    private RString tb_厚労省IF識別コード;
 }

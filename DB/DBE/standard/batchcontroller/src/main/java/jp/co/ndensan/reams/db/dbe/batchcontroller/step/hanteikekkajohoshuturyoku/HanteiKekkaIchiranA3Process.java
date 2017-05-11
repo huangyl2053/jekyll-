@@ -138,20 +138,10 @@ public class HanteiKekkaIchiranA3Process extends BatchProcessBase<HanteiKekkaIch
         } else {
             entity.set認定申請区分_法令(RString.EMPTY);
         }
-        if (!RString.isNullOrEmpty(entity.getTb_一次判定結果_加算())) {
-            entity.setTb_一次判定結果_加算(IchijiHanteiKekkaCode09.toValue(entity.getTb_一次判定結果_加算()).get名称());
-        } else {
-            entity.setTb_一次判定結果_加算(RString.EMPTY);
-        }
         if (entity.getTb_二次判定要介護状態区分() != null && !entity.getTb_二次判定要介護状態区分().isEmpty()) {
             entity.setTb_二次判定要介護状態区分(YokaigoJotaiKubun09.toValue(entity.getTb_二次判定要介護状態区分()).get名称());
         } else {
             entity.setTb_二次判定要介護状態区分(RString.EMPTY);
-        }
-        if (!RString.isNullOrEmpty(entity.get一次判定結果_加算())) {
-            entity.set一次判定結果_加算(IchijiHanteiKekkaCode09.toValue(entity.get一次判定結果_加算()).get名称());
-        } else {
-            entity.set一次判定結果_加算(RString.EMPTY);
         }
         if (entity.get二次判定要介護状態区分() != null && !entity.get二次判定要介護状態区分().isEmpty()) {
             entity.set二次判定要介護状態区分(YokaigoJotaiKubun09.toValue(entity.get二次判定要介護状態区分()).get名称());
