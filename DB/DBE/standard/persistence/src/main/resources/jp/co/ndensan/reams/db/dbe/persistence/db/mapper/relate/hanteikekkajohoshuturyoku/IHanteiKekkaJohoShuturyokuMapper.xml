@@ -462,7 +462,7 @@
         WHERE
         DbT5511."shinsakaiKaisaiNo" = #{kaisaiBangou}
         AND DbT5102."shinsakaiIken" IS NOT NULL
-        AND DbT5102."shinsakaiIken" <> ''
+        AND DbT5102."shinsakaiIken" <![CDATA[<>]]> ''
     </select>
     <resultMap id="resultMap_getShinsakaiKekkaJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaigijiroku.ShinsakaiKekkaJohoRelateEntity" autoMapping="true">
         <result property="新規申請_状態区分変更件数" column="新規申請_状態区分変更件数"/>
