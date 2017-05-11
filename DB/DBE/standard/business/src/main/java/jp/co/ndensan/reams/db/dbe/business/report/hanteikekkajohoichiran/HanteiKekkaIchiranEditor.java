@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.report.hanteikekkajohoichiran;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkaichiran.HanteiKekkaIchiranEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.hanteikekkajohoichiran.HanteiKekkaIchiranA4ReportSource;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaSupport;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -70,9 +71,21 @@ public class HanteiKekkaIchiranEditor implements IHanteiKekkaIchiranEditor {
         source.listHokenshaNo_1 = item.get証記載保険者番号();
         source.listHihokenshaNo_1 = item.get被保険者番号();
         source.listHihokenshaNo_2 = item.get被保険者氏名();
-        source.listHihokenshaNo_3 = item.getTb_一次判定結果();
+        if (!RString.isNullOrEmpty(item.getTb_一次判定結果())) {
+            source.listHihokenshaNo_3 = IchijiHanteiKekkaSupport.compose一次判定結果表示名(
+                    item.getTb_厚労省IF識別コード(),
+                    item.getTb_一次判定結果(),
+                    item.getTb_一次判定結果_加算()
+            );
+        }
         source.listHihokenshaNo_4 = item.getTb_二次判定要介護状態区分();
-        source.listHihokenshaNo_5 = item.get一次判定結果();
+        if (!RString.isNullOrEmpty(item.get一次判定結果())) {
+            source.listHihokenshaNo_5 = IchijiHanteiKekkaSupport.compose一次判定結果表示名(
+                    item.get厚労省IF識別コード(),
+                    item.get一次判定結果(),
+                    item.get一次判定結果_加算()
+            );
+        }
         source.listHihokenshaNo_6 = item.get二次判定要介護状態区分();
         source.listHihokenshaNo_7 = item.get要介護状態像例コード();
 

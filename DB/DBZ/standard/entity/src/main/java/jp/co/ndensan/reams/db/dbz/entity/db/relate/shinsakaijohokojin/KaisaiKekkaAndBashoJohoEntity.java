@@ -22,11 +22,20 @@ public class KaisaiKekkaAndBashoJohoEntity implements IDbAccessable {
 
     private RString 介護認定審査会開催番号;
     private int 合議体番号;
+    private RString 合議体名称;
+    private FlexibleDate 開催予定日;
+    private RString 開始予定時刻;
+    private RString 終了予定時刻;
+    private RString 開催予定場所名;
+    private Code 開催予定地区コード;
     private FlexibleDate 介護認定審査会開催年月日;
     private RString 介護認定審査会開始時刻;
     private RString 介護認定審査会終了時刻;
     private int 所要時間合計;
     private RString 介護認定審査会開催場所名称;
     private Code 介護認定審査会開催地区コード;
-    private RString 合議体名称;
+    private boolean 開催済み;
+    private RString 判定結果コード;
+    private RString 審査会意見;
+
 }
