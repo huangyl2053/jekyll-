@@ -366,18 +366,19 @@
             resultMap="resultMap_getShinsakaiIinJoho"
             fetchSize="500">
         SELECT
-        DbT5594."shinsakaiIinShimei",
-        DbT5594."shinsakaiIinShikakuCode",
-        DbT5503."kaigoninteiShinsakaiGichoKubunCode"
+            DbT5594."shinsakaiIinShimei",
+            DbT5594."shinsakaiIinShikakuCode",
+            DbT5503."kaigoninteiShinsakaiGichoKubunCode"
         FROM
-        rgdb."DbT5503ShinsakaiWariateIinJoho" DbT5503
+           rgdb."DbT5503ShinsakaiWariateIinJoho" DbT5503
         INNER JOIN
-        rgdb."DbT5594ShinsakaiIinJoho" DbT5594
+            rgdb."DbT5594ShinsakaiIinJoho" DbT5594
         ON DbT5503."shinsakaiIinCode" = DbT5594."shinsakaiIinCode"
         WHERE
-        DbT5503."shinsakaiKaisaiNo" = #{kaisaiBangou}
+             DbT5503."shinsakaiKaisaiNo" = #{kaisaiBangou}
+         AND DbT5503."shussekiFlag"
         ORDER BY
-        DbT5503."kaigoninteiShinsakaiGichoKubunCode" DESC
+           DbT5503."kaigoninteiShinsakaiGichoKubunCode" DESC
     </select>
     <resultMap id="resultMap_getShinsakaiKaisaiKekkaJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaigijiroku.ShinsakaiKaisaiKekkaJohoEntity" autoMapping="true">
         <result property="shinsakaiKaisaiNo" column="shinsakaiKaisaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -461,6 +462,7 @@
         WHERE
         DbT5511."shinsakaiKaisaiNo" = #{kaisaiBangou}
         AND DbT5102."shinsakaiIken" IS NOT NULL
+        AND DbT5102."shinsakaiIken" <> ''
     </select>
     <resultMap id="resultMap_getShinsakaiKekkaJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaigijiroku.ShinsakaiKekkaJohoRelateEntity" autoMapping="true">
         <result property="新規申請_状態区分変更件数" column="新規申請_状態区分変更件数"/>
