@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.service.core.shinsakai.iraijohodatatorikomi;
 
-import jp.co.ndensan.reams.db.dbe.business.report.ikenshokinyuyoshioruka.IkenshokinyuyoshiBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.orca.OrcaIkenshoCsv;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKomokuMapping02A;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKomokuMapping06A;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKomokuMapping09A;
@@ -36,10 +36,10 @@ public class IkenshoKomoku {
      * 意見項目の取得処理です。
      *
      * @param 連番 連番
-     * @param business IkenshokinyuyoshiBusiness
+     * @param business OrcaIkenshoCsv
      * @return 意見項目
      */
-    public RString get09A意見項目1(int 連番, IkenshokinyuyoshiBusiness business) {
+    public RString get09A意見項目1(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKomokuMapping09A.点滴の管理.getコード().equals(new RString(連番))) {
             return get処置内容の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping09A.中心静脈栄養.getコード().equals(new RString(連番))) {
@@ -79,7 +79,7 @@ public class IkenshoKomoku {
         }
     }
 
-    private RString get09A意見項目2(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get09A意見項目2(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKomokuMapping09A.認知症の周辺症状.getコード().equals(new RString(連番))) {
             return business.get周辺症状有無();
         } else if (IkenshoKomokuMapping09A.幻視_幻聴.getコード().equals(new RString(連番))) {
@@ -119,7 +119,7 @@ public class IkenshoKomoku {
         }
     }
 
-    private RString get09A意見項目3(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get09A意見項目3(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKomokuMapping09A.四肢欠損.getコード().equals(new RString(連番))) {
             return business.get四肢欠損();
         } else if (IkenshoKomokuMapping09A.麻痺.getコード().equals(new RString(連番))) {
@@ -159,7 +159,7 @@ public class IkenshoKomoku {
         }
     }
 
-    private RString get09A意見項目4(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get09A意見項目4(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKomokuMapping09A.関節の痛み_程度.getコード().equals(new RString(連番))) {
             return business.get関節痛み程度();
         } else if (IkenshoKomokuMapping09A.失調_不随意運動.getコード().equals(new RString(連番))) {
@@ -201,7 +201,7 @@ public class IkenshoKomoku {
         }
     }
 
-    private RString get09A意見項目5(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get09A意見項目5(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKomokuMapping09A.現在の栄養状態.getコード().equals(new RString(連番))) {
             return business.get現在の栄養状態();
         } else if (IkenshoKomokuMapping09A.尿失禁.getコード().equals(new RString(連番))) {
@@ -239,7 +239,7 @@ public class IkenshoKomoku {
         }
     }
 
-    private RString get09A意見項目6(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get09A意見項目6(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKomokuMapping09A.訪問診療.getコード().equals(new RString(連番))) {
             return get医学的管理の必要性の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping09A.訪問看護.getコード().equals(new RString(連番))) {
@@ -277,7 +277,7 @@ public class IkenshoKomoku {
         }
     }
 
-    private RString get09A意見項目7(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get09A意見項目7(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKomokuMapping09A.訪問リハビリテーション_必要性.getコード().equals(new RString(連番))) {
             return get医学的管理の必要性の意見項目(2, INT_3, business);
         } else if (IkenshoKomokuMapping09A.短期入所療養介護_必要性.getコード().equals(new RString(連番))) {
@@ -311,10 +311,10 @@ public class IkenshoKomoku {
      * 意見項目の取得処理です。
      *
      * @param 連番 連番
-     * @param business IkenshokinyuyoshiBusiness
+     * @param business OrcaIkenshoCsv
      * @return 意見項目
      */
-    public RString get99A意見項目1(int 連番, IkenshokinyuyoshiBusiness business) {
+    public RString get99A意見項目1(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKomokuMapping99A.点滴の管理.getコード().equals(new RString(連番))) {
             return get処置内容の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping99A.中心静脈栄養.getコード().equals(new RString(連番))) {
@@ -354,7 +354,7 @@ public class IkenshoKomoku {
         }
     }
 
-    private RString get99A意見項目2(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get99A意見項目2(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKomokuMapping99A.認知症の周辺症状.getコード().equals(new RString(連番))) {
             return business.get周辺症状有無();
         } else if (IkenshoKomokuMapping99A.幻視_幻聴.getコード().equals(new RString(連番))) {
@@ -390,7 +390,7 @@ public class IkenshoKomoku {
         }
     }
 
-    private RString get99A意見項目3(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get99A意見項目3(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKomokuMapping99A.四肢欠損.getコード().equals(new RString(連番))) {
             return business.get四肢欠損();
         } else if (IkenshoKomokuMapping99A.麻痺.getコード().equals(new RString(連番))) {
@@ -406,7 +406,7 @@ public class IkenshoKomoku {
         }
     }
 
-    private RString get99A意見項目4(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get99A意見項目4(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKomokuMapping99A.失調_不随意運動.getコード().equals(new RString(連番))) {
             return business.get失調不随意運動();
         } else if (IkenshoKomokuMapping99A.失調_不随意運動_上肢_左.getコード().equals(new RString(連番))) {
@@ -434,7 +434,7 @@ public class IkenshoKomoku {
         }
     }
 
-    private RString get99A意見項目5(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get99A意見項目5(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKomokuMapping99A.尿失禁.getコード().equals(new RString(連番))) {
             return get発生可能性状態の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping99A.転倒_骨折.getコード().equals(new RString(連番))) {
@@ -458,7 +458,7 @@ public class IkenshoKomoku {
         }
     }
 
-    private RString get99A意見項目6(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get99A意見項目6(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKomokuMapping99A.訪問診療.getコード().equals(new RString(連番))) {
             return get医学的管理の必要性の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping99A.訪問看護.getコード().equals(new RString(連番))) {
@@ -492,7 +492,7 @@ public class IkenshoKomoku {
         }
     }
 
-    private RString get99A意見項目7(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get99A意見項目7(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKomokuMapping99A.訪問リハビリテーション_必要性.getコード().equals(new RString(連番))) {
             return get医学的管理の必要性の意見項目(2, INT_3, business);
         } else if (IkenshoKomokuMapping99A.短期入所療養介護_必要性.getコード().equals(new RString(連番))) {
@@ -524,10 +524,10 @@ public class IkenshoKomoku {
      * 意見項目の取得処理です。
      *
      * @param 連番 連番
-     * @param business IkenshokinyuyoshiBusiness
+     * @param business OrcaIkenshoCsv
      * @return 意見項目
      */
-    public RString get06A意見項目1(int 連番, IkenshokinyuyoshiBusiness business) {
+    public RString get06A意見項目1(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKomokuMapping06A.点滴の管理.getコード().equals(new RString(連番))) {
             return get処置内容の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping06A.中心静脈栄養.getコード().equals(new RString(連番))) {
@@ -567,7 +567,7 @@ public class IkenshoKomoku {
         }
     }
 
-    private RString get06A意見項目2(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get06A意見項目2(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKomokuMapping06A.認知症の周辺症状.getコード().equals(new RString(連番))) {
             return business.get周辺症状有無();
         } else if (IkenshoKomokuMapping06A.幻視_幻聴.getコード().equals(new RString(連番))) {
@@ -607,7 +607,7 @@ public class IkenshoKomoku {
         }
     }
 
-    private RString get06A意見項目3(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get06A意見項目3(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKomokuMapping06A.四肢欠損.getコード().equals(new RString(連番))) {
             return business.get四肢欠損();
         } else if (IkenshoKomokuMapping06A.麻痺.getコード().equals(new RString(連番))) {
@@ -647,7 +647,7 @@ public class IkenshoKomoku {
         }
     }
 
-    private RString get06A意見項目4(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get06A意見項目4(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKomokuMapping06A.関節の痛み_程度.getコード().equals(new RString(連番))) {
             return business.get関節痛み程度();
         } else if (IkenshoKomokuMapping06A.失調_不随意運動.getコード().equals(new RString(連番))) {
@@ -689,7 +689,7 @@ public class IkenshoKomoku {
         }
     }
 
-    private RString get06A意見項目5(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get06A意見項目5(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKomokuMapping06A.現在の栄養状態.getコード().equals(new RString(連番))) {
             return business.get現在の栄養状態();
         } else if (IkenshoKomokuMapping06A.尿失禁.getコード().equals(new RString(連番))) {
@@ -727,7 +727,7 @@ public class IkenshoKomoku {
         }
     }
 
-    private RString get06A意見項目6(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get06A意見項目6(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKomokuMapping06A.訪問診療.getコード().equals(new RString(連番))) {
             return get医学的管理の必要性の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping06A.訪問看護.getコード().equals(new RString(連番))) {
@@ -761,7 +761,7 @@ public class IkenshoKomoku {
         }
     }
 
-    private RString get06A意見項目7(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get06A意見項目7(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKomokuMapping06A.訪問リハビリテーション_必要性.getコード().equals(new RString(連番))) {
             return get医学的管理の必要性の意見項目(2, INT_3, business);
         } else if (IkenshoKomokuMapping06A.短期入所療養介護_必要性.getコード().equals(new RString(連番))) {
@@ -795,10 +795,10 @@ public class IkenshoKomoku {
      * 意見項目の取得処理です。
      *
      * @param 連番 連番
-     * @param business IkenshokinyuyoshiBusiness
+     * @param business OrcaIkenshoCsv
      * @return 意見項目
      */
-    public RString get02A意見項目1(int 連番, IkenshokinyuyoshiBusiness business) {
+    public RString get02A意見項目1(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKomokuMapping02A.点滴の管理.getコード().equals(new RString(連番))) {
             return get処置内容の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping02A.中心静脈栄養.getコード().equals(new RString(連番))) {
@@ -838,7 +838,7 @@ public class IkenshoKomoku {
         }
     }
 
-    private RString get02A意見項目2(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get02A意見項目2(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKomokuMapping02A.認知症の周辺症状.getコード().equals(new RString(連番))) {
             return business.get周辺症状有無();
         } else if (IkenshoKomokuMapping02A.幻視_幻聴.getコード().equals(new RString(連番))) {
@@ -874,7 +874,7 @@ public class IkenshoKomoku {
         }
     }
 
-    private RString get02A意見項目3(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get02A意見項目3(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKomokuMapping02A.四肢欠損.getコード().equals(new RString(連番))) {
             return business.get四肢欠損();
         } else if (IkenshoKomokuMapping02A.麻痺.getコード().equals(new RString(連番))) {
@@ -890,7 +890,7 @@ public class IkenshoKomoku {
         }
     }
 
-    private RString get02A意見項目4(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get02A意見項目4(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKomokuMapping02A.失調_不随意運動.getコード().equals(new RString(連番))) {
             return business.get失調不随意運動();
         } else if (IkenshoKomokuMapping02A.失調_不随意運動_上肢_左.getコード().equals(new RString(連番))) {
@@ -918,7 +918,7 @@ public class IkenshoKomoku {
         }
     }
 
-    private RString get02A意見項目5(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get02A意見項目5(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKomokuMapping02A.尿失禁.getコード().equals(new RString(連番))) {
             return get発生可能性状態の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping02A.転倒_骨折.getコード().equals(new RString(連番))) {
@@ -942,7 +942,7 @@ public class IkenshoKomoku {
         }
     }
 
-    private RString get02A意見項目6(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get02A意見項目6(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKomokuMapping02A.訪問診療.getコード().equals(new RString(連番))) {
             return get医学的管理の必要性の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping02A.訪問看護.getコード().equals(new RString(連番))) {
@@ -976,7 +976,7 @@ public class IkenshoKomoku {
         }
     }
 
-    private RString get02A意見項目7(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get02A意見項目7(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKomokuMapping02A.訪問リハビリテーション_必要性.getコード().equals(new RString(連番))) {
             return get医学的管理の必要性の意見項目(2, INT_3, business);
         } else if (IkenshoKomokuMapping02A.短期入所療養介護_必要性.getコード().equals(new RString(連番))) {
@@ -1004,7 +1004,7 @@ public class IkenshoKomoku {
         }
     }
 
-    private RString get処置内容の意見項目(int start, int end, IkenshokinyuyoshiBusiness business) {
+    private RString get処置内容の意見項目(int start, int end, OrcaIkenshoCsv business) {
         if (!RString.isNullOrEmpty(business.get処置内容())) {
             return business.get処置内容().substring(start, end);
         } else {
@@ -1012,7 +1012,7 @@ public class IkenshoKomoku {
         }
     }
 
-    private RString get周辺症状詳細の意見項目(int start, int end, IkenshokinyuyoshiBusiness business) {
+    private RString get周辺症状詳細の意見項目(int start, int end, OrcaIkenshoCsv business) {
         if (!RString.isNullOrEmpty(business.get周辺症状詳細())) {
             return business.get周辺症状詳細().substring(start, end);
         } else {
@@ -1020,7 +1020,7 @@ public class IkenshoKomoku {
         }
     }
 
-    private RString get発生可能性状態の意見項目(int start, int end, IkenshokinyuyoshiBusiness business) {
+    private RString get発生可能性状態の意見項目(int start, int end, OrcaIkenshoCsv business) {
         if (!RString.isNullOrEmpty(business.get発生可能性状態())) {
             return business.get発生可能性状態().substring(start, end);
         } else {
@@ -1028,7 +1028,7 @@ public class IkenshoKomoku {
         }
     }
 
-    private RString get医学的管理の必要性の意見項目(int start, int end, IkenshokinyuyoshiBusiness business) {
+    private RString get医学的管理の必要性の意見項目(int start, int end, OrcaIkenshoCsv business) {
         if (!RString.isNullOrEmpty(business.get医学的管理の必要性())) {
             return business.get医学的管理の必要性().substring(start, end);
         } else {
@@ -1036,7 +1036,7 @@ public class IkenshoKomoku {
         }
     }
 
-    private RString get特別な対応の意見項目(int start, int end, IkenshokinyuyoshiBusiness business) {
+    private RString get特別な対応の意見項目(int start, int end, OrcaIkenshoCsv business) {
         if (!RString.isNullOrEmpty(business.get特別な対応())) {
             return business.get特別な対応().substring(start, end);
         } else {
@@ -1044,7 +1044,7 @@ public class IkenshoKomoku {
         }
     }
 
-    private RString get不随意運動上肢の意見項目(int start, int end, IkenshokinyuyoshiBusiness business) {
+    private RString get不随意運動上肢の意見項目(int start, int end, OrcaIkenshoCsv business) {
         if (!RString.isNullOrEmpty(business.get失調不随意運動上肢())) {
             return business.get失調不随意運動上肢().substring(start, end);
         } else {
@@ -1052,7 +1052,7 @@ public class IkenshoKomoku {
         }
     }
 
-    private RString get不随意運動下肢の意見項目(int start, int end, IkenshokinyuyoshiBusiness business) {
+    private RString get不随意運動下肢の意見項目(int start, int end, OrcaIkenshoCsv business) {
         if (!RString.isNullOrEmpty(business.get失調不随意運動下肢())) {
             return business.get失調不随意運動下肢().substring(start, end);
         } else {
@@ -1060,7 +1060,7 @@ public class IkenshoKomoku {
         }
     }
 
-    private RString get体幹の意見項目(int start, int end, IkenshokinyuyoshiBusiness business) {
+    private RString get体幹の意見項目(int start, int end, OrcaIkenshoCsv business) {
         if (!RString.isNullOrEmpty(business.get体幹())) {
             return business.get体幹().substring(start, end);
         } else {
@@ -1068,7 +1068,7 @@ public class IkenshoKomoku {
         }
     }
 
-    private RString get歩行補助具_装具の使用の意見項目(int start, int end, IkenshokinyuyoshiBusiness business) {
+    private RString get歩行補助具_装具の使用の意見項目(int start, int end, OrcaIkenshoCsv business) {
         if (!RString.isNullOrEmpty(business.get歩行補助具_装具の使用())) {
             return business.get歩行補助具_装具の使用().substring(start, end);
         } else {

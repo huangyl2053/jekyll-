@@ -290,8 +290,8 @@ public class Ninteishinseibi {
         builder.set認定調査依頼区分コード(new Code(row.getNinteichousaIraiKubunCode()));
         builder.set認定調査回数(
                 (!RString.isNullOrEmpty(row.getNinteichosaIraiKaisu()))
-                ? Integer.parseInt(row.getNinteichosaIraiKaisu().toString())
-                : 0);
+                        ? Integer.parseInt(row.getNinteichosaIraiKaisu().toString())
+                        : 0);
         builder.set認定調査実施年月日(row.getNinteichosaJisshiYMD().getValue());
         builder.set認定調査受領年月日(row.getNinteichosaJuryoYMD().getValue());
         builder.set認定調査区分コード(new Code(row.getNinteiChosaKubunCode()));

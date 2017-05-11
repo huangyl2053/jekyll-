@@ -15,19 +15,17 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class IraiJohoDataTorikomiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("btnDataTorikomi")
-    private Button btnDataTorikomi;
-    @JsonProperty("panelIchiran")
-    private panelIchiranDiv panelIchiran;
     @JsonProperty("uploadArea")
     private uploadAreaDiv uploadArea;
+    @JsonProperty("panelIchiran")
+    private panelIchiranDiv panelIchiran;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -36,21 +34,21 @@ public class IraiJohoDataTorikomiDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getbtnDataTorikomi
-     * @return btnDataTorikomi
+     * getuploadArea
+     * @return uploadArea
      */
-    @JsonProperty("btnDataTorikomi")
-    public Button getBtnDataTorikomi() {
-        return btnDataTorikomi;
+    @JsonProperty("uploadArea")
+    public uploadAreaDiv getUploadArea() {
+        return uploadArea;
     }
 
     /*
-     * setbtnDataTorikomi
-     * @param btnDataTorikomi btnDataTorikomi
+     * setuploadArea
+     * @param uploadArea uploadArea
      */
-    @JsonProperty("btnDataTorikomi")
-    public void setBtnDataTorikomi(Button btnDataTorikomi) {
-        this.btnDataTorikomi = btnDataTorikomi;
+    @JsonProperty("uploadArea")
+    public void setUploadArea(uploadAreaDiv uploadArea) {
+        this.uploadArea = uploadArea;
     }
 
     /*
@@ -72,36 +70,8 @@ public class IraiJohoDataTorikomiDiv extends Panel {
     }
 
     /*
-     * getuploadArea
-     * @return uploadArea
-     */
-    @JsonProperty("uploadArea")
-    public uploadAreaDiv getUploadArea() {
-        return uploadArea;
-    }
-
-    /*
-     * setuploadArea
-     * @param uploadArea uploadArea
-     */
-    @JsonProperty("uploadArea")
-    public void setUploadArea(uploadAreaDiv uploadArea) {
-        this.uploadArea = uploadArea;
-    }
-
-    /*
      * [ ショートカットの作成 ]
      */
-    @JsonIgnore
-    public DataGrid<dgTorikomiFileIchiran_Row> getDgTorikomiFileIchiran() {
-        return this.getPanelIchiran().getDgTorikomiFileIchiran();
-    }
-
-    @JsonIgnore
-    public void  setDgTorikomiFileIchiran(DataGrid<dgTorikomiFileIchiran_Row> dgTorikomiFileIchiran) {
-        this.getPanelIchiran().setDgTorikomiFileIchiran(dgTorikomiFileIchiran);
-    }
-
     @JsonIgnore
     public UploadPanel getUploadTool() {
         return this.getUploadArea().getUploadTool();
@@ -120,6 +90,16 @@ public class IraiJohoDataTorikomiDiv extends Panel {
     @JsonIgnore
     public void  setBtnUpload(Button btnUpload) {
         this.getUploadArea().setBtnUpload(btnUpload);
+    }
+
+    @JsonIgnore
+    public DataGrid<dgTorikomiFileIchiran_Row> getDgTorikomiFileIchiran() {
+        return this.getPanelIchiran().getDgTorikomiFileIchiran();
+    }
+
+    @JsonIgnore
+    public void  setDgTorikomiFileIchiran(DataGrid<dgTorikomiFileIchiran_Row> dgTorikomiFileIchiran) {
+        this.getPanelIchiran().setDgTorikomiFileIchiran(dgTorikomiFileIchiran);
     }
 
     // </editor-fold>

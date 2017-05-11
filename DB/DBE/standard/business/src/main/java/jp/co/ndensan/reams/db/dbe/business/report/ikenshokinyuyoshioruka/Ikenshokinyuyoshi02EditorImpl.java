@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.ikenshokinyuyoshioruka;
 
+import jp.co.ndensan.reams.db.dbe.business.core.orca.OrcaIkenshoCsv;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ikenshokinyuyoshioruka.Ikenshokinyuyoshi02ReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku08;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku09;
@@ -41,14 +42,14 @@ public class Ikenshokinyuyoshi02EditorImpl implements IIkenshokinyuyoshi02Editor
     private static final int LENGTH_12 = 12;
     private static final int LENGTH_13 = 13;
     private static final RString チェック = new RString("✔");
-    private final IkenshokinyuyoshiBusiness business;
+    private final OrcaIkenshoCsv business;
 
     /**
      * インスタンスを生成します。
      *
-     * @param business {@link IkenshokinyuyoshiBusiness}
+     * @param business {@link OrcaIkenshoCsv}
      */
-    protected Ikenshokinyuyoshi02EditorImpl(IkenshokinyuyoshiBusiness business) {
+    protected Ikenshokinyuyoshi02EditorImpl(OrcaIkenshoCsv business) {
         this.business = business;
     }
 

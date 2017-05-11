@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2920001;
+package jp.co.ndensan.reams.db.dbe.entity.core.orca;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class IraiJohoDataTorikomiCsvEntity implements Serializable {
+public class OrcaIkenshoCsvEntity implements Serializable {
 
     @CsvField(order = 1, name = "バージョン")
     private RString バージョン;
@@ -47,10 +47,10 @@ public class IraiJohoDataTorikomiCsvEntity implements Serializable {
     private RString 種別;
     @CsvField(order = 14, name = "記入日")
     private RString 記入日;
-    @CsvField(order = 15, name = "患者名")
-    private RString 患者名;
-    @CsvField(order = 16, name = "患者名かな")
+    @CsvField(order = 15, name = "患者名かな")
     private RString 患者名かな;
+    @CsvField(order = 16, name = "患者名")
+    private RString 患者名;
     @CsvField(order = 17, name = "生年月日")
     private RString 生年月日;
     @CsvField(order = 18, name = "患者_年齢")
