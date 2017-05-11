@@ -11,8 +11,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.ikensho.iraijohodatatorikomi.Nin
 import jp.co.ndensan.reams.db.dbe.business.report.ikenshokinyuyoshioruka.IkenshokinyuyoshiBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.core.iraijohodatatorikomi.IraiJohoDataTorikomiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2920001.DBE2920001StateName;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2920001.IraiJohoDataTorikomiCsvData;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2920001.IraiJohoDataTorikomiCsvEntity;
+import jp.co.ndensan.reams.db.dbe.business.core.orca.IraiJohoDataTorikomiCsvData;
+import jp.co.ndensan.reams.db.dbe.business.core.orca.IraiJohoDataTorikomiCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2920001.IraiJohoDataTorikomiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2920001.dgTorikomiFileIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2920001.IraiJohoDataTorikomiHandler;
@@ -150,7 +150,7 @@ public class IraiJohoDataTorikomi {
             if (csvEntity == null) {
                 continue;
             }
-            businessList.add(getHandler(div).帳票出力用情報の編集(csvEntity));
+            businessList.add(new IkenshokinyuyoshiBusiness(csvEntity));
         }
         return ResponseData.of(publishShujiiIkensho(businessList)).respond();
     }
@@ -178,13 +178,13 @@ public class IraiJohoDataTorikomi {
                     UrQuestionMessages.処理実行の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
-        if ((!new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
-                || ResponseHolder.getButtonType() != MessageDialogSelectedResult.Yes) && !ResponseHolder.isWarningIgnoredRequest()) {
+        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(div).respond();
         }
-        {
+        if (!ResponseHolder.isWarningIgnoredRequest()) {
             ValidationMessageControlPairs validationMessages = getValidationHandler(div).申請日のチェック();
-            if (validationMessages.existsError() && !ResponseHolder.isWarningIgnoredRequest()) {
+            if (validationMessages.existsError()) {
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
         }
