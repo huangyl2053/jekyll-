@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2920001;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.orca.IraiJohoDataTorikomiCsvData;
+import jp.co.ndensan.reams.db.dbe.business.core.orca.OrcaIkenshoCsvData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2920001.IraiJohoDataTorikomiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2920001.dgTorikomiFileIchiran_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -53,12 +53,12 @@ public class IraiJohoDataTorikomiValidationHandler {
     /**
      * データを取込のチェックを行います。
      *
-     * @param torikomiData {@link IraiJohoDataTorikomiCsvData}
+     * @param csvData {@link OrcaIkenshoCsvData}
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs データを取込のチェック(IraiJohoDataTorikomiCsvData torikomiData) {
+    public ValidationMessageControlPairs データを取込のチェック(OrcaIkenshoCsvData csvData) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (torikomiData.isEmpty()) {
+        if (csvData.isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(IraiJohoDataTorikomiMessages.データを取込のチェック));
         }
         return validationMessages;
@@ -76,7 +76,7 @@ public class IraiJohoDataTorikomiValidationHandler {
             if (!rowList.get(i).getCheckBox().isAllSelected()) {
                 continue;
             }
-            if (!rowList.get(i).getShinseibi().equals(rowList.get(i + 1).getShinseibi())) {
+            if (!rowList.get(i).getShinseibi().getValue().equals(rowList.get(i + 1).getShinseibi().getValue())) {
                 validationMessages.add(new ValidationMessageControlPair(IraiJohoDataTorikomiMessages.申請日のチェック));
             }
         }
@@ -99,4 +99,5 @@ public class IraiJohoDataTorikomiValidationHandler {
             return message;
         }
     }
+
 }

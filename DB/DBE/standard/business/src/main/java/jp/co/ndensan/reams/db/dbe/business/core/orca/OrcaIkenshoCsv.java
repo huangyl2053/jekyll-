@@ -3,12 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.report.ikenshokinyuyoshioruka;
+package jp.co.ndensan.reams.db.dbe.business.core.orca;
 
-import jp.co.ndensan.reams.db.dbe.business.core.orca.IraiJohoDataTorikomiCsvEntity;
+import java.io.Serializable;
+import jp.co.ndensan.reams.db.dbe.entity.core.orca.OrcaIkenshoCsvEntity;
 import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,10 +19,10 @@ import lombok.Setter;
  *
  * @reamsid_L DBE-1600-020 lishengli
  */
-@Setter
+@Setter(AccessLevel.PROTECTED)
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class IkenshokinyuyoshiBusiness {
+public class OrcaIkenshoCsv implements Serializable {
 
     private static final RString 同意する = new RString("1");
     private static final RString 有 = new RString("1");
@@ -144,16 +146,7 @@ public class IkenshokinyuyoshiBusiness {
     private RString 感染症名;
     private RString その他特記事項;
 
-    private RString 申請書管理番号;
-    private int 主治医意見書作成依頼履歴番号;
-    private RString 厚労省IF識別コード;
-    private RString 主治医医療機関コード;
-    private RString 主治医コード;
-
-    public IkenshokinyuyoshiBusiness() {
-    }
-
-    public IkenshokinyuyoshiBusiness(IraiJohoDataTorikomiCsvEntity csvEntity) {
+    OrcaIkenshoCsv(OrcaIkenshoCsvEntity csvEntity) {
         this.setタイムスタンプ(csvEntity.getタイムスタンプ());
         this.set記入日(RString.isNullOrEmpty(csvEntity.get記入日()) ? FlexibleDate.EMPTY : new FlexibleDate(csvEntity.get記入日()));
         this.set事業所番号(csvEntity.get事業所番号());
@@ -275,4 +268,5 @@ public class IkenshokinyuyoshiBusiness {
         this.set感染症名(csvEntity.get感染症名());
         this.setその他特記事項(csvEntity.getその他特記事項());
     }
+
 }

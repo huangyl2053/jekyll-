@@ -8,7 +8,8 @@ package jp.co.ndensan.reams.db.dbe.service.core.shinsakai.iraijohodatatorikomi;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.iraijohodatatorikomi.NinteiShinseiJohoIraiJohoData;
-import jp.co.ndensan.reams.db.dbe.business.report.ikenshokinyuyoshioruka.IkenshokinyuyoshiBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.orca.OrcaIkenshoCsv;
+import jp.co.ndensan.reams.db.dbe.business.core.orca.OrcaIkenshoResult;
 import jp.co.ndensan.reams.db.dbe.definition.core.iraijohodatatorikomi.IraiJohoDataTorikomiParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.iraijohodatatorikomi.NinteiShinseiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.iraijohodatatorikomi.ShujiiIkenshoIraiJohoIkenItemRelateEntity;
@@ -125,6 +126,19 @@ public class IraiJohoDataTorikomiManager {
     }
 
     /**
+     * オルカ医見書の取込結果を保存します。
+     *
+     * @param orcaResults 保存対象の{@link OrcaIkenshoResult}すべて
+     */
+    @Transaction
+    public void save意見書(Iterable<? extends OrcaIkenshoResult> orcaResults) {
+        for (OrcaIkenshoResult r : orcaResults) {
+            各テーブルへの登録(r.get申請書管理番号(), r.get主治医意見書作成依頼履歴番号(), r.get厚労省IF識別コード(),
+                    r.get主治医医療機関コード(), r.get主治医コード(), r.getCsvRow());
+        }
+    }
+
+    /**
      * 各テーブルへ登録する。
      *
      * @param 申請書管理番号 申請書管理番号
@@ -132,10 +146,10 @@ public class IraiJohoDataTorikomiManager {
      * @param 厚労省IF識別コード 厚労省IF識別コード
      * @param 主治医医療機関コード 主治医医療機関コード
      * @param 主治医コード 主治医コード
-     * @param business IkenshokinyuyoshiBusiness
+     * @param business OrcaIkenshoCsv
      */
-    public void 各テーブルへの登録(RString 申請書管理番号, int 主治医意見書作成依頼履歴番号, RString 厚労省IF識別コード, RString 主治医医療機関コード, RString 主治医コード,
-            IkenshokinyuyoshiBusiness business) {
+    private void 各テーブルへの登録(RString 申請書管理番号, int 主治医意見書作成依頼履歴番号, RString 厚労省IF識別コード,
+            RString 主治医医療機関コード, RString 主治医コード, OrcaIkenshoCsv business) {
         DbT5302ShujiiIkenshoJohoEntity shujiiIkenshoIraiJohoJoho = get要介護認定主治医意見書情報(申請書管理番号, 厚労省IF識別コード,
                 主治医意見書作成依頼履歴番号);
         if (shujiiIkenshoIraiJohoJoho == null) {
@@ -200,7 +214,7 @@ public class IraiJohoDataTorikomiManager {
     }
 
     private int insert要介護認定主治医意見書情報(RString 申請書管理番号, int 主治医意見書作成依頼履歴番号,
-            RString 主治医医療機関コード, RString 主治医コード, IkenshokinyuyoshiBusiness business) {
+            RString 主治医医療機関コード, RString 主治医コード, OrcaIkenshoCsv business) {
         if (!RString.isNullOrEmpty(申請書管理番号)) {
             DbT5302ShujiiIkenshoJohoEntity entity = new DbT5302ShujiiIkenshoJohoEntity();
             entity.setShinseishoKanriNo(new ShinseishoKanriNo(申請書管理番号));
@@ -251,7 +265,7 @@ public class IraiJohoDataTorikomiManager {
         return 0;
     }
 
-    private int updata要介護認定主治医意見書情報(DbT5302ShujiiIkenshoJohoEntity entity, IkenshokinyuyoshiBusiness business,
+    private int updata要介護認定主治医意見書情報(DbT5302ShujiiIkenshoJohoEntity entity, OrcaIkenshoCsv business,
             RString 主治医医療機関コード, RString 主治医コード, RString 主治医意見書依頼区分) {
         entity.setIkenshoIraiKubun(主治医意見書依頼区分);
         entity.setShujiiIryoKikanCode(主治医医療機関コード);
@@ -295,7 +309,7 @@ public class IraiJohoDataTorikomiManager {
     }
 
     private int insert要介護認定主治医意見書意見項目(ShinseishoKanriNo 申請書管理番号, int 主治医意見書作成依頼履歴番号,
-            IkenshokinyuyoshiBusiness business) {
+            OrcaIkenshoCsv business) {
         if (申請書管理番号 != null && !申請書管理番号.isEmpty()) {
             DbT5304ShujiiIkenshoIkenItemEntity entity = new DbT5304ShujiiIkenshoIkenItemEntity();
             entity.setShinseishoKanriNo(申請書管理番号);
@@ -306,7 +320,7 @@ public class IraiJohoDataTorikomiManager {
         return 0;
     }
 
-    private int insert主治医意見書意見項目(DbT5304ShujiiIkenshoIkenItemEntity entity, IkenshokinyuyoshiBusiness business) {
+    private int insert主治医意見書意見項目(DbT5304ShujiiIkenshoIkenItemEntity entity, OrcaIkenshoCsv business) {
         int count = 0;
         for (int i = 1; i < INT_114; i++) {
             entity.setRemban(i);
@@ -318,7 +332,7 @@ public class IraiJohoDataTorikomiManager {
     }
 
     private int update要介護認定主治医意見書意見項目(List<DbT5304ShujiiIkenshoIkenItemEntity> entityList,
-            RString 申請書管理番号, int 主治医意見書作成依頼履歴番号, IkenshokinyuyoshiBusiness business) {
+            RString 申請書管理番号, int 主治医意見書作成依頼履歴番号, OrcaIkenshoCsv business) {
         int count = 0;
         List<RString> 連番List = new ArrayList<>();
         for (int i = 1; i < INT_114; i++) {
@@ -346,7 +360,7 @@ public class IraiJohoDataTorikomiManager {
     }
 
     private int insert要介護認定主治医意見書記入項目(ShinseishoKanriNo 申請書管理番号, int 主治医意見書作成依頼履歴番号,
-            IkenshokinyuyoshiBusiness business) {
+            OrcaIkenshoCsv business) {
         if (申請書管理番号 != null && !申請書管理番号.isEmpty()) {
             DbT5303ShujiiIkenshoKinyuItemEntity entity = new DbT5303ShujiiIkenshoKinyuItemEntity();
             entity.setShinseishoKanriNo(申請書管理番号);
@@ -358,7 +372,7 @@ public class IraiJohoDataTorikomiManager {
     }
 
     private int insert主治医意見書記入項目(DbT5303ShujiiIkenshoKinyuItemEntity entity,
-            IkenshokinyuyoshiBusiness business) {
+            OrcaIkenshoCsv business) {
         int count = 0;
         for (int i = 1; i <= INT_23; i++) {
             entity.setRemban(i);
@@ -370,7 +384,7 @@ public class IraiJohoDataTorikomiManager {
     }
 
     private int update要介護認定主治医意見書記入項目(List<DbT5303ShujiiIkenshoKinyuItemEntity> entityList,
-            RString 申請書管理番号, int 主治医意見書作成依頼履歴番号, IkenshokinyuyoshiBusiness business) {
+            RString 申請書管理番号, int 主治医意見書作成依頼履歴番号, OrcaIkenshoCsv business) {
         int count = 0;
         List<RString> 連番List = new ArrayList<>();
         for (int i = 1; i <= INT_23; i++) {
@@ -421,7 +435,7 @@ public class IraiJohoDataTorikomiManager {
         return Code.EMPTY;
     }
 
-    private RString get記入項目(int 連番, Code 厚労省IF識別コード, IkenshokinyuyoshiBusiness business) {
+    private RString get記入項目(int 連番, Code 厚労省IF識別コード, OrcaIkenshoCsv business) {
         RString 記入項目 = RString.EMPTY;
         if (厚労省IF識別コード != null && !厚労省IF識別コード.isEmpty()) {
             if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(厚労省IF識別コード.value())) {
@@ -439,7 +453,7 @@ public class IraiJohoDataTorikomiManager {
         return 記入項目;
     }
 
-    private RString get意見項目(int 連番, Code 厚労省IF識別コード, IkenshokinyuyoshiBusiness business) {
+    private RString get意見項目(int 連番, Code 厚労省IF識別コード, OrcaIkenshoCsv business) {
         RString 記入項目 = RString.EMPTY;
         IkenshoKomoku ikenshoKomoku = new IkenshoKomoku();
         if (厚労省IF識別コード != null && !厚労省IF識別コード.isEmpty()) {
@@ -458,7 +472,7 @@ public class IraiJohoDataTorikomiManager {
         return 記入項目;
     }
 
-    private RString get09B記入項目1(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get09B記入項目1(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKinyuMapping09B.その他.getコード().equals(new RString(連番))) {
             return get周辺症状詳細の意見項目(INT_11, INT_12, business);
         } else if (IkenshoKinyuMapping09B.その他の精神_神経症状.getコード().equals(new RString(連番))) {
@@ -494,7 +508,7 @@ public class IraiJohoDataTorikomiManager {
         }
     }
 
-    private RString get09B記入項目2(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get09B記入項目2(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKinyuMapping09B.その他の医療系のサービス.getコード().equals(new RString(連番))
                 && !RString.isNullOrEmpty(business.get発生可能性状態())) {
             return get医学的管理の必要性の意見項目(INT_9, INT_10, business);
@@ -517,7 +531,7 @@ public class IraiJohoDataTorikomiManager {
         }
     }
 
-    private RString get09B意見項目1(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get09B意見項目1(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKomokuMapping09B.点滴の管理.getコード().equals(new RString(連番))) {
             return get処置内容の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping09B.中心静脈栄養.getコード().equals(new RString(連番))) {
@@ -557,7 +571,7 @@ public class IraiJohoDataTorikomiManager {
         }
     }
 
-    private RString get09B意見項目2(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get09B意見項目2(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKomokuMapping09B.認知症の周辺症状.getコード().equals(new RString(連番))) {
             return business.get周辺症状有無();
         } else if (IkenshoKomokuMapping09B.幻視_幻聴.getコード().equals(new RString(連番))) {
@@ -597,7 +611,7 @@ public class IraiJohoDataTorikomiManager {
         }
     }
 
-    private RString get09B意見項目3(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get09B意見項目3(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKomokuMapping09B.四肢欠損.getコード().equals(new RString(連番))) {
             return business.get四肢欠損();
         } else if (IkenshoKomokuMapping09B.麻痺.getコード().equals(new RString(連番))) {
@@ -637,7 +651,7 @@ public class IraiJohoDataTorikomiManager {
         }
     }
 
-    private RString get09B意見項目4(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get09B意見項目4(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKomokuMapping09B.関節の痛み_程度.getコード().equals(new RString(連番))) {
             return business.get関節痛み程度();
         } else if (IkenshoKomokuMapping09B.失調_不随意運動.getコード().equals(new RString(連番))) {
@@ -679,7 +693,7 @@ public class IraiJohoDataTorikomiManager {
         }
     }
 
-    private RString get09B意見項目5(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get09B意見項目5(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKomokuMapping09B.現在の栄養状態.getコード().equals(new RString(連番))) {
             return business.get現在の栄養状態();
         } else if (IkenshoKomokuMapping09B.尿失禁.getコード().equals(new RString(連番))) {
@@ -717,7 +731,7 @@ public class IraiJohoDataTorikomiManager {
         }
     }
 
-    private RString get09B意見項目6(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get09B意見項目6(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKomokuMapping09B.訪問診療.getコード().equals(new RString(連番))) {
             return get医学的管理の必要性の意見項目(0, 1, business);
         } else if (IkenshoKomokuMapping09B.訪問看護.getコード().equals(new RString(連番))) {
@@ -755,7 +769,7 @@ public class IraiJohoDataTorikomiManager {
         }
     }
 
-    private RString get09B意見項目7(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get09B意見項目7(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKomokuMapping09B.訪問リハビリテーション_必要性.getコード().equals(new RString(連番))) {
             return get医学的管理の必要性の意見項目(2, INT_3, business);
         } else if (IkenshoKomokuMapping09B.短期入所療養介護_必要性.getコード().equals(new RString(連番))) {
@@ -785,7 +799,7 @@ public class IraiJohoDataTorikomiManager {
         }
     }
 
-    private RString get09A記入項目1(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get09A記入項目1(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKinyuMapping09A.その他.getコード().equals(new RString(連番))) {
             return get周辺症状詳細の意見項目(INT_11, INT_12, business);
         } else if (IkenshoKinyuMapping09A.その他の精神_神経症状.getコード().equals(new RString(連番))) {
@@ -825,7 +839,7 @@ public class IraiJohoDataTorikomiManager {
         }
     }
 
-    private RString get09A記入項目2(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get09A記入項目2(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKinyuMapping09A.介護サービスの留意事項_移動.getコード().equals(new RString(連番))) {
             return business.getサービス提供移動();
         } else if (IkenshoKinyuMapping09A.介護サービスの留意事項_摂食.getコード().equals(new RString(連番))) {
@@ -843,7 +857,7 @@ public class IraiJohoDataTorikomiManager {
         }
     }
 
-    private RString get06A記入項目1(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get06A記入項目1(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKinyuMapping06A.その他.getコード().equals(new RString(連番))) {
             return get周辺症状詳細の意見項目(INT_11, INT_12, business);
         } else if (IkenshoKinyuMapping06A.その他の精神_神経症状.getコード().equals(new RString(連番))) {
@@ -883,7 +897,7 @@ public class IraiJohoDataTorikomiManager {
         }
     }
 
-    private RString get06A記入項目2(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get06A記入項目2(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKinyuMapping06A.介護サービスの留意事項_移動.getコード().equals(new RString(連番))) {
             return business.getサービス提供移動();
         } else if (IkenshoKinyuMapping06A.介護サービスの留意事項_摂食.getコード().equals(new RString(連番))) {
@@ -901,7 +915,7 @@ public class IraiJohoDataTorikomiManager {
         }
     }
 
-    private RString get02A記入項目1(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get02A記入項目1(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKinyuMapping02A.その他.getコード().equals(new RString(連番))) {
             return get周辺症状詳細の意見項目(INT_11, INT_12, business);
         } else if (IkenshoKinyuMapping02A.その他の精神_神経症状.getコード().equals(new RString(連番))) {
@@ -933,7 +947,7 @@ public class IraiJohoDataTorikomiManager {
         }
     }
 
-    private RString get02A記入項目2(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get02A記入項目2(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKinyuMapping02A.介護サービスの留意事項_移動.getコード().equals(new RString(連番))) {
             return business.getサービス提供移動();
         } else if (IkenshoKinyuMapping02A.介護サービスの留意事項_摂食.getコード().equals(new RString(連番))) {
@@ -949,7 +963,7 @@ public class IraiJohoDataTorikomiManager {
         }
     }
 
-    private RString get99A記入項目1(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get99A記入項目1(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKinyuMapping99A.その他.getコード().equals(new RString(連番))) {
             return get周辺症状詳細の意見項目(INT_11, INT_12, business);
         } else if (IkenshoKinyuMapping99A.その他の精神_神経症状.getコード().equals(new RString(連番))) {
@@ -981,7 +995,7 @@ public class IraiJohoDataTorikomiManager {
         }
     }
 
-    private RString get99A記入項目2(int 連番, IkenshokinyuyoshiBusiness business) {
+    private RString get99A記入項目2(int 連番, OrcaIkenshoCsv business) {
         if (IkenshoKinyuMapping99A.介護サービスの留意事項_移動.getコード().equals(new RString(連番))) {
             return business.getサービス提供移動();
         } else if (IkenshoKinyuMapping99A.介護サービスの留意事項_摂食.getコード().equals(new RString(連番))) {
@@ -997,7 +1011,7 @@ public class IraiJohoDataTorikomiManager {
         }
     }
 
-    private RString get処置内容の意見項目(int start, int end, IkenshokinyuyoshiBusiness business) {
+    private RString get処置内容の意見項目(int start, int end, OrcaIkenshoCsv business) {
         if (!RString.isNullOrEmpty(business.get処置内容())) {
             return business.get処置内容().substring(start, end);
         } else {
@@ -1005,7 +1019,7 @@ public class IraiJohoDataTorikomiManager {
         }
     }
 
-    private RString get周辺症状詳細の意見項目(int start, int end, IkenshokinyuyoshiBusiness business) {
+    private RString get周辺症状詳細の意見項目(int start, int end, OrcaIkenshoCsv business) {
         if (!RString.isNullOrEmpty(business.get周辺症状詳細())) {
             return business.get周辺症状詳細().substring(start, end);
         } else {
@@ -1013,7 +1027,7 @@ public class IraiJohoDataTorikomiManager {
         }
     }
 
-    private RString get発生可能性状態の意見項目(int start, int end, IkenshokinyuyoshiBusiness business) {
+    private RString get発生可能性状態の意見項目(int start, int end, OrcaIkenshoCsv business) {
         if (!RString.isNullOrEmpty(business.get発生可能性状態())) {
             return business.get発生可能性状態().substring(start, end);
         } else {
@@ -1021,7 +1035,7 @@ public class IraiJohoDataTorikomiManager {
         }
     }
 
-    private RString get医学的管理の必要性の意見項目(int start, int end, IkenshokinyuyoshiBusiness business) {
+    private RString get医学的管理の必要性の意見項目(int start, int end, OrcaIkenshoCsv business) {
         if (!RString.isNullOrEmpty(business.get医学的管理の必要性())) {
             return business.get医学的管理の必要性().substring(start, end);
         } else {
@@ -1029,7 +1043,7 @@ public class IraiJohoDataTorikomiManager {
         }
     }
 
-    private RString get特別な対応の意見項目(int start, int end, IkenshokinyuyoshiBusiness business) {
+    private RString get特別な対応の意見項目(int start, int end, OrcaIkenshoCsv business) {
         if (!RString.isNullOrEmpty(business.get特別な対応())) {
             return business.get特別な対応().substring(start, end);
         } else {
@@ -1037,7 +1051,7 @@ public class IraiJohoDataTorikomiManager {
         }
     }
 
-    private RString get不随意運動上肢の意見項目(int start, int end, IkenshokinyuyoshiBusiness business) {
+    private RString get不随意運動上肢の意見項目(int start, int end, OrcaIkenshoCsv business) {
         if (!RString.isNullOrEmpty(business.get失調不随意運動上肢())) {
             return business.get失調不随意運動上肢().substring(start, end);
         } else {
@@ -1045,7 +1059,7 @@ public class IraiJohoDataTorikomiManager {
         }
     }
 
-    private RString get不随意運動下肢の意見項目(int start, int end, IkenshokinyuyoshiBusiness business) {
+    private RString get不随意運動下肢の意見項目(int start, int end, OrcaIkenshoCsv business) {
         if (!RString.isNullOrEmpty(business.get失調不随意運動下肢())) {
             return business.get失調不随意運動下肢().substring(start, end);
         } else {
@@ -1053,7 +1067,7 @@ public class IraiJohoDataTorikomiManager {
         }
     }
 
-    private RString get体幹の意見項目(int start, int end, IkenshokinyuyoshiBusiness business) {
+    private RString get体幹の意見項目(int start, int end, OrcaIkenshoCsv business) {
         if (!RString.isNullOrEmpty(business.get体幹())) {
             return business.get体幹().substring(start, end);
         } else {
@@ -1061,7 +1075,7 @@ public class IraiJohoDataTorikomiManager {
         }
     }
 
-    private RString get歩行補助具_装具の使用の意見項目(int start, int end, IkenshokinyuyoshiBusiness business) {
+    private RString get歩行補助具_装具の使用の意見項目(int start, int end, OrcaIkenshoCsv business) {
         if (!RString.isNullOrEmpty(business.get歩行補助具_装具の使用())) {
             return business.get歩行補助具_装具の使用().substring(start, end);
         } else {

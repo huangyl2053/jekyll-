@@ -8,11 +8,12 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2920001
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.iraijohodatatorikomi.NinteiShinseiJohoIraiJohoData;
-import jp.co.ndensan.reams.db.dbe.business.report.ikenshokinyuyoshioruka.IkenshokinyuyoshiBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.orca.OrcaIkenshoCsv;
 import jp.co.ndensan.reams.db.dbe.definition.core.iraijohodatatorikomi.IraiJohoDataTorikomiParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2920001.DBE2920001StateName;
-import jp.co.ndensan.reams.db.dbe.business.core.orca.IraiJohoDataTorikomiCsvData;
-import jp.co.ndensan.reams.db.dbe.business.core.orca.IraiJohoDataTorikomiCsvEntity;
+import jp.co.ndensan.reams.db.dbe.business.core.orca.OrcaIkenshoCsvData;
+import jp.co.ndensan.reams.db.dbe.business.core.orca.OrcaIkenshoCsvPerser;
+import jp.co.ndensan.reams.db.dbe.business.core.orca.OrcaIkenshoResult;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2920001.IraiJohoDataTorikomiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2920001.dgTorikomiFileIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2920001.IraiJohoDataTorikomiHandler;
@@ -23,9 +24,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.io.Encode;
-import jp.co.ndensan.reams.uz.uza.io.NewLine;
-import jp.co.ndensan.reams.uz.uza.io.csv.CsvReader;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -44,7 +42,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 public class IraiJohoDataTorikomi {
 
     private static final RString 奇数行 = new RString("1");
-    private static final RString CSV_WRITER_DELIMITER = new RString(",");
 
     /**
      * 依頼情報データ受取（オルカ）の初期化。
@@ -71,7 +68,7 @@ public class IraiJohoDataTorikomi {
                 return ResponseData.of(div).addValidationMessages(uploaded).respond();
             }
         }
-        IraiJohoDataTorikomiCsvData csvData = parseCsv(files);
+        OrcaIkenshoCsvData csvData = OrcaIkenshoCsvPerser.parseCSVs(toFilePaths(files));
         ValidationMessageControlPairs parsed = getValidationHandler(div).データを取込のチェック(csvData);
         if (parsed.existsError()) {
             return ResponseData.of(div).addValidationMessages(parsed).respond();
@@ -81,32 +78,12 @@ public class IraiJohoDataTorikomi {
         return ResponseData.of(div).respond();
     }
 
-    private static IraiJohoDataTorikomiCsvData parseCsv(FileData[] files) {
-        List<IraiJohoDataTorikomiCsvEntity> list = new ArrayList<>();
-        for (FileData f : files) {
-            list.addAll(insertCsvDate(f.getFilePath()));
-        }
-        return new IraiJohoDataTorikomiCsvData(list);
-    }
-
-    private static List<IraiJohoDataTorikomiCsvEntity> insertCsvDate(RString filePath) {
-        List<IraiJohoDataTorikomiCsvEntity> list = new ArrayList<>();
-        try (CsvReader<IraiJohoDataTorikomiCsvEntity> csvReader = createCsvReader(filePath)) {
-            while (true) {
-                IraiJohoDataTorikomiCsvEntity entity = csvReader.readLine();
-                if (entity == null) {
-                    break;
-                }
-                list.add(entity);
-            }
+    private static List<RString> toFilePaths(FileData[] files) {
+        List<RString> list = new ArrayList<>();
+        for (FileData file : files) {
+            list.add(file.getFilePath());
         }
         return list;
-    }
-
-    private static CsvReader<IraiJohoDataTorikomiCsvEntity> createCsvReader(RString filePath) {
-        return new CsvReader.InstanceBuilder(filePath, IraiJohoDataTorikomiCsvEntity.class)
-                .setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS)
-                .hasHeader(false).setNewLine(NewLine.LF).build();
     }
 
     /**
@@ -139,26 +116,26 @@ public class IraiJohoDataTorikomi {
      * @return レスポンスデータ
      */
     public ResponseData<SourceDataCollection> onClick_Insatu(IraiJohoDataTorikomiDiv div) {
-        IraiJohoDataTorikomiCsvData csvData = ViewStateHolder.get(ViewStateKeys.要介護認定主治医意見書情報, IraiJohoDataTorikomiCsvData.class);
-        List<IkenshokinyuyoshiBusiness> businessList = new ArrayList<>();
+        OrcaIkenshoCsvData csvData = ViewStateHolder.get(ViewStateKeys.要介護認定主治医意見書情報, OrcaIkenshoCsvData.class);
+        List<OrcaIkenshoCsv> businessList = new ArrayList<>();
         for (dgTorikomiFileIchiran_Row row : div.getDgTorikomiFileIchiran().getDataSource()) {
             if (!row.getCheckBox().isAllSelected()) {
                 continue;
             }
-            IraiJohoDataTorikomiCsvEntity csvEntity
+            OrcaIkenshoCsv csvRow
                     = csvData.getOrNull(row.getHokenshaBango(), row.getHihokenshaBango(), row.getShinseibi().getValue());
-            if (csvEntity == null) {
+            if (csvRow == null) {
                 continue;
             }
-            businessList.add(new IkenshokinyuyoshiBusiness(csvEntity));
+            businessList.add(csvRow);
         }
         return ResponseData.of(publishShujiiIkensho(businessList)).respond();
     }
 
-    private SourceDataCollection publishShujiiIkensho(List<IkenshokinyuyoshiBusiness> businessList) {
+    private SourceDataCollection publishShujiiIkensho(List<OrcaIkenshoCsv> businessList) {
         try (ReportManager reportManager = new ReportManager()) {
             Ikenshokinyuyoshi01PrintService printService = new Ikenshokinyuyoshi01PrintService(reportManager);
-            for (IkenshokinyuyoshiBusiness business : businessList) {
+            for (OrcaIkenshoCsv business : businessList) {
                 printService.print主治医意見書01(business);
                 printService.print主治医意見書02(business);
             }
@@ -188,28 +165,24 @@ public class IraiJohoDataTorikomi {
                 return ResponseData.of(div).addValidationMessages(validationMessages).respond();
             }
         }
-        IraiJohoDataTorikomiCsvData csvData = ViewStateHolder.get(ViewStateKeys.要介護認定主治医意見書情報, IraiJohoDataTorikomiCsvData.class);
+        OrcaIkenshoCsvData csvData = ViewStateHolder.get(ViewStateKeys.要介護認定主治医意見書情報, OrcaIkenshoCsvData.class);
+        List<OrcaIkenshoResult> list = new ArrayList<>();
         for (dgTorikomiFileIchiran_Row row : div.getDgTorikomiFileIchiran().getDataSource()) {
             if (!row.getCheckBox().isAllSelected()) {
                 continue;
             }
-            IkenshokinyuyoshiBusiness business = getBusiness(csvData, row, div);
-            IraiJohoDataTorikomiManager.createInstance().各テーブルへの登録(row.getShinseishoKanriNo(),
-                    row.getIkenshoIraiRirekiNo().getValue().intValue(), row.getKoroshoIfShikibetsuCode(),
-                    row.getShujiiIryokikanCode(), row.getShujiiCode(), business);
+            OrcaIkenshoCsv csvRow
+                    = csvData.getOrNull(row.getHokenshaBango(), row.getHihokenshaBango(), row.getShinseibi().getValue());
+            if (csvRow == null) {
+                continue;
+            }
+            list.add(new OrcaIkenshoResult(
+                    row.getShinseishoKanriNo(), row.getIkenshoIraiRirekiNo().getValue().intValue(), row.getKoroshoIfShikibetsuCode(),
+                    row.getShujiiIryokikanCode(), row.getShujiiCode(), csvRow
+            ));
         }
+        IraiJohoDataTorikomiManager.createInstance().save意見書(list);
         return ResponseData.of(div).respond();
-    }
-
-    private IkenshokinyuyoshiBusiness getBusiness(IraiJohoDataTorikomiCsvData csvData,
-            dgTorikomiFileIchiran_Row row, IraiJohoDataTorikomiDiv div) {
-        IkenshokinyuyoshiBusiness business = new IkenshokinyuyoshiBusiness();
-        IraiJohoDataTorikomiCsvEntity csvEntity
-                = csvData.getOrNull(row.getHokenshaBango(), row.getHihokenshaBango(), row.getShinseibi().getValue());
-        if (csvEntity == null) {
-            return business;
-        }
-        return getHandler(div).帳票出力用情報の編集(csvEntity);
     }
 
     private IraiJohoDataTorikomiHandler getHandler(IraiJohoDataTorikomiDiv div) {

@@ -11,7 +11,7 @@ import jp.co.ndensan.reams.db.dbe.business.report.ikenshokinyuyoshioruka.Ikensho
 import jp.co.ndensan.reams.db.dbe.business.report.ikenshokinyuyoshioruka.Ikenshokinyuyoshi01Report;
 import jp.co.ndensan.reams.db.dbe.business.report.ikenshokinyuyoshioruka.Ikenshokinyuyoshi02Property;
 import jp.co.ndensan.reams.db.dbe.business.report.ikenshokinyuyoshioruka.Ikenshokinyuyoshi02Report;
-import jp.co.ndensan.reams.db.dbe.business.report.ikenshokinyuyoshioruka.IkenshokinyuyoshiBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.orca.OrcaIkenshoCsv;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ikenshokinyuyoshioruka.Ikenshokinyuyoshi01ReportSource;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ikenshokinyuyoshioruka.Ikenshokinyuyoshi02ReportSource;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
@@ -44,9 +44,9 @@ public class Ikenshokinyuyoshi01PrintService {
     /**
      * 主治医意見書（オルカ）を出力します。
      *
-     * @param business IkenshokinyuyoshiBusiness
+     * @param business OrcaIkenshoCsv
      */
-    public void print主治医意見書01(IkenshokinyuyoshiBusiness business) {
+    public void print主治医意見書01(OrcaIkenshoCsv business) {
         List<Ikenshokinyuyoshi01Report> ryoumenReportList = new ArrayList<>();
         ryoumenReportList.add(new Ikenshokinyuyoshi01Report(business));
         Ikenshokinyuyoshi01Property ryoumenproperty = new Ikenshokinyuyoshi01Property();
@@ -61,9 +61,9 @@ public class Ikenshokinyuyoshi01PrintService {
     /**
      * 主治医意見書（オルカ）を出力します。
      *
-     * @param business IkenshokinyuyoshiBusiness
+     * @param business OrcaIkenshoCsv
      */
-    public void print主治医意見書02(IkenshokinyuyoshiBusiness business) {
+    public void print主治医意見書02(OrcaIkenshoCsv business) {
         List<Ikenshokinyuyoshi02Report> ryoumenReportList = new ArrayList<>();
         ryoumenReportList.add(new Ikenshokinyuyoshi02Report(business));
         Ikenshokinyuyoshi02Property ryoumenproperty = new Ikenshokinyuyoshi02Property();

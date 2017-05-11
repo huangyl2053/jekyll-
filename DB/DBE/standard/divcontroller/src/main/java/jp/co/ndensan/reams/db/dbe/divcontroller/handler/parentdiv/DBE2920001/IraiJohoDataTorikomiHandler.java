@@ -8,13 +8,11 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2920001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.iraijohodatatorikomi.NinteiShinseiJohoIraiJohoData;
-import jp.co.ndensan.reams.db.dbe.business.report.ikenshokinyuyoshioruka.IkenshokinyuyoshiBusiness;
-import jp.co.ndensan.reams.db.dbe.business.core.orca.IraiJohoDataTorikomiCsvData;
-import jp.co.ndensan.reams.db.dbe.business.core.orca.IraiJohoDataTorikomiCsvEntity;
+import jp.co.ndensan.reams.db.dbe.business.core.orca.OrcaIkenshoCsv;
+import jp.co.ndensan.reams.db.dbe.business.core.orca.OrcaIkenshoCsvData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2920001.IraiJohoDataTorikomiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2920001.dgTorikomiFileIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
-import jp.co.ndensan.reams.uz.uza.biz.YubinNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
@@ -29,8 +27,6 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 public class IraiJohoDataTorikomiHandler {
 
     private static final int INT_10 = 10;
-    private static final RString 同意する = new RString("1");
-    private static final RString 有 = new RString("1");
     private final IraiJohoDataTorikomiDiv div;
 
     /**
@@ -45,25 +41,25 @@ public class IraiJohoDataTorikomiHandler {
     /**
      * 一覧エリアの設定処理です。
      *
-     * @param csvEntityList {@link IraiJohoDataTorikomiCsvData}
+     * @param csvData {@link OrcaIkenshoCsvData}
      */
-    public void set一覧エリア(IraiJohoDataTorikomiCsvData csvEntityList) {
+    public void set一覧エリア(OrcaIkenshoCsvData csvData) {
         List<dgTorikomiFileIchiran_Row> rowlist = new ArrayList<>();
         List<KeyValueDataSource> selectedKeyItems = new ArrayList<>();
         selectedKeyItems.add(new KeyValueDataSource(new RString(0), RString.EMPTY));
-        for (IraiJohoDataTorikomiCsvEntity csvEntity : csvEntityList) {
+        for (OrcaIkenshoCsv csv : csvData) {
             dgTorikomiFileIchiran_Row row1 = new dgTorikomiFileIchiran_Row();
-            row1.setHokenshaBango(csvEntity.get保険者番号());
-            row1.setHihokenshaBango(!RString.isNullOrEmpty(csvEntity.get被保険者番号())
-                    ? csvEntity.get被保険者番号().padZeroToLeft(INT_10) : RString.EMPTY);
-            row1.getShinseibi().setValue(new FlexibleDate(csvEntity.get申請日()));
-            row1.setHihokenshaShimei(csvEntity.get患者名());
-            row1.getSeninengapi().setValue(new FlexibleDate(csvEntity.get生年月日()));
-            row1.setSeibetu(Seibetsu.toValue(csvEntity.get性別()).get名称());
-            row1.setYubinBangou(csvEntity.get郵便番号());
-            row1.setJyusyo(csvEntity.get住所());
-            row1.setIryouKikanMei(csvEntity.get医療機関名());
-            row1.setShuziiMei(csvEntity.get医師氏名());
+            row1.setHokenshaBango(csv.get保険者番号());
+            row1.setHihokenshaBango(!RString.isNullOrEmpty(csv.get被保険者番号())
+                    ? csv.get被保険者番号().padZeroToLeft(INT_10) : RString.EMPTY);
+            row1.getShinseibi().setValue(csv.get申請日());
+            row1.setHihokenshaShimei(csv.get患者名());
+            row1.getSeninengapi().setValue(csv.get生年月日());
+            row1.setSeibetu(Seibetsu.toValue(csv.get性別()).get名称());
+            row1.setYubinBangou(csv.get郵便番号());
+            row1.setJyusyo(csv.get住所());
+            row1.setIryouKikanMei(csv.get医療機関名());
+            row1.setShuziiMei(csv.get医師氏名());
             row1.setKiguusuu(new RString("1"));
             row1.getCheckBox().setDataSource(selectedKeyItems);
             rowlist.add(row1);
@@ -133,17 +129,6 @@ public class IraiJohoDataTorikomiHandler {
             return RString.EMPTY;
         }
         return 項目;
-    }
-
-    /**
-     * 帳票出力用情報を編集する。
-     *
-     * @param csvEntity IraiJohoDataTorikomiCsvEntity
-     * @return IkenshokinyuyoshiBusiness
-     */
-    public IkenshokinyuyoshiBusiness 帳票出力用情報の編集(IraiJohoDataTorikomiCsvEntity csvEntity) {
-        IkenshokinyuyoshiBusiness business = new IkenshokinyuyoshiBusiness(csvEntity);
-        return business;
     }
 
 }

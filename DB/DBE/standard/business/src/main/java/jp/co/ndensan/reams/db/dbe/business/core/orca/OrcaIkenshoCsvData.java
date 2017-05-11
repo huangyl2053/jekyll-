@@ -22,14 +22,14 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @reamsid_L DBE-1600-010 lishengli
  */
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class IraiJohoDataTorikomiCsvData implements Serializable, Iterable<IraiJohoDataTorikomiCsvEntity> {
+public class OrcaIkenshoCsvData implements Serializable, Iterable<OrcaIkenshoCsv> {
 
     private static final long serialVersionUID = -1979429572032170708L;
-    private final Map<Key, IraiJohoDataTorikomiCsvEntity> elements;
+    private final Map<Key, OrcaIkenshoCsv> elements;
 
-    public IraiJohoDataTorikomiCsvData(List<IraiJohoDataTorikomiCsvEntity> elements) {
-        Map<Key, IraiJohoDataTorikomiCsvEntity> map = new HashMap<>();
-        for (IraiJohoDataTorikomiCsvEntity e : elements) {
+    OrcaIkenshoCsvData(List<? extends OrcaIkenshoCsv> elements) {
+        Map<Key, OrcaIkenshoCsv> map = new HashMap<>();
+        for (OrcaIkenshoCsv e : elements) {
             map.put(new Key(e.get保険者番号(), e.get被保険者番号(), e.get申請日()), e);
         }
         this.elements = Collections.unmodifiableMap(map);
@@ -39,10 +39,10 @@ public class IraiJohoDataTorikomiCsvData implements Serializable, Iterable<IraiJ
      * @param shoKisaiHokenshaNo 保険者番号
      * @param hihokenshaNo 被保険者番号
      * @param shinseiYmd 申請日
-     * @return 指定の値を持つ{@link IraiJohoDataTorikomiCsvEntity}
+     * @return 指定の値を持つ{@link OrcaIkenshoCsvEntity}
      */
     @CheckForNull
-    public IraiJohoDataTorikomiCsvEntity getOrNull(RString shoKisaiHokenshaNo, RString hihokenshaNo, FlexibleDate shinseiYmd) {
+    public OrcaIkenshoCsv getOrNull(RString shoKisaiHokenshaNo, RString hihokenshaNo, FlexibleDate shinseiYmd) {
         return this.elements.get(new Key(shoKisaiHokenshaNo, hihokenshaNo, shinseiYmd));
     }
 
@@ -54,7 +54,7 @@ public class IraiJohoDataTorikomiCsvData implements Serializable, Iterable<IraiJ
     }
 
     @Override
-    public Iterator<IraiJohoDataTorikomiCsvEntity> iterator() {
+    public Iterator<OrcaIkenshoCsv> iterator() {
         return this.elements.values().iterator();
     }
 
@@ -68,10 +68,6 @@ public class IraiJohoDataTorikomiCsvData implements Serializable, Iterable<IraiJ
             this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
             this.hihokenshaNo = hihokenshaNo;
             this.shinseiYmd = shinseiYmd;
-        }
-
-        private Key(RString shoKisaiHokenshaNo, RString hihokenshaNo, RString shinseiYmdValue) {
-            this(shoKisaiHokenshaNo, hihokenshaNo, new FlexibleDate(shinseiYmdValue));
         }
 
         @Override

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jp.co.ndensan.reams.db.dbe.business.core.orca;
+package jp.co.ndensan.reams.db.dbe.entity.core.orca;
 
 import java.io.Serializable;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 @lombok.Setter
 @SuppressWarnings("PMD.UnusedPrivateField")
-public class IraiJohoDataTorikomiCsvEntity implements Serializable {
+public class OrcaIkenshoCsvEntity implements Serializable {
 
     @CsvField(order = 1, name = "バージョン")
     private RString バージョン;
