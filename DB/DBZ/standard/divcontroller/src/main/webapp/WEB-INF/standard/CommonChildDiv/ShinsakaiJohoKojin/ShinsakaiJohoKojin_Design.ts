@@ -77,6 +77,10 @@ module DBZ {
                 return new UZA.TextBox(this.convFiledName("txtShinsaTime"));
             }
 
+            public txtHanteiKekka(): UZA.TextBox {
+                return new UZA.TextBox(this.convFiledName("txtHanteiKekka"));
+            }
+
             public txtShinsakaiIken(): UZA.TextBoxMultiLine {
                 return new UZA.TextBoxMultiLine(this.convFiledName("txtShinsakaiIken"));
             }

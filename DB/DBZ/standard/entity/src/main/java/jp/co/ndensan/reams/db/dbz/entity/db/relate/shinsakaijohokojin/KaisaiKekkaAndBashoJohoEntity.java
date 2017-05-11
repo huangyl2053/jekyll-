@@ -35,6 +35,7 @@ public class KaisaiKekkaAndBashoJohoEntity implements IDbAccessable {
     private RString 介護認定審査会開催場所名称;
     private Code 介護認定審査会開催地区コード;
     private boolean 開催済み;
+    private RString 判定結果コード;
     private RString 審査会意見;
 
 }

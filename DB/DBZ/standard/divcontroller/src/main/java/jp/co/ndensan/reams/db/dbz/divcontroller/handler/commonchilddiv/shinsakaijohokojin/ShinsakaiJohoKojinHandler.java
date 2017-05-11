@@ -75,6 +75,7 @@ public class ShinsakaiJohoKojinHandler {
         if (kaisai.get所要時間合計() != 0) {
             div.getTxtShinsaTime().setValue(new RString(kaisai.get所要時間合計()));
         }
+        div.getTxtHanteiKekka().setValue(kaisai.get判定結果名());
         div.getTxtShinsakaiIken().setValue(kaisai.get審査会意見());
         div.getDgShinsakaiIin().setDataSource(get審査会委員一覧データグリッド(kaisai));
         div.getDgHoketsuShinsakai().setDataSource(get補欠審査会委員一覧データグリッド(kaisai));

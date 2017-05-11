@@ -51,6 +51,8 @@ public class ShinsakaiJohoKojinDiv extends Panel implements IShinsakaiJohoKojinD
     private TextBoxTime txtShinsaShuryoTime;
     @JsonProperty("txtShinsaTime")
     private TextBox txtShinsaTime;
+    @JsonProperty("txtHanteiKekka")
+    private TextBox txtHanteiKekka;
     @JsonProperty("txtShinsakaiIken")
     private TextBoxMultiLine txtShinsakaiIken;
     @JsonProperty("ShussekiIinJoho")
@@ -246,6 +248,24 @@ public class ShinsakaiJohoKojinDiv extends Panel implements IShinsakaiJohoKojinD
     @JsonProperty("txtShinsaTime")
     public void setTxtShinsaTime(TextBox txtShinsaTime) {
         this.txtShinsaTime = txtShinsaTime;
+    }
+
+    /*
+     * gettxtHanteiKekka
+     * @return txtHanteiKekka
+     */
+    @JsonProperty("txtHanteiKekka")
+    public TextBox getTxtHanteiKekka() {
+        return txtHanteiKekka;
+    }
+
+    /*
+     * settxtHanteiKekka
+     * @param txtHanteiKekka txtHanteiKekka
+     */
+    @JsonProperty("txtHanteiKekka")
+    public void setTxtHanteiKekka(TextBox txtHanteiKekka) {
+        this.txtHanteiKekka = txtHanteiKekka;
     }
 
     /*

@@ -24,6 +24,7 @@ and open the template in the editor.
         <result property="介護認定審査会開催場所名称" column="shinsakaiKaisaiBashoName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="介護認定審査会開催地区コード" column="shinsakaiKaisaiChikuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
         <result property="開催済み" column="hadKaisai"/>
+        <result property="判定結果コード" column="hanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="審査会意見" column="shinsakaiIken" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
 
@@ -36,10 +37,15 @@ and open the template in the editor.
                 A."shinsakaiKaishiYoteiTime"      AS "shinsakaiKaishiYoteiTime",
                 A."shinsakaiShuryoYoteiTime"      AS "shinsakaiShuryoYoteiTime",
                 A."shinsakaiKaisaiYoteiBashoCode" AS "shinsakaiKaisaiYoteiBashoCode",
-                A."gogitaiNo"                     AS "gogitaiNo"
+                A."gogitaiNo"                     AS "gogitaiNo",
+                B."hanteiKekkaCode"               AS "hanteiKekkaCode"
             FROM
                 rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS A
-            WHERE 1=1
+            INNER JOIN
+                rgdb."DbT5502ShinsakaiWariateJoho" AS B
+             ON B."shinsakaiKaisaiNo" = A."shinsakaiKaisaiNo"
+            WHERE
+                B."shinseishoKanriNo" = #{申請書管理番号}
                 <if test="null!=審査会開催番号 and 審査会開催番号.length()>0">
                     AND A."shinsakaiKaisaiNo" = #{審査会開催番号}
                 </if>
@@ -73,6 +79,7 @@ and open the template in the editor.
             dbT5592_dbT5511."shinsakaiKaisaiBashoName" AS "shinsakaiKaisaiBashoName",
             dbT5592_dbT5511."shinsakaiKaisaiChikuCode" AS "shinsakaiKaisaiChikuCode",
             dbT5511."shinsakaiKaisaiNo" IS NOT NULL    AS "hadKaisai",
+            dbT5501."hanteiKekkaCode"                  AS "hanteiKekkaCode",
             dbT5102."shinsakaiIken"                    AS "shinsakaiIken"
         FROM
             dbT5501 AS dbT5501

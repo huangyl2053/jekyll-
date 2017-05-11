@@ -71,6 +71,10 @@ var DBZ;
                 return new UZA.TextBox(this.convFiledName("txtShinsaTime"));
             };
 
+            Controls.prototype.txtHanteiKekka = function () {
+                return new UZA.TextBox(this.convFiledName("txtHanteiKekka"));
+            };
+
             Controls.prototype.txtShinsakaiIken = function () {
                 return new UZA.TextBoxMultiLine(this.convFiledName("txtShinsakaiIken"));
             };

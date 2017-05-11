@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinsataishodataoutput;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.HanteiKekkaCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.HanteiKekkaCode;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IsChikokuUmu;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IsShusseki;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.IssotaiUmu;

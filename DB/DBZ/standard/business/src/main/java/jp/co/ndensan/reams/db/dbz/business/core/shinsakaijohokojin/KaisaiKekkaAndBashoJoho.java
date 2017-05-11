@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.business.core.shinsakaijohokojin;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.HanteiKekkaCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shinsakaijohokojin.KaisaiKekkaAndBashoJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -140,6 +141,16 @@ public class KaisaiKekkaAndBashoJoho {
         return entity.is開催済み()
                 ? entity.get介護認定審査会開催地区コード()
                 : entity.get開催予定地区コード();
+    }
+
+    /**
+     * @return 判定結果の名称
+     */
+    public RString get判定結果名() {
+        if (HanteiKekkaCode.existsCode(entity.get判定結果コード())) {
+            return HanteiKekkaCode.toValue(entity.get判定結果コード()).get名称();
+        }
+        return RString.EMPTY;
     }
 
     /**
