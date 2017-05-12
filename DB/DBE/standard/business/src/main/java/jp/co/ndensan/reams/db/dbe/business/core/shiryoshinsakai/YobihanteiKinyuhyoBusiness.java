@@ -134,15 +134,15 @@ public class YobihanteiKinyuhyoBusiness {
             return RString.EMPTY;
         }
         if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(entity.getZenKoroshoIfShikibetsuCode().getColumnValue())) {
-            return YokaigoJotaiKubun99.toValue(entity.getYokaigoJotaiKubunCode().getColumnValue()).get名称();
+            return YokaigoJotaiKubun99.toValue(entity.getYokaigoJotaiKubunCode().getColumnValue()).get略称();
         }
         if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(entity.getZenKoroshoIfShikibetsuCode().getColumnValue())) {
-            return YokaigoJotaiKubun02.toValue(entity.getYokaigoJotaiKubunCode().getColumnValue()).get名称();
+            return YokaigoJotaiKubun02.toValue(entity.getYokaigoJotaiKubunCode().getColumnValue()).get略称();
         }
         if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(entity.getZenKoroshoIfShikibetsuCode().getColumnValue())) {
-            return YokaigoJotaiKubun06.toValue(entity.getYokaigoJotaiKubunCode().getColumnValue()).get名称();
+            return YokaigoJotaiKubun06.toValue(entity.getYokaigoJotaiKubunCode().getColumnValue()).get略称();
         }
-        return YokaigoJotaiKubun09.toValue(entity.getYokaigoJotaiKubunCode().getColumnValue()).get名称();
+        return YokaigoJotaiKubun09.toValue(entity.getYokaigoJotaiKubunCode().getColumnValue()).get略称();
     }
 
     /**
