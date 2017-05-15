@@ -51,6 +51,7 @@ public class Taishouichiran {
         this.entity.set前回認定有効期間_開始(checkNullForFlexibleDate(entity.get前回認定有効期間_開始()));
         this.entity.set前回認定有効期間_終了(checkNullForFlexibleDate(entity.get前回認定有効期間_終了()));
         this.entity.set要介護認定一次判定年月日(checkNullForFlexibleDate(entity.get要介護認定一次判定年月日()));
+        this.entity.set前回厚労省IF識別コード(checkNullForCode(entity.get前回厚労省IF識別コード()));
         this.entity.set要介護認定一次判定結果コード(checkNullForCode(entity.get要介護認定一次判定結果コード()));
         this.entity.set要介護認定前回一次判定結果コード(checkNullForCode(entity.get要介護認定前回一次判定結果コード()));
         this.entity.set二次判定要介護状態区分コード(checkNullForCode(entity.get二次判定要介護状態区分コード()));
@@ -89,19 +90,19 @@ public class Taishouichiran {
     public Boolean get介護認定審査会審査順確定フラグ() {
         return entity.is介護認定審査会審査順確定フラグ();
     }
-    
+
     /**
      * get審査会資料作成年月日
-     * 
+     *
      * @return 審査会資料作成年月日
      */
     public FlexibleDate get審査会資料作成年月日() {
         return entity.get審査会資料作成年月日();
     }
-    
+
     /**
      * get審査会資料送付年月日
-     * 
+     *
      * @return 審査会資料送付年月日
      */
     public FlexibleDate get審査会資料送付年月日() {
@@ -340,6 +341,13 @@ public class Taishouichiran {
      */
     public Code get厚労省IF識別コード() {
         return entity.get厚労省IF識別コード();
+    }
+
+    /**
+     * @return 前回厚労省IF識別コード
+     */
+    public Code get前回厚労省IF識別コード() {
+        return entity.get前回厚労省IF識別コード();
     }
 
     /**

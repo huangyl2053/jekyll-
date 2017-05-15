@@ -40,6 +40,7 @@ public class TaishouIchiranEntity {
     private FlexibleDate 前回認定有効期間_開始;
     private FlexibleDate 前回認定有効期間_終了;
     private FlexibleDate 要介護認定一次判定年月日;
+    private Code 前回厚労省IF識別コード;
     private Code 要介護認定一次判定結果コード;
     private Code 要介護認定前回一次判定結果コード;
     private Code 二次判定要介護状態区分コード;
