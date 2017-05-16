@@ -182,7 +182,15 @@ public enum ReportIdDBZ {
     /**
      * 汎用リストの帳票ＩＤです。
      */
-    DBZ700001(new ReportId("DBZ700001_HanyoList"), new RString("汎用リスト"));
+    DBZ700001(new ReportId("DBZ700001_HanyoList"), new RString("汎用リスト")),
+    /**
+     * 調査票個別まとめ出力の帳票ＩＤです。
+     */
+    DBE221061(new ReportId("DBE221061_ChosahyoIraishoAssortment"), new RString("調査票個別まとめ")),
+    /**
+     * 意見書個別まとめ出力の帳票ＩＤです。
+     */
+    DBE221071(new ReportId("DBE221071_IkenshoAssortment"), new RString("意見書個別まとめ"));
 
     private final ReportId reportId;
     private final RString reportName;

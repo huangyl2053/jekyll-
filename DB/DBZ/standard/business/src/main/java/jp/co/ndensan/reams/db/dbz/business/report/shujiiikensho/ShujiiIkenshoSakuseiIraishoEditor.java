@@ -50,7 +50,7 @@ public class ShujiiIkenshoSakuseiIraishoEditor implements IShujiiIkenshoSakuseiI
         source.meishoFuyo = item.getMeishoFuyo();
         source.customerBarCode = item.getCustomerBarCode();
         source.sonota = item.getSonota();
-        source.atenaRenban = item.getAtenaRenban();
+        source.atenaRemban = item.getAtenaRenban();
         source.title = item.getTitle();
         source.tsuchibun1 = item.getTsuchibun1();
         source.shinseiKubun = item.getShinseiKubun();

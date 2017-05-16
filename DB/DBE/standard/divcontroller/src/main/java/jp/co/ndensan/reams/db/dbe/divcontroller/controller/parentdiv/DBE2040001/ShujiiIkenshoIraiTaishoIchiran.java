@@ -303,13 +303,15 @@ public class ShujiiIkenshoIraiTaishoIchiran {
         }
 
         IkenshoPrintParameterModel model = new IkenshoPrintParameterModel();
-        List<ShinseishoKanriNo> list = new ArrayList<>();
-        for (dgNinteiTaskList_Row row : getHandler(div).getSelectedItems()) {
-            if (!RString.isNullOrEmpty(row.getShinseishoKanriNo())) {
-                list.add(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
+        if (!getHandler(div).getSelectedItems().isEmpty()) {
+            List<ShinseishoKanriNo> list = new ArrayList<>();
+            for (dgNinteiTaskList_Row row : getHandler(div).getSelectedItems()) {
+                if (!RString.isNullOrEmpty(row.getShinseishoKanriNo())) {
+                    list.add(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
+                }
             }
+            model.set申請書管理番号リスト(list);
         }
-        model.set申請書管理番号リスト(list);
         model.set市町村コード(div.getCcdHokenshaList().getSelectedItem().get市町村コード());
         model.set遷移元画面区分(GamenSeniKbn.主治医意見書依頼);
         div.setHiddenIuputModel(DataPassingConverter.serialize(model));

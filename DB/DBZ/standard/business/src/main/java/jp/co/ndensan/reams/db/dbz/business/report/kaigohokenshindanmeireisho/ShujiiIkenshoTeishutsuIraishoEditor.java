@@ -68,6 +68,7 @@ class ShujiiIkenshoTeishutsuIraishoEditor implements IShujiiIkenshoTeishutsuIrai
         source.yubinNo = item.getYubinNo();
         source.jusho = item.getJusho();
         source.tsuchibun2 = item.getTsuchibun2();
+        source.atenaRemban = item.getAtenaRemban();
         source.識別コード = item.get識別コード();
         source.拡張情報 = item.get拡張情報();
         return source;

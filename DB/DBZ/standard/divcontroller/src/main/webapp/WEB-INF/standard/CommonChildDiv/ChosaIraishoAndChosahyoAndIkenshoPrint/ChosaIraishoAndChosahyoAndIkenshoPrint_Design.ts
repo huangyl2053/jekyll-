@@ -191,6 +191,10 @@ module DBZ {
                 return new DBZ.BunshoBangoInput.ModeController(this.convFiledName("ccdBunshoNo"));
             }
 
+            public chkPrintBlank(): UZA.CheckBoxList {
+                return new UZA.CheckBoxList(this.convFiledName("chkPrintBlank"));
+            }
+
             public TeishutsuKigen(): UZA.Panel {
                 return new UZA.Panel(this.convFiledName("TeishutsuKigen"));
             }
