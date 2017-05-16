@@ -8,9 +8,7 @@ package jp.co.ndensan.reams.db.dbe.business.report.jimushinsakaishiryoa3;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.IchijihanteikekkahyoA3Business;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakaishiryo.JimuShinsakaiShiryoA3Layouts;
-import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.IchijihanteikekkahyoA3Entity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.jimushinsakaishiryoa3.JimuShinsakaishiryoA3ReportSource;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -31,8 +29,6 @@ public class JimuShinsakaishiryoA3Group2Editor implements IJimuShinsakaishiryoA3
     private static final RString イメージ = new RString("2");
     private static final RString 全面 = new RString("1");
     private static final RString 短冊 = new RString("2");
-    private static final RString サービス区分コード1 = new RString("1");
-    private static final RString サービス区分コード2 = new RString("2");
     private static final RString 特記事項テキスト_イメージ区分1 = new RString("1");
     private static final RString 特記事項テキスト_イメージ区分2 = new RString("2");
     private static final RString 特記パターン1 = new RString("1");
@@ -83,6 +79,7 @@ public class JimuShinsakaishiryoA3Group2Editor implements IJimuShinsakaishiryoA3
         source.shinseiKubun = item.get申請区分();
         source.age = get年齢(item.get年齢());
         source.seibetsu = item.get性別();
+        source.zenkaiIchijiHanteiKekka = item.get前回一次判定結果();
         source.zenZenkaiHanteikekka = item.get前々回要介護度();
         source.zenzenkaiYukokikan = item.get前々回認定有効期間();
         source.zZenkaiNijiKaishiYMD = パターン17(item.get前々回認定有効期間開始年月日());
@@ -189,6 +186,7 @@ public class JimuShinsakaishiryoA3Group2Editor implements IJimuShinsakaishiryoA3
         source.sabisuKaisu20 = item.getサービス回数20();
         source.sabisuKaisu21 = item.getサービス回数21();
         source.shisetsuType = item.get利用施設種類();
+        source.shisetsuTypeLabel = new RString("施設種別：");
         source.shisetsuNameTxit = item.get施設名テキスト();
         source.shisetsuAddressTxit = item.get住所テキスト();
         source.shisetsuTelTxit = item.get電話番号テキスト();

@@ -134,12 +134,11 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 public class NinteiShinseiToroku {
 
     private final NinteiShinseiTorokuManager manager;
-    private final KaigoHokenshaManager dbt7050Manager;
     private final NinteiKanryoJohoManager dbt5105Manager;
     private final ShinseiRirekiJohoManager dbt5121Manager;
     private static final RString MENUID_DBEMN31001 = new RString("DBEMN31001");
     private static final RString MENUID_DBEMN31003 = new RString("DBEMN31003");
-//    private static final RString MENUID_DBEMN21003 = new RString("DBEMN21003");
+    private static final RString UICONTAINERID_DBEUC10001 = new RString("DBEUC10001");
     private static final RString UICONTAINERID_DBEUC11001 = new RString("DBEUC11001");
     private static final RString UICONTAINERID_DBEUC10002 = new RString("DBEUC10002");
     private static final RString BTNUPDATE_FILENAME = new RString("btnUpdate");
@@ -149,7 +148,6 @@ public class NinteiShinseiToroku {
     private static final int INT_0 = 0;
     private static final int ZERO_17 = 17;
     private static final int ZERO_5 = 5;
-    private static final RString ZERO_6 = new RString("000000");
     private static final RString 歳 = new RString("歳");
     private static final RString KEY1 = new RString("key1");
     private static final RString サービス削除の旨 = new RString("1010");
@@ -176,7 +174,6 @@ public class NinteiShinseiToroku {
      */
     public NinteiShinseiToroku() {
         this.manager = NinteiShinseiTorokuManager.createInstance();
-        this.dbt7050Manager = KaigoHokenshaManager.createInstance();
         this.dbt5105Manager = NinteiKanryoJohoManager.createInstance();
         this.dbt5121Manager = new ShinseiRirekiJohoManager();
         ninteiTandokuDounyuFlag = Boolean.FALSE;
@@ -361,6 +358,9 @@ public class NinteiShinseiToroku {
                 return ResponseData.of(div).rootTitle(審査依頼受付).addValidationMessages(validationMessages).respond();
             } else {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNUPDATE_FILENAME, false);
+            }
+            if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC10001)) {
+                ViewStateHolder.put(ViewStateKeys.認定計画情報, manager.get認定計画情報(管理番号));
             }
             return ResponseData.of(div).rootTitle(審査依頼受付).respond();
         }
@@ -1019,11 +1019,23 @@ public class NinteiShinseiToroku {
             if (shinseitodokedeJoho != null) {
                 manager.save申請届出情報(shinseitodokedeJoho);
             }
-
+            if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC10001)) {
+                update申請計画情報(shinseiJoho, div);
+            }
             前排他キーの解除(申請書管理番号.getColumnValue());
             return goToKanryo(div, response, 申請書管理番号);
         }
         return response.respond();
+    }
+
+    private void update申請計画情報(NinteiShinseiJoho shinseiJoho, NinteiShinseiTorokuDiv div) {
+        FlexibleDate 申請日 = new FlexibleDate(div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtShinseiYMD().getValue().toString());
+        if (!shinseiJoho.get認定申請年月日().equals(申請日)) {
+            NinteiKeikakuJoho ninteiKeikakuJoho = get申請計画情報forUpdate(div);
+            if (ninteiKeikakuJoho != null) {
+                manager.save申請計画情報(ninteiKeikakuJoho);
+            }
+        }
     }
 
     private boolean is変更(NinteiShinseiTorokuDiv div) {
@@ -1343,6 +1355,18 @@ public class NinteiShinseiToroku {
 
     private NinteiKeikakuJoho get申請計画情報(ShinseishoKanriNo 申請書管理番号, NinteiShinseiTorokuDiv div) {
         NinteiKeikakuJoho 認定計画情報 = new NinteiKeikakuJoho(申請書管理番号);
+        return get申請計画情報Logic(認定計画情報, div);
+    }
+
+    private NinteiKeikakuJoho get申請計画情報forUpdate(NinteiShinseiTorokuDiv div) {
+        NinteiKeikakuJoho 認定計画情報 = ViewStateHolder.get(ViewStateKeys.認定計画情報, NinteiKeikakuJoho.class);
+        if (認定計画情報 != null) {
+            return get申請計画情報Logic(認定計画情報, div);
+        }
+        return null;
+    }
+
+    private NinteiKeikakuJoho get申請計画情報Logic(NinteiKeikakuJoho 認定計画情報, NinteiShinseiTorokuDiv div) {
         NinteiKeikakuJohoBuilder ninteiKeikakuJohoBuilder = 認定計画情報.createBuilderForEdit();
         RDate 申請日 = div.getCcdKaigoNinteiShinseiKihon().getKaigoNinteiShinseiKihonJohoInputDiv().getTxtShinseiYMD().getValue();
         if (申請日 != null && !申請日.toDateString().isEmpty()) {

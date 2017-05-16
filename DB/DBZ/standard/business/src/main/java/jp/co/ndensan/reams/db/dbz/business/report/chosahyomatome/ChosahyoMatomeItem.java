@@ -1,0 +1,144 @@
+package jp.co.ndensan.reams.db.dbz.business.report.chosahyomatome;
+
+import jp.co.ndensan.reams.db.dbz.definition.core.chosahyomatome.ChosahyoMatomeLayout;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import lombok.Getter;
+import lombok.Setter;
+
+/**
+ * 調査票まとめて印刷のitemです。
+ * @author n8438
+ */
+@Getter
+@Setter
+public class ChosahyoMatomeItem {
+    
+    private RString hakkoYMD1;
+    private RString denshiKoin;
+    private RString ninshoshaYakushokuMei;
+    private RString ninshoshaYakushokuMei2;
+    private RString ninshoshaYakushokuMei1;
+    private RString koinMojiretsu;
+    private RString ninshoshaShimeiKakeru;
+    private RString ninshoshaShimeiKakenai;
+    private RString koinShoryaku;
+    private RString bunshoNo;
+    private RString yubinNo1;
+    private RString jushoText;
+    private RString kikanNameText;
+    private RString shimeiText;
+    private RString meishoFuyo;
+    private RString customerBarCode;
+    private RString sonota;
+    private RString pageCount;
+    private RString title;
+    private RString tsuchibun1;
+    private RString hihokenshaNo1;
+    private RString hihokenshaNo2;
+    private RString hihokenshaNo3;
+    private RString hihokenshaNo4;
+    private RString hihokenshaNo5;
+    private RString hihokenshaNo6;
+    private RString hihokenshaNo7;
+    private RString hihokenshaNo8;
+    private RString hihokenshaNo9;
+    private RString hihokenshaNo10;
+    private RString birthGengo;
+    private RString birthYMD;
+    private RString hihokenshaNameKana;
+    private RString hihokenshaName;
+    private RString seibetsu;
+    private RString yubinNo;
+    private RString jusho;
+    private RString telNo;
+    private RString homonChosasakiYubinNo;
+    private RString homonChosasakiJusho;
+    private RString homonChosasakiName;
+    private RString homonChosasakiTelNo;
+    private RString shinseiYMD;
+    private RString teishutsuKigen;
+    private RString tsuchibun2;
+    
+    private RString shinseiYY1;
+    private RString shinseiYY2;
+    private RString shinseiMM1;
+    private RString shinseiMM2;
+    private RString shinseiDD1;
+    private RString shinseiDD2;
+    private RString hokenshaNo1;
+    private RString hokenshaNo2;
+    private RString hokenshaNo3;
+    private RString hokenshaNo4;
+    private RString hokenshaNo5;
+    private RString hokenshaNo6;
+    private RString hishokenshaNo7;
+    private RString hishokenshaNo8;
+    private RString hishokenshaNo9;
+    private RString hishokenshaNo10;
+    private RString hishokenshaNo1;
+    private RString hishokenshaNo2;
+    private RString hishokenshaNo3;
+    private RString hishokenshaNo4;
+    private RString hishokenshaNo5;
+    private RString hishokenshaNo6;
+    private RString 再調査;
+    private RString 新規;
+    private RString homonChosainName;
+    private RString homonChosainNo1;
+    private RString homonChosainNo2;
+    private RString homonChosainNo3;
+    private RString homonChosainNo4;
+    private RString homonChosainNo5;
+    private RString homonChosainNo6;
+    private RString homonChosainNo7;
+    private RString homonChosainNo8;
+    private RString homonChosasakiNo1;
+    private RString homonChosasakiNo2;
+    private RString homonChosasakiNo3;
+    private RString homonChosasakiNo4;
+    private RString homonChosasakiNo5;
+    private RString homonChosasakiNo6;
+    private RString homonChosasakiNo7;
+    private RString homonChosasakiNo8;
+    private RString homonChosasakiNo9;
+    private RString homonChosasakiNo10;
+    private RString homonChosasakiNo11;
+    private RString homonChosasakiNo12;
+    private RString shinseishaNameKana;
+    private RString seibetsuMan;
+    private RString shinseishaYubinNo;
+    private RString shinseishTelNo;
+    private RString shinseishaName;
+    private RString seibetsuWoman;
+    private RString shinseishaJusho;
+    private RString kazokuRenrakusakiTel1;
+    private RString meiji;
+    private RString taisho;
+    private RString showa;
+    private RString kazokuRenrakusakiYubinNo;
+    private RString kazokuRenrakusakiTel2;
+    private RString kazokuRenrakusakiJusho;
+    private RString birthMM;
+    private RString birthYY;
+    private RString birthDD;
+    private RString age;
+    private RString shinseishatonoKankei;
+    private RString kazokuRenrakusakiName;
+    private RString nikaime;
+    private RString shokai;
+    private RString higaito;
+    private RString yoshien;
+    private RString yoshiendo;
+    private RString yokaigo;
+    private RString yokaigodo;
+    private RString zenkaiNinteiYYYY;
+    private RString zenkaiNinteiMM;
+    private RString zenkaiNinteiDD;
+    private RString atenaRemban;
+    
+    private ShikibetsuCode shikibetsuCode;
+    private ChosahyoMatomeLayout layout;
+    private ExpandedInformation 拡張情報;
+}

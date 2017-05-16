@@ -8,7 +8,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri;
 import java.util.ArrayList;
 import java.util.Arrays;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.DeletableImages;
-import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.HanteiKekkaCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.HanteiKekkaCode;
 import static jp.co.ndensan.reams.db.dbz.entity.basic.helper.DbT5502ShinsakaiWariateJohoEntityGenerator.createDbT5502ShinsakaiWariateJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5502ShinsakaiWariateJohoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;

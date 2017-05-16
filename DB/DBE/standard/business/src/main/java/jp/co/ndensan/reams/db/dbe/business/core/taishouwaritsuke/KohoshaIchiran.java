@@ -49,6 +49,7 @@ public class KohoshaIchiran {
         this.entity.set前回認定有効期間_終了(checkNullForFlexibleDate(entity.get前回認定有効期間_終了()));
         this.entity.set要介護認定一次判定年月日(checkNullForFlexibleDate(entity.get要介護認定一次判定年月日()));
         this.entity.set要介護認定一次判定結果コード(checkNullForCode(entity.get要介護認定一次判定結果コード()));
+        this.entity.set前回厚労省IF識別コード(checkNullForCode(entity.get前回厚労省IF識別コード()));
         this.entity.set要介護認定前回一次判定結果コード(checkNullForCode(entity.get要介護認定前回一次判定結果コード()));
         this.entity.set二次判定要介護状態区分コード(checkNullForCode(entity.get二次判定要介護状態区分コード()));
         this.entity.setマスキング完了年月日(checkNullForFlexibleDate(entity.getマスキング完了年月日()));
@@ -290,6 +291,13 @@ public class KohoshaIchiran {
      */
     public Code get厚労省IF識別コード() {
         return entity.get厚労省IF識別コード();
+    }
+
+    /**
+     * @return 前回厚労省IF識別コード
+     */
+    public Code get前回厚労省IF識別コード() {
+        return entity.get前回厚労省IF識別コード();
     }
 
     /**

@@ -580,10 +580,11 @@ public class TaishouWaritsukeHandler {
         }
         再調査 = new RString(Integer.toString(taishouichiran.get再調査依頼回数()));
         if (taishouichiran.get厚労省IF識別コード() != null || !taishouichiran.get厚労省IF識別コード().isEmpty()) {
-            RString 厚労省IF識別コード = taishouichiran.get厚労省IF識別コード().value().substring(0, 2);
+            RString 厚労省IF識別コード = taishouichiran.get厚労省IF識別コード().value().substringEmptyOnError(0, 2);
             今回一次判定 = set今回一次判定区分(taishouichiran.get要介護認定一次判定結果コード(), 厚労省IF識別コード, 今回一次判定);
-            前回一次判定 = set前回一次判定区分(taishouichiran.get要介護認定前回一次判定結果コード(), 厚労省IF識別コード, 前回一次判定);
-            前回二次判定 = set前回二次判定区分(taishouichiran.get二次判定要介護状態区分コード(), 厚労省IF識別コード, 前回二次判定);
+            RString 前回厚労省IF識別コード = taishouichiran.get前回厚労省IF識別コード().value().substringEmptyOnError(0, 2);
+            前回一次判定 = set前回一次判定区分(taishouichiran.get要介護認定前回一次判定結果コード(), 前回厚労省IF識別コード, 前回一次判定);
+            前回二次判定 = set前回二次判定区分(taishouichiran.get二次判定要介護状態区分コード(), 前回厚労省IF識別コード, 前回二次判定);
         }
         if (taishouichiran.get認定審査会割付完了年月日() != null && !taishouichiran.get認定審査会割付完了年月日().isEmpty()) {
             認定審査会割付完了日 = new RString(taishouichiran.get認定審査会割付完了年月日().toString());
@@ -782,10 +783,11 @@ public class TaishouWaritsukeHandler {
             }
             再調査 = new RString(Integer.toString(kohoshaIchiran.get再調査依頼回数()));
             if (kohoshaIchiran.get厚労省IF識別コード() != null || !kohoshaIchiran.get厚労省IF識別コード().isEmpty()) {
-                RString 厚労省IF識別コード = kohoshaIchiran.get厚労省IF識別コード().value().substring(0, 2);
+                RString 厚労省IF識別コード = kohoshaIchiran.get厚労省IF識別コード().value().substringEmptyOnError(0, 2);
                 今回一次判定 = set今回一次判定区分(kohoshaIchiran.get要介護認定一次判定結果コード(), 厚労省IF識別コード, 今回一次判定);
-                前回一次判定 = set前回一次判定区分(kohoshaIchiran.get要介護認定前回一次判定結果コード(), 厚労省IF識別コード, 前回一次判定);
-                前回二次判定 = set前回二次判定区分(kohoshaIchiran.get二次判定要介護状態区分コード(), 厚労省IF識別コード, 前回二次判定);
+                RString 前回厚労省IF識別コード = kohoshaIchiran.get前回厚労省IF識別コード().value().substringEmptyOnError(0, 2);
+                前回一次判定 = set前回一次判定区分(kohoshaIchiran.get要介護認定前回一次判定結果コード(), 前回厚労省IF識別コード, 前回一次判定);
+                前回二次判定 = set前回二次判定区分(kohoshaIchiran.get二次判定要介護状態区分コード(), 前回厚労省IF識別コード, 前回二次判定);
             }
             if (!isオブザーバーチェックOK(kohoshaIchiran.get申請書管理番号(), true, false, false)) {
                 オブザーバーチェック_主治医.setIcon(IconType.Warning);
@@ -1010,7 +1012,7 @@ public class TaishouWaritsukeHandler {
         }
         if (row.getJotaiFlag().equals(new RString("2"))) {
             ShinsakaiWariateJohoKenshu shinsakaiWariateJohoKenshu = new ShinsakaiWariateJohoKenshu(
-                    div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(), 
+                    div.getShinsakaiTaishoshaWaritsuke().getKaigoNinteiShinsakaiKaisaiNo(),
                     new ShinseishoKanriNo(row.getShinseishoKanriNo()));
             ShinsakaiWariateJohoKenshuBuilder builder = shinsakaiWariateJohoKenshu.createBuilderForEdit();
             builder.set介護認定審査会開催年月日(div.getTxtKaisaiDate().getValue());

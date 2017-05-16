@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShoriTaishoshaKensakuShijiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,20 +25,20 @@ public class ShoriTaishoshaKensakuShijiDiv extends Panel {
      */
     @JsonProperty("txtHihokenshaNumber")
     private TextBoxCode txtHihokenshaNumber;
-    @JsonProperty("ddlKensakuTaisho")
-    private DropDownList ddlKensakuTaisho;
-    @JsonProperty("txtSearchYMD")
-    private TextBoxDateRange txtSearchYMD;
-    @JsonProperty("chkMasking")
-    private CheckBoxList chkMasking;
     @JsonProperty("txtShinsakaiKaisaiNo")
     private TextBoxNum txtShinsakaiKaisaiNo;
+    @JsonProperty("chkMasking")
+    private CheckBoxList chkMasking;
     @JsonProperty("btnClear")
     private Button btnClear;
     @JsonProperty("txtMaxDisp")
     private TextBoxNum txtMaxDisp;
     @JsonProperty("ccdHokensya")
     private HokenshaListDiv ccdHokensya;
+    @JsonProperty("ddlKensakuTaisho")
+    private DropDownList ddlKensakuTaisho;
+    @JsonProperty("txtSearchYMD")
+    private TextBoxDateRange txtSearchYMD;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -65,39 +65,21 @@ public class ShoriTaishoshaKensakuShijiDiv extends Panel {
     }
 
     /*
-     * getddlKensakuTaisho
-     * @return ddlKensakuTaisho
+     * gettxtShinsakaiKaisaiNo
+     * @return txtShinsakaiKaisaiNo
      */
-    @JsonProperty("ddlKensakuTaisho")
-    public DropDownList getDdlKensakuTaisho() {
-        return ddlKensakuTaisho;
+    @JsonProperty("txtShinsakaiKaisaiNo")
+    public TextBoxNum getTxtShinsakaiKaisaiNo() {
+        return txtShinsakaiKaisaiNo;
     }
 
     /*
-     * setddlKensakuTaisho
-     * @param ddlKensakuTaisho ddlKensakuTaisho
+     * settxtShinsakaiKaisaiNo
+     * @param txtShinsakaiKaisaiNo txtShinsakaiKaisaiNo
      */
-    @JsonProperty("ddlKensakuTaisho")
-    public void setDdlKensakuTaisho(DropDownList ddlKensakuTaisho) {
-        this.ddlKensakuTaisho = ddlKensakuTaisho;
-    }
-
-    /*
-     * gettxtSearchYMD
-     * @return txtSearchYMD
-     */
-    @JsonProperty("txtSearchYMD")
-    public TextBoxDateRange getTxtSearchYMD() {
-        return txtSearchYMD;
-    }
-
-    /*
-     * settxtSearchYMD
-     * @param txtSearchYMD txtSearchYMD
-     */
-    @JsonProperty("txtSearchYMD")
-    public void setTxtSearchYMD(TextBoxDateRange txtSearchYMD) {
-        this.txtSearchYMD = txtSearchYMD;
+    @JsonProperty("txtShinsakaiKaisaiNo")
+    public void setTxtShinsakaiKaisaiNo(TextBoxNum txtShinsakaiKaisaiNo) {
+        this.txtShinsakaiKaisaiNo = txtShinsakaiKaisaiNo;
     }
 
     /*
@@ -116,24 +98,6 @@ public class ShoriTaishoshaKensakuShijiDiv extends Panel {
     @JsonProperty("chkMasking")
     public void setChkMasking(CheckBoxList chkMasking) {
         this.chkMasking = chkMasking;
-    }
-
-    /*
-     * gettxtShinsakaiKaisaiNo
-     * @return txtShinsakaiKaisaiNo
-     */
-    @JsonProperty("txtShinsakaiKaisaiNo")
-    public TextBoxNum getTxtShinsakaiKaisaiNo() {
-        return txtShinsakaiKaisaiNo;
-    }
-
-    /*
-     * settxtShinsakaiKaisaiNo
-     * @param txtShinsakaiKaisaiNo txtShinsakaiKaisaiNo
-     */
-    @JsonProperty("txtShinsakaiKaisaiNo")
-    public void setTxtShinsakaiKaisaiNo(TextBoxNum txtShinsakaiKaisaiNo) {
-        this.txtShinsakaiKaisaiNo = txtShinsakaiKaisaiNo;
     }
 
     /*
@@ -179,6 +143,42 @@ public class ShoriTaishoshaKensakuShijiDiv extends Panel {
     @JsonProperty("ccdHokensya")
     public IHokenshaListDiv getCcdHokensya() {
         return ccdHokensya;
+    }
+
+    /*
+     * getddlKensakuTaisho
+     * @return ddlKensakuTaisho
+     */
+    @JsonProperty("ddlKensakuTaisho")
+    public DropDownList getDdlKensakuTaisho() {
+        return ddlKensakuTaisho;
+    }
+
+    /*
+     * setddlKensakuTaisho
+     * @param ddlKensakuTaisho ddlKensakuTaisho
+     */
+    @JsonProperty("ddlKensakuTaisho")
+    public void setDdlKensakuTaisho(DropDownList ddlKensakuTaisho) {
+        this.ddlKensakuTaisho = ddlKensakuTaisho;
+    }
+
+    /*
+     * gettxtSearchYMD
+     * @return txtSearchYMD
+     */
+    @JsonProperty("txtSearchYMD")
+    public TextBoxDateRange getTxtSearchYMD() {
+        return txtSearchYMD;
+    }
+
+    /*
+     * settxtSearchYMD
+     * @param txtSearchYMD txtSearchYMD
+     */
+    @JsonProperty("txtSearchYMD")
+    public void setTxtSearchYMD(TextBoxDateRange txtSearchYMD) {
+        this.txtSearchYMD = txtSearchYMD;
     }
 
     // </editor-fold>

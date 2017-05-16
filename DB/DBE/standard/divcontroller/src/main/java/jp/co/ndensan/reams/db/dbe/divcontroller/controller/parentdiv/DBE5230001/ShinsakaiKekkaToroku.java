@@ -21,8 +21,8 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku.ShinsakaiKe
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku.ShinsakaiKekkaTorokuDeletionCandidate;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku.ShinsakaiKekkaTorokuIChiRanBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.core.TorisageKubun;
-import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.HanteiKekkaCode;
 import jp.co.ndensan.reams.db.dbe.definition.core.util.accesslog.ExpandedInformations;
+import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.HanteiKekkaCode;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeNotificationMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;

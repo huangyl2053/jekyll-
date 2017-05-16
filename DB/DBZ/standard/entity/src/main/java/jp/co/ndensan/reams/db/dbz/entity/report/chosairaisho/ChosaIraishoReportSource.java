@@ -111,6 +111,8 @@ public class ChosaIraishoReportSource implements IReportSource {
     public RString teishutsuKigen;
     @ReportItem(name = "tsuchibun2", order = 45)
     public RString tsuchibun2;
+    @ReportItem(name = "atenaRemban", order = 46)
+    public RString atenaRemban;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     @ReportPerson(id = "X")

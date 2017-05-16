@@ -24,6 +24,7 @@ import lombok.Setter;
 public class DBE525002_HanteiKekkaHokenshaParameter extends BatchParameterBase {
 
     private static final String SHINSEISHOLANRINOLIST = "shinseishoKanriNoList";
+    private static final String HIHOKENSHANOLIST = "hihokenshaNoList";
     private static final String FAYIRUKUBEN = "fayirukuben";
     private static final String CHUSHUTSUHOHO = "chushutsuHoho";
     private static final String CHUSHUTSUFROMDATE = "chushutsuFromDate";
@@ -50,6 +51,8 @@ public class DBE525002_HanteiKekkaHokenshaParameter extends BatchParameterBase {
     private RString dataShutsuryokuUmu;
     @BatchParameter(key = SHINSEISHOLANRINOLIST, name = "申請書管理番号リスト")
     private List<RString> shinseishoKanriNoList;
+    @BatchParameter(key = HIHOKENSHANOLIST, name = "被保険者番号リスト")
+    private List<RString> hihokenshaNoList;
 
     /**
      * コンストラクタです。
@@ -98,7 +101,8 @@ public class DBE525002_HanteiKekkaHokenshaParameter extends BatchParameterBase {
      * @return ItakusakiChosainIchiranMybitisParamter
      */
     public HanteiKekkaJohoShutsuryokuProcessParamter toHanteiKekkaJohoShutsuryokuProcessParamter() {
-        return new HanteiKekkaJohoShutsuryokuProcessParamter(shinseishoKanriNoList, fayirukuben, hokensha, hokenshaName
-            , chushutsuHoho, chushutsuFromDate, chushutsuToDate, hihokenshaNo, dataShutsuryokuUmu);
+        return new HanteiKekkaJohoShutsuryokuProcessParamter(
+                shinseishoKanriNoList, hihokenshaNoList, fayirukuben, hokensha, hokenshaName, chushutsuHoho,
+                chushutsuFromDate, chushutsuToDate, hihokenshaNo, dataShutsuryokuUmu);
     }
 }

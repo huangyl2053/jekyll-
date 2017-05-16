@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.business.core.shinsakaijohokojin;
 
 import static java.util.Objects.requireNonNull;
+import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.HanteiKekkaCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shinsakaijohokojin.KaisaiKekkaAndBashoJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -61,14 +62,23 @@ public class KaisaiKekkaAndBashoJoho {
     public int get合議体番号() {
         return entity.get合議体番号();
     }
-    
-     /**
+
+    /**
      * 合議体名称を返します。
      *
      * @return 合議体名称
      */
     public RString get合議体名称() {
         return entity.get合議体名称();
+    }
+
+    /**
+     * 開催予定日を返します。
+     *
+     * @return 開催予定日
+     */
+    public FlexibleDate get開催予定日() {
+        return entity.get開催予定日();
     }
 
     /**
@@ -86,7 +96,9 @@ public class KaisaiKekkaAndBashoJoho {
      * @return 介護認定審査会開始時刻
      */
     public RString get介護認定審査会開始時刻() {
-        return entity.get介護認定審査会開始時刻();
+        return entity.is開催済み()
+                ? entity.get介護認定審査会開始時刻()
+                : entity.get開始予定時刻();
     }
 
     /**
@@ -95,7 +107,9 @@ public class KaisaiKekkaAndBashoJoho {
      * @return 介護認定審査会終了時刻
      */
     public RString get介護認定審査会終了時刻() {
-        return entity.get介護認定審査会終了時刻();
+        return entity.is開催済み()
+                ? entity.get介護認定審査会終了時刻()
+                : entity.get終了予定時刻();
     }
 
     /**
@@ -113,7 +127,9 @@ public class KaisaiKekkaAndBashoJoho {
      * @return 介護認定審査会開催場所名称
      */
     public RString get介護認定審査会開催場所名称() {
-        return entity.get介護認定審査会開催場所名称();
+        return entity.is開催済み()
+                ? entity.get介護認定審査会開催場所名称()
+                : entity.get開催予定場所名();
     }
 
     /**
@@ -122,6 +138,26 @@ public class KaisaiKekkaAndBashoJoho {
      * @return 介護認定審査会開催地区コード
      */
     public Code get介護認定審査会開催地区コード() {
-        return entity.get介護認定審査会開催地区コード();
+        return entity.is開催済み()
+                ? entity.get介護認定審査会開催地区コード()
+                : entity.get開催予定地区コード();
     }
+
+    /**
+     * @return 判定結果の名称
+     */
+    public RString get判定結果名() {
+        if (HanteiKekkaCode.existsCode(entity.get判定結果コード())) {
+            return HanteiKekkaCode.toValue(entity.get判定結果コード()).get名称();
+        }
+        return RString.EMPTY;
+    }
+
+    /**
+     * @return 審査会意見
+     */
+    public RString get審査会意見() {
+        return entity.get審査会意見();
+    }
+
 }

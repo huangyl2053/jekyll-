@@ -48,6 +48,7 @@ public class KaigohokenShindanMeireishoHeaderItem {
     private RString jushinKikan;
     private RString jushinArea;
     private RString tsuchibun2;
+    private RString atenaRemban;
     private ShikibetsuCode 識別コード;
     private ExpandedInformation 拡張情報;
 

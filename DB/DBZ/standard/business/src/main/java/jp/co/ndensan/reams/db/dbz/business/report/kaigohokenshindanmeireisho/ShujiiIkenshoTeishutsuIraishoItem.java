@@ -59,6 +59,7 @@ public class ShujiiIkenshoTeishutsuIraishoItem {
     private RString yubinNo;
     private RString jusho;
     private RString tsuchibun2;
+    private RString atenaRemban;
     private ShikibetsuCode 識別コード;
     private ExpandedInformation 拡張情報;
 }

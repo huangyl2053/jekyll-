@@ -54,6 +54,8 @@
         <result property="zKijunJikanKinoKunren" column="zKijunJikanKinoKunren" />
         <result property="zKijunJikanIryoKanren" column="zKijunJikanIryoKanren" />
         <result property="zKijunJikanNinchishoKasan" column="zKijunJikanNinchishoKasan" />
+        <result property="zIchijiHanteiKekkaCode" column="zIchijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
+        <result property="zIchijiHanteiKekkaNinchishoKasanCode" column="zIchijiHanteiKekkaNinchishoKasanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
         <result property="ninteichosaJisshiYMD" column="ninteichosaJisshiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
         <result property="chosaJisshiBashoMeisho" column="chosaJisshiBashoMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="nigoTokuteiShippeiCode" column="nigoTokuteiShippeiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler" />
@@ -406,13 +408,55 @@
 
     <select id="get事務局委員氏名" resultMap="Result_ShinsakaiIinJoho"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.JimuShinsakaiIinJohoMyBatisParameter" fetchSize="500"  resultOrdered="true">
-        SELECT dbt5594."shinsakaiIinShimei" AS dbt5594_shinsakaiIinShimei
-        FROM rgdb."DbT5503ShinsakaiWariateIinJoho" AS dbt5503
-        INNER JOIN rgdb."DbT5594ShinsakaiIinJoho" AS dbt5594
-        ON dbt5594."shinsakaiIinCode" = dbt5503."shinsakaiIinCode"
-        WHERE dbt5503."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
-        ORDER BY dbt5503."kaigoninteiShinsakaiGichoKubunCode" DESC
-        , dbt5594."shinsakaiIinCode"
+        WITH effectiveGogitai AS (
+            SELECT
+                dbt5591."gogitaiNo" AS "gogitaiNo",
+                dbt5591."gogitaiYukoKikanKaishiYMD" AS "gogitaiYukoKikanKaishiYMD",
+                dbt5591."gogitaiYukoKikanShuryoYMD" AS "gogitaiYukoKikanShuryoYMD"
+            FROM (
+                SELECT
+                    "gogitaiNo" AS "gogitaiNo",
+                    "shinsakaiKaisaiYoteiYMD" AS "shinsakaiKaisaiYoteiYMD"
+                FROM
+                    rgdb."DbT5501ShinsakaiKaisaiYoteiJoho"
+                WHERE
+                    "shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
+                ) AS dbt5501
+            INNER JOIN
+                rgdb."DbT5591GogitaiJoho" AS dbt5591
+              ON dbt5591."gogitaiNo" = dbt5501."gogitaiNo"
+             AND dbt5591."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> dbt5501."shinsakaiKaisaiYoteiYMD"
+             AND dbt5591."gogitaiYukoKikanShuryoYMD" <![CDATA[>=]]> dbt5501."shinsakaiKaisaiYoteiYMD"
+            ORDER BY
+                "gogitaiYukoKikanKaishiYMD" ASC
+            LIMIT 1
+        )
+        SELECT
+            dbt5594."shinsakaiIinShimei" AS dbt5594_shinsakaiIinShimei
+        FROM
+            rgdb."DbT5503ShinsakaiWariateIinJoho" AS dbt5503
+        INNER JOIN
+            rgdb."DbT5594ShinsakaiIinJoho" AS dbt5594
+            ON dbt5594."shinsakaiIinCode" = dbt5503."shinsakaiIinCode"
+        INNER JOIN (
+            SELECT
+                dbt5593."shinsakaiIinCode" AS "shinsakaiIinCode",
+                dbt5593."gogitaichoKubunCode" AS "gogitaichoKubunCode"
+            FROM
+                effectiveGogitai eg
+            INNER JOIN
+                rgdb."DbT5593GogitaiWariateIinJoho" AS dbt5593
+                 ON dbt5593."gogitaiNo" = eg."gogitaiNo"
+                AND dbt5593."gogitaiYukoKikanKaishiYMD" = eg."gogitaiYukoKikanKaishiYMD"
+                AND dbt5593."gogitaiYukoKikanShuryoYMD" = eg."gogitaiYukoKikanShuryoYMD"
+        ) AS dbt5593
+            ON dbt5593."shinsakaiIinCode" = dbt5503."shinsakaiIinCode"
+        WHERE
+            dbt5503."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
+        ORDER BY
+            dbt5503."kaigoninteiShinsakaiGichoKubunCode" DESC,
+            dbt5593."gogitaichoKubunCode" DESC,
+            dbt5594."shinsakaiIinCode" ASC
     </select>
 
     <select id="get事務局特記情報"
@@ -686,6 +730,8 @@
         , dbt5116Zenkai."kijunJikanKinoKunren" AS zKijunJikanKinoKunren
         , dbt5116Zenkai."kijunJikanIryoKanren" AS zKijunJikanIryoKanren
         , dbt5116Zenkai."kijunJikanNinchishoKasan" AS zKijunJikanNinchishoKasan
+        , dbt5116Zenkai."ichijiHanteiKekkaCode" AS zIchijiHanteiKekkaCode
+        , dbt5116Zenkai."ichijiHanteiKekkaNinchishoKasanCode" AS zIchijiHanteiKekkaNinchishoKasanCode
         , dbt5202."ninteichosaJisshiYMD"
         , dbt5202."chosaJisshiBashoMeisho"
         , dbt5101."nigoTokuteiShippeiCode"
@@ -1124,6 +1170,8 @@
         , dbt5116Zenkai."kijunJikanKinoKunren" AS zKijunJikanKinoKunren
         , dbt5116Zenkai."kijunJikanIryoKanren" AS zKijunJikanIryoKanren
         , dbt5116Zenkai."kijunJikanNinchishoKasan" AS zKijunJikanNinchishoKasan
+        , dbt5116Zenkai."ichijiHanteiKekkaCode" AS zIchijiHanteiKekkaCode
+        , dbt5116Zenkai."ichijiHanteiKekkaNinchishoKasanCode" AS zIchijiHanteiKekkaNinchishoKasanCode
         , dbt5202."ninteichosaJisshiYMD"
         , dbt5202."chosaJisshiBashoCode"
         , dbt5101."nigoTokuteiShippeiCode"

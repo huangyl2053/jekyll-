@@ -120,7 +120,7 @@ public class IchijihanteikekkahyoItemSetteiA3 {
         RString 共有ファイル名 = 共通情報.getShoKisaiHokenshaNo().concat(共通情報.getHihokenshaNo());
         RString path = copySharedFilesBatch(共通情報.getImageSharedFileId(), 共有ファイル名, ファイルパス);
         SabisuJyoukyoA3 settei = new SabisuJyoukyoA3();
-        settei.set項目(項目, entity);
+        settei.set項目(項目, entity, 共通情報);
         settei.setサービスの状況(entity, 項目, 予防給付, 介護給付, サービス状況フラグ, 共通情報, path);
 
         項目.set概況調査テキスト_イメージ区分(共通情報.getGaikyoChosaTextImageKubun());

@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ImageJohoMaskingDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -181,23 +181,13 @@ public class ImageJohoMaskingDiv extends Panel {
     }
 
     @JsonIgnore
-    public DropDownList getDdlKensakuTaisho() {
-        return this.getShoriTaishoshaKensakuShiji().getDdlKensakuTaisho();
+    public TextBoxNum getTxtShinsakaiKaisaiNo() {
+        return this.getShoriTaishoshaKensakuShiji().getTxtShinsakaiKaisaiNo();
     }
 
     @JsonIgnore
-    public void  setDdlKensakuTaisho(DropDownList ddlKensakuTaisho) {
-        this.getShoriTaishoshaKensakuShiji().setDdlKensakuTaisho(ddlKensakuTaisho);
-    }
-
-    @JsonIgnore
-    public TextBoxDateRange getTxtSearchYMD() {
-        return this.getShoriTaishoshaKensakuShiji().getTxtSearchYMD();
-    }
-
-    @JsonIgnore
-    public void  setTxtSearchYMD(TextBoxDateRange txtSearchYMD) {
-        this.getShoriTaishoshaKensakuShiji().setTxtSearchYMD(txtSearchYMD);
+    public void  setTxtShinsakaiKaisaiNo(TextBoxNum txtShinsakaiKaisaiNo) {
+        this.getShoriTaishoshaKensakuShiji().setTxtShinsakaiKaisaiNo(txtShinsakaiKaisaiNo);
     }
 
     @JsonIgnore
@@ -208,16 +198,6 @@ public class ImageJohoMaskingDiv extends Panel {
     @JsonIgnore
     public void  setChkMasking(CheckBoxList chkMasking) {
         this.getShoriTaishoshaKensakuShiji().setChkMasking(chkMasking);
-    }
-
-    @JsonIgnore
-    public TextBoxNum getTxtShinsakaiKaisaiNo() {
-        return this.getShoriTaishoshaKensakuShiji().getTxtShinsakaiKaisaiNo();
-    }
-
-    @JsonIgnore
-    public void  setTxtShinsakaiKaisaiNo(TextBoxNum txtShinsakaiKaisaiNo) {
-        this.getShoriTaishoshaKensakuShiji().setTxtShinsakaiKaisaiNo(txtShinsakaiKaisaiNo);
     }
 
     @JsonIgnore
@@ -243,6 +223,26 @@ public class ImageJohoMaskingDiv extends Panel {
     @JsonIgnore
     public IHokenshaListDiv getCcdHokensya() {
         return this.getShoriTaishoshaKensakuShiji().getCcdHokensya();
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlKensakuTaisho() {
+        return this.getShoriTaishoshaKensakuShiji().getDdlKensakuTaisho();
+    }
+
+    @JsonIgnore
+    public void  setDdlKensakuTaisho(DropDownList ddlKensakuTaisho) {
+        this.getShoriTaishoshaKensakuShiji().setDdlKensakuTaisho(ddlKensakuTaisho);
+    }
+
+    @JsonIgnore
+    public TextBoxDateRange getTxtSearchYMD() {
+        return this.getShoriTaishoshaKensakuShiji().getTxtSearchYMD();
+    }
+
+    @JsonIgnore
+    public void  setTxtSearchYMD(TextBoxDateRange txtSearchYMD) {
+        this.getShoriTaishoshaKensakuShiji().setTxtSearchYMD(txtSearchYMD);
     }
 
     @JsonIgnore

@@ -17,17 +17,17 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ChosaTaishoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ccdNinteiShinseishaKihonInfo")
-    private NinteiShinseishaKihonInfoDiv ccdNinteiShinseishaKihonInfo;
     @JsonProperty("ccdNinteiShinseiRenrakusakiKihon")
     private NinteiShinseiRenrakusakiKihonDiv ccdNinteiShinseiRenrakusakiKihon;
+    @JsonProperty("ccdNinteiShinseishaKihonInfo")
+    private NinteiShinseishaKihonInfoDiv ccdNinteiShinseishaKihonInfo;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -36,21 +36,21 @@ public class ChosaTaishoDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getccdNinteiShinseishaKihonInfo
-     * @return ccdNinteiShinseishaKihonInfo
-     */
-    @JsonProperty("ccdNinteiShinseishaKihonInfo")
-    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
-        return ccdNinteiShinseishaKihonInfo;
-    }
-
-    /*
      * getccdNinteiShinseiRenrakusakiKihon
      * @return ccdNinteiShinseiRenrakusakiKihon
      */
     @JsonProperty("ccdNinteiShinseiRenrakusakiKihon")
     public INinteiShinseiRenrakusakiKihonDiv getCcdNinteiShinseiRenrakusakiKihon() {
         return ccdNinteiShinseiRenrakusakiKihon;
+    }
+
+    /*
+     * getccdNinteiShinseishaKihonInfo
+     * @return ccdNinteiShinseishaKihonInfo
+     */
+    @JsonProperty("ccdNinteiShinseishaKihonInfo")
+    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
+        return ccdNinteiShinseishaKihonInfo;
     }
 
     // </editor-fold>

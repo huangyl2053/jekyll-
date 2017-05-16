@@ -1,4 +1,4 @@
-package jp.co.ndensan.reams.db.dbe.definition.core.shinsakai;
+package jp.co.ndensan.reams.db.dbz.definition.core.shinsakai;
 
 import java.util.Objects;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;

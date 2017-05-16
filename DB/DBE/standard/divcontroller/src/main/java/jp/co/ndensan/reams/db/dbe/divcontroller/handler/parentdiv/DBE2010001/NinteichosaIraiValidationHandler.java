@@ -64,17 +64,11 @@ public class NinteichosaIraiValidationHandler {
      */
     public ValidationMessageControlPairs 入力チェック_btnTaOutput() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (div.getDgNinteiTaskList().getDataSource() == null || div.getDgNinteiTaskList().getDataSource().isEmpty()) {
-            validationMessages.add(new ValidationMessageControlPair(RRVMessages.該当データなし));
-        } else if (div.getDgNinteiTaskList().getSelectedItems() == null || div.getDgNinteiTaskList().getSelectedItems().isEmpty()) {
-            validationMessages.add(new ValidationMessageControlPair(RRVMessages.対象行を選択));
-        } else {
-            List<dgNinteiTaskList_Row> selected = div.getDgNinteiTaskList().getSelectedItems();
-            for (dgNinteiTaskList_Row row : selected) {
-                if (row.getChosaIraiKubun() == null || row.getChosaIraiKubun().isEmpty() || row.getRowState().equals(RowState.Modified)) {
-                    validationMessages.add(new ValidationMessageControlPair(RRVMessages.調査依頼未保存のため印刷不可));
-                    break;
-                }
+        List<dgNinteiTaskList_Row> selected = div.getDgNinteiTaskList().getSelectedItems();
+        for (dgNinteiTaskList_Row row : selected) {
+            if (row.getChosaIraiKubun() == null || row.getChosaIraiKubun().isEmpty() || row.getRowState().equals(RowState.Modified)) {
+                validationMessages.add(new ValidationMessageControlPair(RRVMessages.調査依頼未保存のため印刷不可));
+                break;
             }
         }
         return validationMessages;

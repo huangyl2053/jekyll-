@@ -26,6 +26,8 @@ public class ShinsakaiTaishoshaRelateEntity {
     private int shinsakaiYoteiTeiin;
     private int shinsakaiWariateZumiNinzu;
     private Code shinsakaiShinchokuJokyo;
+    private RString shinsakaiKaisaiYoteiBashoName;
+    private RString shinsakaiKaisaiYoteiBashoCode;
     private RString shinsakaiKaisaiBashoName;
     private RString shinsakaiKaisaiBashoCode;
     private FlexibleDate shinsakaiKaisaiYoteiYMD;
@@ -58,4 +60,5 @@ public class ShinsakaiTaishoshaRelateEntity {
     private RString iryoKikanMeisho;
     private RString shujiiName;
     private Code shinsakaiKaisaiChikuCode;
+    private Code shinsakaiKaisaiYoteiChikuCode;
 }

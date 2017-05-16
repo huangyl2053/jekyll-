@@ -118,14 +118,11 @@ public class SabisuJyoukyoA3 {
     private static final int 連番_19 = 19;
     private static final int 連番_20 = 20;
     private static final int IMAGE_WIDTH = 540;
-    private static final int IMAGE_HEIGHT = 40;
+    private static final int IMAGE_HEIGHT_JIMU = 38;
+    private static final int IMAGE_HEIGHT_IIN = 97;
     private static final Code 予防給付サービス = new Code(ServiceKubun.予防.getCode());
     private static final Code 介護給付サービス = new Code(ServiceKubun.介護.getCode());
     private static final RString 単位 = new RString(":");
-    private static final RString 施設名ファイル名 = new RString("C0004_BAK.png");
-    private static final RString 住所ファイル名 = new RString("C0005_BAK.png");
-    private static final RString 電話ファイル名 = new RString("C0006_BAK.png");
-    private static final RString SEPARATOR = new RString("/");
     private static final RString COMMA = new RString(".");
     private static final RString 分 = new RString("分");
     private static final RString 加算 = new RString("＋");
@@ -561,15 +558,15 @@ public class SabisuJyoukyoA3 {
     }
 
     private void setサービス(IchijihanteikekkahyoA3Entity 項目, ShinsakaiSiryoKyotsuEntity 共通情報, RString path) {
-        if (!共通情報.isJimukyoku()) {
-            return;
-        }
-
         IGaikyoChosahyoShisetuRiyo g = GaikyoChosahyoShisetuRiyos.toValueOrNull(
                 共通情報.getKoroshoIfShikibetsuCode(), 共通情報.getRiyoShisetsuRemban()
         );
         if (g != null) {
             項目.set利用施設種類(g.get名称());
+        }
+
+        if (!共通情報.isJimukyoku()) {
+            return;
         }
         if (TokkijikoTextImageKubun.テキスト.getコード().equals(共通情報.getGaikyoChosaTextImageKubun())) {
             項目.set施設名テキスト(RString.isNullOrEmpty(共通情報.getRiyoShisetsuShimei()) ? RString.EMPTY : 共通情報.getRiyoShisetsuShimei());
@@ -1133,8 +1130,9 @@ public class SabisuJyoukyoA3 {
      *
      * @param 項目 IchijihanteikekkahyoA3Entity
      * @param entity ItiziHanteiEntity
+     * @param 共通情報 共通情報
      */
-    public void set項目(IchijihanteikekkahyoA3Entity 項目, ItiziHanteiEntity entity) {
+    public void set項目(IchijihanteikekkahyoA3Entity 項目, ItiziHanteiEntity entity, ShinsakaiSiryoKyotsuEntity 共通情報) {
         項目.set年齢(new RString(entity.getAge()));
         項目.set前々回要介護度(set要介護度(entity.getZzKoroshoIfShikibetsuCode(), entity.getZzNijiHanteiYokaigoJotaiKubunCode()));
         項目.set前々回認定有効期間(set有効期間(entity.getZzNijiHanteiNinteiYukoKikan()));
@@ -1237,10 +1235,12 @@ public class SabisuJyoukyoA3 {
         項目.set審査人数(new RString(entity.getShinsakaiOrder()));
         項目.set一次判定結果(set一次判定結果(entity.getKoroshoIfShikibetsuCode(),
                 entity.getIchijiHanteiKekkaCode(), entity.getIchijiHanteiKekkaNinchishoKasanCode()));
+        項目.set前回一次判定結果(set一次判定結果(entity.getZKoroshoIfShikibetsuCode(),
+                entity.getZIchijiHanteiKekkaCode(), entity.getZIchijiHanteiKekkaNinchishoKasanCode()));
         項目.set要介護認定等基準時間(get要介護認定等基準時間(entity));
         項目.set前回要介護認定等基準時間(new RString(new Decimal(entity.getZKijunJikan()).divide(基準時間算出用_10)
                 .add(new Decimal(entity.getZKijunJikanNinchishoKasan()).divide(基準時間算出用_10)).toString()));
-        set基準時間の積み上げグラフ(項目, entity);
+        set基準時間の積み上げグラフ(項目, entity, 共通情報);
         List<NitijouSeikatsu> 日常生活自立度リスト = new ArrayList<>();
         NitijouSeikatsu 障害高齢者自立度 = new NitijouSeikatsu();
         障害高齢者自立度.set特記事項フラグ(entity.getShogaiNichijoSeikatsuJiritsudo());
@@ -1258,7 +1258,7 @@ public class SabisuJyoukyoA3 {
         if (RString.isNullOrEmpty(entity.getHihokenshaKubunCode())) {
             項目.set被保険者区分(RString.EMPTY);
         } else {
-            項目.set被保険者区分(HihokenshaKubunCode.toValue(entity.getHihokenshaKubunCode()).get名称());
+            項目.set被保険者区分(HihokenshaKubunCode.toValue(entity.getHihokenshaKubunCode()).get略称());
             if (HihokenshaKubunCode.第１号被保険者.getコード().equals(entity.getHihokenshaKubunCode())
                     || entity.getNigoTokuteiShippeiCode() == null || entity.getNigoTokuteiShippeiCode().isEmpty()) {
                 項目.set特定疾病名(RString.EMPTY);
@@ -1411,7 +1411,6 @@ public class SabisuJyoukyoA3 {
     private RString set一次判定結果(Code 厚労省IF識別コード, Code 一次判定結果コード, Code 一次判定結果コード_認知症加算) {
         RString 一次判定結果 = RString.EMPTY;
         RString 一次判定結果_認知症加算 = RString.EMPTY;
-        RStringBuilder builder = new RStringBuilder();
         if (一次判定結果コード != null && !一次判定結果コード.isEmpty()) {
             if (A_99.equals(厚労省IF識別コード)) {
                 一次判定結果 = YokaigoJotaiKubun99.toValue(一次判定結果コード.getColumnValue()).get名称();
@@ -1434,6 +1433,7 @@ public class SabisuJyoukyoA3 {
                 一次判定結果_認知症加算 = YokaigoJotaiKubun09.toValue(一次判定結果コード_認知症加算.getColumnValue()).get名称();
             }
         }
+        RStringBuilder builder = new RStringBuilder();
         if (一次判定結果.equals(一次判定結果_認知症加算)) {
             return builder.append(一次判定結果).toRString();
         }
@@ -1989,7 +1989,7 @@ public class SabisuJyoukyoA3 {
         調査結果.set認定調査と主治医意見書の結果比較(比較結果);
     }
 
-    private void set基準時間の積み上げグラフ(IchijihanteikekkahyoA3Entity 項目, ItiziHanteiEntity entity) {
+    private void set基準時間の積み上げグラフ(IchijihanteikekkahyoA3Entity 項目, ItiziHanteiEntity entity, ShinsakaiSiryoKyotsuEntity 共通情報) {
         List<EachBarImage> イメージリストA3 = new ArrayList();
         if (0 < getNumber(entity.getKijunJikanShokuji())) {
             イメージリストA3.add(new EachBarImage(getNumber(entity.getKijunJikanShokuji()), BarImageType.PATTERN1));
@@ -2018,7 +2018,8 @@ public class SabisuJyoukyoA3 {
         if (0 < getNumber(entity.getKijunJikanNinchishoKasan())) {
             イメージリストA3.add(new EachBarImage(getNumber(entity.getKijunJikanNinchishoKasan()), BarImageType.PATTERN10));
         }
-        RString 文件 = new StackBarImage().createHorizontalBarImage(IMAGE_WIDTH, IMAGE_HEIGHT, イメージリストA3);
+        RString 文件 = new StackBarImage().createHorizontalBarImage(
+                IMAGE_WIDTH, 共通情報.isJimukyoku() ? IMAGE_HEIGHT_JIMU : IMAGE_HEIGHT_IIN, イメージリストA3);
         項目.set基準時間の積み上げグラフ(文件);
     }
 

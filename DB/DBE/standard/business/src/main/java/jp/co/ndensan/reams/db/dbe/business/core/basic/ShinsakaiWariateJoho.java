@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.Objects;
 import static java.util.Objects.requireNonNull;
 import javax.annotation.CheckForNull;
-import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.HanteiKekkaCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.HanteiKekkaCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5502ShinsakaiWariateJohoEntity;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;

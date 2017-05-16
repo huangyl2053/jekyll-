@@ -5,8 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ninteishinsakaikekkadatatorikomi;
 
-import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.HanteiKekkaCode;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5501ShinsakaiKaisaiYoteiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.HanteiKekkaCode;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5510IchiGojiHanteiKekkaJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomimobile.TempShinsaIinRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinsakaikekkadatatorikomimobile.TempShinsakaiJohoRelateEntity;
@@ -51,26 +51,26 @@ public class DataTorikomiEdit {
      * @return DbT5503ShinsakaiWariateIinJohoEntity
      */
     public DbT5503ShinsakaiWariateIinJohoEntity updateDbT5503Entity(TempShinsaIinRelateEntity entity,
-                                                                    DbT5503ShinsakaiWariateIinJohoEntity dbt5503Entity) {
+            DbT5503ShinsakaiWariateIinJohoEntity dbt5503Entity) {
         return editDbT5503Entity(entity, dbt5503Entity);
     }
 
     private DbT5503ShinsakaiWariateIinJohoEntity editDbT5503Entity(TempShinsaIinRelateEntity entity,
-                                                                   DbT5503ShinsakaiWariateIinJohoEntity dbt5503Entity) {
+            DbT5503ShinsakaiWariateIinJohoEntity dbt5503Entity) {
         dbt5503Entity.setShinsakaiKaisaiNo(RString.isNullOrEmpty(entity.get介護認定審査会開催番号())
-                                           ? RString.EMPTY : entity.get介護認定審査会開催番号());
+                ? RString.EMPTY : entity.get介護認定審査会開催番号());
         dbt5503Entity.setShinsakaiIinCode(RString.isNullOrEmpty(entity.get介護認定審査会委員コード())
-                                          ? RString.EMPTY : entity.get介護認定審査会委員コード());
+                ? RString.EMPTY : entity.get介護認定審査会委員コード());
         dbt5503Entity.setShinsakaiKaisaiYMD(RString.isNullOrEmpty(entity.get介護認定審査会開催年月日())
-                                            ? FlexibleDate.EMPTY : new FlexibleDate(entity.get介護認定審査会開催年月日()));
+                ? FlexibleDate.EMPTY : new FlexibleDate(entity.get介護認定審査会開催年月日()));
         dbt5503Entity.setKaigoninteiShinsakaiGichoKubunCode(RString.isNullOrEmpty(entity.get介護認定審査会委員長区分コード())
-                                                            ? Code.EMPTY : new Code(entity.get介護認定審査会委員長区分コード()));
+                ? Code.EMPTY : new Code(entity.get介護認定審査会委員長区分コード()));
         dbt5503Entity.setShussekiFlag(RString.isNullOrEmpty(entity.get委員出席()) ? false : Boolean.valueOf(entity.get委員出席().toString()));
         dbt5503Entity.setExistChikokuFlag(RString.isNullOrEmpty(entity.get委員遅刻有無())
-                                          ? false : Boolean.valueOf(entity.get委員遅刻有無().toString()));
+                ? false : Boolean.valueOf(entity.get委員遅刻有無().toString()));
         dbt5503Entity.setShussekiTime(RString.isNullOrEmpty(entity.get委員出席時間()) ? RString.EMPTY : entity.get委員出席時間());
         dbt5503Entity.setExistSotaiFlag(RString.isNullOrEmpty(entity.get委員早退有無())
-                                        ? false : Boolean.valueOf(entity.get委員早退有無().toString()));
+                ? false : Boolean.valueOf(entity.get委員早退有無().toString()));
         dbt5503Entity.setTaisekiTime(RString.isNullOrEmpty(entity.get委員退席時間()) ? RString.EMPTY : entity.get委員退席時間());
         return dbt5503Entity;
     }
@@ -94,67 +94,67 @@ public class DataTorikomiEdit {
      * @return DbT5503ShinsakaiWariateIinJohoEntity
      */
     public DbT5510IchiGojiHanteiKekkaJohoEntity updateDbT5510Entity(TempShinsakaiKekkaEntity entity,
-                                                                    DbT5510IchiGojiHanteiKekkaJohoEntity dbt5510Entity) {
+            DbT5510IchiGojiHanteiKekkaJohoEntity dbt5510Entity) {
         return editDbT5510Entity(entity, dbt5510Entity);
     }
 
     private DbT5510IchiGojiHanteiKekkaJohoEntity editDbT5510Entity(TempShinsakaiKekkaEntity entity,
-                                                                   DbT5510IchiGojiHanteiKekkaJohoEntity dbt5510Entity) {
+            DbT5510IchiGojiHanteiKekkaJohoEntity dbt5510Entity) {
         dbt5510Entity.setShinseishoKanriNo(RString.isNullOrEmpty(entity.get申請書管理番号())
-                                           ? ShinseishoKanriNo.EMPTY : new ShinseishoKanriNo(entity.get申請書管理番号()));
+                ? ShinseishoKanriNo.EMPTY : new ShinseishoKanriNo(entity.get申請書管理番号()));
         dbt5510Entity.setIchiGojiHanteiYMD(RString.isNullOrEmpty(entity.get要介護認定一点五次判定年月日())
-                                           ? FlexibleDate.EMPTY : new FlexibleDate(entity.get要介護認定一点五次判定年月日()));
+                ? FlexibleDate.EMPTY : new FlexibleDate(entity.get要介護認定一点五次判定年月日()));
         dbt5510Entity.setIchiGojiHanteiKekkaCode(RString.isNullOrEmpty(entity.get要介護認定一点五次判定結果コード())
-                                                 ? Code.EMPTY : new Code(entity.get要介護認定一点五次判定結果コード()));
+                ? Code.EMPTY : new Code(entity.get要介護認定一点五次判定結果コード()));
         dbt5510Entity.setIchiGojiHanteiKekkaNinchishoKasanCode(RString.isNullOrEmpty(entity.get要介護認定一点五次判定結果コード_認知症加算())
-                                                               ? Code.EMPTY : new Code(entity.get要介護認定一点五次判定結果コード_認知症加算()));
+                ? Code.EMPTY : new Code(entity.get要介護認定一点五次判定結果コード_認知症加算()));
         set基準時間(entity, dbt5510Entity);
         set点数(entity, dbt5510Entity);
         dbt5510Entity.setIchiGojiHnateiKeikokuCode(RString.isNullOrEmpty(entity.get一点五次要介護認定一点五次判定警告コード())
-                                                   ? Code.EMPTY : new Code(entity.get一点五次要介護認定一点五次判定警告コード()));
+                ? Code.EMPTY : new Code(entity.get一点五次要介護認定一点五次判定警告コード()));
         dbt5510Entity.setJotaiAnteiseiCode(RString.isNullOrEmpty(entity.get一点五次要介護認定状態の安定性コード())
-                                           ? Code.EMPTY : new Code(entity.get一点五次要介護認定状態の安定性コード()));
+                ? Code.EMPTY : new Code(entity.get一点五次要介護認定状態の安定性コード()));
         dbt5510Entity.setNinchishoJiritsudoIIijoNoGaizensei(RString.isNullOrEmpty(entity.get一点五次認知症自立度Ⅱ以上の蓋然性())
-                                                            ? Decimal.ZERO : new Decimal(entity.get一点五次認知症自立度Ⅱ以上の蓋然性().toString()));
+                ? Decimal.ZERO : new Decimal(entity.get一点五次認知症自立度Ⅱ以上の蓋然性().toString()));
         dbt5510Entity.setSuiteiKyufuKubunCode(RString.isNullOrEmpty(entity.get一点五次認知機能及び状態安定性から推定される給付区分コード())
-                                              ? Code.EMPTY : new Code(entity.get一点五次認知機能及び状態安定性から推定される給付区分コード()));
+                ? Code.EMPTY : new Code(entity.get一点五次認知機能及び状態安定性から推定される給付区分コード()));
         return dbt5510Entity;
     }
 
     private void set基準時間(TempShinsakaiKekkaEntity entity, DbT5510IchiGojiHanteiKekkaJohoEntity dbt5510Entity) {
         dbt5510Entity.setKijunJikan(RString.isNullOrEmpty(entity.get一点五次要介護認定等基準時間())
-                                    ? 0 : Short.valueOf(entity.get一点五次要介護認定等基準時間().toString()));
+                ? 0 : Short.valueOf(entity.get一点五次要介護認定等基準時間().toString()));
         dbt5510Entity.setKijunJikanShokuji(RString.isNullOrEmpty(entity.get一点五次要介護認定等基準時間_食事())
-                                           ? 0 : Short.valueOf(entity.get一点五次要介護認定等基準時間_食事().toString()));
+                ? 0 : Short.valueOf(entity.get一点五次要介護認定等基準時間_食事().toString()));
         dbt5510Entity.setKijunJikanHaisetsu(RString.isNullOrEmpty(entity.get一点五次要介護認定等基準時間_排泄())
-                                            ? 0 : Short.valueOf(entity.get一点五次要介護認定等基準時間_排泄().toString()));
+                ? 0 : Short.valueOf(entity.get一点五次要介護認定等基準時間_排泄().toString()));
         dbt5510Entity.setKijunJikanIdo(RString.isNullOrEmpty(entity.get一点五次要介護認定等基準時間_移動())
-                                       ? 0 : Short.valueOf(entity.get一点五次要介護認定等基準時間_移動().toString()));
+                ? 0 : Short.valueOf(entity.get一点五次要介護認定等基準時間_移動().toString()));
         dbt5510Entity.setKijunJikanSeiketsuHoji(RString.isNullOrEmpty(entity.get一点五次要介護認定等基準時間_清潔保持())
-                                                ? 0 : Short.valueOf(entity.get一点五次要介護認定等基準時間_清潔保持().toString()));
+                ? 0 : Short.valueOf(entity.get一点五次要介護認定等基準時間_清潔保持().toString()));
         dbt5510Entity.setKijunJikanKansetsuCare(RString.isNullOrEmpty(entity.get一点五次要介護認定等基準時間_間接ケア())
-                                                ? 0 : Short.valueOf(entity.get一点五次要介護認定等基準時間_間接ケア().toString()));
+                ? 0 : Short.valueOf(entity.get一点五次要介護認定等基準時間_間接ケア().toString()));
         dbt5510Entity.setKijunJikanBPSDKanren(RString.isNullOrEmpty(entity.get一点五次要介護認定等基準時間_BPSD関連())
-                                              ? 0 : Short.valueOf(entity.get一点五次要介護認定等基準時間_BPSD関連().toString()));
+                ? 0 : Short.valueOf(entity.get一点五次要介護認定等基準時間_BPSD関連().toString()));
         dbt5510Entity.setKijunJikanKinoKunren(RString.isNullOrEmpty(entity.get一点五次要介護認定等基準時間_機能訓練())
-                                              ? 0 : Short.valueOf(entity.get一点五次要介護認定等基準時間_機能訓練().toString()));
+                ? 0 : Short.valueOf(entity.get一点五次要介護認定等基準時間_機能訓練().toString()));
         dbt5510Entity.setKijunJikanIryoKanren(RString.isNullOrEmpty(entity.get一点五次要介護認定等基準時間_医療関連())
-                                              ? 0 : Short.valueOf(entity.get一点五次要介護認定等基準時間_医療関連().toString()));
+                ? 0 : Short.valueOf(entity.get一点五次要介護認定等基準時間_医療関連().toString()));
         dbt5510Entity.setKijunJikanNinchishoKasan(RString.isNullOrEmpty(entity.get一点五次要介護認定等基準時間_認知症加算())
-                                                  ? 0 : Short.valueOf(entity.get一点五次要介護認定等基準時間_認知症加算().toString()));
+                ? 0 : Short.valueOf(entity.get一点五次要介護認定等基準時間_認知症加算().toString()));
     }
 
     private void set点数(TempShinsakaiKekkaEntity entity, DbT5510IchiGojiHanteiKekkaJohoEntity dbt5510Entity) {
         dbt5510Entity.setChukanHyokaKomoku1gun(RString.isNullOrEmpty(entity.get一点五次中間評価項目得点第1群())
-                                               ? 0 : Short.valueOf(entity.get一点五次中間評価項目得点第1群().toString()));
+                ? 0 : Short.valueOf(entity.get一点五次中間評価項目得点第1群().toString()));
         dbt5510Entity.setChukanHyokaKomoku2gun(RString.isNullOrEmpty(entity.get一点五次中間評価項目得点第2群())
-                                               ? 0 : Short.valueOf(entity.get一点五次中間評価項目得点第2群().toString()));
+                ? 0 : Short.valueOf(entity.get一点五次中間評価項目得点第2群().toString()));
         dbt5510Entity.setChukanHyokaKomoku3gun(RString.isNullOrEmpty(entity.get一点五次中間評価項目得点第3群())
-                                               ? 0 : Short.valueOf(entity.get一点五次中間評価項目得点第3群().toString()));
+                ? 0 : Short.valueOf(entity.get一点五次中間評価項目得点第3群().toString()));
         dbt5510Entity.setChukanHyokaKomoku4gun(RString.isNullOrEmpty(entity.get一点五次中間評価項目得点第4群())
-                                               ? 0 : Short.valueOf(entity.get一点五次中間評価項目得点第4群().toString()));
+                ? 0 : Short.valueOf(entity.get一点五次中間評価項目得点第4群().toString()));
         dbt5510Entity.setChukanHyokaKomoku5gun(RString.isNullOrEmpty(entity.get一点五次中間評価項目得点第5群())
-                                               ? 0 : Short.valueOf(entity.get一点五次中間評価項目得点第5群().toString()));
+                ? 0 : Short.valueOf(entity.get一点五次中間評価項目得点第5群().toString()));
     }
 
     /**
@@ -166,7 +166,7 @@ public class DataTorikomiEdit {
      * @return DbT5102NinteiKekkaJohoEntity
      */
     public DbT5102NinteiKekkaJohoEntity insertDbT5102Entity(TempShinsakaiKekkaEntity entity, FlexibleDate 審査会資料作成年月日,
-                                                            FlexibleDate nowDate) {
+            FlexibleDate nowDate) {
         DbT5102NinteiKekkaJohoEntity dbt5102Entity = new DbT5102NinteiKekkaJohoEntity();
         return editDbT5102Entity(entity, dbt5102Entity, 審査会資料作成年月日, nowDate);
     }
@@ -181,22 +181,22 @@ public class DataTorikomiEdit {
      * @return DbT5102NinteiKekkaJohoEntity
      */
     public DbT5102NinteiKekkaJohoEntity updateDbT5102Entity(TempShinsakaiKekkaEntity entity, DbT5102NinteiKekkaJohoEntity dbt5102Entity,
-                                                            FlexibleDate 審査会資料作成年月日, FlexibleDate nowDate) {
+            FlexibleDate 審査会資料作成年月日, FlexibleDate nowDate) {
         return editDbT5102Entity(entity, dbt5102Entity, 審査会資料作成年月日, nowDate);
     }
 
     private DbT5102NinteiKekkaJohoEntity editDbT5102Entity(TempShinsakaiKekkaEntity entity, DbT5102NinteiKekkaJohoEntity dbt5102Entity,
-                                                           FlexibleDate 審査会資料作成年月日, FlexibleDate nowDate) {
+            FlexibleDate 審査会資料作成年月日, FlexibleDate nowDate) {
         dbt5102Entity.setShinseishoKanriNo(RString.isNullOrEmpty(entity.get申請書管理番号())
-                                           ? ShinseishoKanriNo.EMPTY : new ShinseishoKanriNo(entity.get申請書管理番号()));
+                ? ShinseishoKanriNo.EMPTY : new ShinseishoKanriNo(entity.get申請書管理番号()));
         dbt5102Entity.setNijiHanteiYMD(RString.isNullOrEmpty(entity.get今回_二次判定日())
-                                       ? FlexibleDate.EMPTY : new FlexibleDate(entity.get今回_二次判定日()));
+                ? FlexibleDate.EMPTY : new FlexibleDate(entity.get今回_二次判定日()));
         dbt5102Entity.setNijiHanteiYokaigoJotaiKubunCode(RString.isNullOrEmpty(entity.get今回_二次判定()) ? Code.EMPTY : new Code(entity.get今回_二次判定()));
         dbt5102Entity.setNijiHanteiNinteiYukoKikan(RString.isNullOrEmpty(entity.get今回_認定期間()) ? 0 : entity.get今回_認定期間().toInt());
         dbt5102Entity.setNijiHanteiNinteiYukoKaishiYMD(RString.isNullOrEmpty(entity.get今回_認定有効開始年月日())
-                                                       ? FlexibleDate.EMPTY : new FlexibleDate(entity.get今回_認定有効開始年月日()));
+                ? FlexibleDate.EMPTY : new FlexibleDate(entity.get今回_認定有効開始年月日()));
         dbt5102Entity.setNijiHanteiNinteiYukoShuryoYMD(RString.isNullOrEmpty(entity.get今回_認定有効終了年月日())
-                                                       ? FlexibleDate.EMPTY : new FlexibleDate(entity.get今回_認定有効終了年月日()));
+                ? FlexibleDate.EMPTY : new FlexibleDate(entity.get今回_認定有効終了年月日()));
         dbt5102Entity.setShinsakaiShiryoSakuseiYMD(審査会資料作成年月日);
         dbt5102Entity.setShinsakaiKaisaiNo(RString.isNullOrEmpty(entity.get今回_審査会開催番号()) ? RString.EMPTY : entity.get今回_審査会開催番号());
         dbt5102Entity.setShinsakaiIken(RString.isNullOrEmpty(entity.get今回_審査会意見()) ? RString.EMPTY : entity.get今回_審査会意見());
@@ -228,16 +228,16 @@ public class DataTorikomiEdit {
      * @return DbT5511ShinsakaiKaisaiKekkaJohoEntity
      */
     public DbT5511ShinsakaiKaisaiKekkaJohoEntity updateDbT5511Entity(TempShinsakaiJohoRelateEntity entity,
-                                                                     DbT5511ShinsakaiKaisaiKekkaJohoEntity dbt5511Entity) {
+            DbT5511ShinsakaiKaisaiKekkaJohoEntity dbt5511Entity) {
         return editDbT5511Entity(entity, dbt5511Entity);
     }
 
     private DbT5511ShinsakaiKaisaiKekkaJohoEntity editDbT5511Entity(TempShinsakaiJohoRelateEntity entity,
-                                                                    DbT5511ShinsakaiKaisaiKekkaJohoEntity dbt5511Entity) {
+            DbT5511ShinsakaiKaisaiKekkaJohoEntity dbt5511Entity) {
         dbt5511Entity.setShinsakaiKaisaiNo(entity.get介護認定審査会開催番号());
         dbt5511Entity.setGogitaiNo(RString.isNullOrEmpty(entity.get合議体番号()) ? 0 : (int) Double.parseDouble(entity.get合議体番号().toString()));
         dbt5511Entity.setShinsakaiKaisaiYMD(RString.isNullOrEmpty(entity.get介護認定審査会開催年月日())
-                                            ? FlexibleDate.EMPTY : new FlexibleDate(entity.get介護認定審査会開催年月日()));
+                ? FlexibleDate.EMPTY : new FlexibleDate(entity.get介護認定審査会開催年月日()));
         dbt5511Entity.setShinsakaiKaishiTime(entity.get介護認定審査会開始時刻());
         dbt5511Entity.setShinsakaiShuryoTime(entity.get介護認定審査会終了時刻());
         dbt5511Entity.setShinsakaiKaisaiBashoCode(RString.isNullOrEmpty(entity.get開催場所コード()) ? RString.EMPTY : entity.get開催場所コード());
@@ -246,7 +246,7 @@ public class DataTorikomiEdit {
         return dbt5511Entity;
     }
 
-      /**
+    /**
      * DbT5511ShinsakaiKaisaiKekkaJohoEntityのupdateメッソドです。
      *
      * @param entity TempShinsakaiJohoEntity
@@ -254,49 +254,49 @@ public class DataTorikomiEdit {
      * @return DbT5511ShinsakaiKaisaiKekkaJohoEntity
      */
     public DbT5105NinteiKanryoJohoEntity editDbT5105Entity(TempShinsakaiKekkaEntity entity,
-                                                                    DbT5105NinteiKanryoJohoEntity dbt5105Entity) {
-       if (!HanteiKekkaCode.existsCode(entity.get今回_通知区分())) {
+            DbT5105NinteiKanryoJohoEntity dbt5105Entity) {
+        if (!HanteiKekkaCode.existsCode(entity.get今回_通知区分())) {
             return dbt5105Entity;
         }
         switch (HanteiKekkaCode.toValue(entity.get今回_通知区分())) {
-                case 再調査_意見書のみ:
-                    dbt5105Entity.setIkenshoSakuseiIraiKanryoYMD(null);
-                    dbt5105Entity.setIkenshoTorokuKanryoYMD(null);
-                    dbt5105Entity.setIchijiHanteiKanryoYMD(null);
-                    dbt5105Entity.setMaskingKanryoYMD(null);
-                    dbt5105Entity.setNinteiShinsakaiWariateKanryoYMD(null);
-                    dbt5105Entity.setNinteiShinsakaiKanryoYMD(null);
-                case 再調査_調査_意見書:
-                    dbt5105Entity.setNinteichosaIraiKanryoYMD(null);
-                    dbt5105Entity.setNinteichosaKanryoYMD(null);
-                    dbt5105Entity.setIkenshoSakuseiIraiKanryoYMD(null);
-                    dbt5105Entity.setIkenshoTorokuKanryoYMD(null);
-                    dbt5105Entity.setIchijiHanteiKanryoYMD(null);
-                    dbt5105Entity.setMaskingKanryoYMD(null);
-                    dbt5105Entity.setNinteiShinsakaiWariateKanryoYMD(null);
-                    dbt5105Entity.setNinteiShinsakaiKanryoYMD(null);
-                case 再調査_調査のみ:
-                    dbt5105Entity.setNinteichosaIraiKanryoYMD(null);
-                    dbt5105Entity.setNinteichosaKanryoYMD(null);
-                    dbt5105Entity.setIchijiHanteiKanryoYMD(null);
-                    dbt5105Entity.setMaskingKanryoYMD(null);
-                    dbt5105Entity.setNinteiShinsakaiWariateKanryoYMD(null);
-                    dbt5105Entity.setNinteiShinsakaiKanryoYMD(null);
-                case 再審査:
-                    dbt5105Entity.setNinteiShinsakaiWariateKanryoYMD(null);
-                    dbt5105Entity.setNinteiShinsakaiKanryoYMD(null);
-                case 未審査:
-                    dbt5105Entity.setNinteiShinsakaiWariateKanryoYMD(null);
-                    dbt5105Entity.setNinteiShinsakaiKanryoYMD(null);
-                default:
+            case 再調査_意見書のみ:
+                dbt5105Entity.setIkenshoSakuseiIraiKanryoYMD(null);
+                dbt5105Entity.setIkenshoTorokuKanryoYMD(null);
+                dbt5105Entity.setIchijiHanteiKanryoYMD(null);
+                dbt5105Entity.setMaskingKanryoYMD(null);
+                dbt5105Entity.setNinteiShinsakaiWariateKanryoYMD(null);
+                dbt5105Entity.setNinteiShinsakaiKanryoYMD(null);
+            case 再調査_調査_意見書:
+                dbt5105Entity.setNinteichosaIraiKanryoYMD(null);
+                dbt5105Entity.setNinteichosaKanryoYMD(null);
+                dbt5105Entity.setIkenshoSakuseiIraiKanryoYMD(null);
+                dbt5105Entity.setIkenshoTorokuKanryoYMD(null);
+                dbt5105Entity.setIchijiHanteiKanryoYMD(null);
+                dbt5105Entity.setMaskingKanryoYMD(null);
+                dbt5105Entity.setNinteiShinsakaiWariateKanryoYMD(null);
+                dbt5105Entity.setNinteiShinsakaiKanryoYMD(null);
+            case 再調査_調査のみ:
+                dbt5105Entity.setNinteichosaIraiKanryoYMD(null);
+                dbt5105Entity.setNinteichosaKanryoYMD(null);
+                dbt5105Entity.setIchijiHanteiKanryoYMD(null);
+                dbt5105Entity.setMaskingKanryoYMD(null);
+                dbt5105Entity.setNinteiShinsakaiWariateKanryoYMD(null);
+                dbt5105Entity.setNinteiShinsakaiKanryoYMD(null);
+            case 再審査:
+                dbt5105Entity.setNinteiShinsakaiWariateKanryoYMD(null);
+                dbt5105Entity.setNinteiShinsakaiKanryoYMD(null);
+            case 未審査:
+                dbt5105Entity.setNinteiShinsakaiWariateKanryoYMD(null);
+                dbt5105Entity.setNinteiShinsakaiKanryoYMD(null);
+            default:
 
-            }
+        }
         return dbt5105Entity;
     }
-    
+
     /**
      * DbT5502ShinsakaiWariateJohoEntityの編集メソッドです。
-     * 
+     *
      * @param entity TempShinsakaiKekkaEntity
      * @param dbt5502 DbT5502ShinsakaiWariateJohoEntity
      * @return DbT5502ShinsakaiWariateJohoEntity
@@ -305,10 +305,10 @@ public class DataTorikomiEdit {
         dbt5502.setHanteiKekkaCode(new Code(entity.get今回_通知区分()));
         return null;
     }
-    
+
     /**
      * DbT5501ShinsakaiKaisaiYoteiJohoEntityのupdateメッソドです。
-     * 
+     *
      * @param dbt5501Entity DbT5501ShinsakaiKaisaiYoteiJohoEntity
      * @return DbT5501ShinsakaiKaisaiYoteiJohoEntity
      */
@@ -316,7 +316,7 @@ public class DataTorikomiEdit {
         dbt5501Entity.setShinsakaiShinchokuJokyo(new Code(ShinsakaiShinchokuJokyo.完了.getコード()));
         return dbt5501Entity;
     }
-    
+
     /**
      * 所要時間を計算します。終了時刻が開始時刻より後である前提で計算します。
      *

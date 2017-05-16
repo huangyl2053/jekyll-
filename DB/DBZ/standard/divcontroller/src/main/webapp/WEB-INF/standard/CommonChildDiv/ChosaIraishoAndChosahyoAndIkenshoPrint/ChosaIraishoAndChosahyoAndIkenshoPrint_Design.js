@@ -183,6 +183,10 @@ var DBZ;
                 return new DBZ.BunshoBangoInput.ModeController(this.convFiledName("ccdBunshoNo"));
             };
 
+            Controls.prototype.chkPrintBlank = function () {
+                return new UZA.CheckBoxList(this.convFiledName("chkPrintBlank"));
+            };
+
             Controls.prototype.TeishutsuKigen = function () {
                 return new UZA.Panel(this.convFiledName("TeishutsuKigen"));
             };

@@ -352,12 +352,14 @@ public class NinteichosaIrai {
         List<dgNinteiTaskList_Row> rowList = requestDiv.getDgNinteiTaskList().getSelectedItems();
         IkenshoPrintParameterModel model = new IkenshoPrintParameterModel();
         List<ShinseishoKanriNo> list = new ArrayList<>();
-        for (dgNinteiTaskList_Row row : rowList) {
-            if (!RString.isNullOrEmpty(row.getShinseishoKanriNo())) {
-                list.add(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
+        if (!rowList.isEmpty()) {
+            for (dgNinteiTaskList_Row row : rowList) {
+                if (!RString.isNullOrEmpty(row.getShinseishoKanriNo())) {
+                    list.add(new ShinseishoKanriNo(row.getShinseishoKanriNo()));
+                }
             }
+            model.set申請書管理番号リスト(list);
         }
-        model.set申請書管理番号リスト(list);
         model.set市町村コード(requestDiv.getCcdHokenshaList().getSelectedItem().get市町村コード());
         model.set遷移元画面区分(GamenSeniKbn.認定調査依頼);
         requestDiv.setHiddenIuputModel(DataPassingConverter.serialize(model));
@@ -377,7 +379,7 @@ public class NinteichosaIrai {
         }
         getHandler(requestDiv).initDataGrid();
         IkenshoPrintParameterModel model = DataPassingConverter.deserialize(requestDiv.getHiddenIuputModel(), IkenshoPrintParameterModel.class);
-        if (model != null) {
+        if (model != null && model.get申請書管理番号リスト() != null) {
             List<ShinseishoKanriNo> kanriNo = model.get申請書管理番号リスト();
             List<RString> kanriNoRString = new ArrayList<>();
             for (ShinseishoKanriNo no : kanriNo) {

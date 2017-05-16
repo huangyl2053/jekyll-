@@ -442,7 +442,7 @@ public class IinTokkiTextPage2A3Editor implements IIinTokkiTextA3Editor {
 
     private RString get年(FlexibleDate 年月日) {
 
-        return パターン12(年月日).getYear();
+        return パターン12(年月日).getYear().substringEmptyOnError(2, 4);
     }
 
     private RString get月(FlexibleDate 年月日) {

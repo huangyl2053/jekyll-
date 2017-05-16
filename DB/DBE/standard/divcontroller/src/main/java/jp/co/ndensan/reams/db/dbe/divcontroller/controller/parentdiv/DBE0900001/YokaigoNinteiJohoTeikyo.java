@@ -167,10 +167,6 @@ public class YokaigoNinteiJohoTeikyo {
     public ResponseData<YokaigoNinteiJohoTeikyoDiv> validate_btnPrint(YokaigoNinteiJohoTeikyoDiv div) {
         NinnteiRiriBusiness 認定申請情報 = ViewStateHolder.get(ViewStateKeys.認定申請情報, NinnteiRiriBusiness.class);
         if (!ResponseHolder.isReRequest()) {
-            if (認定申請情報.get要介護認定一次判定完了年月日() == null
-                    || 認定申請情報.get要介護認定一次判定完了年月日().isEmpty()) {
-                throw new ApplicationException(DbeErrorMessages.一次判定未実施のため発行不可.getMessage());
-            }
 
             ValidationMessageControlPairs validationMessageControlPairs = getValidationHandler(div).validateCheck();
             if (validationMessageControlPairs.iterator().hasNext()) {

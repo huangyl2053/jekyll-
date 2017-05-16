@@ -60,8 +60,11 @@ public class ShinsakaiJohoKojinHandler {
         } else {
             div.getTxtShinsakaijoChikuMeisho().setValue(RString.EMPTY);
         }
+        if (kaisai.get開催予定日() != null && !kaisai.get開催予定日().isEmpty()) {
+            div.getTxtYoteiYmd().setValue(kaisai.get開催予定日());
+        }
         if (kaisai.get介護認定審査会開催年月日() != null && !kaisai.get介護認定審査会開催年月日().isEmpty()) {
-            div.getTxtShinsaKaishiDay().setValue(kaisai.get介護認定審査会開催年月日().toRDate());
+            div.getTxtShinsaKaishiDay().setValue(kaisai.get介護認定審査会開催年月日());
         }
         if (kaisai.get介護認定審査会開始時刻() != null && !kaisai.get介護認定審査会開始時刻().isEmpty()) {
             div.getTxtShinsaKaishiTime().setValue(new RTime(kaisai.get介護認定審査会開始時刻()));
@@ -69,17 +72,21 @@ public class ShinsakaiJohoKojinHandler {
         if (kaisai.get介護認定審査会終了時刻() != null && !kaisai.get介護認定審査会終了時刻().isEmpty()) {
             div.getTxtShinsaShuryoTime().setValue(new RTime(kaisai.get介護認定審査会終了時刻()));
         }
-        div.getTxtShinsaTime().setValue(new RString(String.valueOf(kaisai.get所要時間合計())));
+        if (kaisai.get所要時間合計() != 0) {
+            div.getTxtShinsaTime().setValue(new RString(kaisai.get所要時間合計()));
+        }
+        div.getTxtHanteiKekka().setValue(kaisai.get判定結果名());
+        div.getTxtShinsakaiIken().setValue(kaisai.get審査会意見());
         div.getDgShinsakaiIin().setDataSource(get審査会委員一覧データグリッド(kaisai));
         div.getDgHoketsuShinsakai().setDataSource(get補欠審査会委員一覧データグリッド(kaisai));
     }
 
     private ShinseishoKanriNo get申請書管理番号() {
-            return new ShinseishoKanriNo(div.getHdnShinseishoKanriNo());
+        return new ShinseishoKanriNo(div.getHdnShinseishoKanriNo());
     }
-    
-     private RString get審査会開催番号() {
-            return div.getHdnShinsakaiKaisaiNo();
+
+    private RString get審査会開催番号() {
+        return div.getHdnShinsakaiKaisaiNo();
     }
 
     private List<dgShinsakaiIin_Row> get審査会委員一覧データグリッド(KaisaiKekkaAndBashoJoho 開催情報) {

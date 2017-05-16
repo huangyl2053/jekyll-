@@ -407,6 +407,8 @@ public class IinShinsakaishiryoA3ReportSource implements IReportSource {
     public RString listshujiiikensho_3;
     @ReportItem(name = "listshujiiikensho_4", length = 18, order = 252)
     public RString listshujiiikensho_4;
+    @ReportItem(name = "zenkaiIchijiHanteiKekka", order = 253)
+    public RString zenkaiIchijiHanteiKekka;
 
     //DBE517041_GaikyotokkiTextA3
     @ReportItem(name = "gaikyotokkiImg", order = 271)
@@ -672,7 +674,9 @@ public class IinShinsakaishiryoA3ReportSource implements IReportSource {
     @ReportItem(name = "listYukokikan_1", length = 19, order = 726)
     public RString listYukokikan_1;
 
-    @ReportItem(name = "shisetsuType", order = 730)
+    @ReportItem(name = "shisetsuTypeLabel", length = 7, order = 730)
+    public RString shisetsuTypeLabel;
+    @ReportItem(name = "shisetsuType", order = 731)
     public RString shisetsuType;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
