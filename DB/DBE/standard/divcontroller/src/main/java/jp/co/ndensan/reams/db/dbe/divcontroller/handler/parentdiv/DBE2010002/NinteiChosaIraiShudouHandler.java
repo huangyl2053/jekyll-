@@ -445,6 +445,7 @@ public class NinteiChosaIraiShudouHandler {
                 認定申請年月日,
                 set認定調査提出期限(business),
                 通知文.get(2),
+                RString.EMPTY, //TODO 正しい値
                 new ShikibetsuCode(business.get証記載保険者番号().substring(0, 5).concat(business.get被保険者番号())),
                 new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), business.get申請書管理番号()));
         chosaIraishoHeadItemList.add(item);

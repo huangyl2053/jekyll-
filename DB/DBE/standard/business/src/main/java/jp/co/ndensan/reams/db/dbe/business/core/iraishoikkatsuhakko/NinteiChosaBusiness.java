@@ -70,6 +70,7 @@ public class NinteiChosaBusiness {
     private static final int INT7 = 7;
     private static final int INT8 = 8;
     private static final int INT9 = 9;
+    private static final int INT10 = 10;
     private static final int INT11 = 11;
     private static final int INT12 = 11;
     private static final RString 年号_明治 = new RString("明");
@@ -350,53 +351,54 @@ public class NinteiChosaBusiness {
         List<RString> 被保険者番号リスト = getValueList(entity.get被保険者番号());
 
         return new ChosaIraishoHeadItem(
-                ninshoshaSource.hakkoYMD,
-                ninshoshaSource.denshiKoin,
-                ninshoshaSource.ninshoshaYakushokuMei,
-                ninshoshaSource.ninshoshaYakushokuMei2,
-                ninshoshaSource.ninshoshaYakushokuMei1,
-                ninshoshaSource.koinMojiretsu,
-                ninshoshaSource.ninshoshaShimeiKakeru,
-                ninshoshaSource.ninshoshaShimeiKakenai,
-                ninshoshaSource.koinShoryaku,
-                文書番号,
-                entity.get調査委託先住所_郵便番号() != null
-                ? new YubinNo(entity.get調査委託先住所_郵便番号()).getEditedYubinNo() : RString.EMPTY,
-                entity.get調査委託先住所(),
-                entity.get事業者名称(),
-                entity.get調査員氏名(),
-                get認定調査依頼書名称付与(),
-                getカスタマーバーコード(entity),
-                entity.get被保険者番号(),
-                通知文Map.get(0),
-                通知文Map.get(1),
-                getCode(被保険者番号リスト, 0),
-                getCode(被保険者番号リスト, 1),
-                getCode(被保険者番号リスト, 2),
-                getCode(被保険者番号リスト, INT3),
-                getCode(被保険者番号リスト, INT4),
-                getCode(被保険者番号リスト, INT5),
-                getCode(被保険者番号リスト, INT6),
-                getCode(被保険者番号リスト, INT7),
-                getCode(被保険者番号リスト, INT8),
-                getCode(被保険者番号リスト, INT9),
-                entity.get被保険者氏名カナ(),
-                生年月日年号,
-                entity.get生年月日(),
-                entity.get被保険者氏名(),
-                Seibetsu.toValue(entity.get性別()).get名称(),
-                entity.get郵便番号() != null ? new YubinNo(entity.get郵便番号()).getEditedYubinNo() : RString.EMPTY,
-                entity.get住所(),
-                entity.get電話番号(),
-                entity.get訪問調査先郵便番号() != null ? new YubinNo(entity.get訪問調査先郵便番号()).getEditedYubinNo() : RString.EMPTY,
-                entity.get訪問調査先住所(),
-                entity.get訪問調査先名称(),
-                entity.get訪問調査先電話番号(),
-                entity.get認定申請年月日(),
-                set提出期限(entity),
-                通知文Map.get(2),
-                new ShikibetsuCode(processParamter.getShoKisaiHokenshaNo().substring(0, 5).concat(entity.get被保険者番号())),
-                new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.get申請書管理番号()));
+                /* hakkoYMD1 */ninshoshaSource.hakkoYMD,
+                /* denshiKoin */ ninshoshaSource.denshiKoin,
+                /* ninshoshaYakushokuMei */ ninshoshaSource.ninshoshaYakushokuMei,
+                /* ninshoshaYakushokuMei2 */ ninshoshaSource.ninshoshaYakushokuMei2,
+                /* ninshoshaYakushokuMei1 */ ninshoshaSource.ninshoshaYakushokuMei1,
+                /* koinMojiretsu */ ninshoshaSource.koinMojiretsu,
+                /* ninshoshaShimeiKakeru */ ninshoshaSource.ninshoshaShimeiKakeru,
+                /* ninshoshaShimeiKakenai */ ninshoshaSource.ninshoshaShimeiKakenai,
+                /* koinShoryaku */ ninshoshaSource.koinShoryaku,
+                /* bunshoNo */ 文書番号,
+                /* yubinNo1 */ entity.get調査委託先住所_郵便番号() != null
+                        ? new YubinNo(entity.get調査委託先住所_郵便番号()).getEditedYubinNo() : RString.EMPTY,
+                /* jushoText */ entity.get調査委託先住所(),
+                /* kikanNameText */ entity.get事業者名称(),
+                /* shimeiText */ entity.get調査員氏名(),
+                /* meishoFuyo */ get認定調査依頼書名称付与(),
+                /* customerBarCode */ getカスタマーバーコード(entity),
+                /* sonota */ entity.get被保険者番号(),
+                /* title */ 通知文Map.get(0),
+                /* tsuchibun1 */ 通知文Map.get(1),
+                /* hihokenshaNo1 */ getCode(被保険者番号リスト, 0),
+                /* hihokenshaNo2 */ getCode(被保険者番号リスト, 1),
+                /* hihokenshaNo3 */ getCode(被保険者番号リスト, 2),
+                /* hihokenshaNo4 */ getCode(被保険者番号リスト, INT3),
+                /* hihokenshaNo5 */ getCode(被保険者番号リスト, INT4),
+                /* hihokenshaNo6 */ getCode(被保険者番号リスト, INT5),
+                /* hihokenshaNo7 */ getCode(被保険者番号リスト, INT6),
+                /* hihokenshaNo8 */ getCode(被保険者番号リスト, INT7),
+                /* hihokenshaNo9 */ getCode(被保険者番号リスト, INT8),
+                /* hihokenshaNo10 */ getCode(被保険者番号リスト, INT9),
+                /* hihokenshaNameKana */ entity.get被保険者氏名カナ(),
+                /* birthGengo */ 生年月日年号,
+                /* birthYMD */ entity.get生年月日(),
+                /* hihokenshaName */ entity.get被保険者氏名(),
+                /* seibetsu */ Seibetsu.toValue(entity.get性別()).get名称(),
+                /* yubinNo */ entity.get郵便番号() != null ? new YubinNo(entity.get郵便番号()).getEditedYubinNo() : RString.EMPTY,
+                /* jusho */ entity.get住所(),
+                /* telNo */ entity.get電話番号(),
+                /* homonChosasakiYubinNo */ entity.get訪問調査先郵便番号() != null ? new YubinNo(entity.get訪問調査先郵便番号()).getEditedYubinNo() : RString.EMPTY,
+                /* homonChosasakiJusho */ entity.get訪問調査先住所(),
+                /* homonChosasakiJushoName */ entity.get訪問調査先名称(),
+                /* homonChosasakiTelNo */ entity.get訪問調査先電話番号(),
+                /* shinseiYMD */ entity.get認定申請年月日(),
+                /* teishutsuKigen */ set提出期限(entity),
+                /* tsuchibun2 */ 通知文Map.get(2),
+                /* atenaRemban */ RString.EMPTY,
+                /* shikibetsuCode */ new ShikibetsuCode(processParamter.getShoKisaiHokenshaNo().substring(0, 5).concat(entity.get被保険者番号())),
+                /* expandedInformation */ new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.get申請書管理番号()));
     }
 
     /**
@@ -591,7 +593,7 @@ public class NinteiChosaBusiness {
                 entity.get連絡先携帯番号(),
                 entity.get連絡先氏名(),
                 !RString.isNullOrEmpty(entity.get連絡先続柄())
-                ? RensakusakiTsuzukigara.toValue(entity.get連絡先続柄()).get名称() : RString.EMPTY,
+                        ? RensakusakiTsuzukigara.toValue(entity.get連絡先続柄()).get名称() : RString.EMPTY,
                 RString.isNullOrEmpty(entity.get前回認定年月日()) ? 記号 : RString.EMPTY,
                 !RString.isNullOrEmpty(entity.get前回認定年月日()) ? 記号 : RString.EMPTY,
                 ninteiYY,
@@ -1188,10 +1190,10 @@ public class NinteiChosaBusiness {
         checkEntity.set年齢(entity.get年齢());
         checkEntity.set前回認知症高齢者自立度(
                 RString.isNullOrEmpty(entity.get前回認知症高齢者自立度())
-                ? RString.EMPTY : NinchishoNichijoSeikatsuJiritsudoCode.toValue(entity.get前回認知症高齢者自立度()).get名称());
+                        ? RString.EMPTY : NinchishoNichijoSeikatsuJiritsudoCode.toValue(entity.get前回認知症高齢者自立度()).get名称());
         checkEntity.set前回障害高齢者自立度(
                 RString.isNullOrEmpty(entity.get前回障害高齢者自立度())
-                ? RString.EMPTY : ShogaiNichijoSeikatsuJiritsudoCode.toValue(entity.get前回障害高齢者自立度()).get名称());
+                        ? RString.EMPTY : ShogaiNichijoSeikatsuJiritsudoCode.toValue(entity.get前回障害高齢者自立度()).get名称());
         if (entity.get申請書管理番号()
                 != null && !shinseishoKanriNo.equals(entity.get申請書管理番号())) {
             shinseishoKanriNo = entity.get申請書管理番号();
