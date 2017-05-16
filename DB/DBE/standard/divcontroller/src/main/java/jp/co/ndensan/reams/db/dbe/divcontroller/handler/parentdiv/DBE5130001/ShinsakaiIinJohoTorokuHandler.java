@@ -785,11 +785,19 @@ public class ShinsakaiIinJohoTorokuHandler {
         Models<ShinsakaiIinJohoIdentifier, ShinsakaiIinJoho> models
                 = ViewStateHolder.get(ViewStateKeys.介護認定審査会委員情報更新, Models.class);
         Iterator<ShinsakaiIinJoho> 審査会委員情報 = models.iterator();
+//        List<dgShozokuKikanIchiran_Row> 所属機関 = new ArrayList<>();
+//        div.getDgShozokuKikanIchiran().setDataSource(所属機関);
         while (審査会委員情報.hasNext()) {
             ShinsakaiIinJoho shinsakaiIinJoho = 審査会委員情報.next();
             if (shinsakaiIinJoho.get介護認定審査会委員コード().equals(div.getDgShinsaInJohoIchiran().getClickedItem().getShinsainCode())) {
+//<<<<<<< HEAD
                 List<dgShozokuKikanIchiran_Row> 所属機関 = new ArrayList<>();
                 if (RString.isNullOrEmpty(div.getDgShinsaInJohoIchiran().getClickedItem().getShozokuKikanIchiran())) {
+//=======
+//                所属機関 = new ArrayList<>();
+//                if (shinsakaiIinJoho.getKaigoNinteiShinsakaiIinShozokuKikanJohoList().size() == div.getDgShozokuKikanIchiran().getDataSource().size()
+//                        || (初回選択時.equals(div.getDgShinsaInJohoIchiran().getClickedItem().getStatus()) && div.getDgShozokuKikanIchiran().getDataSource().isEmpty())) {
+//>>>>>>> origin/dbe-master
                     所属機関 = set所属機関(shinsakaiIinJoho, 所属機関, 所属機関一覧);
                 } else {
                     所属機関 = (List<dgShozokuKikanIchiran_Row>) DataPassingConverter.deserialize(div.getDgShinsaInJohoIchiran().getClickedItem().getShozokuKikanIchiran(), ShozokuKikanIchiran.class);

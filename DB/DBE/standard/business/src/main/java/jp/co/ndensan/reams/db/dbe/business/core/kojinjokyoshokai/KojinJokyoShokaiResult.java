@@ -399,16 +399,11 @@ public class KojinJokyoShokaiResult {
      * @return 一次判定結果
      */
     public RString get一次判定結果名称() {
-        final RString koroshoIFCode = this.get厚労省IF識別コード().value();
-        final RString kekkaCode = this.get要介護認定一次判定結果コード().value();
-        final RString kasanCode = this.get要介護認定一次判定結果コード認知症加算().value();
-
-        IIchijiHanteiKekkaCode kekkaName = IchijiHanteiKekkaSupport.toValueOrEmpty(koroshoIFCode, kekkaCode);
-        if (Objects.equals(kekkaCode, kasanCode) || RString.isNullOrEmpty(kasanCode)) {
-            return kekkaName.get名称();
-        }
-        IIchijiHanteiKekkaCode kasanName = IchijiHanteiKekkaSupport.toValueOrEmpty(koroshoIFCode, kasanCode);
-        return new RStringBuilder().append(kekkaName.get略称()).append("→").append(kasanName.get略称()).toRString();
+        return IchijiHanteiKekkaSupport.compose一次判定結果表示名(
+                this.get厚労省IF識別コード().value(),
+                this.get要介護認定一次判定結果コード().value(),
+                this.get要介護認定一次判定結果コード認知症加算().value()
+        );
     }
 
     /**

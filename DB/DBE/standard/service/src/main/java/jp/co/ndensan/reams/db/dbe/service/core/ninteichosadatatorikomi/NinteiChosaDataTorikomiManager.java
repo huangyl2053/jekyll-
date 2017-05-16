@@ -262,6 +262,7 @@ public class NinteiChosaDataTorikomiManager {
             return updateCount == 特記情報List.size();
         }
 
+        tokkijiko:
         for (NinteichosahyoTokkijiko 特記事項 : 特記情報List) {
             for (DbT5205NinteichosahyoTokkijikoEntity entity : entityList) {
                 if (特記事項.get申請書管理番号().equals(entity.getShinseishoKanriNo())
@@ -271,8 +272,10 @@ public class NinteiChosaDataTorikomiManager {
                         && 特記事項.get特記事項テキスト_イメージ区分().equals(entity.getTokkijikoTextImageKubun())
                         && 特記事項.get原本マスク区分().equals(entity.getGenponMaskKubun())) {
                     updateCount = updateCount + dbT5205Dac.save(createModifyData(entity, 特記事項));
+                    continue tokkijiko;
                 }
             }
+            updateCount = updateCount + dbT5205Dac.save(特記事項.toEntity());
         }
         return updateCount == 特記情報List.size();
     }

@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbe.entity.report.hanteikekkaichirana3.HanteiKekka
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaSupport;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -89,9 +90,21 @@ public class HanteiKekkaIchiranA3EditorImpl implements IHanteiKekkaIchiranA3Edit
         source.listHanteikekka_11 = entity.get被保険者区分();
         source.listHanteikekka_12 = entity.get認定申請区分_申請時();
         source.listHanteikekka_13 = entity.get認定申請区分_法令();
-        source.listHanteikekka_14 = entity.getTb_一次判定結果();
+        if (!RString.isNullOrEmpty(entity.getTb_一次判定結果())) {
+            source.listHanteikekka_14 = IchijiHanteiKekkaSupport.compose一次判定結果表示名(
+                    entity.getTb_厚労省IF識別コード(),
+                    entity.getTb_一次判定結果(),
+                    entity.getTb_一次判定結果_加算()
+            );
+        }
         source.listHanteikekka_15 = entity.getTb_二次判定要介護状態区分();
-        source.listHanteikekka_16 = entity.get一次判定結果();
+        if (!RString.isNullOrEmpty(entity.get一次判定結果_加算())) {
+            source.listHanteikekka_16 = IchijiHanteiKekkaSupport.compose一次判定結果表示名(
+                    entity.get厚労省IF識別コード(),
+                    entity.get一次判定結果(),
+                    entity.get一次判定結果_加算()
+            );
+        }
         source.listHanteikekka_17 = entity.get二次判定要介護状態区分();
         source.listHanteikekka_18 = entity.get要介護状態像例コード();
         source.listHanteikekka_19 = entity.get状態像内容();

@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiIinJogaiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseitoroku.NinteiShinseiTorokuResult;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseitoroku.RirekiJohoResult;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteishinchokujohoshokai.HihokenshaJohoParamter;
+import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5123NinteiKeikakuJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5590ShinsakaiIinJogaiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinseitoroku.NinteiShinseiTorokuRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteishinseitoroku.RirekiJohoRelateEntity;
@@ -359,6 +360,20 @@ public class NinteiShinseiTorokuManager {
     }
 
     /**
+     * 申請書管理番号により、認定計画情報の取得
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return 認定計画情報
+     */
+    public NinteiKeikakuJoho get認定計画情報(ShinseishoKanriNo 申請書管理番号) {
+        DbT5123NinteiKeikakuJohoEntity entity = dbt5123Dac.selectByKey(申請書管理番号);
+        if (entity != null) {
+            return new NinteiKeikakuJoho(entity);
+        }
+        return null;
+    }
+
+    /**
      * 識別コードにより、宛名情報の取得
      *
      * @param 識別コード 識別コード
@@ -514,7 +529,7 @@ public class NinteiShinseiTorokuManager {
                 被保険者番号, 認定申請年月日, 申請書区分, 認定申請区分_申請時_コード, 認定申請区分_法令_コード);
         return null != retList && !retList.isEmpty();
     }
-    
+
     /**
      * データ存在チェック
      *
@@ -525,7 +540,7 @@ public class NinteiShinseiTorokuManager {
         List<DbT5201NinteichosaIraiJohoEntity> retList = dbt5201Dac.selectBy申請書管理番号(申請書管理番号);
         return null != retList && !retList.isEmpty();
     }
-    
+
     /**
      * データ存在チェック
      *
@@ -536,7 +551,7 @@ public class NinteiShinseiTorokuManager {
         List<DbT5301ShujiiIkenshoIraiJohoEntity> retList = dbt5301Dac.selectBy申請書管理番号(申請書管理番号);
         return null != retList && !retList.isEmpty();
     }
-    
+
     /**
      * 市町村コードを取得します。
      *
@@ -550,5 +565,5 @@ public class NinteiShinseiTorokuManager {
         }
         return LasdecCode.EMPTY;
     }
-    
+
 }

@@ -17,7 +17,6 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteike
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiShoriKekka;
 import jp.co.ndensan.reams.db.dbe.business.core.tokkijikoinput.TokkiJikoInputComparator;
 import jp.co.ndensan.reams.db.dbe.business.core.tokkijikoinput.TokkiJikoInputModel;
-import jp.co.ndensan.reams.db.dbe.definition.core.NinteichosaIraiKubun;
 import jp.co.ndensan.reams.db.dbe.definition.core.kanri.SampleBunshoGroupCodes;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeInformationMessages;
@@ -32,7 +31,8 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2210001.Nin
 import jp.co.ndensan.reams.db.dbe.service.core.basic.NinteiKanryoJohoManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ichijihanteikekkajohosearch.IchijiHanteiKekkaJohoSearchManager;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosahyo.ninteichosahyotokkijiko.NinteichosahyoTokkijikoManager;
-import jp.co.ndensan.reams.db.dbe.service.core.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJohoManager;
+import jp.co.ndensan.reams.db.dbe.service.core.kekkatoroku.KekkaTorokuUtil;
+import jp.co.ndensan.reams.db.dbe.service.core.kekkatoroku.KekkaTorokuUtil.CheckEditableResult;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -61,7 +61,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.message.ErrorMessage;
-import jp.co.ndensan.reams.uz.uza.message.InformationMessage;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
 import jp.co.ndensan.reams.uz.uza.message.WarningMessage;
@@ -95,6 +94,16 @@ public class NinnteiChousaKekkaTouroku1 {
     private static final RString 認定調査結果入手_必須調査票_特記事項不要 = new RString("1");
     private static final RString 保存するボタン = new RString("btnChosaKekkaUpdate");
     private static final ShinseishoKanriNo DEFAULT前回申請書管理番号 = new ShinseishoKanriNo("00000000000000000");
+    private static final List<RString> ONLOAD_ERROR_MESSAGES;
+
+    static {
+        List<RString> list = new ArrayList<>();
+        list.add(new RString(UrErrorMessages.存在しない.getMessage().getCode()));
+        list.add(new RString(DbeErrorMessages.認定ソフトバージョンエラー.getMessage().getCode()));
+        list.add(CheckEditableResult.一次判定完了済み.getMessageCode());
+        list.add(CheckEditableResult.審査会結果登録完了済み.getMessageCode());
+        ONLOAD_ERROR_MESSAGES = Collections.unmodifiableList(list);
+    }
 
     /**
      * 認定調査結果登録1の初期化。(オンロード)<br/>
@@ -103,14 +112,8 @@ public class NinnteiChousaKekkaTouroku1 {
      * @return レスポンスデータ
      */
     public ResponseData<NinnteiChousaKekkaTouroku1Div> onLoad(NinnteiChousaKekkaTouroku1Div div) {
-        if (new RString(UrErrorMessages.存在しない.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
-                || new RString(DbeErrorMessages.認定ソフトバージョンエラー.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
-                || new RString(DbeErrorMessages.審査会割当済のため処理不可.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
-                || new RString(DbeErrorMessages.一次判定済のため処理不可.getMessage().getCode())
-                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
+        if (ONLOAD_ERROR_MESSAGES.contains(ResponseHolder.getMessageCode())
+                && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             setDisabledControl_Error(div);
             return ResponseData.of(div).respond();
         }
@@ -157,24 +160,30 @@ public class NinnteiChousaKekkaTouroku1 {
         if (!isイメージ) {
             div.getNinteiChosaNyuryoku().getTplKihonChosa().getBtnImageTokkiJiko().setDisplayNone(true);
         }
-        ShinsakaiWariateJohoManager shinsakaiWariateManager = InstanceProvider.create(ShinsakaiWariateJohoManager.class);
-        boolean 審査会割当済 = shinsakaiWariateManager.get審査会割当データ(申請書管理番号);
-        if ((!UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId()))
-                && (!UICONTAINERID_DBEUC40501.equals(ResponseHolder.getUIContainerId()))) {
-            if (審査会割当済) {
-                ErrorMessage message = new ErrorMessage(DbeErrorMessages.審査会割当済のため処理不可.getMessage().getCode(),
-                        DbeErrorMessages.審査会割当済のため処理不可.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
+
+        CheckEditableResult result = KekkaTorokuUtil.checkEditable(申請書管理番号);
+        if (!result.is編集可能()) {
+            return ResponseData.of(div).addMessage(result.getMessage()).respond();
+        }
+
+        if (!new RString(UrErrorMessages.排他_他のユーザが使用中.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+            boolean gotLock = 前排他キーのセット();
+            if (!gotLock) {
+                div.setReadOnly(true);
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(保存するボタン, true);
+                return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
             }
         }
-        NinteiKanryoJohoManager ninteiKanryoJohoManager = InstanceProvider.create(NinteiKanryoJohoManager.class);
-        NinteiKanryoJoho 認定完了情報 = ninteiKanryoJohoManager.get要介護認定完了情報(申請書管理番号);
-        if ((!UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId()))
-                && (!UICONTAINERID_DBEUC40501.equals(ResponseHolder.getUIContainerId()))) {
-            if (認定完了情報.get要介護認定一次判定完了年月日() != null) {
-                InformationMessage message = new InformationMessage(DbeErrorMessages.一次判定済のため処理不可.getMessage().getCode(),
-                        DbeErrorMessages.一次判定済のため処理不可.getMessage().evaluate());
-                return ResponseData.of(div).addMessage(message).respond();
+        getHandler(div).編集前調査実施者情報設定();
+        ViewStateHolder.put(ViewStateKeys.要介護認定完了情報, NinteiKanryoJohoManager.createInstance().get要介護認定完了情報(申請書管理番号));
+        if (概況特記出力しない.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
+            if (UICONTAINERID_DBEUC20601.equals(ResponseHolder.getUIContainerId())) {
+                return ResponseData.of(div).setState(DBE2210001StateName.調査結果登録_基本運用_特記なし);
+            } else if (UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId())
+                    || UICONTAINERID_DBEUC40501.equals(ResponseHolder.getUIContainerId())) {
+                return ResponseData.of(div).setState(DBE2210001StateName.調査結果登録_マスキング_特記なし);
+            } else {
+                return ResponseData.of(div).setState(DBE2210001StateName.調査結果登録_特記なし);
             }
         }
         if (!new RString(UrErrorMessages.排他_他のユーザが使用中.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
@@ -718,7 +727,7 @@ public class NinnteiChousaKekkaTouroku1 {
         IchijiHanteiKekkaResultConveter converter = new IchijiHanteiKekkaResultConveter(申請書管理番号, result);
         List<IchijiHanteiShoriKekka> kekkaList = converter.convert();
 
-        if ((UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId()) 
+        if ((UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId())
                 || UICONTAINERID_DBEUC40501.equals(ResponseHolder.getUIContainerId()))
                 && (kekkaList == null || kekkaList.isEmpty())) {
             return ResponseData.of(div).addMessage(DbeErrorMessages.一次判定失敗.getMessage()).respond();
@@ -781,7 +790,7 @@ public class NinnteiChousaKekkaTouroku1 {
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
                 || new RString(UrQuestionMessages.削除の確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            更新処理(isDelete, div, kekkaList);
+            更新処理(isDelete, div, kekkaList, ViewStateHolder.get(ViewStateKeys.要介護認定完了情報, NinteiKanryoJoho.class));
             アクセスログ(div, 申請書管理番号);
             前排他キーの解除();
             div.getCcdKanryoMessage().setMessage(
@@ -805,13 +814,12 @@ public class NinnteiChousaKekkaTouroku1 {
         return ResponseData.of(div).respond();
     }
 
-    private void 更新処理(boolean isDelete, NinnteiChousaKekkaTouroku1Div div, List<IchijiHanteiShoriKekka> kekkaList) {
+    private void 更新処理(boolean isDelete, NinnteiChousaKekkaTouroku1Div div, List<IchijiHanteiShoriKekka> kekkaList, NinteiKanryoJoho 完了情報) {
         if (isDelete) {
             getHandler(div).削除処理();
         } else {
             getHandler(div).更新処理();
-            if (UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId())
-                    || UICONTAINERID_DBEUC40501.equals(ResponseHolder.getUIContainerId())) {
+            if (完了情報.get要介護認定一次判定完了年月日() != null && !完了情報.get要介護認定一次判定完了年月日().isEmpty()) {
                 getHandler(div).updateGridAndViewStateData(kekkaList);
             }
         }

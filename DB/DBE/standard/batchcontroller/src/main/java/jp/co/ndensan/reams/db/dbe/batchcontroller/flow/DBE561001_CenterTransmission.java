@@ -11,12 +11,14 @@ import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE561001.ChosaItemTempTa
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE561001.SoshinDataSakuseiTaishoshaChushutsuProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE561001.IkenItemTempTableSakuseiProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE561001.ServiceJokyoTempTableSakuseiProcess;
-import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE561001.UpdateGaibuRenkeiDataoutputJohoProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE561001.UpdateNinteiKanryoJohoProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE561001.UpdateNinteiShinseiJohoProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE561001.ZenkaiChosaItemTempTableSakuseiProcess;
 import jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE561001.ZenkaiServiceJokyoTempTableSakuseiProcess;
+import jp.co.ndensan.reams.db.dbe.batchcontroller.step.datarenkei.UpdateGaibuRenkeiDataoutputJohoProcess;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE561001.DBE561001_CenterTransmissionParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.datarenkei.UpdateGaibuRenkeiDataoutputJohoProcessParameter;
+import jp.co.ndensan.reams.db.dbe.definition.batchprm.datarenkei.UpdateGaibuRenkeiDataoutputJohoProcessParameter.RenkeiDataType;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.centertransmission.CenterTransmissionUpdateProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission.SoshinDataSakuseiTaishoshaTempEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
@@ -28,6 +30,7 @@ import jp.co.ndensan.reams.uz.uza.batch.flow.value.NewTempTableCreateOption;
 import jp.co.ndensan.reams.uz.uza.batch.flow.value.PKColumn;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -175,7 +178,12 @@ public class DBE561001_CenterTransmission extends BatchFlowBase<DBE561001_Center
     @Step(DB出力外部連携データ抽出情報)
     IBatchFlowCommand updateGaibuRenkeiDataoutputJoho() {
         return loopBatch(UpdateGaibuRenkeiDataoutputJohoProcess.class)
-                .arguments(new CenterTransmissionUpdateProcessParameter(出力された申請書管理番号)).define();
+                .arguments(new UpdateGaibuRenkeiDataoutputJohoProcessParameter(
+                                出力された申請書管理番号,
+                                RenkeiDataType.センター送信,
+                                FlexibleDate.getNowDate()
+                        ))
+                .define();
     }
 
     /**

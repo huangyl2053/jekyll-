@@ -21,6 +21,7 @@ import lombok.Getter;
 public class HanteiKekkaJohoShutsuryokuProcessParamter implements IBatchProcessParameter {
 
     private final List<RString> shinseishoKanriNoList;
+    private final List<RString> hihokenshaNoList;
     private final RString fayirukuben;
     private final RString hokensha;
     private final RString hokenshaName;
@@ -34,6 +35,7 @@ public class HanteiKekkaJohoShutsuryokuProcessParamter implements IBatchProcessP
      * コンストラクタです。
      *
      * @param 申請書管理番号リスト 申請書管理番号リスト
+     * @param 被保険者番号リスト 被保険者番号リスト
      * @param ファイル区分 ファイル区分
      * @param 保険者 保険者
      * @param 保険者名称 保険者名称
@@ -46,6 +48,7 @@ public class HanteiKekkaJohoShutsuryokuProcessParamter implements IBatchProcessP
      */
     public HanteiKekkaJohoShutsuryokuProcessParamter(
             List<RString> 申請書管理番号リスト,
+            List<RString> 被保険者番号リスト,
             RString ファイル区分,
             RString 保険者,
             RString 保険者名称,
@@ -55,6 +58,7 @@ public class HanteiKekkaJohoShutsuryokuProcessParamter implements IBatchProcessP
             RString 被保険者番号,
             RString データ出力有無) {
         this.shinseishoKanriNoList = 申請書管理番号リスト;
+        this.hihokenshaNoList = 被保険者番号リスト;
         this.fayirukuben = ファイル区分;
         this.hokensha = 保険者;
         this.hokenshaName = 保険者名称;

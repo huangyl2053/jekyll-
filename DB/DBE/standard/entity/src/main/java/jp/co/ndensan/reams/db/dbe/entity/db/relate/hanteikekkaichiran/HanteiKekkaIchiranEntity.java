@@ -51,5 +51,6 @@ public class HanteiKekkaIchiranEntity {
     private RString 合議体番号;
     private RString 審査会開催番号;
     private RString 申請書管理番号;
-    
+    private RString 厚労省IF識別コード;
+    private RString tb_厚労省IF識別コード;
 }

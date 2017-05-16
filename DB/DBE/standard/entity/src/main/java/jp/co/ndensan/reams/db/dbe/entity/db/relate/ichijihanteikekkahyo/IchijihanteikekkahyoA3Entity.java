@@ -56,6 +56,7 @@ public class IchijihanteikekkahyoA3Entity {
     private RString 主治医番号;
     private RString 主治医氏名;
     private RString 一次判定結果;
+    private RString 前回一次判定結果;
     private RString 要介護認定等基準時間;
     private RString 前回要介護認定等基準時間;
     private RString 基準時間の積み上げグラフ;

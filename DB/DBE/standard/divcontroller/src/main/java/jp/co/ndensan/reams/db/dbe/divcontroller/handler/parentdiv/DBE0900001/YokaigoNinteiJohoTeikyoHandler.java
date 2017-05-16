@@ -345,7 +345,7 @@ public class YokaigoNinteiJohoTeikyoHandler {
     private void set一次判定結果CheckBox(NinnteiRiriBusiness business) {
         IchijiHanteiKekkaJoho 一次判定結果情報
                 = YokaigoNinteiJohoTeikyoFinder.createInstance().get一次判定結果情報(new ShinseishoKanriNo(business.get申請書管理番号()));
-        if (一次判定結果情報 != null && !一次判定結果情報.get仮一次判定区分()) {
+        if (一次判定結果情報 != null) {
             if (出力方法_一式.equals(div.getRadOutputHoho().getSelectedKey())) {
                 List<RString> keys = new ArrayList<>();
                 keys.add(KEY0);

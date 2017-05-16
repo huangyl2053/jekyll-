@@ -98,4 +98,9 @@ public class ShujiiIryokikanCode implements IValueObject<RString>, Comparable<Sh
         }
         return this.theValue.length() <= MAX_LENGTH;
     }
+
+    @Override
+    public String toString() {
+        return RString.isNullOrEmpty(this.theValue) ? RString.EMPTY.toString() : this.theValue.toString();
+    }
 }
