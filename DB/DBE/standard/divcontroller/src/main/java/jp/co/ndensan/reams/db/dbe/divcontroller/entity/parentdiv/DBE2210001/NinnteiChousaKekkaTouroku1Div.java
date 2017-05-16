@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class NinnteiChousaKekkaTouroku1Div extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -515,13 +515,13 @@ public class NinnteiChousaKekkaTouroku1Div extends Panel {
     }
 
     @JsonIgnore
-    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
-        return this.getNinteiChosaNyuryoku().getChosaTaisho().getCcdNinteiShinseishaKihonInfo();
+    public INinteiShinseiRenrakusakiKihonDiv getCcdNinteiShinseiRenrakusakiKihon() {
+        return this.getNinteiChosaNyuryoku().getChosaTaisho().getCcdNinteiShinseiRenrakusakiKihon();
     }
 
     @JsonIgnore
-    public INinteiShinseiRenrakusakiKihonDiv getCcdNinteiShinseiRenrakusakiKihon() {
-        return this.getNinteiChosaNyuryoku().getChosaTaisho().getCcdNinteiShinseiRenrakusakiKihon();
+    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
+        return this.getNinteiChosaNyuryoku().getChosaTaisho().getCcdNinteiShinseishaKihonInfo();
     }
 
     @JsonIgnore
@@ -1087,16 +1087,6 @@ public class NinnteiChousaKekkaTouroku1Div extends Panel {
     @JsonIgnore
     public void  setBtnHanteishoriAto(Button btnHanteishoriAto) {
         this.getNinteiChosaNyuryoku().setBtnHanteishoriAto(btnHanteishoriAto);
-    }
-
-    @JsonIgnore
-    public Button getBtnIchijiHantei() {
-        return this.getNinteiChosaNyuryoku().getBtnIchijiHantei();
-    }
-
-    @JsonIgnore
-    public void  setBtnIchijiHantei(Button btnIchijiHantei) {
-        this.getNinteiChosaNyuryoku().setBtnIchijiHantei(btnIchijiHantei);
     }
 
     // </editor-fold>

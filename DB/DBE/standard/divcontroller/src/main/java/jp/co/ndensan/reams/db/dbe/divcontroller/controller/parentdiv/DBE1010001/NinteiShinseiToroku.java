@@ -134,17 +134,11 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 public class NinteiShinseiToroku {
 
     private final NinteiShinseiTorokuManager manager;
-    private final KaigoHokenshaManager dbt7050Manager;
     private final NinteiKanryoJohoManager dbt5105Manager;
     private final ShinseiRirekiJohoManager dbt5121Manager;
     private static final RString MENUID_DBEMN31001 = new RString("DBEMN31001");
     private static final RString MENUID_DBEMN31003 = new RString("DBEMN31003");
-//<<<<<<< HEAD
-//    private static final RString MENUID_DBEMN21003 = new RString("DBEMN21003");
-//=======
-//    private static final RString MENUID_DBEMN21003 = new RString("DBEMN21003");
-//    private static final RString UICONTAINERID_DBEUC10001 = new RString("DBEUC10001");
-//>>>>>>> origin/dbe-master
+    private static final RString UICONTAINERID_DBEUC10001 = new RString("DBEUC10001");
     private static final RString UICONTAINERID_DBEUC11001 = new RString("DBEUC11001");
     private static final RString UICONTAINERID_DBEUC10002 = new RString("DBEUC10002");
     private static final RString BTNUPDATE_FILENAME = new RString("btnUpdate");
@@ -154,7 +148,6 @@ public class NinteiShinseiToroku {
     private static final int INT_0 = 0;
     private static final int ZERO_17 = 17;
     private static final int ZERO_5 = 5;
-    private static final RString ZERO_6 = new RString("000000");
     private static final RString 歳 = new RString("歳");
     private static final RString KEY1 = new RString("key1");
     private static final RString サービス削除の旨 = new RString("1010");
@@ -181,7 +174,6 @@ public class NinteiShinseiToroku {
      */
     public NinteiShinseiToroku() {
         this.manager = NinteiShinseiTorokuManager.createInstance();
-        this.dbt7050Manager = KaigoHokenshaManager.createInstance();
         this.dbt5105Manager = NinteiKanryoJohoManager.createInstance();
         this.dbt5121Manager = new ShinseiRirekiJohoManager();
         ninteiTandokuDounyuFlag = Boolean.FALSE;
@@ -367,14 +359,10 @@ public class NinteiShinseiToroku {
             } else {
                 CommonButtonHolder.setDisabledByCommonButtonFieldName(BTNUPDATE_FILENAME, false);
             }
-//<<<<<<< HEAD
+            if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC10001)) {
+                ViewStateHolder.put(ViewStateKeys.認定計画情報, manager.get認定計画情報(管理番号));
+            }
             return ResponseData.of(div).rootTitle(審査依頼受付).respond();
-//=======
-//            if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC10001)) {
-//                ViewStateHolder.put(ViewStateKeys.認定計画情報, manager.get認定計画情報(管理番号));
-//            }
-//            return ResponseData.of(div).rootTitle(new RString("審査依頼受付")).respond();
-//>>>>>>> origin/dbe-master
         }
         if (MENUID_DBEMN31003.equals(menuID)) {
             Minashi2shisaiJoho business = ViewStateHolder.get(ViewStateKeys.みなし2号登録情報, Minashi2shisaiJoho.class);
@@ -1031,21 +1019,11 @@ public class NinteiShinseiToroku {
             if (shinseitodokedeJoho != null) {
                 manager.save申請届出情報(shinseitodokedeJoho);
             }
-
-//<<<<<<< HEAD
+            if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC10001)) {
+                update申請計画情報(shinseiJoho, div);
+            }
             前排他キーの解除(申請書管理番号.getColumnValue());
             return goToKanryo(div, response, 申請書管理番号);
-//=======
-//            if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC10001)) {
-//                update申請計画情報(shinseiJoho, div);
-//            }
-//            RStringBuilder 前排他制御 = new RStringBuilder();
-//            前排他制御.append("DBEShinseishoKanriNo");
-//            前排他制御.append(申請書管理番号.getColumnValue());
-//            前排他キーの解除(前排他制御.toRString());
-//            return goToKanryo(div, response);
-////            return response.addMessage(UrInformationMessages.正常終了.getMessage().replace("審査依頼受付")).respond();
-//>>>>>>> origin/dbe-master
         }
         return response.respond();
     }

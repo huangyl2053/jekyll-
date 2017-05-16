@@ -192,14 +192,11 @@ public class ShujiiIkenshoIraiTaishoIchiran {
                 hasHeader(true).
                 build()) {
             List<dgNinteiTaskList_Row> rowList = getHandler(div).getSelectedItems();
-//<<<<<<< HEAD
             List<PersonalData> personalDataList = new ArrayList<>();
-//=======
             if (!RString.isNullOrEmpty(div.getDgNinteiTaskList().getSortOrder())) {
                 ShujiiIkenshoIraiComparatorFactory comparatorFactory = new ShujiiIkenshoIraiComparatorFactory();
                 Collections.sort(rowList, comparatorFactory.getNinteiTaskListComparator(div.getDgNinteiTaskList().getSortOrder(), div.getDgNinteiTaskList().isIsAscending()));
             }
-//>>>>>>> origin/dbe-master
             for (dgNinteiTaskList_Row row : rowList) {
                 csvWriter.writeLine(getCsvData(row));
                 Optional<PersonalData> personalData = getHandler(div).getPersonalData(row.getShoKisaiHokenshaNo(), row.getHihoNumber(), row.getShinseishoKanriNo());

@@ -23,7 +23,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class NinteiChosaNyuryokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -44,8 +44,6 @@ public class NinteiChosaNyuryokuDiv extends Panel {
     private Button btnIchijiHanteiValidate;
     @JsonProperty("btnHanteishoriAto")
     private Button btnHanteishoriAto;
-    @JsonProperty("btnIchijiHantei")
-    private Button btnIchijiHantei;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -180,34 +178,16 @@ public class NinteiChosaNyuryokuDiv extends Panel {
     }
 
     /*
-     * getbtnIchijiHantei
-     * @return btnIchijiHantei
-     */
-    @JsonProperty("btnIchijiHantei")
-    public Button getBtnIchijiHantei() {
-        return btnIchijiHantei;
-    }
-
-    /*
-     * setbtnIchijiHantei
-     * @param btnIchijiHantei btnIchijiHantei
-     */
-    @JsonProperty("btnIchijiHantei")
-    public void setBtnIchijiHantei(Button btnIchijiHantei) {
-        this.btnIchijiHantei = btnIchijiHantei;
-    }
-
-    /*
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
-        return this.getChosaTaisho().getCcdNinteiShinseishaKihonInfo();
+    public INinteiShinseiRenrakusakiKihonDiv getCcdNinteiShinseiRenrakusakiKihon() {
+        return this.getChosaTaisho().getCcdNinteiShinseiRenrakusakiKihon();
     }
 
     @JsonIgnore
-    public INinteiShinseiRenrakusakiKihonDiv getCcdNinteiShinseiRenrakusakiKihon() {
-        return this.getChosaTaisho().getCcdNinteiShinseiRenrakusakiKihon();
+    public INinteiShinseishaKihonInfoDiv getCcdNinteiShinseishaKihonInfo() {
+        return this.getChosaTaisho().getCcdNinteiShinseishaKihonInfo();
     }
 
     @JsonIgnore
