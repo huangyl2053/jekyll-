@@ -112,7 +112,14 @@ public class TaishouWaritsukeHandler {
      */
     public void initializtion(RString 介護認定審査会番号) {
         div.getShinsakaiTaishoshaWaritsuke().setKaigoNinteiShinsakaiKaisaiNo(介護認定審査会番号);
+        div.getShinsakaiJoho().setIsOpen(false);
         ヘッドエリア検索();
+        RStringBuilder title = new RStringBuilder();
+        title.append(div.getShinsakaiJoho().getTxtShinsakaiName().getValue())
+             .append(RString.FULL_SPACE)
+             .append(new RString("開催予定日:"))
+             .append(div.getShinsakaiJoho().getTxtKaisaiDate().formattedDate());
+        div.getShinsakaiJoho().setTitle(title.toRString());
         対象者一覧ソートラベル();
         対象者一覧検索();
         候補者一覧検索();

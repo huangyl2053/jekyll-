@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinsakaiTaishoshaWaritsukeDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-15_14-55-30">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,14 +27,6 @@ public class ShinsakaiTaishoshaWaritsukeDiv extends Panel {
     private ShinsakaiJohoDiv ShinsakaiJoho;
     @JsonProperty("WaritsukeTaishoshaIchiran")
     private WaritsukeTaishoshaIchiranDiv WaritsukeTaishoshaIchiran;
-    @JsonProperty("btnJidoWaritsuke")
-    private Button btnJidoWaritsuke;
-    @JsonProperty("btnWaritsuke")
-    private Button btnWaritsuke;
-    @JsonProperty("btnWaritsukeKaijo")
-    private Button btnWaritsukeKaijo;
-    @JsonProperty("chkShiryosakuseizumiKomi")
-    private CheckBoxList chkShiryosakuseizumiKomi;
     @JsonProperty("WaritsukeKohoshaIchiran")
     private WaritsukeKohoshaIchiranDiv WaritsukeKohoshaIchiran;
     @JsonProperty("KaigoNinteiShinsakaiKaisaiNo")
@@ -80,78 +72,6 @@ public class ShinsakaiTaishoshaWaritsukeDiv extends Panel {
     @JsonProperty("WaritsukeTaishoshaIchiran")
     public void setWaritsukeTaishoshaIchiran(WaritsukeTaishoshaIchiranDiv WaritsukeTaishoshaIchiran) {
         this.WaritsukeTaishoshaIchiran = WaritsukeTaishoshaIchiran;
-    }
-
-    /*
-     * getbtnJidoWaritsuke
-     * @return btnJidoWaritsuke
-     */
-    @JsonProperty("btnJidoWaritsuke")
-    public Button getBtnJidoWaritsuke() {
-        return btnJidoWaritsuke;
-    }
-
-    /*
-     * setbtnJidoWaritsuke
-     * @param btnJidoWaritsuke btnJidoWaritsuke
-     */
-    @JsonProperty("btnJidoWaritsuke")
-    public void setBtnJidoWaritsuke(Button btnJidoWaritsuke) {
-        this.btnJidoWaritsuke = btnJidoWaritsuke;
-    }
-
-    /*
-     * getbtnWaritsuke
-     * @return btnWaritsuke
-     */
-    @JsonProperty("btnWaritsuke")
-    public Button getBtnWaritsuke() {
-        return btnWaritsuke;
-    }
-
-    /*
-     * setbtnWaritsuke
-     * @param btnWaritsuke btnWaritsuke
-     */
-    @JsonProperty("btnWaritsuke")
-    public void setBtnWaritsuke(Button btnWaritsuke) {
-        this.btnWaritsuke = btnWaritsuke;
-    }
-
-    /*
-     * getbtnWaritsukeKaijo
-     * @return btnWaritsukeKaijo
-     */
-    @JsonProperty("btnWaritsukeKaijo")
-    public Button getBtnWaritsukeKaijo() {
-        return btnWaritsukeKaijo;
-    }
-
-    /*
-     * setbtnWaritsukeKaijo
-     * @param btnWaritsukeKaijo btnWaritsukeKaijo
-     */
-    @JsonProperty("btnWaritsukeKaijo")
-    public void setBtnWaritsukeKaijo(Button btnWaritsukeKaijo) {
-        this.btnWaritsukeKaijo = btnWaritsukeKaijo;
-    }
-
-    /*
-     * getchkShiryosakuseizumiKomi
-     * @return chkShiryosakuseizumiKomi
-     */
-    @JsonProperty("chkShiryosakuseizumiKomi")
-    public CheckBoxList getChkShiryosakuseizumiKomi() {
-        return chkShiryosakuseizumiKomi;
-    }
-
-    /*
-     * setchkShiryosakuseizumiKomi
-     * @param chkShiryosakuseizumiKomi chkShiryosakuseizumiKomi
-     */
-    @JsonProperty("chkShiryosakuseizumiKomi")
-    public void setChkShiryosakuseizumiKomi(CheckBoxList chkShiryosakuseizumiKomi) {
-        this.chkShiryosakuseizumiKomi = chkShiryosakuseizumiKomi;
     }
 
     /*
@@ -344,6 +264,16 @@ public class ShinsakaiTaishoshaWaritsukeDiv extends Panel {
     }
 
     @JsonIgnore
+    public CheckBoxList getChkTaishoshaFilter() {
+        return this.getWaritsukeTaishoshaIchiran().getChkTaishoshaFilter();
+    }
+
+    @JsonIgnore
+    public void  setChkTaishoshaFilter(CheckBoxList chkTaishoshaFilter) {
+        this.getWaritsukeTaishoshaIchiran().setChkTaishoshaFilter(chkTaishoshaFilter);
+    }
+
+    @JsonIgnore
     public DataGrid<dgTaishoshaIchiran_Row> getDgTaishoshaIchiran() {
         return this.getWaritsukeTaishoshaIchiran().getDgTaishoshaIchiran();
     }
@@ -361,6 +291,56 @@ public class ShinsakaiTaishoshaWaritsukeDiv extends Panel {
     @JsonIgnore
     public void  setLblKohoshaIchiran(Label lblKohoshaIchiran) {
         this.getWaritsukeKohoshaIchiran().setLblKohoshaIchiran(lblKohoshaIchiran);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkKohoshaFilter() {
+        return this.getWaritsukeKohoshaIchiran().getChkKohoshaFilter();
+    }
+
+    @JsonIgnore
+    public void  setChkKohoshaFilter(CheckBoxList chkKohoshaFilter) {
+        this.getWaritsukeKohoshaIchiran().setChkKohoshaFilter(chkKohoshaFilter);
+    }
+
+    @JsonIgnore
+    public Button getBtnJidoWaritsuke() {
+        return this.getWaritsukeKohoshaIchiran().getBtnJidoWaritsuke();
+    }
+
+    @JsonIgnore
+    public void  setBtnJidoWaritsuke(Button btnJidoWaritsuke) {
+        this.getWaritsukeKohoshaIchiran().setBtnJidoWaritsuke(btnJidoWaritsuke);
+    }
+
+    @JsonIgnore
+    public Button getBtnWaritsuke() {
+        return this.getWaritsukeKohoshaIchiran().getBtnWaritsuke();
+    }
+
+    @JsonIgnore
+    public void  setBtnWaritsuke(Button btnWaritsuke) {
+        this.getWaritsukeKohoshaIchiran().setBtnWaritsuke(btnWaritsuke);
+    }
+
+    @JsonIgnore
+    public CheckBoxList getChkShiryosakuseizumiKomi() {
+        return this.getWaritsukeKohoshaIchiran().getChkShiryosakuseizumiKomi();
+    }
+
+    @JsonIgnore
+    public void  setChkShiryosakuseizumiKomi(CheckBoxList chkShiryosakuseizumiKomi) {
+        this.getWaritsukeKohoshaIchiran().setChkShiryosakuseizumiKomi(chkShiryosakuseizumiKomi);
+    }
+
+    @JsonIgnore
+    public Button getBtnWaritsukeKaijo() {
+        return this.getWaritsukeKohoshaIchiran().getBtnWaritsukeKaijo();
+    }
+
+    @JsonIgnore
+    public void  setBtnWaritsukeKaijo(Button btnWaritsukeKaijo) {
+        this.getWaritsukeKohoshaIchiran().setBtnWaritsukeKaijo(btnWaritsukeKaijo);
     }
 
     @JsonIgnore

@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class WaritsukeTaishoshaIchiranDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-15_14-55-30">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -25,6 +25,8 @@ public class WaritsukeTaishoshaIchiranDiv extends Panel {
     private Label lblTaishosha;
     @JsonProperty("lblTaishoshaSort")
     private Label lblTaishoshaSort;
+    @JsonProperty("chkTaishoshaFilter")
+    private CheckBoxList chkTaishoshaFilter;
     @JsonProperty("dgTaishoshaIchiran")
     private DataGrid<dgTaishoshaIchiran_Row> dgTaishoshaIchiran;
 
@@ -68,6 +70,24 @@ public class WaritsukeTaishoshaIchiranDiv extends Panel {
     @JsonProperty("lblTaishoshaSort")
     public void setLblTaishoshaSort(Label lblTaishoshaSort) {
         this.lblTaishoshaSort = lblTaishoshaSort;
+    }
+
+    /*
+     * getchkTaishoshaFilter
+     * @return chkTaishoshaFilter
+     */
+    @JsonProperty("chkTaishoshaFilter")
+    public CheckBoxList getChkTaishoshaFilter() {
+        return chkTaishoshaFilter;
+    }
+
+    /*
+     * setchkTaishoshaFilter
+     * @param chkTaishoshaFilter chkTaishoshaFilter
+     */
+    @JsonProperty("chkTaishoshaFilter")
+    public void setChkTaishoshaFilter(CheckBoxList chkTaishoshaFilter) {
+        this.chkTaishoshaFilter = chkTaishoshaFilter;
     }
 
     /*

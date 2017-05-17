@@ -52,6 +52,7 @@ public class TaishouWaritsuke {
     private static final RString 完了メッセージ = new RString("認定審査会対象者割付");
     private static final RString FLOWPARAMETERS_KEY = new RString("key");
     private static final RString FLOWPARAMETERS_VALUE = new RString("Kanryo");
+    private static final RString フィルターキー = new RString("0");
 
     /**
      * コントロールdivが「生成」された際の処理です。(オンロード)<br/>
@@ -316,6 +317,34 @@ public class TaishouWaritsuke {
         onLoad(div);
         getHandler(div).setCommonButtonDisabled();
         return ResponseData.of(div).setState(DBE5160001StateName.審査会割付);
+    }
+    
+    /**
+     * 対象者フィルター表示切替です。
+     * @param div TaishouWaritsukeDiv
+     * @return ResponseData<TaishouWaritsukeDiv>
+     */
+    public ResponseData<TaishouWaritsukeDiv> onChange_chkTaishoshaFilter(TaishouWaritsukeDiv div) {
+        if (div.getChkTaishoshaFilter().getSelectedKeys().contains(フィルターキー)) {
+            div.getDgTaishoshaIchiran().getGridSetting().setShowFilter(true);
+        } else {
+            div.getDgTaishoshaIchiran().getGridSetting().setShowFilter(false);
+        }
+        return ResponseData.of(div).respond();
+    }
+    
+    /**
+     * 候補者フィルター表示切替です。
+     * @param div TaishouWaritsukeDiv
+     * @return ResponseData<TaishouWaritsukeDiv>
+     */
+    public ResponseData<TaishouWaritsukeDiv> onChange_chkKohoshaFilter(TaishouWaritsukeDiv div) {
+        if (div.getChkKohoshaFilter().getSelectedKeys().contains(フィルターキー)) {
+            div.getDgWaritsukeKohoshaIchiran().getGridSetting().setShowFilter(true);
+        } else {
+            div.getDgWaritsukeKohoshaIchiran().getGridSetting().setShowFilter(false);
+        }
+        return ResponseData.of(div).respond();
     }
 
     private TaishouWaritsukeHandler getHandler(TaishouWaritsukeDiv div) {
