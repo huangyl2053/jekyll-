@@ -222,6 +222,13 @@ public class ShinsakaiKekkaTorokuHandler {
      */
     public void displayTo個別表示欄(dgTaishoshaIchiran_Row row, OperationMode mode) {
         reflectClickedRowTo個別事項表示欄(row);
+        if (mode == OperationMode.更新
+            && RString.isNullOrEmpty(div.getKobetsuHyojiArea().getTxtNijiHanteiDay().getText())) {
+            if (!div.getKyotsuHyojiArea().getTxtKaisaiNichiji().getValue().isEmpty()) {
+                div.getKobetsuHyojiArea().getTxtNijiHanteiDay().setValue(new RDate(div.getKyotsuHyojiArea().getTxtKaisaiNichiji().getValue().toString()));
+            }
+                
+        }
         setInputable個別事項表示欄By(mode);
         if (mode != OperationMode.更新) {
             return;
