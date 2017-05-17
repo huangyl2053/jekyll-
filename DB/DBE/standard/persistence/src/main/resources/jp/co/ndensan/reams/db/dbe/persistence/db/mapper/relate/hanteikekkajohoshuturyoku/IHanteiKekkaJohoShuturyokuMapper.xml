@@ -207,6 +207,7 @@
                  dbT5502."shinsakaiOrder" AS shinsakaiOrder
                 ,dbT7051."shichosonCode" AS shichosonCode
                 ,dbT7051."shichosonMeisho" AS shichosonMeisho
+                ,dbT5101."shinseishoKanriNo" AS shinseishoKanriNo
                 ,dbT5101."shoKisaiHokenshaNo" AS shoKisaiHokenshaNo
                 ,dbT5101."hihokenshaName" AS hihokenshaName
                 ,dbT5101."hihokenshaNo" AS hihokenshaNo
@@ -297,6 +298,7 @@
              A.shinsakaiOrder AS shinsakaiOrder
             ,A.shichosonCode AS shichosonCode
             ,A.shichosonMeisho AS shichosonMeisho
+            ,A.shinseishoKanriNo AS shinseishoKanriNo
             ,A.shoKisaiHokenshaNo AS shoKisaiHokenshaNo
             ,A.hihokenshaName AS hihokenshaName
             ,A.hihokenshaNo AS hihokenshaNo
