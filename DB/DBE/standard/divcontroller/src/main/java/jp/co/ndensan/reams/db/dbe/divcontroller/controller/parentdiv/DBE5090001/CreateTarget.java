@@ -1077,7 +1077,7 @@ public class CreateTarget {
         data.set認知機能及び状態安定性から推定される給付区分(business.getCsvBusiness().get認知機能及び状態安定性から推定される給付区分());
         data.set認定審査会資料作成日(business.getCsvBusiness().get認定審査会資料作成日());
         data.set認定審査会予定日(business.getCsvBusiness().get認定審査会予定日());
-        data.set合議体番号(business.getCsvBusiness().get合議体番号());
+        data.set合議体番号(business.getCsvBusiness().get合議体番号().padZeroToLeft(連番6));
         data.set審査会資料番号(business.getCsvBusiness().get審査会資料番号());
         data.set二次判定日(business.getCsvBusiness().get二次判定日());
         data.set二次判定結果(business.getCsvBusiness().get二次判定結果());

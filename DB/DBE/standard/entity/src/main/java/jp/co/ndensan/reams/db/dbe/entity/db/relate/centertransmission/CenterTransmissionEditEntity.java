@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class CenterTransmissionEditEntity {
 
     private static final int シーケンシャル番号LENGTH = 6;
+    private static final int 合議体番号LENGTH = 6;
     private static final RString EMPTY_VALUE = new RString(0);
     private static final ShinseishoKanriNo EMPTY_申請書管理番号 = new ShinseishoKanriNo("00000000000000000");
     private final CenterTransmissionEntity entity;
@@ -137,7 +138,7 @@ public class CenterTransmissionEditEntity {
         csvEntity.set認知機能及び状態安定性から推定される給付区分(getValue(entity.getSuiteiKyufuKubunCode()));
         csvEntity.set認定審査会資料作成日(getValue(entity.getShinsakaiShiryoSakuseiYMD()));
         csvEntity.set認定審査会予定日(getValue(entity.getShinsakaiKaisaiYoteiYMD()));
-        csvEntity.set合議体番号(new RString(entity.getGogitaiNo()));
+        csvEntity.set合議体番号(new RString(entity.getGogitaiNo()).padZeroToLeft(合議体番号LENGTH));
         csvEntity.set審査会資料番号(RString.EMPTY);
         csvEntity.set二次判定日(getValue(entity.getNijiHanteiYMD()));
         csvEntity.set二次判定結果(getValue(entity.getNijiHanteiYokaigoJotaiKubunCode()));
