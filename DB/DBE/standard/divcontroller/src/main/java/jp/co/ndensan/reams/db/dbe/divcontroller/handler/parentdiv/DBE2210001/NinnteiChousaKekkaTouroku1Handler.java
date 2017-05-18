@@ -230,9 +230,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
         NinnteiChousaKekkaTouroku1Finder finder = NinnteiChousaKekkaTouroku1Finder.createInstance();
         TempData 概況調査情報 = finder.get概況調査情報(申請書管理番号, 認定調査履歴番号);
         initialize概況基本調査情報(申請書管理番号, 認定調査履歴番号, 概況調査情報);
-        ChosaJisshishaJohoModel model = new ChosaJisshishaJohoModel();
-        setChosaJisshishaJohoModel(model, 申請書管理番号, 認定調査履歴番号, 概況調査情報);
-        調査実施者情報子DIV初期化(model);
+        調査実施者情報子DIV初期化(setChosaJisshishaJohoModel(申請書管理番号, 認定調査履歴番号, 概況調査情報));
     }
 
     private void initialize概況基本調査情報(ShinseishoKanriNo 申請書管理番号, Integer 認定調査履歴番号, TempData 概況調査情報) {
@@ -550,7 +548,8 @@ public class NinnteiChousaKekkaTouroku1Handler {
         return 出力イメージフォルダパス;
     }
 
-    private void setChosaJisshishaJohoModel(ChosaJisshishaJohoModel model, ShinseishoKanriNo 申請書管理番号, int 認定調査履歴番号, TempData 概況調査情報) {
+    private ChosaJisshishaJohoModel setChosaJisshishaJohoModel(ShinseishoKanriNo 申請書管理番号, int 認定調査履歴番号, TempData 概況調査情報) {
+        ChosaJisshishaJohoModel model = new ChosaJisshishaJohoModel();
         model.set申請書管理番号(申請書管理番号.getColumnValue());
         model.set認定調査依頼履歴番号(認定調査履歴番号);
         if (概況調査情報 != null) {
@@ -575,6 +574,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
             model.setイメージテキスト区分(ViewStateHolder.get(ViewStateKeys.概況調査テキスト_イメージ区分, RString.class));
             model.set実施場所ImagePath(ViewStateHolder.get(ViewStateKeys.イメージ情報, RString.class));
         }
+        return model;
     }
 
     private void 基本調査の初期化(ShinseishoKanriNo 申請書管理番号, boolean isExistsKihonChosaData, Integer 認定調査履歴番号) {
