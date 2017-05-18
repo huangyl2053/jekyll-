@@ -315,7 +315,6 @@ public class ShujiiIkenshoSakuseiIraiReportOutputService {
         item.setMeishoFuyo(item.getMeishoFuyo());
         item.setCustomerBarCode(item.getCustomerBarCode());
         item.setSonota(item.getSonota());
-        item.setAtenaRenban(item.getAtenaRenban());
         item.setTitle(item.getTitle());
         item.setTsuchibun1(item.getTsuchibun1());
         item.setShinseiKubun(item.getShinseiKubun());

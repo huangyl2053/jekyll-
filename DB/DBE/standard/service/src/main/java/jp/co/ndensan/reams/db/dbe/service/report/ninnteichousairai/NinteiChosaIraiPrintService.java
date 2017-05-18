@@ -51,7 +51,6 @@ import jp.co.ndensan.reams.ur.urz.definition.core.ninshosha.KenmeiFuyoKubunType;
 import jp.co.ndensan.reams.ur.urz.entity.report.parts.ninshosha.NinshoshaSource;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.IReportProperty;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
@@ -137,7 +136,6 @@ public class NinteiChosaIraiPrintService {
                         /* shinseiYMD */ item.getShinseiYMD(),
                         /* teishutsuKigen */ item.getTeishutsuKigen(),
                         /* tsuchibun2 */ item.getTsuchibun2(),
-                        /* atenaRemban */ RString.EMPTY, //TODO 正しい値
                         /* shikibetsuCode */ item.getShikibetsuCode(),
                         /* expandedInformation */ item.getExpandedInformation());
                 要介護認定調査依頼書.add(item);

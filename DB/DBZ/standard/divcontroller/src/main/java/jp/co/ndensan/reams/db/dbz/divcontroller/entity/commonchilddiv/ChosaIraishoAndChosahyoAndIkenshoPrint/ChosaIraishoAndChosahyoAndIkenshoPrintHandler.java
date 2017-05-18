@@ -723,7 +723,6 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                         認定申請年月日,
                         set認定調査提出期限(business),
                         通知文.containsKey(2) ? 通知文.get(2) : RString.EMPTY,
-                        new RString(String.valueOf(宛名連番++)).padZeroToLeft(INDEX_6),
                         new ShikibetsuCode(div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().value().substring(0, 5).concat(business.get被保険者番号())),
                         new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), row.getShinseishoKanriNo())
                 );
@@ -1784,7 +1783,6 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
      */
     public List<ShujiiIkenshoSakuseiIraishoItem> create意見書作成依頼書_パラメータ() {
         List<ShujiiIkenshoSakuseiIraishoItem> itemList = new ArrayList<>();
-        int 宛名連番 = 1;
         int 連番 = 1;
         for (dgShujiiIkensho_Row row : div.getDgShujiiIkensho().getDataSource()) {
             ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter
@@ -1821,12 +1819,6 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                     item.setCustomerBarCode(RString.EMPTY);
                 }
 
-//                item.setSonota(RString.EMPTY);
-//                RStringBuilder builder = new RStringBuilder();
-//                builder.append("*");
-//                builder.append((new RString(String.valueOf(宛名連番++))).padZeroToLeft(INDEX_6));
-//                builder.append("#");
-                item.setAtenaRenban((new RString(String.valueOf(宛名連番++))).padZeroToLeft(INDEX_6));
                 item.setRemban(new RString(String.valueOf(連番++)));
                 RString 保険者市町村コード = div.getCcdHokenshaList().getSelectedItem().get市町村コード().value();
                 int 通知書定型文パターン番号 = RString.isNullOrEmpty(保険者市町村コード) ? 1 : Integer.parseInt(保険者市町村コード.toString());

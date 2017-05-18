@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.business.report.shujiiikensho;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.entity.report.shujiiikensho.ShujiiIkenshoSakuseiIraishoReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -18,6 +19,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class ShujiiIkenshoSakuseiIraishoReport extends Report<ShujiiIkenshoSakuseiIraishoReportSource> {
 
+    private static final int LENGTH = 6;
     private final List<ShujiiIkenshoSakuseiIraishoItem> items;
 
     /**
@@ -58,7 +60,9 @@ public class ShujiiIkenshoSakuseiIraishoReport extends Report<ShujiiIkenshoSakus
      */
     @Override
     public void writeBy(ReportSourceWriter<ShujiiIkenshoSakuseiIraishoReportSource> reportSourceWriter) {
+        int i = 1;
         for (ShujiiIkenshoSakuseiIraishoItem item : items) {
+            item.setAtenaRemban(new RString(i++).padZeroToLeft(LENGTH));
             IShujiiIkenshoSakuseiIraishoEditor editor = new ShujiiIkenshoSakuseiIraishoEditor(item);
             IShujiiIkenshoSakuseiIraishoBuilder builder = new ShujiiIkenshoSakuseiIraishoBuilder(editor);
             reportSourceWriter.writeLine(builder);

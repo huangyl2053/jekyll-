@@ -63,7 +63,7 @@ public class ChosaIraishoHeadItem {
     private final RString shinseiYMD;
     private final RString teishutsuKigen;
     private final RString tsuchibun2;
-    private final RString atenaRemban;
+    private RString atenaRemban;
     private final ShikibetsuCode shikibetsuCode;
     private final ExpandedInformation expandedInformation;
 
@@ -114,7 +114,6 @@ public class ChosaIraishoHeadItem {
      * @param shinseiYMD 要介護認定（更新）申請日
      * @param teishutsuKigen 要介護認定調査表提出期限
      * @param tsuchibun2 通知文2
-     * @param atenaRemban
      * @param shikibetsuCode
      * @param expandedInformation
      */
@@ -163,7 +162,6 @@ public class ChosaIraishoHeadItem {
             RString shinseiYMD,
             RString teishutsuKigen,
             RString tsuchibun2,
-            RString atenaRemban,
             ShikibetsuCode shikibetsuCode,
             ExpandedInformation expandedInformation) {
         this.hakkoYMD1 = hakkoYMD1;
@@ -210,8 +208,15 @@ public class ChosaIraishoHeadItem {
         this.shinseiYMD = shinseiYMD;
         this.teishutsuKigen = teishutsuKigen;
         this.tsuchibun2 = tsuchibun2;
-        this.atenaRemban = atenaRemban;
         this.shikibetsuCode = shikibetsuCode;
         this.expandedInformation = expandedInformation;
+    }
+    
+    /**
+     * 連番をセットします。
+     * @param atenaRemban
+     */
+    public void setAtenaRemban(RString atenaRemban) {
+        this.atenaRemban = atenaRemban;
     }
 }

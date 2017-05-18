@@ -396,7 +396,6 @@ public class NinteiChosaBusiness {
                 /* shinseiYMD */ entity.get認定申請年月日(),
                 /* teishutsuKigen */ set提出期限(entity),
                 /* tsuchibun2 */ 通知文Map.get(2),
-                /* atenaRemban */ RString.EMPTY,
                 /* shikibetsuCode */ new ShikibetsuCode(processParamter.getShoKisaiHokenshaNo().substring(0, 5).concat(entity.get被保険者番号())),
                 /* expandedInformation */ new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.get申請書管理番号()));
     }

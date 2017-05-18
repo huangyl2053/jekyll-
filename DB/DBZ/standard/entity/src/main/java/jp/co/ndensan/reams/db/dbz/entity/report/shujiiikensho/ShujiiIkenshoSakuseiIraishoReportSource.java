@@ -114,7 +114,7 @@ public class ShujiiIkenshoSakuseiIraishoReportSource implements IReportSource {
     public RString shoriName;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
-    @ReportItem(name = "atenaRenban", length = 8, order = 999)
+    @ReportItem(name = "atenaRemban", length = 8, order = 999)
     public RString atenaRemban;
     @ReportItem(name = "remban", length = 4, order = 998)
     public RString remban;

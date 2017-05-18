@@ -36,7 +36,7 @@ public class ShujiiIkenshoSakuseiIraishoItem {
     private RString meishoFuyo;
     private RString customerBarCode;
     private RString sonota;
-    private RString atenaRenban;
+    private RString atenaRemban;
     private RString title;
     private RString tsuchibun1;
     private RString shinseiKubun;

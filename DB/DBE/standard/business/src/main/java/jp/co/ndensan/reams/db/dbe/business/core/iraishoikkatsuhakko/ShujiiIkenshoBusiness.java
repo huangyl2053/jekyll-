@@ -528,11 +528,6 @@ public class ShujiiIkenshoBusiness {
         }
         item.setCustomerBarCode(getカスタマーバーコード());
         item.setSonota(entity.get被保険者番号());
-        RStringBuilder builder = new RStringBuilder();
-        builder.append("*");
-        builder.append((new RString(String.valueOf(宛名連番++))).padLeft(文字列0, INT6));
-        builder.append("#");
-        item.setAtenaRenban(builder.toRString());
         item.setRemban(new RString(String.valueOf(連番++)));
         item.setTitle(通知文Map.get(0));
         item.setTsuchibun1(通知文Map.get(1));

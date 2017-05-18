@@ -193,7 +193,6 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
                         item.getShinseiYMD(),
                         item.getTeishutsuKigen(),
                         item.getTsuchibun2(),
-                        item.getAtenaRemban(),
                         item.getShikibetsuCode(),
                         item.getExpandedInformation());
                 要介護認定調査依頼書.add(item);
