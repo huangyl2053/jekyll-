@@ -40,6 +40,11 @@
 			<artifactId>mybatis</artifactId>
 			<version>3.4.4</version>
 		</dependency>
+		<dependency>
+			<groupId>org.eclipse.mylyn.github</groupId>
+			<artifactId>org.eclipse.egit.github.core</artifactId>
+			<version>2.1.5</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>mavenweb02</finalName>
