@@ -44,7 +44,7 @@ public class HanteikekkaKagamiEditor implements IHanteikekkaKagamiEditor {
             source.title = DbBusinessConfig
                     .get(ConfigNameDBE.介護認定審査判定結果_鑑, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
             source.shinsakaiKaisaiYMD = item.getShinsakaiKaisaiYMD().wareki()
-                    .eraType(EraType.KANJI_RYAKU)
+                    .eraType(EraType.KANJI)
                     .firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE)
                     .fillType(FillType.BLANK).toDateString();
