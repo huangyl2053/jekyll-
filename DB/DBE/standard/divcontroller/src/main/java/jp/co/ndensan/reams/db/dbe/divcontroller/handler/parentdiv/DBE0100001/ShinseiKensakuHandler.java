@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0100001.dgSh
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
@@ -79,18 +80,27 @@ public class ShinseiKensakuHandler {
      * @return 検索条件 検索条件
      */
     public ShinseiKensakuMapperParameter createParameter(RString hihokenshaNo) {
-        return createParameter(hihokenshaNo, null);
+        return createParameterWithoutShoKisaiHokenshaNo(hihokenshaNo, null);
     }
 
     public ShinseiKensakuMapperParameter createParameter(List<ShinseishoKanriNo> shinseishoKanriNos) {
-        return createParameter(RString.EMPTY, shinseishoKanriNos);
+        return createParameterWithoutShoKisaiHokenshaNo(RString.EMPTY, shinseishoKanriNos);
     }
 
-    private ShinseiKensakuMapperParameter createParameter(RString hihokenshaNo, List<ShinseishoKanriNo> shinseishoKanriNos) {
+    public ShinseiKensakuMapperParameter createParameter(ShoKisaiHokenshaNo shoKisaiHokenshaNo, RString hihokenshaNo) {
+        return createParameter(shoKisaiHokenshaNo, hihokenshaNo, null);
+    }
+
+    private ShinseiKensakuMapperParameter createParameterWithoutShoKisaiHokenshaNo(RString hihokenshaNo, List<ShinseishoKanriNo> shinseishoKanriNos) {
+        return createParameter(div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv()
+                .getDdlHokenshaNumber().getSelectedItem().get証記載保険者番号(), hihokenshaNo, shinseishoKanriNos);
+    }
+
+    private ShinseiKensakuMapperParameter createParameter(ShoKisaiHokenshaNo shoKisaiHokenshaNo, RString hihokenshaNo, List<ShinseishoKanriNo> shinseishoKanriNos) {
         ShinseiKensakuMapperParameter parameter = new ShinseiKensakuMapperParameter();
         parameter.setLimitCount(get最大表示件数());
         NinteiShinseishaFinderDiv finderDiv = div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv();
-        editShosaiJokenForParameter(finderDiv, parameter, hihokenshaNo);
+        editShosaiJokenForParameter(finderDiv, parameter, shoKisaiHokenshaNo, hihokenshaNo);
         editNinteiChosaForParameter(finderDiv, parameter);
         editShujiiJohoForParameter(finderDiv, parameter);
         editShinsakaiJohoForParameter(finderDiv, parameter);
@@ -230,15 +240,9 @@ public class ShinseiKensakuHandler {
             parameter.setZenkaiYukoKikanStartTo(new FlexibleDate(設定有効開始日To.toDateString()));
             parameter.setUseZenkaiYukoKikanStartTo(true);
         }
-// <<<<<<< HEAD
         RString 原因疾患 = finderDiv.getCcdGeninShikkan().getCode().value();
         if (!RString.isNullOrEmpty(原因疾患)) {
             parameter.setGeninShikkanCode(原因疾患);
-// =======
-//      Code 原因疾患 = finderDiv.getCdlGeninShikkanCode().getCode();
-//      if (原因疾患 != null && !RString.isNullOrEmpty(原因疾患.value())) {
-//          parameter.setGeninShikkanCode(原因疾患.value());
-// >>>>>>> origin/sync
             parameter.setUseGeninShikkanCode(true);
             parameter.setUseGeninShikkan(true);
         }
@@ -450,14 +454,15 @@ public class ShinseiKensakuHandler {
         parameter.setUseNinteichosahyoKihonChosa(useNinteichosahyoKihonChosa);
     }
 
-    private void editShosaiJokenForParameter(NinteiShinseishaFinderDiv finderDiv, ShinseiKensakuMapperParameter parameter, RString 被保険者番号) {
+    private void editShosaiJokenForParameter(NinteiShinseishaFinderDiv finderDiv, ShinseiKensakuMapperParameter parameter,
+            ShoKisaiHokenshaNo 証記載保険者番号, RString 被保険者番号) {
         if (!RString.isNullOrEmpty(被保険者番号)) {
             parameter.setHihokenshaNo(被保険者番号);
             parameter.setUseHihokenshaNo(true);
         }
-        RString 証記載保険者番号 = finderDiv.getDdlHokenshaNumber().getSelectedItem().get証記載保険者番号().value();
-        if (!RString.isNullOrEmpty(証記載保険者番号)) {
-            parameter.setShoKisaiHokenshaNo(証記載保険者番号);
+
+        if (証記載保険者番号 != null && !証記載保険者番号.isEmpty()) {
+            parameter.setShoKisaiHokenshaNo(証記載保険者番号.value());
             parameter.setUseShoKisaiHokenshaNo(true);
         }
 
@@ -695,14 +700,14 @@ public class ShinseiKensakuHandler {
             if (申請時_コード != null) {
                 row.setShinseikubunshinseiji(NinteiShinseiShinseijiKubunCode.toValue(申請時_コード.value()).get名称());
             }
-            
+
             FlexibleDate 認定日 = business.get二次判定年月日();
             if (認定日 != null && !認定日.isEmpty()) {
                 TextBoxDate ninteibi = new TextBoxDate();
                 ninteibi.setValue(new RDate(認定日.toString()));
                 row.setNinteibi(ninteibi);
             }
-            
+
             Code 介護度 = business.get二次判定要介護状態区分コード();
             Code 厚労省IF識別コード = business.get厚労省IF識別コード();
             if (介護度 != null && !Code.EMPTY.equals(介護度) && 厚労省IF識別コード != null && !Code.EMPTY.equals(厚労省IF識別コード)) {
@@ -710,23 +715,23 @@ public class ShinseiKensakuHandler {
                 if (!RString.isNullOrEmpty(kaigodo)) {
                     row.setKaigodo(kaigodo);
                 }
-                
+
             }
-            
+
             FlexibleDate 認定開始日 = business.get二次判定認定有効開始年月日();
             if (認定開始日 != null && !FlexibleDate.EMPTY.equals(認定開始日)) {
                 TextBoxDate ninteiKaishibi = new TextBoxDate();
                 ninteiKaishibi.setValue(new RDate(認定開始日.toString()));
                 row.setNinteiKaishibi(ninteiKaishibi);
             }
-            
+
             FlexibleDate 認定終了日 = business.get二次判定認定有効終了年月日();
             if (認定終了日 != null && !FlexibleDate.EMPTY.equals(認定終了日)) {
                 TextBoxDate ninteiShuryobi = new TextBoxDate();
                 ninteiShuryobi.setValue(new RDate(認定終了日.toString()));
                 row.setNinteiShuryobi(ninteiShuryobi);
             }
-            
+
             YubinNo 郵便番号 = business.get郵便番号();
             if (郵便番号 != null) {
                 row.setYubinno(郵便番号.getEditedYubinNo());

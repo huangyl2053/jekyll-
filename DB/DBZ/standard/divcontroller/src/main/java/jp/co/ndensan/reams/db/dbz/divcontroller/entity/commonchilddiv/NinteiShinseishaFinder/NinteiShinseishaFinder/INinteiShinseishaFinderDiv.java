@@ -1,5 +1,6 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseishafinder.NinteiShinseishaFinderParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.saikinshorisha.SaikinShorisha.ISaikinShorishaDiv;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -54,9 +55,17 @@ public interface INinteiShinseishaFinderDiv extends ICommonChildDivBasePropertie
      *
      * @param hihokenshaNo
      * @param hihokenshaName
-     * @return
      */
     void updateSaikinShorisha(RString hihokenshaNo, RString hihokenshaName);
+
+    /**
+     * 最近処理者の情報を更新します。
+     *
+     * @param shoKisaiHokenshaNo
+     * @param hihokenshaNo
+     * @param hihokenshaName
+     */
+    void updateSaikinShorisha(ShoKisaiHokenshaNo shoKisaiHokenshaNo, RString hihokenshaNo, RString hihokenshaName);
 
     /**
      * パラメタの内容を初期状態としてセットした状態で初期化します。

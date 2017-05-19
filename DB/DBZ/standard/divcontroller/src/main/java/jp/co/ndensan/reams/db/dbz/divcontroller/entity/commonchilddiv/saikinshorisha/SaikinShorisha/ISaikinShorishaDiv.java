@@ -1,6 +1,7 @@
 package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.saikinshorisha.SaikinShorisha;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.ninteisaikinshorisha.NinteiSaikinShorisha;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.ICommonChildDivBaseProperties;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -15,6 +16,8 @@ public interface ISaikinShorishaDiv extends ICommonChildDivBaseProperties {
     ValidationMessageControlPairs validate();
 
     RString getSelectedHihokenshaNo();
+
+    NinteiSaikinShorisha getSelectedItem();
 
     void update(RString hihokenshaNo, RString hihokenshaName, ShoKisaiHokenshaNo 証記載保険者番号);
 }

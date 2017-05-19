@@ -6,7 +6,10 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5160001;
 
 import java.util.ArrayList;
+import static java.util.Collections.list;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJoho2;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJoho2Builder;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJoho2;
@@ -64,6 +67,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Icon;
 import jp.co.ndensan.reams.uz.uza.ui.binding.IconType;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -116,9 +120,9 @@ public class TaishouWaritsukeHandler {
         ヘッドエリア検索();
         RStringBuilder title = new RStringBuilder();
         title.append(div.getShinsakaiJoho().getTxtShinsakaiName().getValue())
-             .append(RString.FULL_SPACE)
-             .append(new RString("開催予定日:"))
-             .append(div.getShinsakaiJoho().getTxtKaisaiDate().formattedDate());
+                .append(RString.FULL_SPACE)
+                .append(new RString("開催予定日:"))
+                .append(div.getShinsakaiJoho().getTxtKaisaiDate().formattedDate());
         div.getShinsakaiJoho().setTitle(title.toRString());
         対象者一覧ソートラベル();
         対象者一覧検索();
@@ -225,7 +229,7 @@ public class TaishouWaritsukeHandler {
      */
     public void 審査会順序を振りなおす() {
         TaishouWaritsukeFinder finder = TaishouWaritsukeFinder.createInstance();
-        RString カスタムコンフィグの審査会順序 = BusinessConfig.get(DbeConfigKey.審査会順序, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        RString カスタムコンフィグの審査会順序 = (RString) ViewStateHolder.get(ViewStateKeys.審査会順序, Map.class).get(div.getDdlSortOrder().getSelectedKey());
         boolean 審査会資料作成済込み有無 = div.getChkShiryosakuseizumiKomi().getSelectedKeys().contains(new RString("key0"));
         List<dgTaishoshaIchiran_Row> 対象者リスト = div.getDgTaishoshaIchiran().getDataSource();
         List<dgTaishoshaIchiran_Row> 固定対象者リスト = new ArrayList<>();
@@ -431,11 +435,14 @@ public class TaishouWaritsukeHandler {
     }
 
     private void 対象者一覧ソートラベル() {
-        RStringBuilder sortBuilder = new RStringBuilder();
-        RString sort = new RString("ソート順：");
-        RString 審査会順序_表示用 = DbBusinessConfig.get(ConfigNameDBE.審査会順序_表示用, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        sortBuilder.append(sort).append(審査会順序_表示用);
-        div.getLblTaishoshaSort().setText(sortBuilder.toRString());
+        HashMap<RString, RString> map = new HashMap<>();
+        List<KeyValueDataSource> dataSource = new ArrayList<>();
+        RString key1 = new RString("1");
+        dataSource.add(new KeyValueDataSource(key1, DbBusinessConfig.get(ConfigNameDBE.審査会順序_表示用, RDate.getNowDate(), SubGyomuCode.DBE認定支援)));
+        map.put(key1, BusinessConfig.get(DbeConfigKey.審査会順序, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+        div.getDdlSortOrder().setDataSource(dataSource);
+        div.getDdlSortOrder().setSelectedIndex(0);
+        ViewStateHolder.put(ViewStateKeys.審査会順序, map);
     }
 
     private void ヘッドエリア検索() {
@@ -1092,14 +1099,6 @@ public class TaishouWaritsukeHandler {
             }
         }
 
-    }
-
-    private void 対象者一覧No振り直し() {
-        int 対象者割当No = 1;
-        for (dgTaishoshaIchiran_Row currentRow : div.getDgTaishoshaIchiran().getDataSource()) {
-            currentRow.setNo(new RString(対象者割当No));
-            対象者割当No += 1;
-        }
     }
 
     private boolean is対象者Gridに存在する(Taishouichiran 検索該当者) {

@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShinsakaiTaishoshaWaritsukeDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-15_14-55-30">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -254,16 +254,6 @@ public class ShinsakaiTaishoshaWaritsukeDiv extends Panel {
     }
 
     @JsonIgnore
-    public Label getLblTaishoshaSort() {
-        return this.getWaritsukeTaishoshaIchiran().getLblTaishoshaSort();
-    }
-
-    @JsonIgnore
-    public void  setLblTaishoshaSort(Label lblTaishoshaSort) {
-        this.getWaritsukeTaishoshaIchiran().setLblTaishoshaSort(lblTaishoshaSort);
-    }
-
-    @JsonIgnore
     public CheckBoxList getChkTaishoshaFilter() {
         return this.getWaritsukeTaishoshaIchiran().getChkTaishoshaFilter();
     }
@@ -271,6 +261,16 @@ public class ShinsakaiTaishoshaWaritsukeDiv extends Panel {
     @JsonIgnore
     public void  setChkTaishoshaFilter(CheckBoxList chkTaishoshaFilter) {
         this.getWaritsukeTaishoshaIchiran().setChkTaishoshaFilter(chkTaishoshaFilter);
+    }
+
+    @JsonIgnore
+    public DropDownList getDdlSortOrder() {
+        return this.getWaritsukeTaishoshaIchiran().getDdlSortOrder();
+    }
+
+    @JsonIgnore
+    public void  setDdlSortOrder(DropDownList ddlSortOrder) {
+        this.getWaritsukeTaishoshaIchiran().setDdlSortOrder(ddlSortOrder);
     }
 
     @JsonIgnore
