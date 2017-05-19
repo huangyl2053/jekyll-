@@ -27,7 +27,7 @@
      "condition": "",
      "toLayoutSubGyomuCode": "DBE",
      "toLayoutName": "DBE5140002",
-     "toLayoutTitle": "介護認定審査会委員割付",
+     "toLayoutTitle": "委員割付",
      "toState": "初期表示"
     },
     {
@@ -35,7 +35,7 @@
      "type": "ordinal",
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE5140002",
-     "layoutTitle": "介護認定審査会委員割付",
+     "layoutTitle": "委員割付",
      "eventName": "開催予定登録に戻る",
      "destroy": true,
      "condition": "",
@@ -49,10 +49,24 @@
      "type": "end",
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE5140002",
-     "layoutTitle": "介護認定審査会委員割付",
+     "layoutTitle": "委員割付",
      "eventName": "完了",
      "destroy": false,
      "condition": ""
+    },
+    {
+     "id": "5",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE5140002",
+     "layoutTitle": "委員割付",
+     "eventName": "検索結果一覧に戻る",
+     "destroy": true,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE5100001",
+     "toLayoutTitle": "審査会一覧",
+     "toState": "審査結果登録"
     }
    ]
   }
