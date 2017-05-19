@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 概要： 認定調査関連情報取得のマッピング用XMLです。 -->
+
+<!-- @n3327 Miura -->
+<mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.ninteichosa.INinteichosaContextMapper">
+
+    <select id="hasBeenExaminedBefore"  resultType="boolean"
+            parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ninteichosa.NinteichosaContextMapperParameter">
+        WITH personalKey AS (
+            SELECT
+                dbt5101."shoKisaiHokenshaNo" AS "shoKisaiHokenshaNo",
+                dbt5101."hihokenshaNo" AS "hihokenshaNo",
+                dbt5101."ninteiShinseiYMD" AS "ninteiShinseiYMD"
+            FROM
+                rgdb."DbT5101NinteiShinseiJoho" AS dbt5101
+            WHERE
+                dbt5101."shinseishoKanriNo" = #{shinseishoKanriNo}
+        )
+        SELECT
+            EXISTS (
+                SELECT
+                    1
+                FROM
+                    personalKey AS personalKey
+                INNER JOIN
+                    rgdb."DbT5101NinteiShinseiJoho" AS dbt5101
+                  ON dbt5101."shoKisaiHokenshaNo" = personalKey."shoKisaiHokenshaNo"
+                 AND dbt5101."hihokenshaNo" = personalKey."hihokenshaNo"
+                 AND dbt5101."ninteiShinseiYMD" <![CDATA[<=]]> personalKey."ninteiShinseiYMD"
+                 AND dbt5101."logicalDeletedFlag" = false
+                INNER JOIN
+                    rgdb."DbT5201NinteichosaIraiJoho" AS dbt5201
+                  ON dbt5201."shinseishoKanriNo" = dbt5101."shinseishoKanriNo"
+                 AND dbt5201."logicalDeletedFlag" = false
+                INNER JOIN
+                    rgdb."DbT5202NinteichosahyoGaikyoChosa" AS dbt5202
+                  ON dbt5202."shinseishoKanriNo"   = dbt5201."shinseishoKanriNo"
+                 AND dbt5202."ninteichosaRirekiNo" = dbt5201."ninteichosaIraiRirekiNo"
+                WHERE
+                    NOT (
+                         dbt5201."shinseishoKanriNo" = #{shinseishoKanriNo}
+                     AND dbt5201."ninteichosaIraiRirekiNo" <![CDATA[>=]]> #{ninteichosaIraiRirekiNo}
+                    )
+            )
+    </select>
+
+</mapper>
