@@ -114,6 +114,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.ichijipanteisyori.IChiJiPanTeiSyoRiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
@@ -1511,13 +1512,10 @@ public class NinnteiChousaKekkaTouroku1Handler {
         }
         NinteichosahyoGaikyoChosaBuilder dbt5202builder = dbt5202.createBuilderForEdit();
 
-        RString 認定調査依頼区分コード;
-        if (NinteiChousaIraiKubunCode.初回.get名称().equals(div.getCcdChosaJisshishaJoho().getTxtChosaKubun().getValue())) {
-            認定調査依頼区分コード = NinteiChousaIraiKubunCode.初回.getコード();
-        } else if (NinteiChousaIraiKubunCode.再調査.get名称().equals(div.getCcdChosaJisshishaJoho().getTxtChosaKubun().getValue())) {
-            認定調査依頼区分コード = NinteiChousaIraiKubunCode.再調査.getコード();
+        if (ChosaKubun.新規調査.get名称().equals(div.getCcdChosaJisshishaJoho().getTxtChosaKubun().getValue())) {
+            dbt5202builder.set認定調査区分コード(ChosaKubun.新規調査.asCode());
         } else {
-            認定調査依頼区分コード = NinteiChousaIraiKubunCode.再依頼.getコード();
+            dbt5202builder.set認定調査区分コード(ChosaKubun.再調査.asCode());
         }
 
         RString サービス区分コード = div.getRadGenzaiservis().getSelectedKey();
@@ -1540,7 +1538,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
         if (!EntityDataState.Modified.equals(dbt5202builder.getEntityDataState())) {
             dbt5202builder.set認定調査受領年月日(FlexibleDate.getNowDate());
         }
-        dbt5202builder.set認定調査区分コード(new Code(認定調査依頼区分コード));
+
         dbt5202builder.set認定調査委託先コード(new JigyoshaNo(div.getCcdChosaJisshishaJoho().getTxtShozokuKikanCode().getText()));
         dbt5202builder.set認定調査員コード(div.getCcdChosaJisshishaJoho().getTxtKinyushaCode().getText());
         dbt5202builder.set認定調査実施場所コード(new Code(div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedKey()));

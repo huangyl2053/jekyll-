@@ -545,11 +545,6 @@ public class NinnteiChousaKekkaTouroku1 {
         }
         if (new RString(DbeWarningMessages.既に基本調査値が存在します_上書き確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-//            if (NinteichosaIraiKubun.再調査.getCode().equals(認定調査依頼区分コード)) {
-//                getHandler(div).前回値コピー処理_前回履歴(第1群List, 第2群List, 第3群List, 第4群List, 第5群List, 特別な医療List, 自立度List);
-//            } else {
-//                getHandler(div).前回値コピー処理_前回申請(第1群List, 第2群List, 第3群List, 第4群List, 第5群List, 特別な医療List, 自立度List);
-//            }
             getHandler(div).前回値コピー処理_前回申請(第1群List, 第2群List, 第3群List, 第4群List, 第5群List, 特別な医療List, 自立度List);
             ViewStateHolder.put(ViewStateKeys.第一群認定調査基本情報リスト, 第1群List);
             ViewStateHolder.put(ViewStateKeys.第二群認定調査基本情報リスト, 第2群List);

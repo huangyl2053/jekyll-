@@ -80,6 +80,7 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJo
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5210NinteichosahyoShisetsuRiyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItemEntity;
+import jp.co.ndensan.reams.db.dbz.service.core.ninteichosa.NinteichosaContextService;
 import jp.co.ndensan.reams.uz.uza.batch.BatchInterruptedException;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
@@ -552,7 +553,11 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
         entity.setNinteichousaIraiKubunCode(nr.get認定調査依頼区分コード());
         entity.setNinteichosaIraiKaisu(nr.get認定調査回数());
         entity.setNinteichosaJuryoYMD(FlexibleDate.getNowDate());
-        entity.setNinteiChosaKubunCode(ChosaKubun.新規調査.asCode());
+        entity.setNinteiChosaKubunCode(
+                NinteichosaContextService.createInstance()
+                .findChosaKubun(nr.get申請書管理番号().value(), nr.get認定調査依頼履歴番号())
+                .asCode()
+        );
         return entity;
     }
 
