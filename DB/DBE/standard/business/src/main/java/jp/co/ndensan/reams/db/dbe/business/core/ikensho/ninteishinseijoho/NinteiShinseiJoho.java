@@ -841,9 +841,7 @@ public class NinteiShinseiJoho
     @Override
     public NinteiShinseiJoho deleted() {
         DbT5101NinteiShinseiJohoEntity deletedEntity = this.toEntity();
-        if (!deletedEntity.getState().equals(EntityDataState.Added)) {
-            deletedEntity.setState(EntityDataState.Deleted);
-        } else {
+        if (deletedEntity.getState().equals(EntityDataState.Added)) {
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new NinteiShinseiJoho(
