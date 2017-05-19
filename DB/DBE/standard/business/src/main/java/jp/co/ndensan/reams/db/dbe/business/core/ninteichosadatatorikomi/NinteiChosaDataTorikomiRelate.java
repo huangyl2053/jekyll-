@@ -128,4 +128,16 @@ public class NinteiChosaDataTorikomiRelate {
                 ? entity.get認定申請情報Entity().getChosaKubun().value() : RString.EMPTY)
                 : RString.EMPTY;
     }
+    
+    /**
+     * 認定調査委託先コードを返します。
+     * 
+     * @return 認定調査委託先コード
+     */
+    public RString get認定調査委託先コード() {
+        return (entity.get認定調査依頼情報Entity() != null)
+                ? (entity.get認定調査依頼情報Entity().getNinteichosaItakusakiCode().getColumnValue())
+                : RString.EMPTY;
+    }
+    
 }
