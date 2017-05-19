@@ -45,6 +45,7 @@ public class NinteishinseibiHandler {
     private static final RString 申請未登録 = new RString("申請未登録");
     private static final RString 依頼未登録 = new RString("依頼未登録");
     private static final RString 依頼未完了 = new RString("依頼未完了");
+    private static final RString 委託先コード不一致 = new RString("委託先コード不一致");
     private static final RString 一次判定済み = new RString("一次判定済み");
     private static final RString 特記事項未入力 = new RString("特記事項未入力");
     private static final RString 概況特記未入力 = new RString("概況特記未入力");
@@ -94,7 +95,7 @@ public class NinteishinseibiHandler {
             認定調査情報 = manager.get認定調査情報(基本調査データCsvEntity.get証記載保険者番号(),
                     基本調査データCsvEntity.get被保険者番号(), 基本調査データCsvEntity.get認定申請年月日());
             申請書管理番号 = get申請書管理番号(基本調査データCsvEntity, 認定調査情報);
-            認定調査依頼履歴番号 = get認定調査依頼履歴番号(基本調査データCsvEntity, 認定調査情報);
+            認定調査依頼履歴番号 = get認定調査依頼履歴番号(認定調査情報);
 
             特記事項List = get特記事項List(filePath_特記情報データ, 基本調査データCsvEntity, 申請書管理番号, 認定調査依頼履歴番号);
             概況特記事項 = get概況特記情報(filePath_概況特記データ, 基本調査データCsvEntity, 申請書管理番号, 認定調査依頼履歴番号);
@@ -547,6 +548,10 @@ public class NinteishinseibiHandler {
             row.setJyotai(状態_NG);
             row.setErrorJiyu(一次判定済み);
             div.getBtnErrorListOutput().setDisabled(false);
+        } else if (!entity.get認定調査委託先コード().equals(認定調査情報.get認定調査委託先コード())) {
+            row.setJyotai(状態_NG);
+            row.setErrorJiyu(委託先コード不一致);
+            div.getBtnErrorListOutput().setDisabled(false);
         } else if ((必須調査票_パターン2.equals(認定調査結果入手_必須調査票)
                 || 必須調査票_パターン3.equals(認定調査結果入手_必須調査票))
                 && 特記事項List.isEmpty()) {
@@ -669,16 +674,11 @@ public class NinteishinseibiHandler {
         }
     }
 
-    private int get認定調査依頼履歴番号(ChosaKekkaNyuryokuCsvEntity 基本調査データCsvEntity,
-            NinteiChosaDataTorikomiRelate 認定調査情報) {
-        if (!RString.isNullOrEmpty(基本調査データCsvEntity.get認定調査依頼履歴番号())
-                && NumberUtils.isNumber(基本調査データCsvEntity.get認定調査依頼履歴番号().toString())) {
-            return Integer.parseInt(基本調査データCsvEntity.get認定調査依頼履歴番号().toString());
-        } else if (認定調査情報 != null) {
+    private int get認定調査依頼履歴番号(NinteiChosaDataTorikomiRelate 認定調査情報) {
+        if (認定調査情報 != null) {
             return 認定調査情報.get認定調査依頼履歴番号();
-        } else {
-            return 0;
         }
+        return 0;
     }
 
     private FlexibleDate convertFlexibleDate(RString 年月日) {
