@@ -109,7 +109,8 @@ class ShinsakaiKaisaiOshiraseTsuchiEditor implements IShinsakaiKaisaiOshiraseTsu
         List<RString> 予定時刻 = item.get予定時刻().split(":");
         RStringBuilder 開催日時 = new RStringBuilder();
         開催日時.append(getパターン9(item.get開催予定年月日()))
-                .append(new RString(" "))
+                .append(item.get開催予定年月日().getDayOfWeek().getInFullParentheses())
+                .append(RString.HALF_SPACE)
                 .append(予定時刻.get(INT_0).padZeroToLeft(INT_2))
                 .append(new RString("時"))
                 .append(予定時刻.get(INT_1).padZeroToLeft(INT_2))

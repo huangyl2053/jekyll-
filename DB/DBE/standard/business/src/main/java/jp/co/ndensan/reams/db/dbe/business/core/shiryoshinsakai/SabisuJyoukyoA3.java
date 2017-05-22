@@ -165,6 +165,7 @@ public class SabisuJyoukyoA3 {
                         builder = new RStringBuilder();
                         項目.setSabisuName1(get帳票上の文言(厚労省IF識別コード, new RString(連番_1)));
                         項目.setSabisuKaisu1(builder.append(単位)
+                                .append(RString.HALF_SPACE)
                                 .append(dbt5207Entity.getServiceJokyo())
                                 .append(get単位1(厚労省IF識別コード, new RString(連番_1)))
                                 .append(get単位2(厚労省IF識別コード, new RString(連番_1))).toRString());
@@ -175,6 +176,7 @@ public class SabisuJyoukyoA3 {
                         builder = new RStringBuilder();
                         項目.setSabisuName2(get帳票上の文言(厚労省IF識別コード, new RString(連番_2)));
                         項目.setSabisuKaisu2(builder.append(単位)
+                                .append(RString.HALF_SPACE)
                                 .append(dbt5207Entity.getServiceJokyo())
                                 .append(get単位1(厚労省IF識別コード, new RString(連番_2)))
                                 .append(get単位2(厚労省IF識別コード, new RString(連番_2))).toRString());
@@ -183,6 +185,7 @@ public class SabisuJyoukyoA3 {
                         builder = new RStringBuilder();
                         項目.setSabisuName3(get帳票上の文言(厚労省IF識別コード, new RString(連番_3)));
                         項目.setSabisuKaisu3(builder.append(単位)
+                                .append(RString.HALF_SPACE)
                                 .append(dbt5207Entity.getServiceJokyo())
                                 .append(get単位1(厚労省IF識別コード, new RString(連番_3)))
                                 .append(get単位2(厚労省IF識別コード, new RString(連番_3))).toRString());
@@ -191,6 +194,7 @@ public class SabisuJyoukyoA3 {
                         builder = new RStringBuilder();
                         項目.setSabisuName4(get帳票上の文言(厚労省IF識別コード, new RString(連番_4)));
                         項目.setSabisuKaisu4(builder.append(単位)
+                                .append(RString.HALF_SPACE)
                                 .append(dbt5207Entity.getServiceJokyo())
                                 .append(get単位1(厚労省IF識別コード, new RString(連番_4)))
                                 .append(get単位2(厚労省IF識別コード, new RString(連番_4))).toRString());
@@ -199,6 +203,7 @@ public class SabisuJyoukyoA3 {
                         builder = new RStringBuilder();
                         項目.setSabisuName5(get帳票上の文言(厚労省IF識別コード, new RString(連番_5)));
                         項目.setSabisuKaisu5(builder.append(単位)
+                                .append(RString.HALF_SPACE)
                                 .append(dbt5207Entity.getServiceJokyo())
                                 .append(get単位1(厚労省IF識別コード, new RString(連番_5)))
                                 .append(get単位2(厚労省IF識別コード, new RString(連番_5))).toRString());
@@ -207,6 +212,7 @@ public class SabisuJyoukyoA3 {
                         builder = new RStringBuilder();
                         項目.setSabisuName6(get帳票上の文言(厚労省IF識別コード, new RString(連番_6)));
                         項目.setSabisuKaisu6(builder.append(単位)
+                                .append(RString.HALF_SPACE)
                                 .append(dbt5207Entity.getServiceJokyo())
                                 .append(get単位1(厚労省IF識別コード, new RString(連番_6)))
                                 .append(get単位2(厚労省IF識別コード, new RString(連番_6))).toRString());
@@ -215,6 +221,7 @@ public class SabisuJyoukyoA3 {
                         builder = new RStringBuilder();
                         項目.setSabisuName7(get帳票上の文言(厚労省IF識別コード, new RString(連番_7)));
                         項目.setSabisuKaisu7(builder.append(単位)
+                                .append(RString.HALF_SPACE)
                                 .append(dbt5207Entity.getServiceJokyo())
                                 .append(get単位1(厚労省IF識別コード, new RString(連番_7)))
                                 .append(get単位2(厚労省IF識別コード, new RString(連番_7))).toRString());
@@ -233,6 +240,7 @@ public class SabisuJyoukyoA3 {
                         builder = new RStringBuilder();
                         項目.setSabisuName1(get帳票上の文言(厚労省IF識別コード, new RString(連番_1)));
                         項目.setSabisuKaisu1(builder.append(単位)
+                                .append(RString.HALF_SPACE)
                                 .append(dbt5207Entity.getServiceJokyo())
                                 .append(get単位1(厚労省IF識別コード, new RString(連番_1)))
                                 .append(get単位2(厚労省IF識別コード, new RString(連番_1))).toRString());
@@ -243,6 +251,7 @@ public class SabisuJyoukyoA3 {
                         builder = new RStringBuilder();
                         項目.setSabisuName2(get帳票上の文言(厚労省IF識別コード, new RString(連番_2)));
                         項目.setSabisuKaisu2(builder.append(単位)
+                                .append(RString.HALF_SPACE)
                                 .append(dbt5207Entity.getServiceJokyo())
                                 .append(get単位1(厚労省IF識別コード, new RString(連番_2)))
                                 .append(get単位2(厚労省IF識別コード, new RString(連番_2))).toRString());
@@ -259,6 +268,7 @@ public class SabisuJyoukyoA3 {
                         builder = new RStringBuilder();
                         項目.setSabisuName4(get帳票上の文言(厚労省IF識別コード, new RString(連番_4)));
                         項目.setSabisuKaisu4(builder.append(単位)
+                                .append(RString.HALF_SPACE)
                                 .append(dbt5207Entity.getServiceJokyo())
                                 .append(get単位1(厚労省IF識別コード, new RString(連番_4)))
                                 .append(get単位2(厚労省IF識別コード, new RString(連番_4))).toRString());
@@ -267,6 +277,7 @@ public class SabisuJyoukyoA3 {
                         builder = new RStringBuilder();
                         項目.setSabisuName5(get帳票上の文言(厚労省IF識別コード, new RString(連番_5)));
                         項目.setSabisuKaisu5(builder.append(単位)
+                                .append(RString.HALF_SPACE)
                                 .append(dbt5207Entity.getServiceJokyo())
                                 .append(get単位1(厚労省IF識別コード, new RString(連番_5)))
                                 .append(get単位2(厚労省IF識別コード, new RString(連番_5))).toRString());
@@ -275,6 +286,7 @@ public class SabisuJyoukyoA3 {
                         builder = new RStringBuilder();
                         項目.setSabisuName6(get帳票上の文言(厚労省IF識別コード, new RString(連番_6)));
                         項目.setSabisuKaisu6(builder.append(単位)
+                                .append(RString.HALF_SPACE)
                                 .append(dbt5207Entity.getServiceJokyo())
                                 .append(get単位1(厚労省IF識別コード, new RString(連番_6)))
                                 .append(get単位2(厚労省IF識別コード, new RString(連番_6))).toRString());
@@ -283,6 +295,7 @@ public class SabisuJyoukyoA3 {
                         builder = new RStringBuilder();
                         項目.setSabisuName7(get帳票上の文言(厚労省IF識別コード, new RString(連番_7)));
                         項目.setSabisuKaisu7(builder.append(単位)
+                                .append(RString.HALF_SPACE)
                                 .append(dbt5207Entity.getServiceJokyo())
                                 .append(get単位1(厚労省IF識別コード, new RString(連番_7)))
                                 .append(get単位2(厚労省IF識別コード, new RString(連番_7))).toRString());
@@ -309,6 +322,7 @@ public class SabisuJyoukyoA3 {
                 builder = new RStringBuilder();
                 項目.setSabisuName8(get帳票上の文言(厚労省IF識別コード, new RString(連番_8)));
                 項目.setSabisuKaisu8(builder.append(単位)
+                        .append(RString.HALF_SPACE)
                         .append(dbt5207Entity.getServiceJokyo())
                         .append(get単位1(厚労省IF識別コード, new RString(連番_8)))
                         .append(get単位2(厚労省IF識別コード, new RString(連番_8))).toRString());
@@ -317,6 +331,7 @@ public class SabisuJyoukyoA3 {
                 builder = new RStringBuilder();
                 項目.setSabisuName9(get帳票上の文言(厚労省IF識別コード, new RString(連番_9)));
                 項目.setSabisuKaisu9(builder.append(単位)
+                        .append(RString.HALF_SPACE)
                         .append(dbt5207Entity.getServiceJokyo())
                         .append(get単位1(厚労省IF識別コード, new RString(連番_9)))
                         .append(get単位2(厚労省IF識別コード, new RString(連番_9))).toRString());
@@ -325,6 +340,7 @@ public class SabisuJyoukyoA3 {
                 builder = new RStringBuilder();
                 項目.setSabisuName10(get帳票上の文言(厚労省IF識別コード, new RString(連番_10)));
                 項目.setSabisuKaisu10(builder.append(単位)
+                        .append(RString.HALF_SPACE)
                         .append(dbt5207Entity.getServiceJokyo())
                         .append(get単位1(厚労省IF識別コード, new RString(連番_10)))
                         .append(get単位2(厚労省IF識別コード, new RString(連番_10))).toRString());
@@ -333,6 +349,7 @@ public class SabisuJyoukyoA3 {
                 builder = new RStringBuilder();
                 項目.setSabisuName11(get帳票上の文言(厚労省IF識別コード, new RString(連番_11)));
                 項目.setSabisuKaisu11(builder.append(単位)
+                        .append(RString.HALF_SPACE)
                         .append(dbt5207Entity.getServiceJokyo())
                         .append(get単位1(厚労省IF識別コード, new RString(連番_11))).toRString());
                 break;
@@ -340,6 +357,7 @@ public class SabisuJyoukyoA3 {
                 builder = new RStringBuilder();
                 項目.setSabisuName12(get帳票上の文言(厚労省IF識別コード, new RString(連番_12)));
                 項目.setSabisuKaisu12(builder.append(単位)
+                        .append(RString.HALF_SPACE)
                         .append(dbt5207Entity.getServiceJokyo())
                         .append(get単位1(厚労省IF識別コード, new RString(連番_12)))
                         .append(get単位2(厚労省IF識別コード, new RString(連番_12))).toRString());
@@ -348,6 +366,7 @@ public class SabisuJyoukyoA3 {
                 builder = new RStringBuilder();
                 項目.setSabisuName14(get帳票上の文言(厚労省IF識別コード, new RString(連番_14)));
                 項目.setSabisuKaisu14(builder.append(単位)
+                        .append(RString.HALF_SPACE)
                         .append(dbt5207Entity.getServiceJokyo())
                         .append(get単位1(厚労省IF識別コード, new RString(連番_14)))
                         .append(get単位2(厚労省IF識別コード, new RString(連番_14))).toRString());
@@ -356,6 +375,7 @@ public class SabisuJyoukyoA3 {
                 builder = new RStringBuilder();
                 項目.setSabisuName15(get帳票上の文言(厚労省IF識別コード, new RString(連番_15)));
                 項目.setSabisuKaisu15(builder.append(単位)
+                        .append(RString.HALF_SPACE)
                         .append(dbt5207Entity.getServiceJokyo())
                         .append(get単位1(厚労省IF識別コード, new RString(連番_15)))
                         .append(get単位2(厚労省IF識別コード, new RString(連番_15))).toRString());
@@ -364,6 +384,7 @@ public class SabisuJyoukyoA3 {
                 builder = new RStringBuilder();
                 項目.setSabisuName16(get帳票上の文言(厚労省IF識別コード, new RString(連番_16)));
                 項目.setSabisuKaisu16(builder.append(単位)
+                        .append(RString.HALF_SPACE)
                         .append(dbt5207Entity.getServiceJokyo())
                         .append(get単位1(厚労省IF識別コード, new RString(連番_16)))
                         .append(get単位2(厚労省IF識別コード, new RString(連番_16))).toRString());
@@ -393,6 +414,7 @@ public class SabisuJyoukyoA3 {
                 builder = new RStringBuilder();
                 項目.setSabisuName8(get帳票上の文言(厚労省IF識別コード, new RString(連番_8)));
                 項目.setSabisuKaisu8(builder.append(単位)
+                        .append(RString.HALF_SPACE)
                         .append(dbt5207Entity.getServiceJokyo())
                         .append(get単位1(厚労省IF識別コード, new RString(連番_8)))
                         .append(get単位2(厚労省IF識別コード, new RString(連番_8))).toRString());
@@ -401,6 +423,7 @@ public class SabisuJyoukyoA3 {
                 builder = new RStringBuilder();
                 項目.setSabisuName9(get帳票上の文言(厚労省IF識別コード, new RString(連番_9)));
                 項目.setSabisuKaisu9(builder.append(単位)
+                        .append(RString.HALF_SPACE)
                         .append(dbt5207Entity.getServiceJokyo())
                         .append(get単位1(厚労省IF識別コード, new RString(連番_9)))
                         .append(get単位2(厚労省IF識別コード, new RString(連番_9))).toRString());
@@ -409,6 +432,7 @@ public class SabisuJyoukyoA3 {
                 builder = new RStringBuilder();
                 項目.setSabisuName10(get帳票上の文言(厚労省IF識別コード, new RString(連番_10)));
                 項目.setSabisuKaisu10(builder.append(単位)
+                        .append(RString.HALF_SPACE)
                         .append(dbt5207Entity.getServiceJokyo())
                         .append(get単位1(厚労省IF識別コード, new RString(連番_10)))
                         .append(get単位2(厚労省IF識別コード, new RString(連番_10))).toRString());
@@ -417,6 +441,7 @@ public class SabisuJyoukyoA3 {
                 builder = new RStringBuilder();
                 項目.setSabisuName11(get帳票上の文言(厚労省IF識別コード, new RString(連番_11)));
                 項目.setSabisuKaisu11(builder.append(単位)
+                        .append(RString.HALF_SPACE)
                         .append(dbt5207Entity.getServiceJokyo())
                         .append(get単位1(厚労省IF識別コード, new RString(連番_11))).toRString());
                 break;
@@ -424,6 +449,7 @@ public class SabisuJyoukyoA3 {
                 builder = new RStringBuilder();
                 項目.setSabisuName12(get帳票上の文言(厚労省IF識別コード, new RString(連番_12)));
                 項目.setSabisuKaisu12(builder.append(単位)
+                        .append(RString.HALF_SPACE)
                         .append(dbt5207Entity.getServiceJokyo())
                         .append(get単位1(厚労省IF識別コード, new RString(連番_12)))
                         .append(get単位2(厚労省IF識別コード, new RString(連番_12))).toRString());
@@ -432,6 +458,7 @@ public class SabisuJyoukyoA3 {
                 builder = new RStringBuilder();
                 項目.setSabisuName14(get帳票上の文言(厚労省IF識別コード, new RString(連番_13)));
                 項目.setSabisuKaisu14(builder.append(単位)
+                        .append(RString.HALF_SPACE)
                         .append(dbt5207Entity.getServiceJokyo())
                         .append(get単位1(厚労省IF識別コード, new RString(連番_13)))
                         .append(get単位2(厚労省IF識別コード, new RString(連番_13))).toRString());
@@ -440,6 +467,7 @@ public class SabisuJyoukyoA3 {
                 builder = new RStringBuilder();
                 項目.setSabisuName15(get帳票上の文言(厚労省IF識別コード, new RString(連番_14)));
                 項目.setSabisuKaisu15(builder.append(単位)
+                        .append(RString.HALF_SPACE)
                         .append(dbt5207Entity.getServiceJokyo())
                         .append(get単位1(厚労省IF識別コード, new RString(連番_14)))
                         .append(get単位2(厚労省IF識別コード, new RString(連番_14))).toRString());
@@ -448,6 +476,7 @@ public class SabisuJyoukyoA3 {
                 builder = new RStringBuilder();
                 項目.setSabisuName16(get帳票上の文言(厚労省IF識別コード, new RString(連番_15)));
                 項目.setSabisuKaisu16(builder.append(単位)
+                        .append(RString.HALF_SPACE)
                         .append(dbt5207Entity.getServiceJokyo())
                         .append(get単位1(厚労省IF識別コード, new RString(連番_15)))
                         .append(get単位2(厚労省IF識別コード, new RString(連番_15))).toRString());
@@ -456,6 +485,7 @@ public class SabisuJyoukyoA3 {
                 builder = new RStringBuilder();
                 項目.setSabisuName17(get帳票上の文言(厚労省IF識別コード, new RString(連番_16)));
                 項目.setSabisuKaisu17(builder.append(単位)
+                        .append(RString.HALF_SPACE)
                         .append(dbt5207Entity.getServiceJokyo())
                         .append(get単位1(厚労省IF識別コード, new RString(連番_16)))
                         .append(get単位2(厚労省IF識別コード, new RString(連番_16))).toRString());
@@ -464,6 +494,7 @@ public class SabisuJyoukyoA3 {
                 builder = new RStringBuilder();
                 項目.setSabisuName18(get帳票上の文言(厚労省IF識別コード, new RString(連番_17)));
                 項目.setSabisuKaisu18(builder.append(単位)
+                        .append(RString.HALF_SPACE)
                         .append(dbt5207Entity.getServiceJokyo())
                         .append(get単位1(厚労省IF識別コード, new RString(連番_17)))
                         .append(get単位2(厚労省IF識別コード, new RString(連番_17))).toRString());
@@ -472,6 +503,7 @@ public class SabisuJyoukyoA3 {
                 builder = new RStringBuilder();
                 項目.setSabisuName19(get帳票上の文言(厚労省IF識別コード, new RString(連番_18)));
                 項目.setSabisuKaisu19(builder.append(単位)
+                        .append(RString.HALF_SPACE)
                         .append(dbt5207Entity.getServiceJokyo())
                         .append(get単位1(厚労省IF識別コード, new RString(連番_18)))
                         .append(get単位2(厚労省IF識別コード, new RString(連番_18))).toRString());
@@ -480,6 +512,7 @@ public class SabisuJyoukyoA3 {
                 builder = new RStringBuilder();
                 項目.setSabisuName20(get帳票上の文言(厚労省IF識別コード, new RString(連番_19)));
                 項目.setSabisuKaisu20(builder.append(単位)
+                        .append(RString.HALF_SPACE)
                         .append(dbt5207Entity.getServiceJokyo())
                         .append(get単位1(厚労省IF識別コード, new RString(連番_19)))
                         .append(get単位2(厚労省IF識別コード, new RString(連番_19))).toRString());
@@ -488,6 +521,7 @@ public class SabisuJyoukyoA3 {
                 builder = new RStringBuilder();
                 項目.setSabisuName21(get帳票上の文言(厚労省IF識別コード, new RString(連番_20)));
                 項目.setSabisuKaisu21(builder.append(単位)
+                        .append(RString.HALF_SPACE)
                         .append(dbt5207Entity.getServiceJokyo())
                         .append(get単位1(厚労省IF識別コード, new RString(連番_20)))
                         .append(get単位2(厚労省IF識別コード, new RString(連番_20))).toRString());
