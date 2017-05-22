@@ -6,7 +6,6 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5160001;
 
 import java.util.ArrayList;
-import static java.util.Collections.list;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,7 +38,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShinsakaiWariateJohoKenshu;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShinsakaiWariateJohoKenshuBuilder;
-import jp.co.ndensan.reams.db.dbz.definition.core.config.DbeConfigKey;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
@@ -437,9 +435,23 @@ public class TaishouWaritsukeHandler {
     private void 対象者一覧ソートラベル() {
         HashMap<RString, RString> map = new HashMap<>();
         List<KeyValueDataSource> dataSource = new ArrayList<>();
+        RDate nowDate = RDate.getNowDate();
         RString key1 = new RString("1");
-        dataSource.add(new KeyValueDataSource(key1, DbBusinessConfig.get(ConfigNameDBE.審査会順序_表示用, RDate.getNowDate(), SubGyomuCode.DBE認定支援)));
-        map.put(key1, BusinessConfig.get(DbeConfigKey.審査会順序, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
+        dataSource.add(new KeyValueDataSource(key1, DbBusinessConfig.get(ConfigNameDBE.審査会順序_表示用, nowDate, SubGyomuCode.DBE認定支援)));
+        map.put(key1, BusinessConfig.get(ConfigNameDBE.審査会順序, nowDate, SubGyomuCode.DBE認定支援));
+
+        RString 審査会順序２ = BusinessConfig.get(ConfigNameDBE.審査会順序２, nowDate, SubGyomuCode.DBE認定支援);
+        if (!RString.isNullOrEmpty(審査会順序２)) {
+            RString key2 = new RString("2");
+            dataSource.add(new KeyValueDataSource(key2, DbBusinessConfig.get(ConfigNameDBE.審査会順序２_表示用, nowDate, SubGyomuCode.DBE認定支援)));
+            map.put(key2, 審査会順序２);
+        }
+        RString 審査会順序３ = BusinessConfig.get(ConfigNameDBE.審査会順序３, nowDate, SubGyomuCode.DBE認定支援);
+        if (!RString.isNullOrEmpty(審査会順序３)) {
+            RString key3 = new RString("3");
+            dataSource.add(new KeyValueDataSource(key3, DbBusinessConfig.get(ConfigNameDBE.審査会順序３_表示用, nowDate, SubGyomuCode.DBE認定支援)));
+            map.put(key3, 審査会順序３);
+        }
         div.getDdlSortOrder().setDataSource(dataSource);
         div.getDdlSortOrder().setSelectedIndex(0);
         ViewStateHolder.put(ViewStateKeys.審査会順序, map);
