@@ -100,7 +100,7 @@ public class YobihanteiKinyuhyoBusiness {
         if (RString.isNullOrEmpty(entity.getHihokenshaKubunCode())) {
             return RString.EMPTY;
         }
-        return HihokenshaKubunCode.toValue(entity.getHihokenshaKubunCode()).get名称();
+        return HihokenshaKubunCode.toValue(entity.getHihokenshaKubunCode()).get略称2();
     }
 
     /**
