@@ -955,10 +955,14 @@
         ON dbT7051."shoKisaiHokenshaNo"= dbT5101."shoKisaiHokenshaNo"
         INNER JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS dbT5511
         ON dbT5511."shinsakaiKaisaiNo" = dbT5102."shinsakaiKaisaiNo"
+        INNER JOIN rgdb."DbT5502ShinsakaiWariateJoho" AS dbt5502
+        ON dbt5102."shinsakaiKaisaiNo" = dbt5502."shinsakaiKaisaiNo"
+        AND dbt5102."shinseishoKanriNo" = dbt5502."shinseishoKanriNo"
         WHERE
         dbT5102."shinsakaiKaisaiNo" = #{kaisaiBangou}
         ORDER BY
-        dbT7051."shoKisaiHokenshaNo"
+        dbt5502."shinsakaiOrder"
+        ,dbT7051."shoKisaiHokenshaNo"
         ,dbT5101."ninteiShinseiYMD"
     </select>
 </mapper>
