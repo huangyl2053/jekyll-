@@ -35,6 +35,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho.OcrShujiiIkenshoJoho
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.resultlist.OcrTorikomiResult;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.resultlist.OcrTorikomiResultsFactory;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.resultlist.OcrTorikomiResultListEditor;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.resultlist.OcrTorikomiType;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.Models;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OcrDataType;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
@@ -105,7 +106,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
     @Override
     public void cancel() {
         super.cancel();
-        this.kekkaListEditor = new OcrTorikomiResultListEditor();
+        this.kekkaListEditor = new OcrTorikomiResultListEditor(OcrTorikomiType.意見書);
         OcrTorikomiResult r = new OcrTorikomiResult.Builder(ShinseiKey.EMPTY)
                 .set処理結果(ProcessingResultFactory.error(OcrTorikomiMessages.カタログファイルなし
                                 .replaced(OcrDataType.意見書.ca3FileName().toString())))
@@ -128,7 +129,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         this.writer_DbT5304 = new BatchPermanentTableWriter<>(DbT5304ShujiiIkenshoIkenItemEntity.class);
         this.writer_DbT5115 = new BatchPermanentTableWriter<>(DbT5115ImageEntity.class);
         this.writer_DbT5305 = new BatchPermanentTableWriter<>(DbT5305IkenshoImageJohoEntity.class);
-        this.kekkaListEditor = new OcrTorikomiResultListEditor();
+        this.kekkaListEditor = new OcrTorikomiResultListEditor(OcrTorikomiType.意見書);
     }
 
     @Override

@@ -43,6 +43,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ocr.resultlist.OcrTorikomiResult
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.resultlist.OcrTorikomiResultListEditor;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.resultlist.OcrTorikomiResultsFactory;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.images.FileNameConvertionTheories;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.resultlist.OcrTorikomiType;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosaKekkaInfoGaikyo.GaikyoChosahyoServiceJokyos;
 import jp.co.ndensan.reams.db.dbe.definition.core.chosaKekkaInfoGaikyo.IGaikyoChosahyoServiceJokyo;
 import jp.co.ndensan.reams.db.dbe.definition.core.gaikyochosahyouniteichosahyousiseturiy.GaikyoChosahyoShisetuRiyos;
@@ -139,7 +140,7 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
     @Override
     public void cancel() {
         super.cancel();
-        this.kekkaListEditor = new OcrTorikomiResultListEditor();
+        this.kekkaListEditor = new OcrTorikomiResultListEditor(OcrTorikomiType.認定調査);
         OcrTorikomiResult r = new OcrTorikomiResult.Builder(ShinseiKey.EMPTY)
                 .set処理結果(ProcessingResultFactory.error(OcrTorikomiMessages.カタログファイルなし
                                 .replaced(OcrDataType.調査票.ca3FileName().toString())))
@@ -173,7 +174,7 @@ public class OcrDataReadProcess extends BatchProcessBase<TempOcrCsvEntity> {
         writerShisetsu = new BatchPermanentTableWriter<>(DbT5210NinteichosahyoShisetsuRiyoEntity.class);
         writerItem = new BatchPermanentTableWriter<>(DbT5211NinteichosahyoChosaItemEntity.class);
         writerImage = new BatchPermanentTableWriter<>(DbT5115ImageEntity.class);
-        kekkaListEditor = new OcrTorikomiResultListEditor();
+        kekkaListEditor = new OcrTorikomiResultListEditor(OcrTorikomiType.認定調査);
     }
 
     @Override
