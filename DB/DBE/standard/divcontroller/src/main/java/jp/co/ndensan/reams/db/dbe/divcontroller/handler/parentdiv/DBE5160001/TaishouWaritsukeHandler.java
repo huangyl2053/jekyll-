@@ -50,6 +50,8 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.Ich
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode99;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku02;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku03;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinsakaiYusenWaritsukeKubunCode;
@@ -279,7 +281,6 @@ public class TaishouWaritsukeHandler {
             }
         }
         setソート対象者一覧(固定対象者リスト, ソート対象者リスト);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を振りなおす, true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を確定する, false);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(登録する, true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会割付を完了する, true);
@@ -593,13 +594,13 @@ public class TaishouWaritsukeHandler {
             調査票_認知度 = RString.EMPTY;
         }
         try {
-            意見書_寝たきり度 = ShogaiNichijoSeikatsuJiritsudoCode.toValue(
+            意見書_寝たきり度 = IkenKomoku02.toValue(
                     taishouichiran.get意見書_障害高齢者の日常生活自立度コード().getColumnValue()).get名称();
         } catch (IllegalArgumentException e) {
             意見書_寝たきり度 = RString.EMPTY;
         }
         try {
-            意見書_認知度 = ShogaiNichijoSeikatsuJiritsudoCode.toValue(
+            意見書_認知度 = IkenKomoku03.toValue(
                     taishouichiran.get意見書_認知症高齢者の日常生活自立度コード().getColumnValue()).get名称();
         } catch (IllegalArgumentException e) {
             意見書_認知度 = RString.EMPTY;
@@ -796,13 +797,13 @@ public class TaishouWaritsukeHandler {
                 調査票_認知度 = RString.EMPTY;
             }
             try {
-                意見書_寝たきり度 = ShogaiNichijoSeikatsuJiritsudoCode.toValue(
+                意見書_寝たきり度 = IkenKomoku02.toValue(
                         kohoshaIchiran.get意見書_障害高齢者の日常生活自立度コード().getColumnValue()).get名称();
             } catch (IllegalArgumentException e) {
                 意見書_寝たきり度 = RString.EMPTY;
             }
             try {
-                意見書_認知度 = ShogaiNichijoSeikatsuJiritsudoCode.toValue(
+                意見書_認知度 = IkenKomoku03.toValue(
                         kohoshaIchiran.get意見書_認知症高齢者の日常生活自立度コード().getColumnValue()).get名称();
             } catch (IllegalArgumentException e) {
                 意見書_認知度 = RString.EMPTY;
