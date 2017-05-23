@@ -70,6 +70,8 @@ class ShinsakaiKekkaTorokuManager implements IShinsakakKekksaTorokuManager {
     public void delete削除候補(ShinsakaiKekkaTorokuDeletionCandidate o) {
         ShinsakaiKekkaTorokuDeletionCandidateEntity e = o.toEntity();
         save一次判定結果情報(e.getIchijiHanteiEntity());
+        save意見書依頼情報(e.getIkenshoIraiEntity());
+        save調査依頼情報(e.getChosaIraiEntity());
     }
 
     private void save調査依頼情報(DbT5201NinteichosaIraiJohoEntity entity) {
