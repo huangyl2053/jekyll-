@@ -172,7 +172,7 @@ public class IkenshoSakuseiIrai {
                 .create主治医意見書作成依頼(要介護認定申請情報, ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class).value()));
         IkenshoSakuseiIraiManager.createInstance().saveList(builder.build().modifiedModel());
     }
-    
+
     private void アクセスログ_更新(RString 証記載保険者番号, RString 被保険者番号, RString 申請書管理番号) {
         DbAccessLogger accessLog = new DbAccessLogger();
         ExpandedInformation expandedInformation = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号);

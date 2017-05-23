@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoiraijoho.Sh
 import jp.co.ndensan.reams.db.dbe.business.core.ikenshoirairirekiichiran.IkenshoirairirekiIchiran;
 import jp.co.ndensan.reams.db.dbe.business.core.ikenshoirairirekiichiran.IkenshoirairirekiichiranShudou;
 import jp.co.ndensan.reams.db.dbe.business.core.ikenshoirairirekiichiran.ShujiiIkenshoTeishutsuIraishoBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshosakuseiirai.IkenshoSakuseiIraiMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikensho.ninteishinseijoho.NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshoirairirekiichiran.IkenshoirairirekiIchiranEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshoirairirekiichiran.IkenshoirairirekiichiranShudouEntity;
@@ -77,7 +78,9 @@ public class IkenshoSakuseiIraiManager {
         requireNonNull(申請書管理番号, UrSystemErrorMessages.値がnull.getReplacedMessage(定数_申請書管理番号.toString()));
         IIkenshoSakuseiIraiMapper mapper = mapperProvider.create(IIkenshoSakuseiIraiMapper.class);
 
-        IkenshoirairirekiichiranShudouEntity entity = mapper.get主治医意見書作成依頼(申請書管理番号);
+        IkenshoirairirekiichiranShudouEntity entity = mapper.get主治医意見書作成依頼(
+                IkenshoSakuseiIraiMapperParameter.searchBy申請書管理番号(申請書管理番号)
+        );
         if (entity == null) {
             return null;
         }
@@ -117,10 +120,10 @@ public class IkenshoSakuseiIraiManager {
     public boolean save(NinteiShinseiJoho 要介護認定申請情報) {
         DbT5301ShujiiIkenshoIraiJohoEntity 主治医意見書作成依頼情報
                 = 要介護認定申請情報.getshujiiIkenshoIraiJohoList().get(ZERO).toEntity();
-            if (主治医意見書作成依頼情報.hasChanged()) {
-                    主治医意見書作成依頼情報.setState(EntityDataState.Modified);
+        if (主治医意見書作成依頼情報.hasChanged()) {
+            主治医意見書作成依頼情報.setState(EntityDataState.Modified);
             return 1 == 主治医意見書作成依頼情報Dac.save(主治医意見書作成依頼情報);
-                }
+        }
         if (要介護認定申請情報.hasChanged()) {
             DbT5101NinteiShinseiJohoEntity entity = 要介護認定申請情報.toEntity();
             entity.setState(EntityDataState.Modified);
@@ -128,10 +131,11 @@ public class IkenshoSakuseiIraiManager {
         }
         return 要介護認定申請情報Manager.save(要介護認定申請情報);
     }
-    
+
     /**
      * 要介護認定申請情報と主治医意見書作成依頼情報を更新する。
-     * @param 要介護認定申請情報 
+     *
+     * @param 要介護認定申請情報
      */
     @Transaction
     public void saveList(NinteiShinseiJoho 要介護認定申請情報) {
@@ -147,7 +151,7 @@ public class IkenshoSakuseiIraiManager {
             要介護認定申請情報Dac.save(entity);
         }
     }
-    
+
     /**
      * 要介護認定申請情報を取得します。
      *

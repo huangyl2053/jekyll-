@@ -64,11 +64,11 @@ public class IkenshoSakuseiIraiHandler {
         }
         div.setIkenshoIraiRirekiNo(主治医意見書作成依頼.get主治医意見書作成依頼履歴番号());
         if (RString.isNullOrEmpty(主治医意見書作成依頼.get主治医意見書作成依頼履歴番号())) {
-            div.getDdlIraiKubun().setDisabled(false);
+            div.getDdlIraiKubun().setReadOnly(false);
             div.getDdlIraiKubun().setSelectedKey(IkenshoIraiKubun.初回依頼.getコード());
         } else {
-            div.getDdlIraiKubun().setDisabled(true);
-            if (結果データ有無()) {
+            div.getDdlIraiKubun().setReadOnly(true);
+            if (主治医意見書作成依頼.is再調査()) {
                 div.getDdlIraiKubun().setSelectedKey(IkenshoIraiKubun.再意見書.getコード());
             } else {
                 div.getDdlIraiKubun().setSelectedKey(IkenshoIraiKubun.再依頼.getコード());
@@ -81,7 +81,7 @@ public class IkenshoSakuseiIraiHandler {
             更新項目保持(主治医意見書作成依頼);
         }
     }
-    
+
     private void 更新項目保持(IkenshoirairirekiichiranShudou 主治医意見書作成依頼) {
         ViewStateHolder.put(ViewStateKeys.主治医医療機関コード, 主治医意見書作成依頼.get主治医医療機関コード());
         ViewStateHolder.put(ViewStateKeys.主治医コード, 主治医意見書作成依頼.get主治医コード());

@@ -54,49 +54,70 @@
         <result typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" column="researchItem" property="researchItem"/>
         <result typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" column="shichosonCode" property="shichosonCode"/>
         <result typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" column="T5101shichosonCode" property="T5101shichosonCode"/>
+        <result column="isSaiChosa" property="isSaiChosa"/>
     </resultMap>
 
     <select id="select認定調査依頼情報" fetchSize="500"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousairaishudou.NinnteiChousairaiShudouParameter"
             resultMap="resultMap_select認定調査依頼情報" resultOrdered="true">
         SELECT
-        T5101."shinseishoKanriNo"
-        ,T5201."ninteichosaIraiRirekiNo"
-        ,T5201."ninteichosaIraiKubunCode"
-        ,T5910."ninteichosaItakusakiCode"
-        ,T5910."jigyoshaMeisho"
-        ,T5910."chosaItakuKubun"
-        ,T5913."ninteiChosainCode"
-        ,T5913."chosainShimei"
-        ,T5201."ninteichosaIraiYMD"
-        ,T5201."ninteichosaKigenYMD"
-        ,T5101."koroshoIfShikibetsuCode"
-        ,T5101."ninteiShinseiYMD"
-        ,T7051."shichosonCode"
-        ,T5101."shichosonCode" AS "T5101shichosonCode"
+            T5101."shinseishoKanriNo"
+            ,T5201."ninteichosaIraiRirekiNo"
+            ,T5201."ninteichosaIraiKubunCode"
+            ,T5910."ninteichosaItakusakiCode"
+            ,T5910."jigyoshaMeisho"
+            ,T5910."chosaItakuKubun"
+            ,T5913."ninteiChosainCode"
+            ,T5913."chosainShimei"
+            ,T5201."ninteichosaIraiYMD"
+            ,T5201."ninteichosaKigenYMD"
+            ,T5101."koroshoIfShikibetsuCode"
+            ,T5101."ninteiShinseiYMD"
+            ,T7051."shichosonCode"
+            ,T5101."shichosonCode" AS "T5101shichosonCode"
+            ,EXISTS (
+                SELECT *
+                FROM
+                    rgdb."DbT5502ShinsakaiWariateJoho" T5502
+                WHERE
+                    T5502."shinseishoKanriNo" = T5101."shinseishoKanriNo"
+                 AND T5502."hanteiKekkaCode" IN
+                    <foreach collection="判定結果コードs_再調査" item="code" open="("
+                             separator=","
+                             close=")">
+                        #{code}
+                    </foreach>
+            ) AS "isSaiChosa"
         FROM
-        rgdb."DbT5101NinteiShinseiJoho" T5101
-        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" T7051
-        ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo"
-        LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" T5201
-        ON T5101."shinseishoKanriNo" = T5201."shinseishoKanriNo"
-        AND T5201."logicalDeletedFlag" = FALSE
-        AND NOT EXISTS (SELECT 'X'
-        FROM rgdb."DbT5201NinteichosaIraiJoho" AS B1
-        WHERE T5201."shinseishoKanriNo" =B1."shinseishoKanriNo"
-        AND B1."logicalDeletedFlag" = False
-        AND T5201."ninteichosaIraiRirekiNo" <![CDATA[<]]> B1."ninteichosaIraiRirekiNo" )
-        LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" T5910
-        ON T5910."shichosonCode" = T5101."shichosonCode"
-        AND T5910."ninteichosaItakusakiCode" = T5201."ninteichosaItakusakiCode"
-        AND T5910."jokyoFlag" = True
-        LEFT JOIN rgdb."DbT5913ChosainJoho" T5913
-        ON T5913."shichosonCode" = T5101."shichosonCode"
-        AND T5913."ninteiChosaItakusakiCode" = T5201."ninteichosaItakusakiCode"
-        AND T5913."ninteiChosainCode" = T5201."ninteiChosainCode"
-        AND T5913."jokyoFlag" = True
-        WHERE T5101."shinseishoKanriNo" = #{申請書管理番号}
-        AND T5101."logicalDeletedFlag" = False
+            rgdb."DbT5101NinteiShinseiJoho" T5101
+        INNER JOIN
+            rgdb."DbT7051KoseiShichosonMaster" T7051
+          ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo"
+        LEFT JOIN
+            rgdb."DbT5201NinteichosaIraiJoho" T5201
+          ON T5101."shinseishoKanriNo" = T5201."shinseishoKanriNo"
+         AND NOT EXISTS (
+            SELECT 'X'
+            FROM
+                rgdb."DbT5201NinteichosaIraiJoho" AS B1
+            WHERE
+                T5201."shinseishoKanriNo" =B1."shinseishoKanriNo"
+            AND T5201."ninteichosaIraiRirekiNo" <![CDATA[<]]> B1."ninteichosaIraiRirekiNo"
+         )
+        LEFT JOIN
+            rgdb."DbT5910NinteichosaItakusakiJoho" T5910
+          ON T5910."shichosonCode" = T5101."shichosonCode"
+         AND T5910."ninteichosaItakusakiCode" = T5201."ninteichosaItakusakiCode"
+         AND T5910."jokyoFlag" = True
+        LEFT JOIN
+            rgdb."DbT5913ChosainJoho" T5913
+          ON T5913."shichosonCode" = T5101."shichosonCode"
+         AND T5913."ninteiChosaItakusakiCode" = T5201."ninteichosaItakusakiCode"
+         AND T5913."ninteiChosainCode" = T5201."ninteiChosainCode"
+         AND T5913."jokyoFlag" = True
+        WHERE
+             T5101."shinseishoKanriNo" = #{申請書管理番号}
+         AND T5101."logicalDeletedFlag" = False
     </select>
 
     <select id="select更新用認定調査依頼情報" fetchSize="500"

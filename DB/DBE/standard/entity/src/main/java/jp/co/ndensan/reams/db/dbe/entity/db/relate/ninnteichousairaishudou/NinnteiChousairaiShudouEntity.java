@@ -64,4 +64,6 @@ public class NinnteiChousairaiShudouEntity {
     private RString ninteiShinseiShinseijiKubunCd;
     private RString shichosonCode;
     private RString T5101shichosonCode;
+    private boolean isSaiChosa;
+
 }

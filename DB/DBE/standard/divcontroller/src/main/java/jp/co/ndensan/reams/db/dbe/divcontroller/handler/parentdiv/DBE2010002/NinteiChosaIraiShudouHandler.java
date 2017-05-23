@@ -134,15 +134,15 @@ public class NinteiChosaIraiShudouHandler {
                 dataSource.add(new KeyValueDataSource(ninteiChousaIraiKubunCode.getコード(), ninteiChousaIraiKubunCode.get名称()));
             }
             div.getNinteichosaIraiByHand().getDdlIraiKubun().setDataSource(dataSource);
-            if (結果データ有無()) {
+            if (認定調査依頼.is再調査()) {
                 div.getNinteichosaIraiByHand().getDdlIraiKubun().setSelectedKey(NinteiChousaIraiKubunCode.再調査.getコード());
             } else {
                 div.getNinteichosaIraiByHand().getDdlIraiKubun().setSelectedKey(NinteiChousaIraiKubunCode.再依頼.getコード());
             }
             if (!RString.isNullOrEmpty(認定調査依頼.get認定調査依頼履歴番号())) {
-                div.getNinteichosaIraiByHand().getDdlIraiKubun().setDisabled(true);
+                div.getNinteichosaIraiByHand().getDdlIraiKubun().setReadOnly(true);
             } else {
-                div.getNinteichosaIraiByHand().getDdlIraiKubun().setDisabled(false);
+                div.getNinteichosaIraiByHand().getDdlIraiKubun().setReadOnly(false);
             }
             RString 認定調査依頼年月日 = 認定調査依頼.get認定調査依頼年月日();
             if (!RString.isNullOrEmpty(認定調査依頼年月日)) {
