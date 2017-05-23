@@ -260,6 +260,7 @@ public class SabisuJyoukyoA3 {
                         builder = new RStringBuilder();
                         項目.setSabisuName3(get帳票上の文言(厚労省IF識別コード, new RString(連番_3)));
                         項目.setSabisuKaisu3(builder.append(単位)
+                                .append(RString.HALF_SPACE)
                                 .append(dbt5207Entity.getServiceJokyo())
                                 .append(get単位1(厚労省IF識別コード, new RString(連番_3)))
                                 .append(get単位2(厚労省IF識別コード, new RString(連番_3))).toRString());
@@ -1272,8 +1273,7 @@ public class SabisuJyoukyoA3 {
         項目.set前回一次判定結果(set一次判定結果(entity.getZKoroshoIfShikibetsuCode(),
                 entity.getZIchijiHanteiKekkaCode(), entity.getZIchijiHanteiKekkaNinchishoKasanCode()));
         項目.set要介護認定等基準時間(get要介護認定等基準時間(entity));
-        項目.set前回要介護認定等基準時間(new RString(new Decimal(entity.getZKijunJikan()).divide(基準時間算出用_10)
-                .add(new Decimal(entity.getZKijunJikanNinchishoKasan()).divide(基準時間算出用_10)).toString()));
+        項目.set前回要介護認定等基準時間(get前回要介護認定等基準時間(entity));
         set基準時間の積み上げグラフ(項目, entity, 共通情報);
         List<NitijouSeikatsu> 日常生活自立度リスト = new ArrayList<>();
         NitijouSeikatsu 障害高齢者自立度 = new NitijouSeikatsu();
@@ -1301,6 +1301,31 @@ public class SabisuJyoukyoA3 {
             }
         }
         setコード(項目, entity);
+    }
+    
+    private RString get前回要介護認定等基準時間(ItiziHanteiEntity entity) {
+        DecimalFormat decimalFormat = new DecimalFormat("#.#");
+        decimalFormat.setMinimumFractionDigits(1);
+        decimalFormat.setMaximumFractionDigits(1);
+        RStringBuilder 前回基準時間 = new RStringBuilder();
+        if (entity.getZKijunJikanNinchishoKasan() > 0) {
+            前回基準時間.append(decimalFormat.format(new Decimal(entity.getZKijunJikan()).divide(基準時間算出用_10)))
+                    .append(分)
+                    .append(RString.HALF_SPACE)
+                    .append(加算)
+                    .append(RString.HALF_SPACE)
+                    .append(decimalFormat.format(new Decimal(entity.getZKijunJikanNinchishoKasan()).divide(基準時間算出用_10)))
+                    .append(分)
+                    .append(RString.HALF_SPACE)
+                    .append(等号)
+                    .append(RString.HALF_SPACE)
+                    .append(decimalFormat.format(new Decimal(entity.getZKijunJikan()).divide(基準時間算出用_10)
+                                    .add(new Decimal(entity.getZKijunJikanNinchishoKasan()).divide(基準時間算出用_10))))
+                    .append(分);
+        } else {
+            前回基準時間.append(decimalFormat.format(new Decimal(entity.getZKijunJikan()).divide(基準時間算出用_10))).append(分);
+        }
+        return 前回基準時間.toRString();
     }
 
     private RString get要介護認定等基準時間(ItiziHanteiEntity entity) {
