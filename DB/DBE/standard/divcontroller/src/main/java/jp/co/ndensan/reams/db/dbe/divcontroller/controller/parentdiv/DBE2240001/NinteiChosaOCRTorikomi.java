@@ -18,6 +18,9 @@ import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntry
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.io.Directory;
+import jp.co.ndensan.reams.uz.uza.io.Path;
+import jp.co.ndensan.reams.uz.uza.io.ZipUtil;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -39,6 +42,7 @@ public class NinteiChosaOCRTorikomi {
     private static final RString UICONTAINERID_DBEUC20601 = new RString("DBEUC20601");
     private static final RString WORKFLOW_KEY_BATCH = new RString("Batch");
     private static final RString BUTTON_BATCH_REGISTER = new RString("btnBatchRegister");
+    private static final RString WORKFOLDERNAME = new RString("ninteishosaOCRDataTorikomiWork");
 
     /**
      * 画面の初期化します。
@@ -67,13 +71,17 @@ public class NinteiChosaOCRTorikomi {
                 = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusDay(DAY_COUNT_一週間)).isCompressedArchive(false);
         RString sharedFileEntryDescriptorString = RString.EMPTY;
         for (FileData file : files) {
-            if (sharedFileEntryDescriptorString.isEmpty()) {
-                sharedFileEntryDescriptorString = new RString(SharedFile.copyToSharedFile(sfd, new FilesystemPath(file.getFilePath()), opts).toString());
+            RString outputPath = Directory.createWorkDirectory(WORKFOLDERNAME.toString());
+            if (file.getFileName().endsWith(new RString(".zip"))
+                    || file.getFileName().endsWith(new RString(".ZIP"))) {
+                RString filter = new RString("*.{csv,CSV,ca3,CA3,png,PNG}");
+                ZipUtil.extractAllFiles(file.getFilePath(), outputPath);
+                for (RString filePath : Directory.getFiles(outputPath, filter, false)) {
+                    sharedFileEntryDescriptorString = toSharedFile(sharedFileEntryDescriptorString, Path.combinePath(outputPath, filePath), sfd, opts);
+                }
+            Directory.deleteWorkDirectory(WORKFOLDERNAME.toString());
             } else {
-                ReadOnlySharedFileEntryDescriptor ro_sfd = new ReadOnlySharedFileEntryDescriptor(
-                        GyomuCode.DB介護保険, FilesystemName.fromString(イメージ取込み),
-                        SharedFileEntryDescriptor.fromString(sharedFileEntryDescriptorString.toString()).getSharedFileId());
-                SharedFile.appendNewFile(ro_sfd, new FilesystemPath(file.getFilePath()), "");
+                sharedFileEntryDescriptorString = toSharedFile(sharedFileEntryDescriptorString, file.getFilePath(), sfd, opts);
             }
         }
 
@@ -85,6 +93,18 @@ public class NinteiChosaOCRTorikomi {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_BATCH_REGISTER, false);
         div.setHdnSharedFileEntryInfo(sharedFileEntryDescriptorString);
         return ResponseData.of(div).respond();
+    }
+    
+    private RString toSharedFile(RString sharedFileEntryDescriptorString, RString filePath, SharedFileDescriptor sfd, CopyToSharedFileOpts opts) {
+        if (sharedFileEntryDescriptorString.isEmpty()) {
+            sharedFileEntryDescriptorString = new RString(SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts).toString());
+        } else {
+            ReadOnlySharedFileEntryDescriptor ro_sfd = new ReadOnlySharedFileEntryDescriptor(
+                    GyomuCode.DB介護保険, FilesystemName.fromString(イメージ取込み),
+                    SharedFileEntryDescriptor.fromString(sharedFileEntryDescriptorString.toString()).getSharedFileId());
+            SharedFile.appendNewFile(ro_sfd, new FilesystemPath(filePath), "");
+        }
+        return sharedFileEntryDescriptorString;
     }
 
     /**
