@@ -171,7 +171,11 @@ public enum OcrTorikomiMessages {
      *
      * 引数1: 警告の件数
      */
-    警告あり("警告が?件あります。");
+    警告あり("警告が?件あります。"),
+    /**
+     * 引数: ファイル名の変換に失敗したファイル名すべて
+     */
+    ファイル名変換失敗("次のファイルが取り込めませんでした。同時にアップロードされたファイルとの対応に問題がないかを確認してください。：?"),;
 
     //<editor-fold defaultstate="collapsed" desc="implements...">
     private final RString theOriginalMessage;
