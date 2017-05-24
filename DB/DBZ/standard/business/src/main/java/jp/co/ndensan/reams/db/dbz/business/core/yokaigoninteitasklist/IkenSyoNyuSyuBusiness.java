@@ -230,11 +230,49 @@ public class IkenSyoNyuSyuBusiness {
     }
 
     /**
+     * 表の意見書イメージが存在するかを返します。
+     *
+     * @return 帳票ID
+     */
+    public boolean has表イメージ() {
+        return entity.getChoyoID_omote() != null;
+    }
+
+    /**
+     * 裏の意見書イメージが存在するかを返します。
+     *
+     * @return 帳票ID
+     */
+    public boolean has裏イメージ() {
+        return entity.getChoyoID_ura() != null;
+    }
+
+    /**
      * 意見書イメージの帳票IDを返します。
      *
      * @return 帳票ID
      */
     public RString get帳票ID() {
-        return entity.getChoyoID();
+        return entity.getChoyoID_omote() != null
+                ? entity.getChoyoID_omote() : entity.getChoyoID_ura() != null
+                ? entity.getChoyoID_ura() : RString.EMPTY;
+    }
+
+    /**
+     * 意見書イメージの帳票IDを返します。
+     *
+     * @return 帳票ID
+     */
+    public RString get帳票表ID() {
+        return entity.getChoyoID_omote();
+    }
+
+    /**
+     * 意見書イメージの帳票IDを返します。
+     *
+     * @return 帳票ID
+     */
+    public RString get帳票裏ID() {
+        return entity.getChoyoID_ura();
     }
 }
