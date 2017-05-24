@@ -39,8 +39,7 @@
         INNER JOIN (
         SELECT
         DbT5201.*,
-        ROW_NUMBER() OVER (PARTITION BY DbT5201."dbT5201NinteichosaIraiJoho_shinseishoKanriNo",
-        DbT5201."dbT5201NinteichosaIraiJoho_ninteichosaIraiRirekiNo"
+        ROW_NUMBER() OVER (PARTITION BY DbT5201."dbT5201NinteichosaIraiJoho_shinseishoKanriNo"
         ORDER BY DbT5201."dbT5201NinteichosaIraiJoho_ninteichosaIraiRirekiNo" DESC) AS "rowNum"
         FROM
         (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.noDeleted_DbT5201NinteichosaIraiJoho" />) AS DbT5201
