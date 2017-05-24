@@ -70,10 +70,18 @@ public class NinteiChosaOCRTorikomi {
         CopyToSharedFileOpts opts
                 = new CopyToSharedFileOpts().dateToDelete(RDate.getNowDate().plusDay(DAY_COUNT_一週間)).isCompressedArchive(false);
         RString sharedFileEntryDescriptorString = RString.EMPTY;
+        ValidationMessageControlPairs v;
+        int zipCount = 1;
         for (FileData file : files) {
             RString outputPath = Directory.createWorkDirectory(WORKFOLDERNAME.toString());
             if (file.getFileName().endsWith(new RString(".zip"))
                     || file.getFileName().endsWith(new RString(".ZIP"))) {
+                v = getValidationHandler(div).validationZip(zipCount++);
+                if (v.iterator().hasNext()) {
+                    Directory.deleteWorkDirectory(WORKFOLDERNAME.toString());
+                    CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_BATCH_REGISTER, true);
+                    return ResponseData.of(div).addValidationMessages(v).respond();
+                }
                 RString filter = new RString("*.{csv,CSV,ca3,CA3,png,PNG}");
                 ZipUtil.extractAllFiles(file.getFilePath(), outputPath);
                 for (RString filePath : Directory.getFiles(outputPath, filter, false)) {
@@ -85,7 +93,7 @@ public class NinteiChosaOCRTorikomi {
             }
         }
 
-        ValidationMessageControlPairs v = getValidationHandler(div).validateUploadedFiles(sharedFileEntryDescriptorString);
+        v = getValidationHandler(div).validateUploadedFiles(sharedFileEntryDescriptorString);
         if (v.iterator().hasNext()) {
             CommonButtonHolder.setDisabledByCommonButtonFieldName(BUTTON_BATCH_REGISTER, true);
             return ResponseData.of(div).addValidationMessages(v).respond();
