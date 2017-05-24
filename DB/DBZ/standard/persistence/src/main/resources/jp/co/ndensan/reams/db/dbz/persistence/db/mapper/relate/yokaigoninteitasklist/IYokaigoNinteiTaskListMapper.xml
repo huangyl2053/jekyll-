@@ -163,7 +163,8 @@
         <result property="ikenshoReadYMD"  column="ikenshoReadYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="iryoKikanMeisho"  column="iryoKikanMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="shujiiName"  column="shujiiName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-        <result property="ChoyoID"  column="ChoyoID" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choyoID_omote"  column="ChoyoID_omote" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
+        <result property="choyoID_ura"  column="ChoyoID_ura" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
     </resultMap>
     <resultMap id="resultMap_IChiJiHanTeiRelateEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.IChiJiHanTeiRelateEntity" autoMapping="true">
         <result property="shinseishoKanriNo"  column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
@@ -1192,12 +1193,13 @@
         DbT5301."ikenshoSakuseiKigenYMD",
         DbT5301."ikenshoSakuseiIraiYMD",
         DbT5301."ikenshoIraiRirekiNo",
-        DbT4302."ikenshoSakuseiKaisuKubun",
-        DbT4302."ikenshoKinyuYMD",
-        DbT4302."ikenshoReadYMD",
+        DbT5302."ikenshoSakuseiKaisuKubun",
+        DbT5302."ikenshoKinyuYMD",
+        DbT5302."ikenshoReadYMD",
         DbT5911."iryoKikanMeisho",
         DbT5912."shujiiName",
-        DbT5305."ChoyoID"
+        DbT5305_omote."ChoyoID" AS "ChoyoID_omote",
+        DbT5305_ura."ChoyoID" AS "ChoyoID_ura"
         FROM
         rgdb."DbT5101NinteiShinseiJoho" DbT5101
         INNER JOIN
@@ -1226,9 +1228,9 @@
         ON  DbT5101."shinseishoKanriNo" = DbT5301."shinseishoKanriNo"
         AND DbT5301."logicalDeletedFlag" = FALSE
         LEFT JOIN
-        rgdb."DbT4302ShujiiIkenshoJoho" DbT4302
-        ON  DbT4302."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-        AND DbT4302."ikenshoIraiRirekiNo" = DbT5301."ikenshoIraiRirekiNo"
+        rgdb."DbT5302ShujiiIkenshoJoho" DbT5302
+        ON  DbT5302."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        AND DbT5302."ikenshoIraiRirekiNo" = DbT5301."ikenshoIraiRirekiNo"
         LEFT JOIN
         rgdb."DbT5911ShujiiIryoKikanJoho" DbT5911
         ON  DbT5101."shujiiIryokikanCode" = DbT5911."shujiiIryokikanCode"
@@ -1239,24 +1241,15 @@
         AND DbT5912."shujiiCode" = DbT5101."shujiiCode"
         AND DbT5912."shichosonCode" = DbT5101."shichosonCode"
         LEFT JOIN
-        (
-        SELECT
-        *
-        FROM rgdb."DbT5305IkenshoImageJoho" DbT5305_temp
-        WHERE
-        NOT EXISTS(
-        SELECT
-        *
-        FROM
-        rgdb."DbT5305IkenshoImageJoho"
-        WHERE
-        "shinseishoKanriNo" = DbT5305_temp."shinseishoKanriNo"
-        AND "iraiRirekiNo" = DbT5305_temp."iraiRirekiNo"
-        AND "ChoyoID" <![CDATA[ < ]]> DbT5305_temp."ChoyoID"
-        )
-        ) DbT5305
-        ON DbT5305."shinseishoKanriNo" = DbT5301."shinseishoKanriNo"
-        AND DbT5305."iraiRirekiNo" = DbT5301."ikenshoIraiRirekiNo"
+        rgdb."DbT5305IkenshoImageJoho" DbT5305_omote
+        ON DbT5305_omote."shinseishoKanriNo" = DbT5301."shinseishoKanriNo"
+        AND DbT5305_omote."iraiRirekiNo" = DbT5301."ikenshoIraiRirekiNo"
+        AND DbT5305_omote."ChoyoID" IN ('701','777')
+        LEFT JOIN
+        rgdb."DbT5305IkenshoImageJoho" DbT5305_ura
+        ON DbT5305_ura."shinseishoKanriNo" = DbT5301."shinseishoKanriNo"
+        AND DbT5305_ura."iraiRirekiNo" = DbT5301."ikenshoIraiRirekiNo"
+        AND DbT5305_ura."ChoyoID" IN ('702','778')
         WHERE
         DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
@@ -1267,10 +1260,20 @@
         AND DbT5101."logicalDeletedFlag" = FALSE
         AND DbT5105."ikenshoTorokuKanryoYMD" is NULL
         <if test = "状態区分 == 1">
-            AND DbT4302."ikenshoReadYMD" is NULL
+            AND (DbT5302."ikenshoReadYMD" is NULL 
+            OR (DbT5305_omote."ChoyoID" ='701'
+            AND DbT5305_ura."ChoyoID" <![CDATA[<>]]> '702')
+            OR (DbT5305_omote."ChoyoID" = '777'
+            AND DbT5305_ura."ChoyoID" <![CDATA[<>]]> '778')
+            OR (DbT5305_omote."ChoyoID" IS NULL
+            AND DbT5305_ura."ChoyoID" IS NULL))
         </if>
         <if test = "状態区分 == 2">
-            AND DbT4302."ikenshoReadYMD" is NOT NULL
+            AND DbT5302."ikenshoReadYMD" is NOT NULL 
+            AND ((DbT5305_omote."ChoyoID" = '701'
+            AND DbT5305_ura."ChoyoID" = '702')
+            OR (DbT5305_omote."ChoyoID" = '777'
+            AND DbT5305_ura."ChoyoID" = '778'))
         </if>
         <if test = "市町村コード.toString() != ''.toString()">
             AND DbT7051."shichosonCode" = #{市町村コード}
@@ -1316,9 +1319,9 @@
         ON  DbT5101."shinseishoKanriNo" = DbT5301."shinseishoKanriNo"
         AND DbT5301."logicalDeletedFlag" = FALSE
         LEFT JOIN
-        rgdb."DbT4302ShujiiIkenshoJoho" DbT4302
-        ON  DbT4302."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
-        AND DbT4302."ikenshoIraiRirekiNo" = DbT5301."ikenshoIraiRirekiNo"
+        rgdb."DbT5302ShujiiIkenshoJoho" DbT5302
+        ON  DbT5302."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        AND DbT5302."ikenshoIraiRirekiNo" = DbT5301."ikenshoIraiRirekiNo"
         LEFT JOIN
         rgdb."DbT5911ShujiiIryoKikanJoho" DbT5911
         ON  DbT5101."shujiiIryokikanCode" = DbT5911."shujiiIryokikanCode"
@@ -1328,6 +1331,16 @@
         ON  DbT5912."shujiiIryokikanCode" = DbT5101."shujiiIryokikanCode"
         AND DbT5912."shujiiCode" = DbT5101."shujiiCode"
         AND DbT5912."shichosonCode" = DbT5101."shichosonCode"
+        LEFT JOIN
+        rgdb."DbT5305IkenshoImageJoho" DbT5305_omote
+        ON DbT5305_omote."shinseishoKanriNo" = DbT5301."shinseishoKanriNo"
+        AND DbT5305_omote."iraiRirekiNo" = DbT5301."ikenshoIraiRirekiNo"
+        AND DbT5305_omote."ChoyoID" IN ('701','777')
+        LEFT JOIN
+        rgdb."DbT5305IkenshoImageJoho" DbT5305_ura
+        ON DbT5305_ura."shinseishoKanriNo" = DbT5301."shinseishoKanriNo"
+        AND DbT5305_ura."iraiRirekiNo" = DbT5301."ikenshoIraiRirekiNo"
+        AND DbT5305_ura."ChoyoID" IN ('702','778')
         WHERE
         DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
@@ -1338,10 +1351,20 @@
         AND DbT5101."logicalDeletedFlag" = FALSE
         AND DbT5105."ikenshoTorokuKanryoYMD" is NULL
         <if test = "状態区分 == 1">
-            AND DbT4302."ikenshoReadYMD" is NULL
+            AND (DbT5302."ikenshoReadYMD" is NULL 
+            OR (DbT5305_omote."ChoyoID" ='701'
+            AND DbT5305_ura."ChoyoID" <![CDATA[<>]]> '702')
+            OR (DbT5305_omote."ChoyoID" = '777'
+            AND DbT5305_ura."ChoyoID" <![CDATA[<>]]> '778')
+            OR (DbT5305_omote."ChoyoID" IS NULL
+            AND DbT5305_ura."ChoyoID" IS NULL))
         </if>
         <if test = "状態区分 == 2">
-            AND DbT4302."ikenshoReadYMD" is NOT NULL
+            AND DbT5302."ikenshoReadYMD" is NOT NULL 
+            AND ((DbT5305_omote."ChoyoID" = '701'
+            AND DbT5305_ura."ChoyoID" = '702')
+            OR (DbT5305_omote."ChoyoID" = '777'
+            AND DbT5305_ura."ChoyoID" = '778'))
         </if>
         <if test = "市町村コード.toString() != ''.toString()">
             AND DbT7051."shichosonCode" = #{市町村コード}
