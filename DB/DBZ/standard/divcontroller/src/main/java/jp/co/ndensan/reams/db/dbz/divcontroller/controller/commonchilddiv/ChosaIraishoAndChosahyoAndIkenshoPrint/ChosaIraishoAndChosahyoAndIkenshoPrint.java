@@ -335,7 +335,12 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
 
         FlexibleDate 発行日 = new FlexibleDate(div.getTxtHakkoYMD().getValue().toString());
         if (!div.getChkIkenshoIraisho().getSelectedKeys().isEmpty()) {
-            RString radTeishutsuKigen = div.getRadTeishutsuKigen().getSelectedKey();
+            RString radTeishutsuKigen;
+            if (div.getChkPrintBlank().getSelectedKeys().isEmpty()) {
+                radTeishutsuKigen = div.getRadTeishutsuKigen().getSelectedKey();
+            } else {
+                radTeishutsuKigen = KEY1;
+            }
             RDate date = RDate.getNowDate();
             RString 期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成期限設定方法, date, SubGyomuCode.DBE認定支援,
                     div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
@@ -396,7 +401,12 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
 
         FlexibleDate 発行日 = new FlexibleDate(div.getTxtHakkoYMD().getValue().toString());
         if (!div.getChkIraisho().getSelectedKeys().isEmpty()) {
-            RString radTeishutsuKigen = div.getRadTeishutsuKigen().getSelectedKey();
+            RString radTeishutsuKigen;
+            if (div.getChkPrintBlank().getSelectedKeys().isEmpty()) {
+                radTeishutsuKigen = div.getRadTeishutsuKigen().getSelectedKey();
+            } else {
+                radTeishutsuKigen = KEY1;
+            }
             RDate date = RDate.getNowDate();
             RString 認定調査期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, date, SubGyomuCode.DBE認定支援,
                     div.getCcdHokenshaList().getSelectedItem().get市町村コード().value());
@@ -541,8 +551,10 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
 
             if (依頼書選択selectedKeys.contains(KEY0)) {
                 ChosahyoMatomeItem item = handler.create認定調査依頼書印刷用パラメータ_個人別(row, 宛名連番);
-                item.setLayout(ChosahyoMatomeLayout.認定調査依頼書);
-                params.add(item);
+                if (item != null) {
+                    item.setLayout(ChosahyoMatomeLayout.認定調査依頼書);
+                    params.add(item);
+                }
             }
             if (調査票選択selectedKeys.contains(KEY0)) {
                 add認定調査票_概況調査(params, div, row, 保険者市町村コード);
@@ -563,8 +575,10 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
             }
             if (概況特記選択selectedKeys.contains(KEY0)) {
                 ChosahyoMatomeItem item = handler.create認定調査票_概況調査パラメータ_個人別(row);
-                item.setLayout(ChosahyoMatomeLayout.認定調査票_概況特記_OCR);
-                params.add(item);
+                if (item != null) {
+                    item.setLayout(ChosahyoMatomeLayout.認定調査票_概況特記_OCR);
+                    params.add(item);
+                }
             }
 
             if (委託特記事項選択selectedKeys.contains(KEY0)) {
@@ -596,16 +610,20 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
             if (意見書依頼書選択selectedKeys.contains(KEY0)) {
                 ninteiHantei.add(意見書依頼書);
                 IkenshoAssortmentItem item = handler.create意見書作成依頼書_パラメータ_個人別(row, 宛名連番, 連番);
-                item.setLayout(IkenshoAssortmentLayout.主治医意見書作成依頼書);
-                params.add(item);
-                連番++;
+                if (item != null) {
+                    item.setLayout(IkenshoAssortmentLayout.主治医意見書作成依頼書);
+                    params.add(item);
+                    連番++;
+                }
             }
             if (意見書依頼書選択selectedKeys.contains(KEY2)) {
-                連番++;
                 ninteiHantei.add(意見書提出用);
                 IkenshoAssortmentItem item = handler.create介護保険指定医依頼兼主治医意見書提出意見書_パラメータ_個人別(row, 宛名連番);
-                item.setLayout(IkenshoAssortmentLayout.介護保険指定医依頼兼主治医意見書提出依頼書);
-                params.add(item);
+                if (item != null) {
+                    item.setLayout(IkenshoAssortmentLayout.介護保険指定医依頼兼主治医意見書提出依頼書);
+                    params.add(item);
+                    連番++;
+                }
             }
 
 
@@ -616,18 +634,22 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrint {
             }
 
             if (請求書選択selectedKeys.contains(KEY0)) {
-                連番++;
                 IkenshoAssortmentItem item = handler.create主治医意見書作成料請求書_パラメータ_個人別(row);
-                item.setLayout(IkenshoAssortmentLayout.主治医意見書作成料請求書);
-                params.add(item);
+                if (item != null) {
+                    item.setLayout(IkenshoAssortmentLayout.主治医意見書作成料請求書);
+                    params.add(item);
+                    連番++;
+                }
             }
 
             if (診断命令書選択selectedKeys.contains(KEY0)) {
-                連番++;
                 ninteiHantei.add(命令書);
                 IkenshoAssortmentItem item = handler.create介護保険診断命令書_パラメータ_個人別(row, 宛名連番);
-                item.setLayout(IkenshoAssortmentLayout.介護保険診断命令書);
-                params.add(item);
+                if (item != null) {
+                    item.setLayout(IkenshoAssortmentLayout.介護保険診断命令書);
+                    params.add(item);
+                    連番++;
+                }
             }
             宛名連番++;
         }

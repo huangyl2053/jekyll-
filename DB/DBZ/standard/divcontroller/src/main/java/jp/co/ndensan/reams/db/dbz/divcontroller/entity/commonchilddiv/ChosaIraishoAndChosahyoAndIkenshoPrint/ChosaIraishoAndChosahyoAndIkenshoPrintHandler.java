@@ -188,6 +188,7 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
                     帳票ID = new ReportId(帳票IDBuilder.toRString());
                 }
             }
+            div.getCcdHokenshaList().setDisplayNone(true);
             div.getCcdBunshoNo().initialize(帳票ID);
             div.getNinteiChosa().setDisplayNone(false);
             div.getShujiiIkensho().setDisplayNone(true);
@@ -456,9 +457,6 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             div.getChkPrintMatome().setSelectedItemsByKey(選択状態_空);
             div.getChkPrintMatome().setDisabled(true);
             
-            div.getDgNinteiChosa().setDisplayNone(true);
-            div.getDgShujiiIkensho().setDisplayNone(true);
-            
             div.getTeishutsuKigen().setDisplayNone(true);
         } else {
             div.getChkIraisho().setDisabled(false);
@@ -471,8 +469,6 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintHandler {
             
             div.getChkPrintMatome().setDisabled(false);
             
-            div.getDgNinteiChosa().setDisplayNone(false);
-            div.getDgShujiiIkensho().setDisplayNone(false);
             div.getTeishutsuKigen().setDisplayNone(false);
             div.getTxtHakkoYMD().setDisplayNone(false);
         }
