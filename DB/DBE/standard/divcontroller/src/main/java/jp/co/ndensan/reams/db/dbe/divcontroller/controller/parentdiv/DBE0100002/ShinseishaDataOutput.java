@@ -6,8 +6,11 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE0100002;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import jp.co.ndensan.reams.db.dbe.business.core.shinseikensaku.ShinseiKensakuBusiness;
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE010002.DBE010002_ShinseishaDataOutParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0100002.DBE0100002StateName;
@@ -18,13 +21,14 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0100002.Shi
 import jp.co.ndensan.reams.db.dbe.service.core.shinseikensaku.ShinseiKensakuFinder;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.core.ninteisaikinshorisha.NinteiSaikinShorisha;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
+import jp.co.ndensan.reams.uz.uza.util.Comparators;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -71,7 +75,11 @@ public class ShinseishaDataOutput {
      * @return ResponseData
      */
     public ResponseData<ShinseishaDataOutputDiv> onClick_btnKensaku(ShinseishaDataOutputDiv div) {
-        return processKensaku(div, div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().getTxtHihokenshaNumber().getValue());
+        return new KensakuProcess(div).exec(
+                div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv()
+                .getDdlHokenshaNumber().getSelectedItem().get証記載保険者番号(),
+                div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv()
+                .getTxtHihokenshaNumber().getValue());
     }
 
     /**
@@ -86,8 +94,8 @@ public class ShinseishaDataOutput {
             return ResponseData.of(div).addValidationMessages(pairs).respond();
         }
 
-        RString hihokenshaNo = div.getCcdNinteishinseishaFinder().getSaikinShorishaDiv().getSelectedHihokenshaNo();
-        return processKensaku(div, hihokenshaNo);
+        NinteiSaikinShorisha saikinShorisha = div.getCcdNinteishinseishaFinder().getSaikinShorishaDiv().getSelectedItem();
+        return new SaikinShorishaKensakuProcess(div).exec(saikinShorisha.getShoKisaiHokenshaNo(), saikinShorisha.getHihokenshaNo());
     }
 
     /**
@@ -125,10 +133,10 @@ public class ShinseishaDataOutput {
      * @return ResponseData
      */
     public ResponseData<DBE010002_ShinseishaDataOutParameter> createBatchParameter(ShinseishaDataOutputDiv div) {
-        RString 被保険者番号 = div.getCcdNinteishinseishaFinder().getSaikinShorishaDiv().getSelectedHihokenshaNo();
+        NinteiSaikinShorisha saikinShorisha = div.getCcdNinteishinseishaFinder().getSaikinShorishaDiv().getSelectedItem();
         DBE010002_ShinseishaDataOutParameter parameter = new DBE010002_ShinseishaDataOutParameter();
         parameter.set検索実行(true);
-        parameter.set検索条件(getHandler(div).createSearchParameter(被保険者番号));
+        parameter.set検索条件(getHandler(div).createSearchParameter(saikinShorisha.getShoKisaiHokenshaNo(), saikinShorisha.getHihokenshaNo()));
         parameter.set基本情報出力(div.getChkOutputCsv().getSelectedKeys().contains(基本情報));
         parameter.set調査票情報出力(div.getChkOutputCsv().getSelectedKeys().contains(調査票情報));
         parameter.set意見書情報出力(div.getChkOutputCsv().getSelectedKeys().contains(意見書情報));
@@ -163,6 +171,8 @@ public class ShinseishaDataOutput {
      */
     public ResponseData<ShinseishaDataOutputDiv> onClick_btnShokai(ShinseishaDataOutputDiv div) {
         dgShinseiJoho_Row row = div.getDgShinseiJoho().getClickedItem();
+        div.getCcdNinteishinseishaFinder().updateSaikinShorisha(new ShoKisaiHokenshaNo(row.getShoKisaiHokenshaNo()), row.getHihokenshaNo(), row.getShimei());
+        div.getCcdNinteishinseishaFinder().reloadSaikinShorisha();
         ViewStateHolder.put(ViewStateKeys.申請書管理番号, row.getShinseishoKanriNo());
         return ResponseData.of(div).respond();
     }
@@ -179,52 +189,84 @@ public class ShinseishaDataOutput {
         div.getTxtMaxDisp().setDisabled(false);
         return ResponseData.of(div).setState(DBE0100002StateName.申請検索);
     }
+    
+    private static class KensakuProcess {
 
-    private ResponseData<ShinseishaDataOutputDiv> processKensaku(ShinseishaDataOutputDiv div, RString hihokenshaNo) {
-        if (!ResponseHolder.isReRequest()) {
-        } else {
-            return ResponseData.of(div).respond();
+        protected final ShinseishaDataOutputDiv div;
+
+        protected KensakuProcess(ShinseishaDataOutputDiv div) {
+            this.div = div;
         }
-        ValidationMessageControlPairs pairs = div.getCcdNinteishinseishaFinder().validate();
-        if (pairs.existsError()) {
-            return ResponseData.of(div).addValidationMessages(pairs).respond();
-        }
-        SearchResult<ShinseiKensakuBusiness> searchResult
-                = ShinseiKensakuFinder.createInstance().getShinseiKensaku(getHandler(div).createSearchParameter(hihokenshaNo));
-        if (!searchResult.records().isEmpty()) {
-            int lastShinseiYmdIndex = findLastIndex(searchResult);
-            div.getCcdNinteishinseishaFinder()
-                    .updateSaikinShorisha(hihokenshaNo, searchResult.records().get(lastShinseiYmdIndex).get被保険者氏名().value());
-            div.getCcdNinteishinseishaFinder().reloadSaikinShorisha();
+
+        ResponseData<ShinseishaDataOutputDiv> exec(ShoKisaiHokenshaNo shoKisaiHokenshaNo, RString hihokenshaNo) {
+            if (ResponseHolder.isReRequest()) {
+                return ResponseData.of(div).respond();
+            }
+            /* 検索条件のバリデーション */
+            ValidationMessageControlPairs pairs = div.getCcdNinteishinseishaFinder().validate();
+            if (pairs.existsError()) {
+                return ResponseData.of(div).addValidationMessages(pairs).respond();
+            }
+            /* 検索を実施 */
+            SearchResult<ShinseiKensakuBusiness> searchResult = ShinseiKensakuFinder.createInstance()
+                    .getShinseiKensakuForList(getHandler(div).createSearchParameter(shoKisaiHokenshaNo, hihokenshaNo));
+            /* 検索結果が存在しない場合 */
+            if (searchResult.records().isEmpty()) {
+                div.getDgShinseiJoho().setDataSource(Collections.<dgShinseiJoho_Row>emptyList());
+                return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
+            }
+            /* 検索結果が存在する場合 */
+            if (updateSaikinShorisha(searchResult)) {
+                div.getCcdNinteishinseishaFinder().reloadSaikinShorisha();
+            }
             getHandler(div).set申請一覧データグリッド(searchResult);
-        } else {
-            div.getDgShinseiJoho().setDataSource(Collections.<dgShinseiJoho_Row>emptyList());
-            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
+            div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().setIsOpen(false);
+            div.getBtnClear().setDisabled(true);
+            div.getTxtMaxDisp().setDisabled(true);
+            return ResponseData.of(div).setState(DBE0100002StateName.検索結果一覧);
         }
-        div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv().setIsOpen(false);
-        div.getBtnClear().setDisabled(true);
-        div.getTxtMaxDisp().setDisabled(true);
-        if (searchResult.records().size() == 1) {
-            div.getBtnClear().setDisabled(false);
-            div.getTxtMaxDisp().setDisabled(false);
-        }
-        return ResponseData.of(div).setState(DBE0100002StateName.検索結果一覧);
-    }
 
-    private int findLastIndex(SearchResult<ShinseiKensakuBusiness> searchResult) {
-        int lastShinseiYmdIndex = 0;
-        FlexibleDate lastNinteiShinseiYmd = null;
-        for (int i = 0; i < searchResult.records().size(); i++) {
-            ShinseiKensakuBusiness rec = searchResult.records().get(i);
-            if (lastNinteiShinseiYmd == null) {
-                lastNinteiShinseiYmd = rec.get認定申請年月日();
-            }
-            if (rec.get認定申請年月日().isAfter(lastNinteiShinseiYmd)) {
-                lastNinteiShinseiYmd = rec.get認定申請年月日();
-                lastShinseiYmdIndex = i;
-            }
+        private ShinseishaDataOutputHandler getHandler(ShinseishaDataOutputDiv div) {
+            return new ShinseishaDataOutputHandler(div);
         }
-        return lastShinseiYmdIndex;
+
+        protected boolean updateSaikinShorisha(SearchResult<ShinseiKensakuBusiness> searchResult) {
+            return false;
+        }
+
+    }
+    
+    private static class SaikinShorishaKensakuProcess extends KensakuProcess {
+
+        protected SaikinShorishaKensakuProcess(ShinseishaDataOutputDiv div) {
+            super(div);
+        }
+
+        @Override
+        protected boolean updateSaikinShorisha(SearchResult<ShinseiKensakuBusiness> searchResult) {
+            ShinseiKensakuBusiness skb = findLast(searchResult.records());
+            if (skb == null) {
+                return false;
+            }
+            div.getCcdNinteishinseishaFinder().updateSaikinShorisha(
+                    new ShoKisaiHokenshaNo(skb.get証記載保険者番号()), skb.get被保険者番号(), skb.get被保険者氏名().value());
+            return true;
+        }
+
+        private static ShinseiKensakuBusiness findLast(Collection<? extends ShinseiKensakuBusiness> searchResult) {
+            List<ShinseiKensakuBusiness> list = new ArrayList<>(searchResult);
+            if (list.isEmpty()) {
+                return null;
+            }
+            Collections.sort(list, new Comparator<ShinseiKensakuBusiness>() {
+                @Override
+                public int compare(ShinseiKensakuBusiness o1, ShinseiKensakuBusiness o2) {
+                    return Objects.compare(o1.get認定申請年月日(), o2.get認定申請年月日(), Comparators.reverseOrder());
+                }
+            });
+            return list.get(0);
+        }
+
     }
 
     private ShinseishaDataOutputHandler getHandler(ShinseishaDataOutputDiv div) {
