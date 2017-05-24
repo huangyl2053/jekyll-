@@ -33,7 +33,6 @@ import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJohoIdentifier;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoGaikyoChosa;
 import jp.co.ndensan.reams.db.dbz.business.core.ikenshoprint.IkenshoPrintParameterModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.gamensenikbn.GamenSeniKbn;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
@@ -42,7 +41,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteiShinseiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosaIraiJohoManager;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoGaikyoChosaManager;
+import jp.co.ndensan.reams.db.dbz.service.core.ninteichosa.NinteichosaContextService;
 import jp.co.ndensan.reams.db.dbz.service.core.shishosecurityjoho.ShishoSecurityJoho;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -404,7 +403,6 @@ public class NinteiChosaIrai {
     private void insert認定調査依頼情報(NinteiChosaIraiDiv div) {
         List<dgWaritsukeZumiShinseishaIchiran_Row> 割付済み申請者List = div.getDgWaritsukeZumiShinseishaIchiran().getDataSource();
         NinteichosaIraiJohoManager ninteichosaIraiJohoManager = NinteichosaIraiJohoManager.createInstance();
-        NinteichosahyoGaikyoChosaManager ninteichosahyoGaikyoChosaManager = NinteichosahyoGaikyoChosaManager.createInstance();
         RDate nowDate = RDate.getNowDate();
         RString 認定調査期限設定方法 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限設定方法, nowDate, SubGyomuCode.DBE認定支援);
         RString 認定調査期限日数 = DbBusinessConfig.get(ConfigNameDBE.認定調査期限日数, nowDate, SubGyomuCode.DBE認定支援);
@@ -423,41 +421,30 @@ public class NinteiChosaIrai {
                 } else {
                     認定調査期限年月日 = 認定申請日.plusDay(Integer.parseInt(認定調査期限日数.toString()));
                 }
-                if (NinteiChousaIraiKubunCode.初回.get名称().equals(row.getChosaKubun())) {
-                    NinteichosaIraiJoho ninteichosaIraiJoho = new NinteichosaIraiJoho(申請書管理番号, 認定調査依頼履歴番号);
-                    ninteichosaIraiJoho = ninteichosaIraiJoho.createBuilderForEdit()
-                            .set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()))
-                            .set認定調査委託先コード(new JigyoshaNo(認定調査委託先コード))
-                            .set認定調査員コード(調査員コード)
-                            .set認定調査依頼区分コード(new Code(NinteiChousaIraiKubunCode.初回.getコード()))
-                            .set認定調査回数(0)
-                            .set認定調査依頼年月日(認定調査依頼年月日)
-                            .set認定調査期限年月日(認定調査期限年月日)
-                            .set論理削除フラグ(false)
-                            .build();
-                    ninteichosaIraiJohoManager.save認定調査依頼情報(ninteichosaIraiJoho);
-                } else {
-                    NinteichosaIraiJoho ninteichosaIraiJoho = new NinteichosaIraiJoho(申請書管理番号, 認定調査依頼履歴番号);
-                    ninteichosaIraiJoho = ninteichosaIraiJoho.createBuilderForEdit()
-                            .set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()))
-                            .set認定調査委託先コード(new JigyoshaNo(認定調査委託先コード))
-                            .set認定調査員コード(調査員コード)
-                            .set認定調査依頼区分コード(new Code(NinteiChousaIraiKubunCode.再調査.getコード()))
-                            .set認定調査回数(1)
-                            .set認定調査依頼年月日(認定調査依頼年月日)
-                            .set認定調査期限年月日(認定調査期限年月日)
-                            .set論理削除フラグ(false)
-                            .build();
-                    ninteichosaIraiJohoManager.save認定調査依頼情報(ninteichosaIraiJoho);
-                }
-                List<NinteichosahyoGaikyoChosa> 認定調査票概況調査 = ninteichosahyoGaikyoChosaManager.get認定調査票_概況調査_子(申請書管理番号);
-                ChosaKubun 調査区分 = (認定調査票概況調査.isEmpty())
-                        ? ChosaKubun.新規調査
-                        : ChosaKubun.再調査;
+                NinteiChousaIraiKubunCode iraiKubun = toNinteiChousaIraiKubunCode(row.getChosaKubun());
+                NinteichosaIraiJoho ninteichosaIraiJoho = new NinteichosaIraiJoho(申請書管理番号, 認定調査依頼履歴番号);
+                ninteichosaIraiJoho = ninteichosaIraiJoho.createBuilderForEdit()
+                        .set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()))
+                        .set認定調査委託先コード(new JigyoshaNo(認定調査委託先コード))
+                        .set認定調査員コード(調査員コード)
+                        .set認定調査依頼区分コード(iraiKubun.asCode())
+                        .set認定調査回数(iraiKubun == NinteiChousaIraiKubunCode.初回 ? 0 : 1) //正確な回数はシステムで利用しない。
+                        .set認定調査依頼年月日(認定調査依頼年月日)
+                        .set認定調査期限年月日(認定調査期限年月日)
+                        .set論理削除フラグ(false)
+                        .build();
+                ninteichosaIraiJohoManager.save認定調査依頼情報(ninteichosaIraiJoho);
+                ChosaKubun 調査区分 = NinteichosaContextService.createInstance()
+                        .findChosaKubun(申請書管理番号.value(), 認定調査依頼履歴番号);
                 update要介護認定申請情報(申請書管理番号, 調査員コード, 認定調査委託先コード, row, 調査区分);
             }
         }
         div.getDgWaritsukeZumiShinseishaIchiran().setDataSource(割付済み申請者List);
+    }
+
+    private static NinteiChousaIraiKubunCode toNinteiChousaIraiKubunCode(RString 依頼区分名称) {
+        NinteiChousaIraiKubunCode iraiKubun = NinteiChousaIraiKubunCode.toValueFromName(依頼区分名称);
+        return iraiKubun == null ? NinteiChousaIraiKubunCode.初回 : iraiKubun;
     }
 
     private void update要介護認定申請情報(ShinseishoKanriNo 申請書管理番号, RString 調査員コード,
