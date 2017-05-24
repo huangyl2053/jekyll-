@@ -137,6 +137,13 @@ public class IkenshogetHandler {
                 row.getIkenshoNyushuKanryoDay().setValue(new RDate(business.get主治医意見書登録完了年月日().toString()));
             }
             row.setIkenshoNyushuTeikei(get定型OR定型外(business.get帳票ID()));
+            RString データ有 = new RString("●");
+            if (business.has表イメージ()) {
+                row.setHasImageOmote(データ有);
+            }
+            if (business.has裏イメージ()) {
+                row.setHasImageUra(データ有);
+            }
             row.setIkenshoIraiShokai(business.get意見書作成回数区分() == null || business.get意見書作成回数区分().value().equals(RString.EMPTY)
                     || business.get意見書作成回数区分().value().equals(RString.HALF_SPACE)
                     ? RString.EMPTY : IkenshoSakuseiKaisuKubun.toValue(business.get意見書作成回数区分().getKey()).get名称());
@@ -148,12 +155,14 @@ public class IkenshogetHandler {
             row.setChosaTokusokuHoho(督促方法);
             row.getChosaTokusokuCount().setValue(new Decimal(business.get主治医意見書作成督促回数()));
             意見書入手モードの日付設定(row, business);
-            if (business.get主治医意見書読取年月日() == null) {
+            if (business.get主治医意見書読取年月日() == null
+                    || !get定型OR定型外(business.get帳票表ID()).equals(get定型OR定型外(business.get帳票裏ID()))) {
                 row.setJyotai(未処理);
                 row.setCellBgColor("jyotai", DataGridCellBgColor.bgColorRed);
                 notCount++;
                 rowListNotreated.add(row);
-            } else if (business.get主治医意見書読取年月日() != null) {
+            } else if (business.get主治医意見書読取年月日() != null
+                    && get定型OR定型外(business.get帳票表ID()).equals(get定型OR定型外(business.get帳票裏ID()))) {
                 row.setJyotai(完了可能);
                 completeCount++;
                 rowListComplete.add(row);
