@@ -303,7 +303,7 @@ public class DataTorikomiEdit {
      */
     public DbT5502ShinsakaiWariateJohoEntity editDbT5502Entity(TempShinsakaiKekkaEntity entity, DbT5502ShinsakaiWariateJohoEntity dbt5502) {
         dbt5502.setHanteiKekkaCode(new Code(entity.get今回_通知区分()));
-        return null;
+        return dbt5502;
     }
 
     /**
