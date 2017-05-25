@@ -141,7 +141,8 @@ public class YokaigoninteiimagesakujoManager {
         for (OperationTarget t : 処理対象s) {
             _updateOrDelete(イメージ管理情報, t);
         }
-        update完了情報(イメージ管理情報.get申請書管理番号(), 処理対象s);
+//2017/5/25 削除するイメージの種類による完了情報の更新については、方針決定を見送る。
+//        update完了情報(イメージ管理情報.get申請書管理番号(), 処理対象s);
         DbAccessLogger accessLogger = new DbAccessLogger();
         accessLogger.store(new ShoKisaiHokenshaNo(イメージ管理情報.get証記載保険者番号()), イメージ管理情報.get被保険者番号(),
                 ExpandedInformations.fromShinseishoKanriNo(イメージ管理情報.get申請書管理番号()));

@@ -97,7 +97,7 @@ public class Yokaigoninteiimagekanri {
         present(div, イメージ管理情報);
         if (!RealInitialLocker.tryGetLock(LockingKeys.申請書管理番号.appended(申請書管理番号))) {
             div.setReadOnly(true);
-            setDisabledCommonBtnField(true);
+            setDisableBtnImageOutput(true);
             return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
         }
         ViewStateHolder.put(ViewStateKeys.イメージ情報, イメージ管理情報);
@@ -349,7 +349,7 @@ public class Yokaigoninteiimagekanri {
         div.getBtnIkenshoTeikei().setDisabled(true);
         div.getBtnIkenshoTeikeigai().setDisabled(true);
         div.getBtnSonota().setDisabled(true);
-        setDisabledCommonBtnField(true);
+        setDisableBtnImageOutput(true);
     }
 
     private void setBtnControllerDisabled(YokaigoninteiimagekanriDiv div, ReadOnlySharedFileEntryDescriptor ro_sfed) {
@@ -357,35 +357,39 @@ public class Yokaigoninteiimagekanri {
         if (存在したイメージファイル名 != null && !存在したイメージファイル名.isEmpty() && !存在したイメージファイル名.contains(null)) {
             if (getHandler(div).isExistsGaikyoChosaImageFile(存在したイメージファイル名)) {
                 div.getBtnGaikyoChosa().setDisabled(false);
-                setDisabledCommonBtnField(false);
+                setDisableBtnImageOutput(false);
             }
             if (getHandler(div).isExistsChosahyoTokkiImageFile(存在したイメージファイル名)) {
                 div.getBtnChosahyoTokuki().setDisabled(false);
                 div.getBtnTokkiRembanShusei().setDisabled(false);
-                setDisabledCommonBtnField(false);
+                setDisableBtnImageOutput(false);
             }
             if (getHandler(div).isExistsGaikyoTokkiImageFile(存在したイメージファイル名)) {
                 div.getBtnGaikyoTokki().setDisabled(false);
-                setDisabledCommonBtnField(false);
+                setDisableBtnImageOutput(false);
             }
             if (getHandler(div).isExistsOpinionFileTeikeiImageFile(存在したイメージファイル名)) {
                 div.getBtnIkenshoTeikei().setDisabled(false);
-                setDisabledCommonBtnField(false);
+                setDisableBtnImageOutput(false);
             }
             if (getHandler(div).isExistsOpinionFileTeikeigaiImageFile(存在したイメージファイル名)) {
                 div.getBtnIkenshoTeikeigai().setDisabled(false);
-                setDisabledCommonBtnField(false);
+                setDisableBtnImageOutput(false);
             }
             if (getHandler(div).isExistsOtherFileImageFile(存在したイメージファイル名)) {
                 div.getRadSonota().setSelectedIndex(0);
                 div.getBtnSonota().setDisabled(false);
-                setDisabledCommonBtnField(false);
+                setDisableBtnImageOutput(false);
+                setDisableBtnImageDelete(false);
             }
         }
     }
 
-    private void setDisabledCommonBtnField(boolean obj) {
+    private void setDisableBtnImageOutput(boolean obj) {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnImageOutput"), obj);
+    }
+
+    private void setDisableBtnImageDelete(boolean obj) {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnImageDelete"), obj);
     }
 

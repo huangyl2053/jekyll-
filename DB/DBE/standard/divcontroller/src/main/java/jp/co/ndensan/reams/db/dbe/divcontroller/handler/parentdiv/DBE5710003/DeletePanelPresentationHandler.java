@@ -53,11 +53,13 @@ public class DeletePanelPresentationHandler {
         }
         div.getLblTargetImage().setText(DELETION_TARGET);
         div.getBtnDelete().setDisabled(false);
-        new ChosahyoDivPresenter(div.getChosahyo()).initialize(imageFiles.confirmChosahyoImagesPresent());
-        new GaikyoTokkiDivPresenter(div.getGaikyoTokki()).initialize(imageFiles.confirmGaikyoTokkiImagesPresent());
-        new IkenshoDivPresenter(div.getIkensho()).initialize(imageFiles.confirmIkenshoImagesPresent());
-        new SonotaDivPresenter(div.getSonota()).initialize(imageFiles.confirmSonotaShiryoImagesPresent());
-        return true;
+        //2017/5/25 その他資料イメージのみ削除可能とする暫定対応
+        new ChosahyoDivPresenter(div.getChosahyo()).initialize(ImageFilesPresentState.存在しない/*imageFiles.confirmChosahyoImagesPresent()*/);
+        new GaikyoTokkiDivPresenter(div.getGaikyoTokki()).initialize(ImageFilesPresentState.存在しない/*imageFiles.confirmGaikyoTokkiImagesPresent()*/);
+        new IkenshoDivPresenter(div.getIkensho()).initialize(ImageFilesPresentState.存在しない/*imageFiles.confirmIkenshoImagesPresent()*/);
+        ImageFilesPresentState existsSonota = imageFiles.confirmSonotaShiryoImagesPresent(); //暫定
+        new SonotaDivPresenter(div.getSonota()).initialize(existsSonota/*imageFiles.confirmSonotaShiryoImagesPresent()*/);
+        return existsSonota != ImageFilesPresentState.存在しない; //暫定
     }
 
     /**
