@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2040001.DBE2
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2040001.ShujiiIkenshoIraiTaishoIchiranDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2040001.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.ikenshoget.IkenshogetManager;
+import jp.co.ndensan.reams.db.dbe.service.core.ikenshoirai.ShujiiIkenshoIraiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -198,11 +199,17 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
             if (row.getIshiKubunCode() != null) {
                 div.getCcdShujiiInput().setShiteii(IshiKubun.指定医.getCode().equals(row.getIshiKubunCode()));
             }
-
+            int 主治医意見書作成依頼履歴番号 = (!row.getIkenshoIraiRirekiNo().equals(new RString("0"))
+                    ? Integer.parseInt(row.getIkenshoIraiRirekiNo().toString()) + 1
+                    : 1);
             div.getDdlIraiKubun().setSelectedKey(
                     (row.getIkenshoIraiKubun() != null && !(row.getIkenshoIraiKubun().trim()).isEmpty())
                     ? row.getIkenshoIraiKubun()
-                    : IkenshoIraiKubun.初回依頼.getコード());
+                    : 主治医意見書作成依頼履歴番号 == 1
+                    ? IkenshoIraiKubun.初回依頼.getコード()
+                    : is再意見書(row.getShinseishoKanriNo())
+                    ? IkenshoIraiKubun.再意見書.getコード()
+                    : IkenshoIraiKubun.再依頼.getコード());
             div.getTxtSakuseiIraiYmd().setValue(row.getIkenshoIraiDay().getValue());
         }
     }
@@ -577,6 +584,11 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
             div.getTxtCompleteCount().setDisplayNone(false);
             div.getTxtTotalCount().setDisplayNone(false);
         }
+    }
+
+    private boolean is再意見書(RString 申請書管理番号) {
+        ShujiiIkenshoIraiManager manager = ShujiiIkenshoIraiManager.createInstance();
+        return manager.is再意見書(申請書管理番号);
     }
 
     /**

@@ -145,9 +145,9 @@ public class NinteichosaIraiManager {
     @Transaction
     public int getMax認定調査依頼履歴番号(RString 申請書管理番号) {
         INinteichosaIraiMapper mapper = mapperProvider.create(INinteichosaIraiMapper.class);
-        RString result = mapper.selectMax認定調査依頼履歴番号(NinteichosaIraiParameter.createParameter(
+        int result = mapper.selectMax認定調査依頼履歴番号(NinteichosaIraiParameter.createParameter(
                 RString.EMPTY, RString.EMPTY, 申請書管理番号, RString.EMPTY, RString.EMPTY, RString.EMPTY));
-        return result == null ? 0 : Integer.parseInt(result.toString());
+        return result;
     }
 
     /**

@@ -140,10 +140,9 @@
     </select>
     <select resultOrdered="true" id="selectMax認定調査依頼履歴番号"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosairai.NinteichosaIraiParameter"
-            resultType="RStringTypeHandler" fetchSize="500">
+            resultType="int" fetchSize="500">
         SELECT
-        MAX("ninteichosaIraiRirekiNo"
-        )
+        CASE WHEN MAX("ninteichosaIraiRirekiNo") IS NULL THEN 0 ELSE MAX("ninteichosaIraiRirekiNo") END
         FROM
         rgdb."DbT5201NinteichosaIraiJoho"
         WHERE

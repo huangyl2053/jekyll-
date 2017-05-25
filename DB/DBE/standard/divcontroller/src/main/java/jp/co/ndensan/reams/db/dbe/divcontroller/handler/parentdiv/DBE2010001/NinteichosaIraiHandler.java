@@ -10,15 +10,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaItakusakiJohoRelate;
+import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairaishudou.NinnteiChousairaiShudouBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousairaishudou.NinnteiChousairaiShudouParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.DBE2010001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.NinteichosaIraiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.dgNinteiTaskList_Row;
+import jp.co.ndensan.reams.db.dbe.service.core.basic.ninnteichousairaishudou.NinnteiChousairaiShudouFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosairai.NinteichosaIraiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoseiShichoson;
@@ -169,10 +173,17 @@ public class NinteichosaIraiHandler {
             div.getCcdItakusakiAndChosainInput().getTxtChosainCode().setValue(row.getKonkaiChosainCode());
             div.getCcdItakusakiAndChosainInput().getTxtChosainName().setValue(row.getKonkaiChosain());
             div.getCcdItakusakiAndChosainInput().setHdnShichosonCode(row.getShichosonCode());
-            div.getDdlIraiKubun().setSelectedKey(
-                    (!row.getChosaIraiKubunCode().isEmpty())
-                    ? row.getChosaIraiKubunCode()
-                    : NinteiChousaIraiKubunCode.初回.getコード());
+            NinteichosaIraiManager manager = NinteichosaIraiManager.createInstance();
+            int 認定調査依頼履歴番号 = manager.getMax認定調査依頼履歴番号(row.getShinseishoKanriNo()) + 1;
+            NinteiChousaIraiKubunCode 調査依頼区分
+                    = row.getChosaIraiKubunCode() != null
+                    ? NinteiChousaIraiKubunCode.toValue(row.getChosaIraiKubunCode())
+                    : (認定調査依頼履歴番号 == 1)
+                    ? NinteiChousaIraiKubunCode.初回
+                    : is再調査(new ShinseishoKanriNo(row.getShinseishoKanriNo()))
+                    ? NinteiChousaIraiKubunCode.再調査
+                    : NinteiChousaIraiKubunCode.再依頼;
+            div.getDdlIraiKubun().setSelectedKey(調査依頼区分.getコード());
             div.getTxtChosaIraiYmd().setValue(row.getNinteichosaIraiYmd().getValue());
             KijuntsukiShichosonjohoiDataPassModel modle = new KijuntsukiShichosonjohoiDataPassModel();
             modle.set委託先コード(row.getKonkaiChosaItakusakiCode());
@@ -209,6 +220,8 @@ public class NinteichosaIraiHandler {
                 .plusDay(Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.認定調査期限日数, nowDate, SubGyomuCode.DBE認定支援).toString())));
         NinteiChousaIraiKubunCode 調査依頼区分 = (認定調査依頼履歴番号 == 1)
                 ? NinteiChousaIraiKubunCode.初回
+                : is再調査(new ShinseishoKanriNo(row.getShinseishoKanriNo()))
+                ? NinteiChousaIraiKubunCode.再調査
                 : NinteiChousaIraiKubunCode.再依頼;
         row.setChosaIraiKubunCode(調査依頼区分.getコード());
         row.setChosaIraiKubun(調査依頼区分.get名称());
@@ -470,6 +483,14 @@ public class NinteichosaIraiHandler {
             result.put(構成市町村情報.get市町村コード().value(), 構成市町村情報);
         }
         return result;
+    }
+
+    private boolean is再調査(ShinseishoKanriNo 申請書管理番号) {
+        NinnteiChousairaiShudouFinder finder = NinnteiChousairaiShudouFinder.createInstance();
+        NinnteiChousairaiShudouParameter parameter = NinnteiChousairaiShudouParameter.createParameterBy申請書管理番号(申請書管理番号.value());
+        List<NinnteiChousairaiShudouBusiness> 認定調査依頼List = finder.get認定調査依頼情報(parameter).records();
+        NinnteiChousairaiShudouBusiness 認定調査依頼 = 認定調査依頼List.get(0);
+        return 認定調査依頼.is再調査();
     }
 
     /**
