@@ -428,7 +428,7 @@ public class NinteiChosaIrai {
                         .set認定調査委託先コード(new JigyoshaNo(認定調査委託先コード))
                         .set認定調査員コード(調査員コード)
                         .set認定調査依頼区分コード(iraiKubun.asCode())
-                        .set認定調査回数(iraiKubun == NinteiChousaIraiKubunCode.初回 ? 0 : 1) //正確な回数はシステムで利用しない。
+                        .set認定調査回数(iraiKubun == NinteiChousaIraiKubunCode.初回 ? 1 : 2) //正確な回数はシステムで利用しない。
                         .set認定調査依頼年月日(認定調査依頼年月日)
                         .set認定調査期限年月日(認定調査期限年月日)
                         .set論理削除フラグ(false)

@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain;
 
+import javax.annotation.CheckForNull;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -82,15 +83,12 @@ public enum NinteiChousaIraiKubunCode {
      * @param displayName 表示名
      * @return 対応するNinteiChousaIraiKubunCode
      */
+    @CheckForNull
     public static NinteiChousaIraiKubunCode toValueFromName(RString displayName) {
-        if (初回.get名称().equals(displayName)) {
-            return 初回;
-        }
-        if (再依頼.get名称().equals(displayName)) {
-            return 再依頼;
-        }
-        if (再調査.get名称().equals(displayName)) {
-            return 再調査;
+        for (NinteiChousaIraiKubunCode ninteiChousaIraiKubunCode : values()) {
+            if (ninteiChousaIraiKubunCode.get名称().equals(displayName)) {
+                return ninteiChousaIraiKubunCode;
+            }
         }
         return null;
     }
