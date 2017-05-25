@@ -65,21 +65,18 @@ public class IkenshoImages implements Iterable<IkenshoImageJoho> {
         Map<RString, IkenshoImageJoho> maskedAdded = new HashMap<>(this.maskedByChohyoID);
         Map<OCRID, List<RString>> deletionsTable = deletionsTableByOCRID();
         Set<RString> idsToDelete = new HashSet<>();
-        Set<RString> idsToAdd = new HashSet<>();
         for (OCRID addingID : ocrIDs) {
             if (deletionsTable.containsKey(addingID)) {
                 idsToDelete.addAll(deletionsTable.get(addingID));
             }
             RString idValue = addingID.value();
-            idsToAdd.add(idValue);
             if (gemponAdded.containsKey(idValue)) {
                 continue;
             }
             gemponAdded.put(idValue, newIkenshoImageJoho(this.shinseishoKanriNo, this.rirekiNo, addingID));
         }
         deleteUnnecessaryItems(gemponAdded, idsToDelete);
-        deleteUnnecessaryItems(maskedAdded, idsToDelete);
-        deleteUnnecessaryItems(maskedAdded, idsToAdd);
+        deleteAll(maskedAdded);
         return new IkenshoImages(this.shinseishoKanriNo, this.rirekiNo, gemponAdded, maskedAdded);
     }
 
@@ -125,6 +122,13 @@ public class IkenshoImages implements Iterable<IkenshoImageJoho> {
                 }
                 added.put(id, o.deleted());
             }
+        }
+    }
+
+    private static void deleteAll(Map<RString, IkenshoImageJoho> added) {
+        for (RString id : added.keySet()) {
+            IkenshoImageJoho o = added.get(id);
+            added.put(id, o.deleted());
         }
     }
 

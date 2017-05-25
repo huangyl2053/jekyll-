@@ -23,6 +23,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.GenponMaskKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5105NinteiKanryoJohoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
@@ -42,6 +44,7 @@ public class YokaigoninteiimagesakujoManager {
 
     private final DbT5601NinteiChosaHoshuJissekiJohoDac dbT5601Dac;
     private final DbT5602ShujiiIkenshoHoshuJissekiJohoDac dbT5602Dac;
+    private final DbT5105NinteiKanryoJohoDac dbT5105Dac;
     private final MapperProvider mapperProvider;
 
     /**
@@ -50,23 +53,8 @@ public class YokaigoninteiimagesakujoManager {
     YokaigoninteiimagesakujoManager() {
         dbT5601Dac = InstanceProvider.create(DbT5601NinteiChosaHoshuJissekiJohoDac.class);
         dbT5602Dac = InstanceProvider.create(DbT5602ShujiiIkenshoHoshuJissekiJohoDac.class);
+        dbT5105Dac = InstanceProvider.create(DbT5105NinteiKanryoJohoDac.class);
         mapperProvider = InstanceProvider.create(MapperProvider.class);
-
-    }
-
-    /**
-     * テスト用コンストラクタです。
-     *
-     * @param dbT5601Dac {@link DbT5601NinteiChosaHoshuJissekiJohoDac}
-     * @param dbT5602Dac {@link DbT5602ShujiiIkenshoHoshuJissekiJohoDac}
-     * @param mapperProvider {@link MapperProvider}
-     */
-    YokaigoninteiimagesakujoManager(DbT5601NinteiChosaHoshuJissekiJohoDac dbT5601Dac,
-            DbT5602ShujiiIkenshoHoshuJissekiJohoDac dbT5602Dac,
-            MapperProvider mapperProvider) {
-        this.dbT5601Dac = dbT5601Dac;
-        this.dbT5602Dac = dbT5602Dac;
-        this.mapperProvider = mapperProvider;
     }
 
     /**
@@ -153,6 +141,7 @@ public class YokaigoninteiimagesakujoManager {
         for (OperationTarget t : 処理対象s) {
             _updateOrDelete(イメージ管理情報, t);
         }
+        update完了情報(イメージ管理情報.get申請書管理番号(), 処理対象s);
         DbAccessLogger accessLogger = new DbAccessLogger();
         accessLogger.store(new ShoKisaiHokenshaNo(イメージ管理情報.get証記載保険者番号()), イメージ管理情報.get被保険者番号(),
                 ExpandedInformations.fromShinseishoKanriNo(イメージ管理情報.get申請書管理番号()));
@@ -238,6 +227,39 @@ public class YokaigoninteiimagesakujoManager {
                         申請書管理番号, 主治医意見書作成依頼履歴番号, GenponMaskKubun.マスク.getコード(), true));
             default:
         }
+    }
+
+    private void update完了情報(ShinseishoKanriNo 申請書管理番号, OperationTargets 処理対象s) {
+        DbT5105NinteiKanryoJohoEntity e = this.dbT5105Dac.selectByKey(申請書管理番号);
+        for (OperationTarget o : 処理対象s) {
+            switch (o.type()) {
+                case その他資料:
+                    continue;
+                case 意見書:
+                    e.setMaskingKanryoYMD(null);
+                    if (o.deletionMethod().isMaskedOnly()) {
+                        continue;
+                    }
+                    e.setIkenshoTorokuKanryoYMD(null);
+                    e.setIchijiHanteiKanryoYMD(null);
+                    continue;
+                case 調査票:
+                    e.setMaskingKanryoYMD(null);
+                    if (o.deletionMethod().isMaskedOnly()) {
+                        continue;
+                    }
+                    e.setNinteichosaKanryoYMD(null);
+                    e.setIchijiHanteiKanryoYMD(null);
+                    continue;
+                case 概況特記:
+                    e.setMaskingKanryoYMD(null);
+                    if (o.deletionMethod().isMaskedOnly()) {
+                        continue;
+                    }
+                    e.setNinteichosaKanryoYMD(null);
+            }
+        }
+        this.dbT5105Dac.save(e);
     }
 
 }

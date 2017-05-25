@@ -67,6 +67,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.log.applog._Logger;
+import jp.co.ndensan.reams.uz.uza.log.applog.gyomu._GyomuLogData;
 
 /**
  * 主治医意見書の読み込み処理です。
@@ -569,6 +571,11 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
             ImageinputRelate ir, IkenshoImageUpdateParameter param) {
         boolean hasDeleted = false;
         for (IkenshoImageJoho o : ir.get意見書イメージs().added(param.getOCRIDs())) {
+            _Logger.gyomuLog(_GyomuLogData.LogType.Info, new StringBuilder()
+                    .append("帳票ID：").append(o.get帳票ID().toString())
+                    .append(" 原/マ：").append(o.getマスキングデータ区分())
+                    .append(" State：").append(o.toEntity().getState())
+                    .toString());
             DbT5305IkenshoImageJohoEntity entity = o.toEntity();
             switch (entity.getState()) {
                 case Added:
