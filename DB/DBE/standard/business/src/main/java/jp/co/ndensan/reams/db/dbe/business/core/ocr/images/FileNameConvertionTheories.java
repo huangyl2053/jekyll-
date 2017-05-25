@@ -61,8 +61,8 @@ public enum FileNameConvertionTheories implements IFileNameConvertionTheory {
             };
 
     private static final Map<String, RString> 認定調査票_概況;
-    private static final RString 主治医意見書_表;
-    private static final RString 主治医意見書_裏;
+    public static final RString 主治医意見書_表;
+    public static final RString 主治医意見書_裏;
 
     static {
         //ファイル名が一元管理されていないが、

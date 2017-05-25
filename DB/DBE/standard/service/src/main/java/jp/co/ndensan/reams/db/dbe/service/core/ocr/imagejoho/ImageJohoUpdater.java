@@ -34,8 +34,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.log.applog._Logger;
-import jp.co.ndensan.reams.uz.uza.log.applog.gyomu._GyomuLogData;
 
 /**
  * イメージ情報を更新します。
@@ -78,35 +76,34 @@ public class ImageJohoUpdater {
 
     public Result save(IBatchTableWriter<? super DbT5115ImageEntity> dbWriter) {
         ProcessingResults result = new ProcessingResults();
-
         RString targetDirectoryPath = Directory.createTmpDirectory();
-        CopyImageResult copyImageResult = copyImageFilesToDirectory(targetImageFileNames, targetDirectoryPath,
+        CopyImageResult copyResult = copyImageFilesToDirectory(targetImageFileNames, targetDirectoryPath,
                 imageFilePaths, fileNameTheory);
-        List<RString> imagesNotFound = copyImageResult.getImagesNotFound();
-        if (!imagesNotFound.isEmpty()) {
-            result.add(ProcessingResultFactory.warning(ocrData, OcrTorikomiMessages.存在しないイメージあり
-                    .replaced(composeImageFileNames(imagesNotFound).toString())));
+        if (copyResult.hasImagesNotFound()) {
+            result.add(ProcessingResultFactory.warning(ocrData,
+                    OcrTorikomiMessages.存在しないイメージあり
+                    .replaced(composeImageFileNames(copyResult.getImagesNotFound()).toString())));
         }
-        List<RString> failedToConvertFileName = copyImageResult.getImagesFailedToConvertFileName();
-        if (!failedToConvertFileName.isEmpty()) {
-            result.add(ProcessingResultFactory.warning(ocrData, OcrTorikomiMessages.ファイル名変換失敗
-                    .replaced(composeImageFileNames(failedToConvertFileName).toString())));
+        if (copyResult.hasImagesFailedToConvertName()) {
+            result.add(ProcessingResultFactory.warning(ocrData,
+                    OcrTorikomiMessages.ファイル名変換失敗
+                    .replaced(composeImageFileNames(copyResult.getImagesFailedToConvertName()).toString())));
         }
-        if (copyImageResult.getSavingImageFileNames().isEmpty()) {
-            return new Result(this.共有ファイルID, result);
+        if (!copyResult.hasImagesToSave()) {
+            return new Result(this.共有ファイルID, result, copyResult.getImagesToSave());
         }
         if (this.共有ファイルID == null) {
             SharedFileEntryDescriptor sfed = defineAndCopyToSharedFile(new FilesystemPath(targetDirectoryPath),
                     compose共有ファイル名(this.証記載保険者番号, this.被保険者番号));
             insertIntoImageJohoBy(dbWriter, this.申請書管理番号, sfed);
-            return new Result(sfed.getSharedFileId(), result);
+            return new Result(sfed.getSharedFileId(), result, copyResult.getImagesToSave());
         } else {
             ReadOnlySharedFileEntryDescriptor ro_sfd = new ReadOnlySharedFileEntryDescriptor(
                     compose共有ファイル名(this.証記載保険者番号, this.被保険者番号), this.共有ファイルID);
-            deletePastFiles(ro_sfd, copyImageResult.getSavingImageFileNames());
+            deletePastFiles(ro_sfd, copyResult.getImagesToSave());
             SharedFile.appendNewFile(ro_sfd, new FilesystemPath(targetDirectoryPath), RString.EMPTY.toString(),
                     new SharedAppendOption().overWrite(true));
-            return new Result(this.共有ファイルID, result);
+            return new Result(this.共有ファイルID, result, copyResult.getImagesToSave());
         }
     }
 
@@ -122,8 +119,8 @@ public class ImageJohoUpdater {
     private static CopyImageResult copyImageFilesToDirectory(List<RString> targetImageFileNames, RString targetDirectoryPath,
             OcrFiles imageFilePaths, IFileNameConvertionTheory fileNameTheory) {
         List<RString> imagesNotFound = new ArrayList<>(),
-                savingImageFileNames = new ArrayList<>(),
-                imagesFailedToConvertFileName = new ArrayList<>();
+                imagesToSave = new ArrayList<>(),
+                imagesFailedToConvertName = new ArrayList<>();
         for (RString imageFileName : targetImageFileNames) {
             RString fromPath = imageFilePaths.findFilePathFromName(imageFileName);
             if (RString.isNullOrEmpty(fromPath)) {
@@ -132,14 +129,14 @@ public class ImageJohoUpdater {
             }
             RString convertedFileName = fileNameTheory.convert(imageFileName);
             if (RString.isNullOrEmpty(convertedFileName)) {
-                imagesFailedToConvertFileName.add(imageFileName);
+                imagesFailedToConvertName.add(imageFileName);
                 continue;
             }
-            savingImageFileNames.add(convertedFileName);
+            imagesToSave.add(convertedFileName);
             RString destinationPath = new RStringBuilder(targetDirectoryPath).append(SEPARATOR).append(convertedFileName).toRString();
             File.copy(fromPath, destinationPath);
         }
-        return new CopyImageResult(imagesNotFound, savingImageFileNames, imagesFailedToConvertFileName);
+        return new CopyImageResult(imagesNotFound, imagesToSave, imagesFailedToConvertName);
     }
 
     private static FilesystemName compose共有ファイル名(RString 証記載保険者番号1, RString 被保険者番号1) {
@@ -204,7 +201,19 @@ public class ImageJohoUpdater {
     @lombok.Value
     private static class CopyImageResult {
 
-        private List<RString> imagesNotFound, savingImageFileNames, imagesFailedToConvertFileName;
+        private List<RString> imagesNotFound, imagesToSave, imagesFailedToConvertName;
+
+        private boolean hasImagesNotFound() {
+            return !this.imagesNotFound.isEmpty();
+        }
+
+        private boolean hasImagesFailedToConvertName() {
+            return !this.imagesFailedToConvertName.isEmpty();
+        }
+
+        private boolean hasImagesToSave() {
+            return !this.imagesToSave.isEmpty();
+        }
     }
 
     /**
@@ -215,6 +224,7 @@ public class ImageJohoUpdater {
 
         private RDateTime sharedFileID;
         private IProcessingResults processingResults;
+        private List<RString> savedFileNames;
     }
 
     /**

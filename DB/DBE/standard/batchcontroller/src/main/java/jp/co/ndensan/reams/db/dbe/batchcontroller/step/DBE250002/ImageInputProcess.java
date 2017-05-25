@@ -293,10 +293,24 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         results.addAll(saveImageResult.getProcessingResults());
         if (!results.hasError()) {
             results.addAll(insertOrUpdate意見書イメージ情報By(writer_DbT5305, ir,
-                    new IkenshoImageUpdateParameter.Builder().add(value.getOCRID(), value).build()
+                    new IkenshoImageUpdateParameter.Builder()
+                    .add(value.getOCRID(), value)
+                    .filter(toOCRIDs(saveImageResult.getSavedFileNames()))
+                    .build()
             ));
         }
         return new CopyImageResult(saveImageResult.getSharedFileID(), results);
+    }
+
+    private static List<OCRID> toOCRIDs(List<RString> fileNames) {
+        List<OCRID> list = new ArrayList<>();
+        if (fileNames.contains(FileNameConvertionTheories.主治医意見書_表)) {
+            list.add(OCRID._701);
+        }
+        if (fileNames.contains(FileNameConvertionTheories.主治医意見書_裏)) {
+            list.add(OCRID._702);
+        }
+        return list;
     }
 
     private static Optional<CatalogLine> findCatalogLine_ID777or778(Catalog catalog, SheetID id) {
@@ -351,6 +365,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
                     new IkenshoImageUpdateParameter.Builder()
                     .add(OCRID._777, pair.getCsv777())
                     .add(OCRID._778, pair.getCsv778())
+                    .filter(toOCRIDs(result2.getSavedFileNames()))
                     .build()
             ));
         }
@@ -376,6 +391,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
                     new IkenshoImageUpdateParameter.Builder()
                     .add(OCRID._777, pair.getCsv777())
                     .add(OCRID._778, pair.getCsv777())
+                    .filter(toOCRIDs(result.getSavedFileNames()))
                     .build()
             ));
         }
@@ -592,15 +608,29 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
         private static final class Builder {
 
-            private Map<OCRID, OcrIken> params;
+            private final Map<OCRID, OcrIken> params;
 
             private Builder() {
                 this.params = new HashMap<>();
             }
 
+            private Builder(Map<OCRID, OcrIken> params) {
+                this.params = new HashMap<>(params);
+            }
+
             private Builder add(OCRID ocrID, OcrIken ocrIken) {
                 params.put(ocrID, ocrIken);
                 return this;
+            }
+
+            private Builder filter(Iterable<? extends OCRID> ocrIDs) {
+                Map<OCRID, OcrIken> map = new HashMap<>();
+                for (OCRID ocrID : ocrIDs) {
+                    if (params.containsKey(ocrID)) {
+                        map.put(ocrID, params.get(ocrID));
+                    }
+                }
+                return new Builder(map);
             }
 
             private IkenshoImageUpdateParameter build() {
