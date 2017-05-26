@@ -106,18 +106,20 @@ public class CreateTargetHandler {
                 row.setShinseiKubunHo(NinteiShinseiHoreiCode.toValue(list.get認定申請区分_法令コード().value()).get名称());
             }
             row.getNijiHanteiBi().setValue(getNull(list.get二次判定日()));
-            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(list.get厚労省IF識別コード().value())) {
-                row.setNijiHanteiKekka(YokaigoJotaiKubun99.toValue(list.get状態区分コード()).get名称());
-            }
-            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(list.get厚労省IF識別コード().value())) {
-                row.setNijiHanteiKekka(YokaigoJotaiKubun02.toValue(list.get状態区分コード()).get名称());
-            }
-            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(list.get厚労省IF識別コード().value())) {
-                row.setNijiHanteiKekka(YokaigoJotaiKubun06.toValue(list.get状態区分コード()).get名称());
-            }
-            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(list.get厚労省IF識別コード().value())
-                    || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(list.get厚労省IF識別コード().value())) {
-                row.setNijiHanteiKekka(YokaigoJotaiKubun09.toValue(list.get状態区分コード()).get名称());
+            if (!RString.isNullOrEmpty(list.get状態区分コード())) {
+                if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(list.get厚労省IF識別コード().value())) {
+                    row.setNijiHanteiKekka(YokaigoJotaiKubun99.toValue(list.get状態区分コード()).get名称());
+                }
+                if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(list.get厚労省IF識別コード().value())) {
+                    row.setNijiHanteiKekka(YokaigoJotaiKubun02.toValue(list.get状態区分コード()).get名称());
+                }
+                if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(list.get厚労省IF識別コード().value())) {
+                    row.setNijiHanteiKekka(YokaigoJotaiKubun06.toValue(list.get状態区分コード()).get名称());
+                }
+                if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(list.get厚労省IF識別コード().value())
+                        || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(list.get厚労省IF識別コード().value())) {
+                    row.setNijiHanteiKekka(YokaigoJotaiKubun09.toValue(list.get状態区分コード()).get名称());
+                }
             }
             row.setNinteiYukoKikan(new RString(list.get認定有効期間()));
             row.getSortNinteiYukoKikan().setValue(new Decimal(list.get認定有効期間()));
