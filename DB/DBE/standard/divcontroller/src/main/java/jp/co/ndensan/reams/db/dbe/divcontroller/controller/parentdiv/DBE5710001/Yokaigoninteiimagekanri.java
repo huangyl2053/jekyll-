@@ -350,6 +350,7 @@ public class Yokaigoninteiimagekanri {
         div.getBtnIkenshoTeikeigai().setDisabled(true);
         div.getBtnSonota().setDisabled(true);
         setDisableBtnImageOutput(true);
+        setDisableBtnImageDelete(true);
     }
 
     private void setBtnControllerDisabled(YokaigoninteiimagekanriDiv div, ReadOnlySharedFileEntryDescriptor ro_sfed) {
