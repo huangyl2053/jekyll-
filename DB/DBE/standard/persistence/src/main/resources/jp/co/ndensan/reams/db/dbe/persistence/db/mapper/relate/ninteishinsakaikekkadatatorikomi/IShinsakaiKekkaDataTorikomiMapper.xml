@@ -92,9 +92,7 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteishinsakaikekkadatatorikomi.ShinsakaiKekkaDataTorikomiMybatisParameter"
             resultType="jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5502ShinsakaiWariateJohoEntity" fetchSize="500">
         SELECT
-        DbT5502."shinsakaiKaisaiNo",
-        DbT5502."shinseishoKanriNo",
-        DbT5502."shinsakaiShiryoSakuseiYMD"
+        DbT5502.*
         FROM
         rgdb."DbT5502ShinsakaiWariateJoho" AS DbT5502
         WHERE

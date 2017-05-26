@@ -8,6 +8,8 @@
 //import jp.co.ndensan.reams.db.dbe.definition.batchprm.DBE561001.DBE561001_CenterTransmissionParameter;
 //import jp.co.ndensan.reams.db.dbz.testhelper.DbeTestDacBase;
 //import jp.co.ndensan.reams.uz.uza.batch.BatchExitStatus;
+//import jp.co.ndensan.reams.uz.uza.batch.BatchExitStatus.Status;
+//import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 //import jp.co.ndensan.reams.uz.uza.biz.ReamsDonyuDantaiCode;
 //import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 //import jp.co.ndensan.reams.uz.uza.core._ControlData;
@@ -21,6 +23,7 @@
 //import org.junit.Before;
 //import org.junit.Test;
 //import static org.junit.Assert.*;
+//import org.junit.Ignore;
 //import org.junit.experimental.runners.Enclosed;
 //import org.junit.runner.RunWith;
 //import org.mockito.Mockito;
@@ -29,6 +32,7 @@
 ///**
 // * センター送信データ作成バッチのテスト
 // */
+//@Ignore
 //@RunWith(Enclosed.class)
 //public class DBE561001_CenterTransmissionTest extends DbeTestDacBase {
 //
@@ -49,6 +53,7 @@
 //                    new RString("センター送信データ作成"),
 //                    DBE561001_CenterTransmission.class,
 //                    createBatchParameter());
+//            
 //            assertThat(result.getStatus(), is(BatchExitStatus.Status.SUCCESS));
 //        }
 //    }
@@ -56,7 +61,9 @@
 //    private static DBE561001_CenterTransmissionParameter createBatchParameter() {
 //        DBE561001_CenterTransmissionParameter parameter = new DBE561001_CenterTransmissionParameter();
 //        parameter.setデータ出力区分(new RString("1"));
-//        parameter.set二次判定終了日(new RString("20160224"));
+//        parameter.set市町村コード(new LasdecCode("202118"));
+//        parameter.set二次判定開始日(new RString("20170501"));
+//        parameter.set二次判定終了日(new RString("20170525"));
 //        parameter.set転入死亡情報出力区分(new RString("0"));
 //        return parameter;
 //    }

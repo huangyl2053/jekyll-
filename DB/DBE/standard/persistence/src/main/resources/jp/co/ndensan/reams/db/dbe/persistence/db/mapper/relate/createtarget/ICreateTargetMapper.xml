@@ -170,7 +170,7 @@
         <result property="意見書入手日"   column="E_ikenshoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="調査依頼日"  column="G_ninteichosaIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="調査実施日"  column="H_ninteichosaJisshiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="指定居宅介護支援事業者等番号"  column="I_jigyoshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="指定居宅介護支援事業者等番号"  column="I_ninteichosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="委託区分"  column="I_chosaItakuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="認定調査員番号"  column="G_ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="認定調査員資格コード"  column="J_chosainShikaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -275,7 +275,7 @@
         , E."ikenshoJuryoYMD"                        AS "E_ikenshoJuryoYMD"
         , G."iraishoShutsuryokuYMD"                  AS "G_ninteichosaIraiYMD"
         , H."ninteichosaJisshiYMD"                   AS "H_ninteichosaJisshiYMD"
-        , I."jigyoshaNo"                             AS "I_jigyoshaNo"
+        , I."ninteichosaItakusakiCode"               AS "I_ninteichosaItakusakiCode"
         , I."chosaItakuKubun"                        AS "I_chosaItakuKubun"
         , G."ninteiChosainCode"                      AS "G_ninteiChosainCode"
         , J."chosainShikaku"                         AS "J_chosainShikaku"
@@ -403,6 +403,7 @@
         ) 
         LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS H 
         ON A."shinseishoKanriNo" = H."shinseishoKanriNo" 
+        AND G."ninteichosaIraiRirekiNo" = H."ninteichosaRirekiNo"
         AND NOT EXISTS ( 
         SELECT
         'X' 
@@ -410,11 +411,11 @@
         rgdb."DbT5202NinteichosahyoGaikyoChosa" AS H1 
         WHERE
         H."shinseishoKanriNo" = H1."shinseishoKanriNo" 
-        AND H."ninteichosaRirekiNo" <![CDATA[<]]> H1."ninteichosaRirekiNo"
+        AND H."ninteichosaRirekiNo" = H1."ninteichosaRirekiNo"
+        AND H."gaikyoChosaTextImageKubun" <![CDATA[<]]> H1."gaikyoChosaTextImageKubun"
         ) 
-        AND H."gaikyoChosaTextImageKubun" = '1' 
-        LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS I 
-        ON G."ninteichosaItakusakiCode" = I."ninteichosaItakusakiCode" 
+        LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS I
+        ON H."chosaItakusakiCode" = I."ninteichosaItakusakiCode" 
         AND I."shichosonCode" = A."shichosonCode" 
         AND I."jokyoFlag" = TRUE 
         LEFT JOIN rgdb."DbT5913ChosainJoho" AS J 

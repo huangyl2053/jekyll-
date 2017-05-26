@@ -266,6 +266,7 @@ public class DataTorikomiEdit {
                 dbt5105Entity.setMaskingKanryoYMD(null);
                 dbt5105Entity.setNinteiShinsakaiWariateKanryoYMD(null);
                 dbt5105Entity.setNinteiShinsakaiKanryoYMD(null);
+                break;
             case 再調査_調査_意見書:
                 dbt5105Entity.setNinteichosaIraiKanryoYMD(null);
                 dbt5105Entity.setNinteichosaKanryoYMD(null);
@@ -275,6 +276,7 @@ public class DataTorikomiEdit {
                 dbt5105Entity.setMaskingKanryoYMD(null);
                 dbt5105Entity.setNinteiShinsakaiWariateKanryoYMD(null);
                 dbt5105Entity.setNinteiShinsakaiKanryoYMD(null);
+                break;
             case 再調査_調査のみ:
                 dbt5105Entity.setNinteichosaIraiKanryoYMD(null);
                 dbt5105Entity.setNinteichosaKanryoYMD(null);
@@ -282,12 +284,15 @@ public class DataTorikomiEdit {
                 dbt5105Entity.setMaskingKanryoYMD(null);
                 dbt5105Entity.setNinteiShinsakaiWariateKanryoYMD(null);
                 dbt5105Entity.setNinteiShinsakaiKanryoYMD(null);
+                break;
             case 再審査:
                 dbt5105Entity.setNinteiShinsakaiWariateKanryoYMD(null);
                 dbt5105Entity.setNinteiShinsakaiKanryoYMD(null);
+                break;
             case 未審査:
                 dbt5105Entity.setNinteiShinsakaiWariateKanryoYMD(null);
                 dbt5105Entity.setNinteiShinsakaiKanryoYMD(null);
+                break;
             default:
 
         }

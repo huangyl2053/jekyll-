@@ -605,18 +605,19 @@
         AND A."koroshoIfShikibetsuCode" = G1."koroshoIfShikibetsuCode"
         AND G."ninteichosaIraiRirekiNo" <![CDATA[<]]> G1."ninteichosaIraiRirekiNo"
         )
-        LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" H
-        ON A."shinseishoKanriNo" = H."shinseishoKanriNo"
-        AND NOT EXISTS (
+        LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS H 
+        ON A."shinseishoKanriNo" = H."shinseishoKanriNo" 
+        AND G."ninteichosaIraiRirekiNo" = H."ninteichosaRirekiNo"
+        AND NOT EXISTS ( 
         SELECT
-        'X'
+        'X' 
         FROM
-        rgdb."DbT5202NinteichosahyoGaikyoChosa" H1
+        rgdb."DbT5202NinteichosahyoGaikyoChosa" AS H1 
         WHERE
-        H."shinseishoKanriNo" = H1."shinseishoKanriNo"
-        AND H."ninteichosaRirekiNo" <![CDATA[<]]> H1."ninteichosaRirekiNo"
-        )
-        AND H."gaikyoChosaTextImageKubun" = #{gaikyoChosaTextImageKubun}
+        H."shinseishoKanriNo" = H1."shinseishoKanriNo" 
+        AND H."ninteichosaRirekiNo" = H1."ninteichosaRirekiNo"
+        AND H."gaikyoChosaTextImageKubun" <![CDATA[<]]> H1."gaikyoChosaTextImageKubun"
+        ) 
         LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" I
         ON H."chosaItakusakiCode" = I."ninteichosaItakusakiCode"
         AND I."shichosonCode" = A."shichosonCode"
