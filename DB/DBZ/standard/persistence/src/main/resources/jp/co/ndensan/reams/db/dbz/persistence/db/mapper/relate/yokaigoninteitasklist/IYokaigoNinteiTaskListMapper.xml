@@ -1261,12 +1261,14 @@
         AND DbT5105."ikenshoTorokuKanryoYMD" is NULL
         <if test = "状態区分 == 1">
             AND (DbT5302."ikenshoReadYMD" is NULL 
-            OR (DbT5305_omote."ChoyoID" ='701'
+            OR DbT5305_omote."ChoyoID" IS NULL
+            OR DbT5305_ura."ChoyoID" IS NULL
+            OR (DbT5305_omote."ChoyoID" <![CDATA[<>]]> '701'
+            AND DbT5305_omote."ChoyoID" <![CDATA[<>]]> '777')
+            OR (DbT5305_omote."ChoyoID" = '701'
             AND DbT5305_ura."ChoyoID" <![CDATA[<>]]> '702')
             OR (DbT5305_omote."ChoyoID" = '777'
-            AND DbT5305_ura."ChoyoID" <![CDATA[<>]]> '778')
-            OR (DbT5305_omote."ChoyoID" IS NULL
-            AND DbT5305_ura."ChoyoID" IS NULL))
+            AND DbT5305_ura."ChoyoID" <![CDATA[<>]]> '778'))
         </if>
         <if test = "状態区分 == 2">
             AND DbT5302."ikenshoReadYMD" is NOT NULL 
@@ -1352,12 +1354,14 @@
         AND DbT5105."ikenshoTorokuKanryoYMD" is NULL
         <if test = "状態区分 == 1">
             AND (DbT5302."ikenshoReadYMD" is NULL 
-            OR (DbT5305_omote."ChoyoID" ='701'
+            OR DbT5305_omote."ChoyoID" IS NULL
+            OR DbT5305_ura."ChoyoID" IS NULL
+            OR (DbT5305_omote."ChoyoID" <![CDATA[<>]]> '701'
+            AND DbT5305_omote."ChoyoID" <![CDATA[<>]]> '777')
+            OR (DbT5305_omote."ChoyoID" = '701'
             AND DbT5305_ura."ChoyoID" <![CDATA[<>]]> '702')
             OR (DbT5305_omote."ChoyoID" = '777'
-            AND DbT5305_ura."ChoyoID" <![CDATA[<>]]> '778')
-            OR (DbT5305_omote."ChoyoID" IS NULL
-            AND DbT5305_ura."ChoyoID" IS NULL))
+            AND DbT5305_ura."ChoyoID" <![CDATA[<>]]> '778'))
         </if>
         <if test = "状態区分 == 2">
             AND DbT5302."ikenshoReadYMD" is NOT NULL 

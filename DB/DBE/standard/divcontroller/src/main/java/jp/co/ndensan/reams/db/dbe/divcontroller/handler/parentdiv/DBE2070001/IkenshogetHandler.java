@@ -156,6 +156,8 @@ public class IkenshogetHandler {
             row.getChosaTokusokuCount().setValue(new Decimal(business.get主治医意見書作成督促回数()));
             意見書入手モードの日付設定(row, business);
             if (business.get主治医意見書読取年月日() == null
+                    || business.get帳票表ID() == null || business.get帳票裏ID() == null
+                    || get定型OR定型外(business.get帳票表ID()).isEmpty()
                     || !get定型OR定型外(business.get帳票表ID()).equals(get定型OR定型外(business.get帳票裏ID()))) {
                 row.setJyotai(未処理);
                 row.setCellBgColor("jyotai", DataGridCellBgColor.bgColorRed);
