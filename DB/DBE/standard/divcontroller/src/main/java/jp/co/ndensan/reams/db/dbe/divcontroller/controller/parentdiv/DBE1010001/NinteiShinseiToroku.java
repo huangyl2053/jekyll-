@@ -329,10 +329,12 @@ public class NinteiShinseiToroku {
                 div.getBtnJogaiShinsakaiIinGuide().setDisabled(true);
             }
 //            if (MENUID_DBEMN21003.equals(menuID) || ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC11001) || is照会) {
-            if (!ResponseHolder.isReRequest() && !RealInitialLocker.tryGetLock(LockingKeys.申請書管理番号.appended(管理番号.getColumnValue()))) {
-                div.setReadOnly(true);
-                setBtnUpdateDisableTrue();
-                return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
+            if (!is照会) {
+                if (!ResponseHolder.isReRequest() && !RealInitialLocker.tryGetLock(LockingKeys.申請書管理番号.appended(管理番号.getColumnValue()))) {
+                    div.setReadOnly(true);
+                    setBtnUpdateDisableTrue();
+                    return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
+                }
             }
             if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC11001) || is照会) {
                 getHandler(div).setShokai();
