@@ -156,7 +156,7 @@ public class CreateTarget {
     private static final RString Zero = new RString("0");
     private static final RString 枝番 = new RString("0");
     private static final RString 現在の状況初期値 = new RString("1");
-    private static final RString 前回の認定審査会結果初期値 = new RString("99");
+    private static final RString 前回の認定審査会結果初期値 = RString.EMPTY;
 
     /**
      * 画面初期化処理です。
@@ -1142,7 +1142,7 @@ public class CreateTarget {
 
     private RString edit真理値To数値(RString 真理値) {
         if (RString.isNullOrEmpty(真理値)) {
-            return RString.EMPTY;
+            return 偽;
         }
         if (真理値.equals(new RString("t")) || 真理値.equals(new RString("f"))) {
             return 真理値.equals(new RString("t")) ? 真 : 偽;
@@ -1170,7 +1170,7 @@ public class CreateTarget {
         data.set特定施設入居者生活介護(Zero);
         data.set福祉用具貸与(Zero);
         data.set特定福祉用具販売(Zero);
-        data.set住宅改修介護給付(Zero);
+        data.set住宅改修介護給付(偽);
         data.set夜間対応型訪問介護(Zero);
         data.set認知症対応型通所介護(Zero);
         data.set小規模多機能型居宅介護(Zero);
@@ -1191,7 +1191,7 @@ public class CreateTarget {
         data.set介護予防特定施設入居者生活介護(Zero);
         data.set介護予防福祉用具貸与(Zero);
         data.set特定介護予防福祉用具販売(Zero);
-        data.set住宅改修予防給付(Zero);
+        data.set住宅改修予防給付(偽);
         data.set介護予防認知症対応型通所介護(Zero);
         data.set介護予防小規模多機能型居宅介護(Zero);
         data.set介護予防認知症対応型共同生活介護グループホーム(Zero);
@@ -1211,7 +1211,7 @@ public class CreateTarget {
             data.set前回結果_特定施設入居者生活介護(Zero);
             data.set前回結果_福祉用具貸与(Zero);
             data.set前回結果_特定福祉用具販売(Zero);
-            data.set前回結果_住宅改修介護給付(Zero);
+            data.set前回結果_住宅改修介護給付(偽);
             data.set前回結果_夜間対応型訪問介護(Zero);
             data.set前回結果_認知症対応型通所介護(Zero);
             data.set前回結果_小規模多機能型居宅介護(Zero);
@@ -1232,7 +1232,7 @@ public class CreateTarget {
             data.set前回結果_介護予防特定施設入居者生活介護(Zero);
             data.set前回結果_介護予防福祉用具貸与(Zero);
             data.set前回結果_特定介護予防福祉用具販売(Zero);
-            data.set前回結果_住宅改修予防給付(Zero);
+            data.set前回結果_住宅改修予防給付(偽);
             data.set前回結果_介護予防認知症対応型通所介護(Zero);
             data.set前回結果_介護予防小規模多機能型居宅介護(Zero);
             data.set前回結果_介護予防認知症対応型共同生活介護グループホーム(Zero);

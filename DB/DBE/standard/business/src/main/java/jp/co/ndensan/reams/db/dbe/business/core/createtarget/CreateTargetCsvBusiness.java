@@ -396,7 +396,7 @@ public class CreateTargetCsvBusiness {
      * @return 委託区分
      */
     public RString get委託区分() {
-        return entity.get委託区分() != null ? entity.get委託区分().trim() : RString.EMPTY;
+        return entity.get委託区分();
     }
 
     /**
