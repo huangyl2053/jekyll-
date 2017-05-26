@@ -51,7 +51,11 @@ public class NinteiChosaIraiShudouValidationHandler {
         if (!更新前_調査委託先コード.equals(更新後_調査委託先コード)) {
             notUpdate = false;
         }
-        if (!更新前_調査員コード.equals(更新後_調査員コード)) {
+        if (!RString.isNullOrEmpty(更新前_調査員コード)) {
+            if (!更新前_調査員コード.equals(更新後_調査員コード)) {
+                notUpdate = false;
+            }
+        } else if (!RString.isNullOrEmpty(更新後_調査員コード)) {
             notUpdate = false;
         }
         if (!更新前_調査依頼年月日.equals(更新後_調査依頼年月日)) {
@@ -72,9 +76,6 @@ public class NinteiChosaIraiShudouValidationHandler {
 
         if (RString.isNullOrEmpty(div.getNinteichosaIraiByHand().getCcdItakusakiAndChosainInput().getTxtChosaItakusakiCode().getValue())) {
             validPairs.add(new ValidationMessageControlPair(new CheckMessages(UrErrorMessages.必須, "委託先")));
-        }
-        if (RString.isNullOrEmpty(div.getNinteichosaIraiByHand().getCcdItakusakiAndChosainInput().getTxtChosainCode().getValue())) {
-            validPairs.add(new ValidationMessageControlPair(new CheckMessages(UrErrorMessages.必須, "調査員")));
         }
         return validPairs;
     }
