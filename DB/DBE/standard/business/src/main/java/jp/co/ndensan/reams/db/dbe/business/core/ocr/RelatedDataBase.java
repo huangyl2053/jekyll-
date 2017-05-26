@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.IProcessingResult.Type;
 import jp.co.ndensan.reams.db.dbe.definition.core.TorisageKubun;
-import static jp.co.ndensan.reams.db.dbe.definition.core.TorisageKubun.認定申請有効;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.TreatmentWhenIchijiHanteiZumi;
 import static jp.co.ndensan.reams.db.dbe.definition.core.ocr.TreatmentWhenIchijiHanteiZumi.エラーとする;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
