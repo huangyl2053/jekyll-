@@ -55,6 +55,15 @@ public class ShujiiIryokikanAndShujiiInputHandler {
         } else {
             div.getBtnZenkaiIrokikanJoho().setDisabled(true);
         }
+        if (ShoriType.SimpleInputMode.equals(div.getMode_ShoriType())) {
+            div.getTxtIryoKikanCode().setReadOnly(false);
+            div.getBtnIryokikanGuide().setDisabled(false);
+            div.getBtnShujiiRenrakuJiko().setDisabled(false);
+            div.getBtnZenkaiIrokikanJoho().setDisplayNone(true);
+            div.getTxtShujiiCode().setReadOnly(false);
+            div.getBtnShujiiGuide().setDisabled(false);
+            div.getBtnClear().setDisplayNone(true);
+        }
     }
 
     /**
@@ -129,15 +138,15 @@ public class ShujiiIryokikanAndShujiiInputHandler {
         div.getTxtShujiiCode().clearValue();
         div.getTxtShujiiName().clearValue();
         div.getChkShiteii().setSelectedItemsByKey(new ArrayList<RString>());
-        if (ShoriType.ShokaiMode != div.getMode_ShoriType() 
+        if (ShoriType.ShokaiMode != div.getMode_ShoriType()
                 && ShoriType.SimpleShokaiMode != div.getMode_ShoriType()) {
             div.getChkShiteii().setReadOnly(false);
         }
     }
-    
+
     /**
      * 指定医フラグをセットします。
-     * 
+     *
      * @param shichosonCode 市町村コード
      * @param shujiiIryokikanCode 主治医医療機関コード
      * @param shujiiCode 主治医コード
@@ -145,9 +154,9 @@ public class ShujiiIryokikanAndShujiiInputHandler {
     public void setChkShiteii(LasdecCode shichosonCode, RString shujiiIryokikanCode, RString shujiiCode) {
         ShujiiIryokikanAndShujiiInputFinder finder = ShujiiIryokikanAndShujiiInputFinder.createInstance();
         boolean 指定医フラグ = false;
-        if(!(shichosonCode == null || shichosonCode.isEmpty()) &&
-           !(shujiiIryokikanCode == null || shujiiIryokikanCode.isEmpty()) &&
-           !(shujiiCode == null || shujiiCode.isEmpty())){
+        if (!(shichosonCode == null || shichosonCode.isEmpty())
+                && !(shujiiIryokikanCode == null || shujiiIryokikanCode.isEmpty())
+                && !(shujiiCode == null || shujiiCode.isEmpty())) {
             指定医フラグ = finder.getShiteiiFlag(shichosonCode, shujiiIryokikanCode, shujiiCode);
         }
         List<RString> shiteiiList = new ArrayList();

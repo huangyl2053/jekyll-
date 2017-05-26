@@ -100,6 +100,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         set主治医意見書依頼完了対象者一覧データグリッド();
         setButton(stateName);
         set依頼区分ドロップダウンリスト();
+        div.getCcdShujiiInput().setDisabled(true);
         div.getCcdShujiiInput().getTxtIryoKikanCode().setReadOnly(true);
         div.getCcdShujiiInput().getBtnIryokikanGuide().setVisible(true);
     }
@@ -186,15 +187,15 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
      */
     public void set意見書依頼登録パネル() {
         div.getCcdShujiiInput().initialize(new LasdecCode(div.getDgNinteiTaskList().getSelectedItems().get(0).getShichosonCode()),
-                ShinseishoKanriNo.EMPTY, SubGyomuCode.DBE認定支援);
+                new ShinseishoKanriNo(div.getDgNinteiTaskList().getSelectedItems().get(0).getShinseishoKanriNo()), SubGyomuCode.DBE認定支援);
         div.getCcdShujiiInput().setHdnShichosonCode(div.getDgNinteiTaskList().getSelectedItems().get(0).getShichosonCode());
         if (!div.getDgNinteiTaskList().getSelectedItems().isEmpty()) {
             dgNinteiTaskList_Row row = div.getDgNinteiTaskList().getSelectedItems().get(0);
             div.getCcdShujiiInput().getTxtIryoKikanCode().setValue(row.getKonkaiShujiiIryokikanCode());
             div.getCcdShujiiInput().getTxtIryoKikanName().setValue(row.getKonkaiShujiiIryokikan());
             div.getCcdShujiiInput().getTxtShujiiCode().setValue(row.getKonkaiShujiiCode());
-            div.getCcdShujiiInput().getTxtShujiiCode().setDisabled(true);
-            div.getCcdShujiiInput().getBtnIryokikanGuide().setDisabled(true);
+            div.getCcdShujiiInput().getTxtShujiiCode().setDisabled(false);
+            div.getCcdShujiiInput().getBtnIryokikanGuide().setDisabled(false);
             div.getCcdShujiiInput().getTxtShujiiName().setValue(row.getKonkaiShujii());
             if (row.getIshiKubunCode() != null) {
                 div.getCcdShujiiInput().setShiteii(IshiKubun.指定医.getCode().equals(row.getIshiKubunCode()));
@@ -246,6 +247,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         div.getTxtSakuseiIraiYmd().setReadOnly(!is依頼日のみ入力);
         div.getBtnSetteisezuModoru().setDisabled(!is依頼日のみ入力);
         div.getBtnSettei().setDisabled(!is依頼日のみ入力);
+        div.getCcdShujiiInput().setDisabled(true);
     }
 
     /**
