@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class ShujiiIkenshoTorokuTotalDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-06_05-07-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-04-17_13-55-22">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -33,6 +33,10 @@ public class ShujiiIkenshoTorokuTotalDiv extends Panel {
     private ShujiiIkenshoTorokuDiv ShujiiIkenshoToroku;
     @JsonProperty("KaigoKanryoMsg")
     private KaigoKanryoMsgDiv KaigoKanryoMsg;
+    @JsonProperty("ichijiHanteiArgument")
+    private RString ichijiHanteiArgument;
+    @JsonProperty("ichijiHanteiResult")
+    private RString ichijiHanteiResult;
     @JsonProperty("hdnHasChanged")
     private RString hdnHasChanged;
     @JsonProperty("hdnSampleText")
@@ -90,6 +94,42 @@ public class ShujiiIkenshoTorokuTotalDiv extends Panel {
     @JsonProperty("KaigoKanryoMsg")
     public void setKaigoKanryoMsg(KaigoKanryoMsgDiv KaigoKanryoMsg) {
         this.KaigoKanryoMsg = KaigoKanryoMsg;
+    }
+
+    /*
+     * getichijiHanteiArgument
+     * @return ichijiHanteiArgument
+     */
+    @JsonProperty("ichijiHanteiArgument")
+    public RString getIchijiHanteiArgument() {
+        return ichijiHanteiArgument;
+    }
+
+    /*
+     * setichijiHanteiArgument
+     * @param ichijiHanteiArgument ichijiHanteiArgument
+     */
+    @JsonProperty("ichijiHanteiArgument")
+    public void setIchijiHanteiArgument(RString ichijiHanteiArgument) {
+        this.ichijiHanteiArgument = ichijiHanteiArgument;
+    }
+
+    /*
+     * getichijiHanteiResult
+     * @return ichijiHanteiResult
+     */
+    @JsonProperty("ichijiHanteiResult")
+    public RString getIchijiHanteiResult() {
+        return ichijiHanteiResult;
+    }
+
+    /*
+     * setichijiHanteiResult
+     * @param ichijiHanteiResult ichijiHanteiResult
+     */
+    @JsonProperty("ichijiHanteiResult")
+    public void setIchijiHanteiResult(RString ichijiHanteiResult) {
+        this.ichijiHanteiResult = ichijiHanteiResult;
     }
 
     /*
@@ -247,6 +287,26 @@ public class ShujiiIkenshoTorokuTotalDiv extends Panel {
     @JsonIgnore
     public void  setRadJotaiKubun(RadioButton radJotaiKubun) {
         this.getShujiiIkenshoToroku().setRadJotaiKubun(radJotaiKubun);
+    }
+
+    @JsonIgnore
+    public Button getBtnIchijiHanteiValidate() {
+        return this.getShujiiIkenshoToroku().getBtnIchijiHanteiValidate();
+    }
+
+    @JsonIgnore
+    public void  setBtnIchijiHanteiValidate(Button btnIchijiHanteiValidate) {
+        this.getShujiiIkenshoToroku().setBtnIchijiHanteiValidate(btnIchijiHanteiValidate);
+    }
+
+    @JsonIgnore
+    public Button getBtnHanteishoriAto() {
+        return this.getShujiiIkenshoToroku().getBtnHanteishoriAto();
+    }
+
+    @JsonIgnore
+    public void  setBtnHanteishoriAto(Button btnHanteishoriAto) {
+        this.getShujiiIkenshoToroku().setBtnHanteishoriAto(btnHanteishoriAto);
     }
 
     @JsonIgnore
