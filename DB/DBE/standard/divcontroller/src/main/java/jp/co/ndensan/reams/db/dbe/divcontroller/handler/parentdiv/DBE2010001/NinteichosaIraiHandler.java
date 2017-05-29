@@ -176,7 +176,7 @@ public class NinteichosaIraiHandler {
             NinteichosaIraiManager manager = NinteichosaIraiManager.createInstance();
             int 認定調査依頼履歴番号 = manager.getMax認定調査依頼履歴番号(row.getShinseishoKanriNo()) + 1;
             NinteiChousaIraiKubunCode 調査依頼区分
-                    = row.getChosaIraiKubunCode() != null
+                    = row.getChosaIraiKubunCode() != null && !row.getChosaIraiKubunCode().isEmpty()
                     ? NinteiChousaIraiKubunCode.toValue(row.getChosaIraiKubunCode())
                     : (認定調査依頼履歴番号 == 1)
                     ? NinteiChousaIraiKubunCode.初回
