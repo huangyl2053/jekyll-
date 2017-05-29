@@ -113,9 +113,7 @@ public class IkenshoSakuseiIrai {
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             保存処理(div);
-            if (createHandler(div).結果データ有無()) {
-                完了データ更新();
-            }
+            完了データ更新();
             RealInitialLocker.release(get排他キー());
             div.getIkenshoIraiTorokuPanel().setDisabled(true);
             div.getKanryoMessage().setSuccessMessage(
