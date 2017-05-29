@@ -284,6 +284,7 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
         param.setShichosonCode(div.getDoctorSelectionPanel().getDgDoctorSelection().getActiveRow().getShichosonCode());
         param.setShishoCode(支所コード);
         param.setShoKisaiHokenshaNo(市町村セキュリティ情報.get市町村情報().get証記載保険者番号().value());
+        param.setBunshoNo(div.getCcdBunshoNo().get文書番号());
         response.data = param;
         return response;
     }
