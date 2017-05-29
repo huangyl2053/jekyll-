@@ -192,10 +192,11 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         if (!div.getDgNinteiTaskList().getSelectedItems().isEmpty()) {
             dgNinteiTaskList_Row row = div.getDgNinteiTaskList().getSelectedItems().get(0);
             div.getCcdShujiiInput().getTxtIryoKikanCode().setValue(row.getKonkaiShujiiIryokikanCode());
+            div.getCcdShujiiInput().getTxtIryoKikanCode().setReadOnly(true);
             div.getCcdShujiiInput().getTxtIryoKikanName().setValue(row.getKonkaiShujiiIryokikan());
             div.getCcdShujiiInput().getTxtShujiiCode().setValue(row.getKonkaiShujiiCode());
-            div.getCcdShujiiInput().getTxtShujiiCode().setDisabled(false);
-            div.getCcdShujiiInput().getBtnIryokikanGuide().setDisabled(false);
+            div.getCcdShujiiInput().getTxtShujiiCode().setReadOnly(true);
+            div.getCcdShujiiInput().getBtnIryokikanGuide().setDisabled(true);
             div.getCcdShujiiInput().getTxtShujiiName().setValue(row.getKonkaiShujii());
             if (row.getIshiKubunCode() != null) {
                 div.getCcdShujiiInput().setShiteii(IshiKubun.指定医.getCode().equals(row.getIshiKubunCode()));
@@ -205,12 +206,12 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
                     : 1);
             div.getDdlIraiKubun().setSelectedKey(
                     (row.getIkenshoIraiKubun() != null && !(row.getIkenshoIraiKubun().trim()).isEmpty())
-                    ? row.getIkenshoIraiKubun()
-                    : 主治医意見書作成依頼履歴番号 == 1
-                    ? IkenshoIraiKubun.初回依頼.getコード()
-                    : is再意見書(row.getShinseishoKanriNo())
-                    ? IkenshoIraiKubun.再意見書.getコード()
-                    : IkenshoIraiKubun.再依頼.getコード());
+                            ? row.getIkenshoIraiKubun()
+                            : 主治医意見書作成依頼履歴番号 == 1
+                                    ? IkenshoIraiKubun.初回依頼.getコード()
+                                    : is再意見書(row.getShinseishoKanriNo())
+                                            ? IkenshoIraiKubun.再意見書.getコード()
+                                            : IkenshoIraiKubun.再依頼.getコード());
             div.getTxtSakuseiIraiYmd().setValue(row.getIkenshoIraiDay().getValue());
         }
     }
@@ -448,7 +449,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         row.setNyushoShisetsu(business.get入所施設() == null ? RString.EMPTY : business.get入所施設().value());
         row.setIkenshoTokusokuHoho(business.get主治医意見書作成督促方法() == null
                 || business.get主治医意見書作成督促方法().trim().isEmpty()
-                ? RString.EMPTY : IkenshoSakuseiTokusokuHoho.toValue(business.get主治医意見書作成督促方法()).get名称());
+                        ? RString.EMPTY : IkenshoSakuseiTokusokuHoho.toValue(business.get主治医意見書作成督促方法()).get名称());
         row.getIkenshoTokusokuCount().setValue(new Decimal(business.get主治医意見書作成督促回数()));
         row.setNyushoShisetsuCode(business.get入所施設コード() == null ? RString.EMPTY : business.get入所施設コード().value());
         row.setShinseishoKanriNo(business.get申請書管理番号() == null ? RString.EMPTY : business.get申請書管理番号().value());
