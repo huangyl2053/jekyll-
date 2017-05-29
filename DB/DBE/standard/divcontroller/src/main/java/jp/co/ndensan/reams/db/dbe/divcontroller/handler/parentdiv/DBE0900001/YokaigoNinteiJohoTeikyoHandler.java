@@ -149,6 +149,7 @@ public class YokaigoNinteiJohoTeikyoHandler {
                     business.get主治医医療機関コード(), business.get医療機関名称(), business.get主治医コード(), business.get主治医氏名());
             div.getNinteiKekkaShosai().getTxtShinsakaiYoteibi().setValue(getNull(business.get審査会開催予定日()));
             div.getNinteiKekkaShosai().getTxtShinsakaiKaisaibi().setValue(getNull(business.get審査会開催日()));
+            set発行する帳票初期選択(business);
             set発行する帳票(business);
             if (被保険者情報 == null) {
                 ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(business.get証記載保険者番号());
@@ -242,6 +243,20 @@ public class YokaigoNinteiJohoTeikyoHandler {
         } else {
             div.getRadIchijiHanteiMasking().setDisabled(false);
         }
+    }
+    
+    private void set発行する帳票初期選択(NinnteiRiriBusiness business) {
+        RString 認定調査票 = DbBusinessConfig.get(ConfigNameDBE.要介護認定情報提供_初期選択_認定調査票, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        RString 特記事項 = DbBusinessConfig.get(ConfigNameDBE.要介護認定情報提供_初期選択_特記事項, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        RString 主治医意見書 = DbBusinessConfig.get(ConfigNameDBE.要介護認定情報提供_初期選択_主治医意見書, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        RString その他資料 = DbBusinessConfig.get(ConfigNameDBE.要介護認定情報提供_初期選択_その他資料, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        RString 一次判定結果 = DbBusinessConfig.get(ConfigNameDBE.要介護認定情報提供_初期選択_一次判定結果, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        
+        div.getRadNinteiChosaMasking().setSelectedKey(認定調査票);
+        div.getRadTokkiJikoMasking().setSelectedKey(特記事項);
+        div.getRadShujii().setSelectedKey(主治医意見書);
+        div.getRadSonotaShiryoMasking().setSelectedKey(その他資料);
+        div.getRadIchijiHanteiMasking().setSelectedKey(一次判定結果);
     }
 
     private void set認定調査票CheckBox(NinnteiRiriBusiness business) {
