@@ -157,8 +157,10 @@ public class NinteichosaItakusakiMain {
         if (ResponseHolder.isReRequest()) {
             return ResponseData.of(div).respond();
         }
-        RString kanCodeFrom = div.getChosainSearch().getTxtSearchSonotaKikanCodeFrom().getValue();
-        RString kanCodeTo = div.getChosainSearch().getTxtSearchSonotaKikanCodeTo().getValue();
+        RString kanCodeFrom = div.getChosainSearch().getTxtSearchSonotaKikanCodeFrom().getValue().isEmpty()
+                ? new RString("0000000000") : div.getChosainSearch().getTxtSearchSonotaKikanCodeFrom().getValue();
+        RString kanCodeTo = div.getChosainSearch().getTxtSearchSonotaKikanCodeTo().getValue().isEmpty()
+                ? new RString("9999999999") : div.getChosainSearch().getTxtSearchSonotaKikanCodeTo().getValue();
         RString kikanKubun = div.getChosainSearch().getDdlkikankubun().getSelectedKey();
         RString itakuKubun = div.getChosainSearch().getDdlitakukubun().getSelectedKey();
         ValidationMessageControlPairs validPairs = getValidationHandler(div).
