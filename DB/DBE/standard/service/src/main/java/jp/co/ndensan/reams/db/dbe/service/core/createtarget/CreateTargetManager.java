@@ -84,7 +84,7 @@ public class CreateTargetManager {
         if (entityList == null || entityList.isEmpty()) {
             return SearchResult.of(Collections.<CreateTargetBusiness>emptyList(), 0, false);
         }
-        int totalcount = mapper.getTaishouKensu(param);
+        int totalcount = entityList.get(0).getTotalCount();
         for (CreateTargetRelateEntity entity : entityList) {
             resultList.add(new CreateTargetBusiness(entity));
         }
