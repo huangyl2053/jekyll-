@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 /**
  * 主治医マスタのマッパーインタフェースです。
  *
- * @reamsid_L DBE-0250-010  suguangjun 
+ * @reamsid_L DBE-0250-010 suguangjun
  */
 public interface IShujiiMasterJohoMapper {
 
@@ -26,6 +26,14 @@ public interface IShujiiMasterJohoMapper {
      * @return ShujiiMasterRelateEntity 検索結果の{@link ShujiiMasterRelateEntity}
      */
     List<ShujiiMasterRelateEntity> selectShujiiIchiranList(ShujiiMasterMapperParameter 検索条件);
+
+    /**
+     * 主治医情報の重複チェック。
+     *
+     * @param 検索条件 主治医情報検索条件
+     * @return 主治医情報検索件数
+     */
+    int countShujiiJoho(ShujiiMasterMapperParameter 検索条件);
 
     /**
      * 主治医情報の重複チェック。

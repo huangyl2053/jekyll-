@@ -58,6 +58,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessCon
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 主治医マスタ処理のクラスです。。
@@ -103,7 +104,7 @@ public class ShujiiMaster {
             div.getShujiiSearch().getTxtSearchShujiiIryokikanCodeFrom().setValue(主治医医療機関コード);
             div.getShujiiSearch().getTxtSearchShujiiIryokikanCodeTo().setValue(主治医医療機関コード);
             div.getShujiiSearch().getCcdHokenshaList().setSelectedShichosonIfExist(市町村コード);
-            List<jp.co.ndensan.reams.db.dbe.business.core.shujiijoho.ShujiiMaster> 主治医情報List = searchChosainInfo(div);
+            SearchResult<jp.co.ndensan.reams.db.dbe.business.core.shujiijoho.ShujiiMaster> 主治医情報List = searchChosainInfo(div);
             getHandler(div).setShujiiIchiran(主治医情報List);
             return ResponseData.of(div).setState(DBE9020001StateName.主治医一覧_医療機関登録から遷移);
         }
@@ -131,7 +132,7 @@ public class ShujiiMaster {
         if (ResponseHolder.isReRequest()) {
             return ResponseData.of(div).respond();
         }
-        List<jp.co.ndensan.reams.db.dbe.business.core.shujiijoho.ShujiiMaster> 主治医情報List = searchChosainInfo(div);
+        SearchResult<jp.co.ndensan.reams.db.dbe.business.core.shujiijoho.ShujiiMaster> 主治医情報List = searchChosainInfo(div);
 
 //        boolean 検索条件初期値 = true;
 //        if (!div.getTxtSearchShujiiIryokikanCodeFrom().getValue().isEmpty()
@@ -144,7 +145,7 @@ public class ShujiiMaster {
 //                || !div.getTxtSearchShujiiKanaShimei().getValue().isEmpty()) {
 //            検索条件初期値 = false;
 //        }
-        if (主治医情報List.isEmpty() //                && !検索条件初期値
+        if (主治医情報List.records().isEmpty() //                && !検索条件初期値
                 ) {
             div.getShujiiSearch().setDisabled(false);
             div.getShujiiIchiran().setDisabled(true);
@@ -199,7 +200,7 @@ public class ShujiiMaster {
         return false;
     }
 
-    private List<jp.co.ndensan.reams.db.dbe.business.core.shujiijoho.ShujiiMaster> searchChosainInfo(ShujiiMasterDiv div) {
+    private SearchResult<jp.co.ndensan.reams.db.dbe.business.core.shujiijoho.ShujiiMaster> searchChosainInfo(ShujiiMasterDiv div) {
         boolean jokyoFlag = false;
         if (div.getRadSearchJokyoFlag().getSelectedIndex() == 0) {
             jokyoFlag = true;
@@ -260,9 +261,8 @@ public class ShujiiMaster {
                 四マスタ優先表示市町村識別ID,
                 構成市町村マスタ市町村コード重複種別);
         ShujiiMasterFinder shujiiMasterFinder = ShujiiMasterFinder.createInstance();
-        List<jp.co.ndensan.reams.db.dbe.business.core.shujiijoho.ShujiiMaster> 主治医情報List
-                = shujiiMasterFinder.getShujiiIchiranList(
-                        parameter).records();
+        SearchResult<jp.co.ndensan.reams.db.dbe.business.core.shujiijoho.ShujiiMaster> 主治医情報List
+                = shujiiMasterFinder.getShujiiIchiranList(parameter);
 
         div.getShujiiSearch().setDisabled(true);
         div.getShujiiIchiran().setDisabled(false);
