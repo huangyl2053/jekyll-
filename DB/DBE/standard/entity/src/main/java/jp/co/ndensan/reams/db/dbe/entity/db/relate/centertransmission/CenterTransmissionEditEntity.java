@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.Shuj
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -118,21 +119,40 @@ public class CenterTransmissionEditEntity {
         csvEntity.set一次判定日(getValue(entity.getIchijiHanteiYMD()));
         csvEntity.set一次判定結果(getValue(entity.getIchijiHanteiKekkaCode()));
         csvEntity.set一次判定結果認知症加算(getValue(entity.getIchijiHanteiKekkaNinchishoKasanCode()));
-        csvEntity.set要介護認定等基準時間(new RString(entity.getKijunJikan()));
-        csvEntity.set要介護認定等基準時間食事(new RString(entity.getKijunJikanShokuji()));
-        csvEntity.set要介護認定等基準時間排泄(new RString(entity.getKijunJikanHaisetsu()));
-        csvEntity.set要介護認定等基準時間移動(new RString(entity.getKijunJikanIdo()));
-        csvEntity.set要介護認定等基準時間清潔保持(new RString(entity.getKijunJikanSeiketsuHoji()));
-        csvEntity.set要介護認定等基準時間間接ケア(new RString(entity.getKijunJikanKansetsuCare()));
-        csvEntity.set要介護認定等基準時間BPSD関連(new RString(entity.getKijunJikanBPSDKanren()));
-        csvEntity.set要介護認定等基準時間機能訓練(new RString(entity.getKijunJikanKinoKunren()));
-        csvEntity.set要介護認定等基準時間医療関連(new RString(entity.getKijunJikanIryoKanren()));
-        csvEntity.set要介護認定等基準時間認知症加算(new RString(entity.getKijunJikanNinchishoKasan()));
-        csvEntity.set中間評価項目得点第１群(new RString(entity.getChukanHyokaKomoku1gun()));
-        csvEntity.set中間評価項目得点第２群(new RString(entity.getChukanHyokaKomoku2gun()));
-        csvEntity.set中間評価項目得点第３群(new RString(entity.getChukanHyokaKomoku3gun()));
-        csvEntity.set中間評価項目得点第４群(new RString(entity.getChukanHyokaKomoku4gun()));
-        csvEntity.set中間評価項目得点第５群(new RString(entity.getChukanHyokaKomoku5gun()));
+        if (NinteiShinseiShinseijiKubunCode.転入申請.getコード().equals(entity.getNinteiShinseiShinseijiKubunCode().value())
+                || NinteiShinseiShinseijiKubunCode.資格喪失_死亡.getコード().equals(entity.getNinteiShinseiShinseijiKubunCode().value())) {
+            csvEntity.set要介護認定等基準時間(RString.EMPTY);
+            csvEntity.set要介護認定等基準時間食事(RString.EMPTY);
+            csvEntity.set要介護認定等基準時間排泄(RString.EMPTY);
+            csvEntity.set要介護認定等基準時間移動(RString.EMPTY);
+            csvEntity.set要介護認定等基準時間清潔保持(RString.EMPTY);
+            csvEntity.set要介護認定等基準時間間接ケア(RString.EMPTY);
+            csvEntity.set要介護認定等基準時間BPSD関連(RString.EMPTY);
+            csvEntity.set要介護認定等基準時間機能訓練(RString.EMPTY);
+            csvEntity.set要介護認定等基準時間医療関連(RString.EMPTY);
+            csvEntity.set要介護認定等基準時間認知症加算(RString.EMPTY);
+            csvEntity.set中間評価項目得点第１群(RString.EMPTY);
+            csvEntity.set中間評価項目得点第２群(RString.EMPTY);
+            csvEntity.set中間評価項目得点第３群(RString.EMPTY);
+            csvEntity.set中間評価項目得点第４群(RString.EMPTY);
+            csvEntity.set中間評価項目得点第５群(RString.EMPTY);
+        } else {
+            csvEntity.set要介護認定等基準時間(new RString(entity.getKijunJikan()));
+            csvEntity.set要介護認定等基準時間食事(new RString(entity.getKijunJikanShokuji()));
+            csvEntity.set要介護認定等基準時間排泄(new RString(entity.getKijunJikanHaisetsu()));
+            csvEntity.set要介護認定等基準時間移動(new RString(entity.getKijunJikanIdo()));
+            csvEntity.set要介護認定等基準時間清潔保持(new RString(entity.getKijunJikanSeiketsuHoji()));
+            csvEntity.set要介護認定等基準時間間接ケア(new RString(entity.getKijunJikanKansetsuCare()));
+            csvEntity.set要介護認定等基準時間BPSD関連(new RString(entity.getKijunJikanBPSDKanren()));
+            csvEntity.set要介護認定等基準時間機能訓練(new RString(entity.getKijunJikanKinoKunren()));
+            csvEntity.set要介護認定等基準時間医療関連(new RString(entity.getKijunJikanIryoKanren()));
+            csvEntity.set要介護認定等基準時間認知症加算(new RString(entity.getKijunJikanNinchishoKasan()));
+            csvEntity.set中間評価項目得点第１群(new RString(entity.getChukanHyokaKomoku1gun()));
+            csvEntity.set中間評価項目得点第２群(new RString(entity.getChukanHyokaKomoku2gun()));
+            csvEntity.set中間評価項目得点第３群(new RString(entity.getChukanHyokaKomoku3gun()));
+            csvEntity.set中間評価項目得点第４群(new RString(entity.getChukanHyokaKomoku4gun()));
+            csvEntity.set中間評価項目得点第５群(new RString(entity.getChukanHyokaKomoku5gun()));
+        }
         csvEntity.set一次判定警告配列コード(entity.getIchijiHnateiKeikokuCode());
         csvEntity.set状態の安定性(getValue(entity.getJotaiAnteiseiCode()));
         csvEntity.set認知症自立度Ⅱ以上の蓋然性(getValue(entity.getNinchishoJiritsudoIIijoNoGaizensei()));
@@ -611,7 +631,7 @@ public class CenterTransmissionEditEntity {
         csvEntity.set前回結果_カテーテル(get項目By厚労省99ABy02Aと06A(entity.getZenkaiKoroshoIfShikibetsuCode(),
                 entity.getZenkaiChosaItemKoban85(), entity.getZenkaiChosaItemKoban79(), entity.getZenkaiChosaItemKoban74()));
     }
-    
+
     private void initialize前回項目(CenterTransmissionCsvEntity csvEntity) {
         csvEntity.set前回結果_要介護認定等基準時間(RString.EMPTY);
         csvEntity.set前回結果_要介護認定等基準時間食事(RString.EMPTY);
