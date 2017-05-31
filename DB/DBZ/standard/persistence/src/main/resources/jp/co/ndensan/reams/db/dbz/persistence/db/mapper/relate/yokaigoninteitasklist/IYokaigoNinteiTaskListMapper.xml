@@ -1477,8 +1477,12 @@
     <select resultOrdered="true" id="getマスキング" resultMap="resultMap_MaSuKinGuRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
         SELECT
-        DISTINCT A.*,
+        B.*,
         COUNT(*) OVER() as "totalCount"
+        FROM
+        (
+        SELECT
+        DISTINCT A.*
         FROM
         (
         SELECT
@@ -1689,6 +1693,7 @@
         </if>
         ORDER BY
         A."ninteiShinseiYMD"
+        ) as B
         LIMIT #{件数}
     </select>
     <resultMap id="resultMap_MaSuKinGuRelate" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.ShinSaKaiToRoKuRelate" autoMapping="true">
