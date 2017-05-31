@@ -118,22 +118,23 @@ public class RenkeiDataTorikomiBusiness {
      *
      * @param entity DbT5912RelateEntity
      * @param processParamter RenkeiDataTorikomiProcessParamter
-     * @param 登録フラグ 登録フラグ
      * @return DbT5912ShujiiIryoKikanJohoEntity
      */
     public DbT5912ShujiiJohoEntity setDbt5912Entity(DbT5912RelateEntity entity,
-            RenkeiDataTorikomiProcessParamter processParamter, boolean 登録フラグ) {
+            RenkeiDataTorikomiProcessParamter processParamter) {
+        DbT5912TempEntity dbT5912TempEntity = entity.getDbt5912TempEntity();
         DbT5912ShujiiJohoEntity dbt5912Entity;
-        if (登録フラグ) {
+        if (entity.getDbT5912Entity() == null
+                || entity.getDbT5912Entity().getShujiiIryokikanCode() == null) {
             dbt5912Entity = new DbT5912ShujiiJohoEntity();
+            dbt5912Entity.setShichosonCode(new LasdecCode(processParamter.get市町村コード()));
+            dbt5912Entity.setShujiiIryokikanCode(dbT5912TempEntity.get医療機関コード());
+            dbt5912Entity.setShujiiCode(dbT5912TempEntity.get主治医コード());
             dbt5912Entity.setSeibetsu(null);
         } else {
             dbt5912Entity = entity.getDbT5912Entity();
+            dbt5912Entity.initializeMd5();
         }
-        DbT5912TempEntity dbT5912TempEntity = entity.getDbt5912TempEntity();
-        dbt5912Entity.setShichosonCode(new LasdecCode(processParamter.get市町村コード()));
-        dbt5912Entity.setShujiiIryokikanCode(dbT5912TempEntity.get医療機関コード());
-        dbt5912Entity.setShujiiCode(dbT5912TempEntity.get主治医コード());
         dbt5912Entity.setShujiiName(dbT5912TempEntity.get主治医名称());
         if (!processParamter.is厚労省フラグ()) {
             dbt5912Entity.setShujiiKana(getKanaMeisho(dbT5912TempEntity.get主治医名称カナ()));
@@ -192,20 +193,23 @@ public class RenkeiDataTorikomiBusiness {
      *
      * @param entity DbT5911RelateEntity
      * @param processParamter RenkeiDataTorikomiProcessParamter
-     * @param 登録フラグ 登録フラグ
      * @return DbT5911ShujiiIryoKikanJohoEntity
      */
     public DbT5911ShujiiIryoKikanJohoEntity setDbt5911Entity(DbT5911RelateEntity entity,
-            RenkeiDataTorikomiProcessParamter processParamter, boolean 登録フラグ) {
+            RenkeiDataTorikomiProcessParamter processParamter) {
+        DbT5911TempEntity dbT5911TempEntity = entity.getDbt5911TempEntity();
         DbT5911ShujiiIryoKikanJohoEntity dbt5911Entity;
-        if (登録フラグ) {
+//        if (登録フラグ) {
+        if (entity.getDbT5911Entity() == null
+                || entity.getDbT5911Entity().getShujiiIryokikanCode() == null
+                || entity.getDbT5911Entity().getShujiiIryokikanCode().value() == null) {
             dbt5911Entity = new DbT5911ShujiiIryoKikanJohoEntity();
+            dbt5911Entity.setShichosonCode(new LasdecCode(processParamter.get市町村コード()));
+            dbt5911Entity.setShujiiIryokikanCode(dbT5911TempEntity.get医療機関コード());
         } else {
             dbt5911Entity = entity.getDbT5911Entity();
+            dbt5911Entity.initializeMd5();
         }
-        DbT5911TempEntity dbT5911TempEntity = entity.getDbt5911TempEntity();
-        dbt5911Entity.setShichosonCode(new LasdecCode(processParamter.get市町村コード()));
-        dbt5911Entity.setShujiiIryokikanCode(dbT5911TempEntity.get医療機関コード());
         dbt5911Entity.setIryoKikanMeisho(dbT5911TempEntity.get医療機関名称());
         if (!processParamter.is厚労省フラグ()) {
             dbt5911Entity.setIryoKikanMeishoKana(dbT5911TempEntity.get医療機関名称カナ());
@@ -276,24 +280,25 @@ public class RenkeiDataTorikomiBusiness {
      */
     public DbT5913ChosainJohoEntity setDbt5913Entity(DbT5913RelateEntity entity,
             RenkeiDataTorikomiProcessParamter processParamter, boolean 登録フラグ) {
+        DbT5913TempEntity dbT5913TempEntity = entity.getDbt5913TempEntity();
         DbT5913ChosainJohoEntity dbt5913Entity;
-        if (登録フラグ) {
+        if (entity.getDbT5913Entity() == null || entity.getDbT5913Entity().getNinteiChosaItakusakiCode() == null) {
             dbt5913Entity = new DbT5913ChosainJohoEntity();
+            dbt5913Entity.setShichosonCode(new LasdecCode(processParamter.get市町村コード()));
+            dbt5913Entity.setNinteiChosaItakusakiCode(dbT5913TempEntity.get委託先コード());
+            dbt5913Entity.setNinteiChosainCode(dbT5913TempEntity.get調査員コード());
             dbt5913Entity.setSeibetsu(null);
+            dbt5913Entity.setChosaKanoNinzuPerMonth(Integer.parseInt(
+                    DbBusinessConfig.get(ConfigNameDBE.調査員調査可能人数, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString()));
         } else {
             dbt5913Entity = entity.getDbT5913Entity();
+            dbt5913Entity.initializeMd5();
         }
-        DbT5913TempEntity dbT5913TempEntity = entity.getDbt5913TempEntity();
-        dbt5913Entity.setShichosonCode(new LasdecCode(processParamter.get市町村コード()));
-        dbt5913Entity.setNinteiChosaItakusakiCode(dbT5913TempEntity.get委託先コード());
-        dbt5913Entity.setNinteiChosainCode(dbT5913TempEntity.get調査員コード());
         dbt5913Entity.setChosainShimei(dbT5913TempEntity.get調査員名称());
         if (!processParamter.is厚労省フラグ()) {
             dbt5913Entity.setChosainKanaShimei(dbT5913TempEntity.get調査員名称カナ());
         }
         dbt5913Entity.setChosainShikaku(dbT5913TempEntity.get資格コード());
-        dbt5913Entity.setChosaKanoNinzuPerMonth(Integer.parseInt(
-                DbBusinessConfig.get(ConfigNameDBE.調査員調査可能人数, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString()));
         RString jokyoFlag = dbT5913TempEntity.get状況();
         if (RString.isNullOrEmpty(jokyoFlag)) {
             dbt5913Entity.setJokyoFlag(false);
@@ -397,34 +402,30 @@ public class RenkeiDataTorikomiBusiness {
      *
      * @param entity DbT5910RelateEntity
      * @param processParamter RenkeiDataTorikomiProcessParamter
-     * @param kubun 更新区分
      * @return DbT5910NinteichosaItakusakiJohoEntity
      */
     public DbT5910NinteichosaItakusakiJohoEntity setDbt5910Entity(DbT5910RelateEntity entity,
-            RenkeiDataTorikomiProcessParamter processParamter, RString kubun) {
+            RenkeiDataTorikomiProcessParamter processParamter) {
+        DbT5910TempEntity dbT5910TempEntity = entity.getDbt5910TempEntity();
         DbT5910NinteichosaItakusakiJohoEntity dbt5910Entity;
-        if (登録.equals(kubun)) {
+        if (entity.getDbT5910Entity() == null || entity.getDbT5910Entity().getNinteichosaItakusakiCode() == null) {
             dbt5910Entity = new DbT5910NinteichosaItakusakiJohoEntity();
+            dbt5910Entity.setShichosonCode(new LasdecCode(processParamter.get市町村コード()));
+            dbt5910Entity.setNinteichosaItakusakiCode(dbT5910TempEntity.get委託先コード());
+            dbt5910Entity.setWaritsukeTeiin(Integer.parseInt(
+                    DbBusinessConfig.get(ConfigNameDBE.認定調査委託先割付定員, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString()));
         } else {
             dbt5910Entity = entity.getDbT5910Entity();
+            dbt5910Entity.initializeMd5();
         }
-        DbT5910TempEntity dbT5910TempEntity = entity.getDbt5910TempEntity();
-        dbt5910Entity.setShichosonCode(new LasdecCode(processParamter.get市町村コード()));
-        dbt5910Entity.setNinteichosaItakusakiCode(dbT5910TempEntity.get委託先コード());
         dbt5910Entity.setJigyoshaMeisho(dbT5910TempEntity.get委託先名称());
-        dbt5910Entity.setJigyoshaMeishoKana(dbT5910TempEntity.get委託先名称カナ());
+        if (!processParamter.is厚労省フラグ()) {
+            dbt5910Entity.setJigyoshaMeishoKana(dbT5910TempEntity.get委託先名称カナ());
+        }
         dbt5910Entity.setYubinNo(getYubinNo(dbT5910TempEntity.get郵便番号()));
         dbt5910Entity.setJusho(dbT5910TempEntity.get住所());
         dbt5910Entity.setTelNo(getTelNo(dbT5910TempEntity.get電話番号()));
-        dbt5910Entity.setDaihyoshaName(dbT5910TempEntity.get委託先名称());
-        if (!processParamter.is厚労省フラグ()) {
-            dbt5910Entity.setDaihyoshaNameKana(dbT5910TempEntity.get委託先名称カナ());
-        }
         dbt5910Entity.setChosaItakuKubun(dbT5910TempEntity.get委託区分コード());
-        if (登録.equals(kubun)) {
-            dbt5910Entity.setWaritsukeTeiin(Integer.parseInt(
-                    DbBusinessConfig.get(ConfigNameDBE.認定調査委託先割付定員, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString()));
-        }
         RString jokyoFlag = dbT5910TempEntity.get状況();
         if (RString.isNullOrEmpty(jokyoFlag)) {
             dbt5910Entity.setJokyoFlag(false);
@@ -801,16 +802,16 @@ public class RenkeiDataTorikomiBusiness {
         }
         return null;
     }
-    
+
     private RString shinseiDaikoKubunCodeToShinseiTodokedeDaikoKubunCode(RString shinseiDaikoKubunCode) {
-        if (shinseiDaikoKubunCode.equals(ShinseiDaikoKubunCode_地域包括支援センター) 
-                || shinseiDaikoKubunCode.equals(ShinseiDaikoKubunCode_指定居宅介護支援事務) 
+        if (shinseiDaikoKubunCode.equals(ShinseiDaikoKubunCode_地域包括支援センター)
+                || shinseiDaikoKubunCode.equals(ShinseiDaikoKubunCode_指定居宅介護支援事務)
                 || shinseiDaikoKubunCode.equals(ShinseiDaikoKubunCode_介護保険施設)) {
             return ShinseiTodokedeDaikoKubunCode.代行.getCode();
         }
         return shinseiDaikoKubunCode;
     }
-    
+
     private RString shinseishaKankeiCodeToJigyoshaKubun(RString shinseishaKankeiCode) {
         if (RString.isNullOrEmpty(shinseishaKankeiCode)) {
             return JigyoshaKubun.なし.getCode();
