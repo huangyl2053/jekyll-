@@ -7,6 +7,11 @@
     <select resultOrdered="true" id="get審査会登録" resultMap="resultMap_ShinsakaiTorokuRelateEntity" 
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
         SELECT
+            CASE WHEN 
+            DbT5123."ninteiShinsakaiWariateYoteiYMD" <![CDATA[<]]> #{処理日}
+            THEN TRUE
+            ELSE FALSE
+            END AS delay,
             DbT5101."shinseishoKanriNo",
             DbT5101."shoKisaiHokenshaNo",
             DbT5101."hihokenshaNo",
@@ -63,6 +68,8 @@
                 AND DbT5591."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]>  DbT5501."shinsakaiKaisaiYoteiYMD"
                 AND DbT5591."gogitaiYukoKikanShuryoYMD" <![CDATA[>=]]>  DbT5501."shinsakaiKaisaiYoteiYMD"
         </if>
+            LEFT JOIN rgdb."DbT5123NinteiKeikakuJoho" DbT5123
+            ON DbT5101."shinseishoKanriNo" = DbT5123."shinseishoKanriNo"
         WHERE
                 (DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
             AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<>]]> '')
@@ -125,6 +132,7 @@
                   DbT5101."shoKisaiHokenshaNo"
     </select>
     <resultMap id="resultMap_ShinsakaiTorokuRelateEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaitoroku.ShinsakaiTorokuRelateEntity" autoMapping="true">
+    <result property="delay" column="delay" />
     <result property="shinseishoKanriNo"  column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
     <result property="shoKisaiHokenshaNo"  column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
     <result property="hihokenshaNo"  column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>

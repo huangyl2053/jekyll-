@@ -34,7 +34,16 @@ public class IKnSyoiRaiBusiness implements Serializable {
     public IKnSyoiRaiBusiness(IKnSyoiRaiRelateEntity entity) {
         this.entity = entity;
     }
-
+    
+    /**
+     * 遅延の有無を返します。
+     * 
+     * @return boolean true:遅延 false:遅延なし
+     */
+    public boolean is遅延() {
+        return entity.isDelay();
+    }
+    
     /**
      * 証記載保険者番号を返します。
      *

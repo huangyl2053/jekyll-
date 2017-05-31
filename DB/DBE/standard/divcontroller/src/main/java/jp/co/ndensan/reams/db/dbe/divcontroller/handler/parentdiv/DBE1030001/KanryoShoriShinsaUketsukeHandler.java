@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1030001.KanryoShoriShinsaUketsukeDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1030001.dgNinteiTaskList_Row;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
@@ -30,6 +31,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Icon;
+import jp.co.ndensan.reams.uz.uza.ui.binding.IconType;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
@@ -100,9 +103,23 @@ public class KanryoShoriShinsaUketsukeHandler {
         List<ShinSaKeTuKeBusiness> リスト = 審査受付.records();
         int totalCount = 審査受付.totalCount();
         put審査受付List(リスト);
+        FlexibleDate nowDate = FlexibleDate.getNowDate();
         int CompleteCount = 0;
+        Icon warningIcon = new Icon();
+        warningIcon.setIcon(IconType.Warning);
+        Icon noIcon = new Icon();
+        noIcon.setVisible(false);
         for (ShinSaKeTuKeBusiness value : リスト) {
             dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
+            RString 市町村コード = value.get市町村コード() == null ? RString.EMPTY : value.get市町村コード().getColumnValue();
+            FlexibleDate 認定申請予定年月日 = value.get認定申請年月日().plusDay(
+                    DbBusinessConfig.get(ConfigNameDBE.認定審査会受付予定年月日, RDate.getNowDate(), 市町村コード).toInt());
+            if (nowDate.isAfter(認定申請予定年月日)) {
+                row.setDelay(warningIcon);
+            } else {
+                row.setDelay(noIcon);
+            }
+            
             row.setHokensha(value.get保険者() == null ? RString.EMPTY : value.get保険者());
             if (value.get認定申請年月日() != null && !value.get認定申請年月日().isEmpty()) {
                 row.getNinteiShinseiDay().setValue(new RDate(value.get認定申請年月日().toString()));

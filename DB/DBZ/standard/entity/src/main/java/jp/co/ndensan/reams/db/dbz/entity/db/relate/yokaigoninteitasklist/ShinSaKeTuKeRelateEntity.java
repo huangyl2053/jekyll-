@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHok
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -39,4 +40,5 @@ public class ShinSaKeTuKeRelateEntity {
     private RString shichosonMeisho;
     private FlexibleDate johoTorokuKanryoYMD;
     private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
+    private LasdecCode shichosonCode;
 }

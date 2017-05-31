@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.uz.uza.biz.TelNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 
 /**
  * タスク一覧共有画面を管理するクラスです。
@@ -148,5 +149,14 @@ public class ShinSaKeTuKeBusiness {
      */
     public ShoKisaiHokenshaNo get証記載保険者番号() {
         return entity.getShoKisaiHokenshaNo();
+    }
+    
+    /**
+     * 市町村コードを返します。
+     * 
+     * @return 市町村コード
+     */
+    public LasdecCode get市町村コード() {
+        return entity.getShichosonCode();
     }
 }

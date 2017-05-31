@@ -42,6 +42,8 @@ import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Icon;
+import jp.co.ndensan.reams.uz.uza.ui.binding.IconType;
 
 /**
  * 完了処理・主治医意見書入手のHandlerクラスです。
@@ -125,8 +127,17 @@ public class IkenshogetHandler {
         int completeCount = 0;
         int notCount = 0;
         RString 督促方法;
+        Icon warningIcon = new Icon();
+        warningIcon.setIcon(IconType.Warning);
+        Icon noIcon = new Icon();
+        noIcon.setVisible(false);
         for (IkenSyoNyuSyuBusiness business : 意見書入手List.records()) {
             dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
+            if (business.is遅延()) {
+                row.setDelay(warningIcon);
+            } else {
+                row.setDelay(noIcon);
+            }
             row.setHokensha(business.get保険者名() == null ? RString.EMPTY : business.get保険者名());
             row.setShoKisaiHokenshaNo(business.get証記載保険者番号().value());
             row.setHihoNumber(business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号());

@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist;
 
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -24,6 +25,7 @@ public final class YokaigoNinteiTaskListParameter {
     private final RString 状態区分;
     private final Decimal 件数;
     private final LasdecCode 市町村コード;
+    private final RString 処理日;
     private final boolean isItijiHannteiAto;
     private final boolean is特記事項必須;
     private final boolean is概況特記必須;
@@ -34,7 +36,7 @@ public final class YokaigoNinteiTaskListParameter {
     private static final RString 意見書のみ = new RString("2");
     private static final RString 依頼書_意見書 = new RString("3");
 
-    private YokaigoNinteiTaskListParameter(RString 通常, RString 延期, RString 状態区分, Decimal 件数, LasdecCode 市町村コード,
+    private YokaigoNinteiTaskListParameter(RString 通常, RString 延期, RString 状態区分, Decimal 件数, LasdecCode 市町村コード, RString 処理日,
             boolean 一次判定後フラグ, boolean is特記事項必須, boolean is概況特記必須,
             boolean usesIraisho,
             boolean usesIkensho,
@@ -44,6 +46,7 @@ public final class YokaigoNinteiTaskListParameter {
         this.状態区分 = 状態区分;
         this.件数 = 件数;
         this.市町村コード = 市町村コード;
+        this.処理日 = 処理日;
         this.isItijiHannteiAto = 一次判定後フラグ;
         this.is特記事項必須 = is特記事項必須;
         this.is概況特記必須 = is概況特記必須;
@@ -80,6 +83,7 @@ public final class YokaigoNinteiTaskListParameter {
                 状態区分,
                 件数,
                 市町村コード,
+                RDate.getNowDate().toDateString(),
                 一次判定後フラグ,
                 is特記事項必須,
                 is概況特記必須,
@@ -112,6 +116,7 @@ public final class YokaigoNinteiTaskListParameter {
                 状態区分,
                 件数,
                 市町村コード,
+                RDate.getNowDate().toDateString(),
                 一次判定後フラグ,
                 false,
                 false,
@@ -142,6 +147,7 @@ public final class YokaigoNinteiTaskListParameter {
                 状態区分,
                 件数,
                 市町村コード,
+                RDate.getNowDate().toDateString(),
                 false,
                 false,
                 false,
@@ -170,6 +176,7 @@ public final class YokaigoNinteiTaskListParameter {
                 状態区分,
                 件数,
                 LasdecCode.EMPTY,
+                RDate.getNowDate().toDateString(),
                 false,
                 false,
                 false,
@@ -196,6 +203,7 @@ public final class YokaigoNinteiTaskListParameter {
                 状態区分,
                 Decimal.ZERO,
                 LasdecCode.EMPTY,
+                RDate.getNowDate().toDateString(),
                 false,
                 false,
                 false,
@@ -220,6 +228,7 @@ public final class YokaigoNinteiTaskListParameter {
                 RString.EMPTY,
                 Decimal.ZERO,
                 LasdecCode.EMPTY,
+                RDate.getNowDate().toDateString(),
                 false,
                 false,
                 false,
@@ -264,6 +273,7 @@ public final class YokaigoNinteiTaskListParameter {
                 状態区分,
                 件数,
                 市町村コード,
+                RDate.getNowDate().toDateString(),
                 false,
                 false,
                 false,

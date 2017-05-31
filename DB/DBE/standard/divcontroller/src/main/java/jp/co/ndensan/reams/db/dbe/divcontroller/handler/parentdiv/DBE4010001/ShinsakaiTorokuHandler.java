@@ -50,6 +50,8 @@ import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Icon;
+import jp.co.ndensan.reams.uz.uza.ui.binding.IconType;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
@@ -247,6 +249,10 @@ public class ShinsakaiTorokuHandler {
         List<ShinsakaiTorokuBusiness> newRowList = new ArrayList<>();
         int completeCount = 0;
         int notCount = 0;
+        Icon warningIcon = new Icon();
+        warningIcon.setIcon(IconType.Warning);
+        Icon noIcon = new Icon();
+        noIcon.setVisible(false);
         if (審査会登録List.size() > div.getTxtTaishoshaMaxHyojiKensu().getValue().intValue()) {
             for (int count = 0; count < div.getTxtTaishoshaMaxHyojiKensu().getValue().intValue(); count++) {
                 newRowList.add(審査会登録List.get(count));
@@ -256,6 +262,11 @@ public class ShinsakaiTorokuHandler {
         }
         for (ShinsakaiTorokuBusiness business : newRowList) {
             dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
+            if (business.is遅延()) {
+                row.setDelay(warningIcon);
+            } else {
+                row.setDelay(noIcon);
+            }
             row.setRowState(RowState.Unchanged);
             row.setCancelButtonState(DataGridButtonState.Disabled);
             if (business.get介護認定審査会割当年月日() == null || business.get介護認定審査会割当年月日().isEmpty()) {

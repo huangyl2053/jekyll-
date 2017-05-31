@@ -30,6 +30,7 @@ public class CyoSaiRaiRelateEntity implements Serializable {
 
     private static final long serialVersionUID = 218315186601471803L;
 
+    private boolean delay;
     private ShinseishoKanriNo shinseishoKanriNo;
     private RString hihokenshaNo;
     private AtenaMeisho hihokenshaName;

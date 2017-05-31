@@ -35,6 +35,15 @@ public class CyoSaiRaiBusiness implements Serializable {
     public CyoSaiRaiBusiness(CyoSaiRaiRelateEntity entity) {
         this.entity = entity;
     }
+    
+    /**
+     * 遅延の有無を返します。
+     * 
+     * @return boolean true:遅延 false:遅延なし
+     */
+    public boolean is遅延() {
+        return entity.isDelay();
+    }
 
     /**
      * 申請書管理番号を返します。

@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHok
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class MaSuKinGuRelateEntity {
 
+    private boolean delay;
     private ShinseishoKanriNo shinseishoKanriNo;
     private RString hihokenshaNo;
     private AtenaMeisho hihokenshaName;
