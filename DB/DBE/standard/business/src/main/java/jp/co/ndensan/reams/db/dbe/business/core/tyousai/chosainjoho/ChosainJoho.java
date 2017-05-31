@@ -242,13 +242,14 @@ public class ChosainJoho extends ModelBase<ChosainJohoIdentifier, DbT5913Chosain
     }
 
     /**
-     * 調査員情報のみを変更対象とします。<br/> {@link DbT5913ChosainJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
+     * 調査員情報のみを変更対象とします。<br/>
+     * {@link DbT5913ChosainJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば変更状態にします。
      *
      * @return 変更対象処理実施後の{@link ChosainJoho}
      */
     public ChosainJoho modifiedModel() {
         DbT5913ChosainJohoEntity modifiedEntity = entity.clone();
-        if (modifiedEntity.getState().equals(EntityDataState.Unchanged)) {
+        if (!modifiedEntity.getState().equals(EntityDataState.Added)) {
             modifiedEntity.setState(EntityDataState.Modified);
         }
         return new ChosainJoho(
@@ -256,7 +257,8 @@ public class ChosainJoho extends ModelBase<ChosainJohoIdentifier, DbT5913Chosain
     }
 
     /**
-     * 保持する調査員情報を削除対象とします。<br/> {@link DbT5913ChosainJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
+     * 保持する調査員情報を削除対象とします。<br/>
+     * {@link DbT5913ChosainJohoEntity}の{@link EntityDataState}がすでにDBへ永続化されている物であれば削除状態にします。
      *
      * @return 削除対象処理実施後の{@link ChosainJoho}
      */
