@@ -204,6 +204,7 @@ public class ShinsaKaiKekkaToroku {
             return ResponseData.of(div).addValidationMessages(存在チェック結果).respond();
         }
         ValidationMessageControlPairs validation = getValidationHandler(div).選択チェック();
+        validation.add(getValidationHandler(div).個別登録件数チェック());
         if (validation.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validation).respond();
         } else {
