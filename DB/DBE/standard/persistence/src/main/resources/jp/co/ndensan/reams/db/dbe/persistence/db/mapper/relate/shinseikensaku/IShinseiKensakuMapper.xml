@@ -313,7 +313,8 @@
                 AND DbT5511ShinsakaiKaisaiKekkaJoho."shinsakaiKaisaiYMD" <![CDATA[<=]]> #{shinsakaiKaisaiYMDTo}
             </if>
         </if>
-        <if test="forList == false">
+        <if test="forList == false or useZenkaiNinteiChosaItakusaki or useZenkaiShujiiIryokikanCode 
+                  or useZenkaiJotaiKubunCode or useZenkaiYukoKikan">
             LEFT JOIN
             (
             SELECT
