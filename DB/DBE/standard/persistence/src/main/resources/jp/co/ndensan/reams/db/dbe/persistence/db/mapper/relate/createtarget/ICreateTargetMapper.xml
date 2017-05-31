@@ -243,6 +243,7 @@
         <result property="前回結果_住宅改修介護給付" column="Z_serviceJokyoFlag" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="前回識別コード" column="A2_A2_koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="認定審査会意見等" column="N_shinsakaiIken" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="コメント等" column="N_shinsakaiMemo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     <select resultOrdered="true" id="getCsvData"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.createtarget.CreateTargetMapperParameter"
@@ -348,6 +349,7 @@
         , Z."serviceJokyoFlag"                       AS "Z_serviceJokyoFlag"
         , A2."A2_koroshoIfShikibetsuCode"            AS "A2_A2_koroshoIfShikibetsuCode"
         , N."shinsakaiIken"                          AS "N_shinsakaiIken"
+        , N."shinsakaiMemo"                          AS "N_shinsakaiMemo"
         FROM
         rgdb."DbT5101NinteiShinseiJoho" AS A
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS A1

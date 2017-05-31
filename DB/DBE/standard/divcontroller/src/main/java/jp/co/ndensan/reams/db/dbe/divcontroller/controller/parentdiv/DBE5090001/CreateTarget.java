@@ -1119,7 +1119,7 @@ public class CreateTarget {
         data.set前回結果_現在の状況(edit前回結果_現在の状況(business));
         data.set前回識別コード(business.getCsvBusiness().getCreateCsvDataBusiness().get前回識別コード());
         data.set認定審査会意見等(business.getCsvBusiness().getCreateCsvDataBusiness().get認定審査会意見等());
-        data.setコメント等(RString.EMPTY);
+        data.setコメント等(business.getCsvBusiness().getCreateCsvDataBusiness().getコメント等());
         return data;
     }
 
