@@ -33,5 +33,5 @@ public class DbT5912KoroshoTempEntity extends DbTableEntityBase<DbT5912KoroshoTe
     @TempTableColumnOrder(6)
     private RString 主治医名称;
     @TempTableColumnOrder(7)
-    private boolean 状況;
+    private RString 状況;
 }

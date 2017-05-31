@@ -38,5 +38,5 @@ public class DbT5911KoroshoTempEntity extends DbTableEntityBase<DbT5911KoroshoTe
     @TempTableColumnOrder(8)
     private RString 電話番号;
     @TempTableColumnOrder(9)
-    private boolean 状況;
+    private RString 状況;
 }
