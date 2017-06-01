@@ -352,6 +352,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
                 .ocrData(pair.getCsv778())
                 .save(writer_DbT5115);
         results.addAll(result1.getProcessingResults());
+        List<RString> savedImages = new ArrayList<>(result1.getSavedFileNames());
         ImageJohoUpdater.Result result2 = ImageJohoUpdater.shinseiKey(ir.get申請書管理番号(), ir.get証記載保険者番号(), ir.get被保険者番号())
                 .sharedFileID(result1.getSharedFileID())
                 .imageFilePaths(this.processParameter.getImageFilePaths())
@@ -360,12 +361,13 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
                 .ocrData(pair.getCsv777())
                 .save(writer_DbT5115);
         results.addAll(result2.getProcessingResults());
+        savedImages.addAll(result2.getSavedFileNames());
         if (!results.hasError()) {
             results.addAll(insertOrUpdate意見書イメージ情報By(writer_DbT5305, ir,
                     new IkenshoImageUpdateParameter.Builder()
                     .add(OCRID._777, pair.getCsv777())
                     .add(OCRID._778, pair.getCsv778())
-                    .filter(toOCRIDs(result2.getSavedFileNames()))
+                    .filter(toOCRIDs(savedImages))
                     .build()
             ));
         }
