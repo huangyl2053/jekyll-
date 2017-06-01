@@ -5,6 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousairaishudou;
 
+import java.util.Arrays;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.HanteiKekkaCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -18,6 +21,10 @@ public final class NinnteiChousairaiShudouParameter {
 
     private final RString 申請書管理番号;
     private final RString 被保険者番号;
+    private final List<RString> 判定結果コードs_再調査 = Arrays.<RString>asList(
+            HanteiKekkaCode.再調査_調査のみ.getコード(),
+            HanteiKekkaCode.再調査_調査_意見書.getコード()
+    );
 
     /**
      * コンストラクタです。

@@ -458,4 +458,11 @@ public class NinnteiChousairaiShudouBusiness {
     public RString get申請情報市町村コード() {
         return entity.getT5101shichosonCode();
     }
+
+    /**
+     * @return 再調査の場合、{@code true}
+     */
+    public boolean is再調査() {
+        return entity.isSaiChosa();
+    }
 }

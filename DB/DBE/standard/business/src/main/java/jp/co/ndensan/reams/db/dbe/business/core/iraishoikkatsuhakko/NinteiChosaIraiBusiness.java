@@ -11,6 +11,8 @@ import jp.co.ndensan.reams.db.dbe.business.report.chosairaihakkoichiranhyo.Chosa
 import jp.co.ndensan.reams.db.dbe.business.report.chosairaihakkoichiranhyo.ChosaIraiHakkoIchiranhyoHeadItem;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.NinteiChosaIraiProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.NinteiChosaIraiRelateEntity;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -18,6 +20,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  *
@@ -27,7 +30,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
  */
 public class NinteiChosaIraiBusiness {
 
-        private static final RString 年号_明治 = new RString("明");
+    private final NinteiChosaIraiProcessParamter processParamter;
+    private static final RString 年号_明治 = new RString("明");
     private static final RString 年号_大正 = new RString("大");
     private static final RString 年号_昭和 = new RString("昭");
     private static final RString 記号_星 = new RString("*");
@@ -74,15 +78,17 @@ public class NinteiChosaIraiBusiness {
     private static final RString NINTEICHOSAIRAIRIREKIICHIRAN = new RString("【認定調査依頼履歴一覧出力区分】");
     private static final RString UESANKAKU = new RString("▲");
     private static final RString SHITASANKAKU = new RString("▼");
-    
-    
+
+    public NinteiChosaIraiBusiness(NinteiChosaIraiProcessParamter processParamter) {
+        this.processParamter = processParamter;
+    }
+
     /**
      * 帳票「帳票設計_DBE220003_認定調査依頼発行一覧表」Headerデータを作成するメッソドです。
      *
-     * @param processParamter processParamter
      * @return ChosaIraiHakkoIchiranhyoHeadItem
      */
-    public ChosaIraiHakkoIchiranhyoHeadItem setHeadItem(NinteiChosaIraiProcessParamter processParamter) {
+    public ChosaIraiHakkoIchiranhyoHeadItem setHeadItem() {
         ChosaIraiHakkoIchiranhyoHeadItem headItem = new ChosaIraiHakkoIchiranhyoHeadItem();
         headItem.set認定調査依頼書FLG(processParamter.getNinteiChosaIraisyo());
         headItem.set依頼日From(processParamter.getIraiFromYMD());
@@ -109,6 +115,8 @@ public class NinteiChosaIraiBusiness {
         bodyItem.set代表者名(entity.getDaihyoshaName());
         bodyItem.set連絡先(entity.getTelNo());
         bodyItem.set調査員名(entity.getChosainShimei());
+        bodyItem.set識別コード(new ShikibetsuCode(processParamter.getShokisaiHokenshaNo().substring(0, 5).concat(entity.getHihokenshaNo())));
+        bodyItem.set拡張情報(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.getShinseishoKanriNo()));
         return bodyItem;
     }
 
@@ -207,7 +215,8 @@ public class NinteiChosaIraiBusiness {
 //        出力条件.add(builder.toRString());
         return 出力条件;
     }
-        private RString get出力可否(boolean 出力可否) {
+
+    private RString get出力可否(boolean 出力可否) {
         return 出力可否 ? new RString("出力する") : new RString("出力しない");
     }
 

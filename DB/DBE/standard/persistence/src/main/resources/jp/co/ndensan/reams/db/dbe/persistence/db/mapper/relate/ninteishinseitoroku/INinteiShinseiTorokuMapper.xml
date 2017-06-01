@@ -327,6 +327,7 @@
         <result column = "shichosonCode" property="市町村コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result column = "kateiHomonFlag" property="家庭訪問の有無"/>
         <result column = "shikibetsuCode" property="識別コード" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
+        <result column = "shoKisaiHokenshaNo" property="証記載保険者番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result column = "renrakuJikoToChosain" property="調査員への連絡事項" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result column = "renrakuJikoToShujii" property="主治医への連絡事項" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result column = "shichosonRenrakuJiko" property="市町村連絡事項" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -426,6 +427,7 @@
         , T5101."enkiMikomiKaishiYMD"
         , T5101."enkiMikomiShuryoYMD"
         , T5101."shichosonCode"
+        , T5101."shoKisaiHokenshaNo"
         , T5101."shinsakaiYusenWaritsukeKubunCode"
         , T5101."jidoWariateJogaishaKubun"
         , T5101."minashiNigoEtcTaishoFlag"
@@ -481,4 +483,22 @@
     <delete id="deleteDbT5123PhysicalByShinseishoKanriNo" parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" > DELETE FROM rgdb."DbT5123NinteiKeikakuJoho" WHERE "shinseishoKanriNo" = #{shinseishoKanriNo}  </delete>
     <delete id="deleteDbT5150PhysicalByShinseishoKanriNo" parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" > DELETE FROM rgdb."DbT5150RenrakusakiJoho" WHERE "shinseishoKanriNo" = #{shinseishoKanriNo}  </delete>
     <delete id="deleteDbT5590PhysicalByShinseishoKanriNo" parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" > DELETE FROM rgdb."DbT5590ShinsakaiIinJogaiJoho" WHERE "shinseishoKanriNo" = #{shinseishoKanriNo}  </delete>
+
+    <select resultOrdered="true" id="getZenkaiShinseishoKanriNo" resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteishinchokujohoshokai.HihokenshaJohoParamter" fetchSize="500">
+        SELECT
+        DbT5101."shinseishoKanriNo"
+        FROM
+        rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
+        LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" DbT5102
+        ON DbT5102."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+        WHERE
+        DbT5101."shoKisaiHokenshaNo" = #{証記載保険者番号}
+        AND DbT5101."hihokenshaNo" = #{被保険者番号}
+        AND DbT5101."torisageKubunCode" = '1'
+        AND DbT5101."shoriJotaiKubun" in ('0','3')
+        ORDER BY
+        DbT5101."ninteiShinseiYMD" DESC, DbT5102."nijiHanteiYMD" DESC
+        LIMIT 1
+    </select>
 </mapper>

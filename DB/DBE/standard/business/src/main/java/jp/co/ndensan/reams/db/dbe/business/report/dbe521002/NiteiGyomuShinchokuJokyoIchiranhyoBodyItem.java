@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package jp.co.ndensan.reams.db.dbe.business.report.dbe521002;
 
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -12,13 +11,13 @@ import lombok.Getter;
 /**
  *
  * 要介護認定業務進捗状況一覧表リスト一覧表情報です。
+ *
  * @reamsid_L DBE-0210-020 dongyabin
  */
 @Getter
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class NiteiGyomuShinchokuJokyoIchiranhyoBodyItem {
-    
-    
+
     private final RString listIchiranhyo1_2;
     private final RString listIchiranhyo1_3;
     private final RString listIchiranhyo1_4;
@@ -38,9 +37,12 @@ public class NiteiGyomuShinchokuJokyoIchiranhyoBodyItem {
     private final RString listHihokenshaJusho_1;
     private final RString listChosainName_1;
     private final RString listIshiName_1;
-    
+    private final RString shoKisaiHokenshaNo;
+    private final RString shinseishoKanriNo;
+
     /**
      * インスタンスを生成します。
+     *
      * @param listIchiranhyo1_2 調査依頼
      * @param listIchiranhyo1_3 意見書依頼
      * @param listIchiranhyo1_4 調査結果
@@ -60,6 +62,8 @@ public class NiteiGyomuShinchokuJokyoIchiranhyoBodyItem {
      * @param listHihokenshaJusho_1 住所
      * @param listChosainName_1 調査員名
      * @param listIshiName_1 医師名
+     * @param shoKisaiHokenshaNo 証記載保険者番号
+     * @param shinseishoKanriNo 申請書管理番号
      */
     public NiteiGyomuShinchokuJokyoIchiranhyoBodyItem(RString listIchiranhyo1_2,
             RString listIchiranhyo1_3,
@@ -79,7 +83,9 @@ public class NiteiGyomuShinchokuJokyoIchiranhyoBodyItem {
             RString listShinsaYoteiYMD_1,
             RString listHihokenshaJusho_1,
             RString listChosainName_1,
-            RString listIshiName_1) {
+            RString listIshiName_1,
+            RString shoKisaiHokenshaNo,
+            RString shinseishoKanriNo) {
         this.listIchiranhyo1_2 = listIchiranhyo1_2;
         this.listIchiranhyo1_3 = listIchiranhyo1_3;
         this.listIchiranhyo1_4 = listIchiranhyo1_4;
@@ -99,5 +105,8 @@ public class NiteiGyomuShinchokuJokyoIchiranhyoBodyItem {
         this.listHihokenshaJusho_1 = listHihokenshaJusho_1;
         this.listChosainName_1 = listChosainName_1;
         this.listIshiName_1 = listIshiName_1;
+        this.shoKisaiHokenshaNo = shoKisaiHokenshaNo;
+        this.shinseishoKanriNo = shinseishoKanriNo;
     }
+
 }

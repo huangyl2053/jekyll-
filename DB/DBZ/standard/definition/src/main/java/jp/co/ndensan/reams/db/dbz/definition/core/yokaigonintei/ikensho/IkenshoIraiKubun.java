@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho;
 
+import javax.annotation.CheckForNull;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -69,4 +70,19 @@ public enum IkenshoIraiKubun {
         }
         throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("主治医意見書依頼区分"));
     }
+
+    /**
+     * @param displayName 表示名称
+     * @return 表示名称と対応する{@link IkenshoIraiKubun}
+     */
+    @CheckForNull
+    public static IkenshoIraiKubun toValueFromName(RString displayName) {
+        for (IkenshoIraiKubun ikenshoIraiKubun : values()) {
+            if (ikenshoIraiKubun.get名称().equals(displayName)) {
+                return ikenshoIraiKubun;
+            }
+        }
+        return null;
+    }
+
 }

@@ -15,7 +15,8 @@ public enum DBA7020011StateName implements IStateEnumerations {
 // <editor-fold defaultstate="collapsed" desc="Created By UI Designer ver 1.0.0">
 
     NoChange(""),
-    初期状態("初期状態");
+    初期状態("初期状態"),
+    他画面から遷移("他画面から遷移");
 
     private final RString name;
 

@@ -34,7 +34,7 @@ public class TaJushochiTokureishaKanri {
      * @return ResponseData<TaJushochiTokureishaKanriDiv>
      */
     public ResponseData<TaJushochiTokureishaKanriDiv> onClick_BtnAdd(TaJushochiTokureishaKanriDiv requestDiv) {
-        getHandler(requestDiv).onClick_BtnAdd();
+//        getHandler(requestDiv).onClick_BtnAdd();
         return ResponseData.of(requestDiv).respond();
     }
 
@@ -119,7 +119,7 @@ public class TaJushochiTokureishaKanri {
         if (vallidation.iterator().hasNext()) {
             return ResponseData.of(requestDiv).addValidationMessages(vallidation).respond();
         } else {
-                getHandler(requestDiv).onClick_BtnKakunin(requestDiv.getDgJushochiTokureiRireki().getActiveRow(), 親画面状態);
+            getHandler(requestDiv).onClick_BtnKakunin(requestDiv.getDgJushochiTokureiRireki().getActiveRow(), 親画面状態);
         }
         return ResponseData.of(requestDiv).respond();
     }

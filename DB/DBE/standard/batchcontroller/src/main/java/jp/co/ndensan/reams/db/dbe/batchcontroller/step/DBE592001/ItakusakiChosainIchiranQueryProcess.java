@@ -99,7 +99,6 @@ public class ItakusakiChosainIchiranQueryProcess extends BatchKeyBreakBase<Itaku
         if (entity.getDbT5910_TelNo() != null) {
             dbT5910_TelNo = entity.getDbT5910_TelNo().value();
         }
-        RString 性別 = (RString.isNullOrEmpty(entity.getDbT5913_Seibetsu()) ? RString.EMPTY : entity.getDbT5913_Seibetsu());
         return new ItakusakiChosainIchiranHead(paramter.getItakusakiCodeFrom(),
                 paramter.getItakusakiCodeTo(),
                 paramter.getChosainNoFrom(),
@@ -124,8 +123,12 @@ public class ItakusakiChosainIchiranQueryProcess extends BatchKeyBreakBase<Itaku
                 entity.getDbT5910_Jusho(),
                 entity.getDbT5910_DaihyoshaName(),
                 entity.getDbT5913_ChosainShimei(),
-                性別,
+                trim(entity.getDbT5913_Seibetsu()),
                 entity.getDbT5913_ShozokuKikanName());
+    }
+
+    private static RString trim(RString rs) {
+        return RString.isNullOrEmpty(rs) ? RString.EMPTY : rs.trim();
     }
 
     @Override

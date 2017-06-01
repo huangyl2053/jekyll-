@@ -26,6 +26,7 @@ public class ShujiiIkenshoSakuseiProcessParamter implements IBatchProcessParamet
     private final RString shujiiIkenshoSakuseiIraisho;
     private final RString shujiiIkensho;
     private final List<GridParameter> shujiiIkenshoSakuseiIraiList;
+    private final RString shokisaiHokenshaNo;
 
     /**
      * コンストラクタです。
@@ -35,18 +36,20 @@ public class ShujiiIkenshoSakuseiProcessParamter implements IBatchProcessParamet
      * @param 主治医意見書作成依頼書 主治医意見書作成依頼書
      * @param 主治医意見書 主治医意見書
      * @param 主治医意見書作成依頼リスト 主治医意見書作成依頼リスト
+     * @param 証記載保険者番号
      */
     public ShujiiIkenshoSakuseiProcessParamter(RString 依頼日From,
             RString 依頼日To,
             RString 主治医意見書作成依頼書,
             RString 主治医意見書,
-            List<GridParameter> 主治医意見書作成依頼リスト) {
+            List<GridParameter> 主治医意見書作成依頼リスト,
+            RString 証記載保険者番号) {
         this.iraiFromYMD = 依頼日From;
         this.iraiToYMD = 依頼日To;
         this.shujiiIkenshoSakuseiIraisho = 主治医意見書作成依頼書;
         this.shujiiIkensho = 主治医意見書;
         this.shujiiIkenshoSakuseiIraiList = 主治医意見書作成依頼リスト;
-
+        this.shokisaiHokenshaNo = 証記載保険者番号;
     }
 
     /**

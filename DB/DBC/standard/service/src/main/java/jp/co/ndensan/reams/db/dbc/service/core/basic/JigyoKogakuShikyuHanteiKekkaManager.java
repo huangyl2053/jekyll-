@@ -58,7 +58,7 @@ public class JigyoKogakuShikyuHanteiKekkaManager {
             HihokenshaNo 被保険者番号,
             FlexibleYearMonth サービス提供年月,
             HokenshaNo 証記載保険者番号,
-            Decimal 履歴番号) {
+            int 履歴番号) {
         requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
         requireNonNull(サービス提供年月, UrSystemErrorMessages.値がnull.getReplacedMessage("サービス提供年月"));
         requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
@@ -164,7 +164,7 @@ public class JigyoKogakuShikyuHanteiKekkaManager {
         List<DbT3111JigyoKogakuShikyuHanteiKekkaEntity> 管理番号リスト = dac.select管理番号Bykey(被保険者番号, サービス提供年月);
         List<Decimal> 管理番号 = new ArrayList<>();
         for (DbT3111JigyoKogakuShikyuHanteiKekkaEntity entity : 管理番号リスト) {
-            管理番号.add(entity.getRirekiNo());
+            管理番号.add(new Decimal(entity.getRirekiNo()));
         }
         return 管理番号;
     }

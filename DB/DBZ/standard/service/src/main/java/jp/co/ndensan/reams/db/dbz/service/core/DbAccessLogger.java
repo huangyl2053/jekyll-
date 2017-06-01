@@ -14,6 +14,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
+import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
  * 介護業務専用に作成したアクセスログ制御クラスです。<br>
@@ -23,9 +25,6 @@ public class DbAccessLogger {
 
     private final List<PersonalData> personalData = new ArrayList<>();
 
-    private static final Code コード = new Code("0003");
-    private static final RString 被保険者番号 = new RString("被保険者番号");
-
     /**
      * アクセスログを追加します。
      *
@@ -33,7 +32,11 @@ public class DbAccessLogger {
      * @param hihokenshaNo
      */
     public void store(ShoKisaiHokenshaNo shoKisaiHokenshaNo, RString hihokenshaNo) {
-        store(shoKisaiHokenshaNo, hihokenshaNo, new ExpandedInformation(コード, 被保険者番号, hihokenshaNo));
+        personalData.add(PersonalData.of(newShikibetsuCode(shoKisaiHokenshaNo, hihokenshaNo)));
+    }
+
+    private static ShikibetsuCode newShikibetsuCode(ShoKisaiHokenshaNo shoKisaiHokenshaNo, RString hihokenshaNo) {
+        return new ShikibetsuCode(shoKisaiHokenshaNo.value().substring(0, 5).concat(hihokenshaNo));
     }
 
     /**
@@ -44,7 +47,18 @@ public class DbAccessLogger {
      * @param expandedInformation
      */
     public void store(ShoKisaiHokenshaNo shoKisaiHokenshaNo, RString hihokenshaNo, ExpandedInformation expandedInformation) {
-        personalData.add(PersonalData.of(new ShikibetsuCode(shoKisaiHokenshaNo.value().substring(0, 5).concat(hihokenshaNo)), expandedInformation));
+        personalData.add(PersonalData.of(newShikibetsuCode(shoKisaiHokenshaNo, hihokenshaNo), expandedInformation));
+    }
+
+    /**
+     * アクセスログを追加します。
+     *
+     * @param shoKisaiHokenshaNo
+     * @param hihokenshaNo
+     * @param expandedInformations
+     */
+    public void store(ShoKisaiHokenshaNo shoKisaiHokenshaNo, RString hihokenshaNo, ExpandedInformation... expandedInformations) {
+        personalData.add(PersonalData.of(newShikibetsuCode(shoKisaiHokenshaNo, hihokenshaNo), expandedInformations));
     }
 
     /**
@@ -55,5 +69,17 @@ public class DbAccessLogger {
     public void flushBy(AccessLogType accessLogType) {
         jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger.log(accessLogType, personalData);
         personalData.clear();
+    }
+
+    /**
+     * EUCに関するアクセスログを実際に書き出します。
+     *
+     * @param spoolOutputType {@link UzUDE0835SpoolOutputType}
+     * @return {@link AccessLogUUID} （ファイルスプールの引数に用いる）
+     */
+    public AccessLogUUID flushByEUC(UzUDE0835SpoolOutputType spoolOutputType) {
+        AccessLogUUID uuid = jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger.logEUC(spoolOutputType, personalData);
+        personalData.clear();
+        return uuid;
     }
 }

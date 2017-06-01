@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5160001;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJoho2;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaikaisaiyoteijoho.ShinsakaiKaisaiYoteiJoho2Builder;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariatejoho.ShinsakaiWariateJoho2;
@@ -36,7 +38,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShinsakaiWariateJohoKenshu;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShinsakaiWariateJohoKenshuBuilder;
-import jp.co.ndensan.reams.db.dbz.definition.core.config.DbeConfigKey;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
@@ -49,6 +50,8 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.Ich
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode99;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku02;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenKomoku03;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShinsakaiYusenWaritsukeKubunCode;
@@ -64,6 +67,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RTime;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Icon;
 import jp.co.ndensan.reams.uz.uza.ui.binding.IconType;
+import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -112,7 +116,14 @@ public class TaishouWaritsukeHandler {
      */
     public void initializtion(RString 介護認定審査会番号) {
         div.getShinsakaiTaishoshaWaritsuke().setKaigoNinteiShinsakaiKaisaiNo(介護認定審査会番号);
+        div.getShinsakaiJoho().setIsOpen(false);
         ヘッドエリア検索();
+        RStringBuilder title = new RStringBuilder();
+        title.append(div.getShinsakaiJoho().getTxtShinsakaiName().getValue())
+                .append(RString.FULL_SPACE)
+                .append(new RString("開催予定日:"))
+                .append(div.getShinsakaiJoho().getTxtKaisaiDate().formattedDate());
+        div.getShinsakaiJoho().setTitle(title.toRString());
         対象者一覧ソートラベル();
         対象者一覧検索();
         候補者一覧検索();
@@ -218,7 +229,7 @@ public class TaishouWaritsukeHandler {
      */
     public void 審査会順序を振りなおす() {
         TaishouWaritsukeFinder finder = TaishouWaritsukeFinder.createInstance();
-        RString カスタムコンフィグの審査会順序 = BusinessConfig.get(DbeConfigKey.審査会順序, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        RString カスタムコンフィグの審査会順序 = (RString) ViewStateHolder.get(ViewStateKeys.審査会順序, Map.class).get(div.getDdlSortOrder().getSelectedKey());
         boolean 審査会資料作成済込み有無 = div.getChkShiryosakuseizumiKomi().getSelectedKeys().contains(new RString("key0"));
         List<dgTaishoshaIchiran_Row> 対象者リスト = div.getDgTaishoshaIchiran().getDataSource();
         List<dgTaishoshaIchiran_Row> 固定対象者リスト = new ArrayList<>();
@@ -270,7 +281,6 @@ public class TaishouWaritsukeHandler {
             }
         }
         setソート対象者一覧(固定対象者リスト, ソート対象者リスト);
-        CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を振りなおす, true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会順番を確定する, false);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(登録する, true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(審査会割付を完了する, true);
@@ -424,11 +434,28 @@ public class TaishouWaritsukeHandler {
     }
 
     private void 対象者一覧ソートラベル() {
-        RStringBuilder sortBuilder = new RStringBuilder();
-        RString sort = new RString("ソート順：");
-        RString 審査会順序_表示用 = DbBusinessConfig.get(ConfigNameDBE.審査会順序_表示用, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        sortBuilder.append(sort).append(審査会順序_表示用);
-        div.getLblTaishoshaSort().setText(sortBuilder.toRString());
+        HashMap<RString, RString> map = new HashMap<>();
+        List<KeyValueDataSource> dataSource = new ArrayList<>();
+        RDate nowDate = RDate.getNowDate();
+        RString key1 = new RString("1");
+        dataSource.add(new KeyValueDataSource(key1, DbBusinessConfig.get(ConfigNameDBE.審査会順序_表示用, nowDate, SubGyomuCode.DBE認定支援)));
+        map.put(key1, BusinessConfig.get(ConfigNameDBE.審査会順序, nowDate, SubGyomuCode.DBE認定支援));
+
+        RString 審査会順序２ = BusinessConfig.get(ConfigNameDBE.審査会順序２, nowDate, SubGyomuCode.DBE認定支援);
+        if (!RString.isNullOrEmpty(審査会順序２)) {
+            RString key2 = new RString("2");
+            dataSource.add(new KeyValueDataSource(key2, DbBusinessConfig.get(ConfigNameDBE.審査会順序２_表示用, nowDate, SubGyomuCode.DBE認定支援)));
+            map.put(key2, 審査会順序２);
+        }
+        RString 審査会順序３ = BusinessConfig.get(ConfigNameDBE.審査会順序３, nowDate, SubGyomuCode.DBE認定支援);
+        if (!RString.isNullOrEmpty(審査会順序３)) {
+            RString key3 = new RString("3");
+            dataSource.add(new KeyValueDataSource(key3, DbBusinessConfig.get(ConfigNameDBE.審査会順序３_表示用, nowDate, SubGyomuCode.DBE認定支援)));
+            map.put(key3, 審査会順序３);
+        }
+        div.getDdlSortOrder().setDataSource(dataSource);
+        div.getDdlSortOrder().setSelectedIndex(0);
+        ViewStateHolder.put(ViewStateKeys.審査会順序, map);
     }
 
     private void ヘッドエリア検索() {
@@ -567,13 +594,13 @@ public class TaishouWaritsukeHandler {
             調査票_認知度 = RString.EMPTY;
         }
         try {
-            意見書_寝たきり度 = ShogaiNichijoSeikatsuJiritsudoCode.toValue(
+            意見書_寝たきり度 = IkenKomoku02.toValue(
                     taishouichiran.get意見書_障害高齢者の日常生活自立度コード().getColumnValue()).get名称();
         } catch (IllegalArgumentException e) {
             意見書_寝たきり度 = RString.EMPTY;
         }
         try {
-            意見書_認知度 = ShogaiNichijoSeikatsuJiritsudoCode.toValue(
+            意見書_認知度 = IkenKomoku03.toValue(
                     taishouichiran.get意見書_認知症高齢者の日常生活自立度コード().getColumnValue()).get名称();
         } catch (IllegalArgumentException e) {
             意見書_認知度 = RString.EMPTY;
@@ -656,6 +683,8 @@ public class TaishouWaritsukeHandler {
             } else if (厚労省IF識別コード.equals(厚労省IF識別コード_99)) {
                 前回二次判定 = YokaigoJotaiKubun99.toValue(code.value()).get名称();
             }
+        } else {
+            前回二次判定 = RString.EMPTY;
         }
         return 前回二次判定;
     }
@@ -671,6 +700,8 @@ public class TaishouWaritsukeHandler {
             } else if (厚労省IF識別コード.equals(厚労省IF識別コード_99)) {
                 前回一次判定 = IchijiHanteiKekkaCode99.toValue(code.value()).get名称();
             }
+        } else {
+            前回一次判定 = RString.EMPTY;
         }
         return 前回一次判定;
     }
@@ -686,6 +717,8 @@ public class TaishouWaritsukeHandler {
             } else if (厚労省IF識別コード.equals(厚労省IF識別コード_99)) {
                 今回一次判定 = IchijiHanteiKekkaCode99.toValue(code.value()).get名称();
             }
+        } else {
+            今回一次判定 = RString.EMPTY;
         }
         return 今回一次判定;
     }
@@ -705,11 +738,9 @@ public class TaishouWaritsukeHandler {
         RString 意見書_寝たきり度;
         RString 意見書_認知度;
         RString 再調査;
-        RString 今回一次判定 = RString.EMPTY;
-        RString 前回一次判定 = RString.EMPTY;
-        RString 前回二次判定 = RString.EMPTY;
-        Icon test = new Icon();
-        test.setIcon(IconType.Info);
+        RString 今回一次判定;
+        RString 前回一次判定;
+        RString 前回二次判定;
         Icon オブザーバーチェック_主治医;
         Icon オブザーバーチェック_調査員;
         Icon オブザーバーチェック_入所施設;
@@ -725,6 +756,9 @@ public class TaishouWaritsukeHandler {
             オブザーバーチェック_調査員 = new Icon();
             オブザーバーチェック_入所施設 = new Icon();
             オブザーバーチェック_その他 = new Icon();
+            今回一次判定 = RString.EMPTY;
+            前回一次判定 = RString.EMPTY;
+            前回二次判定 = RString.EMPTY;
             try {
                 優先 = kohoshaIchiran.get介護認定審査会優先振分区分コード().getColumnValue().equals(new RString("1"))
                         ? ShinsakaiYusenWaritsukeKubunCode.toValue(kohoshaIchiran.get介護認定審査会優先振分区分コード().getColumnValue()).get名称()
@@ -763,13 +797,13 @@ public class TaishouWaritsukeHandler {
                 調査票_認知度 = RString.EMPTY;
             }
             try {
-                意見書_寝たきり度 = ShogaiNichijoSeikatsuJiritsudoCode.toValue(
+                意見書_寝たきり度 = IkenKomoku02.toValue(
                         kohoshaIchiran.get意見書_障害高齢者の日常生活自立度コード().getColumnValue()).get名称();
             } catch (IllegalArgumentException e) {
                 意見書_寝たきり度 = RString.EMPTY;
             }
             try {
-                意見書_認知度 = ShogaiNichijoSeikatsuJiritsudoCode.toValue(
+                意見書_認知度 = IkenKomoku03.toValue(
                         kohoshaIchiran.get意見書_認知症高齢者の日常生活自立度コード().getColumnValue()).get名称();
             } catch (IllegalArgumentException e) {
                 意見書_認知度 = RString.EMPTY;
@@ -1078,14 +1112,6 @@ public class TaishouWaritsukeHandler {
             }
         }
 
-    }
-
-    private void 対象者一覧No振り直し() {
-        int 対象者割当No = 1;
-        for (dgTaishoshaIchiran_Row currentRow : div.getDgTaishoshaIchiran().getDataSource()) {
-            currentRow.setNo(new RString(対象者割当No));
-            対象者割当No += 1;
-        }
     }
 
     private boolean is対象者Gridに存在する(Taishouichiran 検索該当者) {

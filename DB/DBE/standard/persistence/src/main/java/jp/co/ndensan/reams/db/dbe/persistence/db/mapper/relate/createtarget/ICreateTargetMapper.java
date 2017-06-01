@@ -9,6 +9,9 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.createtarget.CreateTargetMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.createtarget.CreateTargetCsvRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.createtarget.CreateTargetRelateEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7211GaibuRenkeiDataoutputJohoEntity;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * センター送信データ出力のマッパーインタフェースです。
@@ -80,4 +83,18 @@ public interface ICreateTargetMapper {
      * @return List<CreateTargetRelateEntity>
      */
     List<CreateTargetRelateEntity> get前回サービスの状況(CreateTargetMapperParameter param);
+
+    /**
+     *
+     * @param shinseishoKanriNo
+     * @return
+     */
+    DbT5101NinteiShinseiJohoEntity get申請情報(RString shinseishoKanriNo);
+
+    /**
+     *
+     * @param shinseishoKanriNo
+     * @return
+     */
+    DbT7211GaibuRenkeiDataoutputJohoEntity get外部連携データ(RString shinseishoKanriNo);
 }

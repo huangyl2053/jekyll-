@@ -13,6 +13,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0100002.Shin
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0100002.dgShinseiJoho_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
@@ -69,7 +70,7 @@ public class ShinseishaDataOutputHandler {
         List<dgShinseiJoho_Row> dataSource = new ArrayList<>();
         div.getDgShinseiJoho().setDataSource(dataSource);
     }
-
+    
     /**
      * 検索条件を作成します。
      *
@@ -77,10 +78,15 @@ public class ShinseishaDataOutputHandler {
      * @return 検索条件 検索条件
      */
     public ShinseiKensakuMapperParameter createSearchParameter(RString hihokenshaNo) {
+        return createSearchParameter(div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv()
+                .getDdlHokenshaNumber().getSelectedItem().get証記載保険者番号(), hihokenshaNo);
+    }
+    
+    public ShinseiKensakuMapperParameter createSearchParameter(ShoKisaiHokenshaNo shoKisaiHokenshaNo, RString hihokenshaNo) {
         ShinseiKensakuMapperParameter parameter = new ShinseiKensakuMapperParameter();
         parameter.setLimitCount(div.getTxtMaxDisp().getValue().intValue());
         NinteiShinseishaFinderDiv finderDiv = div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv();
-        editShosaiJokenForParameter(finderDiv, parameter, hihokenshaNo);
+        editShosaiJokenForParameter(finderDiv, parameter, shoKisaiHokenshaNo, hihokenshaNo);
         editNinteiChosaForParameter(finderDiv, parameter);
         editShujiiJohoForParameter(finderDiv, parameter);
         editShinsakaiJohoForParameter(finderDiv, parameter);
@@ -481,14 +487,14 @@ public class ShinseishaDataOutputHandler {
         parameter.setUseNinteichosahyoKihonChosa(useNinteichosahyoKihonChosa);
     }
 
-    private void editShosaiJokenForParameter(NinteiShinseishaFinderDiv finderDiv, ShinseiKensakuMapperParameter parameter, RString 被保険者番号) {
+    private void editShosaiJokenForParameter(NinteiShinseishaFinderDiv finderDiv, ShinseiKensakuMapperParameter parameter,
+            ShoKisaiHokenshaNo 証記載保険者番号, RString 被保険者番号) {
         if (!RString.isNullOrEmpty(被保険者番号)) {
             parameter.setHihokenshaNo(被保険者番号);
             parameter.setUseHihokenshaNo(true);
         }
-        RString 証記載保険者番号 = finderDiv.getDdlHokenshaNumber().getSelectedItem().get証記載保険者番号().value();
-        if (!RString.isNullOrEmpty(証記載保険者番号)) {
-            parameter.setShoKisaiHokenshaNo(証記載保険者番号);
+        if (証記載保険者番号 != null && !証記載保険者番号.isEmpty()) {
+            parameter.setShoKisaiHokenshaNo(証記載保険者番号.value());
             parameter.setUseShoKisaiHokenshaNo(true);
         }
 

@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbe.definition.message.DbeInformationMessages;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaitaishosha.TaishoshaIchiranMapperParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0120001.DBE0120001TransitionEventName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0120001.ShinsakaiTaishoshaDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0120001.dgTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0120001.ShinsakaiTaishoshaHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0120001.ShinsakaiTaishoshaValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.shinsakaitaisho.ShinsakaiTaishoshaFinder;
@@ -57,8 +58,8 @@ public class ShinsakaiTaishosha {
      * @return ResponseData
      */
     public ResponseData<ShinsakaiTaishoshaDiv> btn_Shokai(ShinsakaiTaishoshaDiv div) {
-        ViewStateHolder.put(ViewStateKeys.申請書管理番号,
-                div.getDgTaishoshaIchiran().getClickedItem().getShinseishoKanriNo());
+        dgTaishoshaIchiran_Row row = div.getDgTaishoshaIchiran().getClickedItem();
+        ViewStateHolder.put(ViewStateKeys.申請書管理番号, row.getShinseishoKanriNo());
         return ResponseData.of(div).forwardWithEventName(DBE0120001TransitionEventName.対象者選択).respond();
     }
 

@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbe.service.core.ichijipanteisyori.IChiJiPanTeiSyo
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
@@ -165,6 +166,7 @@ public class IchijiHanteiHandler {
         div.getIchijiHanteiKensakuJoken().getTxtMaxCount().setValue(new Decimal(最大表示件数.toString()));
         div.getIchijiHanteiKensakuJoken().getTxtMaxCount().setMaxValue(new Decimal(最大上限.toString()));
         div.getIchijiHanteiKensakuJoken().getTxtHihokenshaNo().clearValue();
+        div.getIchijiHanteiKensakuJoken().getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
     }
 
     /**
@@ -266,7 +268,6 @@ public class IchijiHanteiHandler {
     public void 対象者一覧の編集(List<IChiJiPanTeiSyoRiBusiness> 一次判定対象者一覧List) {
 
         List<dgIchijiHanteiTaishoshaIchiran_Row> rowList = new ArrayList<>();
-        DbAccessLogger accessLog = new DbAccessLogger();
         for (IChiJiPanTeiSyoRiBusiness business : 一次判定対象者一覧List) {
 
             dgIchijiHanteiTaishoshaIchiran_Row row = new dgIchijiHanteiTaishoshaIchiran_Row();
@@ -339,13 +340,9 @@ public class IchijiHanteiHandler {
             row.setShinseishoKanriNo(business.get申請書管理番号().value());
             row.setKoroshoIfShikibetsuCode(business.get厚労省IF識別コード());
             row.setShoKisaiHokenshaNo(business.get証記載保険者番号().getColumnValue());
-            
-            ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(row.getShoKisaiHokenshaNo());
-            ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), row.getShinseishoKanriNo());
-            accessLog.store(shoKisaiHokenshaNo, row.getHihokenNo(), expandedInfo);
+
             rowList.add(row);
         }
-        accessLog.flushBy(AccessLogType.照会);
         div.getIchijiHanteiShoriTaishoshaIchiran().getDgIchijiHanteiTaishoshaIchiran().setDataSource(rowList);
         setDisplayNoneOfIchijiHanteiDialigButton(div.getIchijiHanteiShoriTaishoshaIchiran().getDgIchijiHanteiTaishoshaIchiran());
     }

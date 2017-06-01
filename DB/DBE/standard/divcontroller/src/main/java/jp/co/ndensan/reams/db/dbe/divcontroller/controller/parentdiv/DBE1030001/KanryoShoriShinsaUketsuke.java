@@ -22,18 +22,11 @@ import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDescriptor;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDownload;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.euc.api.EucOtherInfo;
+import jp.co.ndensan.reams.uz.uza.euc.cooperation.EucDownload;
+import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -46,6 +39,8 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
+import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
@@ -99,8 +94,10 @@ public class KanryoShoriShinsaUketsuke {
      * @return IDownLoadServletResponse
      */
     public IDownLoadServletResponse onClick_Dataoutput(KanryoShoriShinsaUketsukeDiv div, IDownLoadServletResponse response) {
+        FileSpoolManager spoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
+                EUC_ENTITYID, UzUDE0831EucAccesslogFileType.Csv);
         RString CSVファイル名 = EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, EUC_ENTITYID);
-        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
+        RString filePath = Path.combinePath(spoolManager.getEucOutputDirectry(), CSVファイル名);
         DbAccessLogger accessLog = new DbAccessLogger();
         try (CsvWriter<KanryoShoriCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).
@@ -113,18 +110,13 @@ public class KanryoShoriShinsaUketsuke {
             List<dgNinteiTaskList_Row> rowList = div.getDgNinteiTaskList().getSelectedItems();
             for (dgNinteiTaskList_Row row : rowList) {
                 csvWriter.writeLine(getCsvData(row));
-                ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(row.getShoKisaiHokenshaNo());
                 ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), row.getShinseishoKanriNo());
-                accessLog.store(shoKisaiHokenshaNo, row.getHihoNumber(), expandedInfo);
+                accessLog.store(new ShoKisaiHokenshaNo(row.getShoKisaiHokenshaNo()), row.getHihoNumber(), expandedInfo);
             }
-            accessLog.flushBy(AccessLogType.照会);
-            csvWriter.close();
+//            csvWriter.close();
         }
-        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(CSVファイル名));
-        sfd = SharedFile.defineSharedFile(sfd);
-        CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
-        SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
-        return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, CSVファイル名), response);
+        spoolManager.spool(filePath, accessLog.flushByEUC(UzUDE0835SpoolOutputType.EucOther));
+        return EucDownload.directAccessDownload(SubGyomuCode.DBE認定支援, spoolManager.getSharedFileName(), spoolManager.getSharedFileId(), response);
     }
 
     /**

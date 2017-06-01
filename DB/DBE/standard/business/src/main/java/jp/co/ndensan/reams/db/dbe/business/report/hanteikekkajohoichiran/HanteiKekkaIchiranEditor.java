@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbe.business.report.hanteikekkajohoichiran;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkaichiran.HanteiKekkaIchiranEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.hanteikekkajohoichiran.HanteiKekkaIchiranA4ReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaSupport;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -16,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.ui.binding.propertyenum.DisplayTimeFormat;
 
 /**
@@ -112,6 +115,8 @@ public class HanteiKekkaIchiranEditor implements IHanteiKekkaIchiranEditor {
         source.listTokuteishippei_1 = tempTokuteishippei_2.toRString();
         source.listTokuteishippei_2 = item.get二号特定疾病内容();
         source.listShinsakaiiken_1 = item.get介護認定審査会意見();
+        source.識別コード = new ShikibetsuCode(item.get証記載保険者番号().substring(0, 5).concat(item.get被保険者番号()));
+        source.拡張情報 = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.get申請書管理番号());
         return source;
     }
 }

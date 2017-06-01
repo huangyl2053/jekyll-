@@ -35,6 +35,9 @@ public final class SonoTashiryoEntityEditor {
         sonoTashiryo.set保険者番号(yokaigoNinteiJohoTeikyoEntity.get保険者番号());
         sonoTashiryo.set被保険者番号(yokaigoNinteiJohoTeikyoEntity.get被保険者番号());
         sonoTashiryo.set被保険者氏名(yokaigoNinteiJohoTeikyoEntity.get被保険者氏名());
+        sonoTashiryo.setTemp_保険者番号(yokaigoNinteiJohoTeikyoEntity.get保険者番号());
+        sonoTashiryo.setTemp_被保険者番号(yokaigoNinteiJohoTeikyoEntity.get被保険者番号());
+        sonoTashiryo.setTemp_申請書管理番号(yokaigoNinteiJohoTeikyoEntity.get申請書管理番号());
         sonoTashiryo.set申請日_元号(yokaigoNinteiJohoTeikyoEntity.get認定申請年月日() == null ? RString.EMPTY : yokaigoNinteiJohoTeikyoEntity
                 .get認定申請年月日().wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getEra());
         sonoTashiryo.set申請日_年(yokaigoNinteiJohoTeikyoEntity.get認定申請年月日() == null ? RString.EMPTY : yokaigoNinteiJohoTeikyoEntity

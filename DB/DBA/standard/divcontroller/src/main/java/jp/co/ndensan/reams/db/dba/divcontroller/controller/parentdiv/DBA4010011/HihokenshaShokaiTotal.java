@@ -31,6 +31,7 @@ import jp.co.ndensan.reams.db.dbz.service.TaishoshaKey;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.HihokenshaDaichoManager;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -93,7 +94,7 @@ public class HihokenshaShokaiTotal {
                 shikibetsuCode, DaichoType.被保険者.getコード(), ShisetsuNyutaishoState.照会);
         div.getHihokenshaShokaiPanel().getCcdShoKofuKaishuButton().initialize(hihokenshaNo, ShoKaishuKirokuState.照会);
         div.getHihokenshaShokaiPanel().getCcdSetaiShotokuButton().initialize(shikibetsuCode);
-
+        div.getHihokenshaShokaiPanel().getCcdSeikatsuHogoJoho().initialize(shikibetsuCode.getColumnValue(), GyomuCode.DB介護保険.getColumnValue());
         return ResponseData.of(div).respond();
     }
 

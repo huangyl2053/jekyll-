@@ -3,7 +3,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5140001;
  * このコードはツールによって生成されました。
  * このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
  * コードが再生成されるときに損失したりします。
- * Sat Mar 04 22:26:04 JST 2017 
+ * Wed Mar 22 18:02:12 JST 2017 
  */
 
 
@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  */
 
 public class dgShinsakaiKaisaiGogitaiJoho_Row extends DataRow {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-15_05-21-09">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
 
     private TextBoxNum number;
     private RString gogitaiMeisho;
@@ -38,6 +38,9 @@ public class dgShinsakaiKaisaiGogitaiJoho_Row extends DataRow {
     private RString shinsakaiIin10;
     private TextBoxDate yukoKikanKaishiYMD;
     private TextBoxDate yukoKikanShuryoYMD;
+    private TextBoxNum nendoNaiKaisaiKaisu;
+    private RString gogitaiNo;
+    private TextBoxNum henkoMaeNendoNaiKaisaiKaisu;
 
     public dgShinsakaiKaisaiGogitaiJoho_Row() {
         super();
@@ -56,6 +59,9 @@ public class dgShinsakaiKaisaiGogitaiJoho_Row extends DataRow {
         this.shinsakaiIin10 = RString.EMPTY;
         this.yukoKikanKaishiYMD = new TextBoxDate();
         this.yukoKikanShuryoYMD = new TextBoxDate();
+        this.nendoNaiKaisaiKaisu = new TextBoxNum();
+        this.gogitaiNo = RString.EMPTY;
+        this.henkoMaeNendoNaiKaisaiKaisu = new TextBoxNum();
         this.setOriginalData("number", number);
         this.setOriginalData("gogitaiMeisho", gogitaiMeisho);
         this.setOriginalData("shurui", shurui);
@@ -71,9 +77,12 @@ public class dgShinsakaiKaisaiGogitaiJoho_Row extends DataRow {
         this.setOriginalData("shinsakaiIin10", shinsakaiIin10);
         this.setOriginalData("yukoKikanKaishiYMD", yukoKikanKaishiYMD);
         this.setOriginalData("yukoKikanShuryoYMD", yukoKikanShuryoYMD);
+        this.setOriginalData("nendoNaiKaisaiKaisu", nendoNaiKaisaiKaisu);
+        this.setOriginalData("gogitaiNo", gogitaiNo);
+        this.setOriginalData("henkoMaeNendoNaiKaisaiKaisu", henkoMaeNendoNaiKaisaiKaisu);
     }
 
-    public dgShinsakaiKaisaiGogitaiJoho_Row(TextBoxNum number, RString gogitaiMeisho, RString shurui, RString shinsakaiIin1, RString shinsakaiIin2, RString shinsakaiIin3, RString shinsakaiIin4, RString shinsakaiIin5, RString shinsakaiIin6, RString shinsakaiIin7, RString shinsakaiIin8, RString shinsakaiIin9, RString shinsakaiIin10, TextBoxDate yukoKikanKaishiYMD, TextBoxDate yukoKikanShuryoYMD) {
+    public dgShinsakaiKaisaiGogitaiJoho_Row(TextBoxNum number, RString gogitaiMeisho, RString shurui, RString shinsakaiIin1, RString shinsakaiIin2, RString shinsakaiIin3, RString shinsakaiIin4, RString shinsakaiIin5, RString shinsakaiIin6, RString shinsakaiIin7, RString shinsakaiIin8, RString shinsakaiIin9, RString shinsakaiIin10, TextBoxDate yukoKikanKaishiYMD, TextBoxDate yukoKikanShuryoYMD, TextBoxNum nendoNaiKaisaiKaisu, RString gogitaiNo, TextBoxNum henkoMaeNendoNaiKaisaiKaisu) {
         super();
         this.setOriginalData("number", number);
         this.setOriginalData("gogitaiMeisho", gogitaiMeisho);
@@ -90,6 +99,9 @@ public class dgShinsakaiKaisaiGogitaiJoho_Row extends DataRow {
         this.setOriginalData("shinsakaiIin10", shinsakaiIin10);
         this.setOriginalData("yukoKikanKaishiYMD", yukoKikanKaishiYMD);
         this.setOriginalData("yukoKikanShuryoYMD", yukoKikanShuryoYMD);
+        this.setOriginalData("nendoNaiKaisaiKaisu", nendoNaiKaisaiKaisu);
+        this.setOriginalData("gogitaiNo", gogitaiNo);
+        this.setOriginalData("henkoMaeNendoNaiKaisaiKaisu", henkoMaeNendoNaiKaisaiKaisu);
         this.number = number;
         this.gogitaiMeisho = gogitaiMeisho;
         this.shurui = shurui;
@@ -105,6 +117,9 @@ public class dgShinsakaiKaisaiGogitaiJoho_Row extends DataRow {
         this.shinsakaiIin10 = shinsakaiIin10;
         this.yukoKikanKaishiYMD = yukoKikanKaishiYMD;
         this.yukoKikanShuryoYMD = yukoKikanShuryoYMD;
+        this.nendoNaiKaisaiKaisu = nendoNaiKaisaiKaisu;
+        this.gogitaiNo = gogitaiNo;
+        this.henkoMaeNendoNaiKaisaiKaisu = henkoMaeNendoNaiKaisaiKaisu;
     }
 
     public TextBoxNum getNumber() {
@@ -165,6 +180,18 @@ public class dgShinsakaiKaisaiGogitaiJoho_Row extends DataRow {
 
     public TextBoxDate getYukoKikanShuryoYMD() {
         return yukoKikanShuryoYMD;
+    }
+
+    public TextBoxNum getNendoNaiKaisaiKaisu() {
+        return nendoNaiKaisaiKaisu;
+    }
+
+    public RString getGogitaiNo() {
+        return gogitaiNo;
+    }
+
+    public TextBoxNum getHenkoMaeNendoNaiKaisaiKaisu() {
+        return henkoMaeNendoNaiKaisaiKaisu;
     }
 
     public void setNumber(TextBoxNum number) {
@@ -240,6 +267,21 @@ public class dgShinsakaiKaisaiGogitaiJoho_Row extends DataRow {
     public void setYukoKikanShuryoYMD(TextBoxDate yukoKikanShuryoYMD) {
         this.setOriginalData("yukoKikanShuryoYMD", yukoKikanShuryoYMD);
         this.yukoKikanShuryoYMD = yukoKikanShuryoYMD;
+    }
+
+    public void setNendoNaiKaisaiKaisu(TextBoxNum nendoNaiKaisaiKaisu) {
+        this.setOriginalData("nendoNaiKaisaiKaisu", nendoNaiKaisaiKaisu);
+        this.nendoNaiKaisaiKaisu = nendoNaiKaisaiKaisu;
+    }
+
+    public void setGogitaiNo(RString gogitaiNo) {
+        this.setOriginalData("gogitaiNo", gogitaiNo);
+        this.gogitaiNo = gogitaiNo;
+    }
+
+    public void setHenkoMaeNendoNaiKaisaiKaisu(TextBoxNum henkoMaeNendoNaiKaisaiKaisu) {
+        this.setOriginalData("henkoMaeNendoNaiKaisaiKaisu", henkoMaeNendoNaiKaisaiKaisu);
+        this.henkoMaeNendoNaiKaisaiKaisu = henkoMaeNendoNaiKaisaiKaisu;
     }
 
     // </editor-fold>

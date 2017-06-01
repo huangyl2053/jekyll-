@@ -6,10 +6,16 @@
 package jp.co.ndensan.reams.db.dbe.business.report.johoteikyoshiryo;
 
 import jp.co.ndensan.reams.db.dbe.entity.report.johoteikyoshiryo.JohoTeikyoShiryoReportSource;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 要介護認定結果情報提供票（主治医）のEditorです。
@@ -89,7 +95,18 @@ public class JohoTeikyoShiryoEditor implements IJohoTeikyoShiryoEditor {
             source.sonota = item.getSonota();
             source.tsuchibun2 = item.getTsuchibun2();
             source.yubinNo = item.getYubinNo();
+            setAccessLogInfo(source);
         }
         return source;
+    }
+    
+    private void setAccessLogInfo(JohoTeikyoShiryoReportSource source) {
+        RStringBuilder 識別コードStr = new RStringBuilder();
+        識別コードStr.append(item.getShoKisaiHokenshaNo().getColumnValue().substring(0, 5));
+        識別コードStr.append(item.getHihokenshaNo());
+        ShikibetsuCode 識別コード = new ShikibetsuCode(識別コードStr.toRString());
+        ExpandedInformation 拡張情報 = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.getShinseishoKanriNo());
+        source.識別コード = 識別コード;
+        source.拡張情報 = 拡張情報;
     }
 }

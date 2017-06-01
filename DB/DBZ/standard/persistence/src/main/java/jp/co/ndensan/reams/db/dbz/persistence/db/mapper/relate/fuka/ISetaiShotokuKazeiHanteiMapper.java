@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.fuka;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.fuka.SetaiHaakuMybatisParameter;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.fuka.SetaiShotokuKazeiHanteiMybatisParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbV2502KaigoShotokuEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.fuka.SetaiHaakuResultEntity;
@@ -26,9 +27,10 @@ public interface ISetaiShotokuKazeiHanteiMapper {
     /**
      * 世帯員把握入力住所地特例該当が１
      *
+     * @param parameter
      * @return List<SetaiHaakuEntity>
      */
-    List<SetaiHakuEntity> select世帯員把握入力_1();
+    List<SetaiHakuEntity> select世帯員把握入力_1(SetaiHaakuMybatisParameter parameter);
 
     /**
      * select世帯員把握入力

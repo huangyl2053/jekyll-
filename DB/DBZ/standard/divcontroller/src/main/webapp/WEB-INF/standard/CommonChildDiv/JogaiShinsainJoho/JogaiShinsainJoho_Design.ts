@@ -32,6 +32,10 @@ module DBZ {
                 return "onClick_btnToroku";
             }
 
+            public static onClick_btnCancel(): string {
+                return "onClick_btnCancel";
+            }
+
             public static onClick_btnModoru(): string {
                 return "onClick_btnModoru";
             }
@@ -81,8 +85,8 @@ module DBZ {
                 return new UZA.Panel(this.convFiledName("ShinsakaiIinJoho"));
             }
 
-            public txtShinsakaiIinCode(): UZA.TextBox {
-                return new UZA.TextBox(this.convFiledName("txtShinsakaiIinCode"));
+            public txtShinsakaiIinCode(): UZA.TextBoxCode {
+                return new UZA.TextBoxCode(this.convFiledName("txtShinsakaiIinCode"));
             }
 
             public btnShinsakaiIinGuide(): UZA.ButtonDialog {
@@ -103,6 +107,14 @@ module DBZ {
 
             public btnToroku(): UZA.Button {
                 return new UZA.Button(this.convFiledName("btnToroku"));
+            }
+
+            public btnCancel(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnCancel"));
+            }
+
+            public horizonLine1(): UZA.HorizontalLine {
+                return new UZA.HorizontalLine(this.convFiledName("horizonLine1"));
             }
 
             public btnModoru(): UZA.Button {

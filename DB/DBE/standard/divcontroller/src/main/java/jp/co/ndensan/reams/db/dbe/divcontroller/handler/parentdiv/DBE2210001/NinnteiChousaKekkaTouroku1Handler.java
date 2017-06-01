@@ -114,6 +114,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.chosakekkainfogaikyo.ChosaKekkaInfoGaikyoFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.ichijipanteisyori.IChiJiPanTeiSyoRiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5105NinteiKanryoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
@@ -230,9 +231,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
         NinnteiChousaKekkaTouroku1Finder finder = NinnteiChousaKekkaTouroku1Finder.createInstance();
         TempData 概況調査情報 = finder.get概況調査情報(申請書管理番号, 認定調査履歴番号);
         initialize概況基本調査情報(申請書管理番号, 認定調査履歴番号, 概況調査情報);
-        ChosaJisshishaJohoModel model = new ChosaJisshishaJohoModel();
-        setChosaJisshishaJohoModel(model, 申請書管理番号, 認定調査履歴番号, 概況調査情報);
-        調査実施者情報子DIV初期化(model);
+        調査実施者情報子DIV初期化(setChosaJisshishaJohoModel(申請書管理番号, 認定調査履歴番号, 概況調査情報));
     }
 
     private void initialize概況基本調査情報(ShinseishoKanriNo 申請書管理番号, Integer 認定調査履歴番号, TempData 概況調査情報) {
@@ -550,7 +549,8 @@ public class NinnteiChousaKekkaTouroku1Handler {
         return 出力イメージフォルダパス;
     }
 
-    private void setChosaJisshishaJohoModel(ChosaJisshishaJohoModel model, ShinseishoKanriNo 申請書管理番号, int 認定調査履歴番号, TempData 概況調査情報) {
+    private ChosaJisshishaJohoModel setChosaJisshishaJohoModel(ShinseishoKanriNo 申請書管理番号, int 認定調査履歴番号, TempData 概況調査情報) {
+        ChosaJisshishaJohoModel model = new ChosaJisshishaJohoModel();
         model.set申請書管理番号(申請書管理番号.getColumnValue());
         model.set認定調査依頼履歴番号(認定調査履歴番号);
         if (概況調査情報 != null) {
@@ -575,6 +575,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
             model.setイメージテキスト区分(ViewStateHolder.get(ViewStateKeys.概況調査テキスト_イメージ区分, RString.class));
             model.set実施場所ImagePath(ViewStateHolder.get(ViewStateKeys.イメージ情報, RString.class));
         }
+        return model;
     }
 
     private void 基本調査の初期化(ShinseishoKanriNo 申請書管理番号, boolean isExistsKihonChosaData, Integer 認定調査履歴番号) {
@@ -1511,13 +1512,10 @@ public class NinnteiChousaKekkaTouroku1Handler {
         }
         NinteichosahyoGaikyoChosaBuilder dbt5202builder = dbt5202.createBuilderForEdit();
 
-        RString 認定調査依頼区分コード;
-        if (NinteiChousaIraiKubunCode.初回.get名称().equals(div.getCcdChosaJisshishaJoho().getTxtChosaKubun().getValue())) {
-            認定調査依頼区分コード = NinteiChousaIraiKubunCode.初回.getコード();
-        } else if (NinteiChousaIraiKubunCode.再調査.get名称().equals(div.getCcdChosaJisshishaJoho().getTxtChosaKubun().getValue())) {
-            認定調査依頼区分コード = NinteiChousaIraiKubunCode.再調査.getコード();
+        if (ChosaKubun.新規調査.get名称().equals(div.getCcdChosaJisshishaJoho().getTxtChosaKubun().getValue())) {
+            dbt5202builder.set認定調査区分コード(ChosaKubun.新規調査.asCode());
         } else {
-            認定調査依頼区分コード = NinteiChousaIraiKubunCode.再依頼.getコード();
+            dbt5202builder.set認定調査区分コード(ChosaKubun.再調査.asCode());
         }
 
         RString サービス区分コード = div.getRadGenzaiservis().getSelectedKey();
@@ -1540,7 +1538,7 @@ public class NinnteiChousaKekkaTouroku1Handler {
         if (!EntityDataState.Modified.equals(dbt5202builder.getEntityDataState())) {
             dbt5202builder.set認定調査受領年月日(FlexibleDate.getNowDate());
         }
-        dbt5202builder.set認定調査区分コード(new Code(認定調査依頼区分コード));
+
         dbt5202builder.set認定調査委託先コード(new JigyoshaNo(div.getCcdChosaJisshishaJoho().getTxtShozokuKikanCode().getText()));
         dbt5202builder.set認定調査員コード(div.getCcdChosaJisshishaJoho().getTxtKinyushaCode().getText());
         dbt5202builder.set認定調査実施場所コード(new Code(div.getCcdChosaJisshishaJoho().getDdlChosaJisshiBasho().getSelectedKey()));

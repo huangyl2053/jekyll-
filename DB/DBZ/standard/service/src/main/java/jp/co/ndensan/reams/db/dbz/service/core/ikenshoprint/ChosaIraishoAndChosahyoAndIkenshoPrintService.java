@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.service.core.ikenshoprint;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoDonyuKeitai;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -16,12 +17,18 @@ import jp.co.ndensan.reams.db.dbz.business.core.ninteichosahyotokkijiko.Chosahyo
 import jp.co.ndensan.reams.db.dbz.business.report.chosahyokihonchosakatamen.ChosahyoKihonchosaKatamenItem;
 import jp.co.ndensan.reams.db.dbz.business.report.chosahyokihonchosakatamen.ChosahyoKihonchosaKatamenProperty;
 import jp.co.ndensan.reams.db.dbz.business.report.chosahyokihonchosakatamen.ChosahyoKihonchosaKatamenReport;
+import jp.co.ndensan.reams.db.dbz.business.report.chosahyomatome.ChosahyoMatomeItem;
+import jp.co.ndensan.reams.db.dbz.business.report.chosahyomatome.ChosahyoMatomeProperty;
+import jp.co.ndensan.reams.db.dbz.business.report.chosahyomatome.ChosahyoMatomeReport;
 import jp.co.ndensan.reams.db.dbz.business.report.chosairaiichiranhyo.ChosaIraiIchiranhyoBodyItem;
 import jp.co.ndensan.reams.db.dbz.business.report.chosairaiichiranhyo.ChosaIraiIchiranhyoProperty;
 import jp.co.ndensan.reams.db.dbz.business.report.chosairaiichiranhyo.ChosaIraiIchiranhyoReport;
 import jp.co.ndensan.reams.db.dbz.business.report.chosairaisho.ChosaIraishoHeadItem;
 import jp.co.ndensan.reams.db.dbz.business.report.chosairaisho.ChosaIraishoProperty;
 import jp.co.ndensan.reams.db.dbz.business.report.chosairaisho.ChosaIraishoReport;
+import jp.co.ndensan.reams.db.dbz.business.report.ikenshoassortment.IkenshoAssortmentItem;
+import jp.co.ndensan.reams.db.dbz.business.report.ikenshoassortment.IkenshoAssortmentProperty;
+import jp.co.ndensan.reams.db.dbz.business.report.ikenshoassortment.IkenshoAssortmentReport;
 import jp.co.ndensan.reams.db.dbz.business.report.ikenshokinyuyoshi.IkenshokinyuyoshiProperty;
 import jp.co.ndensan.reams.db.dbz.business.report.ikenshokinyuyoshi.IkenshokinyuyoshiReport;
 import jp.co.ndensan.reams.db.dbz.business.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoItem;
@@ -54,11 +61,15 @@ import jp.co.ndensan.reams.db.dbz.business.report.shujiiikensho.ShujiiIkenshoSak
 import jp.co.ndensan.reams.db.dbz.business.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoItem;
 import jp.co.ndensan.reams.db.dbz.business.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoProperty;
 import jp.co.ndensan.reams.db.dbz.business.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoReport;
+import jp.co.ndensan.reams.db.dbz.definition.core.chosahyomatome.ChosahyoMatomeLayout;
+import jp.co.ndensan.reams.db.dbz.definition.core.ikenshoassortment.IkenshoAssortmentLayout;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
 import jp.co.ndensan.reams.db.dbz.entity.report.chosahyokihonchosakatamen.ChosahyoKihonchosaKatamenReportSource;
+import jp.co.ndensan.reams.db.dbz.entity.report.chosahyomatome.ChosahyoMatomeReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.chosairaiichiranhyo.ChosaIraiIchiranhyoReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.chosairaisho.ChosaIraishoReportSource;
+import jp.co.ndensan.reams.db.dbz.entity.report.ikenshoassortment.IkenshoAssortmentReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.ikenshokinyuyoshi.IkenshokinyuyoshiReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.ikenshosakuseiiraiichiranhyo.IkenshoSakuseiIraiIchiranhyoReportSource;
 import jp.co.ndensan.reams.db.dbz.entity.report.kaigohokenshindanmeireisho.KaigohokenShindanMeireishoReportSource;
@@ -96,6 +107,9 @@ import jp.co.ndensan.reams.uz.uza.report.source.breaks.BreakAggregator;
 public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
 
     private final ReportManager reportManager;
+    private static final RString 意見書依頼書 = new RString("iraisho");
+    private static final RString 意見書提出用 = new RString("teishutsu");
+    private static final RString 命令書 = new RString("meireisho");
 
     /**
      * コンストラクタです。
@@ -178,7 +192,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
                         item.getHomonChosasakiTelNo(),
                         item.getShinseiYMD(),
                         item.getTeishutsuKigen(),
-                        item.getTsuchibun2());
+                        item.getTsuchibun2(),
+                        item.getShikibetsuCode(),
+                        item.getExpandedInformation());
                 要介護認定調査依頼書.add(item);
             }
             ChosaIraishoReport report = ChosaIraishoReport.createFrom(要介護認定調査依頼書);
@@ -246,7 +262,9 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
                         item.getListIchiranhyo_11(),
                         item.getListIchiranhyo_12(),
                         item.getShichosonCode(),
-                        item.getChosaItakusakiCode()));
+                        item.getChosaItakusakiCode(),
+                        item.getShinseishoKanriNo(),
+                        item.getShokisaiHokenshaNo()));
             }
             ChosaIraiIchiranhyoReport report = ChosaIraiIchiranhyoReport.createFrom(itemList);
             report.writeBy(reportSourceWriter);
@@ -645,6 +663,124 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
             }
         }
     }
+    
+    /**
+     * 認定調査票個人別まとめ印刷です。
+     * @param items List<ChosahyoMatomeItem>
+     * @param isRyomen true:両面印刷する
+     * @param 証記載保険者番号 ShoKisaiHokenshaNo
+     */
+    public void print調査票個人別(List<ChosahyoMatomeItem> items, boolean isRyomen, ShoKisaiHokenshaNo 証記載保険者番号) {
+        ChosahyoMatomeProperty property = new ChosahyoMatomeProperty();
+        try (ReportAssembler<ChosahyoMatomeReportSource> assembler = createAssembler(property, reportManager, items.get(0).getLayout().getIndex())) {
+            ReportSourceWriter<ChosahyoMatomeReportSource> writer = new ReportSourceWriter(assembler);
+            
+            boolean is認定広域 = false;
+            KaigoAtesakiJushoSetteiFinder finader = KaigoAtesakiJushoSetteiFinder.createInstance();
+            List<KaigoDonyuKeitai> 介護導入形態 = finader.select介護導入形態().records();
+            for (KaigoDonyuKeitai item : 介護導入形態) {
+                if (GyomuBunrui.介護認定.equals(item.get業務分類()) && DonyuKeitaiCode.認定広域.equals(item.get導入形態コード())) {
+                    is認定広域 = true;
+                }
+            }
+            NinshoshaSource ninshoshaSource;
+            if (is認定広域) {
+                ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE220001.getReportId(), FlexibleDate.getNowDate(),
+                        NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, writer, 証記載保険者番号);
+            } else {
+                ninshoshaSource = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE220001.getReportId(), FlexibleDate.getNowDate(),
+                        NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, writer);
+            }
+            
+            for (ChosahyoMatomeItem item : items) {
+                if (item.getLayout().equals(ChosahyoMatomeLayout.認定調査依頼書)) {
+                    item.setDenshiKoin(ninshoshaSource.denshiKoin);
+                    item.setNinshoshaYakushokuMei(ninshoshaSource.ninshoshaYakushokuMei);
+                    item.setNinshoshaYakushokuMei1(ninshoshaSource.ninshoshaYakushokuMei1);
+                    item.setNinshoshaYakushokuMei2(ninshoshaSource.ninshoshaYakushokuMei2);
+                    item.setNinshoshaShimeiKakenai(ninshoshaSource.ninshoshaShimeiKakenai);
+                    item.setNinshoshaShimeiKakeru(ninshoshaSource.ninshoshaShimeiKakeru);
+                    item.setKoinMojiretsu(ninshoshaSource.koinMojiretsu);
+                    item.setKoinShoryaku(ninshoshaSource.koinShoryaku);
+                }
+            }
+            ChosahyoMatomeReport report = ChosahyoMatomeReport.createFromList(items, isRyomen);
+            report.writeBy(writer);
+        }
+    }
+    
+    /**
+     * 意見書まとめて印刷です。
+     * @param items List<IkenshoAssortmentItem>
+     * @param isRyomen true:両面印刷する
+     * @param ninteiHantei チェックした依頼書
+     * @param 証記載保険者番号 ShoKisaiHokenshaNo
+     */
+    public void print意見書個人別(List<IkenshoAssortmentItem> items, boolean isRyomen,
+            Set<RString> ninteiHantei, ShoKisaiHokenshaNo 証記載保険者番号) {
+        IkenshoAssortmentProperty property = new IkenshoAssortmentProperty();
+        try (ReportAssembler<IkenshoAssortmentReportSource> assembler
+                = createAssembler(property, reportManager, items.get(0).getLayout().getIndex())) {
+            ReportSourceWriter<IkenshoAssortmentReportSource> writer = new ReportSourceWriter(assembler);
+            NinshoshaSource ninshoshaSourceIraisho = null;
+            NinshoshaSource ninshoshaSourceTeishutsu = null;
+            NinshoshaSource ninshoshaSourceMeireisho = null;
+            //ここに認証者セットを追加する
+            boolean is認定広域 = false;
+            KaigoAtesakiJushoSetteiFinder finader = KaigoAtesakiJushoSetteiFinder.createInstance();
+            List<KaigoDonyuKeitai> 介護導入形態 = finader.select介護導入形態().records();
+            for (KaigoDonyuKeitai keitai : 介護導入形態) {
+                if (GyomuBunrui.介護認定.equals(keitai.get業務分類()) && DonyuKeitaiCode.認定広域.equals(keitai.get導入形態コード())) {
+                    is認定広域 = true;
+                }
+            }
+            if (ninteiHantei.contains(意見書依頼書)) {
+                if (is認定広域) {
+                    ninshoshaSourceIraisho = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE230001.getReportId(),
+                            FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, writer,
+                            証記載保険者番号);
+                } else {
+                    ninshoshaSourceIraisho = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE230001.getReportId(),
+                            FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, writer);
+                }
+            }
+            if (ninteiHantei.contains(意見書提出用)) {
+                if (is認定広域) {
+                    ninshoshaSourceTeishutsu = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE236001.getReportId(),
+                            FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, writer, 
+                            証記載保険者番号);
+                } else {
+                    ninshoshaSourceTeishutsu = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE236001.getReportId(),
+                            FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, writer, 
+                            証記載保険者番号);
+                }
+            }
+            if (ninteiHantei.contains(命令書)) {
+                if (is認定広域) {
+                    ninshoshaSourceMeireisho = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE230002.getReportId(),
+                            FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, writer, 
+                            証記載保険者番号);
+                } else {
+                    ninshoshaSourceMeireisho = ReportUtil.get認証者情報(SubGyomuCode.DBE認定支援, ReportIdDBZ.DBE230002.getReportId(),
+                            FlexibleDate.getNowDate(), NinshoshaDenshikoinshubetsuCode.認定用印.getコード(), KenmeiFuyoKubunType.付与なし, writer);
+                }
+            }
+            for (IkenshoAssortmentItem item : items) {
+                if (ninshoshaSourceIraisho != null && item.getLayout() == IkenshoAssortmentLayout.主治医意見書作成依頼書) {
+                    setNinshosha(item, ninshoshaSourceIraisho);
+                }
+                if (ninshoshaSourceTeishutsu != null && item.getLayout() == IkenshoAssortmentLayout.介護保険指定医依頼兼主治医意見書提出依頼書) {
+                    setNinshosha(item, ninshoshaSourceTeishutsu);
+                }
+                if (ninshoshaSourceMeireisho != null && item.getLayout() == IkenshoAssortmentLayout.介護保険診断命令書) {
+                    setNinshosha(item, ninshoshaSourceMeireisho);
+                }
+            }
+            IkenshoAssortmentReport report = IkenshoAssortmentReport.createFromList(items, isRyomen);
+            report.writeBy(writer);
+        }
+        
+    }
 
     private List<ShujiiIkenshoTeishutsuIraishoItem> setNishosha(List<ShujiiIkenshoTeishutsuIraishoItem> itemList, NinshoshaSource ninshosha) {
         List<ShujiiIkenshoTeishutsuIraishoItem> resultList = new ArrayList<>();
@@ -660,5 +796,17 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintService {
             resultList.add(item);
         }
         return resultList;
+    }
+    
+    private IkenshoAssortmentItem setNinshosha(IkenshoAssortmentItem item, NinshoshaSource ninshosha) {
+        item.setDenshiKoin(ninshosha.denshiKoin);
+        item.setNinshoshaYakushokuMei(ninshosha.ninshoshaYakushokuMei);
+        item.setNinshoshaYakushokuMei1(ninshosha.ninshoshaYakushokuMei1);
+        item.setNinshoshaYakushokuMei2(ninshosha.ninshoshaYakushokuMei2);
+        item.setNinshoshaShimeiKakenai(ninshosha.ninshoshaShimeiKakenai);
+        item.setNinshoshaShimeiKakeru(ninshosha.ninshoshaShimeiKakeru);
+        item.setKoinMojiretsu(ninshosha.koinMojiretsu);
+        item.setKoinShoryaku(ninshosha.koinShoryaku);
+        return item;
     }
 }

@@ -537,4 +537,6 @@ public class DbT3095JutakuKaishuRiyushoTesuryoMeisaiEntity extends DbTableEntity
 
 // </editor-fold>
 
+
+
 }

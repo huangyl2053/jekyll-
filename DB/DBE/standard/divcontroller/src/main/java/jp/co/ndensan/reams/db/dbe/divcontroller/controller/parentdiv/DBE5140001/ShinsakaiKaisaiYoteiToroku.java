@@ -6,9 +6,12 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5140001;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiKaisaiYoteiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiKaisaiYoteiJohoBuilder;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiKaisaiYoteiJohoIdentifier;
@@ -16,6 +19,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.gogitaijohoshinsakai.GogitaiJoho
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho2;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakai.shinsakaiwariateiinjoho.ShinsakaiWariateIinJoho2Builder;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikaisaikekka.ShinsakaiKaisaiYoteiJohoBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.core.exclusion.LockingKeys;
 import jp.co.ndensan.reams.db.dbe.definition.core.hoshu.GogitaichoKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.KaigoninteiShinsakaiGichoKubunCode;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.dbe5140001.ShinsakaiKaisaiYoteiJohoParameter;
@@ -78,6 +82,7 @@ import jp.co.ndensan.reams.uz.uza.workflow.parameter.FlowParameters;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5503ShinsakaiWariateIinJohoEntity;
+import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 
 /**
  *
@@ -166,13 +171,36 @@ public class ShinsakaiKaisaiYoteiToroku {
      * 画面初期化処理です。
      *
      * @param div 画面情報
-     * @return ResponseData<ShinsakaiKaisaiYoteiTorokuDiv>
+     * @return ResponseData
      */
     public ResponseData<ShinsakaiKaisaiYoteiTorokuDiv> onLoad(ShinsakaiKaisaiYoteiTorokuDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
+        if (!RealInitialLocker.tryGetLock(LockingKeys.審査会開催予定登録.value())) {
+            div.setReadOnly(true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnHozon"), true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnSchedule"), true);
+            return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
+        }
+        return initialize(div);
+    }
+
+    private ResponseData<ShinsakaiKaisaiYoteiTorokuDiv> initialize(ShinsakaiKaisaiYoteiTorokuDiv div) {
         this.div = div;
         init(RString.EMPTY);
         ViewStateHolder.put(ViewStateKeys.保存フラグ, false);
         return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 画面再表示時の処理です。
+     *
+     * @param div 画面情報
+     * @return ResponseData
+     */
+    public ResponseData<ShinsakaiKaisaiYoteiTorokuDiv> onActive(ShinsakaiKaisaiYoteiTorokuDiv div) {
+        return initialize(div);
     }
 
     /**
@@ -661,6 +689,7 @@ public class ShinsakaiKaisaiYoteiToroku {
         モード = モード_クリア;
         yoteiJohoEntityList2.removeAll(removeList);
         set介護認定審査会開催予定一覧(div.getTxtSeteibi().getValue().getYearMonth().toDateString());
+        updatedGogitaiJohosWithAdditionalPlan(div, ShinsakaiKaisaiYoteiToroku.yoteiJohoEntityList2);
         set開催予定入力欄(div.getTxtSeteibi().getValue());
         set変更前(div.getDgKaisaiYoteiNyuryokuran().getDataSource());
         return ResponseData.of(div).respond();
@@ -684,6 +713,7 @@ public class ShinsakaiKaisaiYoteiToroku {
         ViewStateHolder.put(ViewStateKeys.押下フラグ, 登録ボタン押下);
         モード = モード_登録;
         set介護認定審査会開催予定一覧(getLblMonth(div.getLblMonth().getText()));
+        updatedGogitaiJohosWithAdditionalPlan(div, ShinsakaiKaisaiYoteiToroku.yoteiJohoEntityList2);
         set開催予定入力欄(指定日);
         div.getShinsakaiKaisaiYoteiIchiran().getBtnWeekCopy().setDisabled(true);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnHozon"), false);
@@ -773,6 +803,7 @@ public class ShinsakaiKaisaiYoteiToroku {
             }
             モード = モード_週COPY;
             set介護認定審査会開催予定一覧(getLblMonth(div.getLblMonth().getText()));
+            updatedGogitaiJohosWithAdditionalPlan(div, ShinsakaiKaisaiYoteiToroku.yoteiJohoEntityList2);
             if (div.getTxtSeteibi().getValue() != null) {
                 set開催予定入力欄(div.getTxtSeteibi().getValue());
             }
@@ -910,7 +941,7 @@ public class ShinsakaiKaisaiYoteiToroku {
             ViewStateHolder.put(ViewStateKeys.保存フラグ, true);
             div.getLblMonth2()
                     .setText(年月);
-            set介護認定審査会開催予定一覧(new RString(div.getTxtSeteibi().getValue().getYearMonth().toString()));
+            set介護認定審査会開催予定一覧(getLblMonth(div.getLblMonth().getText()));
             div.getDgShinsakaiKaisaiYoteiIchiran()
                     .setDisabled(true);
             div.getTxtCopyFrom()
@@ -1085,7 +1116,7 @@ public class ShinsakaiKaisaiYoteiToroku {
         return true;
     }
 
-    private RString getLblMonth(RString formatMonth) {
+    private static RString getLblMonth(RString formatMonth) {
         return formatMonth.replace(NENNDO, RString.EMPTY).replace(GETSU, RString.EMPTY);
     }
 
@@ -1223,6 +1254,7 @@ public class ShinsakaiKaisaiYoteiToroku {
         SearchResult<GogitaiJohoShinsaRelateBusiness> gogitaiBusinessList
                 = gogitaiManager.get合議体情報(date.getYearMonth().toDateString(), new RString(date.getLastDay()), RString.EMPTY);
         set合議体情報(gogitaiBusinessList);
+        updatedGogitaiJohosWithAdditionalPlan(div, ShinsakaiKaisaiYoteiToroku.yoteiJohoEntityList2);
         div.getTxtSeteibi().setValue(date);
         if (date.getDayValue() == 1) {
             div.getBtnDayBefore().setDisabled(true);
@@ -1262,6 +1294,7 @@ public class ShinsakaiKaisaiYoteiToroku {
                 = gogitaiManager.get合議体情報(date2.getYearMonth().toDateString(), new RString(date2.getLastDay()), RString.EMPTY);
 
         set合議体情報(gogitaiBusinessList);
+        updatedGogitaiJohosWithAdditionalPlan(div, ShinsakaiKaisaiYoteiToroku.yoteiJohoEntityList2);
         clear入力();
         set変更前(div.getDgKaisaiYoteiNyuryokuran().getDataSource());
         div.getDgKaisaiYoteiNyuryokuran().setDisabled(true);
@@ -1292,6 +1325,7 @@ public class ShinsakaiKaisaiYoteiToroku {
                 = gogitaiManager.get合議体情報(date2.getYearMonth().toDateString(), new RString(date2.getLastDay()), RString.EMPTY);
 
         set合議体情報(gogitaiBusinessList);
+        updatedGogitaiJohosWithAdditionalPlan(div, ShinsakaiKaisaiYoteiToroku.yoteiJohoEntityList2);
         clear入力();
         set変更前(div.getDgKaisaiYoteiNyuryokuran().getDataSource());
         div.getDgKaisaiYoteiNyuryokuran().setDisabled(true);
@@ -1321,6 +1355,7 @@ public class ShinsakaiKaisaiYoteiToroku {
                 = gogitaiManager.get合議体情報(date2.getYearMonth().toDateString(), new RString(date2.getLastDay()), RString.EMPTY);
 
         set合議体情報(gogitaiBusinessList);
+        updatedGogitaiJohosWithAdditionalPlan(div, ShinsakaiKaisaiYoteiToroku.yoteiJohoEntityList2);
         clear入力();
         set変更前(div.getDgKaisaiYoteiNyuryokuran().getDataSource());
         div.getDgKaisaiYoteiNyuryokuran().setDisabled(true);
@@ -1701,7 +1736,52 @@ public class ShinsakaiKaisaiYoteiToroku {
         gogitaiJohoRow.setShinsakaiIin1(business.get介護認定審査会委員氏名());
         gogitaiJohoRow.getYukoKikanKaishiYMD().setValue(new RDate(business.get有効期間開始年月日().toString()));
         gogitaiJohoRow.getYukoKikanShuryoYMD().setValue(new RDate(business.get有効期間終了年月日().toString()));
+        Decimal nendoNaiKaisaiCount = new Decimal(business.get年度内開催回数());
+        gogitaiJohoRow.getNendoNaiKaisaiKaisu().setValue(nendoNaiKaisaiCount);
+        gogitaiJohoRow.getHenkoMaeNendoNaiKaisaiKaisu().setValue(nendoNaiKaisaiCount);
+        gogitaiJohoRow.setGogitaiNo(new RString(business.get合議体番号()));
         gogitaiJohoRowList.add(gogitaiJohoRow);
+    }
+
+    private static void updatedGogitaiJohosWithAdditionalPlan(ShinsakaiKaisaiYoteiTorokuDiv div,
+            final Collection<? extends ShinsakaiKaisaiYoteiJohoParameter> editedPlans) {
+        if (editedPlans.isEmpty()) {
+            return;
+        }
+
+        FlexibleYear nendo = new FlexibleDate(getLblMonth(div.getLblMonth().getText())).getNendo();
+        Map<RString, Integer> added = findAdditionalPlansCountPerGogitaiNoOn(nendo, editedPlans);
+        List<dgShinsakaiKaisaiGogitaiJoho_Row> rows = new ArrayList<>();
+        for (dgShinsakaiKaisaiGogitaiJoho_Row row : div.getDgShinsakaiKaisaiGogitaiJoho().getDataSource()) {
+            RString gogitaiNo = row.getGogitaiNo();
+            int count = added.containsKey(gogitaiNo) ? added.get(gogitaiNo) : 0;
+            Decimal priserved = row.getHenkoMaeNendoNaiKaisaiKaisu().getValue();
+            row.getNendoNaiKaisaiKaisu().setValue(priserved.add(count));
+            rows.add(row);
+        }
+        div.getDgShinsakaiKaisaiGogitaiJoho().setDataSource(rows);
+    }
+
+    private static Map<RString, Integer> findAdditionalPlansCountPerGogitaiNoOn(FlexibleYear nendo,
+            final Iterable<? extends ShinsakaiKaisaiYoteiJohoParameter> editedPlans) {
+        Map<RString, Integer> map = new HashMap<>();
+        for (ShinsakaiKaisaiYoteiJohoParameter p : editedPlans) {
+            RString gogitaiNo = new RString(p.get合議体番号());
+            if (p.is存在()) {
+                continue;
+            }
+            FlexibleDate date = p.get日付();
+            if (!date.isValid() || !nendo.equals(date.getNendo())) {
+                continue;
+            }
+            if (!map.containsKey(gogitaiNo)) {
+                map.put(gogitaiNo, 1);
+                continue;
+            }
+            int cValue = map.get(gogitaiNo);
+            map.put(gogitaiNo, cValue + 1);
+        }
+        return map;
     }
 
     private void set開催予定入力欄(RDate 指定日) {

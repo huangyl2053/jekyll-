@@ -8,18 +8,27 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.saikinsho
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.ninteisaikinshorisha.NinteiSaikinShorisha;
+import jp.co.ndensan.reams.db.dbz.business.core.ninteisaikinshorisha.NinteiSaikinShorishas;
 import jp.co.ndensan.reams.db.dbz.business.core.validation.CommonValidationMessage;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT7501NinteiSaikinShorishaEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.saikinshorisha.SaikinShorishaService;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.TypeSafeKey;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
+import jp.co.ndensan.reams.uz.uza.ui.session.PanelSessionAccessor;
 
 /**
  * 最近処理者共有子DivのHandlerクラスです。
  */
 public class SaikinShorishaHandler {
+
+    private static final TypeSafeKey<NinteiSaikinShorishas> KEY;
+
+    static {
+        KEY = TypeSafeKey.create(NinteiSaikinShorishas.class, "最近処理者");
+    }
 
     private final SaikinShorishaDiv div;
 
@@ -31,12 +40,13 @@ public class SaikinShorishaHandler {
      * 最近処理者共有子Divを初期化します。
      */
     public void initialize(ShoKisaiHokenshaNo 証記載保険者番号) {
-        List<DbT7501NinteiSaikinShorishaEntity> entities = new SaikinShorishaService().findTarget(証記載保険者番号);
+        NinteiSaikinShorishas entities = new SaikinShorishaService().findTarget(証記載保険者番号);
         List<KeyValueDataSource> items = new ArrayList<>();
-        for (DbT7501NinteiSaikinShorishaEntity entity : entities) {
-            items.add(new KeyValueDataSource(entity.getHihokenshaNo(), entity.getHihokenshaNo().concat("　").concat(entity.getHihokenshaName())));
+        for (NinteiSaikinShorisha entity : entities) {
+            items.add(new KeyValueDataSource(entity.getKey(), entity.composeDisplayName()));
         }
         div.getDdlSaikinShorisha().setDataSource(items);
+        PanelSessionAccessor.put(div, KEY.value(), entities);
     }
 
     /**
@@ -67,13 +77,18 @@ public class SaikinShorishaHandler {
         new SaikinShorishaService().update(hihokenshaNo, hihokenshaName, 証記載保険者番号);
     }
 
+    public NinteiSaikinShorisha getSelectedItem() {
+        return PanelSessionAccessor.get(div, KEY.value(), KEY.type()).find(div.getDdlSaikinShorisha().getSelectedKey());
+    }
+
     /**
      * 現在選択されている被保険者番号を返します。
      *
      * @return
      */
     public RString getSelectedHihokenshaNo() {
-        return div.getDdlSaikinShorisha().getSelectedKey();
+        NinteiSaikinShorisha selected = getSelectedItem();
+        return selected == null ? RString.EMPTY : selected.getHihokenshaNo();
     }
 
 }

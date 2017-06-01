@@ -30,4 +30,5 @@ public class NinteiChosaIraiRelateEntity {
     private RString telNo;
     private RString ninteiChosainNo;
     private RString chosainShimei;
+    private RString shinseishoKanriNo;
 }

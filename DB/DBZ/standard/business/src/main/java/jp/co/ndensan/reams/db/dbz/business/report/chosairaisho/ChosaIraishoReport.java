@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbz.business.report.chosairaisho;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.entity.report.chosairaisho.ChosaIraishoReportSource;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -17,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class ChosaIraishoReport extends Report<ChosaIraishoReportSource> {
 
+    private static final int LENGTH = 6;
     private final List<ChosaIraishoHeadItem> headItemList;
     private final ChosaIraishoHeadItem headItem;
 
@@ -60,7 +62,9 @@ public class ChosaIraishoReport extends Report<ChosaIraishoReportSource> {
     @Override
     public void writeBy(ReportSourceWriter<ChosaIraishoReportSource> reportSourceWriter) {
         if (headItemList != null) {
+            int i = 1;
             for (ChosaIraishoHeadItem item : headItemList) {
+                item.setAtenaRemban(new RString(i++).padZeroToLeft(LENGTH));
                 IChosaIraishoEditor headerEditor = new ChosaIraishoHeaderEditor(item);
                 IChosaIraishoBuilder builder = new ChosaIraishoBuilderImpl(headerEditor);
                 reportSourceWriter.writeLine(builder);

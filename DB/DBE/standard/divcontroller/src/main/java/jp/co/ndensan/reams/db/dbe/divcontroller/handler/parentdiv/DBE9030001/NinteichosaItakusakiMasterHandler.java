@@ -85,6 +85,7 @@ public class NinteichosaItakusakiMasterHandler {
                     SubGyomuCode.DBE認定支援, new LasdecCode("000000"), new RString("四マスタ優先表示市町村識別ID"));
     private static final RString 預金種別 = new RString("預金種別");
     private static final RString 預金種目 = new RString("預金種目");
+    private static final RString 空白 = new RString("");
 
     /**
      * コンストラクタです。
@@ -104,6 +105,8 @@ public class NinteichosaItakusakiMasterHandler {
     public void onLoad() {
         div.getChosainSearch().getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護認定);
         div.getChosainSearch().getRadSearchChosainJokyo().setSelectedKey(new RString("key0"));
+        div.getChosainSearch().getTxtSearchChosaItakusakiCodeFrom().clearValue();
+        div.getChosainSearch().getTxtSearchChosaItakusakiCodeTo().clearValue();
         List<KeyValueDataSource> chosaItakuKubunCodes = new ArrayList<>();
         chosaItakuKubunCodes.add(new KeyValueDataSource(SELECTKEY_空白, RString.EMPTY));
         chosaItakuKubunCodes.addAll(createListFromChosaItakuKubunCodeASC());
@@ -207,7 +210,7 @@ public class NinteichosaItakusakiMasterHandler {
         List<YokinShubetsuPattern> yokinShubetsuPatternlist = div.getChosaitakusakiJohoInput().getKozaJoho().
                 getCcdKozaJohoMeisaiKinyuKikanInput().get金融機関().get預金種別リスト();
         List<KeyValueDataSource> yokinShubetsuList = new ArrayList<>();
-        yokinShubetsuList.add(new KeyValueDataSource(SELECTKEY_空白, RString.EMPTY));
+        yokinShubetsuList.add(new KeyValueDataSource(空白, RString.EMPTY));
         for (YokinShubetsuPattern yokinShubetsuPattern : yokinShubetsuPatternlist) {
             KeyValueDataSource keyValueDataSource = new KeyValueDataSource();
             keyValueDataSource.setKey(yokinShubetsuPattern.get預金種別コード());
@@ -264,11 +267,12 @@ public class NinteichosaItakusakiMasterHandler {
         div.getChosaitakusakiJohoInput().getRadautowatitsuke().setSelectedKey(有効);
         div.getChosaitakusakiJohoInput().getRadChosainJokyo().setSelectedKey(有効);
         div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().clear();
-        div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().setSelectedIndex(0);
+        div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().setSelectedKey(空白);
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().clearValue();
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().clearValue();
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKanjiMeiginin().clearValue();
-
+        div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenBan().clearValue();
+        div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenMei().clearValue();
     }
 
     /**
@@ -303,6 +307,7 @@ public class NinteichosaItakusakiMasterHandler {
      *
      */
     public void set修正状態() {
+        clear();
         div.set状態(修正状態コード);
         div.getChosaitakusakiJohoInput().getDdlItakusakikubun().getDataSource().clear();
         div.getChosaitakusakiJohoInput().getDdlItakusakikubun().getDataSource().addAll(createListFromChosaItakuKubunCodeASC());
@@ -329,6 +334,7 @@ public class NinteichosaItakusakiMasterHandler {
      *
      */
     public void set削除状態() {
+        clear();
         div.set状態(削除状態コード);
         div.getChosaitakusakiJohoInput().getDdlItakusakikubun().getDataSource().clear();
         div.getChosaitakusakiJohoInput().getDdlItakusakikubun().getDataSource().addAll(createListFromChosaItakuKubunCodeASC());
@@ -413,7 +419,7 @@ public class NinteichosaItakusakiMasterHandler {
                 div.getChosaitakusakiJohoInput().getDdlKikankubun().getSelectedValue(),
                 div.getChosaitakusakiJohoInput().getRadChosainJokyo().getSelectedValue(),
                 div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().value(),
-                div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().value(),
+                get支店コード(),
                 convertYokinShubetsu(div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().getSelectedKey()),
                 div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().getValue(),
                 div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().getValue(),
@@ -715,7 +721,16 @@ public class NinteichosaItakusakiMasterHandler {
         //口座情報
         div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().search(
                 new KinyuKikanCode(row.getKinyuKikanCode()), new KinyuKikanShitenCode(row.getKinyuKikanShitenCode()), FlexibleDate.getNowDate());
-        div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().setSelectedKey(row.getYokinShubetsu().isEmpty() ? new RString(0) : row.getYokinShubetsu());
+        if (div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().isゆうちょ銀行()) {
+            div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenBan().setValue(row.getKinyuKikanShitenCode());
+            div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenMei().setValue(
+                    div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().
+                    get金融機関支店().get支店名称());
+            div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().search(
+                    new KinyuKikanCode(row.getKinyuKikanCode()), new KinyuKikanShitenCode(RString.EMPTY), FlexibleDate.getNowDate());
+        }
+        setKozaJoho();
+        div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().setSelectedKey(row.getYokinShubetsu());
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().setValue(row.getKozaNo());
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().setValue(row.getKozaMeigininKana());
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKanjiMeiginin().setValue(row.getKozaMeiginin());
@@ -744,6 +759,7 @@ public class NinteichosaItakusakiMasterHandler {
         div.getChosaitakusakiJohoInput().getRadChosainJokyo().setDisabled(isDisabled);
         div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().setDisabled(isDisabled);
         div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().setDisabled(isDisabled);
+        div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenBan().setDisabled(isDisabled);
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo().setDisabled(isDisabled);
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKozaMeiginin().setDisabled(isDisabled);
         div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKanjiMeiginin().setDisabled(isDisabled);
@@ -797,8 +813,7 @@ public class NinteichosaItakusakiMasterHandler {
                 ? RString.EMPTY : div.getChosaitakusakiJohoInput().getRadChosainJokyo().getSelectedValue());
         builder.append(div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode() == null
                 ? RString.EMPTY : div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode());
-        builder.append(div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode() == null
-                ? RString.EMPTY : div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode());
+        builder.append(get支店コード() == null ? RString.EMPTY : get支店コード());
         builder.append(div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().getSelectedKey() == null
                 ? RString.EMPTY : div.getChosaitakusakiJohoInput().getKozaJoho().getDdlYokinShubetsu().getSelectedValue());
         builder.append(div.getChosaitakusakiJohoInput().getKozaJoho().getTxtGinkoKozaNo() == null
@@ -809,4 +824,13 @@ public class NinteichosaItakusakiMasterHandler {
                 ? RString.EMPTY : div.getChosaitakusakiJohoInput().getKozaJoho().getTxtKanjiMeiginin().getValue());
         return builder.toRString();
     }
+
+    private RString get支店コード() {
+        if (div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().isゆうちょ銀行()) {
+            return div.getChosaitakusakiJohoInput().getKozaJoho().getTxtTenBan().getValue();
+        } else {
+            return div.getChosaitakusakiJohoInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().value();
+        }
+    }
+
 }

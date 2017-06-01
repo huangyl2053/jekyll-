@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.kouhoushajoho;
 
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.biz.YMDHMS;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -22,6 +24,7 @@ public class KouhoushaJohoParameter {
     private FlexibleDate 基準日;
     private YMDHMS バッチ処理日時;
     private RString 減免減額種類;
+    private final UaFt200FindShikibetsuTaishoParam psmShikibetsuTaisho;
 
     /**
      * コンストラクタです。
@@ -29,11 +32,13 @@ public class KouhoushaJohoParameter {
      * @param 基準日 FlexibleDate
      * @param バッチ処理日時 YMDHMS
      * @param 減免減額種類 RString
+     * @param searchKey
      */
-    public KouhoushaJohoParameter(FlexibleDate 基準日, YMDHMS バッチ処理日時, RString 減免減額種類) {
+    public KouhoushaJohoParameter(FlexibleDate 基準日, YMDHMS バッチ処理日時, RString 減免減額種類, IShikibetsuTaishoPSMSearchKey searchKey) {
         this.基準日 = 基準日;
         this.バッチ処理日時 = バッチ処理日時;
         this.減免減額種類 = 減免減額種類;
+        this.psmShikibetsuTaisho = new UaFt200FindShikibetsuTaishoParam(searchKey);
     }
 
 }

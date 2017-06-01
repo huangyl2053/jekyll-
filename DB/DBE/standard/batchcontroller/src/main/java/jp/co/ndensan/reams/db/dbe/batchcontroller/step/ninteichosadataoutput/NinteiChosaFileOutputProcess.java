@@ -7,10 +7,14 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteichosadataoutput;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteichosadataoutput.NinteiChosaDataOutputResult;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosadataoutput.NinteiChosaFileOutputProcessParamter;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaOutputPersonalDataEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
+import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
+import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.api.EucOtherInfo;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
@@ -20,6 +24,9 @@ import jp.co.ndensan.reams.uz.uza.io.ZipUtil;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
@@ -27,8 +34,11 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
  *
  * @author n3509
  */
-public class NinteiChosaFileOutputProcess extends SimpleBatchProcessBase {
+public class NinteiChosaFileOutputProcess extends BatchProcessBase<NinteiChosaOutputPersonalDataEntity> {
 
+    private static final RString MYBATIS_SELECT_ID = new RString(
+            "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosadataoutput.INinteiChosaDataOutputMapper."
+            + "getPersonalData");
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBE224005");
     private static final EucEntityId EUC_ENTITY_ID_DATA = new EucEntityId("DBE224001");
     private static final EucEntityId EUC_ENTITY_ID_TOKKI = new EucEntityId("DBE224003");
@@ -39,6 +49,8 @@ public class NinteiChosaFileOutputProcess extends SimpleBatchProcessBase {
     private RString eucFilePath;
     private static final RString underscore = new RString("_");
     private static final RString ZIP拡張子 = new RString(".zip");
+    private final NinteiChosaDataOutputResult business = new NinteiChosaDataOutputResult();
+    private final List<PersonalData> personalDataList = new ArrayList<>();
 
     @Override
     protected void beforeExecute() {
@@ -50,19 +62,26 @@ public class NinteiChosaFileOutputProcess extends SimpleBatchProcessBase {
     }
 
     @Override
-    protected void process() {
+    protected IBatchReader createReader() {
+        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.toNinteiChosaFileOutputMybitisParameter());
+    }
+
+    @Override
+    protected void process(NinteiChosaOutputPersonalDataEntity entity) {
+        PersonalData personalData = business.getPersonalData(entity);
+        personalDataList.add(personalData);
+    }
+
+    @Override
+    protected void afterExecute() {
         List<RString> filePathes = new ArrayList<>();
         filePathes.add(Path.combinePath(processParamter.getTempFilePath(), EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, EUC_ENTITY_ID_DATA.toRString())));
         filePathes.add(Path.combinePath(processParamter.getTempFilePath(), EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, EUC_ENTITY_ID_TOKKI.toRString())));
         filePathes.add(Path.combinePath(processParamter.getTempFilePath(), EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, EUC_ENTITY_ID_GAIKYO.toRString())));
         filePathes.add(Path.combinePath(processParamter.getTempFilePath(), EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, EUC_ENTITY_ID_CHOSAIN.toRString())));
-
         ZipUtil.createFromFiles(eucFilePath, filePathes);
-    }
-
-    @Override
-    protected void afterExecute() {
-        manager.spool(eucFilePath);
+        AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+        manager.spool(eucFilePath, accessLogUUID);
     }
 
 }

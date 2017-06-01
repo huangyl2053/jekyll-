@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.shinsataishodataoutput;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.definition.processprm.shinsataishodataoutput.ShinsaTaishoDataOutPutProcessParammeter;
+import jp.co.ndensan.reams.db.dbe.definition.processprm.shinsataishodataoutput.ShinsakaiFileOutputProcessParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.batch.process.SimpleBatchProcessBase;
@@ -35,7 +35,7 @@ public class ShinsakaiFileOutputProcess extends SimpleBatchProcessBase {
     private static final EucEntityId EUC_ENTITY_ID_GAIKYO = new EucEntityId("DBE518003");
     private static final EucEntityId EUC_ENTITY_ID_KIHON = new EucEntityId("DBE518004");
     private static final EucEntityId EUC_ENTITY_ID_CODE = new EucEntityId("DBE518005");
-    private ShinsaTaishoDataOutPutProcessParammeter processParamter;
+    private ShinsakaiFileOutputProcessParameter processParamter;
     private FileSpoolManager manager;
     private RString eucFilePath;
     private static final RString underscore = new RString("_");
@@ -64,6 +64,6 @@ public class ShinsakaiFileOutputProcess extends SimpleBatchProcessBase {
 
     @Override
     protected void afterExecute() {
-        manager.spool(eucFilePath);
+        manager.spool(eucFilePath, processParamter.getAccessLogUUID());
     }
 }

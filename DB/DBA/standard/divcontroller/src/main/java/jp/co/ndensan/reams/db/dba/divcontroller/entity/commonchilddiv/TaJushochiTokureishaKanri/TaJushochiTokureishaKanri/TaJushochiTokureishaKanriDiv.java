@@ -33,8 +33,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
  * @reamsid_L DBA-0200-010 linghuhang
  */
 public class TaJushochiTokureishaKanriDiv extends Panel implements ITaJushochiTokureishaKanriDiv {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-16_09-04-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -172,7 +171,7 @@ public class TaJushochiTokureishaKanriDiv extends Panel implements ITaJushochiTo
             DisplayMode[] enumArray = DisplayMode.values();
 
             for (DisplayMode enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) {
+                if (str.equals(enumStr.name.toString())) { 
                     return enumStr;
                 }
             }
@@ -187,11 +186,11 @@ public class TaJushochiTokureishaKanriDiv extends Panel implements ITaJushochiTo
     }
 
     public DisplayMode getMode_DisplayMode() {
-        return (DisplayMode) _CommonChildDivModeUtil.getMode(this.modes, DisplayMode.class);
+        return (DisplayMode) _CommonChildDivModeUtil.getMode( this.modes, DisplayMode.class );
     }
 
-    public void setMode_DisplayMode(DisplayMode value) {
-        _CommonChildDivModeUtil.setMode(this.modes, DisplayMode.class, value);
+    public void setMode_DisplayMode( DisplayMode value ) {
+        _CommonChildDivModeUtil.setMode( this.modes, DisplayMode.class , value );
     }
 
     /*
@@ -203,7 +202,7 @@ public class TaJushochiTokureishaKanriDiv extends Panel implements ITaJushochiTo
     }
 
     @JsonIgnore
-    public void setTxtNyusyobi(TextBoxDate txtNyusyobi) {
+    public void  setTxtNyusyobi(TextBoxDate txtNyusyobi) {
         this.getTajushochiTokureiInput().setTxtNyusyobi(txtNyusyobi);
     }
 
@@ -213,7 +212,7 @@ public class TaJushochiTokureishaKanriDiv extends Panel implements ITaJushochiTo
     }
 
     @JsonIgnore
-    public void setTxtTekiyobi(TextBoxDate txtTekiyobi) {
+    public void  setTxtTekiyobi(TextBoxDate txtTekiyobi) {
         this.getTajushochiTokureiInput().setTxtTekiyobi(txtTekiyobi);
     }
 
@@ -223,7 +222,7 @@ public class TaJushochiTokureishaKanriDiv extends Panel implements ITaJushochiTo
     }
 
     @JsonIgnore
-    public void setTxtTekiyoTodokedebi(TextBoxDate txtTekiyoTodokedebi) {
+    public void  setTxtTekiyoTodokedebi(TextBoxDate txtTekiyoTodokedebi) {
         this.getTajushochiTokureiInput().setTxtTekiyoTodokedebi(txtTekiyoTodokedebi);
     }
 
@@ -233,7 +232,7 @@ public class TaJushochiTokureishaKanriDiv extends Panel implements ITaJushochiTo
     }
 
     @JsonIgnore
-    public void setDdlTekiyoJiyo(DropDownList ddlTekiyoJiyo) {
+    public void  setDdlTekiyoJiyo(DropDownList ddlTekiyoJiyo) {
         this.getTajushochiTokureiInput().setDdlTekiyoJiyo(ddlTekiyoJiyo);
     }
 
@@ -243,7 +242,7 @@ public class TaJushochiTokureishaKanriDiv extends Panel implements ITaJushochiTo
     }
 
     @JsonIgnore
-    public void setTxtTasyobi(TextBoxDate txtTasyobi) {
+    public void  setTxtTasyobi(TextBoxDate txtTasyobi) {
         this.getTajushochiTokureiInput().setTxtTasyobi(txtTasyobi);
     }
 
@@ -253,7 +252,7 @@ public class TaJushochiTokureishaKanriDiv extends Panel implements ITaJushochiTo
     }
 
     @JsonIgnore
-    public void setTxtKaijyobi(TextBoxDate txtKaijyobi) {
+    public void  setTxtKaijyobi(TextBoxDate txtKaijyobi) {
         this.getTajushochiTokureiInput().setTxtKaijyobi(txtKaijyobi);
     }
 
@@ -263,7 +262,7 @@ public class TaJushochiTokureishaKanriDiv extends Panel implements ITaJushochiTo
     }
 
     @JsonIgnore
-    public void setTxtKaijyoTodokedebi(TextBoxDate txtKaijyoTodokedebi) {
+    public void  setTxtKaijyoTodokedebi(TextBoxDate txtKaijyoTodokedebi) {
         this.getTajushochiTokureiInput().setTxtKaijyoTodokedebi(txtKaijyoTodokedebi);
     }
 
@@ -273,7 +272,7 @@ public class TaJushochiTokureishaKanriDiv extends Panel implements ITaJushochiTo
     }
 
     @JsonIgnore
-    public void setDdlKaijyoJiyo(DropDownList ddlKaijyoJiyo) {
+    public void  setDdlKaijyoJiyo(DropDownList ddlKaijyoJiyo) {
         this.getTajushochiTokureiInput().setDdlKaijyoJiyo(ddlKaijyoJiyo);
     }
 
@@ -283,7 +282,7 @@ public class TaJushochiTokureishaKanriDiv extends Panel implements ITaJushochiTo
     }
 
     @JsonIgnore
-    public void setPanSotimotoJyoho(panSotimotoJyohoDiv panSotimotoJyoho) {
+    public void  setPanSotimotoJyoho(panSotimotoJyohoDiv panSotimotoJyoho) {
         this.getTajushochiTokureiInput().setPanSotimotoJyoho(panSotimotoJyoho);
     }
 
@@ -293,7 +292,7 @@ public class TaJushochiTokureishaKanriDiv extends Panel implements ITaJushochiTo
     }
 
     @JsonIgnore
-    public void setTxtHihoNo(TextBoxCode txtHihoNo) {
+    public void  setTxtHihoNo(TextBoxCode txtHihoNo) {
         this.getTajushochiTokureiInput().getPanSotimotoJyoho().setTxtHihoNo(txtHihoNo);
     }
 
@@ -308,7 +307,7 @@ public class TaJushochiTokureishaKanriDiv extends Panel implements ITaJushochiTo
     }
 
     @JsonIgnore
-    public void setPanShisetsuJoho(panShisetsuJohoDiv panShisetsuJoho) {
+    public void  setPanShisetsuJoho(panShisetsuJohoDiv panShisetsuJoho) {
         this.getTajushochiTokureiInput().setPanShisetsuJoho(panShisetsuJoho);
     }
 
@@ -323,7 +322,7 @@ public class TaJushochiTokureishaKanriDiv extends Panel implements ITaJushochiTo
     }
 
     @JsonIgnore
-    public void setBtnKakunin(Button btnKakunin) {
+    public void  setBtnKakunin(Button btnKakunin) {
         this.getTajushochiTokureiInput().setBtnKakunin(btnKakunin);
     }
 
@@ -333,7 +332,7 @@ public class TaJushochiTokureishaKanriDiv extends Panel implements ITaJushochiTo
     }
 
     @JsonIgnore
-    public void setBtnTorikeshi(Button btnTorikeshi) {
+    public void  setBtnTorikeshi(Button btnTorikeshi) {
         this.getTajushochiTokureiInput().setBtnTorikeshi(btnTorikeshi);
     }
 

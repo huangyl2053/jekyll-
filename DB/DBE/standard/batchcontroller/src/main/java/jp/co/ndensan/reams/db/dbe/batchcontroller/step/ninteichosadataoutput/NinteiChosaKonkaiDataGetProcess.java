@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteichosadataoutput;
 
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosadataoutput.NinteiChosaDataOutputProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaDataOutputBatchRelateEntity;
+import jp.co.ndensan.reams.db.dbz.service.core.ninteichosa.NinteichosaContextService;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -26,6 +27,7 @@ public class NinteiChosaKonkaiDataGetProcess extends BatchProcessBase<NinteiChos
     private NinteiChosaDataOutputProcessParamter processParamter;
     @BatchWriter
     private BatchEntityCreatedTempTableWriter<NinteiChosaDataOutputBatchRelateEntity> tempTableWriter;
+    private NinteichosaContextService service;
 
     @Override
     protected IBatchReader createReader() {
@@ -39,7 +41,18 @@ public class NinteiChosaKonkaiDataGetProcess extends BatchProcessBase<NinteiChos
     }
 
     @Override
+    protected void beforeExecute() {
+        this.service = NinteichosaContextService.createInstance();
+    }
+
+    @Override
     protected void process(NinteiChosaDataOutputBatchRelateEntity entity) {
+        if (RString.isNullOrEmpty(entity.get認定調査区分コード())) {
+            entity.set認定調査区分コード(
+                    service.findChosaKubun(entity.get申請書管理番号(), entity.get認定調査依頼履歴番号().toInt())
+                    .getコード()
+            );
+        }
         tempTableWriter.insert(entity);
     }
 

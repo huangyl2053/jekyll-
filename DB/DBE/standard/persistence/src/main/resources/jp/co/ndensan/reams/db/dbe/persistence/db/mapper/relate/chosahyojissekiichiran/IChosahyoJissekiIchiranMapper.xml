@@ -41,7 +41,7 @@
         AND A."gaikyoChosaTextImageKubun" <![CDATA[<]]> B."gaikyoChosaTextImageKubun"
         ) ) AS T5202
         INNER JOIN rgdb."DbT5101NinteiShinseiJoho" AS T5101
-        ON T5101."shinseishoKanriNo" = T5202."shinseishoKanriNo"	
+        ON T5101."shinseishoKanriNo" = T5202."shinseishoKanriNo"
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS T7051
         ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo"
         INNER JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS T5910
@@ -105,7 +105,7 @@
             </if>
         </where>
     </sql>
-    
+
     <sql id="group">
         GROUP BY T7051."shoKisaiHokenshaNo"
         , T7051."shichosonMeisho"

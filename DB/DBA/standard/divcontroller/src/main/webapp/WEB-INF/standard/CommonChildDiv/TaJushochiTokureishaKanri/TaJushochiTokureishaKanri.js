@@ -66,7 +66,7 @@ var DBA;
                 };
 
                 DisplayMode.prototype.Teisei = function () {
-                    this.controls.btnAdd().displayNone = false;
+                    this.controls.btnAdd().displayNone = true;
                     this.controls.btnKakunin().displayNone = false;
                     this.controls.btnTorikeshi().displayNone = false;
 
@@ -100,7 +100,7 @@ var DBA;
                 };
 
                 DisplayMode.prototype.Tekiyo = function () {
-                    this.controls.btnAdd().displayNone = false;
+                    this.controls.btnAdd().displayNone = true;
                     this.controls.btnKakunin().displayNone = false;
                     this.controls.btnTorikeshi().displayNone = false;
 
@@ -110,7 +110,7 @@ var DBA;
                     gridSetting.isShowRowState = false;
                     gridSetting.isShowSelectButtonColumn = false;
                     gridSetting.isShowModifyButtonColumn = true;
-                    gridSetting.isShowDeleteButtonColumn = true;
+                    gridSetting.isShowDeleteButtonColumn = false;
 
                     this.controls.dgJushochiTokureiRireki().gridSetting = gridSetting;
 

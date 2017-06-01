@@ -59,10 +59,38 @@
      "type": "end",
      "layoutSubGyomuCode": "DBE",
      "layoutName": "DBE5410001",
-     "layoutTitle": "要介護認定個人状況照会",
+     "layoutTitle": " ",
      "eventName": "処理完了",
      "destroy": false,
      "condition": ""
+    },
+    {
+     "id": "6",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE5410001",
+     "layoutTitle": " ",
+     "eventName": "申請情報照会に遷移する",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE1010001",
+     "toLayoutTitle": "要介護認定申請（みなし２号）登録",
+     "toState": "照会"
+    },
+    {
+     "id": "7",
+     "type": "ordinal",
+     "layoutSubGyomuCode": "DBE",
+     "layoutName": "DBE1010001",
+     "layoutTitle": "要介護認定申請（みなし２号）登録",
+     "eventName": "個人状況に戻る",
+     "destroy": false,
+     "condition": "",
+     "toLayoutSubGyomuCode": "DBE",
+     "toLayoutName": "DBE5410001",
+     "toLayoutTitle": " ",
+     "toState": "default"
     }
    ]
   }

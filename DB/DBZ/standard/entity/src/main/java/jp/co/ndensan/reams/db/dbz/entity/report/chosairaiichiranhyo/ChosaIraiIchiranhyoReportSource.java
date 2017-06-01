@@ -5,9 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.report.chosairaiichiranhyo;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 認定調査依頼一覧表Sourceクラスです。
@@ -91,4 +95,8 @@ public class ChosaIraiIchiranhyoReportSource implements IReportSource {
     public RString shichosoncode;
     @ReportItem(name = "chosaitakusakicode", order = 999)
     public RString chosaitakusakicode;
+    @ReportPerson(id = "X")
+    public ShikibetsuCode 識別コード;
+    @ReportExpandedInfo(id = "X")
+    public ExpandedInformation 拡張情報;
 }

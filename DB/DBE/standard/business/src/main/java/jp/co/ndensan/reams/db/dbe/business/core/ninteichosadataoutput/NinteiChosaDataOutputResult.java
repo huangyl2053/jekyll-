@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiC
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaDataOutputBatchRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaDataOutputBatchRelateZenkaiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaDataOutputEucCsvEntity;
+import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaOutputPersonalDataEntity;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping02A;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping06A;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosahyou.NinteichosaKomokuMapping09A;
@@ -897,12 +898,13 @@ public class NinteiChosaDataOutputResult {
     /**
      * アクセスログを出力するためのPersonalDataを取得するメソッドです。
      *
-     * @param 申請書管理番号 申請書管理番号
+     * @param entity
      * @return PersonalData
      */
-    public PersonalData getPersonalData(RString 申請書管理番号) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号);
-        return PersonalData.of(ShikibetsuCode.EMPTY, expandedInfo);
+    public PersonalData getPersonalData(NinteiChosaOutputPersonalDataEntity entity) {
+        ShikibetsuCode shikibetsuCode = new ShikibetsuCode(entity.get証記載保険者番号().substring(0, 5).concat(entity.get被保険者番号()));
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.get申請書管理番号());
+        return PersonalData.of(shikibetsuCode, expandedInfo);
     }
 
 }

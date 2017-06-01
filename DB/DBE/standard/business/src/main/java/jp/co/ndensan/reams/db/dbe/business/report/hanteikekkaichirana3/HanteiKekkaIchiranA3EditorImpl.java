@@ -8,6 +8,8 @@ package jp.co.ndensan.reams.db.dbe.business.report.hanteikekkaichirana3;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkaichirana3.HanteiKekkaIchiranA3Entity;
 import jp.co.ndensan.reams.db.dbe.entity.report.hanteikekkaichirana3.HanteiKekkaIchiranA3ReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaSupport;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
@@ -16,6 +18,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 要介護認定判定結果一覧表Ａ３版のEditorです。
@@ -118,6 +121,8 @@ public class HanteiKekkaIchiranA3EditorImpl implements IHanteiKekkaIchiranA3Edit
         source.listHanteikekka_26 = entity.get二号特定疾病コード();
         source.listHanteikekka_27 = entity.get二号特定疾病内容();
         source.listHanteikekka_28 = entity.get介護認定審査会意見();
+        source.識別コード = new ShikibetsuCode(entity.get証記載保険者番号().substring(0, 5).concat(entity.get被保険者番号()));
+        source.拡張情報 = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.get申請書管理番号());
         return source;
     }
 

@@ -276,10 +276,10 @@ public class ShujiiIkenshoSakuseiIrai {
         ViewStateHolder.put(ViewStateKeys.証記載保険者番号, 保険者番号);
         return ResponseData.of(div).setState(DBE2300001StateName.初期表示);
     }
-    
+
     /**
      * 主治医入力ダイアログがOkCloseで操作時
-     * 
+     *
      * @param div コントロールdiv
      * @return レスポンスデータ
      */
@@ -366,42 +366,30 @@ public class ShujiiIkenshoSakuseiIrai {
                 if (!RString.isNullOrEmpty(row.getSakuseiryoSeikyuKubunCode())) {
                     作成料請求区分Code = new Code(row.getSakuseiryoSeikyuKubunCode());
                 }
-                if (IkenshoIraiKubun.初回依頼.get名称().equals(row.getIkenshoIraiKubun())) {
-                    ShujiiIkenshoIraiJoho shujiiIkenshoIraiJoho = new ShujiiIkenshoIraiJoho(申請書管理番号, 主治医意見書作成依頼履歴番号);
-                    shujiiIkenshoIraiJoho = shujiiIkenshoIraiJoho.createBuilderForEdit()
-                            .set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()))
-                            .set主治医医療機関コード(主治医医療機関コード)
-                            .set主治医コード(主治医コード)
-                            .set主治医意見書依頼区分(IkenshoIraiKubun.初回依頼.getコード())
-                            .set主治医意見書作成回数(1)
-                            .set医師区分コード(医師区分コード)
-                            .set主治医意見書作成依頼年月日(主治医意見書作成依頼年月日)
-                            .set主治医意見書作成期限年月日(主治医意見書作成期限年月日)
-                            .set作成料請求区分(作成料請求区分Code)
-                            .set論理削除フラグ(false)
-                            .build();
-                    shujiiIkenshoIraiJohoManager.save主治医意見書作成依頼情報(shujiiIkenshoIraiJoho);
-                    update要介護認定申請情報(申請書管理番号, 主治医コード, 主治医医療機関コード, row, div.getCcdShujiiIryoKikanAndShujiiInput().hasShiteii());
-                } else {
-                    ShujiiIkenshoIraiJoho shujiiIkenshoIraiJoho = new ShujiiIkenshoIraiJoho(申請書管理番号, 主治医意見書作成依頼履歴番号);
-                    shujiiIkenshoIraiJoho = shujiiIkenshoIraiJoho.createBuilderForEdit()
-                            .set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()))
-                            .set主治医医療機関コード(主治医医療機関コード)
-                            .set主治医コード(主治医コード)
-                            .set主治医意見書依頼区分(IkenshoIraiKubun.再依頼.getコード())
-                            .set主治医意見書作成回数(1)
-                            .set医師区分コード(医師区分コード)
-                            .set主治医意見書作成依頼年月日(主治医意見書作成依頼年月日)
-                            .set主治医意見書作成期限年月日(主治医意見書作成期限年月日)
-                            .set作成料請求区分(作成料請求区分Code)
-                            .set論理削除フラグ(false)
-                            .build();
-                    shujiiIkenshoIraiJohoManager.save主治医意見書作成依頼情報(shujiiIkenshoIraiJoho);
-                    update要介護認定申請情報(申請書管理番号, 主治医コード, 主治医医療機関コード, row, div.getCcdShujiiIryoKikanAndShujiiInput().hasShiteii());
-                }
+                IkenshoIraiKubun iraiKubun = toIkenshoIraiKubun(row.getIkenshoIraiKubun());
+                ShujiiIkenshoIraiJoho shujiiIkenshoIraiJoho = new ShujiiIkenshoIraiJoho(申請書管理番号, 主治医意見書作成依頼履歴番号);
+                shujiiIkenshoIraiJoho = shujiiIkenshoIraiJoho.createBuilderForEdit()
+                        .set厚労省IF識別コード(new Code(row.getKoroshoIfShikibetsuCode()))
+                        .set主治医医療機関コード(主治医医療機関コード)
+                        .set主治医コード(主治医コード)
+                        .set主治医意見書依頼区分(iraiKubun.getコード())
+                        .set主治医意見書作成回数(iraiKubun == IkenshoIraiKubun.初回依頼 ? 1 : 2) //正確な回数はシステムで利用しない。
+                        .set医師区分コード(医師区分コード)
+                        .set主治医意見書作成依頼年月日(主治医意見書作成依頼年月日)
+                        .set主治医意見書作成期限年月日(主治医意見書作成期限年月日)
+                        .set作成料請求区分(作成料請求区分Code)
+                        .set論理削除フラグ(false)
+                        .build();
+                shujiiIkenshoIraiJohoManager.save主治医意見書作成依頼情報(shujiiIkenshoIraiJoho);
+                update要介護認定申請情報(申請書管理番号, 主治医コード, 主治医医療機関コード, row, div.getCcdShujiiIryoKikanAndShujiiInput().hasShiteii());
             }
         }
         div.getDgWaritsukeZumiShinseishaIchiran().setDataSource(割付済み申請者List);
+    }
+
+    private static IkenshoIraiKubun toIkenshoIraiKubun(RString displayName) {
+        IkenshoIraiKubun i = IkenshoIraiKubun.toValueFromName(displayName);
+        return i == null ? IkenshoIraiKubun.初回依頼 : i;
     }
 
     private void update要介護認定申請情報(ShinseishoKanriNo 申請書管理番号, RString 主治医コード,

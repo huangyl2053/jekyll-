@@ -18,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class SearchConditionPanelDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-10_08-47-42">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -35,10 +35,10 @@ public class SearchConditionPanelDiv extends Panel {
     private TextBoxNum txtDispMax;
     @JsonProperty("btnClear")
     private Button btnClear;
-    @JsonProperty("ccdShujiiIryokikanAndShujiiInput")
-    private ShujiiIryokikanAndShujiiInputDiv ccdShujiiIryokikanAndShujiiInput;
     @JsonProperty("ccdHokensha")
     private HokenshaListDiv ccdHokensha;
+    @JsonProperty("ccdShujiiIryokikanAndShujiiInput")
+    private ShujiiIryokikanAndShujiiInputDiv ccdShujiiIryokikanAndShujiiInput;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -137,21 +137,21 @@ public class SearchConditionPanelDiv extends Panel {
     }
 
     /*
-     * getccdShujiiIryokikanAndShujiiInput
-     * @return ccdShujiiIryokikanAndShujiiInput
-     */
-    @JsonProperty("ccdShujiiIryokikanAndShujiiInput")
-    public IShujiiIryokikanAndShujiiInputDiv getCcdShujiiIryokikanAndShujiiInput() {
-        return ccdShujiiIryokikanAndShujiiInput;
-    }
-
-    /*
      * getccdHokensha
      * @return ccdHokensha
      */
     @JsonProperty("ccdHokensha")
     public IHokenshaListDiv getCcdHokensha() {
         return ccdHokensha;
+    }
+
+    /*
+     * getccdShujiiIryokikanAndShujiiInput
+     * @return ccdShujiiIryokikanAndShujiiInput
+     */
+    @JsonProperty("ccdShujiiIryokikanAndShujiiInput")
+    public IShujiiIryokikanAndShujiiInputDiv getCcdShujiiIryokikanAndShujiiInput() {
+        return ccdShujiiIryokikanAndShujiiInput;
     }
 
     // </editor-fold>

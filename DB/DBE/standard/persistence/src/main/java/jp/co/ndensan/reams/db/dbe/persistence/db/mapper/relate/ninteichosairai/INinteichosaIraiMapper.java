@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosairaijoho.ninteishi
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.tyousai.ninteichosaitakusakijoho.NinteichosaItakusakiJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5913ChosainJohoEntity;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
  * 完了処理・認定調査依頼のマッパーインタフェースです。
@@ -68,7 +67,7 @@ public interface INinteichosaIraiMapper {
      * @param parameter 検索パラメータ
      * @return 最大の認定調査依頼履歴番号
      */
-    RString selectMax認定調査依頼履歴番号(NinteichosaIraiParameter parameter);
+    int selectMax認定調査依頼履歴番号(NinteichosaIraiParameter parameter);
 
     /**
      * モバイルデータの申請書管理番号より、最新認定調査依頼情報を取得します。

@@ -29,7 +29,7 @@ public class DBD560001 extends BatchFlowBase<DBD560001Parameter> {
 
     @Override
     protected void initialize() {
-        code = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定).get導入形態コード().value();
+        code = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務).get導入形態コード().value();
     }
 
     @Override

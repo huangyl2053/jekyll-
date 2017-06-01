@@ -138,7 +138,6 @@ public class KogakugassanShikyushinseishoOutSofuFileSakuseiProcess extends Batch
         RString 主キー = mapper.get業務別主キー(mybatis);
         IKozaSearchKey searchKey = new KozaSearchKeyBuilder()
                 .set業務コード(GyomuCode.DB介護保険)
-                .setサブ業務コード(SubGyomuCode.DBC介護給付)
                 .set科目コード(介護給付_高額合算.getコード())
                 .set業務別主キー(主キー)
                 .set用途区分(new KozaYotoKubunCodeValue(KozaYotoKubunType.振込口座.getCode()))

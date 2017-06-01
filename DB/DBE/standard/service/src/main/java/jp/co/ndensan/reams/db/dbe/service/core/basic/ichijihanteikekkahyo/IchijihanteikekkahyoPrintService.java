@@ -154,6 +154,9 @@ public class IchijihanteikekkahyoPrintService {
         entity.set特別な医療4_1リスト(data.get特別な医療4_1リスト());
         entity.set特別な医療4_2リスト(data.get特別な医療4_2リスト());
         entity.set厚労省IF識別コード(data.get厚労省IF識別コード());
+        entity.setTemp_保険者番号(data.get保険者番号());
+        entity.setTemp_申請書管理番号(data.get管理番号());
+        entity.setTemp_被保険者番号(data.get被保険者番号());
         return entity;
     }
 }

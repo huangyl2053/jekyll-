@@ -44,7 +44,7 @@ public class ChosairairirekiIchiranReportSource implements IReportSource {
 // </editor-fold>
 
     @ReportPerson(id = "X")
-    public ShikibetsuCode shikibetuCode;
+    public ShikibetsuCode 識別コード;
     @ReportExpandedInfo(id = "X")
-    public ExpandedInformation hishokenshaNo;
+    public ExpandedInformation 拡張情報;
 }

@@ -12,8 +12,11 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.hakkoichiranhyo.ShujiiIk
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hakkoichiranhyo.ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity;
 import jp.co.ndensan.reams.db.dbz.business.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoItem;
 import jp.co.ndensan.reams.db.dbz.business.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoReport;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ShujiiIkenshoHoshuTankaParameter;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.ikenshoprint.ShujiiIkenshoHoshuTankaEntity;
 import jp.co.ndensan.reams.db.dbz.entity.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoReportSource;
+import jp.co.ndensan.reams.db.dbz.service.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintFinder;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.ur.urz.service.report.outputjokenhyo.OutputJokenhyoFactory;
@@ -40,6 +43,7 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoProcess extends BatchProcessBase<Sh
     private static final ReportId 帳票ID = ReportIdDBZ.DBE234001.getReportId();
     private List<ShujiiIkenshoSakuseiRyoSeikyushoItem> itemList;
     private ShujiiIkenshoProcessParamter processParamter;
+    private List<ShujiiIkenshoHoshuTankaEntity> 意見書作成料リスト;
 
     @BatchWriter
     private BatchReportWriter<ShujiiIkenshoSakuseiRyoSeikyushoReportSource> batchWriter;
@@ -62,8 +66,14 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoProcess extends BatchProcessBase<Sh
     }
 
     @Override
+    protected void beforeExecute() {
+        ShujiiIkenshoHoshuTankaParameter param = ShujiiIkenshoHoshuTankaParameter.createParameter();
+        意見書作成料リスト = ChosaIraishoAndChosahyoAndIkenshoPrintFinder.createInstance().get主治医意見書作成料報酬単価(param);
+    }
+
+    @Override
     protected void process(ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity entity) {
-        itemList.add(new ShujiiIkenshoBusiness(entity, processParamter).setDBE234001Item());
+        itemList.add(new ShujiiIkenshoBusiness(entity, processParamter).setDBE234001Item(意見書作成料リスト));
     }
 
     @Override

@@ -66,7 +66,8 @@ public final class IkenshoJissekiIchiranChange {
                 在宅_継,
                 施設_新,
                 施設_継,
-                entity.get単価());
+                entity.get単価(),
+                entity.get申請書管理番号());
         return data;
     }
 

@@ -27,7 +27,7 @@ public class ShujiiIkenTokusokujoCsvEntity {
     @CsvField(order = 4, name = "市町村名称")
     private final RString cityName;
 
-    @CsvField(order = 6, name = "保険者")
+    @CsvField(order = 6, name = "保険者名")
     private final RString hokenshaName;
 
     @CsvField(order = 7, name = "被保険者番号")
@@ -45,16 +45,16 @@ public class ShujiiIkenTokusokujoCsvEntity {
     @CsvField(order = 11, name = "督促状発行日")
     private final RString tokusokujoHakkoYMD;
 
-    @CsvField(order = 12, name = "事業者コード")
+    @CsvField(order = 12, name = "主治医医療機関コード")
     private final RString kikanCode;
 
-    @CsvField(order = 13, name = "事業者名称")
+    @CsvField(order = 13, name = "主治医医療機関名称")
     private final RString kikanName;
 
-    @CsvField(order = 14, name = "事業者住所")
+    @CsvField(order = 14, name = "主治医医療機関住所")
     private final RString kikanJusho;
 
-    @CsvField(order = 15, name = "事業者電話番号")
+    @CsvField(order = 15, name = "主治医医療機関電話番号")
     private final RString kikanTel;
 
     @CsvField(order = 16, name = "主治医コード")

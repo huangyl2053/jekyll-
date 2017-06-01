@@ -835,7 +835,7 @@ public class KogakuSabisuhiShikyuShinseiPanelHandler {
             int 履歴番号 = KougakuSabisuhiShikyuuShinnseiTouroku.createInstance().
                     get事業高額介護支給申請履歴番号(被保険者番号, サービス年月);
             entity = new JigyoKogakuShikyuHanteiKekka(被保険者番号,
-                    サービス年月, 証記載保険者番号, new Decimal(履歴番号)).createBuilderForEdit().build();
+                    サービス年月, 証記載保険者番号, 履歴番号).createBuilderForEdit().build();
         }
         entity = entity.createBuilderForEdit().set履歴番号枝番(履歴番号枝番).build();
         if (div.getShinseiTorokuPanel().getCcdKogakuServicehiDetail().get決定日() != null) {

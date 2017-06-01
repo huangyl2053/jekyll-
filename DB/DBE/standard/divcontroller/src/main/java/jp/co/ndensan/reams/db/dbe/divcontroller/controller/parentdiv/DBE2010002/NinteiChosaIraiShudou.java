@@ -28,6 +28,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosahyoGaikyoChosa;
@@ -37,7 +38,9 @@ import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.Chos
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosahyoGaikyoChosaManager;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -45,14 +48,16 @@ import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
 import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.report.ReportManager;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -85,6 +90,8 @@ public class NinteiChosaIraiShudou {
     private static final RString CHKNAME_概況特記 = new RString("概況特記");
     private static final RString CHKNAME_認定調査依頼該当者履歴一覧 = new RString("認定調査依頼該当者履歴一覧");
     private static final int 履歴番号インクリメント = 1;
+    private static final RString UICONTAINERID_DBEUC24101 = new RString("DBEUC24101");
+    private static final RString BTN_COMMON_SAVE_CHOSA_IRAI = new RString("btnCommonSaveChosaIrai");
 
     /**
      * 画面初期化処理です。
@@ -93,9 +100,14 @@ public class NinteiChosaIraiShudou {
      * @return ResponseData<NinteiChosaIraiShudouDiv>
      */
     public ResponseData<NinteiChosaIraiShudouDiv> onLoad(NinteiChosaIraiShudouDiv div) {
+        if (ResponseHolder.isReRequest()) {
+            return ResponseData.of(div).respond();
+        }
         ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
         if (!RealInitialLocker.tryGetLock(get排他キー())) {
-            throw new PessimisticLockingException();
+            div.setReadOnly(true);
+            CommonButtonHolder.setDisabledByCommonButtonFieldName(BTN_COMMON_SAVE_CHOSA_IRAI, true);
+            return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
         }
         div.setReadOnly(false);
         NinnteiChousairaiShudouFinder finder = NinnteiChousairaiShudouFinder.createInstance();
@@ -153,6 +165,9 @@ public class NinteiChosaIraiShudou {
      * @return ResponseData<SourceDataCollection>
      */
     public ResponseData<NinteiChosaIraiShudouDiv> onClick_btnCommonSaveChosaIrai(NinteiChosaIraiShudouDiv div) {
+        if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC24101)) {
+            getValidationHandler(div).更新項目チェック();
+        }
         if (!ResponseHolder.isReRequest()) {
             ValidationMessageControlPairs validPairs = getValidationHandler(div).checkForUpdate();
             if (validPairs.iterator().hasNext()) {
@@ -163,9 +178,7 @@ public class NinteiChosaIraiShudou {
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             saveData(div);
-            if (getHandler(div).結果データ有無()) {
-                完了データ更新();
-            }
+            完了データ更新();
             ShinseishoKanriNo 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, ShinseishoKanriNo.class);
             NinteiShinseiJoho 更新用認定調査依頼情報 = NinnteiChousairaiShudouFinder.createInstance().get更新用認定調査依頼情報(
                     NinnteiChousairaiShudouParameter.createParameterBy申請書管理番号(申請書管理番号.value()));
@@ -198,7 +211,7 @@ public class NinteiChosaIraiShudou {
         if (div.getNinteichosaIraiByHand().getTxtChosaIraiD().getValue() != null) {
             認定調査依頼年月日 = new FlexibleDate(div.getNinteichosaIraiByHand().getTxtChosaIraiD().getValue().toDateString());
         }
-
+        アクセスログ_更新(認定調査依頼情報.get証記載保険者番号(), 認定調査依頼情報.get被保険者番号(), 認定調査依頼情報.get申請書管理番号().getColumnValue());
         認定調査依頼情報 = 認定調査依頼情報.createBuilderForEdit()
                 .set調査区分(調査区分.asCode())
                 .set認定調査委託先コード(new ChosaItakusakiCode(認定調査委託先コード.value()))
@@ -243,6 +256,13 @@ public class NinteiChosaIraiShudou {
                     .set認定調査督促メモ(RString.EMPTY).build();
             NinteichosaIraiJohoManager.createInstance().save認定調査依頼情報(ninteichosaIraiJoho);
         }
+    }
+
+    private void アクセスログ_更新(RString 証記載保険者番号, RString 被保険者番号, RString 申請書管理番号) {
+        DbAccessLogger accessLog = new DbAccessLogger();
+        ExpandedInformation expandedInformation = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号);
+        accessLog.store(new ShoKisaiHokenshaNo(証記載保険者番号), 被保険者番号, expandedInformation);
+        accessLog.flushBy(AccessLogType.更新);
     }
 
     private void 完了データ更新() {

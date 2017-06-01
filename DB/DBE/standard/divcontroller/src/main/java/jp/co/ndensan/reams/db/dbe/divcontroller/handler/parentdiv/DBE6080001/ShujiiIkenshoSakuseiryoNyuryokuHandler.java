@@ -180,7 +180,10 @@ public class ShujiiIkenshoSakuseiryoNyuryokuHandler {
             row.setIraiNengappi(dateFormat(business.get主治医意見書作成依頼年月日()));
             row.setKinyuNengappi(dateFormat(business.get主治医意見書記入年月日()));
             row.setJuryoNengappi(dateFormat(business.get主治医意見書受領年月日()));
-            row.setIshiKubun(IshiKubunCode.toValue(business.get医師区分コード()).get名称());
+            IshiKubunCode ishiKubun = business.get医師区分();
+            if (ishiKubun != null) {
+                row.setIshiKubun(ishiKubun.get名称());
+            }
             row.setIkenshoSakuseiryo(DecimalFormatter.toコンマ区切りRString(new Decimal(business.get主治医意見書作成料()), 0));
             row.setIkenshoBettoShinryohi(DecimalFormatter.toコンマ区切りRString(new Decimal(business.get主治医意見書別途診療費()), 0));
             row.setIkenshoHoshu(DecimalFormatter.toコンマ区切りRString(new Decimal(business.get主治医意見書報酬()), 0));
@@ -223,6 +226,7 @@ public class ShujiiIkenshoSakuseiryoNyuryokuHandler {
             div.getShinseiJohoMeisai().getRadGinkoFurikomi().setDisabled(false);
         }
         setMeisai(row);
+        div.getDgShinsakaiIin().setReadOnly(true);
     }
 
     /**
@@ -248,15 +252,17 @@ public class ShujiiIkenshoSakuseiryoNyuryokuHandler {
      * 「入力を取りやめる」ボタンを押下します。
      */
     public void onClick_ToriyameruBtn() {
-        setMeisai(div.getShinseiJoho().getDgShinsakaiIin().getClickedItem());
+        div.getDgShinsakaiIin().setReadOnly(false);
+        setMeisai(div.getDgShinsakaiIin().getSelectedItems().get(0));
     }
 
     /**
      * 「登録する」ボタンを押下します。
      */
     public void onClick_TourokuBtn() {
+        div.getDgShinsakaiIin().setReadOnly(false);
         List<dgShinsakaiIin_Row> rowList = div.getShinseiJoho().getDgShinsakaiIin().getDataSource();
-        int rowCount = div.getShinseiJoho().getDgShinsakaiIin().getClickedItem().getId();
+        int rowCount = div.getDgShinsakaiIin().getSelectedItems().get(0).getId();
         dgShinsakaiIin_Row row = rowList.get(rowCount);
         if (状態_追加.equals(row.getColumnState())) {
             if (状態_修正.equals(div.getHdnState())) {

@@ -9,7 +9,9 @@ import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteishinchokujohoshokai
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteishinchokujohoshokai.YokaigoNinteiShinchokuJoho;
 import jp.co.ndensan.reams.db.dbe.business.report.dbe521002.NiteiGyomuShinchokuJokyoIchiranhyoJoho;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.yokaigoninteishinchokujohoshokai.YokaigoNinteiParamter;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5510001.DBE5510001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5510001.YokaigoNinteiShinchokuJohoShokaiDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5510001.dgShinseiJoho_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5510001.YokaigoNinteiShinchokuJohoShokaiHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5510001.YokaigoNinteiShinchokuJohoShokaiValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteishinchokujohoshokai.YokaigoNinteiShinchokuJohoShokaiFinder;
@@ -34,7 +36,7 @@ import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteiShinseiJohoManager;
  * @reamsid_L DBE-0210-010 dongyabin
  */
 public class YokaigoNinteiShinchokuJohoShokai {
-    
+
     /**
      * 画面初期化処理です。
      *
@@ -53,7 +55,6 @@ public class YokaigoNinteiShinchokuJohoShokai {
      * @return ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv>
      */
     public ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv> onActive(YokaigoNinteiShinchokuJohoShokaiDiv div) {
-        getHandler(div).set検索条件切替(false);
         RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
         RString 被保険者番号 = ViewStateHolder.get(ViewStateKeys.被保険者番号, RString.class);
         NinteiShinseiJoho ninteiShinseiJoho = null;
@@ -86,8 +87,8 @@ public class YokaigoNinteiShinchokuJohoShokai {
         }
         return ResponseData.of(div).respond();
     }
-    
-        /**
+
+    /**
      * onClick_btnHihokenshaKensaku処理。
      *
      * @param div 画面情報
@@ -157,9 +158,9 @@ public class YokaigoNinteiShinchokuJohoShokai {
             return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
         }
         div.getShinseiJohoIchiran().setIsOpen(true);
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBE5510001StateName.進捗状況一覧);
     }
-    
+
     /**
      * 「再検索する」ボタン押下します。
      *
@@ -167,8 +168,7 @@ public class YokaigoNinteiShinchokuJohoShokai {
      * @return {@code ResponseData}
      */
     public ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv> btnReSearch(YokaigoNinteiShinchokuJohoShokaiDiv div) {
-        getHandler(div).set検索条件切替(false);
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBE5510001StateName.Default);
     }
 
     /**
@@ -177,11 +177,10 @@ public class YokaigoNinteiShinchokuJohoShokai {
      * @param div 画面情報
      * @return ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv>
      */
-        public ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv> onClick_Select(YokaigoNinteiShinchokuJohoShokaiDiv div) {
-        ViewStateHolder.put(ViewStateKeys.申請書管理番号, div.getDgShinseiJoho().
-                getClickedItem().getShinseishoKanriNo());
-        ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, div.getDgShinseiJoho().
-                getClickedItem().getNinteichosaIraiRirekiNo().toInt());
+    public ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv> onClick_Select(YokaigoNinteiShinchokuJohoShokaiDiv div) {
+        dgShinseiJoho_Row row = div.getDgShinseiJoho().getClickedItem();
+        ViewStateHolder.put(ViewStateKeys.申請書管理番号, row.getShinseishoKanriNo());
+        ViewStateHolder.put(ViewStateKeys.認定調査履歴番号, row.getNinteichosaIraiRirekiNo().toInt());
         return ResponseData.of(div).respond();
     }
 
@@ -217,10 +216,10 @@ public class YokaigoNinteiShinchokuJohoShokai {
     public ResponseData<YokaigoNinteiShinchokuJohoShokaiDiv> btnPrintAfter(YokaigoNinteiShinchokuJohoShokaiDiv div) {
         return ResponseData.of(div).respond();
     }
-    
+
     private YokaigoNinteiParamter get検索パラメータ(YokaigoNinteiShinchokuJohoShokaiDiv div) {
         return YokaigoNinteiParamter.createParamter(
-                div.getCcdHokenshaList().getSelectedItem().get市町村コード().getColumnValue(),
+                div.getCcdHokenshaList().getSelectedItem().get証記載保険者番号().getColumnValue(),
                 div.getRadKensakuHoho().getSelectedKey(),
                 div.getTxtShiteiHizukeRange().getFromValue() == null ? RString.EMPTY : div.getTxtShiteiHizukeRange().getFromValue().toDateString(),
                 div.getTxtShiteiHizukeRange().getToValue() == null ? RString.EMPTY : div.getTxtShiteiHizukeRange().getToValue().toDateString(),
@@ -248,7 +247,7 @@ public class YokaigoNinteiShinchokuJohoShokai {
     private YokaigoNinteiShinchokuJohoShokaiHandler getHandler(YokaigoNinteiShinchokuJohoShokaiDiv div) {
         return new YokaigoNinteiShinchokuJohoShokaiHandler(div);
     }
-    
+
     private YokaigoNinteiShinchokuJohoShokaiValidationHandler getValidationHandler(YokaigoNinteiShinchokuJohoShokaiDiv div) {
         return new YokaigoNinteiShinchokuJohoShokaiValidationHandler(div);
     }

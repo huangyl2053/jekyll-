@@ -12,9 +12,11 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dba.business.core.tennyutenshutsuhoryu.TennyuHoryuTaisho;
 import jp.co.ndensan.reams.db.dba.business.core.tennyutenshutsuhoryu.TenshutsuHoryuTaisho;
+import jp.co.ndensan.reams.db.dba.definition.message.DbaQuestionMessages;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tennyutenshutsuhoryu.TennyushutsuHoryuTaishoshaRelateEntity;
 import jp.co.ndensan.reams.db.dba.entity.db.relate.tennyutenshutsuhoryu.TenshutsuHoryuTaishoshaRelateEntity;
 import jp.co.ndensan.reams.db.dba.persistence.db.mapper.relate.tennyutenshutsuhoryutaishosha.ITennyuTenshutsuHoryuTaishoshaMapper;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.HihokenshaDaicho;
 import jp.co.ndensan.reams.db.dbz.business.core.TennyushutsuHoryuTaishosha;
 import jp.co.ndensan.reams.db.dbz.business.core.TenshutsuHoryuTaishosha;
@@ -30,6 +32,9 @@ import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaish
 import jp.co.ndensan.reams.ua.uax.service.core.shikibetsutaisho.kojin._KojinManager;
 import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
@@ -188,6 +193,60 @@ public class TennyuTenshutsuHoryuTaishoshaManager {
         for (TenshutsuHoryuTaishosha taishosha : 転出保留対象者) {
             delete転出保留対象者(taishosha);
         }
+    }
+
+    public Message check転出保留対象者(ShikibetsuCode 識別コード) {
+        TenshutsuHoryuTaisho 転出保留対象者情報 = getTenshutsuHoryuTaishosha(識別コード);
+        Message message = null;
+        if (転出保留対象者情報 != null) {
+            ViewStateHolder.put(ViewStateKeys.転出保留対象者, 転出保留対象者情報);
+            message = new QuestionMessage(DbaQuestionMessages.保留対象取消確認.getMessage().getCode(),
+                    DbaQuestionMessages.保留対象取消確認.getMessage().replace("転出保留対象者", "保留対象から削除しても").evaluate());
+        }
+        return message;
+    }
+
+    public Message check転入保留対象者(ShikibetsuCode 識別コード) {
+        TennyuHoryuTaisho 転入保留対象者情報 = getTennyuHoryuTaishosha(識別コード);
+        Message message = null;
+        if (転入保留対象者情報 != null) {
+            ViewStateHolder.put(ViewStateKeys.転入保留対象者, 転入保留対象者情報);
+            message = new QuestionMessage(DbaQuestionMessages.保留対象取消確認.getMessage().getCode(),
+                    DbaQuestionMessages.保留対象取消確認.getMessage().replace("転入保留対象者", "保留対象から削除しても").evaluate());
+        }
+        return message;
+    }
+
+    /**
+     * 指定した識別コードで転出保留対象者情報の取得処理します。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @return TennyuHoryuTaisho
+     */
+    @Transaction
+    private TenshutsuHoryuTaisho getTenshutsuHoryuTaishosha(ShikibetsuCode 識別コード) {
+        ITennyuTenshutsuHoryuTaishoshaMapper mapper = mapperProvider.create(ITennyuTenshutsuHoryuTaishoshaMapper.class);
+        TenshutsuHoryuTaishoshaRelateEntity entity = mapper.get転出保留対象者情報(識別コード);
+        if (entity == null) {
+            return null;
+        }
+        return new TenshutsuHoryuTaisho(entity);
+    }
+
+    /**
+     * 指定した識別コードで転入保留対象者情報の取得処理します。
+     *
+     * @param 識別コード ShikibetsuCode
+     * @return TennyuHoryuTaisho
+     */
+    @Transaction
+    private TennyuHoryuTaisho getTennyuHoryuTaishosha(ShikibetsuCode 識別コード) {
+        ITennyuTenshutsuHoryuTaishoshaMapper mapper = mapperProvider.create(ITennyuTenshutsuHoryuTaishoshaMapper.class);
+        TennyushutsuHoryuTaishoshaRelateEntity entity = mapper.get転入保留対象者情報(識別コード);
+        if (entity == null) {
+            return null;
+        }
+        return new TennyuHoryuTaisho(entity);
     }
 
     private void save被保険者台帳(List<HihokenshaDaicho> 被保険者台帳) {

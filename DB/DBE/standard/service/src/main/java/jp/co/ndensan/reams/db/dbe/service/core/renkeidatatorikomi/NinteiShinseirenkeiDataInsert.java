@@ -113,7 +113,6 @@ public class NinteiShinseirenkeiDataInsert {
 
     private RString check主治医一時テーブル電算(DbT5912RelateEntity entity) {
         RStringBuilder errorBuilder = new RStringBuilder();
-        checkDbT5912同情報(entity, errorBuilder);
         DbT5911ShujiiIryoKikanJohoDac dac = InstanceProvider.create(DbT5911ShujiiIryoKikanJohoDac.class);
         if (RString.isNullOrEmpty(entity.getDbt5912TempEntity().get医療機関コード())) {
             errorBuilder.append(new RString("医療機関コードが未入力です;"));
@@ -193,7 +192,6 @@ public class NinteiShinseirenkeiDataInsert {
 
     private RString check医療機関一時テーブル電算(DbT5911RelateEntity entity) {
         RStringBuilder errorBuilder = new RStringBuilder();
-        checkDbT5911同情報(entity, errorBuilder);
         if (entity.getDbt5911TempEntity().get医療機関コード() == null
                 || entity.getDbt5911TempEntity().get医療機関コード() == ShujiiIryokikanCode.EMPTY) {
             errorBuilder = errorBuilder.append(new RString("医療機関コードが未入力です;"));
@@ -264,7 +262,6 @@ public class NinteiShinseirenkeiDataInsert {
 
     private RString check調査員一時テーブル電算(DbT5913RelateEntity entity) {
         RStringBuilder errorBuilder = new RStringBuilder();
-        checkDbT5913同情報(entity, errorBuilder);
         if (RString.isNullOrEmpty(entity.getDbt5913TempEntity().get委託先コード())) {
             errorBuilder.append(new RString("調査機関コードが未入力です;"));
         }
@@ -352,7 +349,6 @@ public class NinteiShinseirenkeiDataInsert {
 
     private RString check委託先情報一時テーブル電算(DbT5910RelateEntity entity) {
         RStringBuilder errorBuilder = new RStringBuilder();
-        checkDbT5910同情報(entity, errorBuilder);
         if (RString.isNullOrEmpty(entity.getDbt5910TempEntity().get委託先コード())) {
             errorBuilder = errorBuilder.append(new RString("調査機関コードが不正です;"));
         }
@@ -595,8 +591,8 @@ public class NinteiShinseirenkeiDataInsert {
             if (entity.getDbt5101TempEntity().get申請区分_申請時コード().equals(NinteiShinseiShinseijiKubunCode.資格喪失_死亡.getコード())) {
                 return errorBuilder;
             }
-            if (entity.getDbt5101TempEntity().get認定申請日() != null 
-                    && !entity.getDbt5101TempEntity().get認定申請日().isEmpty() 
+            if (entity.getDbt5101TempEntity().get認定申請日() != null
+                    && !entity.getDbt5101TempEntity().get認定申請日().isEmpty()
                     && new FlexibleDate(entity.getDbt5101TempEntity().get認定申請日().toString()).isBefore(entity.getDbT5101Entity().getNinteiShinseiYMD())) {
                 errorBuilder.append(new RString("取込データの認定申請日より新しい認定申請日の申請情報が存在します;"));
             }
@@ -613,36 +609,8 @@ public class NinteiShinseirenkeiDataInsert {
         return errorBuilder;
     }
 
-    private RStringBuilder checkDbT5910同情報(DbT5910RelateEntity entity, RStringBuilder errorBuilder) {
-        if (entity.getDbT5910Entity() != null) {
-            errorBuilder.append(new RString("既に登録されています;"));
-        }
-        return errorBuilder;
-    }
-
-    private RStringBuilder checkDbT5911同情報(DbT5911RelateEntity entity, RStringBuilder errorBuilder) {
-        if (entity.getDbT5911Entity() != null) {
-            errorBuilder.append(new RString("既に登録されています;"));
-        }
-        return errorBuilder;
-    }
-
-    private RStringBuilder checkDbT5912同情報(DbT5912RelateEntity entity, RStringBuilder errorBuilder) {
-        if (entity.getDbT5912Entity() != null) {
-            errorBuilder.append(new RString("既に登録されています;"));
-        }
-        return errorBuilder;
-    }
-
-    private RStringBuilder checkDbT5913同情報(DbT5913RelateEntity entity, RStringBuilder errorBuilder) {
-        if (entity.getDbT5913Entity() != null) {
-            errorBuilder.append(new RString("既に登録されています;"));
-        }
-        return errorBuilder;
-    }
-
     private RStringBuilder check認定調査委託先コード(DbT5101RelateEntity entity, RStringBuilder errorBuilder) {
-        if (!RString.isNullOrEmpty(entity.getDbt5101TempEntity().get調査委託先コード()) 
+        if (!RString.isNullOrEmpty(entity.getDbt5101TempEntity().get調査委託先コード())
                 && entity.getDbT5910Entity() == null) {
             errorBuilder.append(new RString("調査委託先コードが不正です;"));
         }
@@ -650,7 +618,7 @@ public class NinteiShinseirenkeiDataInsert {
     }
 
     private RStringBuilder check主治医医療機関コード(DbT5101RelateEntity entity, RStringBuilder errorBuilder) {
-        if (!RString.isNullOrEmpty(entity.getDbt5101TempEntity().get主治医医療機関コード()) 
+        if (!RString.isNullOrEmpty(entity.getDbt5101TempEntity().get主治医医療機関コード())
                 && entity.getDbT5911Entity() == null) {
             errorBuilder.append(new RString("主治医医療機関コードが不正です;"));
         }
@@ -658,7 +626,7 @@ public class NinteiShinseirenkeiDataInsert {
     }
 
     private RStringBuilder check主治医コード(DbT5101RelateEntity entity, RStringBuilder errorBuilder) {
-        if (!RString.isNullOrEmpty(entity.getDbt5101TempEntity().get主治医番号()) 
+        if (!RString.isNullOrEmpty(entity.getDbt5101TempEntity().get主治医番号())
                 && entity.getDbT5912Entity() == null) {
             errorBuilder.append(new RString("主治医コードが不正です;"));
         }

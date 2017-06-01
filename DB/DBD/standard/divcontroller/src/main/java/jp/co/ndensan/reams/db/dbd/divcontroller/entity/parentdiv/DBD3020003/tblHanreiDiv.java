@@ -17,7 +17,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TablePanel;
  * @author 自動生成
  */
 public class tblHanreiDiv extends TablePanel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -293,7 +293,7 @@ public class tblHanreiDiv extends TablePanel {
  * @author 自動生成
  */
 class celHanreiColorKannoAttblHanrei extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
     @JsonProperty("tblColorKanno")
     private tblColorKannoDiv tblColorKanno;
 
@@ -323,7 +323,7 @@ class celHanreiColorKannoAttblHanrei extends TableCell {
  * @author 自動生成
  */
 class celKannoAttblHanrei extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
     @JsonProperty("lblKanno")
     private Label lblKanno;
 
@@ -353,7 +353,7 @@ class celKannoAttblHanrei extends TableCell {
  * @author 自動生成
  */
 class celHanreiColorMinoAttblHanrei extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
     @JsonProperty("tblColorMino")
     private tblColorMinoDiv tblColorMino;
 
@@ -383,7 +383,7 @@ class celHanreiColorMinoAttblHanrei extends TableCell {
  * @author 自動生成
  */
 class celMinoAttblHanrei extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
     @JsonProperty("lblMino")
     private Label lblMino;
 
@@ -413,7 +413,7 @@ class celMinoAttblHanrei extends TableCell {
  * @author 自動生成
  */
 class celHanreiColorJikoAttblHanrei extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
     @JsonProperty("tblColorJiko")
     private tblColorJikoDiv tblColorJiko;
 
@@ -443,7 +443,7 @@ class celHanreiColorJikoAttblHanrei extends TableCell {
  * @author 自動生成
  */
 class celJikoAttblHanrei extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
     @JsonProperty("lblJiko")
     private Label lblJiko;
 
@@ -473,7 +473,7 @@ class celJikoAttblHanrei extends TableCell {
  * @author 自動生成
  */
 class celHanreiColorKanoAttblHanrei extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
     @JsonProperty("tblColorKano")
     private tblColorKanoDiv tblColorKano;
 
@@ -503,7 +503,7 @@ class celHanreiColorKanoAttblHanrei extends TableCell {
  * @author 自動生成
  */
 class celKanoAttblHanrei extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
     @JsonProperty("lblKano")
     private Label lblKano;
 
@@ -533,7 +533,7 @@ class celKanoAttblHanrei extends TableCell {
  * @author 自動生成
  */
 class celHanreiColorJikoTaishoGaiAttblHanrei extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
     @JsonProperty("tblColorJikoTaishoGai")
     private tblColorJikoTaishoGaiDiv tblColorJikoTaishoGai;
 
@@ -563,7 +563,7 @@ class celHanreiColorJikoTaishoGaiAttblHanrei extends TableCell {
  * @author 自動生成
  */
 class celJikoTaishoGaiAttblHanrei extends TableCell {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-08-09_21-40-56">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
     @JsonProperty("lblJikoTaishoGai")
     private Label lblJikoTaishoGai;
 

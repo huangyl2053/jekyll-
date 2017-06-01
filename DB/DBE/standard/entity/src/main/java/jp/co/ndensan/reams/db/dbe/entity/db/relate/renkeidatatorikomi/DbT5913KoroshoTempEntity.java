@@ -35,5 +35,5 @@ public class DbT5913KoroshoTempEntity extends DbTableEntityBase<DbT5913KoroshoTe
     @TempTableColumnOrder(7)
     private RString 資格コード;
     @TempTableColumnOrder(8)
-    private boolean 状況;
+    private RString 状況;
 }

@@ -254,7 +254,7 @@ public class InsJigyoKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<Tyu
                     DbT3112KogakuShikyuShinsaKetteiEntity 審査決定全件一時 = get審査決定全件一時_3(給付実績中間事業高額Entity, 結果Entity);
                     DbT3109JigyoKogakuKyufuTaishoshaGokeiEntity 合計全件一時 = get合計全件一時_3(給付実績中間事業高額Entity, 結果Entity, 算定済高額金額);
                     TempKogakuKyufuTaishoshaMeisaiZenUpdateEntity 明細全件更新一時 = get明細全件更新一時(給付実績中間事業高額Entity);
-                    明細全件更新一時.setRirekiNo(判定結果全件一時.getRirekiNo().intValue());
+                    明細全件更新一時.setRirekiNo(判定結果全件一時.getRirekiNo());
                     申請全件一時Writer.insert(申請全件一時);
                     申請全件一時_新規Writer.insert(申請全件一時);
                     判定結果全件一時Writer.insert(判定結果全件一時);
@@ -322,7 +322,7 @@ public class InsJigyoKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<Tyu
         判定結果全件一時Entity.setHihokenshaNo(給付実績中間事業高額Entity.getHiHokenshaNo());
         判定結果全件一時Entity.setServiceTeikyoYM(給付実績中間事業高額Entity.getServiceTeikyoYM());
         判定結果全件一時Entity.setShoKisaiHokenshaNo(給付実績中間事業高額Entity.getShokisaiHokenshaNo());
-        判定結果全件一時Entity.setRirekiNo(Decimal.ONE);
+        判定結果全件一時Entity.setRirekiNo(1);
         判定結果全件一時Entity.setRirekiEdaNo(0);
         判定結果全件一時Entity.setKetteiYMD(FlexibleDate.EMPTY);
         判定結果全件一時Entity.setHonninShiharaiGaku(Decimal.ZERO);
@@ -337,7 +337,7 @@ public class InsJigyoKogakuKaigoServiceHiTmpProcess extends BatchProcessBase<Tyu
         判定結果全件一時Entity.setHihokenshaNo(給付実績中間事業高額Entity.getHiHokenshaNo());
         判定結果全件一時Entity.setServiceTeikyoYM(給付実績中間事業高額Entity.getServiceTeikyoYM());
         判定結果全件一時Entity.setShoKisaiHokenshaNo(給付実績中間事業高額Entity.getShokisaiHokenshaNo());
-        判定結果全件一時Entity.setRirekiNo(結果Entity.get事業高額判定結果全件Entity().getRirekiNo().add(Decimal.ONE));
+        判定結果全件一時Entity.setRirekiNo(結果Entity.get事業高額判定結果全件Entity().getRirekiNo() + 1);
         判定結果全件一時Entity.setRirekiEdaNo(0);
         判定結果全件一時Entity.setKetteiYMD(FlexibleDate.EMPTY);
         判定結果全件一時Entity.setHonninShiharaiGaku(Decimal.ZERO);

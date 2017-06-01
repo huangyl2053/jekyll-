@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei;
 
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -13,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBZ-9999-023 wangchao
  */
-public enum RensakusakiTsuzukigara {
+public enum RensakusakiTsuzukigara implements IRenrakusakiTsuzukigara {
 
     /**
      * コード:01 名称:父 略称:定義なし
@@ -57,6 +56,7 @@ public enum RensakusakiTsuzukigara {
      *
      * @return 介護連絡先続柄のコード
      */
+    @Override
     public RString getコード() {
         return code;
     }
@@ -66,6 +66,7 @@ public enum RensakusakiTsuzukigara {
      *
      * @return 介護連絡先続柄の名称
      */
+    @Override
     public RString get名称() {
         return fullName;
     }
@@ -76,13 +77,30 @@ public enum RensakusakiTsuzukigara {
      * @param code 介護連絡先続柄のコード
      * @return {@code code} に対応する介護連絡先続柄
      */
-    public static RensakusakiTsuzukigara toValue(RString code) {
-
-        for (RensakusakiTsuzukigara rensakusakiTsuzukigara : RensakusakiTsuzukigara.values()) {
-            if (rensakusakiTsuzukigara.code.equals(code)) {
-                return rensakusakiTsuzukigara;
+    public static IRenrakusakiTsuzukigara toValue(RString code) {
+        for (RensakusakiTsuzukigara v : RensakusakiTsuzukigara.values()) {
+            if (v.code.equals(code)) {
+                return v;
+            }
+            if (v.fullName.equals(code)) {
+                return v;
             }
         }
-        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("介護連絡先続柄"));
+        return new _Empty();
     }
+
+    private static class _Empty implements IRenrakusakiTsuzukigara {
+
+        @Override
+        public RString getコード() {
+            return RString.EMPTY;
+        }
+
+        @Override
+        public RString get名称() {
+            return RString.EMPTY;
+        }
+
+    }
+
 }

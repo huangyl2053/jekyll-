@@ -23,10 +23,12 @@ public enum ExpandedInformations {
     /**
      * コード：0002　名称：証記載保険者番号
      */
+    @Deprecated
     証記載保険者番号("0002", "証記載保険者番号"),
     /**
      * コード：0003　名称：被保険者番号
      */
+    @Deprecated
     被保険者番号("0003", "被保険者番号");
     private final Code aCode;
     private final RString aName;

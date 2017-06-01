@@ -6,6 +6,8 @@
 package jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku;
 
 import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.UaFt200FindShikibetsuTaishoParam;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -27,6 +29,7 @@ public class GemmenGengakuTaishoGaiShaListMyBatisParameter implements IMyBatisPa
     private FlexibleDate システム日付;
     private FlexibleDate 前年度の開始日;
     private FlexibleDate 前年度の終了日;
+    private final UaFt200FindShikibetsuTaishoParam shikibetsutaishoParam;
 
     /**
      *
@@ -34,13 +37,16 @@ public class GemmenGengakuTaishoGaiShaListMyBatisParameter implements IMyBatisPa
      * @param 減免減額種類 GemmenGengakuShurui
      * @param 前年度の開始日 FlexibleDate
      * @param 前年度の終了日 FlexibleDate
+     * @param searchKey
      */
-    public GemmenGengakuTaishoGaiShaListMyBatisParameter(FlexibleDate 基準日, GemmenGengakuShurui 減免減額種類, FlexibleDate 前年度の開始日, FlexibleDate 前年度の終了日) {
+    public GemmenGengakuTaishoGaiShaListMyBatisParameter(FlexibleDate 基準日, GemmenGengakuShurui 減免減額種類,
+            FlexibleDate 前年度の開始日, FlexibleDate 前年度の終了日, IShikibetsuTaishoPSMSearchKey searchKey) {
         this.基準日 = 基準日;
         this.減免減額種類 = 減免減額種類;
         this.前年度の開始日 = 前年度の開始日;
         this.前年度の終了日 = 前年度の終了日;
         this.システム日付 = new FlexibleDate(RDate.getNowDate().toString());
+        this.shikibetsutaishoParam = new UaFt200FindShikibetsuTaishoParam(searchKey);
     }
 
 }

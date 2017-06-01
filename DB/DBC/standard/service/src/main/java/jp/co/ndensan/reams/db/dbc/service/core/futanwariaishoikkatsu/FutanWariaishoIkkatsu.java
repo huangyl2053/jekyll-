@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbc.service.core.futanwariaishoikkatsu;
 
 import java.util.List;
 import static java.util.Objects.requireNonNull;
-import jp.co.ndensan.reams.db.dbc.definition.core.futanwariai.FutanWariaiHanteiKubun;
+import jp.co.ndensan.reams.db.dbd.definition.core.futanwariai.FutanWariaiHanteiKubun;
 import jp.co.ndensan.reams.db.dbc.definition.processprm.futanwariaishohakko.FutanwariaishoHakkoProcessParameter;
 import jp.co.ndensan.reams.db.dbc.entity.csv.FutanwariaiShoHakkoIchiranCSVEntity;
 import jp.co.ndensan.reams.db.dbc.entity.db.relate.futanwariaishohakko.RiyoshaFutanwariaishoTempEntity;

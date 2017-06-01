@@ -76,7 +76,7 @@ public class IkenshoImages implements Iterable<IkenshoImageJoho> {
             gemponAdded.put(idValue, newIkenshoImageJoho(this.shinseishoKanriNo, this.rirekiNo, addingID));
         }
         deleteUnnecessaryItems(gemponAdded, idsToDelete);
-        deleteUnnecessaryItems(maskedAdded, idsToDelete);
+        deleteAll(maskedAdded);
         return new IkenshoImages(this.shinseishoKanriNo, this.rirekiNo, gemponAdded, maskedAdded);
     }
 
@@ -122,6 +122,13 @@ public class IkenshoImages implements Iterable<IkenshoImageJoho> {
                 }
                 added.put(id, o.deleted());
             }
+        }
+    }
+
+    private static void deleteAll(Map<RString, IkenshoImageJoho> added) {
+        for (RString id : added.keySet()) {
+            IkenshoImageJoho o = added.get(id);
+            added.put(id, o.deleted());
         }
     }
 

@@ -2,6 +2,7 @@
 serviceTeikyoYM,UDD014YM,FlexibleYearMonth,,,,,サービス提供年月,A
 shoKisaiHokenshaNo,DbUDD003HokenshaNo,HokenshaNo,,,,,証記載保険者番号,A
 rirekiNo,int2,int,,,,,履歴番号,A
+rirekiEdaNo,int2,int,,,,,履歴枝番,A
 ketteiYMD,UDD015YMD,FlexibleDate,,,,,決定年月日,A
 honninShiharaiGaku,numeric,Decimal,,,,,本人支払額,A
 shikyuKubunCode,varchar,RString,,,,,支給区分コード,A

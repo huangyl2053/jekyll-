@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class PrintJokenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-11-29_19-09-25">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-15_14-55-30">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,6 +27,10 @@ public class PrintJokenDiv extends Panel {
     private TextBoxDate txtHakkoYMD;
     @JsonProperty("ccdBunshoNo")
     private BunshoBangoInputDiv ccdBunshoNo;
+    @JsonProperty("chkPrintBlank")
+    private CheckBoxList chkPrintBlank;
+    @JsonProperty("chkPrintMatome")
+    private CheckBoxList chkPrintMatome;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -59,6 +63,42 @@ public class PrintJokenDiv extends Panel {
     @JsonProperty("ccdBunshoNo")
     public IBunshoBangoInputDiv getCcdBunshoNo() {
         return ccdBunshoNo;
+    }
+
+    /*
+     * getchkPrintBlank
+     * @return chkPrintBlank
+     */
+    @JsonProperty("chkPrintBlank")
+    public CheckBoxList getChkPrintBlank() {
+        return chkPrintBlank;
+    }
+
+    /*
+     * setchkPrintBlank
+     * @param chkPrintBlank chkPrintBlank
+     */
+    @JsonProperty("chkPrintBlank")
+    public void setChkPrintBlank(CheckBoxList chkPrintBlank) {
+        this.chkPrintBlank = chkPrintBlank;
+    }
+
+    /*
+     * getchkPrintMatome
+     * @return chkPrintMatome
+     */
+    @JsonProperty("chkPrintMatome")
+    public CheckBoxList getChkPrintMatome() {
+        return chkPrintMatome;
+    }
+
+    /*
+     * setchkPrintMatome
+     * @param chkPrintMatome chkPrintMatome
+     */
+    @JsonProperty("chkPrintMatome")
+    public void setChkPrintMatome(CheckBoxList chkPrintMatome) {
+        this.chkPrintMatome = chkPrintMatome;
     }
 
     // </editor-fold>

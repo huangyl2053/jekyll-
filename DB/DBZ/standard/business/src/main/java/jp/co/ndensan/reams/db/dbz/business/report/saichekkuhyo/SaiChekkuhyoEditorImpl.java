@@ -78,6 +78,8 @@ public class SaiChekkuhyoEditorImpl implements ISaiChekkuhyoEditor {
         source.hokenshaName = item.getHokenshaName();
         source.age = item.getAge();
         source.zenkaiNijiHantei = item.getZenkaiNijiHantei();
+        source.識別コード = item.get識別コード();
+        source.拡張情報 = item.get拡張情報();
         if (RString.isNullOrEmpty(item.getZenkaiNijihanteiYMD())) {
             source.zenkaiNijihanteiYMD = RString.EMPTY;
         } else {

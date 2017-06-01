@@ -36,8 +36,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 public class CreateTargetHandler {
 
     private final CreateTargetDiv div;
-    private static final RString キー_0 = new RString("0");
-    private static final RString キー_1 = new RString("1");
+    private static final RString 未出力のみ = new RString("0");
+    private static final RString 出力済みを再度出力 = new RString("1");
     private static final RString 基準日_認定申請日キー = new RString("0");
     private static final RString 基準日_二次判定日キー = new RString("1");
 
@@ -56,7 +56,7 @@ public class CreateTargetHandler {
      */
     public void onLoad() {
         div.getRdoShinseiNintei().setSelectedKey(基準日_二次判定日キー);
-        div.getRdoSyutsuryoku().setSelectedKey(キー_0);
+        div.getRdoSyutsuryoku().setSelectedKey(未出力のみ);
         div.getTxtMaxKensu().setValue(new Decimal(DbBusinessConfig
                 .get(ConfigNameDBU.検索制御_最大取得件数, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告).toString()));
         div.getTxtMaxKensu().setMaxValue(new Decimal(DbBusinessConfig
@@ -79,8 +79,6 @@ public class CreateTargetHandler {
      *
      */
     public void onChange_btnChange() {
-        div.getTxtKijunYMD().clearFromValue();
-        div.getTxtKijunYMD().clearToValue();
     }
 
     /**
@@ -106,18 +104,20 @@ public class CreateTargetHandler {
                 row.setShinseiKubunHo(NinteiShinseiHoreiCode.toValue(list.get認定申請区分_法令コード().value()).get名称());
             }
             row.getNijiHanteiBi().setValue(getNull(list.get二次判定日()));
-            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(list.get厚労省IF識別コード().value())) {
-                row.setNijiHanteiKekka(YokaigoJotaiKubun99.toValue(list.get状態区分コード()).get名称());
-            }
-            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(list.get厚労省IF識別コード().value())) {
-                row.setNijiHanteiKekka(YokaigoJotaiKubun02.toValue(list.get状態区分コード()).get名称());
-            }
-            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(list.get厚労省IF識別コード().value())) {
-                row.setNijiHanteiKekka(YokaigoJotaiKubun06.toValue(list.get状態区分コード()).get名称());
-            }
-            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(list.get厚労省IF識別コード().value())
-                    || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(list.get厚労省IF識別コード().value())) {
-                row.setNijiHanteiKekka(YokaigoJotaiKubun09.toValue(list.get状態区分コード()).get名称());
+            if (!RString.isNullOrEmpty(list.get状態区分コード())) {
+                if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(list.get厚労省IF識別コード().value())) {
+                    row.setNijiHanteiKekka(YokaigoJotaiKubun99.toValue(list.get状態区分コード()).get名称());
+                }
+                if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(list.get厚労省IF識別コード().value())) {
+                    row.setNijiHanteiKekka(YokaigoJotaiKubun02.toValue(list.get状態区分コード()).get名称());
+                }
+                if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(list.get厚労省IF識別コード().value())) {
+                    row.setNijiHanteiKekka(YokaigoJotaiKubun06.toValue(list.get状態区分コード()).get名称());
+                }
+                if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(list.get厚労省IF識別コード().value())
+                        || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(list.get厚労省IF識別コード().value())) {
+                    row.setNijiHanteiKekka(YokaigoJotaiKubun09.toValue(list.get状態区分コード()).get名称());
+                }
             }
             row.setNinteiYukoKikan(new RString(list.get認定有効期間()));
             row.getSortNinteiYukoKikan().setValue(new Decimal(list.get認定有効期間()));
@@ -162,13 +162,13 @@ public class CreateTargetHandler {
      * @return CreateTargetMapperParameter
      */
     public CreateTargetMapperParameter createParam() {
-        RString データ出力 = キー_1;
+        RString データ出力 = 出力済みを再度出力;
         FlexibleDate 申請_開始日 = FlexibleDate.EMPTY;
         FlexibleDate 申請_終了日 = FlexibleDate.EMPTY;
         FlexibleDate 認定_開始日 = FlexibleDate.EMPTY;
         FlexibleDate 認定_終了日 = FlexibleDate.EMPTY;
-        if (キー_0.equals(div.getRdoSyutsuryoku().getSelectedKey())) {
-            データ出力 = キー_0;
+        if (未出力のみ.equals(div.getRdoSyutsuryoku().getSelectedKey())) {
+            データ出力 = 未出力のみ;
         }
         if (基準日_認定申請日キー.equals(div.getRdoShinseiNintei().getSelectedKey())) {
             申請_開始日 = new FlexibleDate(div.getTxtKijunYMD().getFromValue().toDateString());

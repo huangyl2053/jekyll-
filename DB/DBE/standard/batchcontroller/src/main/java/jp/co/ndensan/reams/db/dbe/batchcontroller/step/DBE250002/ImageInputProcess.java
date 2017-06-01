@@ -35,6 +35,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.ocr.ikensho.OcrShujiiIkenshoJoho
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.resultlist.OcrTorikomiResult;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.resultlist.OcrTorikomiResultsFactory;
 import jp.co.ndensan.reams.db.dbe.business.core.ocr.resultlist.OcrTorikomiResultListEditor;
+import jp.co.ndensan.reams.db.dbe.business.core.ocr.resultlist.OcrTorikomiType;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.Models;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.OcrDataType;
 import jp.co.ndensan.reams.db.dbe.definition.core.ocr.SheetID;
@@ -50,6 +51,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.IkenshoImageJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IIkenshoKomokuMapping;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoKomokuMappings;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.SakuseiryoSeikyuKubun;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5302ShujiiIkenshoJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5304ShujiiIkenshoIkenItemEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5305IkenshoImageJohoEntity;
@@ -104,7 +106,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
     @Override
     public void cancel() {
         super.cancel();
-        this.kekkaListEditor = new OcrTorikomiResultListEditor();
+        this.kekkaListEditor = new OcrTorikomiResultListEditor(OcrTorikomiType.意見書);
         OcrTorikomiResult r = new OcrTorikomiResult.Builder(ShinseiKey.EMPTY)
                 .set処理結果(ProcessingResultFactory.error(OcrTorikomiMessages.カタログファイルなし
                                 .replaced(OcrDataType.意見書.ca3FileName().toString())))
@@ -127,7 +129,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         this.writer_DbT5304 = new BatchPermanentTableWriter<>(DbT5304ShujiiIkenshoIkenItemEntity.class);
         this.writer_DbT5115 = new BatchPermanentTableWriter<>(DbT5115ImageEntity.class);
         this.writer_DbT5305 = new BatchPermanentTableWriter<>(DbT5305IkenshoImageJohoEntity.class);
-        this.kekkaListEditor = new OcrTorikomiResultListEditor();
+        this.kekkaListEditor = new OcrTorikomiResultListEditor(OcrTorikomiType.意見書);
     }
 
     @Override
@@ -291,10 +293,24 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         results.addAll(saveImageResult.getProcessingResults());
         if (!results.hasError()) {
             results.addAll(insertOrUpdate意見書イメージ情報By(writer_DbT5305, ir,
-                    new IkenshoImageUpdateParameter.Builder().add(value.getOCRID(), value).build()
+                    new IkenshoImageUpdateParameter.Builder()
+                    .add(value.getOCRID(), value)
+                    .filter(toOCRIDs(saveImageResult.getSavedFileNames()))
+                    .build()
             ));
         }
         return new CopyImageResult(saveImageResult.getSharedFileID(), results);
+    }
+
+    private static List<OCRID> toOCRIDs(List<RString> fileNames) {
+        List<OCRID> list = new ArrayList<>();
+        if (fileNames.contains(FileNameConvertionTheories.主治医意見書_表)) {
+            list.add(OCRID._777);
+        }
+        if (fileNames.contains(FileNameConvertionTheories.主治医意見書_裏)) {
+            list.add(OCRID._778);
+        }
+        return list;
     }
 
     private static Optional<CatalogLine> findCatalogLine_ID777or778(Catalog catalog, SheetID id) {
@@ -349,6 +365,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
                     new IkenshoImageUpdateParameter.Builder()
                     .add(OCRID._777, pair.getCsv777())
                     .add(OCRID._778, pair.getCsv778())
+                    .filter(toOCRIDs(result2.getSavedFileNames()))
                     .build()
             ));
         }
@@ -374,6 +391,7 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
                     new IkenshoImageUpdateParameter.Builder()
                     .add(OCRID._777, pair.getCsv777())
                     .add(OCRID._778, pair.getCsv777())
+                    .filter(toOCRIDs(result.getSavedFileNames()))
                     .build()
             ));
         }
@@ -524,6 +542,11 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
         entity.setShindamMei1(RString.EMPTY);
         entity.setShindamMei2(RString.EMPTY);
         entity.setShindamMei3(RString.EMPTY);
+        SakuseiryoSeikyuKubun ssk = ir.get作成料請求区分();
+        if (ssk != null) {
+            entity.setIkenshoSakuseiKaisuKubun(new Code(ssk.as作成回数区分().getコード()));
+            entity.setZaitakuShisetsuKubun(ssk.as在宅施設区分().getCode());
+        }
         return entity;
     }
 
@@ -585,15 +608,29 @@ public class ImageInputProcess extends BatchProcessBase<TempOcrCsvEntity> {
 
         private static final class Builder {
 
-            private Map<OCRID, OcrIken> params;
+            private final Map<OCRID, OcrIken> params;
 
             private Builder() {
                 this.params = new HashMap<>();
             }
 
+            private Builder(Map<OCRID, OcrIken> params) {
+                this.params = new HashMap<>(params);
+            }
+
             private Builder add(OCRID ocrID, OcrIken ocrIken) {
                 params.put(ocrID, ocrIken);
                 return this;
+            }
+
+            private Builder filter(Iterable<? extends OCRID> ocrIDs) {
+                Map<OCRID, OcrIken> map = new HashMap<>();
+                for (OCRID ocrID : ocrIDs) {
+                    if (params.containsKey(ocrID)) {
+                        map.put(ocrID, params.get(ocrID));
+                    }
+                }
+                return new Builder(map);
             }
 
             private IkenshoImageUpdateParameter build() {

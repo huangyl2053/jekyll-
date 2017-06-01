@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.Shuj
  */
 public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911ShujiiIryoKikanJohoEntity> implements IDbAccessable, IShujiiIryoKikanJohoEntity {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
+
     @TableName
     public static final RString TABLE_NAME = new RString("DbT5911ShujiiIryoKikanJoho");
 
@@ -59,7 +60,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * insertDantaiCdのgetメソッドです。
-     * 
+     *
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -68,7 +69,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * insertDantaiCdのsetメソッドです。
-     * 
+     *
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -77,7 +78,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * isDeletedのgetメソッドです。
-     * 
+     *
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -86,17 +87,16 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * isDeletedのsetメソッドです。
-     * 
+     *
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
-
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     * 
+     *
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -105,7 +105,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * 市町村コードのgetメソッドです。
-     * 
+     *
      * @return 市町村コード
      */
     public LasdecCode getShichosonCode() {
@@ -114,7 +114,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * 市町村コードのsetメソッドです。
-     * 
+     *
      * @param shichosonCode 市町村コード
      */
     public void setShichosonCode(@Nonnull LasdecCode shichosonCode) {
@@ -123,7 +123,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * 主治医医療機関コードのgetメソッドです。
-     * 
+     *
      * @return 主治医医療機関コード
      */
     public ShujiiIryokikanCode getShujiiIryokikanCode() {
@@ -132,7 +132,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * 主治医医療機関コードのsetメソッドです。
-     * 
+     *
      * @param shujiiIryokikanCode 主治医医療機関コード
      */
     public void setShujiiIryokikanCode(@Nonnull ShujiiIryokikanCode shujiiIryokikanCode) {
@@ -143,7 +143,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
      * 医療機関コードのgetメソッドです。
      * <br/>
      * <br/>URを参照する場合のみ設定
-     * 
+     *
      * @return 医療機関コード
      */
     @CheckForNull
@@ -155,7 +155,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
      * 医療機関コードのsetメソッドです。
      * <br/>
      * <br/>URを参照する場合のみ設定
-     * 
+     *
      * @param iryokikanCode 医療機関コード
      */
     public void setIryokikanCode(IryoKikanCode iryokikanCode) {
@@ -164,7 +164,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * 医療機関名称のgetメソッドです。
-     * 
+     *
      * @return 医療機関名称
      */
     @CheckForNull
@@ -174,7 +174,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * 医療機関名称のsetメソッドです。
-     * 
+     *
      * @param iryoKikanMeisho 医療機関名称
      */
     public void setIryoKikanMeisho(RString iryoKikanMeisho) {
@@ -183,7 +183,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * 医療機関名称カナのgetメソッドです。
-     * 
+     *
      * @return 医療機関名称カナ
      */
     @CheckForNull
@@ -193,7 +193,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * 医療機関名称カナのsetメソッドです。
-     * 
+     *
      * @param iryoKikanMeishoKana 医療機関名称カナ
      */
     public void setIryoKikanMeishoKana(RString iryoKikanMeishoKana) {
@@ -202,7 +202,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * 郵便番号のgetメソッドです。
-     * 
+     *
      * @return 郵便番号
      */
     @CheckForNull
@@ -212,7 +212,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * 郵便番号のsetメソッドです。
-     * 
+     *
      * @param yubinNo 郵便番号
      */
     public void setYubinNo(YubinNo yubinNo) {
@@ -221,7 +221,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * 住所のgetメソッドです。
-     * 
+     *
      * @return 住所
      */
     @CheckForNull
@@ -231,7 +231,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * 住所のsetメソッドです。
-     * 
+     *
      * @param jusho 住所
      */
     public void setJusho(RString jusho) {
@@ -240,7 +240,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * 電話番号のgetメソッドです。
-     * 
+     *
      * @return 電話番号
      */
     @CheckForNull
@@ -250,7 +250,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * 電話番号のsetメソッドです。
-     * 
+     *
      * @param telNo 電話番号
      */
     public void setTelNo(TelNo telNo) {
@@ -259,7 +259,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * FAX番号のgetメソッドです。
-     * 
+     *
      * @return FAX番号
      */
     @CheckForNull
@@ -269,7 +269,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * FAX番号のsetメソッドです。
-     * 
+     *
      * @param faxNo FAX番号
      */
     public void setFaxNo(TelNo faxNo) {
@@ -278,7 +278,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * 代表者名のgetメソッドです。
-     * 
+     *
      * @return 代表者名
      */
     @CheckForNull
@@ -288,7 +288,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * 代表者名のsetメソッドです。
-     * 
+     *
      * @param daihyoshaName 代表者名
      */
     public void setDaihyoshaName(RString daihyoshaName) {
@@ -297,7 +297,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * 代表者名カナのgetメソッドです。
-     * 
+     *
      * @return 代表者名カナ
      */
     @CheckForNull
@@ -307,7 +307,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * 代表者名カナのsetメソッドです。
-     * 
+     *
      * @param daihyoshaNameKana 代表者名カナ
      */
     public void setDaihyoshaNameKana(RString daihyoshaNameKana) {
@@ -318,7 +318,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
      * 状況フラグのgetメソッドです。
      * <br/>
      * <br/>True：有効　False：無効
-     * 
+     *
      * @return 状況フラグ
      */
     public boolean getJokyoFlag() {
@@ -329,7 +329,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
      * 状況フラグのsetメソッドです。
      * <br/>
      * <br/>True：有効　False：無効
-     * 
+     *
      * @param jokyoFlag 状況フラグ
      */
     public void setJokyoFlag(@Nonnull boolean jokyoFlag) {
@@ -338,7 +338,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * 金融機関コードのgetメソッドです。
-     * 
+     *
      * @return 金融機関コード
      */
     @CheckForNull
@@ -348,7 +348,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * 金融機関コードのsetメソッドです。
-     * 
+     *
      * @param kinyuKikanCode 金融機関コード
      */
     public void setKinyuKikanCode(KinyuKikanCode kinyuKikanCode) {
@@ -357,7 +357,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * 支店コードのgetメソッドです。
-     * 
+     *
      * @return 支店コード
      */
     @CheckForNull
@@ -367,7 +367,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * 支店コードのsetメソッドです。
-     * 
+     *
      * @param kinyuKikanShitenCode 支店コード
      */
     public void setKinyuKikanShitenCode(KinyuKikanShitenCode kinyuKikanShitenCode) {
@@ -376,7 +376,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * 預金種別のgetメソッドです。
-     * 
+     *
      * @return 預金種別
      */
     @CheckForNull
@@ -386,7 +386,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * 預金種別のsetメソッドです。
-     * 
+     *
      * @param yokinShubetsu 預金種別
      */
     public void setYokinShubetsu(RString yokinShubetsu) {
@@ -395,7 +395,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * 口座番号のgetメソッドです。
-     * 
+     *
      * @return 口座番号
      */
     @CheckForNull
@@ -405,7 +405,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * 口座番号のsetメソッドです。
-     * 
+     *
      * @param kozaNo 口座番号
      */
     public void setKozaNo(RString kozaNo) {
@@ -414,7 +414,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * 口座名義人カナのgetメソッドです。
-     * 
+     *
      * @return 口座名義人カナ
      */
     @CheckForNull
@@ -424,7 +424,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * 口座名義人カナのsetメソッドです。
-     * 
+     *
      * @param kozaMeigininKana 口座名義人カナ
      */
     public void setKozaMeigininKana(AtenaKanaMeisho kozaMeigininKana) {
@@ -433,7 +433,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * 口座名義人のgetメソッドです。
-     * 
+     *
      * @return 口座名義人
      */
     @CheckForNull
@@ -443,7 +443,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * 口座名義人のsetメソッドです。
-     * 
+     *
      * @param kozaMeiginin 口座名義人
      */
     public void setKozaMeiginin(AtenaMeisho kozaMeiginin) {
@@ -452,9 +452,9 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * このエンティティの主キーが他の{@literal DbT5911ShujiiIryoKikanJohoEntity}と等しいか判定します。
-     * 
+     *
      * @param other 比較するエンティティ
-     * @return 
+     * @return
      * 比較するエンティティが同じ主キーを持つ{@literal DbT5911ShujiiIryoKikanJohoEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
@@ -498,6 +498,7 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
 
     /**
      * {@inheritDoc}
+     *
      * @return {@inheritDoc}
      */
     @Override
@@ -506,5 +507,4 @@ public class DbT5911ShujiiIryoKikanJohoEntity extends DbTableEntityBase<DbT5911S
     }
 
 // </editor-fold>
-
 }

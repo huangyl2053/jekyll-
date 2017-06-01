@@ -491,8 +491,21 @@
             dbt5101."ninteiShinseiYMD" AS "ninteiShinseiYMD",
             dbt5101."ninteiShinseiShinseijiKubunCode" AS "ninteiShinseiKubunCode",
             dbt5101."chikuCode" AS "chikuCode",
-            CASE WHEN dbt5201."shinseishoKanriNo" IS NOT NULL
-                THEN '1'
+            CASE
+                WHEN EXISTS (
+                    SELECT *
+                    FROM
+                        rgdb."DbT5502ShinsakaiWariateJoho" T5502
+                    WHERE
+                        T5502."shinseishoKanriNo" = dbt5101."shinseishoKanriNo"
+                     AND T5502."hanteiKekkaCode" IN
+                        <foreach collection="判定結果コードs_再調査" item="code" open="("
+                                 separator=","
+                                 close=")">
+                            #{code}
+                        </foreach>
+                ) THEN '2'
+                WHEN dbt5201."shinseishoKanriNo" IS NOT NULL THEN '1'
                 ELSE '0'
             END AS "chosaKubun",
             dbt5101."jusho" AS "jusho",
@@ -554,7 +567,7 @@
                    AND dbt5912zenkai."shichosonCode" = dbt5101zenkai."shichosonCode"
                    AND dbt5912zenkai."shujiiCode" = dbt5101zenkai."shujiiCode"
         WHERE
-            dbt5201."shinseishoKanriNo" is null
+            dbt5201."shinseishoKanriNo" IS NULL
             OR dbt5201."logicalDeletedFlag" = TRUE
         ORDER BY
             dbt5101."chosaKubun",

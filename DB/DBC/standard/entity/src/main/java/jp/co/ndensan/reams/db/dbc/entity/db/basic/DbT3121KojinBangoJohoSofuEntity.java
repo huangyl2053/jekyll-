@@ -375,4 +375,5 @@ public class DbT3121KojinBangoJohoSofuEntity extends DbTableEntityBase<DbT3121Ko
     }
 
 // </editor-fold>
+
 }

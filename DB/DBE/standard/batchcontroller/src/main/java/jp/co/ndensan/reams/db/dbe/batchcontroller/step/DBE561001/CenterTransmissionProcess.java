@@ -18,7 +18,6 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission.CenterTran
 import jp.co.ndensan.reams.db.dbe.entity.report.centersoshintaishoshaichiran.CenterSoshinTaishoshaIchiranReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun02;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun06;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
@@ -26,7 +25,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotai
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.core.date.DateEditor;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
@@ -42,6 +40,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.OutputParameter;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.api.EucOtherInfo;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
@@ -59,8 +58,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
@@ -100,7 +101,7 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
     private static final RString DATE_ヶ月 = new RString("ヶ月");
     private CenterSoshinTaishoshaIchiranEntity centerSoshinTaishoshaIchiranEntity;
     private RString printTimeStamp;
-    private DbAccessLogger accessLog;
+    private final List<PersonalData> personalDataList = new ArrayList<>();
 
     /**
      * データ有無の判定です。
@@ -143,7 +144,6 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
                 setNewLine(NewLine.CRLF).
                 hasHeader(false).
                 build();
-        accessLog = new DbAccessLogger();
     }
 
     @Override
@@ -170,11 +170,15 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
         RString 申請書管理番号 = currentEntity.getShinseishoKanriNo().value();
         if (!出力された申請書管理番号.contains(申請書管理番号)) {
             出力された申請書管理番号.add(申請書管理番号);
-            ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号);
-            accessLog.store(new ShoKisaiHokenshaNo(currentEntity.getShoKisaiHokenshaNo()),
-                    currentEntity.getHihokenshaNo(), expandedInfo);
+            personalDataList.add(toPersonalData(currentEntity.getShoKisaiHokenshaNo(), currentEntity.getHihokenshaNo(), 申請書管理番号));
         }
         printReport(currentEntity);
+    }
+
+    private PersonalData toPersonalData(RString 証記載保険者番号, RString 被保険者番号, RString 申請書管理番号) {
+        ShikibetsuCode shikibetsuCode = new ShikibetsuCode(証記載保険者番号.substring(0, 5).concat(被保険者番号));
+        ExpandedInformation expandedInformation = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号);
+        return PersonalData.of(shikibetsuCode, expandedInformation);
     }
 
     private boolean is死亡データ(CenterTransmissionEntity before, CenterTransmissionEntity current) {
@@ -194,9 +198,9 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
         outputJokenhyoFactory();
         csvWriterCenterTransmission.close();
         if (出力データ件数 != 0) {
-            manager.spool(filename);
+            AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+            manager.spool(filename, accessLogUUID);
         }
-        accessLog.flushBy(AccessLogType.照会);
     }
 
     private void outputJokenhyoFactory() {
@@ -270,6 +274,8 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
         centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_9(get認定有効期間(currentEntity.getNijiHanteiNinteiYukoKikan()));
         centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_10(get開始日(currentEntity.getNijiHanteiNinteiYukoKaishiYMD()));
         centerSoshinTaishoshaIchiranEntity.setListTaishoshaIchiran_11(get終了日(currentEntity.getNijiHanteiNinteiYukoShuryoYMD()));
+        centerSoshinTaishoshaIchiranEntity.setShikibetsuCode(new ShikibetsuCode(currentEntity.getShoKisaiHokenshaNo().substring(0, 5).concat(currentEntity.getHihokenshaNo())));
+        centerSoshinTaishoshaIchiranEntity.setExpandedInformation(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), currentEntity.getShinseishoKanriNo().value()));
         CenterSoshinTaishoshaIchiranReport report = new CenterSoshinTaishoshaIchiranReport(printTimeStamp, centerSoshinTaishoshaIchiranEntity);
         report.writeBy(reportSourceWriter);
     }

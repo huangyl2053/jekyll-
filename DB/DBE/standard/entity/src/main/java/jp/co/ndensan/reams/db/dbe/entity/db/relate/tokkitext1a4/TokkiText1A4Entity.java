@@ -44,5 +44,8 @@ public class TokkiText1A4Entity {
     private List<TokkiTextEntity> 特記事項全イメージリスト;
     private List<TokkiTextEntity> 特記事項イメージリスト;
     private RString 厚労省IF識別コード;
+    private RString temp_保険者番号;
+    private RString temp_被保険者番号;
+    private RString temp_申請書管理番号;
 
 }

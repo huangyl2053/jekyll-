@@ -5,7 +5,10 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousairai;
 
+import java.util.Arrays;
+import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.HanteiKekkaCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -21,6 +24,10 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 public final class NinnteiChousairaiParameter {
 
+    private final List<RString> 判定結果コードs_再調査 = Arrays.<RString>asList(
+            HanteiKekkaCode.再調査_調査のみ.getコード(),
+            HanteiKekkaCode.再調査_調査_意見書.getコード()
+    );
     private final ShoKisaiHokenshaNo 証記載保険者番号;
     private final RString 支所コード;
     private final LasdecCode 市町村コード;

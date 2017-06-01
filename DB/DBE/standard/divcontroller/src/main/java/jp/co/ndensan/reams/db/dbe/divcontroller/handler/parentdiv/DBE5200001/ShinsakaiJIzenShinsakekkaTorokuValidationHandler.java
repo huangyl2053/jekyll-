@@ -5,17 +5,19 @@
  */
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5200001;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5200001.ShinsakaiJIzenShinsakekkaTorokuDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5200001.ShinsakaikekkaIchiranInputCsvEntity;
+import jp.co.ndensan.reams.db.dbe.service.core.shinsakaijizenshinsakekkaichiran.ShinsakaiJIzenShinsakekkaIchiranFinder;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -26,6 +28,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
  */
 public class ShinsakaiJIzenShinsakekkaTorokuValidationHandler {
 
+    private static final RString 出力名 = new RString("JizenShinsaKekka");
+    private static final RString 下線 = new RString("_");
+    private static final RString CSV_TAIPU = new RString(".csv");
     private final ShinsakaiJIzenShinsakekkaTorokuDiv div;
 
     /**
@@ -40,55 +45,65 @@ public class ShinsakaiJIzenShinsakekkaTorokuValidationHandler {
     /**
      * 入力チェック
      *
-     * @param path path
-     * @param fileNames fileNames
+     * @param uploadedFiles アップロードされたファイル
+     * @param 開催番号 開催番号
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs 入力チェック_btnGetResult(RStringBuilder path, List<RString> fileNames) {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        RStringBuilder name = new RStringBuilder();
-        for (RString fileName : fileNames) {
-            if (div.getJizenShinsakaiShiryoPublication().getPublicationTargetShinsakai().getTxtShinsakaiKaisaiNo() != null
-                    && !new File(Path.combinePath(path.toRString(), fileName).toString()).exists()) {
-                name.append(fileName);
+    public ValidationMessageControlPairs validateUploadedFiles(FileData[] uploadedFiles, RString 開催番号) {
+        ValidationMessageControlPairs vp = new ValidationMessageControlPairs();
+        final List<RString> 審査員s = ShinsakaiJIzenShinsakekkaIchiranFinder.createInstance().get審査員(開催番号).records();
+        final List<RString> uploadedFileNames = toFileNames(uploadedFiles);
+        final RStringBuilder name = new RStringBuilder();
+        for (RString fileName : asRequiredFileNames(開催番号, 審査員s)) {
+            if (!uploadedFileNames.contains(fileName)) {
+                name.append(fileName).append(RString.HALF_SPACE);
             }
         }
-        if (getIsExistsFile(path, fileNames).isEmpty()) {
-            validationMessages.add(new ValidationMessageControlPair(
+        if (name.length() != 0) {
+            vp.add(new ValidationMessageControlPair(
                     new ShinsakaiJIzenShinsakekkaTorokuValidationHandler.ValidationCheckMessages(
                             UrErrorMessages.対象ファイルが存在しない, name.toString())));
         }
-        return validationMessages;
+        return vp;
     }
 
-    /**
-     * 存在のファイル取得する。
-     *
-     * @param path path
-     * @param fileNames fileNames
-     * @return 存在のファイル名リスト
-     */
-    public List<RString> getIsExistsFile(RStringBuilder path, List<RString> fileNames) {
-        List<RString> nameExists = new ArrayList<>();
-        for (RString fileName : fileNames) {
-            if (new File(Path.combinePath(path.toRString(), fileName).toString()).exists()) {
-                nameExists.add(fileName);
-            }
+    private static List<RString> asRequiredFileNames(RString 審査会番号, List<RString> 審査会委員コードリスト) {
+        List<RString> fileNameList = new ArrayList();
+        for (RString 審査会委員コード : 審査会委員コードリスト) {
+            fileNameList.add(new RStringBuilder(出力名).append(下線).append(審査会番号).append(下線)
+                    .append(審査会委員コード).append(CSV_TAIPU).toRString());
         }
-        return nameExists;
+        return fileNameList;
+    }
+
+    private static List<RString> toFileNames(FileData[] files) {
+        List<RString> list = new ArrayList<>();
+        for (FileData f : files) {
+            list.add(f.getFileName());
+        }
+        return list;
     }
 
     /**
      * ヌルチェック
      *
-     * @param name 対象ファイルname
+     * @param parsed アップロードされたCSVファイルを解析した結果
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs ヌルチェック_btnGetResult(RString name) {
+    public ValidationMessageControlPairs ヌルチェック_btnGetResult(Map<String, List<ShinsakaikekkaIchiranInputCsvEntity>> parsed) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        RStringBuilder names = new RStringBuilder();
+        for (Map.Entry<String, List<ShinsakaikekkaIchiranInputCsvEntity>> entry : parsed.entrySet()) {
+            if (entry.getValue().isEmpty()) {
+                names.append(entry.getKey());
+            }
+        }
+        if (names.length() == 0) {
+            return validationMessages;
+        }
         validationMessages.add(new ValidationMessageControlPair(
                 new ShinsakaiJIzenShinsakekkaTorokuValidationHandler.ValidationCheckMessages(
-                        UrErrorMessages.対象データなし_追加メッセージあり, name.toString())));
+                        UrErrorMessages.対象データなし_追加メッセージあり, names.toString())));
         return validationMessages;
     }
 

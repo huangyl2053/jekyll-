@@ -99,26 +99,28 @@ public class ShujiiMasterHandler {
     public void setShujiiIchiran(List<ShujiiMaster> shujiiMasterList) {
         List<dgShujiiIchiran_Row> dataGridList = new ArrayList<>();
         for (ShujiiMaster shujiiMaster : shujiiMasterList) {
-            dataGridList.add(createDgShujiiIchiranRow(
-                    RString.EMPTY,
-                    shujiiMaster.get市町村コード(),
-                    shujiiMaster.get市町村名称(),
-                    shujiiMaster.get主治医氏名(),
-                    shujiiMaster.get主治医カナ(),
-                    shujiiMaster.get主治医コード(),
-                    shujiiMaster.get主治医医療機関コード(),
-                    shujiiMaster.get医療機関名称(),
-                    shujiiMaster.get診療科名称(),
-                    shujiiMaster.is指定医フラグ(),
-                    shujiiMaster.is状況フラグ(),
-                    shujiiMaster.get郵便番号(),
-                    shujiiMaster.get住所(),
-                    shujiiMaster.get電話番号(),
-                    shujiiMaster.getFAX番号(),
-                    shujiiMaster.get性別() != null
-                    ? shujiiMaster.get性別()
-                    : RString.EMPTY
-            ));
+            if (shujiiMaster.get主治医コード() != null && !shujiiMaster.get主治医コード().isEmpty()) {
+                dataGridList.add(createDgShujiiIchiranRow(
+                        RString.EMPTY,
+                        shujiiMaster.get市町村コード(),
+                        shujiiMaster.get市町村名称(),
+                        shujiiMaster.get主治医氏名(),
+                        shujiiMaster.get主治医カナ(),
+                        shujiiMaster.get主治医コード(),
+                        shujiiMaster.get主治医医療機関コード(),
+                        shujiiMaster.get医療機関名称(),
+                        shujiiMaster.get診療科名称(),
+                        shujiiMaster.is指定医フラグ(),
+                        shujiiMaster.is状況フラグ(),
+                        shujiiMaster.get郵便番号(),
+                        shujiiMaster.get住所(),
+                        shujiiMaster.get電話番号(),
+                        shujiiMaster.getFAX番号(),
+                        shujiiMaster.get性別() != null
+                        ? shujiiMaster.get性別()
+                        : RString.EMPTY
+                ));
+            }
         }
         div.getShujiiIchiran().getDgShujiiIchiran().setDataSource(dataGridList);
     }

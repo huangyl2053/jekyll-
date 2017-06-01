@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosadataoutput;
 
+import java.util.List;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IMyBatisParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -16,34 +17,24 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 @lombok.Getter
 public class NinteiChosaFileOutputMybitisParameter implements IMyBatisParameter {
 
-    private final RString shichosonCode;
-    private final RString addedFileName;
-    private final RString tempFilePath;
+    private final List<RString> shinseishoKanriNoList;
 
     /**
      * コンストラクタです。
      *
-     * @param shichosonCode
-     * @param addedFileName
-     * @param tempFilePath
+     * @param shinseishoKanriNoList
      */
-    public NinteiChosaFileOutputMybitisParameter(
-            RString shichosonCode,
-            RString addedFileName,
-            RString tempFilePath) {
-        this.shichosonCode = shichosonCode;
-        this.addedFileName = addedFileName;
-        this.tempFilePath = tempFilePath;
+    public NinteiChosaFileOutputMybitisParameter(List<RString> shinseishoKanriNoList) {
+        this.shinseishoKanriNoList = shinseishoKanriNoList;
     }
 
     /**
      * パラメータを取得します。
      *
-     * @param addedFileName
-     * @param tempFilePath
+     * @param shinseishoKanriNoList
      * @return バッチパラメータ
      */
-    public static NinteiChosaFileOutputMybitisParameter createSelectByKeyParam(RString shichosonCode, RString addedFileName, RString tempFilePath) {
-        return new NinteiChosaFileOutputMybitisParameter(shichosonCode, addedFileName, tempFilePath);
+    public static NinteiChosaFileOutputMybitisParameter createSelectByKeyParam(List<RString> shinseishoKanriNoList) {
+        return new NinteiChosaFileOutputMybitisParameter(shinseishoKanriNoList);
     }
 }

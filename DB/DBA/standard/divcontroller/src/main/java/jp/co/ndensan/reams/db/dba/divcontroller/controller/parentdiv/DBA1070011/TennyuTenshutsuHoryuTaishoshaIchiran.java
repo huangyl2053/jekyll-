@@ -332,10 +332,10 @@ public class TennyuTenshutsuHoryuTaishoshaIchiran {
      * @param div 転入転出保留対象者管理
      * @return ResponseData<TennyuTenshutsuHoryuTaishoshaIchiranDiv>
      */
-    public ResponseData<TennyuTenshutsuHoryuTaishoshaIchiranDiv> onClick_btnComplete(TennyuTenshutsuHoryuTaishoshaIchiranDiv div) {
-
-        return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.完了する).respond();
-    }
+//    public ResponseData<TennyuTenshutsuHoryuTaishoshaIchiranDiv> onClick_btnComplete(TennyuTenshutsuHoryuTaishoshaIchiranDiv div) {
+//
+//        return ResponseData.of(div).forwardWithEventName(DBA1070011TransitionEventName.完了する).respond();
+//    }
 
     private void get資格異動(Models<HihokenshaDaichoIdentifier, HihokenshaDaicho> 被保険者台帳情報,
             IKojin 宛名, dgTenshutsu_Row row, List<HihokenshaDaicho> 被保険者台帳List) {

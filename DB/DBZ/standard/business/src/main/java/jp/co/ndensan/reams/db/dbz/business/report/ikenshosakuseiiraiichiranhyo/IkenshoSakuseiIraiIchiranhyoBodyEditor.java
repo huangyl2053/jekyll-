@@ -64,6 +64,8 @@ public class IkenshoSakuseiIraiIchiranhyoBodyEditor implements IkenshoSakuseiIra
         source.listIchiranhyo_8 = item.getListIchiranhyo_8();
         source.listIchiranhyo_9 = item.getListIchiranhyo_9();
         source.shujiiIryokikanCode = item.getShujiiIryokikanCode();
+        source.識別コード = item.get識別コード();
+        source.拡張情報 = item.get拡張情報();
         source.shichosonCode = item.getShichosonCode();
         source.pageCountForIryokikan = new RString(String.valueOf(pageCount));
         return source;

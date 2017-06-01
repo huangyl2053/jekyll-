@@ -67,9 +67,9 @@ public class ShujiiikenshoReportSource implements IReportSource {
     @ReportItem(name = "layout", order = 999)
     public int layout;
     @ReportPerson(id = "X")
-    public ShikibetsuCode shikibetuCode;
+    public ShikibetsuCode 識別コード;
     @ReportExpandedInfo(id = "X")
-    public ExpandedInformation hihokennshaNo;
+    public ExpandedInformation 拡張情報;
     public static final RString LAYOUTBREAKITEM;
 
     static {

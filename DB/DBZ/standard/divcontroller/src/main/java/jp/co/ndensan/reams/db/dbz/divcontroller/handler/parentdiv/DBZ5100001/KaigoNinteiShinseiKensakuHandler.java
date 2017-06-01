@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.handler.parentdiv.DBZ5100001;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.business.core.shinseikensaku.ShinseiKensakuBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
@@ -15,8 +16,6 @@ import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.shinseikensaku.ShinseiKe
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.NinteiShinseishaFinder.NinteiShinseishaFinder.NinteiShinseishaFinderDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ5100001.KaigoNinteiShinseiKensakuDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.parentdiv.DBZ5100001.dgShinseiJoho_Row;
-import jp.co.ndensan.reams.ur.urz.business.IUrControlData;
-import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -29,7 +28,6 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxDate;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -177,6 +175,7 @@ public class KaigoNinteiShinseiKensakuHandler {
      */
     public void add最近処理者(dgShinseiJoho_Row row) {
         div.getCcdNinteishinseishaFinder().updateSaikinShorisha(
+                get選択証記載保険者番号(row),
                 get選択被保険者番号(row),
                 get選択被保険者氏名(row));
         div.getCcdNinteishinseishaFinder().reloadSaikinShorisha();
@@ -191,6 +190,16 @@ public class KaigoNinteiShinseiKensakuHandler {
     public static RString get選択申請書管理番号(dgShinseiJoho_Row row) {
         return row.getShinseishoKanriNo();
 
+    }
+    
+    /**
+     * 引数で与えられたデータグリッドレコードの証記載保険者番号を返します。
+     * 
+     * @param row データグリッドレコード
+     * @return 申請書管理番号
+     */
+    public static ShoKisaiHokenshaNo get選択証記載保険者番号(dgShinseiJoho_Row row) {
+        return new ShoKisaiHokenshaNo(row.getShoKisaiHokenshaNo());
     }
 
     /**
@@ -226,26 +235,30 @@ public class KaigoNinteiShinseiKensakuHandler {
             return obj;
         }
     }
-
-    public ShinseiKensakuMapperParameter createMapperParameter() {
-        ShinseiKensakuMapperParameter result = new ShinseiKensakuMapperParameter();
-        result.setLimitCount(get最大表示件数());
-        NinteiShinseishaFinderDiv finderDiv = div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv();
-        editShosaiJokenForParameter(finderDiv, result, finderDiv.getTxtHihokenshaNumber().getValue());
-        editNinteiChosaForParameter(finderDiv, result);
-        editShujiiJohoForParameter(finderDiv, result);
-        editShinsakaiJohoForParameter(finderDiv, result);
-        editZenkaiJohoForParameter(finderDiv, result);
-        editNowPhaseForParameter(finderDiv, result);
-        editChkForParameter(finderDiv, result);
-        return result;
+    
+    /**
+     * 検索条件を作成します。
+     *
+     * @param hihokenshaNo 被保険者番号
+     * @return 検索条件 検索条件
+     */
+    public ShinseiKensakuMapperParameter createMapperParameter(RString hihokenshaNo) {
+        return createMapperParameter(div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv()
+                .getDdlHokenshaNumber().getSelectedItem().get証記載保険者番号(), hihokenshaNo);
     }
 
-    public ShinseiKensakuMapperParameter createMapperParameter最近処理者() {
+    /**
+     * 検索条件を作成します。
+     *
+     * @param shoKisaiHokenshaNo 証記載保険者番号
+     * @param hihokenshaNo 被保険者番号
+     * @return 検索条件 検索条件
+     */
+    public ShinseiKensakuMapperParameter createMapperParameter(ShoKisaiHokenshaNo shoKisaiHokenshaNo, RString hihokenshaNo) {
         ShinseiKensakuMapperParameter result = new ShinseiKensakuMapperParameter();
         result.setLimitCount(get最大表示件数());
         NinteiShinseishaFinderDiv finderDiv = div.getCcdNinteishinseishaFinder().getNinteiShinseishaFinderDiv();
-        editShosaiJokenForParameter(finderDiv, result, finderDiv.getSaikinShorishaDiv().getSelectedHihokenshaNo());
+        editShosaiJokenForParameter(finderDiv, result, shoKisaiHokenshaNo, hihokenshaNo);
         editNinteiChosaForParameter(finderDiv, result);
         editShujiiJohoForParameter(finderDiv, result);
         editShinsakaiJohoForParameter(finderDiv, result);
@@ -594,16 +607,16 @@ public class KaigoNinteiShinseiKensakuHandler {
         parameter.setUseNinteichosahyoKihonChosa(useNinteichosahyoKihonChosa);
     }
 
-    private void editShosaiJokenForParameter(NinteiShinseishaFinderDiv finderDiv, ShinseiKensakuMapperParameter parameter, RString 被保険者番号) {
+    private void editShosaiJokenForParameter(NinteiShinseishaFinderDiv finderDiv, ShinseiKensakuMapperParameter parameter,
+            ShoKisaiHokenshaNo 証記載保険者番号, RString 被保険者番号) {
         if (RString.isNullOrEmpty(被保険者番号)) {
             parameter.setUseHihokenshaNo(false);
         } else {
             parameter.setHihokenshaNo(被保険者番号);
             parameter.setUseHihokenshaNo(true);
         }
-        RString 証記載保険者番号 = finderDiv.getDdlHokenshaNumber().getSelectedItem().get証記載保険者番号().value();
-        if (!RString.isNullOrEmpty(証記載保険者番号)) {
-            parameter.setShoKisaiHokenshaNo(証記載保険者番号);
+        if (証記載保険者番号 != null && !証記載保険者番号.isEmpty()) {
+            parameter.setShoKisaiHokenshaNo(証記載保険者番号.value());
             parameter.setUseShoKisaiHokenshaNo(true);
         }
 

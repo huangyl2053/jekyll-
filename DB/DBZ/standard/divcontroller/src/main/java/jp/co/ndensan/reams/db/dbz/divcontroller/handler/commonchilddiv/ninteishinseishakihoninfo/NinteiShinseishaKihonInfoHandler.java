@@ -60,8 +60,9 @@ public class NinteiShinseishaKihonInfoHandler {
                     business.get被保険者氏名カナ() == null ? RString.EMPTY : new RString(business.get被保険者氏名カナ().toString()));
             div.getTxtSeibetsu().setValue(
                     business.get性別() == null ? RString.EMPTY : new RString(Seibetsu.toValue(business.get性別().getKey()).name()));
-            div.getTxtSeinenYmd().setValue(
-                    new RDate(business.get生年月日().toString()));
+            if (business.get生年月日() != null && business.get生年月日().isValid()) {
+                div.getTxtSeinenYmd().setValue(new RDate(business.get生年月日().toString()));
+            }
             div.getTxtNenrei().setValue(
                     new Decimal(business.get年齢()));
             div.getTxtYubibNo().setValue(
@@ -79,11 +80,11 @@ public class NinteiShinseishaKihonInfoHandler {
                     ? RString.EMPTY : NinteiShinseiShinseijiKubunCode.toValue(business.get申請区分_申請時().getKey()).get名称());
             div.getTxtShinseiKubunHoreiji().setValue(
                     business.get申請区分_法令時() == null || RString.isNullOrEmpty(business.get申請区分_法令時().getKey())
-                    ? RString.EMPTY : NinteiShinseiHoreiCode.toValue(business.get申請区分_法令時().getKey()).get名称());
+                            ? RString.EMPTY : NinteiShinseiHoreiCode.toValue(business.get申請区分_法令時().getKey()).get名称());
             div.setHdn業務コード(GyomuCode.DB介護保険.value());
             div.setHdn識別対象区分(MemoShikibetsuTaisho.識別コード.get識別対象());
             div.setHdn識別対象コード(business.get証記載保険者番号().concat(business.get被保険者番号()));
-            MemoNyuryokuHandler.btnupdateImage(GyomuCode.DB介護保険, div.getIDMemo(), MemoShikibetsuTaisho.識別コード.get識別対象(), 
+            MemoNyuryokuHandler.btnupdateImage(GyomuCode.DB介護保険, div.getIDMemo(), MemoShikibetsuTaisho.識別コード.get識別対象(),
                     business.get証記載保険者番号().concat(business.get被保険者番号()), RString.EMPTY, RString.EMPTY);
         }
 

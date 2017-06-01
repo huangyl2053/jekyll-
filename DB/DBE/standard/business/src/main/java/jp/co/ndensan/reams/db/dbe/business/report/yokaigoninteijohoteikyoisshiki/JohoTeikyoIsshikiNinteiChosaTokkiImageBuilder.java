@@ -119,8 +119,8 @@ public class JohoTeikyoIsshikiNinteiChosaTokkiImageBuilder implements IJohoTeiky
         source.tokki24 = getイメージ03(item.get特記事項リストイメージ(), 連番_24);
         source.gaikyotokkiImg = item.get概況特記事項イメージ();
         source.gaikyotokkiText = item.get概況特記事項テキスト();
-        source.shikibetuCode = ShikibetsuCode.EMPTY;
-        source.hihokennshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), item.get被保険者番号());
+        source.識別コード = new ShikibetsuCode(item.getTemp_保険者番号().substring(0, 5).concat(item.getTemp_被保険者番号()));
+        source.拡張情報 = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.getTemp_申請書管理番号());
         source.layout = getレイアウト();
         return source;
     }

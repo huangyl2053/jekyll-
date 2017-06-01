@@ -21,8 +21,8 @@ module DBE {
                 return "onClick_btnInput";
             }
 
-            public static onChange_txtTokkiJiko(): string {
-                return "onChange_txtTokkiJiko";
+            public static onClick_btnAddRemban(): string {
+                return "onClick_btnAddRemban";
             }
 
             public static onClick_btnSave(): string {
@@ -41,12 +41,20 @@ module DBE {
                 return "onClick_btnDeleteCancel";
             }
 
-            public static onClick_btnReturn(): string {
-                return "onClick_btnReturn";
+            public static onClick_dgTokkiBtnModify(): string {
+                return "onClick_dgTokkiBtnModify";
             }
 
-            public static onClick_btnUpdateCancel(): string {
-                return "onClick_btnUpdateCancel";
+            public static onClick_dgTokkiBtnDelete(): string {
+                return "onClick_dgTokkiBtnDelete";
+            }
+
+            public static onClick_btnUpdateReturn(): string {
+                return "onClick_btnUpdateReturn";
+            }
+
+            public static onClick_btnCancelReturn(): string {
+                return "onClick_btnCancelReturn";
             }
 
         }
@@ -110,6 +118,10 @@ module DBE {
                 return new UZA.Button(this.convFiledName("btnInput"));
             }
 
+            public btnAddRemban(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnAddRemban"));
+            }
+
             public txtTokkiJiko(): UZA.TextBoxMultiLine {
                 return new UZA.TextBoxMultiLine(this.convFiledName("txtTokkiJiko"));
             }
@@ -134,12 +146,12 @@ module DBE {
                 return new UZA.DataGrid(this.convFiledName("dgTokkiJikoJoho"));
             }
 
-            public btnReturn(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnReturn"));
+            public btnUpdateReturn(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnUpdateReturn"));
             }
 
-            public btnUpdateCancel(): UZA.Button {
-                return new UZA.Button(this.convFiledName("btnUpdateCancel"));
+            public btnCancelReturn(): UZA.Button {
+                return new UZA.Button(this.convFiledName("btnCancelReturn"));
             }
 
         }

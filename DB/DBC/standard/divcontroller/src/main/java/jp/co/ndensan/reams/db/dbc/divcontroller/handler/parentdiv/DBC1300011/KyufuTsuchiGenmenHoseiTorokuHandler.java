@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbc.divcontroller.entity.parentdiv.DBC1300011.Kyuf
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.HokenshaDDLPattem;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
@@ -113,7 +114,7 @@ public class KyufuTsuchiGenmenHoseiTorokuHandler {
         CommonButtonHolder.setVisibleByCommonButtonFieldName(BTN_HOZON, false);
         CommonButtonHolder.setVisibleByCommonButtonFieldName(BTN_RESEARCH, false);
         CommonButtonHolder.setVisibleByCommonButtonFieldName(BTN_RESEARCH_RESULT, false);
-        div.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護事務, false);
+        div.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護事務, HokenshaDDLPattem.全市町村以外);
         DataGridItiran_Row row = div.getDataGridItiran().getActiveRow();
         if (!row.getTxtServiceNengetsu().isEmpty()) {
             div.getTextBoxDateSaabisu().setValue(new RDate(row.getTxtServiceNengetsu().toString()));
@@ -185,7 +186,7 @@ public class KyufuTsuchiGenmenHoseiTorokuHandler {
     public void back() {
         div.getTextBoxDateSaabisu().clearValue();
         div.getCcdServiceTypeInput().clear();
-        div.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護事務, false);
+        div.getKyufuTsuchiGenmenHoseiTorokuDetail().getCcdHokenshaList().loadHokenshaList(GyomuBunrui.介護事務, HokenshaDDLPattem.全市町村以外);
         div.getCcdJigyoshaInput().setNyuryokuShisetsuKodo(RString.EMPTY);
         div.getCcdJigyoshaInput().setShisetsuMeisho(RString.EMPTY);
         div.getTextBoxFudangoukei().clearValue();

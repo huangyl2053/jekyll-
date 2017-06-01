@@ -11,7 +11,6 @@ import jp.co.ndensan.reams.db.dbe.business.core.shinsakaitaishosha.ShinsakaiTais
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaitaishosha.TaishoshaIchiranMapperParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0120001.ShinsakaiTaishoshaDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0120001.dgTaishoshaIchiran_Row;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.ShinsakaiShinchokuJokyo;
@@ -21,7 +20,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ShogaiNi
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
-import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.CodeShubetsu;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
@@ -30,8 +28,6 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.RTime;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -115,7 +111,6 @@ public class ShinsakaiTaishoshaHandler {
         }
 
         List<dgTaishoshaIchiran_Row> listRow = new ArrayList();
-        DbAccessLogger accessLog = new DbAccessLogger();
         for (ShinsakaiTaishoshaBusiness shinsakaiTai : 一覧情報) {
             dgTaishoshaIchiran_Row row = new dgTaishoshaIchiran_Row();
             TextBoxNum no = new TextBoxNum();
@@ -179,11 +174,7 @@ public class ShinsakaiTaishoshaHandler {
             }
             row.setShinseishoKanriNo(shinsakaiTai.getShinseishoKanriNo().getColumnValue());
             listRow.add(row);
-            ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
-                    row.getShinseishoKanriNo());
-            accessLog.store(new ShoKisaiHokenshaNo(row.getHokenshaNo()), row.getHihokenshaNumber(), expandedInfo);
         }
-        accessLog.flushBy(AccessLogType.照会);
         div.getDgTaishoshaIchiran().setDataSource(listRow);
     }
 

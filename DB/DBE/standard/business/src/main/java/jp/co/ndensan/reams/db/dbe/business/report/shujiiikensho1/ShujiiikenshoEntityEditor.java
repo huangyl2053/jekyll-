@@ -54,6 +54,9 @@ public final class ShujiiikenshoEntityEditor {
         shujiEntity.set保険者番号(yokaigoNinteiJohoTeikyoEntity.get保険者番号());
         shujiEntity.set被保険者番号(yokaigoNinteiJohoTeikyoEntity.get被保険者番号());
         shujiEntity.set被保険者氏名(yokaigoNinteiJohoTeikyoEntity.get被保険者氏名());
+        shujiEntity.setTemp_保険者番号(yokaigoNinteiJohoTeikyoEntity.get保険者番号());
+        shujiEntity.setTemp_被保険者番号(yokaigoNinteiJohoTeikyoEntity.get被保険者番号());
+        shujiEntity.setTemp_申請書管理番号(yokaigoNinteiJohoTeikyoEntity.get申請書管理番号());
         shujiEntity.set申請日_元号(yokaigoNinteiJohoTeikyoEntity.get認定申請年月日() == null ? RString.EMPTY
                 : yokaigoNinteiJohoTeikyoEntity.get認定申請年月日().wareki().eraType(EraType.KANJI)
                 .firstYear(FirstYear.GAN_NEN).fillType(FillType.BLANK).getEra());

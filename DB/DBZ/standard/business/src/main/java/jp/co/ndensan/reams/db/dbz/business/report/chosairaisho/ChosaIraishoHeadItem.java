@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.report.chosairaisho;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import lombok.Getter;
 
 /**
@@ -61,6 +63,9 @@ public class ChosaIraishoHeadItem {
     private final RString shinseiYMD;
     private final RString teishutsuKigen;
     private final RString tsuchibun2;
+    private RString atenaRemban;
+    private final ShikibetsuCode shikibetsuCode;
+    private final ExpandedInformation expandedInformation;
 
     /**
      * インスタンスを生成します。
@@ -109,6 +114,8 @@ public class ChosaIraishoHeadItem {
      * @param shinseiYMD 要介護認定（更新）申請日
      * @param teishutsuKigen 要介護認定調査表提出期限
      * @param tsuchibun2 通知文2
+     * @param shikibetsuCode
+     * @param expandedInformation
      */
     public ChosaIraishoHeadItem(
             RString hakkoYMD1,
@@ -154,7 +161,9 @@ public class ChosaIraishoHeadItem {
             RString homonChosasakiTelNo,
             RString shinseiYMD,
             RString teishutsuKigen,
-            RString tsuchibun2) {
+            RString tsuchibun2,
+            ShikibetsuCode shikibetsuCode,
+            ExpandedInformation expandedInformation) {
         this.hakkoYMD1 = hakkoYMD1;
         this.denshiKoin = denshiKoin;
         this.ninshoshaYakushokuMei = ninshoshaYakushokuMei;
@@ -199,5 +208,15 @@ public class ChosaIraishoHeadItem {
         this.shinseiYMD = shinseiYMD;
         this.teishutsuKigen = teishutsuKigen;
         this.tsuchibun2 = tsuchibun2;
+        this.shikibetsuCode = shikibetsuCode;
+        this.expandedInformation = expandedInformation;
+    }
+    
+    /**
+     * 連番をセットします。
+     * @param atenaRemban
+     */
+    public void setAtenaRemban(RString atenaRemban) {
+        this.atenaRemban = atenaRemban;
     }
 }

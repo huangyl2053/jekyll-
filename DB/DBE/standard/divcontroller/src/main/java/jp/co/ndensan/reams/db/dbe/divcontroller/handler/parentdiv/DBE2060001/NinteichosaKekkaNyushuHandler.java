@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.CyoSaNyuSyuBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKaiBusiness;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteichosaTokusokuHoho;
@@ -32,10 +33,13 @@ import jp.co.ndensan.reams.db.dbz.service.core.yokaigoninteitasklist.YokaigoNint
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -44,6 +48,9 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 
 /**
  * 完了処理・認定調査結果入手のHandlerクラスです。
@@ -93,12 +100,16 @@ public class NinteichosaKekkaNyushuHandler {
      */
     public void onClick_btnChousaResultKanryo(Models<NinteiKanryoJohoIdentifier, NinteiKanryoJoho> 要介護認定完了情報Model) {
         List<dgNinteiTaskList_Row> 選択されたデータ = div.getNinteichosakekkainput().getDgNinteiTaskList().getSelectedItems();
+        DbAccessLogger accessLog = new DbAccessLogger();
         for (dgNinteiTaskList_Row row : 選択されたデータ) {
             NinteiKanryoJohoIdentifier 要介護認定完了情報の識別子 = new NinteiKanryoJohoIdentifier(
                     new ShinseishoKanriNo(row.getShinseishoKanriNo()));
             NinteichosaIraiListManager.createInstance().save要介護認定完了情報(要介護認定完了情報Model.get(要介護認定完了情報の識別子).
                     createBuilderForEdit().set認定調査完了年月日(FlexibleDate.getNowDate()).build().toEntity());
+            ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), row.getShinseishoKanriNo());
+            accessLog.store(new ShoKisaiHokenshaNo(row.getShoKisaiHokenshaNo()), row.getHihoNo(), expandedInfo);
         }
+        accessLog.flushBy(AccessLogType.更新);
     }
 
     /**
@@ -188,7 +199,7 @@ public class NinteichosaKekkaNyushuHandler {
         if (UIContainer_DBEUC22101.equals(ResponseHolder.getUIContainerId())) {
             div.getNinteichosakekkainput().getRadJotaiKubun().setSelectedKey(KanryoShoriStatus.完了可能.getコード());
             div.getNinteichosakekkainput().getRadJotaiKubun().setDisabled(true);
-        } else if(UIContainer_DBEUC20602.equals(ResponseHolder.getUIContainerId())) {
+        } else if (UIContainer_DBEUC20602.equals(ResponseHolder.getUIContainerId())) {
             div.getNinteichosakekkainput().getRadJotaiKubun().setSelectedKey(KanryoShoriStatus.完了可能.getコード());
             div.getNinteichosakekkainput().getRadJotaiKubun().setDisabled(true);
         } else {
@@ -334,4 +345,16 @@ public class NinteichosaKekkaNyushuHandler {
         return no == null || RString.isNullOrEmpty(no.value()) ? RString.EMPTY : no.value();
     }
 
+    /**
+     * アクセスログを出力するためのPersonalDataを取得するメソッドです。
+     *
+     * @param 証記載保険者番号 RString
+     * @param 被保険者番号 RString
+     * @param 申請書管理番号 RString
+     * @return PersonalData
+     */
+    public Optional<PersonalData> getPersonalData(RString 証記載保険者番号, RString 被保険者番号, RString 申請書管理番号) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号);
+        return Optional.of(PersonalData.of(new ShikibetsuCode(証記載保険者番号.substring(0, 5).concat(被保険者番号)), expandedInfo));
+    }
 }

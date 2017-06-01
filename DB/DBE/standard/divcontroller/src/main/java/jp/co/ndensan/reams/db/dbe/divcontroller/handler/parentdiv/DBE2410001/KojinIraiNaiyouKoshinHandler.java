@@ -10,6 +10,8 @@ import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.kojinirainaiyoukoshin.KojinIraiNaiyouBusiness;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2410001.KojinIraiNaiyouKoshinDiv;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.Sikaku;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaItakuKubunCode;
@@ -18,9 +20,14 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiCh
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoIraiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IshiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.KateiHomonUmu;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
+import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteiShinseiJohoManager;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 
@@ -63,12 +70,22 @@ public class KojinIraiNaiyouKoshinHandler {
         div.getCcdNinteiShinseishaKihonInfo().initialize(申請書管理番号);
         div.getBtnChosaPrint().setDisabled(false);
         div.getBtnIkenshoPrint().setDisabled(false);
+        NinteiShinseiJohoManager manager = new NinteiShinseiJohoManager();
+        NinteiShinseiJoho ninteiShinseiJoho = manager.get要介護認定申請情報(申請書管理番号);
+        アクセスログ_照会(ninteiShinseiJoho.get証記載保険者番号(), ninteiShinseiJoho.get被保険者番号(), ninteiShinseiJoho.get申請書管理番号().getColumnValue());
         CommonButtonHolder.setDisabledByCommonButtonFieldName(調査依頼修正ボタン名, false);
         CommonButtonHolder.setDisabledByCommonButtonFieldName(意見書依頼修正ボタン名, false);
         set今回調査依頼情報(今回調査情報);
         set前回調査依頼情報(前回調査情報);
         set今回主治医情報(今回主治医情報);
         set前回主治医情報(前回主治医情報);
+    }
+    
+    private void アクセスログ_照会(RString 証記載保険者番号, RString 被保険者番号, RString 申請書管理番号) {
+        DbAccessLogger accessLog = new DbAccessLogger();
+        ExpandedInformation expandedInformation = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号);
+        accessLog.store(new ShoKisaiHokenshaNo(証記載保険者番号), 被保険者番号, expandedInformation);
+        accessLog.flushBy(AccessLogType.照会);
     }
 
     private void set前回調査依頼情報(KojinIraiNaiyouBusiness 前回調査情報) {

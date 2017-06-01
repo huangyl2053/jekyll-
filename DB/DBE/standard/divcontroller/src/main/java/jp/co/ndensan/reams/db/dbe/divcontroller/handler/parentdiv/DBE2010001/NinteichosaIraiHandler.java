@@ -10,20 +10,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.NinteichosaItakusakiJohoRelate;
+import jp.co.ndensan.reams.db.dbe.business.core.ninnteichousairaishudou.NinnteiChousairaiShudouBusiness;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninnteichousairaishudou.NinnteiChousairaiShudouParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.DBE2010001StateName;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.NinteichosaIraiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2010001.dgNinteiTaskList_Row;
+import jp.co.ndensan.reams.db.dbe.service.core.basic.ninnteichousairaishudou.NinnteiChousairaiShudouFinder;
 import jp.co.ndensan.reams.db.dbe.service.core.ninteichosairai.NinteichosaIraiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
 import jp.co.ndensan.reams.db.dbz.business.core.koikizenshichosonjoho.KoseiShichoson;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.CyoSaiRaiBusiness;
 import jp.co.ndensan.reams.db.dbz.business.core.yokaigoninteitasklist.ShinSaKaiBusiness;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteichosaTokusokuHoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
@@ -33,10 +38,13 @@ import jp.co.ndensan.reams.db.dbz.service.core.koikishichosonjoho.KoikiShichoson
 import jp.co.ndensan.reams.db.dbz.service.core.yokaigoninteitasklist.YokaigoNinteiTaskListFinder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
@@ -165,10 +173,17 @@ public class NinteichosaIraiHandler {
             div.getCcdItakusakiAndChosainInput().getTxtChosainCode().setValue(row.getKonkaiChosainCode());
             div.getCcdItakusakiAndChosainInput().getTxtChosainName().setValue(row.getKonkaiChosain());
             div.getCcdItakusakiAndChosainInput().setHdnShichosonCode(row.getShichosonCode());
-            div.getDdlIraiKubun().setSelectedKey(
-                    (!row.getChosaIraiKubunCode().isEmpty())
-                    ? row.getChosaIraiKubunCode()
-                    : NinteiChousaIraiKubunCode.初回.getコード());
+            NinteichosaIraiManager manager = NinteichosaIraiManager.createInstance();
+            int 認定調査依頼履歴番号 = manager.getMax認定調査依頼履歴番号(row.getShinseishoKanriNo()) + 1;
+            NinteiChousaIraiKubunCode 調査依頼区分
+                    = row.getChosaIraiKubunCode() != null && !row.getChosaIraiKubunCode().isEmpty()
+                    ? NinteiChousaIraiKubunCode.toValue(row.getChosaIraiKubunCode())
+                    : (認定調査依頼履歴番号 == 1)
+                    ? NinteiChousaIraiKubunCode.初回
+                    : is再調査(new ShinseishoKanriNo(row.getShinseishoKanriNo()))
+                    ? NinteiChousaIraiKubunCode.再調査
+                    : NinteiChousaIraiKubunCode.再依頼;
+            div.getDdlIraiKubun().setSelectedKey(調査依頼区分.getコード());
             div.getTxtChosaIraiYmd().setValue(row.getNinteichosaIraiYmd().getValue());
             KijuntsukiShichosonjohoiDataPassModel modle = new KijuntsukiShichosonjohoiDataPassModel();
             modle.set委託先コード(row.getKonkaiChosaItakusakiCode());
@@ -205,6 +220,8 @@ public class NinteichosaIraiHandler {
                 .plusDay(Integer.parseInt(DbBusinessConfig.get(ConfigNameDBE.認定調査期限日数, nowDate, SubGyomuCode.DBE認定支援).toString())));
         NinteiChousaIraiKubunCode 調査依頼区分 = (認定調査依頼履歴番号 == 1)
                 ? NinteiChousaIraiKubunCode.初回
+                : is再調査(new ShinseishoKanriNo(row.getShinseishoKanriNo()))
+                ? NinteiChousaIraiKubunCode.再調査
                 : NinteiChousaIraiKubunCode.再依頼;
         row.setChosaIraiKubunCode(調査依頼区分.getコード());
         row.setChosaIraiKubun(調査依頼区分.get名称());
@@ -468,4 +485,24 @@ public class NinteichosaIraiHandler {
         return result;
     }
 
+    private boolean is再調査(ShinseishoKanriNo 申請書管理番号) {
+        NinnteiChousairaiShudouFinder finder = NinnteiChousairaiShudouFinder.createInstance();
+        NinnteiChousairaiShudouParameter parameter = NinnteiChousairaiShudouParameter.createParameterBy申請書管理番号(申請書管理番号.value());
+        List<NinnteiChousairaiShudouBusiness> 認定調査依頼List = finder.get認定調査依頼情報(parameter).records();
+        NinnteiChousairaiShudouBusiness 認定調査依頼 = 認定調査依頼List.get(0);
+        return 認定調査依頼.is再調査();
+    }
+
+    /**
+     * アクセスログを出力するためのPersonalDataを取得するメソッドです。
+     *
+     * @param 証記載保険者番号 RString
+     * @param 被保険者番号 RString
+     * @param 申請書管理番号 RString
+     * @return PersonalData
+     */
+    public Optional<PersonalData> getPersonalData(RString 証記載保険者番号, RString 被保険者番号, RString 申請書管理番号) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号);
+        return Optional.of(PersonalData.of(new ShikibetsuCode(証記載保険者番号.substring(0, 5).concat(被保険者番号)), expandedInfo));
+    }
 }

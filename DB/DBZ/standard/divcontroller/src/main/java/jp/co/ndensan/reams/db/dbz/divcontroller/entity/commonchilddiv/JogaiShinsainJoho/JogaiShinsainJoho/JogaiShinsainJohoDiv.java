@@ -27,7 +27,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBox;
  * @reamsid_L DBZ-1300-040 dongyabin
  */
 public class JogaiShinsainJohoDiv extends Panel implements IJogaiShinsainJohoDiv, IDialogDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-06_05-07-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-24_05-18-54">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -40,6 +40,10 @@ public class JogaiShinsainJohoDiv extends Panel implements IJogaiShinsainJohoDiv
     private ShinsakaiIinJohoDiv ShinsakaiIinJoho;
     @JsonProperty("btnToroku")
     private Button btnToroku;
+    @JsonProperty("btnCancel")
+    private Button btnCancel;
+    @JsonProperty("horizonLine1")
+    private HorizontalLine horizonLine1;
     @JsonProperty("btnModoru")
     private Button btnModoru;
     @JsonProperty("btnKakutei")
@@ -115,6 +119,42 @@ public class JogaiShinsainJohoDiv extends Panel implements IJogaiShinsainJohoDiv
     @JsonProperty("btnToroku")
     public void setBtnToroku(Button btnToroku) {
         this.btnToroku = btnToroku;
+    }
+
+    /*
+     * getbtnCancel
+     * @return btnCancel
+     */
+    @JsonProperty("btnCancel")
+    public Button getBtnCancel() {
+        return btnCancel;
+    }
+
+    /*
+     * setbtnCancel
+     * @param btnCancel btnCancel
+     */
+    @JsonProperty("btnCancel")
+    public void setBtnCancel(Button btnCancel) {
+        this.btnCancel = btnCancel;
+    }
+
+    /*
+     * gethorizonLine1
+     * @return horizonLine1
+     */
+    @JsonProperty("horizonLine1")
+    public HorizontalLine getHorizonLine1() {
+        return horizonLine1;
+    }
+
+    /*
+     * sethorizonLine1
+     * @param horizonLine1 horizonLine1
+     */
+    @JsonProperty("horizonLine1")
+    public void setHorizonLine1(HorizontalLine horizonLine1) {
+        this.horizonLine1 = horizonLine1;
     }
 
     /*
@@ -328,12 +368,12 @@ public class JogaiShinsainJohoDiv extends Panel implements IJogaiShinsainJohoDiv
     }
 
     @JsonIgnore
-    public TextBox getTxtShinsakaiIinCode() {
+    public TextBoxCode getTxtShinsakaiIinCode() {
         return this.getShinsakaiIinJoho().getTxtShinsakaiIinCode();
     }
 
     @JsonIgnore
-    public void  setTxtShinsakaiIinCode(TextBox txtShinsakaiIinCode) {
+    public void  setTxtShinsakaiIinCode(TextBoxCode txtShinsakaiIinCode) {
         this.getShinsakaiIinJoho().setTxtShinsakaiIinCode(txtShinsakaiIinCode);
     }
 

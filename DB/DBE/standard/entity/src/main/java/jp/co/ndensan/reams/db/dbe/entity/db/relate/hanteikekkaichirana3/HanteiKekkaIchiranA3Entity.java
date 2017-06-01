@@ -24,6 +24,7 @@ public class HanteiKekkaIchiranA3Entity {
     private RDateTime printTimeStamp;
     private int 介護認定審査会審査順;
     private RString 市町村名称;
+    private RString 申請書管理番号;
     private RString 証記載保険者番号;
     private RString 被保険者氏名;
     private RString 被保険者番号;

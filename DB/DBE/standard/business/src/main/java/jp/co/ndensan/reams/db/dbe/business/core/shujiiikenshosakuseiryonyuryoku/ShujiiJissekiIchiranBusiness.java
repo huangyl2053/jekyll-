@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshosakuseiryonyuryoku;
 
+import javax.annotation.CheckForNull;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshosakuseiryonyuryoku.ShujiiJissekiIchiranRelateEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IshiKubunCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -141,6 +143,17 @@ public class ShujiiJissekiIchiranBusiness {
      */
     public RString get医師区分コード() {
         return entity.getIshiKubunCode();
+    }
+
+    /**
+     * @return 医師区分. もしくは{@code null}.
+     */
+    @CheckForNull
+    public IshiKubunCode get医師区分() {
+        if (IshiKubunCode.existsCode(get医師区分コード())) {
+            return IshiKubunCode.toValue(get医師区分コード());
+        }
+        return null;
     }
 
     /**

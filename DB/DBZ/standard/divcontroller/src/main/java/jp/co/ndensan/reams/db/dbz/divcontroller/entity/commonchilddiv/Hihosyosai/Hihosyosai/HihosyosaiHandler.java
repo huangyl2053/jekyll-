@@ -101,8 +101,10 @@ public class HihosyosaiHandler {
         div.setHiddenDonyuKeitaiCode(導入形態コード);
         List<KeyValueDataSource> 被保区分情報
                 = HihousyosaiFinder.createInstance().getHihokubunList().records();
-        div.getDdlSyozaiHokensya().setDataSource(get所在保険者());
-        div.getDdlSotimotoHokensya().setDataSource(get所在保険者());
+        if (!単一保険者.equals(広域と市町村判断())) {
+            div.getDdlSyozaiHokensya().setDataSource(get所在保険者());
+            div.getDdlSotimotoHokensya().setDataSource(get所在保険者());
+        }
         div.getDdlSyutokuJiyu().setDataSource(get取得事由());
         div.getDdlHihokubun().setDataSource(被保区分情報);
         div.getDdlSosichiJiyu().setDataSource(get喪失事由());
@@ -160,8 +162,10 @@ public class HihosyosaiHandler {
         div.setHiddenDonyuKeitaiCode(導入形態コード);
         List<KeyValueDataSource> 被保区分情報
                 = HihousyosaiFinder.createInstance().getHihokubunList().records();
-        div.getDdlSyozaiHokensya().setDataSource(get所在保険者());
-        div.getDdlSotimotoHokensya().setDataSource(get所在保険者());
+        if (!単一保険者.equals(広域と市町村判断())) {
+            div.getDdlSyozaiHokensya().setDataSource(get所在保険者());
+            div.getDdlSotimotoHokensya().setDataSource(get所在保険者());
+        }
         div.getDdlSyutokuJiyu().setDataSource(get取得事由());
         div.getDdlHihokubun().setDataSource(被保区分情報);
         div.getDdlSosichiJiyu().setDataSource(get喪失事由());
@@ -268,8 +272,11 @@ public class HihosyosaiHandler {
         div.getTxtSyutokutodokedeYMD().setValue(new RDate(得喪情報.getShikakuShutokuTodokedeYMD().toString()));
         set取得事由(得喪情報.getShikakuShutokuJiyuCode());
         set被保区分(得喪情報.getHihokennshaKubunCode());
-        set所在保険者(得喪情報.getShichosonCode().getColumnValue());
-        set措置元保険者(得喪情報.getKoikinaiTokureiSochimotoShichosonCode().getColumnValue());
+        if (!単一保険者.equals(広域と市町村判断())) {
+            set所在保険者(得喪情報.getShichosonCode().getColumnValue());
+            set措置元保険者(得喪情報.getKoikinaiTokureiSochimotoShichosonCode().getColumnValue());
+
+        }
         set旧保険者(得喪情報.getKyuShichosonCode().getColumnValue());
         div.getTxtSyoninichiji1().setValue(日期(得喪情報.getLastUpdateTimestamp()));
         if (得喪情報.getShikakuSoshitsuYMD() != null && !得喪情報.getShikakuSoshitsuYMD().isEmpty()) {

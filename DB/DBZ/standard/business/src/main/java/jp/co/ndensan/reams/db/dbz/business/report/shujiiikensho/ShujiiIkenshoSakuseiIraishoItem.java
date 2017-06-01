@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.report.shujiiikensho;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 主治医意見書作成依頼書_帳票パラメータクラスです。
@@ -34,7 +36,7 @@ public class ShujiiIkenshoSakuseiIraishoItem {
     private RString meishoFuyo;
     private RString customerBarCode;
     private RString sonota;
-    private RString atenaRenban;
+    private RString atenaRemban;
     private RString title;
     private RString tsuchibun1;
     private RString shinseiKubun;
@@ -66,4 +68,6 @@ public class ShujiiIkenshoSakuseiIraishoItem {
     private RString tsuchibun2;
     private RString remban;
     private RString shoriName;
+    private ShikibetsuCode 識別コード;
+    private ExpandedInformation 拡張情報;
 }

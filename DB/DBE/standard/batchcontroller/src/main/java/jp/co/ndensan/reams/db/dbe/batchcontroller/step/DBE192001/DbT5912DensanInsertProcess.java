@@ -54,6 +54,15 @@ public class DbT5912DensanInsertProcess extends BatchProcessBase<DbT5912RelateEn
 
     @Override
     protected void process(DbT5912RelateEntity entity) {
-        dbT5912Writer.insert(business.setDbt5912Entity(entity, processParamter, true));
+        DbT5912ShujiiJohoEntity dbt5912Entity = business.setDbt5912Entity(entity, processParamter);
+        switch (dbt5912Entity.getState()) {
+            case Added:
+                dbT5912Writer.insert(dbt5912Entity);
+                break;
+            case Modified:
+                dbT5912Writer.update(dbt5912Entity);
+                break;
+            default:
+        }
     }
 }

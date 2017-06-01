@@ -41,8 +41,32 @@ public class DeletePanelPresentationHandler {
      * @return
      */
     public boolean initialize(ImagekanriJoho imageKanriJoho) {
+        //2017/5/25 その他資料イメージのみ削除可能とする暫定対応
+        return _initialize(imageKanriJoho);
+//        ImageFileNames imageFiles = imageKanriJoho.collectImageNames();
+//        if (imageFiles.isEmpty()) {
+//            div.getLblTargetImage().setText(NONE_DELETABLE);
+//            div.getBtnDelete().setDisabled(true);
+//            div.getChosahyo().setDisplayNone(true);
+//            div.getGaikyoTokki().setDisplayNone(true);
+//            div.getIkensho().setDisplayNone(true);
+//            div.getSonota().setDisplayNone(true);
+//            return false;
+//        }
+//        div.getLblTargetImage().setText(DELETION_TARGET);
+//        div.getBtnDelete().setDisabled(false);
+//        new ChosahyoDivPresenter(div.getChosahyo()).initialize(imageFiles.confirmChosahyoImagesPresent());
+//        new GaikyoTokkiDivPresenter(div.getGaikyoTokki()).initialize(imageFiles.confirmGaikyoTokkiImagesPresent());
+//        new IkenshoDivPresenter(div.getIkensho()).initialize(imageFiles.confirmIkenshoImagesPresent());
+//        new SonotaDivPresenter(div.getSonota()).initialize(imageFiles.confirmSonotaShiryoImagesPresent());
+//        return true;
+    }
+
+    //暫定
+    public boolean _initialize(ImagekanriJoho imageKanriJoho) {
         ImageFileNames imageFiles = imageKanriJoho.collectImageNames();
-        if (imageFiles.isEmpty()) {
+        ImageFilesPresentState existsSonota = imageFiles.confirmSonotaShiryoImagesPresent();
+        if (imageFiles.isEmpty() || existsSonota == ImageFilesPresentState.存在しない) {
             div.getLblTargetImage().setText(NONE_DELETABLE);
             div.getBtnDelete().setDisabled(true);
             div.getChosahyo().setDisplayNone(true);
@@ -53,10 +77,10 @@ public class DeletePanelPresentationHandler {
         }
         div.getLblTargetImage().setText(DELETION_TARGET);
         div.getBtnDelete().setDisabled(false);
-        new ChosahyoDivPresenter(div.getChosahyo()).initialize(imageFiles.confirmChosahyoImagesPresent());
-        new GaikyoTokkiDivPresenter(div.getGaikyoTokki()).initialize(imageFiles.confirmGaikyoTokkiImagesPresent());
-        new IkenshoDivPresenter(div.getIkensho()).initialize(imageFiles.confirmIkenshoImagesPresent());
-        new SonotaDivPresenter(div.getSonota()).initialize(imageFiles.confirmSonotaShiryoImagesPresent());
+        new ChosahyoDivPresenter(div.getChosahyo()).initialize(ImageFilesPresentState.存在しない);
+        new GaikyoTokkiDivPresenter(div.getGaikyoTokki()).initialize(ImageFilesPresentState.存在しない);
+        new IkenshoDivPresenter(div.getIkensho()).initialize(ImageFilesPresentState.存在しない);
+        new SonotaDivPresenter(div.getSonota()).initialize(existsSonota);
         return true;
     }
 

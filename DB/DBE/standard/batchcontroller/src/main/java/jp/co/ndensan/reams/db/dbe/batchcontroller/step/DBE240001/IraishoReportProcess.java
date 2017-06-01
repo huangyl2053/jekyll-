@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoDonyuKeitai;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.report.chosairaisho.ChosaIraishoHeadItem;
 import jp.co.ndensan.reams.db.dbz.business.report.chosairaisho.ChosaIraishoReport;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.reportid.ReportIdDBZ;
@@ -52,6 +53,7 @@ public class IraishoReportProcess extends BatchProcessBase<HomonChosaIraishoRela
     private static final RString MYBATIS_SELECT_ID = new RString("jp.co.ndensan.reams.db.dbe.persistence.db.mapper."
             + "relate.hakkoichiranhyo.IHomonChosaIraishoMapper.get訪問調査依頼書tmp");
     private static final ReportId 帳票ID = ReportIdDBZ.DBE220001.getReportId();
+    private static final int INT6 = 6;
     private NinteiChosaBusiness business;
     private NinshoshaSource ninshoshaSource;
     private Map<Integer, RString> 通知文Map;
@@ -61,6 +63,7 @@ public class IraishoReportProcess extends BatchProcessBase<HomonChosaIraishoRela
     @BatchWriter
     private BatchReportWriter<ChosaIraishoReportSource> iraishoBatchReportWriter;
     private ReportSourceWriter<ChosaIraishoReportSource> iraishoReportSourceWriter;
+    private int 宛名連番 = 1;
 
     @Override
     protected void initialize() {
@@ -107,7 +110,9 @@ public class IraishoReportProcess extends BatchProcessBase<HomonChosaIraishoRela
 
     @Override
     protected void process(HomonChosaIraishoRelateEntity entity) {
-        ChosaIraishoReport report = ChosaIraishoReport.createFrom(business.setChosaIraishoHeadItem(entity, 通知文Map, ninshoshaSource, 文書番号));
+        ChosaIraishoHeadItem item = business.setChosaIraishoHeadItem(entity, 通知文Map, ninshoshaSource, 文書番号);
+        item.setAtenaRemban(new RString(宛名連番++).padZeroToLeft(INT6));
+        ChosaIraishoReport report = ChosaIraishoReport.createFrom(item);
         report.writeBy(iraishoReportSourceWriter);
     }
 

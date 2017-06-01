@@ -43,4 +43,5 @@ public class CreateTargetRelateEntity {
     private FlexibleDate 認定有効終了年月日;
     private int 連番;
     private RString 項目;
+    private int totalCount;
 }

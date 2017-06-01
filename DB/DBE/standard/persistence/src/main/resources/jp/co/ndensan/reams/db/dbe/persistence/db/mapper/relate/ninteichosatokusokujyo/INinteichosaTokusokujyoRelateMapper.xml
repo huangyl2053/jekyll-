@@ -39,8 +39,7 @@
         INNER JOIN (
         SELECT
         DbT5201.*,
-        ROW_NUMBER() OVER (PARTITION BY DbT5201."dbT5201NinteichosaIraiJoho_shinseishoKanriNo",
-        DbT5201."dbT5201NinteichosaIraiJoho_ninteichosaIraiRirekiNo"
+        ROW_NUMBER() OVER (PARTITION BY DbT5201."dbT5201NinteichosaIraiJoho_shinseishoKanriNo"
         ORDER BY DbT5201."dbT5201NinteichosaIraiJoho_ninteichosaIraiRirekiNo" DESC) AS "rowNum"
         FROM
         (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.noDeleted_DbT5201NinteichosaIraiJoho" />) AS DbT5201
@@ -126,6 +125,7 @@
         <result property="temp_調査員氏名" column="temp_調査員氏名" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="temp_事業者住所" column="temp_事業者住所" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="temp_事業者電話番号" column="temp_事業者電話番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler" />
+        <result property="temp_申請書管理番号" column="temp_申請書管理番号" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
     <select resultOrdered="true" id="select認定調査督促対象者一覧表ByKey"
             resultMap="resultMap_NinteiChosaTokusokuTaishoshaIchiranhyoRelateEntity"
@@ -145,7 +145,8 @@
         DbT5913ChosainJoho."ninteiChosainCode" AS temp_調査員コード,
         DbT5913ChosainJoho."chosainShimei" AS temp_調査員氏名,
         DbT5910NinteichosaItakusakiJoho."jusho"  AS  temp_事業者住所,
-        DbT5910NinteichosaItakusakiJoho."telNo"  AS  temp_事業者電話番号
+        DbT5910NinteichosaItakusakiJoho."telNo"  AS  temp_事業者電話番号,
+        DbT5101NinteiShinseiJoho."shinseishoKanriNo" AS temp_申請書管理番号
         FROM
         rgdb."DbT5101NinteiShinseiJoho"  AS  DbT5101NinteiShinseiJoho
         LEFT JOIN

@@ -23,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
@@ -35,24 +36,34 @@ import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 public final class OcrTorikomiResultListEditor implements AutoCloseable {
 
     private static final RString FILE_NAME = new RString("取込結果リスト.csv");
+    private static final RString DISPLAY_NAME_BASE = new RString("取込結果リスト");
+    private static final RString DISPLAY_NAME_ERROR = new RString("<br>（エラーあり）");
+    private static final RString DISPLAY_NAME_WARNING = new RString("<br>（警告あり）");
+    private static final RString DISPLAY_NAME_SUCCESS = new RString("<br>（正常終了）");
     private static final RString DOUBLE_QUOTATION = new RString("\"");
     private static final RString COMMA = new RString(",");
     private static final RString EUC_ENTITY_ID = new RString("DBE250001");
 
+    private final OcrTorikomiType torikomiType;
     private final FileSpoolManager spoolManager;
     private final RString filePath;
     private final CsvWriterWrapper csvWriter;
-    private boolean closes;
+    private boolean hasClosed;
+    private final Set<Type> torikomiKekkaTypes;
 
     /**
      * インスタンスを生成します。
+     *
+     * @param torikomiType 処理結果リスト出力対象となる取込処理の種類
      */
-    public OcrTorikomiResultListEditor() {
+    public OcrTorikomiResultListEditor(OcrTorikomiType torikomiType) {
+        this.torikomiType = torikomiType;
         this.spoolManager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther,
-                EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Other);
+                EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Csv);
         this.filePath = Path.combinePath(this.spoolManager.getEucOutputDirectry(), FILE_NAME);
         this.csvWriter = new CsvWriterWrapper(this.filePath);
-        this.closes = false;
+        this.hasClosed = false;
+        this.torikomiKekkaTypes = new HashSet<>();
     }
 
     /**
@@ -62,7 +73,7 @@ public final class OcrTorikomiResultListEditor implements AutoCloseable {
      * @param o {@link OcrTorikomiResult 取込結果}の{@link Collection}
      */
     public void writeMultiLine(Collection<? extends OcrTorikomiResult> o) {
-        if (closes) {
+        if (hasClosed) {
             throw new IllegalStateException("すでにcloseされたインスタンスです。 要修正：close()メソッドのコール後にwriteLine()が呼ばれている箇所");
         }
         List<OcrTorikomiKekkaCsvEntity> list = new ArrayList<>();
@@ -77,7 +88,7 @@ public final class OcrTorikomiResultListEditor implements AutoCloseable {
         List<Key> keyList = new ArrayList(map.keySet());
         Collections.sort(keyList);
         for (Key key : keyList) {
-            map.get(key).writeBy(this.csvWriter);
+            this.torikomiKekkaTypes.add(map.get(key).writeBy(this.csvWriter));
         }
     }
 
@@ -98,16 +109,34 @@ public final class OcrTorikomiResultListEditor implements AutoCloseable {
      */
     @Override
     public void close() {
-        this.closes = true;
+        this.hasClosed = true;
         if (csvWriter == null) {
             return;
         }
+        this.spoolManager.setDisplayName(composeDisplayName(this.torikomiType, this.torikomiKekkaTypes));
         Optional<AccessLogUUID> uuid = this.csvWriter.closeWithAccessLog();
         if (uuid.isPresent()) {
             this.spoolManager.spool(this.filePath, uuid.get());
         } else {
             this.spoolManager.spool(this.filePath);
         }
+    }
+
+    private static RString composeDisplayName(OcrTorikomiType type, Set<Type> types) {
+        RStringBuilder builder = new RStringBuilder()
+                .append(type.displayName())
+                .append(RString.HALF_SPACE)
+                .append(DISPLAY_NAME_BASE);
+        if (types.contains(Type.ERROR)) {
+            return builder.append(DISPLAY_NAME_ERROR).toRString();
+        }
+        if (types.contains(Type.WARNING)) {
+            return builder.append(DISPLAY_NAME_WARNING).toRString();
+        }
+        if (types.contains(Type.SUCCESS)) {
+            return builder.append(DISPLAY_NAME_SUCCESS).toRString();
+        }
+        return builder.toRString();
     }
 
     /**
@@ -190,21 +219,24 @@ public final class OcrTorikomiResultListEditor implements AutoCloseable {
             return this.elements.add(entity);
         }
 
-        private void writeBy(CsvWriterWrapper csvWriter) {
+        private Type writeBy(CsvWriterWrapper csvWriter) {
             if (elements.isEmpty()) {
-                return;
+                return null;
             }
 
             Map<Integer, List<OcrTorikomiKekkaCsvEntity>> map = groupingByKekkaCode(this.elements);
             if (map.containsKey(Type.ERROR.code())) {
                 write(Type.ERROR, map, csvWriter);
-                return;
+                return Type.ERROR;
             }
             OcrTorikomiKekkaCsvEntity lastWritee = null;
+            boolean hasWarning = false;
             if (map.containsKey(Type.WARNING.code())) {
                 lastWritee = write(Type.WARNING, map, csvWriter);
+                hasWarning = true;
             }
             writeSuccess(map, csvWriter, lastWritee);
+            return hasWarning ? Type.WARNING : Type.SUCCESS;
         }
 
         private static Map<Integer, List<OcrTorikomiKekkaCsvEntity>>

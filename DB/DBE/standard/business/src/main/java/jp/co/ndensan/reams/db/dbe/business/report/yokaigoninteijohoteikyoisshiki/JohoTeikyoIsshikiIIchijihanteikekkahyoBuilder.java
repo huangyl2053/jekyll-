@@ -184,8 +184,8 @@ public class JohoTeikyoIsshikiIIchijihanteikekkahyoBuilder implements IJohoTeiky
         editSource1(source);
         editSource2(source);
         editSource3(source);
-        source.shikibetuCode = ShikibetsuCode.EMPTY;
-        source.hihokennshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), item.get被保険者番号());
+        source.識別コード = new ShikibetsuCode(item.getTemp_保険者番号().substring(0, 5).concat(item.getTemp_被保険者番号()));
+        source.拡張情報 = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.getTemp_申請書管理番号());
         source.layout = JohoTeikyoIsshiki.Ichijihanteikekkahyo.getFormGroupIndex();
         return source;
     }

@@ -117,6 +117,8 @@ public class ShujiiIkenshoSakuseiTokusokujoHeadEditor implements IShujiiIkenshoS
         source.seibetsu = headitem.getSeyiben();
         source.birthGengo = headitem.getBirthGengo();
         source.shoriName = headitem.getShoriName();
+        source.識別コード = headitem.get識別コード();
+        source.拡張情報 = headitem.get拡張情報();
         return source;
     }
 }

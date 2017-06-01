@@ -50,6 +50,14 @@ public enum OCRID {
      */
     _801("801", false),
     /**
+     * 審査結果
+     */
+    _901("901", false),
+    /**
+     * 審査結果
+     */
+    _902("902", false),
+    /**
      * 空（nullObject）
      */
     EMPTY;

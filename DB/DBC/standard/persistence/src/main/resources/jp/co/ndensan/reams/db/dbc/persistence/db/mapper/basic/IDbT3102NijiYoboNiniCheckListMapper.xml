@@ -34,7 +34,7 @@
 
 
     <!--テーブルDbT3102NijiYoboNiniCheckListの項目をDbT3102NijiYoboNiniCheckListEntityの項目にマッピングします。-->
-    <resultMap id="ResultMap_DbT3102NijiYoboNiniCheckListEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3102NijiYoboNiniCheckListEntity" autoMapping="true">
+    <resultMap id="ResultMap_DbT3102NijiYoboNiniCheckListEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3102NijiYoboNiniCheckListEntity" autoMapping="true">
         <id property="hihokenshaNo" column="dbT3102NijiYoboNiniCheckList_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="uketsukeYMD" column="dbT3102NijiYoboNiniCheckList_uketsukeYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <id property="niniShitsumonNo" column="dbT3102NijiYoboNiniCheckList_niniShitsumonNo" />

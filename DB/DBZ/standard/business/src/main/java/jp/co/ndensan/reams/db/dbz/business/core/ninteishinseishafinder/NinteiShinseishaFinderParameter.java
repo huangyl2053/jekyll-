@@ -18,10 +18,12 @@ public class NinteiShinseishaFinderParameter {
     GyomuBunrui 業務分類;
     boolean checkedみなし2号申請;
     ShoKisaiHokenshaNo 証記載保険者番号;
+    boolean is月例処理未完了;
 
     public NinteiShinseishaFinderParameter() {
         業務分類 = null;
         checkedみなし2号申請 = false;
         証記載保険者番号 = null;
+        is月例処理未完了 = false;
     }
 }

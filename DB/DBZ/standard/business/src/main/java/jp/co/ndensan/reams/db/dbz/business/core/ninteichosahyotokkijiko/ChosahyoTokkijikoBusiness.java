@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.core.ninteichosahyotokkijiko;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import lombok.Getter;
 
 /**
@@ -40,6 +42,8 @@ public class ChosahyoTokkijikoBusiness {
     private final RString hihokenshaNo10;
     private final RString hihokenshaNo2;
     private final RString hihokenshaName;
+    private final ShikibetsuCode 識別コード;
+    private final ExpandedInformation 拡張情報;
 
     /**
      * コンストラクタです。
@@ -67,6 +71,8 @@ public class ChosahyoTokkijikoBusiness {
      * @param hihokenshaNo10 被保険者番号10
      * @param hihokenshaNo2 被保険者番号2
      * @param hihokenshaName 被保険者名
+     * @param 識別コード
+     * @param 拡張情報
      */
     public ChosahyoTokkijikoBusiness(
             RString hokenshaNo4,
@@ -91,7 +97,9 @@ public class ChosahyoTokkijikoBusiness {
             RString hihokenshaNo9,
             RString hihokenshaNo10,
             RString hihokenshaNo2,
-            RString hihokenshaName
+            RString hihokenshaName,
+            ShikibetsuCode 識別コード,
+            ExpandedInformation 拡張情報
     ) {
         this.hokenshaNo4 = hokenshaNo4;
         this.shinseiYY1 = shinseiYY1;
@@ -116,5 +124,7 @@ public class ChosahyoTokkijikoBusiness {
         this.hihokenshaNo10 = hihokenshaNo10;
         this.hihokenshaNo2 = hihokenshaNo2;
         this.hihokenshaName = hihokenshaName;
+        this.識別コード = 識別コード;
+        this.拡張情報 = 拡張情報;
     }
 }

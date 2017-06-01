@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxNum;
  * @reamsid_L DBA-0140-010 houtianpeng
  */
 public class JigyoshaNyuryokuGudieCommonChildDivDiv extends Panel implements IJigyoshaNyuryokuGudieCommonChildDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-07-28_11-34-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-07_20-09-44">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -37,6 +37,8 @@ public class JigyoshaNyuryokuGudieCommonChildDivDiv extends Panel implements IJi
     private TaishoJigyoshaKensakuDiv TaishoJigyoshaKensaku;
     @JsonProperty("JigyoshaItirann")
     private JigyoshaItirannDiv JigyoshaItirann;
+    @JsonProperty("btnYameru")
+    private Button btnYameru;
     @JsonProperty("JigyoshaMode")
     private RString JigyoshaMode;
 
@@ -80,6 +82,24 @@ public class JigyoshaNyuryokuGudieCommonChildDivDiv extends Panel implements IJi
     @JsonProperty("JigyoshaItirann")
     public void setJigyoshaItirann(JigyoshaItirannDiv JigyoshaItirann) {
         this.JigyoshaItirann = JigyoshaItirann;
+    }
+
+    /*
+     * getbtnYameru
+     * @return btnYameru
+     */
+    @JsonProperty("btnYameru")
+    public Button getBtnYameru() {
+        return btnYameru;
+    }
+
+    /*
+     * setbtnYameru
+     * @param btnYameru btnYameru
+     */
+    @JsonProperty("btnYameru")
+    public void setBtnYameru(Button btnYameru) {
+        this.btnYameru = btnYameru;
     }
 
     /*
@@ -208,16 +228,6 @@ public class JigyoshaNyuryokuGudieCommonChildDivDiv extends Panel implements IJi
     @JsonIgnore
     public void  setBtnClear(Button btnClear) {
         this.getTaishoJigyoshaKensaku().setBtnClear(btnClear);
-    }
-
-    @JsonIgnore
-    public Button getBtnYameru() {
-        return this.getTaishoJigyoshaKensaku().getBtnYameru();
-    }
-
-    @JsonIgnore
-    public void  setBtnYameru(Button btnYameru) {
-        this.getTaishoJigyoshaKensaku().setBtnYameru(btnYameru);
     }
 
     // </editor-fold>

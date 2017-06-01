@@ -296,8 +296,11 @@ public class RoreiFukushiNenkinShokaiDiv extends Panel implements IRoreiFukushiN
     }
 
     @Override
-    public void initialize(Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> roreiFukushiNenkinJukyusha) {
+    public void initialize(Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> roreiFukushiNenkinJukyusha,
+            ShikibetsuCode shikibetsuCode) {
         List<RoreiFukushiNenkinJukyusha> rofukuList = new ArrayList<>(roreiFukushiNenkinJukyusha.values());
+        this.setShikibetsuCode(shikibetsuCode == null ? RString.EMPTY : shikibetsuCode
+                .getColumnValue());
         getHandler(this).set老齢福祉年金情報一覧表示グリッド(rofukuList);
         ViewStateHolder.put(ViewStateKeys.老齢福祉年金情報検索結果一覧, roreiFukushiNenkinJukyusha);
     }

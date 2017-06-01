@@ -76,10 +76,10 @@
         rgdb."DbT5210NinteichosahyoShisetsuRiyo"  AS  DbT5210NinteichosahyoShisetsuRiyo
         ON  DbT5202NinteichosahyoGaikyoChosa."shinseishoKanriNo" = DbT5210NinteichosahyoShisetsuRiyo."shinseishoKanriNo"
         AND DbT5202NinteichosahyoGaikyoChosa."ninteichosaRirekiNo" = DbT5210NinteichosahyoShisetsuRiyo."ninteichosaRirekiNo"
+        AND DbT5210NinteichosahyoShisetsuRiyo."remban" = 1
         WHERE
         DbT5202NinteichosahyoGaikyoChosa."shinseishoKanriNo" = #{temp_申請書管理番号}
         AND DbT5202NinteichosahyoGaikyoChosa."ninteichosaRirekiNo" = #{temp_認定調査依頼履歴番号}
-        AND DbT5210NinteichosahyoShisetsuRiyo."remban" = 1
         ORDER BY temp_概況調査テキストイメージ区分 DESC
         LIMIT (1)
     </select>

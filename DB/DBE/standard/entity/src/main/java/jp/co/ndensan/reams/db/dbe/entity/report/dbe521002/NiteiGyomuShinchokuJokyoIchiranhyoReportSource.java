@@ -72,7 +72,7 @@ public class NiteiGyomuShinchokuJokyoIchiranhyoReportSource implements IReportSo
     @ReportPerson(id = "X")
     public ShikibetsuCode shikibetuCode;
     @ReportExpandedInfo(id = "X")
-    public ExpandedInformation hishokenshaNo;
+    public ExpandedInformation shinseishoKanriNo;
     @ReportKojinNo(id = "X")
     public KojinNo kojinNo;
     @ReportHojinNo(id = "X")

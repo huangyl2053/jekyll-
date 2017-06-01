@@ -4,28 +4,26 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2020001;
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.Button;
-import jp.co.ndensan.reams.uz.uza.ui.binding.DropDownList;
+import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
-import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxFlexibleDate;
+import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
 
 /**
- * SearchConditionPanel のクラスファイル
- *
+ * SearchConditionPanel のクラスファイル 
+ * 
+ * @author 自動生成
  */
 public class SearchConditionPanelDiv extends Panel {
-
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-01-15_09-59-03">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_06-32-36">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("txtSetteiYM")
-    private TextBoxFlexibleDate txtSetteiYM;
+    @JsonProperty("txtConfigurationYM")
+    private TextBoxFlexibleYearMonth txtConfigurationYM;
     @JsonProperty("btnPreviousMonth")
     private Button btnPreviousMonth;
     @JsonProperty("btnNextMonth")
@@ -42,21 +40,21 @@ public class SearchConditionPanelDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * gettxtSetteiYM
-     * @return txtSetteiYM
+     * gettxtConfigurationYM
+     * @return txtConfigurationYM
      */
-    @JsonProperty("txtSetteiYM")
-    public TextBoxFlexibleDate getTxtSetteiYM() {
-        return txtSetteiYM;
+    @JsonProperty("txtConfigurationYM")
+    public TextBoxFlexibleYearMonth getTxtConfigurationYM() {
+        return txtConfigurationYM;
     }
 
     /*
-     * settxtSetteiYM
-     * @param txtSetteiYM txtSetteiYM
+     * settxtConfigurationYM
+     * @param txtConfigurationYM txtConfigurationYM
      */
-    @JsonProperty("txtSetteiYM")
-    public void setTxtSetteiYM(TextBoxFlexibleDate txtSetteiYM) {
-        this.txtSetteiYM = txtSetteiYM;
+    @JsonProperty("txtConfigurationYM")
+    public void setTxtConfigurationYM(TextBoxFlexibleYearMonth txtConfigurationYM) {
+        this.txtConfigurationYM = txtConfigurationYM;
     }
 
     /*

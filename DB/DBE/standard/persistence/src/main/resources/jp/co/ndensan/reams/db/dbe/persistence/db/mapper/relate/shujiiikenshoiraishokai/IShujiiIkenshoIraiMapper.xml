@@ -59,4 +59,30 @@
         DbT5101Nintei."ninteiShinseiYMD" DESC
         , DbT5301Shujii."ikenshoIraiRirekiNo" DESC
     </select>
+    <select resultOrdered="true" id="is再意見書"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshoiraishokai.ShujiiIkenshoIraiParameter"
+            resultType="boolean" fetchSize="500">
+        SELECT
+        EXISTS (
+        SELECT *
+        FROM
+        rgdb."DbT5502ShinsakaiWariateJoho" T5502
+        WHERE
+        T5502."shinseishoKanriNo" = T5101."shinseishoKanriNo"
+        AND T5502."hanteiKekkaCode" IN
+        <foreach collection="判定結果コードs_再意見書" item="code" open="("
+                 separator=","
+                 close=")">
+            #{code}
+        </foreach>
+        )
+        FROM
+        rgdb."DbT5101NinteiShinseiJoho" T5101
+        INNER JOIN
+        rgdb."DbT7051KoseiShichosonMaster" T7051
+        ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo"
+        WHERE
+        T5101."shinseishoKanriNo" = #{申請書管理番号}
+        AND T5101."logicalDeletedFlag" = False
+    </select>
 </mapper>

@@ -56,11 +56,26 @@ public class NinteiChosaKekkaTorikomiOcrValidationHandler {
         }
         return v;
     }
+    
+    /**
+     * zip処理が2回目のときにエラーメッセージを返します。
+     * 
+     * @return ValidationMessageControlPairs
+     * @param count
+     */
+    public ValidationMessageControlPairs validationZip(int count) {
+        ValidationMessageControlPairs v = new ValidationMessageControlPairs();
+        if (count > 1) {
+            v.add(new ValidationMessageControlPair(ValidationMessages.zipファイル複数, div.getNinteiChosaOCRTorikomiFile()));
+        }
+        return v;
+    }
 
     private enum ValidationMessages implements IValidationMessage {
 
         NeedToUploadCsv(DbeErrorMessages.要アップロード, OcrDataType.調査票.csvFileName().toString()),
-        NeedToUploadCa3(DbeErrorMessages.要アップロード, OcrDataType.調査票.ca3FileName().toString());
+        NeedToUploadCa3(DbeErrorMessages.要アップロード, OcrDataType.調査票.ca3FileName().toString()),
+        zipファイル複数(DbeErrorMessages.zipファイル複数);
 
         private final Message m;
 

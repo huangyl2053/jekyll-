@@ -286,4 +286,12 @@ public class IkenshoirairirekiichiranShudou {
     public TelNo get電話番号() {
         return entity.getTelNo();
     }
+
+    /**
+     * @return 次の依頼が再調査となる場合、{@code true}
+     */
+    public boolean is再調査() {
+        return entity.isSaiChosa();
+    }
+
 }

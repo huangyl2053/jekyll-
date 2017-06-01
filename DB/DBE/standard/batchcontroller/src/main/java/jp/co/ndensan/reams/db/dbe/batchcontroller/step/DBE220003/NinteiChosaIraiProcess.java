@@ -58,7 +58,7 @@ public class NinteiChosaIraiProcess extends BatchKeyBreakBase<NinteiChosaIraiRel
     @Override
     protected void initialize() {
         count = 1;
-        business = new NinteiChosaIraiBusiness();
+        business = new NinteiChosaIraiBusiness(processParamter);
     }
 
     @Override
@@ -78,7 +78,7 @@ public class NinteiChosaIraiProcess extends BatchKeyBreakBase<NinteiChosaIraiRel
         if (hasBrek(getBefore(), current)) {
             count = 1;
             ChosaIraiHakkoIchiranhyoReport report = ChosaIraiHakkoIchiranhyoReport.
-                    createFrom(business.setHeadItem(processParamter), business.setBodyItem(current), count++);
+                    createFrom(business.setHeadItem(), business.setBodyItem(current), count++);
             report.writeBy(reportSourceWriter);
         }
     }
@@ -93,7 +93,7 @@ public class NinteiChosaIraiProcess extends BatchKeyBreakBase<NinteiChosaIraiRel
     @Override
     protected void usualProcess(NinteiChosaIraiRelateEntity entity) {
         ChosaIraiHakkoIchiranhyoReport report = ChosaIraiHakkoIchiranhyoReport.
-                createFrom(business.setHeadItem(processParamter), business.setBodyItem(entity), count++);
+                createFrom(business.setHeadItem(), business.setBodyItem(entity), count++);
         report.writeBy(reportSourceWriter);
     }
 

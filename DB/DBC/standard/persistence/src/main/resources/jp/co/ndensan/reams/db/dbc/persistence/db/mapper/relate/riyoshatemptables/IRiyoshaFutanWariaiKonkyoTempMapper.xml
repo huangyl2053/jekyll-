@@ -19,7 +19,7 @@
         "setaiinShotokuRirekiNo"
     </sql>
 
-    <resultMap id="ResultMap_RiyoshaFutanWariaiKonkyoTempEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.RiyoshaFutanWariaiKonkyoTempEntity" autoMapping="true">
+    <resultMap id="ResultMap_RiyoshaFutanWariaiKonkyoTempEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.temptables.RiyoshaFutanWariaiKonkyoTempEntity" autoMapping="true">
         <result property="nendo" column="RiyoshaFutanWariaiKonkyoTemp_nendo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleYearTypeHandler"/>
         <result property="hihokenshaNo" column="RiyoshaFutanWariaiKonkyoTemp_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="edaNo" column="RiyoshaFutanWariaiKonkyoTemp_edaNo" />

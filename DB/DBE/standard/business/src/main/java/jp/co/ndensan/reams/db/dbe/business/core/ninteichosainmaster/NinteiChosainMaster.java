@@ -57,7 +57,7 @@ public class NinteiChosainMaster {
      * @return 認定調査員コード
      */
     public RString get認定調査員コード() {
-        return entity.getNinteiChosainNo().getColumnValue();
+        return entity.getNinteiChosainNo() != null ? entity.getNinteiChosainNo().getColumnValue() : RString.EMPTY;
     }
 
     /**

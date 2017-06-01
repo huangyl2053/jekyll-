@@ -47,10 +47,6 @@ var DBZ;
                 return new UZA.Panel(this.convFiledName("KensakuJoken"));
             };
 
-            Controls.prototype.ccdHokenshaList = function () {
-                return new DBZ.HokenshaList.ModeController(this.convFiledName("ccdHokenshaList"));
-            };
-
             Controls.prototype.txtSonotaKikanCodefrom = function () {
                 return new UZA.TextBox(this.convFiledName("txtSonotaKikanCodefrom"));
             };

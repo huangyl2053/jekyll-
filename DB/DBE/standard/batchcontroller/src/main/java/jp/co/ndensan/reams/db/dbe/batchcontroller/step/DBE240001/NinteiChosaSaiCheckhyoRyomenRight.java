@@ -63,9 +63,6 @@ public class NinteiChosaSaiCheckhyoRyomenRight extends BatchProcessBase<HomonCho
         batchReportWriter = BatchReportFactory.createBatchReportWriter(帳票.getReportId().value())
                 .addBreak(new BreakerCatalog<SaiChekkuhyoReportSource>().new SimpleLayoutBreaker(
 
-
-
-
                     SaiChekkuhyoReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<SaiChekkuhyoReportSource> occuredBreak(ReportLineRecord<SaiChekkuhyoReportSource> currentRecord,
@@ -90,7 +87,8 @@ public class NinteiChosaSaiCheckhyoRyomenRight extends BatchProcessBase<HomonCho
         List<ChosaIraishoAndChosahyoAndIkenshoPrintBusiness> businessList = ChosaIraishoAndChosahyoAndIkenshoPrintFinder.createInstance()
                 .get認定調査票差異チェック票(parameter).records();
         ChosahyoSaiCheckhyoRelateEntity checkEntity = business.set認定調査票差異チェック票List(entity, businessList);
-        SaiChekkuhyoRyoumenReport report = SaiChekkuhyoRyoumenReport.createFrom(business.setDBE292001Item(checkEntity, entity.get厚労省IF識別コード()));
+        SaiChekkuhyoRyoumenReport report = SaiChekkuhyoRyoumenReport.createFrom(business.setDBE292001Item(checkEntity,
+                businessList != null && !businessList.isEmpty() ? businessList.get(0).get厚労省IF識別コード() : RString.EMPTY));
         report.writeBy(reportSourceWriter);
     }
 

@@ -15,6 +15,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class CreateTargetCsvBusiness {
 
+    private static final int GOGITAI_CD_LENGTH = 6;
+    private static final RString DEFAULT_GOGITAI_CD = RString.EMPTY.padZeroToLeft(GOGITAI_CD_LENGTH);
     private final CreateTargetCsvRelateEntity entity;
     private final CreateCsvDataBusiness createBusiness;
 
@@ -639,7 +641,9 @@ public class CreateTargetCsvBusiness {
      * @return 合議体番号
      */
     public RString get合議体番号() {
-        return entity.get合議体番号();
+        return RString.isNullOrEmpty(entity.get合議体番号())
+                ? DEFAULT_GOGITAI_CD
+                : entity.get合議体番号().padZeroToLeft(GOGITAI_CD_LENGTH);
     }
 
     /**

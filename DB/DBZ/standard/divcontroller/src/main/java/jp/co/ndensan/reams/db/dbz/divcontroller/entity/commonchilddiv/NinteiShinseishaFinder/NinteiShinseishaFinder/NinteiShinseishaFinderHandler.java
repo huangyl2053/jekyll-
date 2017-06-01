@@ -56,6 +56,7 @@ public class NinteiShinseishaFinderHandler {
     private static final RString MENUID_DBEMN72001 = new RString("DBEMN72001");
     private static final RString MENUID_DBEMN24001 = new RString("DBEMN24001");
     private static final RString MENUID_DBEMN31001 = new RString("DBEMN31001");
+    private static final RString MENUID_DBEMN31002 = new RString("DBEMN31002");
 
     /**
      * コンストラクタです。
@@ -82,10 +83,18 @@ public class NinteiShinseishaFinderHandler {
      * @param parameter パラメタ
      */
     public void initialize(NinteiShinseishaFinderParameter parameter) {
-        initialize();
+        if (parameter.get業務分類().equals(GyomuBunrui.介護認定)) {
+            div.getDdlHokenshaNumber().loadHokenshaList(GyomuBunrui.介護認定);
+        } else {
+            div.getDdlHokenshaNumber().loadHokenshaList(GyomuBunrui.介護事務);
+        }
+        div.getCcdSaikinShorisha().initialize(div.getDdlHokenshaNumber().getSelectedItem().get証記載保険者番号());
+        initialize共通処理();
+        initTennyuNashi();
         if (parameter.get業務分類() != null) {
             div.getDdlHokenshaNumber().loadHokenshaList(parameter.get業務分類());
         }
+        set月例処理未完了(parameter.is月例処理未完了());
         setみなし2号申請チェック(parameter.isCheckedみなし2号申請());
         if (parameter.get証記載保険者番号() != null) {
             div.getDdlHokenshaNumber().setSelectedShoKisaiHokenshaNoIfExist(parameter.get証記載保険者番号());
@@ -157,7 +166,7 @@ public class NinteiShinseishaFinderHandler {
         setAbledKanryoJoho();
         init完了情報();
     }
-    
+
     private void init二次判定結果DDL() {
         div.getDdlNijiHanteiKekka().setDataSource(dataSourceOf二次判定結果From厚労省IFコード(KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3));
         div.getDdlNijiHanteiKekka().setSelectedIndex(0);
@@ -571,7 +580,15 @@ public class NinteiShinseishaFinderHandler {
         }
         div.getChkMinashiFlag().setSelectedItemsByKey(selectedItems);
     }
-    
+
+    private void set月例処理未完了(boolean is月例処理未完了) {
+        if (is月例処理未完了 == true) {
+            List<RString> selectedkeyMikann = new ArrayList<>();
+            selectedkeyMikann.add(処理状態未完了);
+            div.getChkGetsureiShori().setSelectedItemsByKey(selectedkeyMikann);
+        }
+    }
+
     public void setDisabledKanryoJoho() {
         div.getChkIchijiHantei().setDisabled(true);
         div.getChkShinseiUketsuke().setDisabled(true);
@@ -598,7 +615,7 @@ public class NinteiShinseishaFinderHandler {
         div.getChkTsuchiShori().setDisabled(true);
         div.getChkIkenshoNyushu().setDisabled(false);
         div.getChkGetsureiShori().setDisabled(false);
-        
+
     }
 
     public void clearKanryoJoho() {
@@ -635,7 +652,7 @@ public class NinteiShinseishaFinderHandler {
         div.getChkIkenshoNyushu().setSelectedItemsByKey(selectedkeyMikann);
         div.getChkGetsureiShori().setSelectedItemsByKey(selectedkeyMikann);
     }
- 
+
     public void set調査依頼完了情報() {
         List<RString> selectedkeyMikann = new ArrayList<>();
         List<RString> selectedkeyKanryo = new ArrayList<>();
@@ -679,7 +696,7 @@ public class NinteiShinseishaFinderHandler {
         div.getChkGetsureiShori().setSelectedItemsByKey(selectedkeyMikann);
         div.getChkShinseiUketsuke().setSelectedItemsByKey(selectedkeyKanryo);
     }
-    
+
     public void set調査入手完了情報() {
         List<RString> selectedkeyMikann = new ArrayList<>();
         List<RString> selectedkeyKanryo = new ArrayList<>();
@@ -931,6 +948,8 @@ public class NinteiShinseishaFinderHandler {
             setKanryoJoho_DBEMN43001();
         } else if (MENUID_DBEMN72001.equals(menuID)) {
             setKanryoJoho_DBEMN72001();
+        } else if (MENUID_DBEMN31002.equals(menuID)) {
+            setKanryoJoho_DBEMN31002();
         }
     }
 
@@ -946,6 +965,8 @@ public class NinteiShinseishaFinderHandler {
             setKanryoJoho_DBEMN43001();
         } else if (MENUID_DBEMN72001.equals(menuID)) {
             setKanryoJoho_DBEMN72001();
+        } else if (MENUID_DBEMN31002.equals(menuID)) {
+            setKanryoJoho_DBEMN31002();
         }
     }
 
@@ -1030,5 +1051,9 @@ public class NinteiShinseishaFinderHandler {
         div.getChkNijiHantei().setDisabled(true);
         div.getChkGetsureiShori().setSelectedItemsByKey(selectedkeyMikann);
         div.getChkGetsureiShori().setDisabled(true);
+    }
+
+    private void setKanryoJoho_DBEMN31002() {
+        div.getChkGetsureiShori().setSelectedItemsByKey(Arrays.asList(処理状態未完了));
     }
 }

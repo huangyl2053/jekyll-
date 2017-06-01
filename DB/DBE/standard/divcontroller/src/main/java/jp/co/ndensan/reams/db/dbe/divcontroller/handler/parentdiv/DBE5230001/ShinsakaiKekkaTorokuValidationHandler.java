@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5230001;
 
 import jp.co.ndensan.reams.db.dbz.definition.core.shinsakai.HanteiKekkaCode;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001.ShinsakaiKekkaTorokuDiv;
+import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5230001.dgTaishoshaIchiran_Row;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -63,6 +64,10 @@ public class ShinsakaiKekkaTorokuValidationHandler {
     public ValidationMessageControlPairs validate全体() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         対象者一覧件数チェック(validationMessages);
+        if (validationMessages.existsError()) {
+            return validationMessages;
+        }
+        hasAnyChanges(validationMessages);
         return validationMessages;
     }
 
@@ -72,10 +77,25 @@ public class ShinsakaiKekkaTorokuValidationHandler {
      * @param validPairs ValidationMessageControlPairs
      * @return validPairs ValidationMessageControlPairs
      */
-    void 対象者一覧件数チェック(ValidationMessageControlPairs validationMessages) {
+    private void 対象者一覧件数チェック(ValidationMessageControlPairs validationMessages) {
         if (div.getShinseishaIchiran().getDgTaishoshaIchiran().getDataSource().isEmpty()) {
-            validationMessages.add(new ValidationMessageControlPair(new ShinsakaiKekkaTorokuValidationHandler.IdocheckMessages(UrErrorMessages.該当データなし)));
+            validationMessages.add(new ValidationMessageControlPair(
+                    new ShinsakaiKekkaTorokuValidationHandler.IdocheckMessages(UrErrorMessages.該当データなし),
+                    div.getDgTaishoshaIchiran()
+            ));
         }
+    }
+
+    private void hasAnyChanges(ValidationMessageControlPairs validationMessages) {
+        for (dgTaishoshaIchiran_Row row : div.getDgTaishoshaIchiran().getDataSource()) {
+            if (!RString.isNullOrEmpty(row.getJotai())) {
+                return;
+            }
+        }
+        validationMessages.add(new ValidationMessageControlPair(
+                new ShinsakaiKekkaTorokuValidationHandler.IdocheckMessages(UrErrorMessages.更新対象のデータがない),
+                div.getDgTaishoshaIchiran()
+        ));
     }
 
     /**

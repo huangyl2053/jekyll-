@@ -1026,6 +1026,15 @@ public class CreateCsvDataBusiness {
     }
 
     /**
+     * 認コメント等を取得します。
+     *
+     * @return 認定審査会意見等
+     */
+    public RString getコメント等() {
+        return entity.getコメント等();
+    }
+
+    /**
      * 前回結果_整髪を取得します。
      *
      * @return 前回結果_整髪

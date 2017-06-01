@@ -62,17 +62,11 @@ public class ShujiiIkenshoIraiTaishoIchiranValidationHandler {
      */
     public ValidationMessageControlPairs validateBtnIraishoToOutputClick() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (div.getDgNinteiTaskList().getDataSource() == null || div.getDgNinteiTaskList().getDataSource().isEmpty()) {
-            validationMessages.add(new ValidationMessageControlPair(ValidationMessages.該当データなし));
-        } else if (div.getDgNinteiTaskList().getSelectedItems() == null || div.getDgNinteiTaskList().getSelectedItems().isEmpty()) {
-            validationMessages.add(new ValidationMessageControlPair(ValidationMessages.対象行を選択));
-        } else {
-            List<dgNinteiTaskList_Row> selected = div.getDgNinteiTaskList().getSelectedItems();
-            for (dgNinteiTaskList_Row row : selected) {
-                if (row.getIkenshoIraiDay().getValue() == null || row.getRowState().equals(RowState.Modified)) {
-                    validationMessages.add(new ValidationMessageControlPair(ValidationMessages.意見書依頼未保存のため印刷不可));
-                    break;
-                }
+        List<dgNinteiTaskList_Row> selected = div.getDgNinteiTaskList().getSelectedItems();
+        for (dgNinteiTaskList_Row row : selected) {
+            if (row.getIkenshoIraiDay().getValue() == null || row.getRowState().equals(RowState.Modified)) {
+                validationMessages.add(new ValidationMessageControlPair(ValidationMessages.意見書依頼未保存のため印刷不可));
+                break;
             }
         }
         return validationMessages;

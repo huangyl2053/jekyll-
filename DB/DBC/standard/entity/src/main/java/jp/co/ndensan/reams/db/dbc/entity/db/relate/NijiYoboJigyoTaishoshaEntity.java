@@ -8,8 +8,8 @@ package jp.co.ndensan.reams.db.dbc.entity.db.relate;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3100NijiYoboJigyoTaishoshaEntity;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3101NijiYoboKihonCheckListEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3100NijiYoboJigyoTaishoshaEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3101NijiYoboKihonCheckListEntity;
 
 /**
  * 二次予防事業対象者RelateEntityクラスです。

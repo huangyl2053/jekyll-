@@ -15,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
  *
  * @reamsid_L DBE-1610-020 wanghui
  */
-public class IchijihanteiSumidataIferaBunisess {
+class IchijihanteiSumidataIferaBunisess {
 
     private final RString データ = new RString(" ");
     private final RString 識別コード = new RString("識別コード");

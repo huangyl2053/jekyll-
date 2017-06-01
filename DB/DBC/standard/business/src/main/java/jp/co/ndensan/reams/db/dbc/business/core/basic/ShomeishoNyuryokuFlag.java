@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
 import java.io.Serializable;
-import jp.co.ndensan.reams.db.dbc.definition.enumeratedtype.ShomeishoNyuryokuKubunType;
+import jp.co.ndensan.reams.db.dbd.definition.enumeratedtype.ShomeishoNyuryokuKubunType;
 
 /**
  * 証明書入力済フラグのクラスです。

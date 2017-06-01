@@ -243,25 +243,6 @@ public class ShinsakaiIinWaritsukeHandler {
         div.getWaritsuke().getDgShinsakaiIinIchiran().getDataSource().add(row);
     }
 
-    /**
-     * 排他制御を行います。
-     */
-    public void 前排他制御処理() {
-        LockingKey lockingKey = new LockingKey(new RString("ShinsakaiNo"));
-        if (!RealInitialLocker.tryGetLock(lockingKey)) {
-            div.setReadOnly(true);
-            throw new ApplicationException(UrErrorMessages.排他_他のユーザが使用中.getMessage());
-        }
-    }
-
-    /**
-     * 排他制御の解除を行います。
-     */
-    public void 前排他解除処理() {
-        LockingKey lockingKey = new LockingKey(new RString("ShinsakaiNo"));
-        RealInitialLocker.release(lockingKey);
-    }
-
     private static RString get議長区分名称(RString 区分コード) {
         RString 議長区分名称 = RString.EMPTY;
         for (KaigoninteiShinsakaiGichoKubunCode item : KaigoninteiShinsakaiGichoKubunCode.values()) {

@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbe.business.report.ichosahyojissekiichiran;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.chosahyojissekiichiran.ChosahyoJissekiIchiranEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.chosahyojissekiichiran.ChosahyoJissekiIchiranReportSource;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
@@ -14,6 +16,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.util.editor.DecimalFormatter;
 
@@ -57,7 +60,7 @@ public class ChosahyoJissekiIchiranEditor implements IChosahyoJissekiIchiranEdit
         source.listChosaJissekiIchiran_9 = item.get調査区分();
         source.listChosaJissekiIchiran_10 = item.get訪問の種類();
         source.listChosaJissekiIchiran_11 = get数値(item.get単価());
-        
+        setAccessLogInfo(source);
         return source;
     }
 
@@ -81,6 +84,16 @@ public class ChosahyoJissekiIchiranEditor implements IChosahyoJissekiIchiranEdit
     
     private RString get数値(RString 単価) {
         return DecimalFormatter.toコンマ区切りRString(new Decimal(単価.toString()), 0);
+    }
+    
+    private void setAccessLogInfo(ChosahyoJissekiIchiranReportSource source) {
+        RStringBuilder 識別コードStr = new RStringBuilder();
+        識別コードStr.append(item.get保険者番号().substring(0, 5));
+        識別コードStr.append(item.get被保険者番号());
+        ShikibetsuCode 識別コード = new ShikibetsuCode(識別コードStr.toRString());
+        ExpandedInformation 拡張情報 = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.get申請書管理番号());
+        source.識別コード = 識別コード;
+        source.拡張情報 = 拡張情報;
     }
 
 }

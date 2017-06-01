@@ -109,7 +109,7 @@ public class IkenshoSakuseiJissekiShokaiHandler {
                 }
             }
             dgIkenshoSakuseiJisseki_Row row = new dgIkenshoSakuseiJisseki_Row(
-                    get保険者(data),
+                    data.get市町村名称(),
                     data.get医療機関コード(),
                     data.get医療機関名称(),
                     data.get主治医コード(),

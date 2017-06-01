@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.report.kaigohokenshindanmeireisho;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -57,4 +59,7 @@ public class ShujiiIkenshoTeishutsuIraishoItem {
     private RString yubinNo;
     private RString jusho;
     private RString tsuchibun2;
+    private RString atenaRemban;
+    private ShikibetsuCode 識別コード;
+    private ExpandedInformation 拡張情報;
 }

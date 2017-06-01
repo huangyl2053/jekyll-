@@ -3,6 +3,7 @@
 <!-- 概要： 主治医意見書作成依頼(手動)のマッピング用XMLです。 -->
 <!-- @reamsid_L DBE-1590-030 zuotao -->
 <mapper namespace="jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshosakuseiirai.IIkenshoSakuseiIraiMapper">
+
     <resultMap id="resultMap_get主治医意見書作成依頼" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshoirairirekiichiran.IkenshoirairirekiichiranShudouEntity" autoMapping="true">
         <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <result property="ikenshoIraiRirekiNo" column="ikenshoIraiRirekiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -17,7 +18,6 @@
         <result property="ninteiShinseiYMD" column="ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
         <result property="daihyoshaName" column="daihyoshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
-
         <result property="shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hihokenshaKana" column="hihokenshaKana" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaKanaMeishoTypeHandler"/>
@@ -30,7 +30,9 @@
         <result property="ikenshoSakuseiKigenYMD" column="ikenshoSakuseiKigenYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="iryoKikanYubinNo" column="iryoKikanYubinNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.YubinNoTypeHandler"/>
         <result property="iryoKikanJusho" column="iryoKikanJusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
+        <result property="isSaiChosa" column="isSaiChosa"/>
     </resultMap>
+
     <resultMap id="resultMap_NinteiShinseiJohoEntity" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ikensho.ninteishinseijoho.NinteiShinseiJohoEntity" autoMapping="true">
         <id property="要介護認定申請情報Entity.shinseishoKanriNo" column="dbT5101NinteiShinseiJoho_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <association property="要介護認定申請情報Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.ResultMap_DbT5101NinteiShinseiJohoEntity"/>
@@ -102,39 +104,52 @@
     </resultMap>
 
     <select resultOrdered="true" id="get主治医意見書作成依頼" resultMap="resultMap_get主治医意見書作成依頼"
-            parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
-        SELECT
-        DISTINCT
-        T5101."shinseishoKanriNo"
-        ,T5301."ikenshoIraiRirekiNo"
-        ,T5301."ikenshoIraiKubun"
-        ,T5301."ishiKubunCode"
-        ,T5301."ikenshoSakuseiIraiYMD"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshosakuseiirai.IkenshoSakuseiIraiMapperParameter" fetchSize="500">
+        SELECT DISTINCT
+             T5101."shinseishoKanriNo"
+            ,T5301."ikenshoIraiRirekiNo"
+            ,T5301."ikenshoIraiKubun"
+            ,T5301."ishiKubunCode"
+            ,T5301."ikenshoSakuseiIraiYMD"
 
-        ,T5101."shoKisaiHokenshaNo"
-        ,T5101."hihokenshaNo"
-        ,T5101."hihokenshaKana"
-        ,T5101."hihokenshaName"
-        ,T5101."seinengappiYMD"
-        ,T5101."seibetsu"
-        ,T5101."yubinNo"
-        ,T5101."jusho"
-        ,T5101."ninteiShinseiShinseijiKubunCode"
-        ,T5301."ikenshoSakuseiKigenYMD"
-        ,T5911."yubinNo" AS "iryoKikanYubinNo"
-        ,T5911."jusho" AS "iryoKikanJusho"
-        ,T5911."daihyoshaName" AS "daihyoshaName"
+            ,T5101."shoKisaiHokenshaNo"
+            ,T5101."hihokenshaNo"
+            ,T5101."hihokenshaKana"
+            ,T5101."hihokenshaName"
+            ,T5101."seinengappiYMD"
+            ,T5101."seibetsu"
+            ,T5101."yubinNo"
+            ,T5101."jusho"
+            ,T5101."ninteiShinseiShinseijiKubunCode"
+            ,T5301."ikenshoSakuseiKigenYMD"
+            ,T5911."yubinNo" AS "iryoKikanYubinNo"
+            ,T5911."jusho" AS "iryoKikanJusho"
+            ,T5911."daihyoshaName" AS "daihyoshaName"
 
-        ,T5912."shujiiCode"
-        ,T5912."shujiiName"
-        ,T5911."shujiiIryokikanCode"
-        ,T5911."iryoKikanMeisho"
-        ,T5101."koroshoIfShikibetsuCode"
-        ,T5101."ninteiShinseiYMD"
-        ,T5101."shichosonCode"
+            ,T5912."shujiiCode"
+            ,T5912."shujiiName"
+            ,T5911."shujiiIryokikanCode"
+            ,T5911."iryoKikanMeisho"
+            ,T5101."koroshoIfShikibetsuCode"
+            ,T5101."ninteiShinseiYMD"
+            ,T5101."shichosonCode"
+            ,EXISTS (
+                SELECT *
+                FROM
+                    rgdb."DbT5502ShinsakaiWariateJoho" T5502
+                WHERE
+                    T5502."shinseishoKanriNo" = T5101."shinseishoKanriNo"
+                 AND T5502."hanteiKekkaCode" IN
+                    <foreach collection="判定結果コードs_再調査" item="code" open="("
+                             separator=","
+                             close=")">
+                        #{code}
+                    </foreach>
+            ) AS "isSaiChosa"
         FROM
-        <include refid="selectJoken主治医意見書作成依頼" />
+            <include refid="selectJoken主治医意見書作成依頼" />
     </select>
+
     <select resultOrdered="true" id="get要介護認定申請情報" resultMap="resultMap_NinteiShinseiJohoEntity"
             parameterType="jp.co.ndensan.reams.uz.uza.lang.RString" fetchSize="500">
         SELECT
@@ -173,38 +188,38 @@
         "DbT5101NinteiShinseiJoho"."shinseishoKanriNo" = #{shinseishoKanriNo}
         AND "DbT5101NinteiShinseiJoho"."logicalDeletedFlag" = False
     </select>
+
     <sql id="selectJoken主治医意見書作成依頼">
-        rgdb."DbT5101NinteiShinseiJoho" AS T5101
+            rgdb."DbT5101NinteiShinseiJoho" AS T5101
         INNER JOIN
-        rgdb."DbT7051KoseiShichosonMaster" AS T7051
-        ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo"
+            rgdb."DbT7051KoseiShichosonMaster" AS T7051
+          ON T7051."shoKisaiHokenshaNo" = T5101."shoKisaiHokenshaNo"
         LEFT JOIN
-        rgdb."DbT5301ShujiiIkenshoIraiJoho" AS T5301
-        ON T5101."shinseishoKanriNo" = T5301."shinseishoKanriNo"
-        AND T5301."logicalDeletedFlag" = FALSE
-        AND
-        NOT EXISTS (
-        SELECT 'X'
-        FROM
-        rgdb."DbT5301ShujiiIkenshoIraiJoho" AS B1
+            rgdb."DbT5301ShujiiIkenshoIraiJoho" AS T5301
+          ON T5101."shinseishoKanriNo" = T5301."shinseishoKanriNo"
+         AND T5301."logicalDeletedFlag" = FALSE
+         AND NOT EXISTS (
+                SELECT 'X'
+                FROM
+                    rgdb."DbT5301ShujiiIkenshoIraiJoho" AS B1
+                WHERE
+                     T5301."shinseishoKanriNo" = B1."shinseishoKanriNo"
+                 AND T5301."ikenshoIraiRirekiNo" <![CDATA[<]]> B1."ikenshoIraiRirekiNo"
+         )
+        LEFT JOIN
+            rgdb."DbT5912ShujiiJoho" AS T5912
+          ON T5912."shichosonCode" = T5101."shichosonCode"
+         AND T5912."shujiiIryokikanCode" = T5301."shujiiIryokikanCode"
+         AND T5912."shujiiCode" = T5301."shujiiCode"
+         AND T5912."jokyoFlag" = True
+        LEFT JOIN
+            rgdb."DbT5911ShujiiIryoKikanJoho" AS T5911
+          ON T5911."shichosonCode" = T5101."shichosonCode"
+         AND T5911."shujiiIryokikanCode" = T5301."shujiiIryokikanCode"
+         AND T5911."jokyoFlag" = True
         WHERE
-        T5301."shinseishoKanriNo" = B1."shinseishoKanriNo"
-        AND B1."logicalDeletedFlag" = False
-        AND T5301."ikenshoIraiRirekiNo" <![CDATA[<]]> B1."ikenshoIraiRirekiNo")
-        LEFT JOIN
-        rgdb."DbT5912ShujiiJoho" AS T5912
-        ON T5912."shichosonCode" = T5101."shichosonCode"
-        AND T5912."shujiiIryokikanCode" = T5301."shujiiIryokikanCode"
-        AND T5912."shujiiCode" = T5301."shujiiCode"
-        AND T5912."jokyoFlag" = True
-        LEFT JOIN
-        rgdb."DbT5911ShujiiIryoKikanJoho" AS T5911
-        ON T5911."shichosonCode" = T5101."shichosonCode"
-        AND T5911."shujiiIryokikanCode" = T5301."shujiiIryokikanCode"
-        AND T5911."jokyoFlag" = True
-        WHERE
-        T5101."shinseishoKanriNo" = #{shinseishoKanriNo}
-        AND T5101."logicalDeletedFlag" = False
+             T5101."shinseishoKanriNo" = #{申請書管理番号}
+         AND T5101."logicalDeletedFlag" = False
     </sql>
 
     <select resultOrdered="true" id="get主治医意見書作成依頼発行一覧表" resultMap="resultMap_主治医意見書作成依頼発行"

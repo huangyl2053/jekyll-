@@ -10,9 +10,8 @@ import jp.co.ndensan.reams.db.dbc.business.core.basic.SogoJigyoTaishosha;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
- * 総合事業対象の情報と状態を管理するクラスです。
  *
- * @reamsid_L DBC-4900-010 wangjie2
+ * @author n3509
  */
 @lombok.Getter
 @lombok.Setter
@@ -33,5 +32,4 @@ public class SogoJigyoTaishoshaToJotai implements Serializable {
         this.状態 = 状態;
         this.総合事業対象 = 総合事業対象;
     }
-
 }

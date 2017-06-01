@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.ikenshokinyuyoshioruka;
 
+import jp.co.ndensan.reams.db.dbe.business.core.orca.OrcaIkenshoCsv;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ikenshokinyuyoshioruka.Ikenshokinyuyoshi02ReportSource;
 import jp.co.ndensan.reams.uz.uza.report.Report;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
@@ -16,14 +17,14 @@ import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
  */
 public class Ikenshokinyuyoshi02Report extends Report<Ikenshokinyuyoshi02ReportSource> {
 
-    private final IkenshokinyuyoshiBusiness business;
+    private final OrcaIkenshoCsv business;
 
     /**
      * インスタンスを生成します。
      *
      * @param business 主治医意見書（オルカ）のBusiness
      */
-    public Ikenshokinyuyoshi02Report(IkenshokinyuyoshiBusiness business) {
+    public Ikenshokinyuyoshi02Report(OrcaIkenshoCsv business) {
         this.business = business;
     }
 

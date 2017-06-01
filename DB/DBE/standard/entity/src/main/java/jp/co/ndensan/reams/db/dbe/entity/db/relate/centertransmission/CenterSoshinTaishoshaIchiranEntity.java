@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 完了処理・センター送信Report用のentityクラスです。
@@ -29,6 +31,9 @@ public class CenterSoshinTaishoshaIchiranEntity {
     private RString listTaishoshaIchiran_9;
     private RString listTaishoshaIchiran_10;
     private RString listTaishoshaIchiran_11;
+
+    private ShikibetsuCode shikibetsuCode;
+    private ExpandedInformation expandedInformation;
 
     public void setPrintTimeStamp() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

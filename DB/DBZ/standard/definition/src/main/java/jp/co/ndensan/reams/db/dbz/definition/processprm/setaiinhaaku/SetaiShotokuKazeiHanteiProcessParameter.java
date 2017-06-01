@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.processprm.setaiinhaaku;
 
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.fuka.SetaiHaakuMybatisParameter;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.fuka.SetaiShotokuKazeiHanteiMybatisParameter;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
@@ -39,7 +41,16 @@ public class SetaiShotokuKazeiHanteiProcessParameter implements IBatchProcessPar
      */
     public SetaiShotokuKazeiHanteiMybatisParameter toSetaiShotokuKazeiHanteiMybatisParameter() {
         return new SetaiShotokuKazeiHanteiMybatisParameter(管理識別区分);
+    }
 
+    /**
+     * mybatisのパラメータを生成します。
+     *
+     * @param searchKey
+     * @return mybatisパラメータ
+     */
+    public SetaiHaakuMybatisParameter toSetaiHaakuMybatisParameter(IShikibetsuTaishoPSMSearchKey searchKey) {
+        return new SetaiHaakuMybatisParameter(searchKey);
     }
 
 }

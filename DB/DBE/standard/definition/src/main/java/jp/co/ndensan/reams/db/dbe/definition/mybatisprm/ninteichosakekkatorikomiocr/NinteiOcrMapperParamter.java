@@ -5,6 +5,8 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosakekkatorikomiocr;
 
+import java.util.Objects;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
@@ -20,6 +22,7 @@ public final class NinteiOcrMapperParamter {
     private final RString 証記載保険者番号;
     private final RString 被保険者番号;
     private final RString 認定申請日;
+    private final RString 申請書管理番号;
 
     private NinteiOcrMapperParamter(RString 証記載保険者番号,
             RString 被保険者番号,
@@ -27,6 +30,14 @@ public final class NinteiOcrMapperParamter {
         this.証記載保険者番号 = 証記載保険者番号;
         this.被保険者番号 = 被保険者番号;
         this.認定申請日 = 認定申請日;
+        this.申請書管理番号 = RString.EMPTY;
+    }
+
+    private NinteiOcrMapperParamter(RString 申請書管理番号) {
+        this.申請書管理番号 = 申請書管理番号;
+        this.証記載保険者番号 = RString.EMPTY;
+        this.被保険者番号 = RString.EMPTY;
+        this.認定申請日 = RString.EMPTY;
     }
 
     /**
@@ -37,10 +48,19 @@ public final class NinteiOcrMapperParamter {
      * @param 認定申請日 認定申請日
      * @return 認定調査結果取込みの検索用パラメータ
      */
-    public static NinteiOcrMapperParamter createParamter(RString 証記載保険者番号,
+    public static NinteiOcrMapperParamter searchByAmbiguousParams(RString 証記載保険者番号,
             RString 被保険者番号,
             RString 認定申請日) {
         return new NinteiOcrMapperParamter(証記載保険者番号, 被保険者番号, 認定申請日);
+    }
+
+    /**
+     * @param 申請書管理番号 申請書管理番号
+     * @return 認定調査結果取込みの検索用パラメータ
+     */
+    public static NinteiOcrMapperParamter searchByShinseishoKanriNo(ShinseishoKanriNo 申請書管理番号) {
+        Objects.requireNonNull(申請書管理番号);
+        return new NinteiOcrMapperParamter(申請書管理番号.value());
     }
 
 }

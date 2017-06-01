@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.definition.processprm.dbd1080001;
 
 import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.GemmenGengakuTaishoGaiShaListMyBatisParameter;
 import jp.co.ndensan.reams.db.dbx.definition.core.gemmengengaku.GemmenGengakuShurui;
+import jp.co.ndensan.reams.ua.uax.definition.mybatisprm.shikibetsutaisho.IShikibetsuTaishoPSMSearchKey;
 import jp.co.ndensan.reams.uz.uza.batch.parameter.IBatchProcessParameter;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import lombok.Getter;
@@ -42,11 +43,12 @@ public class GemmenGengakuTaishoGaiShaListProcessParameter implements IBatchProc
      *
      * @param 開始日 FlexibleDate
      * @param 終了日 FlexibleDate
+     * @param searchKey
      * @return MybatisParameter
      */
-    public GemmenGengakuTaishoGaiShaListMyBatisParameter toGemmenGengakuTaishoGaiShaListMyBatisParameter(FlexibleDate 開始日, FlexibleDate 終了日) {
+    public GemmenGengakuTaishoGaiShaListMyBatisParameter toGemmenGengakuTaishoGaiShaListMyBatisParameter(FlexibleDate 開始日, FlexibleDate 終了日, IShikibetsuTaishoPSMSearchKey searchKey) {
         this.前年度の開始日 = 開始日;
         this.前年度の終了日 = 終了日;
-        return new GemmenGengakuTaishoGaiShaListMyBatisParameter(基準日, 減免減額種類, 前年度の開始日, 前年度の終了日);
+        return new GemmenGengakuTaishoGaiShaListMyBatisParameter(基準日, 減免減額種類, 前年度の開始日, 前年度の終了日, searchKey);
     }
 }

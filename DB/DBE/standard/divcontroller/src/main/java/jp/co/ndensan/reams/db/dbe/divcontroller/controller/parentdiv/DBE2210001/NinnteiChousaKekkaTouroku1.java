@@ -186,6 +186,25 @@ public class NinnteiChousaKekkaTouroku1 {
                 return ResponseData.of(div).setState(DBE2210001StateName.調査結果登録_特記なし);
             }
         }
+        if (!new RString(UrErrorMessages.排他_他のユーザが使用中.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+            boolean gotLock = 前排他キーのセット();
+            if (!gotLock) {
+                div.setReadOnly(true);
+                CommonButtonHolder.setDisabledByCommonButtonFieldName(保存するボタン, true);
+                return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
+            }
+        }
+        getHandler(div).編集前調査実施者情報設定();
+        if (概況特記出力しない.equals(DbBusinessConfig.get(ConfigNameDBE.認定調査票_概況特記_出力有無, RDate.getNowDate()))) {
+            if (UICONTAINERID_DBEUC20601.equals(ResponseHolder.getUIContainerId())) {
+                return ResponseData.of(div).setState(DBE2210001StateName.調査結果登録_基本運用_特記なし);
+            } else if (UICONTAINERID_DBEUC20801.equals(ResponseHolder.getUIContainerId())
+                    || UICONTAINERID_DBEUC40501.equals(ResponseHolder.getUIContainerId())) {
+                return ResponseData.of(div).setState(DBE2210001StateName.調査結果登録_マスキング_特記なし);
+            } else {
+                return ResponseData.of(div).setState(DBE2210001StateName.調査結果登録_特記なし);
+            }
+        }
         return ResponseData.of(div).respond();
     }
 
@@ -526,11 +545,6 @@ public class NinnteiChousaKekkaTouroku1 {
         }
         if (new RString(DbeWarningMessages.既に基本調査値が存在します_上書き確認.getMessage().getCode())
                 .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-//            if (NinteichosaIraiKubun.再調査.getCode().equals(認定調査依頼区分コード)) {
-//                getHandler(div).前回値コピー処理_前回履歴(第1群List, 第2群List, 第3群List, 第4群List, 第5群List, 特別な医療List, 自立度List);
-//            } else {
-//                getHandler(div).前回値コピー処理_前回申請(第1群List, 第2群List, 第3群List, 第4群List, 第5群List, 特別な医療List, 自立度List);
-//            }
             getHandler(div).前回値コピー処理_前回申請(第1群List, 第2群List, 第3群List, 第4群List, 第5群List, 特別な医療List, 自立度List);
             ViewStateHolder.put(ViewStateKeys.第一群認定調査基本情報リスト, 第1群List);
             ViewStateHolder.put(ViewStateKeys.第二群認定調査基本情報リスト, 第2群List);

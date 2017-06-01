@@ -108,11 +108,17 @@ public class NinteiChosaScheduleShosaiHander {
             set認定調査スケジュール詳細情報(認定調査スケジュールList);
             div.getNchosainScheduleIchiran().setIsOpen(IS閉じている);
             div.getBtnKensaku().setDisabled(活性);
-            if (設定日.getDayValue() == 1) {
-                div.getBtnSetteiDateToZenjitsu().setDisabled(非活性);
-            }
-            if (設定日.getDayValue() == 設定日.getLastDay()) {
-                div.getBtnSetteiDateToJijitsu().setDisabled(非活性);
+//            Todo:超暫定対応
+            if (設定日 == null || 設定日.isEmpty()) {
+                div.getSearchNinteiChosaSchedule().getBtnSetteiDateToZenjitsu().setDisabled(非活性);
+                div.getSearchNinteiChosaSchedule().getBtnSetteiDateToJijitsu().setDisabled(非活性);
+            } else {
+                if (設定日.getDayValue() == 1) {
+                    div.getBtnSetteiDateToZenjitsu().setDisabled(非活性);
+                }
+                if (設定日.getDayValue() == 設定日.getLastDay()) {
+                    div.getBtnSetteiDateToJijitsu().setDisabled(非活性);
+                }                
             }
         } else if (モード_3.equals(モード)) {
             RDate 当日 = RDate.getNowDate();
@@ -424,15 +430,25 @@ public class NinteiChosaScheduleShosaiHander {
     }
 
     private void set対象地区DDL(List<ChosaChiku> list, Code 地区コード) {
+//        Todo:仕様が全く分からないため、超暫定的に落ちないよう対応
+//        対応方法：Keyが重複したらsetしない
         List<KeyValueDataSource> dataList = new ArrayList<>();
+        List<RString> existsKeyList = new ArrayList<>();
         for (ChosaChiku chosaChiku : list) {
+            if (existsKeyList.contains(chosaChiku.get調査地区コード())) {
+                continue;
+            }
             KeyValueDataSource dataSource = new KeyValueDataSource();
             dataSource.setKey(chosaChiku.get調査地区コード());
             dataSource.setValue(chosaChiku.get調査地区名称());
             dataList.add(dataSource);
+            existsKeyList.add(chosaChiku.get調査地区コード());
         }
         div.getDdlTaishoChiku().setDataSource(dataList);
         for (ChosaChiku chosaChiku : list) {
+//            Todo:何をしたいのかわからないがとりあえず落ちないよう暫定対応
+//            対応方法:cotainsをequalsに変更
+//            if (chosaChiku.get調査地区コード().contains(地区コード.value())) {
             if (chosaChiku.get調査地区コード().equals(地区コード.value())) {
                 div.getDdlTaishoChiku().setSelectedKey(地区コード.value());
             }

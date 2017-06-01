@@ -5,16 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbe.batchcontroller.step.ninteichosadataoutput;
 
-import java.util.ArrayList;
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosadataoutput.NinteiChosaDataOutputResult;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosadataoutput.NinteiChosaDataCsvProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaBasicDataRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosaDataOutputEucCsvEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -24,7 +20,6 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.euc.api.EucOtherInfo;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucEntityId;
@@ -35,12 +30,7 @@ import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 
 /**
  *
@@ -65,13 +55,10 @@ public class NinteiChosaDataOutputProcess extends BatchProcessBase<NinteiChosaBa
     private RString eucFilePath;
     @BatchWriter
     private CsvWriter<NinteiChosaDataOutputEucCsvEntity> eucCsvWriter;
-    private final List<PersonalData> personalDataList = new ArrayList<>();
-    private DbAccessLogger accessLog;
 
     @Override
     protected void initialize() {
         eucFilePath = Path.combinePath(processParamter.getTempFilePath(), EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, EUC_ENTITY_ID.toRString()));
-        accessLog = new DbAccessLogger();
     }
 
     @Override
@@ -103,21 +90,12 @@ public class NinteiChosaDataOutputProcess extends BatchProcessBase<NinteiChosaBa
             市町村名称 = entity.get今回分Entity().get市町村名称();
         }
         eucCsvWriter.writeLine(new NinteiChosaDataOutputResult().setEucCsvEntity(entity));
-        PersonalData personalData = new NinteiChosaDataOutputResult().getPersonalData(entity.get今回分Entity().get申請書管理番号());
-        personalDataList.add(personalData);
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
-                entity.get今回分Entity().get申請書管理番号());
-        accessLog.store(new ShoKisaiHokenshaNo(entity.get今回分Entity().get証記載保険者番号()),
-                entity.get今回分Entity().get被保険者番号(), expandedInfo);
-
     }
 
     @Override
     protected void afterExecute() {
         eucCsvWriter.close();
-        AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
         outputJokenhyoFactory();
-        accessLog.flushBy(AccessLogType.照会);
     }
 
     private void outputJokenhyoFactory() {

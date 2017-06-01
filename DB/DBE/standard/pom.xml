@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>jp.co.ndensan.reams.db.dbe</groupId>
     <artifactId>dbe</artifactId>
-    <version>1.17.8</version>
+    <version>1.18.0</version>
     <packaging>pom</packaging>
     <name>DBE</name>
     <parent>
@@ -185,6 +185,19 @@
                         <artifactId>DbePersistence</artifactId>
                     </exclusion>
                 </exclusions>
+            </dependency>
+            <!-- UCX -->
+            <dependency>
+                <artifactId>UcxDefinition</artifactId>
+                <groupId>jp.co.ndensan.reams.uc.ucx</groupId>
+                <type>jar</type>
+                <version>${jp.co.ndensan.reams.ucxVersion}</version>
+            </dependency>
+            <dependency>
+                <artifactId>UcxEntity</artifactId>
+                <groupId>jp.co.ndensan.reams.uc.ucx</groupId>
+                <type>jar</type>
+                <version>${jp.co.ndensan.reams.ucxVersion}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

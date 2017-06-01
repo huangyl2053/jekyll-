@@ -27,6 +27,7 @@ public final class ShinsaiinJissekiIchiranProcessParamter implements IBatchProce
     private final FlexibleDate 審査会実施日TO;
     private final List<ShinsaiinJissekiIchiranKey> keyJoho;
     private final boolean batchFlag;
+    private final boolean is歯科医師含む;
 
     /**
      * コンストラクタです。
@@ -36,17 +37,20 @@ public final class ShinsaiinJissekiIchiranProcessParamter implements IBatchProce
      * @param 審査会実施日TO 審査会実施日TO
      * @param keyJoho キー情報Entityリスト
      * @param batchFlag
+     * @param is歯科医師含む boolean
      */
     public ShinsaiinJissekiIchiranProcessParamter(RString 帳票出力区分,
             FlexibleDate 審査会実施日FROM,
             FlexibleDate 審査会実施日TO,
             List<ShinsaiinJissekiIchiranKey> keyJoho,
-            boolean batchFlag) {
+            boolean batchFlag,
+            boolean is歯科医師含む) {
         this.帳票出力区分 = 帳票出力区分;
         this.審査会実施日FROM = 審査会実施日FROM;
         this.審査会実施日TO = 審査会実施日TO;
         this.keyJoho = keyJoho;
         this.batchFlag = batchFlag;
+        this.is歯科医師含む = is歯科医師含む;
     }
 
     /**
@@ -56,6 +60,7 @@ public final class ShinsaiinJissekiIchiranProcessParamter implements IBatchProce
      */
     public ShinsaiinJissekiIchiranMybitisParamter toMybitisParameter() {
         return ShinsaiinJissekiIchiranMybitisParamter.createParamter(batchFlag,
+                is歯科医師含む,
                 審査会実施日FROM,
                 審査会実施日TO,
                 keyJoho);

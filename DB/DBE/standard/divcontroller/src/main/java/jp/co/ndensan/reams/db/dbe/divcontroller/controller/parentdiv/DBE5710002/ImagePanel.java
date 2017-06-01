@@ -13,27 +13,27 @@ import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImageFileItem;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImageFileNames;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImagekanriJoho;
+import jp.co.ndensan.reams.db.dbe.definition.core.util.accesslog.ExpandedInformations;
 import jp.co.ndensan.reams.db.dbe.definition.core.yokaigoninteiimagekanri.ImageType;
 import jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5710001.Yokaigoninteiimagekanri;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5710002.ImagePanelDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5710002.ImagePanelValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.yokaigoninteiimagesyutsuryoku.YokaigoninteiimageShutsuryokuFinder;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDescriptor;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDownload;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.euc.cooperation.EucDownload;
+import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.ZipUtil;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
+import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSourceConverter;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
@@ -47,6 +47,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
  */
 public class ImagePanel {
 
+    private static final RString IMAGEDATA_EUC_ENTITY_ID = new RString("DBE5710001");
+    private static final RString IMAGEDATA_DISPLAY_NAME_PREFIX = new RString("イメージデータ_");
     private static final RString 調査票 = ImageType.調査票.key();
     private static final RString 調査票概況 = ImageType.概況特記.key();
     private static final RString 主治医意見書 = ImageType.意見書.key();
@@ -122,21 +124,22 @@ public class ImagePanel {
      */
     public IDownLoadServletResponse onclick_btnDownLoad(ImagePanelDiv div, IDownLoadServletResponse response) {
         ImagekanriJoho イメージ情報 = ViewStateHolder.get(ViewStateKeys.イメージ情報, ImagekanriJoho.class);
-        ReadOnlySharedFileEntryDescriptor ro_sfed = new ReadOnlySharedFileEntryDescriptor(
-                new FilesystemName(イメージ情報.get証記載保険者番号().concat(イメージ情報.get被保険者番号())), イメージ情報.getイメージ共有ファイルID());
         RString 書庫化ファイル名 = sharedFileName(イメージ情報).concat(".zip");
-        RString zipPath = Path.combinePath(Path.getTmpDirectoryPath(), 書庫化ファイル名);
+        FileSpoolManager fsmanager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, IMAGEDATA_EUC_ENTITY_ID, UzUDE0831EucAccesslogFileType.Other);
+        fsmanager.setDisplayName(IMAGEDATA_DISPLAY_NAME_PREFIX.concat(書庫化ファイル名));
+        RString zipPath = Path.combinePath(fsmanager.getEucOutputDirectry(), 書庫化ファイル名);
         File zipFile = new File(zipPath.toString());
         if (zipFile.exists()) {
             zipFile.delete();
         }
+        ReadOnlySharedFileEntryDescriptor ro_sfed = new ReadOnlySharedFileEntryDescriptor(
+                new FilesystemName(イメージ情報.get証記載保険者番号().concat(イメージ情報.get被保険者番号())), イメージ情報.getイメージ共有ファイルID());
         ZipUtil.createFromFiles(zipPath, createDownloadFileList(div, ro_sfed));
-        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(書庫化ファイル名));
-        sfd = SharedFile.defineSharedFile(sfd);
-        CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
-        SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(zipPath), opts);
-        return SharedFileDirectAccessDownload.directAccessDownload(
-                new SharedFileDirectAccessDescriptor(entry, 書庫化ファイル名), response);
+        DbAccessLogger accessLog = new DbAccessLogger();
+        accessLog.store(new ShoKisaiHokenshaNo(イメージ情報.get証記載保険者番号()), イメージ情報.get被保険者番号(),
+                ExpandedInformations.fromShinseishoKanriNo(イメージ情報.get申請書管理番号()));
+        fsmanager.spool(zipPath, accessLog.flushByEUC(UzUDE0835SpoolOutputType.EucOther));
+        return EucDownload.directAccessDownload(SubGyomuCode.DBE認定支援, fsmanager.getSharedFileName(), fsmanager.getSharedFileId(), response);
     }
 
     private List<RString> createDownloadFileList(ImagePanelDiv div, ReadOnlySharedFileEntryDescriptor ro_sfed) {

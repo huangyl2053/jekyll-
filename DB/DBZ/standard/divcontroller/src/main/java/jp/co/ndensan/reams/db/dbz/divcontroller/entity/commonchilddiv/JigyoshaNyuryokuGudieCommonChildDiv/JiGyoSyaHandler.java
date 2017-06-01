@@ -44,12 +44,12 @@ public class JiGyoSyaHandler {
     private final RString 完全一致 = new RString("完全一致");
     private final RString 後方一致 = new RString("後方一致");
     private final RString 部分一致 = new RString("部分一致");
-    
+
     private final RString 前方一致_コード = new RString("key0");
     private final RString 完全一致_コード = new RString("key1");
     private final RString 後方一致_コード = new RString("key2");
     private final RString 部分一致_コード = new RString("key3");
-    
+
     private final RString 管内管外区分_全て = new RString("0");
     private final RString 管内管外区分_管内 = new RString("1");
     private final RString 管内管外区分_管外 = new RString("2");
@@ -102,7 +102,7 @@ public class JiGyoSyaHandler {
 
             SearchResult<ServiceJigyoshaInputGuide> Jigyosha = JigyoshaInputGuideFinder.createInstance().getServiceJigyoshaInputGuide(
                     JigyoshaInputGuideParameter.createParam_ServiceJigyoshaInputGuide(new KaigoJigyoshaNo(
-                            div.getKennsakuJyokenn().getTxtJIgyoshaNo().getValue()),
+                                    div.getKennsakuJyokenn().getTxtJIgyoshaNo().getValue()),
                             div.getKennsakuJyokenn().getTxtYukouKaishibi().getFromValue() == null ? FlexibleDate.EMPTY
                                     : new FlexibleDate(div.getKennsakuJyokenn().getTxtYukouKaishibi().getFromValue().toString()),
                             div.getKennsakuJyokenn().getTxtYukouKaishibi().getToValue() == null ? FlexibleDate.EMPTY
@@ -173,7 +173,7 @@ public class JiGyoSyaHandler {
             }
             SearchResult<ServiceJigyoshaInputGuide> Jigyosha = JigyoshaInputGuideFinder.createInstance().getOtherTokureiInputGuide(
                     JigyoshaInputGuideParameter.createParam_OtherTokureiInputGuide(new KaigoJigyoshaNo(
-                            div.getKennsakuJyokenn().getTxtJIgyoshaNo().getValue()),
+                                    div.getKennsakuJyokenn().getTxtJIgyoshaNo().getValue()),
                             div.getKennsakuJyokenn().getTxtYukouKaishibi().getFromValue() == null ? FlexibleDate.EMPTY
                                     : new FlexibleDate(div.getKennsakuJyokenn().getTxtYukouKaishibi().getFromValue().toString()),
                             div.getKennsakuJyokenn().getTxtYukouKaishibi().getToValue() == null ? FlexibleDate.EMPTY
@@ -232,7 +232,7 @@ public class JiGyoSyaHandler {
 
             SearchResult<ServiceJigyoshaInputGuide> Jigyosha = JigyoshaInputGuideFinder.createInstance().getTekiyoJogaiInputGuide(
                     JigyoshaInputGuideParameter.createParam_TekiyoJogaiInputGuide(new KaigoJigyoshaNo(
-                            div.getKennsakuJyokenn().getTxtJIgyoshaNo().getValue()),
+                                    div.getKennsakuJyokenn().getTxtJIgyoshaNo().getValue()),
                             div.getKennsakuJyokenn().getTxtYukouKaishibi().getFromValue() == null ? FlexibleDate.EMPTY
                                     : new FlexibleDate(div.getKennsakuJyokenn().getTxtYukouKaishibi().getFromValue().toString()),
                             div.getKennsakuJyokenn().getTxtYukouKaishibi().getToValue() == null ? FlexibleDate.EMPTY
@@ -500,12 +500,12 @@ public class JiGyoSyaHandler {
         KeyValue2.setValue(完全一致);
         KeyValue3.setValue(後方一致);
         KeyValue4.setValue(部分一致);
-        
+
         dataSource.add(KeyValue1);
         dataSource.add(KeyValue2);
         dataSource.add(KeyValue3);
         dataSource.add(KeyValue4);
-        
+
         return dataSource;
     }
 

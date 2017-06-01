@@ -15,47 +15,58 @@
         <result property="合議体長区分コード" column="gogitaichoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="有効期間開始年月日" column="gogitaiYukoKikanKaishiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="有効期間終了年月日" column="gogitaiYukoKikanShuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
+        <result property="年度内開催回数" column="nendoNaiKaisaiKaisu"/>
     </resultMap>
     <select resultOrdered="true" id="get合議体情報"
             resultMap="resultMap_GogitaiJoho"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinsakaikaisaiyotei.GogitaiIchiranJohoMapperParameter"
             fetchSize="500">
         SELECT
-        DbT5591."gogitaiNo" AS "gogitaiNo"
-        ,DbT5591."gogitaiMei" AS "gogitaiMei"
-        ,DbT5591."gogitaiSeishinkaSonzaiFlag"  AS "gogitaiSeishinkaSonzaiFlag"
-        ,DbT5594."shinsakaiIinCode"  AS "shinsakaiIinCode"
-        ,DbT5594."shinsakaiIinShimei" AS "shinsakaiIinShimei"
-        ,DbT5591."gogitaiYukoKikanKaishiYMD"
-        ,DbT5591."gogitaiYukoKikanShuryoYMD"
-        ,DbT5593."gogitaichoKubunCode" AS "gogitaichoKubunCode"
+            DbT5591."gogitaiNo" AS "gogitaiNo"
+            ,DbT5591."gogitaiMei" AS "gogitaiMei"
+            ,DbT5591."gogitaiSeishinkaSonzaiFlag"  AS "gogitaiSeishinkaSonzaiFlag"
+            ,DbT5594."shinsakaiIinCode"  AS "shinsakaiIinCode"
+            ,DbT5594."shinsakaiIinShimei" AS "shinsakaiIinShimei"
+            ,DbT5591."gogitaiYukoKikanKaishiYMD"
+            ,DbT5591."gogitaiYukoKikanShuryoYMD"
+            ,DbT5593."gogitaichoKubunCode" AS "gogitaichoKubunCode"
+            , (
+                SELECT count(*)
+                FROM
+                    rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" AS DbT5501
+                WHERE
+                      DbT5501."gogitaiNo" = DbT5591."gogitaiNo"
+                  AND DbT5501."shinsakaiKaisaiYoteiYMD" <![CDATA[>=]]> #{nendoFrom}
+                  AND DbT5501."shinsakaiKaisaiYoteiYMD" <![CDATA[<=]]> #{nendoTo}
+                  AND DbT5501."ShinsakaiShinchokuJokyo" <![CDATA[<>]]> #{審査会進捗状況_中止_コード}
+            ) AS "nendoNaiKaisaiKaisu"
         FROM
-        rgdb."DbT5591GogitaiJoho" AS DbT5591
+            rgdb."DbT5591GogitaiJoho" AS DbT5591
         INNER JOIN
-        rgdb."DbT5593GogitaiWariateIinJoho" AS DbT5593
-        ON
-        DbT5593."gogitaiNo" =  DbT5591."gogitaiNo"
-        AND
-        DbT5591."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> DbT5593."gogitaiYukoKikanKaishiYMD"
-        AND
-        DbT5591."gogitaiYukoKikanShuryoYMD" <![CDATA[>=]]> DbT5593."gogitaiYukoKikanShuryoYMD"
-        AND
-        DbT5593."isDeleted" = FALSE
+            rgdb."DbT5593GogitaiWariateIinJoho" AS DbT5593
+            ON
+            DbT5593."gogitaiNo" =  DbT5591."gogitaiNo"
+            AND
+            DbT5591."gogitaiYukoKikanKaishiYMD" <![CDATA[<=]]> DbT5593."gogitaiYukoKikanKaishiYMD"
+            AND
+            DbT5591."gogitaiYukoKikanShuryoYMD" <![CDATA[>=]]> DbT5593."gogitaiYukoKikanShuryoYMD"
+            AND
+            DbT5593."isDeleted" = FALSE
         INNER JOIN
-        rgdb."DbT5594ShinsakaiIinJoho" AS DbT5594
-        ON
-        DbT5594."shinsakaiIinCode" = DbT5593."shinsakaiIinCode"
+            rgdb."DbT5594ShinsakaiIinJoho" AS DbT5594
+            ON
+            DbT5594."shinsakaiIinCode" = DbT5593."shinsakaiIinCode"
         WHERE
-        DbT5593."substituteFlag" = false
-        AND DbT5591."gogitaiYukoKikanKaishiYMD"  <![CDATA[<=]]> #{YukoYMDFrom}
-        AND
-        #{YukoYMDTo} <![CDATA[<=]]> DbT5591."gogitaiYukoKikanShuryoYMD"
-        <if test="usesGogitaiNo">
-        AND DbT5591."gogitaiNo" = #{GogitaiNo}
-        </if>
-        ORDER BY
-        "gogitaiNo"
-        ,"gogitaichoKubunCode" DESC
+            DbT5593."substituteFlag" = false
+            AND DbT5591."gogitaiYukoKikanKaishiYMD"  <![CDATA[<=]]> #{YukoYMDFrom}
+            AND
+            #{YukoYMDTo} <![CDATA[<=]]> DbT5591."gogitaiYukoKikanShuryoYMD"
+            <if test="usesGogitaiNo">
+                AND DbT5591."gogitaiNo" = #{GogitaiNo}
+            </if>
+            ORDER BY
+            "gogitaiNo"
+            ,"gogitaichoKubunCode" DESC
     </select>
     <resultMap id="resultMap_ShinsakaiIinJoho" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shinsakaikaisaikekka.ShinsakaiKaisaiYoteiJohoEntity" autoMapping="true">
         <result property="開催予定日" column="shinsakaiKaisaiYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>

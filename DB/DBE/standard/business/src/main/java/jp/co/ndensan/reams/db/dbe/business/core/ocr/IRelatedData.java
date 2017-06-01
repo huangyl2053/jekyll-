@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.core.ocr;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -21,4 +22,9 @@ public interface IRelatedData {
      * @return 被保険者のカナ氏名
      */
     RString get被保険者カナ();
+
+    /**
+     * @return 申請書管理番号
+     */
+    ShinseishoKanriNo get申請書管理番号();
 }

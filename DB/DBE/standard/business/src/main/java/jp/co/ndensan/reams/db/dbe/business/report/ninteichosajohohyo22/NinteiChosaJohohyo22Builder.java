@@ -43,8 +43,8 @@ public class NinteiChosaJohohyo22Builder implements INinteiChosaJohohyo22Builder
         NinteiChosaJohohyo22ReportSource source = new NinteiChosaJohohyo22ReportSource();
         source.hokenshaNo = entity.get保険者番号();
         source.hihokenshaNo = entity.get被保険者番号();
-        source.shikibetuCode = ShikibetsuCode.EMPTY;
-        source.hihokennshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), entity.get被保険者番号());
+        source.識別コード = new ShikibetsuCode(entity.getTemp_保険者番号().substring(0, 5).concat(entity.getTemp_被保険者番号()));
+        source.拡張情報 = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.getTemp_申請書管理番号());
         source.hihokenshaName = entity.get被保険者氏名();
         source.shinseiGengo = entity.get申請日_元号();
         source.shinseiYY = !RString.isNullOrEmpty(entity.get申請日_年()) ? entity.get申請日_年().substring(2) : RString.EMPTY;

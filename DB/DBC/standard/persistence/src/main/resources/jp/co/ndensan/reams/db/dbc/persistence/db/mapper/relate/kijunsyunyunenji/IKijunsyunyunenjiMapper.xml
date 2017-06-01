@@ -95,7 +95,7 @@
              T1."hihokenshaNo", T1."shikibetsuCode"
      </select>
      
-      <resultMap id="ResultMap_SetaiShotokuEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.SetaiShotokuEntity" autoMapping="true">
+      <resultMap id="ResultMap_SetaiShotokuEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.temptables.SetaiShotokuEntity" autoMapping="true">
         <id property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="shikibetsuCode" column="shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="kijunYMD" column="kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
@@ -153,7 +153,7 @@
             T2."T1_shikibetsuCode" = "ShikibetsuTaisho"."shikibetsuCode"  
      </select>
      
-     <resultMap id="ResultMap_SetaiShotokuEntityTemp" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.SetaiShotokuEntity" autoMapping="true">
+     <resultMap id="ResultMap_SetaiShotokuEntityTemp" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.temptables.SetaiShotokuEntity" autoMapping="true">
         <id property="hihokenshaNo" column="T1_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <id property="shikibetsuCode" column="T1_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="kijunYMD" column="T1_kijunYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>

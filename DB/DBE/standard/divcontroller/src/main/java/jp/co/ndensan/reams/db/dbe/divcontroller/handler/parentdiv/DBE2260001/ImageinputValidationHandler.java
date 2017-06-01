@@ -89,6 +89,20 @@ public class ImageinputValidationHandler {
             builder.append(appending);
         }
     }
+    
+    /**
+     * zip処理が2回目のときにエラーメッセージを返します。
+     * 
+     * @return ValidationMessageControlPairs
+     * @param count
+     */
+    public ValidationMessageControlPairs validationZip(int count) {
+        ValidationMessageControlPairs v = new ValidationMessageControlPairs();
+        if (count > 1) {
+            v.add(new ValidationMessageControlPair(ValidationMessages.zipファイル複数, div.getImageinputFile()));
+        }
+        return v;
+    }
 
     @lombok.AllArgsConstructor
     private static class ValidationMessage implements IValidationMessage {
@@ -107,7 +121,8 @@ public class ImageinputValidationHandler {
         NeedToUploadIkenCa3(DbeErrorMessages.要アップロード, OcrDataType.意見書.ca3FileName().toString()),
         NeedToUploadSonotaCsv(DbeErrorMessages.要アップロード, OcrDataType.その他資料.csvFileName().toString()),
         NeedToUploadSonotaCa3(DbeErrorMessages.要アップロード, OcrDataType.その他資料.ca3FileName().toString()),
-        NeedToReUpload(DbeErrorMessages.OCR取込用ファイルが未アップロード);
+        NeedToReUpload(DbeErrorMessages.OCR取込用ファイルが未アップロード),
+        zipファイル複数(DbeErrorMessages.zipファイル複数);
 
         private final Message m;
 

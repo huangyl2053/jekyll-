@@ -104,6 +104,9 @@ class ChosaIraishoHeaderEditor implements IChosaIraishoEditor {
             source.teishutsuKigen = パターン12(new RDate(item.getTeishutsuKigen().toString()));
         }
         source.tsuchibun2 = item.getTsuchibun2();
+        source.atenaRemban = item.getAtenaRemban();
+        source.識別コード = item.getShikibetsuCode();
+        source.拡張情報 = item.getExpandedInformation();
         return source;
     }
 

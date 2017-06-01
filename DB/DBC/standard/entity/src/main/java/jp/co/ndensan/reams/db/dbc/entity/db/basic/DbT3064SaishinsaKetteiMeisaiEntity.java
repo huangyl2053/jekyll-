@@ -1,27 +1,25 @@
 package jp.co.ndensan.reams.db.dbc.entity.db.basic;
 
+import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
+import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
+import jp.co.ndensan.reams.uz.uza.util.db.TableName;
+import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import java.util.UUID;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import javax.annotation.CheckForNull;
 import javax.annotation.Nonnull;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ServiceShuruiCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleYearMonth;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
-import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.util.db.DbTableEntityBase;
-import jp.co.ndensan.reams.uz.uza.util.db.IDbAccessable;
-import jp.co.ndensan.reams.uz.uza.util.db.PrimaryKey;
-import jp.co.ndensan.reams.uz.uza.util.db.TableName;
 
 /**
  * 再審査決定明細テーブルのエンティティクラスです。
  */
 public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT3064SaishinsaKetteiMeisaiEntity> implements IDbAccessable {
 // <editor-fold defaultstate="collapsed" desc="Created By POJO Tool ver 1.4.3">
-
     @TableName
     public static final RString TABLE_NAME = new RString("DbT3064SaishinsaKetteiMeisai");
 
@@ -33,9 +31,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
     private int updateCount = 0;
     private RDateTime lastUpdateTimestamp;
     private RString lastUpdateReamsLoginId;
-    @PrimaryKey
     private FlexibleYearMonth toriatsukaiYM;
-    @PrimaryKey
     private RString hokenshaKubun;
     private int rirekiNo;
     private JigyoshaNo jigyoshoNo;
@@ -59,7 +55,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * insertDantaiCdのgetメソッドです。
-     *
+     * 
      * @return insertDantaiCd
      */
     public RString getInsertDantaiCd() {
@@ -68,7 +64,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * insertDantaiCdのsetメソッドです。
-     *
+     * 
      * @param insertDantaiCd insertDantaiCd
      */
     public void setInsertDantaiCd(RString insertDantaiCd) {
@@ -77,7 +73,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * isDeletedのgetメソッドです。
-     *
+     * 
      * @return isDeleted
      */
     public boolean getIsDeleted() {
@@ -86,16 +82,17 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * isDeletedのsetメソッドです。
-     *
+     * 
      * @param isDeleted isDeleted
      */
     public void setIsDeleted(boolean isDeleted) {
         this.isDeleted = isDeleted;
     }
 
+
     /**
      * lastUpdateReamsLoginIdのsetメソッドです。
-     *
+     * 
      * @param lastUpdateReamsLoginId lastUpdateReamsLoginId
      */
     public void setLastUpdateReamsLoginId(RString lastUpdateReamsLoginId) {
@@ -106,7 +103,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
      * 取扱年月のgetメソッドです。
      * <br/>
      * <br/>連合会が取扱った年月
-     *
+     * 
      * @return 取扱年月
      */
     public FlexibleYearMonth getToriatsukaiYM() {
@@ -117,7 +114,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
      * 取扱年月のsetメソッドです。
      * <br/>
      * <br/>連合会が取扱った年月
-     *
+     * 
      * @param toriatsukaiYM 取扱年月
      */
     public void setToriatsukaiYM(@Nonnull FlexibleYearMonth toriatsukaiYM) {
@@ -128,11 +125,11 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
      * 保険者区分のgetメソッドです。
      * <br/>
      * <br/>1：保険者　2：公費負担者
-     *
+
      * <br/>3：総合事業費保険者
-     *
+
      * <br/>4：総合事業費公費負担者
-     *
+     * 
      * @return 保険者区分
      */
     public RString getHokenshaKubun() {
@@ -143,11 +140,11 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
      * 保険者区分のsetメソッドです。
      * <br/>
      * <br/>1：保険者　2：公費負担者
-     *
+
      * <br/>3：総合事業費保険者
-     *
+
      * <br/>4：総合事業費公費負担者
-     *
+     * 
      * @param hokenshaKubun 保険者区分
      */
     public void setHokenshaKubun(@Nonnull RString hokenshaKubun) {
@@ -156,7 +153,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * 履歴番号のgetメソッドです。
-     *
+     * 
      * @return 履歴番号
      */
     public int getRirekiNo() {
@@ -165,7 +162,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * 履歴番号のsetメソッドです。
-     *
+     * 
      * @param rirekiNo 履歴番号
      */
     public void setRirekiNo(@Nonnull int rirekiNo) {
@@ -174,7 +171,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * 事業所番号のgetメソッドです。
-     *
+     * 
      * @return 事業所番号
      */
     public JigyoshaNo getJigyoshoNo() {
@@ -183,7 +180,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * 事業所番号のsetメソッドです。
-     *
+     * 
      * @param jigyoshoNo 事業所番号
      */
     public void setJigyoshoNo(@Nonnull JigyoshaNo jigyoshoNo) {
@@ -192,7 +189,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * 事業所名のgetメソッドです。
-     *
+     * 
      * @return 事業所名
      */
     @CheckForNull
@@ -202,7 +199,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * 事業所名のsetメソッドです。
-     *
+     * 
      * @param jigyoshoName 事業所名
      */
     public void setJigyoshoName(RString jigyoshoName) {
@@ -211,7 +208,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * 被保険者番号のgetメソッドです。
-     *
+     * 
      * @return 被保険者番号
      */
     public HihokenshaNo getHiHokenshaNo() {
@@ -220,7 +217,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * 被保険者番号のsetメソッドです。
-     *
+     * 
      * @param hiHokenshaNo 被保険者番号
      */
     public void setHiHokenshaNo(@Nonnull HihokenshaNo hiHokenshaNo) {
@@ -231,7 +228,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
      * 公費受給者番号のgetメソッドです。
      * <br/>
      * <br/>公費（保険者区分=2,4）の場合のみ設定
-     *
+     * 
      * @return 公費受給者番号
      */
     @CheckForNull
@@ -243,7 +240,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
      * 公費受給者番号のsetメソッドです。
      * <br/>
      * <br/>公費（保険者区分=2,4）の場合のみ設定
-     *
+     * 
      * @param kohiJukyushaNo 公費受給者番号
      */
     public void setKohiJukyushaNo(RString kohiJukyushaNo) {
@@ -254,7 +251,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
      * 証記載保険者番号のgetメソッドです。
      * <br/>
      * <br/>公費（保険者区分=2,4）の場合のみ設定
-     *
+     * 
      * @return 証記載保険者番号
      */
     @CheckForNull
@@ -266,7 +263,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
      * 証記載保険者番号のsetメソッドです。
      * <br/>
      * <br/>公費（保険者区分=2,4）の場合のみ設定
-     *
+     * 
      * @param shokisaiHokenshaNo 証記載保険者番号
      */
     public void setShokisaiHokenshaNo(HokenshaNo shokisaiHokenshaNo) {
@@ -275,7 +272,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * サービス提供年月のgetメソッドです。
-     *
+     * 
      * @return サービス提供年月
      */
     public FlexibleYearMonth getServiceTeikyoYM() {
@@ -284,7 +281,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * サービス提供年月のsetメソッドです。
-     *
+     * 
      * @param serviceTeikyoYM サービス提供年月
      */
     public void setServiceTeikyoYM(@Nonnull FlexibleYearMonth serviceTeikyoYM) {
@@ -293,7 +290,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * サービス種類コードのgetメソッドです。
-     *
+     * 
      * @return サービス種類コード
      */
     @CheckForNull
@@ -303,7 +300,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * サービス種類コードのsetメソッドです。
-     *
+     * 
      * @param serviceShuruiCode サービス種類コード
      */
     public void setServiceShuruiCode(ServiceShuruiCode serviceShuruiCode) {
@@ -312,7 +309,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * サービス種類名のgetメソッドです。
-     *
+     * 
      * @return サービス種類名
      */
     @CheckForNull
@@ -322,7 +319,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * サービス種類名のsetメソッドです。
-     *
+     * 
      * @param serviceShuruiName サービス種類名
      */
     public void setServiceShuruiName(RString serviceShuruiName) {
@@ -331,7 +328,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * 申立事由コードのgetメソッドです。
-     *
+     * 
      * @return 申立事由コード
      */
     @CheckForNull
@@ -341,7 +338,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * 申立事由コードのsetメソッドです。
-     *
+     * 
      * @param moushitateJiyuCode 申立事由コード
      */
     public void setMoushitateJiyuCode(RString moushitateJiyuCode) {
@@ -350,7 +347,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * 申立事由のgetメソッドです。
-     *
+     * 
      * @return 申立事由
      */
     @CheckForNull
@@ -360,7 +357,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * 申立事由のsetメソッドです。
-     *
+     * 
      * @param moushitateJiyu 申立事由
      */
     public void setMoushitateJiyu(RString moushitateJiyu) {
@@ -369,7 +366,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * 再審査結果コードのgetメソッドです。
-     *
+     * 
      * @return 再審査結果コード
      */
     @CheckForNull
@@ -379,7 +376,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * 再審査結果コードのsetメソッドです。
-     *
+     * 
      * @param saishinsaResultCode 再審査結果コード
      */
     public void setSaishinsaResultCode(RString saishinsaResultCode) {
@@ -388,7 +385,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * 当初請求単位数のgetメソッドです。
-     *
+     * 
      * @return 当初請求単位数
      */
     @CheckForNull
@@ -398,7 +395,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * 当初請求単位数のsetメソッドです。
-     *
+     * 
      * @param toshoSeikyuTanisu 当初請求単位数
      */
     public void setToshoSeikyuTanisu(Decimal toshoSeikyuTanisu) {
@@ -407,7 +404,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * 原審単位数のgetメソッドです。
-     *
+     * 
      * @return 原審単位数
      */
     @CheckForNull
@@ -417,7 +414,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * 原審単位数のsetメソッドです。
-     *
+     * 
      * @param genshinSeikyuTanisu 原審単位数
      */
     public void setGenshinSeikyuTanisu(Decimal genshinSeikyuTanisu) {
@@ -426,7 +423,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * 申立単位数のgetメソッドです。
-     *
+     * 
      * @return 申立単位数
      */
     @CheckForNull
@@ -436,7 +433,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * 申立単位数のsetメソッドです。
-     *
+     * 
      * @param moushitateTanisu 申立単位数
      */
     public void setMoushitateTanisu(Decimal moushitateTanisu) {
@@ -445,7 +442,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * 決定単位数のgetメソッドです。
-     *
+     * 
      * @return 決定単位数
      */
     @CheckForNull
@@ -455,7 +452,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * 決定単位数のsetメソッドです。
-     *
+     * 
      * @param ketteiTanisu 決定単位数
      */
     public void setKetteiTanisu(Decimal ketteiTanisu) {
@@ -464,7 +461,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * 調整単位数のgetメソッドです。
-     *
+     * 
      * @return 調整単位数
      */
     @CheckForNull
@@ -474,7 +471,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * 調整単位数のsetメソッドです。
-     *
+     * 
      * @param choseiTanisu 調整単位数
      */
     public void setChoseiTanisu(Decimal choseiTanisu) {
@@ -483,7 +480,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * 保険者負担額のgetメソッドです。
-     *
+     * 
      * @return 保険者負担額
      */
     @CheckForNull
@@ -493,7 +490,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * 保険者負担額のsetメソッドです。
-     *
+     * 
      * @param hokenshaFutangaku 保険者負担額
      */
     public void setHokenshaFutangaku(Decimal hokenshaFutangaku) {
@@ -502,7 +499,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * 取込年月のgetメソッドです。
-     *
+     * 
      * @return 取込年月
      */
     @CheckForNull
@@ -512,7 +509,7 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * 取込年月のsetメソッドです。
-     *
+     * 
      * @param torikomiYM 取込年月
      */
     public void setTorikomiYM(FlexibleYearMonth torikomiYM) {
@@ -521,9 +518,10 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * このエンティティの主キーが他の{@literal DbT3064SaishinsaKetteiMeisaiEntity}と等しいか判定します。
-     *
+     * 
      * @param other 比較するエンティティ
-     * @return 比較するエンティティが同じ主キーを持つ{@literal DbT3064SaishinsaKetteiMeisaiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
+     * @return 
+     * 比較するエンティティが同じ主キーを持つ{@literal DbT3064SaishinsaKetteiMeisaiEntity}の場合{@literal true}、それ以外の場合は{@literal false}
      */
     @Override
     public boolean equalsPrimaryKeys(DbT3064SaishinsaKetteiMeisaiEntity other) {
@@ -563,7 +561,6 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
 
     /**
      * {@inheritDoc}
-     *
      * @return {@inheritDoc}
      */
     @Override
@@ -572,4 +569,5 @@ public class DbT3064SaishinsaKetteiMeisaiEntity extends DbTableEntityBase<DbT306
     }
 
 // </editor-fold>
+
 }

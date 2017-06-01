@@ -347,4 +347,5 @@ public class CreateTargetCsvRelateEntity {
     private RString 前回結果_介護予防認知症対応型共同生活介護グループホーム;
     private RString 前回識別コード;
     private RString 認定審査会意見等;
+    private RString コメント等;
 }

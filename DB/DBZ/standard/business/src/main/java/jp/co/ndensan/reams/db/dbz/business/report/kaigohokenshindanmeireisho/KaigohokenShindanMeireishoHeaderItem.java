@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.business.report.kaigohokenshindanmeireisho;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -46,6 +48,9 @@ public class KaigohokenShindanMeireishoHeaderItem {
     private RString jushinKikan;
     private RString jushinArea;
     private RString tsuchibun2;
+    private RString atenaRemban;
+    private ShikibetsuCode 識別コード;
+    private ExpandedInformation 拡張情報;
 
     /**
      * インスタンスを生成します。
@@ -83,6 +88,8 @@ public class KaigohokenShindanMeireishoHeaderItem {
      * @param jushinArea 診断を受ける場所
      * @param tsuchibun2 通知文2
      * @param title 帳票名
+     * @param 識別コード
+     * @param 拡張情報
      */
     public KaigohokenShindanMeireishoHeaderItem(
             RString bunshoNo,
@@ -111,7 +118,9 @@ public class KaigohokenShindanMeireishoHeaderItem {
             RString jushinKikan,
             RString jushinArea,
             RString tsuchibun2,
-            RString title) {
+            RString title,
+            ShikibetsuCode 識別コード,
+            ExpandedInformation 拡張情報) {
         this.bunshoNo = bunshoNo;
         this.hakkoYMD = hakkoYMD;
         this.denshiKoin = denshiKoin;
@@ -139,5 +148,7 @@ public class KaigohokenShindanMeireishoHeaderItem {
         this.jushinArea = jushinArea;
         this.tsuchibun2 = tsuchibun2;
         this.title = title;
+        this.識別コード = 識別コード;
+        this.拡張情報 = 拡張情報;
     }
 }

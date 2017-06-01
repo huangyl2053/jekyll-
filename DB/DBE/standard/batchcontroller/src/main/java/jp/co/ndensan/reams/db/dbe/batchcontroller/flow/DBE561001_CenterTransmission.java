@@ -21,11 +21,15 @@ import jp.co.ndensan.reams.db.dbe.definition.batchprm.datarenkei.UpdateGaibuRenk
 import jp.co.ndensan.reams.db.dbe.definition.batchprm.datarenkei.UpdateGaibuRenkeiDataoutputJohoProcessParameter.RenkeiDataType;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.centertransmission.CenterTransmissionUpdateProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission.SoshinDataSakuseiTaishoshaTempEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.uz.uza.batch.Step;
 import jp.co.ndensan.reams.uz.uza.batch.flow.BatchFlowBase;
 import jp.co.ndensan.reams.uz.uza.batch.flow.IBatchFlowCommand;
 import jp.co.ndensan.reams.uz.uza.batch.flow.value.NewTempTableCreateOption;
 import jp.co.ndensan.reams.uz.uza.batch.flow.value.PKColumn;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
@@ -64,7 +68,10 @@ public class DBE561001_CenterTransmission extends BatchFlowBase<DBE561001_Center
         if (!出力された申請書管理番号.isEmpty()) {
             executeStep(DB出力要介護認定申請情報);
             executeStep(DB出力外部連携データ抽出情報);
-            executeStep(DB出力要介護認定完了情報);
+            RString 登録方法 = DbBusinessConfig.get(ConfigNameDBE.センター送信_完了日登録方法, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+            if (new RString("1").equals(登録方法)) {
+                executeStep(DB出力要介護認定完了情報);
+            }
         }
     }
 
@@ -187,7 +194,7 @@ public class DBE561001_CenterTransmission extends BatchFlowBase<DBE561001_Center
     @Step(DB出力要介護認定完了情報)
     IBatchFlowCommand updateNinteiKanryoJoho() {
         return loopBatch(UpdateNinteiKanryoJohoProcess.class)
-                .arguments(new CenterTransmissionUpdateProcessParameter(出力された申請書管理番号)).define();
+                .arguments(getParameter().toCenterTransmissionProcessParameter()).define();
     }
 
     private static class PrimaryKey {

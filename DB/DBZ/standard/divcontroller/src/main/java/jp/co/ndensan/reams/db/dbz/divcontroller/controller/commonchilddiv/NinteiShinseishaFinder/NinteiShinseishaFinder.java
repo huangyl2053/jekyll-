@@ -40,7 +40,7 @@ public class NinteiShinseishaFinder {
         getHandler(div).initialize();
         return ResponseData.of(div).respond();
     }
-  
+
     /**
      * 保険者DDLを変更した時の処理です。<br/>
      * 最近処理者が使用可能である場合に最近処理者の一覧を更新します。
@@ -49,7 +49,7 @@ public class NinteiShinseishaFinder {
      * @return
      */
     public ResponseData<NinteiShinseishaFinderDiv> onChange_Hokenja(NinteiShinseishaFinderDiv div) {
-        if (div.getCcdSaikinShorisha().isDisplayNone() || !div.getCcdSaikinShorisha().isVisible()) {
+        if (!div.getCcdSaikinShorisha().isDisplayNone() && div.getCcdSaikinShorisha().isVisible()) {
             div.getCcdSaikinShorisha().initialize(div.getDdlHokenshaNumber().getSelectedItem().get証記載保険者番号());
         }
         return ResponseData.of(div).respond();
@@ -203,7 +203,7 @@ public class NinteiShinseishaFinder {
                 getHandler(div).set意見書依頼完了情報();
             }
             if (KanryoInfoPhase.調査入手.getコード().equals(nowPhase)) {
-               getHandler(div).set調査入手完了情報();
+                getHandler(div).set調査入手完了情報();
             }
             if (KanryoInfoPhase.意見書入手.getコード().equals(nowPhase)) {
                 getHandler(div).set意見書入手完了情報();
@@ -449,14 +449,14 @@ public class NinteiShinseishaFinder {
     private NinteiShinseishaFinderHandler getHandler(NinteiShinseishaFinderDiv div) {
         return new NinteiShinseishaFinderHandler(div);
     }
-    
+
     /**
      * 入力された認定調査委託先からコード名称を取得します。
      *
      * @param div NinteiShinseishaFinderDiv
      * @return ResponseData
      */
-    public ResponseData<NinteiShinseishaFinderDiv> onBlur_txtNinteiChosaIinItakuSaki(NinteiShinseishaFinderDiv div) {      
+    public ResponseData<NinteiShinseishaFinderDiv> onBlur_txtNinteiChosaIinItakuSaki(NinteiShinseishaFinderDiv div) {
         getHandler(div).onBlur_txtNinteiChosaIinItakuSaki();
         return ResponseData.of(div).respond();
     }

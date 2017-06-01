@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class PublicationResultDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-23_13-41-30">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -23,8 +23,6 @@ public class PublicationResultDiv extends Panel {
      */
     @JsonProperty("DgBeforeShinsakaiResult")
     private DataGrid<DgBeforeShinsakaiResult_Row> DgBeforeShinsakaiResult;
-    @JsonProperty("btnGetResult")
-    private Button btnGetResult;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -48,24 +46,6 @@ public class PublicationResultDiv extends Panel {
     @JsonProperty("DgBeforeShinsakaiResult")
     public void setDgBeforeShinsakaiResult(DataGrid<DgBeforeShinsakaiResult_Row> DgBeforeShinsakaiResult) {
         this.DgBeforeShinsakaiResult = DgBeforeShinsakaiResult;
-    }
-
-    /*
-     * getbtnGetResult
-     * @return btnGetResult
-     */
-    @JsonProperty("btnGetResult")
-    public Button getBtnGetResult() {
-        return btnGetResult;
-    }
-
-    /*
-     * setbtnGetResult
-     * @param btnGetResult btnGetResult
-     */
-    @JsonProperty("btnGetResult")
-    public void setBtnGetResult(Button btnGetResult) {
-        this.btnGetResult = btnGetResult;
     }
 
     // </editor-fold>

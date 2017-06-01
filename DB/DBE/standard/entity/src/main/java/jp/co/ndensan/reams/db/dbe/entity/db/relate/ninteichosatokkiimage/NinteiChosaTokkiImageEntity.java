@@ -47,5 +47,7 @@ public class NinteiChosaTokkiImageEntity {
     private RString 概況特記事項イメージ;
     private RString 概況特記事項テキスト;
     private RString レイアウト;
-
+    private RString temp_保険者番号;
+    private RString temp_被保険者番号;
+    private RString temp_申請書管理番号;
 }

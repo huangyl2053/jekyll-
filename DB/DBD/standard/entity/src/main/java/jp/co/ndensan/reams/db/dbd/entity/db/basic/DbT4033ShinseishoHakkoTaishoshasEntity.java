@@ -156,4 +156,5 @@ public class DbT4033ShinseishoHakkoTaishoshasEntity extends DbTableEntityBase<Db
 
 // </editor-fold>
 
+
 }

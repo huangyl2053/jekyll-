@@ -34,7 +34,7 @@ public class DbT7501NinteiSaikinShorishaDac implements ISaveable<DbT7501NinteiSa
      * 指定キーに一致するデータを取得します。
      *
      * @param reamsLoginId ログインID
-     * @param 証記載保険者番号 証記載ほけん車番号
+     * @param 証記載保険者番号 証記載保険者番号
      * @return 条件に一致する最近処理者情報
      */
     @Transaction
@@ -45,8 +45,26 @@ public class DbT7501NinteiSaikinShorishaDac implements ISaveable<DbT7501NinteiSa
         return new DbAccessorNormalType(session).select().
                 table(DbT7501NinteiSaikinShorisha.class).
                 where(and(
-                        eq(DbT7501NinteiSaikinShorisha.reamsLoginId, reamsLoginId),
-                        eq(DbT7501NinteiSaikinShorisha.shoKisaiHokenshaNo, 証記載保険者番号))).
+                                eq(DbT7501NinteiSaikinShorisha.reamsLoginId, reamsLoginId),
+                                eq(DbT7501NinteiSaikinShorisha.shoKisaiHokenshaNo, 証記載保険者番号))).
+                order(by(DbT7501NinteiSaikinShorisha.insertTimestamp, Order.DESC)).
+                limit(15).
+                toList(DbT7501NinteiSaikinShorishaEntity.class);
+    }
+
+    /**
+     * 指定キーに一致するデータを取得します。
+     *
+     * @param reamsLoginId ログインID
+     * @return 条件に一致する最近処理者情報
+     */
+    @Transaction
+    public List<DbT7501NinteiSaikinShorishaEntity> selectByUser(RString reamsLoginId) {
+        requireNonNull(reamsLoginId, UrSystemErrorMessages.値がnull.getReplacedMessage("reamsLoginId"));
+
+        return new DbAccessorNormalType(session).select().
+                table(DbT7501NinteiSaikinShorisha.class).
+                where(eq(DbT7501NinteiSaikinShorisha.reamsLoginId, reamsLoginId)).
                 order(by(DbT7501NinteiSaikinShorisha.insertTimestamp, Order.DESC)).
                 limit(15).
                 toList(DbT7501NinteiSaikinShorishaEntity.class);

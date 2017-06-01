@@ -20,6 +20,7 @@
         <result property="telNo" column="telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="ninteiChosainNo" column="ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="chosainShimei" column="chosainShimei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
     </resultMap>
 
     <select resultOrdered="true" id="get認定調査依頼発行一覧" resultMap="resultMap_getNinteiChosaIrai"
@@ -37,7 +38,8 @@
         dbT5910."daihyoshaName",
         dbT5910."telNo",
         dbT5913."ninteiChosainCode",
-        dbT5913."chosainShimei"
+        dbT5913."chosainShimei",
+        dbT5101."shinseishoKanriNo"
         FROM
         rgdb."DbT5201NinteichosaIraiJoho" AS dbT5201
         INNER JOIN

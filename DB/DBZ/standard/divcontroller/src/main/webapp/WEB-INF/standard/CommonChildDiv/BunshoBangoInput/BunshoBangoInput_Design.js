@@ -4,6 +4,10 @@ var DBZ;
         var Events = (function () {
             function Events() {
             }
+            Events.onBlur_txtBunshoNo = function () {
+                return "onBlur_txtBunshoNo";
+            };
+
             Events.onClick_BtnGetBunshoNo = function () {
                 return "onClick_BtnGetBunshoNo";
             };
@@ -40,7 +44,7 @@ var DBZ;
             };
 
             Controls.prototype.txtBunshoNo = function () {
-                return new UZA.TextBoxCode(this.convFiledName("txtBunshoNo"));
+                return new UZA.TextBox(this.convFiledName("txtBunshoNo"));
             };
 
             Controls.prototype.txtBunshoFooter = function () {

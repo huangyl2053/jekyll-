@@ -43,36 +43,72 @@
         DbT5912ShujiiJoho."dbT5912ShujiiJoho_faxNo" AS dbT5912ShujiiJoho_faxNo,
         DbT5912ShujiiJoho."dbT5912ShujiiJoho_seibetsu" AS dbT5912ShujiiJoho_seibetsu
         FROM
-        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5912ShujiiJohoMapper.noDeleted_DbT5912ShujiiJoho" />) AS DbT5912ShujiiJoho
+        (SELECT
+        "DbT7051KoseiShichosonMaster"."shichosonCode" as "dbT7051KoseiShichosonMaster_shichosonCode",
+        "DbT7051KoseiShichosonMaster"."shichosonMeisho" as "dbT7051KoseiShichosonMaster_shichosonMeisho"
+        FROM
+        rgdb."DbT7051KoseiShichosonMaster"
+        WHERE
+        rgdb."DbT7051KoseiShichosonMaster"."isDeleted" = FALSE) AS DbT7051KoseiShichosonMaster
         INNER JOIN
-        (<include refid="jp.co.ndensan.reams.db.dbx.persistence.db.mapper.basic.IDbT7051KoseiShichosonMasterMapper.noDeleted_DbT7051KoseiShichosonMaster" />) AS DbT7051KoseiShichosonMaster
+        (SELECT
+        "DbT5911ShujiiIryoKikanJoho"."shichosonCode" as "dbT5911ShujiiIryoKikanJoho_shichosonCode",
+        "DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode" as "dbT5911ShujiiIryoKikanJoho_shujiiIryokikanCode",
+        "DbT5911ShujiiIryoKikanJoho"."iryoKikanMeisho" as "dbT5911ShujiiIryoKikanJoho_iryoKikanMeisho"
+        FROM
+        rgdb."DbT5911ShujiiIryoKikanJoho"
+        WHERE
+        rgdb."DbT5911ShujiiIryoKikanJoho"."isDeleted" = FALSE) AS DbT5911ShujiiIryoKikanJoho
         ON
-        DbT5912ShujiiJoho."dbT5912ShujiiJoho_shichosonCode"  =  DbT7051KoseiShichosonMaster."dbT7051KoseiShichosonMaster_shichosonCode"
-        INNER JOIN
-        (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5911ShujiiIryoKikanJohoMapper.noDeleted_DbT5911ShujiiIryoKikanJoho" />) AS DbT5911ShujiiIryoKikanJoho
+        DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_shichosonCode"  =  DbT7051KoseiShichosonMaster."dbT7051KoseiShichosonMaster_shichosonCode"
+        <if test="uses主治医コードFrom or uses主治医コードTo or uses主治医氏名 or uses主治医カナ氏名">
+            INNER JOIN
+        </if>
+        <if test="!uses主治医コードFrom and !uses主治医コードTo and !uses主治医氏名 and !uses主治医カナ氏名">
+            LEFT JOIN
+        </if>
+        (SELECT
+        "DbT5912ShujiiJoho"."shichosonCode" as "dbT5912ShujiiJoho_shichosonCode",
+        "DbT5912ShujiiJoho"."shujiiIryokikanCode" as "dbT5912ShujiiJoho_shujiiIryokikanCode",
+        "DbT5912ShujiiJoho"."shujiiCode" as "dbT5912ShujiiJoho_shujiiCode",
+        "DbT5912ShujiiJoho"."shujiiName" as "dbT5912ShujiiJoho_shujiiName",
+        "DbT5912ShujiiJoho"."shujiiKana" as "dbT5912ShujiiJoho_shujiiKana",
+        "DbT5912ShujiiJoho"."seibetsu" as "dbT5912ShujiiJoho_seibetsu",
+        "DbT5912ShujiiJoho"."yubinNo" as "dbT5912ShujiiJoho_yubinNo",
+        "DbT5912ShujiiJoho"."jusho" as "dbT5912ShujiiJoho_jusho",
+        "DbT5912ShujiiJoho"."telNo" as "dbT5912ShujiiJoho_telNo",
+        "DbT5912ShujiiJoho"."faxNo" as "dbT5912ShujiiJoho_faxNo",
+        "DbT5912ShujiiJoho"."shinryokaName" as "dbT5912ShujiiJoho_shinryokaName",
+        "DbT5912ShujiiJoho"."shiteiiFlag" as "dbT5912ShujiiJoho_shiteiiFlag",
+        "DbT5912ShujiiJoho"."jokyoFlag" as "dbT5912ShujiiJoho_jokyoFlag"
+        FROM
+        rgdb."DbT5912ShujiiJoho"
+        WHERE
+        rgdb."DbT5912ShujiiJoho"."isDeleted" = FALSE
+        <if test="状況フラグ">
+            AND
+            "DbT5912ShujiiJoho"."jokyoFlag" = true
+        </if>
+        <if test="!状況フラグ">
+            AND
+            "DbT5912ShujiiJoho"."jokyoFlag" = false
+        </if>) AS DbT5912ShujiiJoho
         ON
         DbT5912ShujiiJoho."dbT5912ShujiiJoho_shichosonCode" = DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_shichosonCode"
         AND DbT5912ShujiiJoho."dbT5912ShujiiJoho_shujiiIryokikanCode" = DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_shujiiIryokikanCode"
         <where>
             <if test="uses市町村コード">
                 AND
-                DbT5912ShujiiJoho."dbT5912ShujiiJoho_shichosonCode" = #{市町村コード}
+                DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_shichosonCode" = #{市町村コード}
             </if>
-            <if test="状況フラグ">
-                AND
-                DbT5912ShujiiJoho."dbT5912ShujiiJoho_jokyoFlag" = true
-            </if>
-            <if test="!状況フラグ">
-                AND
-                DbT5912ShujiiJoho."dbT5912ShujiiJoho_jokyoFlag" = false
-            </if>
+            
             <if test="uses主治医医療機関コードFrom">
                 AND
-                DbT5912ShujiiJoho."dbT5912ShujiiJoho_shujiiIryokikanCode" <![CDATA[>=]]> #{主治医医療機関コードFrom}
+                DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_shujiiIryokikanCode" <![CDATA[>=]]> #{主治医医療機関コードFrom}
             </if>
             <if test="uses主治医医療機関コードTo">
                 AND
-                DbT5912ShujiiJoho."dbT5912ShujiiJoho_shujiiIryokikanCode" <![CDATA[<=]]> #{主治医医療機関コードTo}
+                DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_shujiiIryokikanCode" <![CDATA[<=]]> #{主治医医療機関コードTo}
             </if>
             <if test="uses主治医医療機関名称">
                 <if test="uses0主治医医療機関名称">
@@ -110,7 +146,6 @@
                     DbT5911ShujiiIryoKikanJoho."dbT5911ShujiiIryoKikanJoho_iryoKikanMeishoKana"  LIKE '%' || #{主治医医療機関カナ名称} || '%'
                 </if>
             </if>
-
             <if test="uses主治医コードFrom">
                 AND
                 DbT5912ShujiiJoho."dbT5912ShujiiJoho_shujiiCode" <![CDATA[>=]]> #{主治医コードFrom}
@@ -154,17 +189,6 @@
                     AND
                     DbT5912ShujiiJoho."dbT5912ShujiiJoho_shujiiKana"  LIKE '%' || #{主治医カナ氏名} || '%'
                 </if>
-            </if>
-            <if test="市町村識別ID利用Flag">
-                AND DbT7051KoseiShichosonMaster."dbT7051KoseiShichosonMaster_shichosonShokibetsuID" NOT IN (
-                        SELECT "shichosonShokibetsuID"
-                        FROM rgdb."DbT7051KoseiShichosonMaster"
-                        WHERE  "shichosonCode"=(
-                                                SELECT "shichosonCode"  FROM rgdb."DbT7051KoseiShichosonMaster"
-                                                WHERE "shichosonShokibetsuID" = #{市町村識別ID}
-                                                )
-                        AND "shichosonShokibetsuID" <![CDATA[<>]]> #{市町村識別ID}
-                        )
             </if>
         </where>
         ORDER BY
@@ -307,11 +331,11 @@
             resultType="jp.co.ndensan.reams.uz.uza.lang.RString"
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiijoho.ShujiiMasterSearchParameter">
         SELECT
-          "DbT5911ShujiiIryoKikanJoho"."iryoKikanMeisho"
+        "DbT5911ShujiiIryoKikanJoho"."iryoKikanMeisho"
         FROM
-         rgdb."DbT5911ShujiiIryoKikanJoho"
+        rgdb."DbT5911ShujiiIryoKikanJoho"
         WHERE
-         "DbT5911ShujiiIryoKikanJoho"."isDeleted" = FALSE
+        "DbT5911ShujiiIryoKikanJoho"."isDeleted" = FALSE
         AND  "DbT5911ShujiiIryoKikanJoho"."shichosonCode" = #{市町村コード}
         AND  "DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode" = #{主治医医療機関コード}
     </select>

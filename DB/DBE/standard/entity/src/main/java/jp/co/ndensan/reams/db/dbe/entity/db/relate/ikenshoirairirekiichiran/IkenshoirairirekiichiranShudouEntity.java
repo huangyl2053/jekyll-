@@ -58,4 +58,6 @@ public class IkenshoirairirekiichiranShudouEntity {
     private FlexibleDate iraishoShutsuryokuYMD;
     private RString shichosonMeisho;
     private TelNo telNo;
+
+    private boolean isSaiChosa;
 }

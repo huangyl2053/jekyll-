@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE2920001;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2920001.IraiJohoDataTorikomiCsvEntity;
+import jp.co.ndensan.reams.db.dbe.business.core.orca.OrcaIkenshoCsvData;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2920001.IraiJohoDataTorikomiDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2920001.dgTorikomiFileIchiran_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPair;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 
@@ -36,14 +37,28 @@ public class IraiJohoDataTorikomiValidationHandler {
     }
 
     /**
-     * データを取込のチェックを行います。
+     * 取込みファイル対象未選択チェックを行います。
      *
-     * @param csvEntityList List<IraiJohoDataTorikomiCsvEntity>
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs データを取込のチェック(List<IraiJohoDataTorikomiCsvEntity> csvEntityList) {
+    @SuppressWarnings("checkstyle:illegaltoken")
+    public ValidationMessageControlPairs 取込みファイル対象未選択チェック(FileData[] files) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        if (csvEntityList == null || csvEntityList.isEmpty()) {
+        if (files.length == 0) {
+            validationMessages.add(new ValidationMessageControlPair(IraiJohoDataTorikomiMessages.取込みファイル対象未選択チェック));
+        }
+        return validationMessages;
+    }
+
+    /**
+     * データを取込のチェックを行います。
+     *
+     * @param csvData {@link OrcaIkenshoCsvData}
+     * @return ValidationMessageControlPairs
+     */
+    public ValidationMessageControlPairs データを取込のチェック(OrcaIkenshoCsvData csvData) {
+        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+        if (csvData.isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(IraiJohoDataTorikomiMessages.データを取込のチェック));
         }
         return validationMessages;
@@ -58,22 +73,13 @@ public class IraiJohoDataTorikomiValidationHandler {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         List<dgTorikomiFileIchiran_Row> rowList = div.getDgTorikomiFileIchiran().getDataSource();
         for (int i = 0; i < rowList.size(); i++) {
-            if (rowList.get(i).getCheckBox().isAllSelected() && !rowList.get(i).getShinseibi().equals(rowList.get(i + 1).getShinseibi())) {
+            if (!rowList.get(i).getCheckBox().isAllSelected()) {
+                continue;
+            }
+            if (!rowList.get(i).getShinseibi().getValue().equals(rowList.get(i + 1).getShinseibi().getValue())) {
                 validationMessages.add(new ValidationMessageControlPair(IraiJohoDataTorikomiMessages.申請日のチェック));
             }
         }
-        return validationMessages;
-    }
-
-    /**
-     * 取込みファイル対象未選択チェックを行います。
-     *
-     * @return ValidationMessageControlPairs
-     */
-    @SuppressWarnings("checkstyle:illegaltoken")
-    public ValidationMessageControlPairs 取込みファイル対象未選択チェック() {
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        validationMessages.add(new ValidationMessageControlPair(IraiJohoDataTorikomiMessages.取込みファイル対象未選択チェック));
         return validationMessages;
     }
 
@@ -93,4 +99,5 @@ public class IraiJohoDataTorikomiValidationHandler {
             return message;
         }
     }
+
 }

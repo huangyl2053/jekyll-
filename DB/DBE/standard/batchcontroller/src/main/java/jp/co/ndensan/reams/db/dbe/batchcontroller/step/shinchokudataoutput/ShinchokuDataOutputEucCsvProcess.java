@@ -13,8 +13,6 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.niinteichosajoho.ShinchokuDat
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.niinteichosajoho.ShinchokuDataOutputRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -34,10 +32,10 @@ import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.uuid.AccessLogUUID;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
 import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
@@ -59,7 +57,7 @@ public class ShinchokuDataOutputEucCsvProcess extends BatchProcessBase<Shinchoku
     private RString eucFilePath;
     private ShinchokuDataOutputBusiness business;
     private FileSpoolManager manager;
-    private DbAccessLogger accessLog;
+    private List<PersonalData> personalDataList;
 
     @Override
     protected void initialize() {
@@ -72,7 +70,7 @@ public class ShinchokuDataOutputEucCsvProcess extends BatchProcessBase<Shinchoku
             eucFilePath = Path.combinePath(manager.getEucOutputDirectry(), 連携データ送信ファイル名);
         }
         hihokenshaNoList = new ArrayList<>();
-        accessLog = new DbAccessLogger();
+        personalDataList = new ArrayList<>();
     }
 
     @Override
@@ -111,16 +109,15 @@ public class ShinchokuDataOutputEucCsvProcess extends BatchProcessBase<Shinchoku
     protected void process(ShinchokuDataOutputRelateEntity entity) {
         eucCsvWriterJunitoJugo.writeLine(business.setEucCsvEntity(entity));
         hihokenshaNoList.add(entity.getHihokenshaNo());
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.getShinseishoKanriNo());
-        accessLog.store(new ShoKisaiHokenshaNo(entity.getShoKisaiHokenshaNo()), entity.getHihokenshaNo(), expandedInfo);
+        personalDataList.add(toPersonalData(entity.getShoKisaiHokenshaNo(), entity.getHihokenshaNo(), entity.getShinseishoKanriNo()));
     }
 
     @Override
     protected void afterExecute() {
         eucCsvWriterJunitoJugo.close();
-        manager.spool(eucFilePath);
+        AccessLogUUID accessLogUUID = AccessLogger.logEUC(UzUDE0835SpoolOutputType.EucOther, personalDataList);
+        manager.spool(eucFilePath, accessLogUUID);
         outputJokenhyoFactory();
-        accessLog.flushBy(AccessLogType.照会);
     }
 
     private void outputJokenhyoFactory() {
@@ -150,5 +147,11 @@ public class ShinchokuDataOutputEucCsvProcess extends BatchProcessBase<Shinchoku
                     business.get出力条件(paramter, hihokenshaNoList));
             OutputJokenhyoFactory.createInstance(item).print();
         }
+    }
+
+    private PersonalData toPersonalData(RString 証記載保険者番号, RString 被保険者番号, RString 申請書管理番号) {
+        ShikibetsuCode shikibetsuCode = new ShikibetsuCode(証記載保険者番号.substring(0, 5).concat(被保険者番号));
+        ExpandedInformation expandedInformation = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号);
+        return PersonalData.of(shikibetsuCode, expandedInformation);
     }
 }

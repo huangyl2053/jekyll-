@@ -12,6 +12,7 @@ import jp.co.ndensan.reams.db.dbe.business.euc.dbe010002.ChosahyoJoho06AEucEntit
 import jp.co.ndensan.reams.db.dbe.business.euc.dbe010002.ChosahyoJoho09AEucEntityEditor;
 import jp.co.ndensan.reams.db.dbe.business.euc.dbe010002.ChosahyoJoho09BEucEntityEditor;
 import jp.co.ndensan.reams.db.dbe.business.euc.dbe010002.ChosahyoJoho99AEucEntityEditor;
+import jp.co.ndensan.reams.db.dbe.definition.core.util.accesslog.ExpandedInformations;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shinseishadataout.ShinseishaDataOutMybatisParameter;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.shinseishadataout.ShinseishaDataOutProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shinseishadataout.ChosahyoEntity;
@@ -22,12 +23,14 @@ import jp.co.ndensan.reams.db.dbe.entity.euc.shinseishadataout.DBE010002_Chosahy
 import jp.co.ndensan.reams.db.dbe.entity.euc.shinseishadataout.DBE010002_ChosahyoJoho99AEucEntity;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.shinseishadataout.IShinseishaDataOutMapper;
 import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5207NinteichosahyoServiceJokyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5208NinteichosahyoServiceJokyoFlagEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5209NinteichosahyoKinyuItemEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5210NinteichosahyoShisetsuRiyoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5211NinteichosahyoChosaItemEntity;
+import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.EucFileOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -100,6 +103,7 @@ public class ChosahyoJohoCsvOutputProcess extends BatchProcessBase<ChosahyoEntit
     private boolean exist02A;
     private boolean exist99A;
     private List<RString> 申請書管理番号リスト;
+    private DbAccessLogger accessLogger;
 
     @Override
     protected void initialize() {
@@ -115,6 +119,7 @@ public class ChosahyoJohoCsvOutputProcess extends BatchProcessBase<ChosahyoEntit
         exist02A = false;
         exist99A = false;
         申請書管理番号リスト = new ArrayList<>();
+        accessLogger = new DbAccessLogger();
     }
 
     @Override
@@ -204,6 +209,8 @@ public class ChosahyoJohoCsvOutputProcess extends BatchProcessBase<ChosahyoEntit
             exist99A = true;
             申請書管理番号リスト.add(entity.getShinseishoKanriNo());
         }
+        accessLogger.store(new ShoKisaiHokenshaNo(entity.getShoKisaiHokenshaNo()), entity.getHihokenshaNo(),
+                ExpandedInformations.fromValue(entity.getShinseishoKanriNo()));
     }
 
     @Override
@@ -215,19 +222,19 @@ public class ChosahyoJohoCsvOutputProcess extends BatchProcessBase<ChosahyoEntit
         csvWriter_02A.close();
         csvWriter_99A.close();
         if (exist09B) {
-            fileSpoolManager_09B.spool(filePath_09B);
+            fileSpoolManager_09B.spool(filePath_09B, accessLogger.flushByEUC(UzUDE0835SpoolOutputType.EucOther));
         }
         if (exist09A) {
-            fileSpoolManager_09A.spool(filePath_09A);
+            fileSpoolManager_09A.spool(filePath_09A, accessLogger.flushByEUC(UzUDE0835SpoolOutputType.EucOther));
         }
         if (exist06A) {
-            fileSpoolManager_06A.spool(filePath_06A);
+            fileSpoolManager_06A.spool(filePath_06A, accessLogger.flushByEUC(UzUDE0835SpoolOutputType.EucOther));
         }
         if (exist02A) {
-            fileSpoolManager_02A.spool(filePath_02A);
+            fileSpoolManager_02A.spool(filePath_02A, accessLogger.flushByEUC(UzUDE0835SpoolOutputType.EucOther));
         }
         if (exist99A) {
-            fileSpoolManager_99A.spool(filePath_99A);
+            fileSpoolManager_99A.spool(filePath_99A, accessLogger.flushByEUC(UzUDE0835SpoolOutputType.EucOther));
         }
     }
 

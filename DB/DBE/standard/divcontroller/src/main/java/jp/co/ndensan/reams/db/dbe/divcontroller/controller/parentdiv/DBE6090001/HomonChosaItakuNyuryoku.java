@@ -135,6 +135,7 @@ public class HomonChosaItakuNyuryoku {
         if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             getHandler(div).kuria();
+            div.getDgShinsakaiIin().setReadOnly(false);
             return ResponseData.of(div).setState(DBE6090001StateName.調査実績一覧);
         }
         return ResponseData.of(div).respond();
@@ -148,6 +149,7 @@ public class HomonChosaItakuNyuryoku {
      */
     public ResponseData<HomonChosaItakuNyuryokuDiv> onClick_btnToroku(HomonChosaItakuNyuryokuDiv div) {
         getHandler(div).setbtnToroku();
+        div.getDgShinsakaiIin().setReadOnly(false);
         return ResponseData.of(div).setState(DBE6090001StateName.調査実績一覧状態);
     }
 
@@ -161,6 +163,7 @@ public class HomonChosaItakuNyuryoku {
         getHandler(div).set状態_更新();
         List<NinteichosahyoGaikyoChosaBusiness> 単価List = manager.get単価検索(getHandler(div).createParam_単価(div)).records();
         getHandler(div).単価(単価List);
+        div.getDgShinsakaiIin().setReadOnly(true);
         return ResponseData.of(div).setState(DBE6090001StateName.調査実績明細状態);
     }
 
@@ -174,6 +177,7 @@ public class HomonChosaItakuNyuryoku {
         getHandler(div).set状態_削除();
         List<NinteichosahyoGaikyoChosaBusiness> 単価List = manager.get単価検索(getHandler(div).createParam_単価(div)).records();
         getHandler(div).単価(単価List);
+        div.getDgShinsakaiIin().setReadOnly(true);
         return ResponseData.of(div).setState(DBE6090001StateName.調査実績明細状態);
     }
 

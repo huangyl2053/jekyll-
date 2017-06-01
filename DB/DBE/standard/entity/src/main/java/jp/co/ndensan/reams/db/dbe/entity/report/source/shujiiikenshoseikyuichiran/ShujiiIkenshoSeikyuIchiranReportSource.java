@@ -52,17 +52,12 @@ public class ShujiiIkenshoSeikyuIchiranReportSource implements IReportSource {
     public RString listIkeniraimishori_14;
     @ReportItem(name = "listIkeniraimishori_15", length = 9, order = 18)
     public RString listIkeniraimishori_15;
-    @ReportPerson(id = "X")
-    public ShikibetsuCode shikibetuCode;
-    @ReportExpandedInfo(id = "X")
-    public ExpandedInformation hokenshaNo;
-    @ReportExpandedInfo(id = "X")
-    public ExpandedInformation hihokenshaNo;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
-    //追加コードは以下（「User Customize Area」内）に記述してください。
-    //帳票ソースデータクラスを再作成する場合は、「User Customize Area」内のソースコードは記述されません。
-    //再作成した後、当箇所に記述したコードを再作成された帳票ソースデータクラスの「User Customize Area」内にコピー＆ペーストする必要があります。
+    @ReportPerson(id = "X")
+    public ShikibetsuCode 識別コード;
+    @ReportExpandedInfo(id = "X")
+    public ExpandedInformation 拡張情報;
 // </editor-fold>
 
     /**

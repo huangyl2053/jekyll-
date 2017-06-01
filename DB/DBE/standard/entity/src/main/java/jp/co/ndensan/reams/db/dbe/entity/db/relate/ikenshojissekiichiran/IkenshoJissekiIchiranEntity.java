@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshojissekiichiran;
 
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoSakuseiKaisuKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.ZaitakuShisetsuKubun;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
@@ -56,6 +57,8 @@ public class IkenshoJissekiIchiranEntity implements IIkenshoJissekiIchiranCsvEuc
     private final RString 入手パターン_施継;
     @CsvField(order = 16, name = "単価")
     private final RString 単価;
+    
+    private final RString 申請書管理番号;
 
     private static final RString MARU = new RString("○");
 
@@ -78,6 +81,7 @@ public class IkenshoJissekiIchiranEntity implements IIkenshoJissekiIchiranCsvEuc
      * @param 入手パターン_施新 入手パターン_施新
      * @param 入手パターン_施継 入手パターン_施継
      * @param 単価 単価
+     * @param 申請書管理番号 RString
      */
     public IkenshoJissekiIchiranEntity(RString 保険者番号,
             RString 保険者名称,
@@ -94,7 +98,8 @@ public class IkenshoJissekiIchiranEntity implements IIkenshoJissekiIchiranCsvEuc
             RString 入手パターン_在継,
             RString 入手パターン_施新,
             RString 入手パターン_施継,
-            RString 単価) {
+            RString 単価,
+            RString 申請書管理番号) {
         this.保険者番号 = 保険者番号;
         this.保険者名称 = 保険者名称;
         this.医療機関コード = 医療機関コード;
@@ -111,6 +116,7 @@ public class IkenshoJissekiIchiranEntity implements IIkenshoJissekiIchiranCsvEuc
         this.入手パターン_施新 = 入手パターン_施新;
         this.入手パターン_施継 = 入手パターン_施継;
         this.単価 = 単価;
+        this.申請書管理番号 = 申請書管理番号;
     }
 
     public IkenshoJissekiIchiranEntity(IkenshoJissekiIchiranRelateEntity relateEntity) {
@@ -150,6 +156,7 @@ public class IkenshoJissekiIchiranEntity implements IIkenshoJissekiIchiranCsvEuc
         this.入手パターン_施新 = 施設_新;
         this.入手パターン_施継 = 施設_継;
         this.単価 = relateEntity.get単価();
+        this.申請書管理番号 = relateEntity.get申請書管理番号();
     }
 
     private static RString dateFormat(RString date) {

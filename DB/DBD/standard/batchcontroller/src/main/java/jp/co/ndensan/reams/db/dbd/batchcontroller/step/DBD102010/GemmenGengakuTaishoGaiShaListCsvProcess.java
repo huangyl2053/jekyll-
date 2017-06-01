@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbd.batchcontroller.step.DBD102010;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbd.definition.mybatisprm.gemmenshinseishotaishohaaku.GemmenGengakuTaishoGaiShaListMyBatisParameter;
 import jp.co.ndensan.reams.db.dbd.definition.processprm.dbd1080001.GemmenGengakuTaishoGaiShaListProcessParameter;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmenshinseishotaishohaaku.GemmenGengakuTaishoGaiShaEntity;
 import jp.co.ndensan.reams.db.dbd.entity.db.relate.gemmenshinseishotaishohaaku.GemmenGengakuTaishoGaiShaListCsvEntity;
@@ -18,11 +19,14 @@ import jp.co.ndensan.reams.db.dbz.definition.core.YokaigoJotaiKubunSupport;
 import jp.co.ndensan.reams.db.dbz.definition.core.honninkubun.HonninKubun;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.ShikibetsuTaishoFactory;
 import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.kojin.IKojin;
+import jp.co.ndensan.reams.ua.uax.business.core.shikibetsutaisho.search.ShikibetsuTaishoPSMSearchKeyBuilder;
+import jp.co.ndensan.reams.ua.uax.definition.core.enumeratedtype.shikibetsutaisho.KensakuYusenKubun;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.euc.io.EucCsvWriter;
@@ -80,14 +84,17 @@ public class GemmenGengakuTaishoGaiShaListCsvProcess extends BatchProcessBase<Ge
 
     @Override
     protected IBatchReader createReader() {
+        ShikibetsuTaishoPSMSearchKeyBuilder builder = new ShikibetsuTaishoPSMSearchKeyBuilder(GyomuCode.DB介護保険, KensakuYusenKubun.住登内優先);
+        builder.set基準日(processParamter.get基準日());
+        GemmenGengakuTaishoGaiShaListMyBatisParameter param = processParamter.toGemmenGengakuTaishoGaiShaListMyBatisParameter(開始日, 終了日, builder.build());
         if (processParamter.get減免減額種類().equals(GemmenGengakuShurui.負担限度額認定)) {
-            return new BatchDbReader(MYBATIS_SELECT_ID_負担限度額認定, processParamter.toGemmenGengakuTaishoGaiShaListMyBatisParameter(開始日, 終了日));
+            return new BatchDbReader(MYBATIS_SELECT_ID_負担限度額認定, param);
         } else if (processParamter.get減免減額種類().equals(GemmenGengakuShurui.利用者負担額減額)) {
-            return new BatchDbReader(MYBATIS_SELECT_ID_利用者負担額減額, processParamter.toGemmenGengakuTaishoGaiShaListMyBatisParameter(開始日, 終了日));
+            return new BatchDbReader(MYBATIS_SELECT_ID_利用者負担額減額, param);
         } else if (processParamter.get減免減額種類().equals(GemmenGengakuShurui.訪問介護利用者負担額減額)) {
-            return new BatchDbReader(MYBATIS_SELECT_ID_訪問介護利用者, processParamter.toGemmenGengakuTaishoGaiShaListMyBatisParameter(開始日, 終了日));
+            return new BatchDbReader(MYBATIS_SELECT_ID_訪問介護利用者, param);
         } else {
-            return new BatchDbReader(MYBATIS_SELECT_ID_社会福祉法人, processParamter.toGemmenGengakuTaishoGaiShaListMyBatisParameter(開始日, 終了日));
+            return new BatchDbReader(MYBATIS_SELECT_ID_社会福祉法人, param);
         }
     }
 

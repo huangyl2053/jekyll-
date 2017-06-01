@@ -44,6 +44,7 @@ public class ShikakuHenkoRirekiDialog {
 
         RString mode = div.getMode();
         ShikibetsuCode shikibetsuCode = new ShikibetsuCode(div.getShikibetsuCode());
+        HihokenshaNo hihokenshaNo = new HihokenshaNo(div.getHihokenshaNo());
         FlexibleDate shutokuDate = FlexibleDate.EMPTY;
         if (!isShutokuDateEmpty(div)) {
             shutokuDate = new FlexibleDate(div.getShutokuDate());
@@ -57,7 +58,7 @@ public class ShikakuHenkoRirekiDialog {
             IItemList<HihokenshaDaicho> hihoData = ItemList.of(serialHihoData);
             hihoData = new HihokenshaDaichoList(hihoData).to資格関連異動List();
 
-            div.getCcdShikakuHenkoRireki().initialize(shikibetsuCode, hihoData);
+            div.getCcdShikakuHenkoRireki().initialize(shikibetsuCode, hihoData, hihokenshaNo);
         } else if (!isHihoDataEmpty(div)) {
             ArrayList<HihokenshaDaicho> serialHihoData = DataPassingConverter.deserialize(div.getHihoData(), ArrayList.class);
             IItemList<HihokenshaDaicho> hihoData = ItemList.of(serialHihoData);
@@ -68,7 +69,7 @@ public class ShikakuHenkoRirekiDialog {
                 hihoData = ItemList.empty();
             }
 
-            div.getCcdShikakuHenkoRireki().initialize(shikibetsuCode, hihoData);
+            div.getCcdShikakuHenkoRireki().initialize(shikibetsuCode, hihoData, hihokenshaNo);
         }
         return ResponseData.of(div).respond();
     }

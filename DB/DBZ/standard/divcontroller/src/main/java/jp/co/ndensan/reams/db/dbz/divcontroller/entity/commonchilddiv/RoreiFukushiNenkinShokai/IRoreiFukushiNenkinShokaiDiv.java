@@ -26,8 +26,9 @@ public interface IRoreiFukushiNenkinShokaiDiv extends ICommonChildDivBasePropert
      * 画面を初期化します。グリッド上に表示するデータを引数から受け取って初期化します。
      *
      * @param roreiFukushiNenkinJukyusha グリッド上に表示するデータ
+     * @param shikibetsuCode 識別コード
      */
-    void initialize(Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> roreiFukushiNenkinJukyusha);
+    void initialize(Models<RoreiFukushiNenkinJukyushaIdentifier, RoreiFukushiNenkinJukyusha> roreiFukushiNenkinJukyusha, ShikibetsuCode shikibetsuCode);
 
     /**
      * 画面データをデータベースに格納します。

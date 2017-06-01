@@ -4,8 +4,10 @@
  */
 package jp.co.ndensan.reams.db.dbc.business.core.basic;
 
+import jp.co.ndensan.reams.db.dbd.business.core.basic.NijiYoboJigyoTaishoshaBuilder;
+import jp.co.ndensan.reams.db.dbd.business.core.basic.NijiYoboJigyoTaishosha;
 import jp.co.ndensan.reams.db.dbc.entity.basic.helper.DbT3100NijiYoboJigyoTaishoshaEntityGenerator;
-import jp.co.ndensan.reams.db.dbc.entity.db.basic.DbT3100NijiYoboJigyoTaishoshaEntity;
+import jp.co.ndensan.reams.db.dbd.entity.db.basic.DbT3100NijiYoboJigyoTaishoshaEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.HihokenshaNo;
 import jp.co.ndensan.reams.db.dbz.testhelper.DbcTestBase;
 import static org.hamcrest.CoreMatchers.is;

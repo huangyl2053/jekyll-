@@ -46,6 +46,8 @@ public class DataTorikomiProcess extends BatchProcessBase<TempShinsakaiKekkaEnti
     BatchPermanentTableWriter<DbT5102NinteiKekkaJohoEntity> dbT5102Writer;
     @BatchWriter
     BatchPermanentTableWriter<DbT5105NinteiKanryoJohoEntity> dbT5105Writer;
+    @BatchWriter
+    BatchPermanentTableWriter<DbT5502ShinsakaiWariateJohoEntity> dbT5502Writer;
 
     @Override
     protected void beforeExecute() {
@@ -59,6 +61,7 @@ public class DataTorikomiProcess extends BatchProcessBase<TempShinsakaiKekkaEnti
         dbT5510Writer = new BatchPermanentTableWriter(DbT5510IchiGojiHanteiKekkaJohoEntity.class);
         dbT5102Writer = new BatchPermanentTableWriter(DbT5102NinteiKekkaJohoEntity.class);
         dbT5105Writer = new BatchPermanentTableWriter(DbT5105NinteiKanryoJohoEntity.class);
+        dbT5502Writer = new BatchPermanentTableWriter(DbT5502ShinsakaiWariateJohoEntity.class);
     }
 
     @Override
@@ -69,8 +72,12 @@ public class DataTorikomiProcess extends BatchProcessBase<TempShinsakaiKekkaEnti
     @Override
     protected void process(TempShinsakaiKekkaEntity entity) {
         if (null != entity) {
+            mybatisParameter = ShinsakaiKekkaDataTorikomiMybatisParameter.createParam(entity.get申請書管理番号(), 
+                    entity.get今回_審査会開催番号(), RString.EMPTY);
+            DbT5502ShinsakaiWariateJohoEntity dbt5502 = mapper.getShinsakaiWariateJoho(mybatisParameter);
             syoriDbT5510(entity);
-            syoriDbT5102(entity);
+            syoriDbT5502(entity, dbt5502);
+            syoriDbT5102(entity, dbt5502);
             syoriDbT5105(entity);
         }
     }
@@ -86,12 +93,9 @@ public class DataTorikomiProcess extends BatchProcessBase<TempShinsakaiKekkaEnti
         }
     }
 
-    private void syoriDbT5102(TempShinsakaiKekkaEntity entity) {
+    private void syoriDbT5102(TempShinsakaiKekkaEntity entity, DbT5502ShinsakaiWariateJohoEntity dbt5502) {
         FlexibleDate 審査会資料作成年月日 = FlexibleDate.EMPTY;
         DbT5102NinteiKekkaJohoEntity dbt5102 = mapper.getNinteiKekkan(new ShinseishoKanriNo(entity.get申請書管理番号()));
-        mybatisParameter = ShinsakaiKekkaDataTorikomiMybatisParameter.createParam(entity.get申請書管理番号(),
-                entity.get今回_審査会開催番号(), RString.EMPTY);
-        DbT5502ShinsakaiWariateJohoEntity dbt5502 = mapper.getShinsakaiWariateJoho(mybatisParameter);
         if (null != dbt5502) {
             審査会資料作成年月日 = dbt5502.getShinsakaiShiryoSakuseiYMD();
         }
@@ -106,6 +110,12 @@ public class DataTorikomiProcess extends BatchProcessBase<TempShinsakaiKekkaEnti
         DbT5105NinteiKanryoJohoEntity dbt5105 = mapper.getNinteiKanryo(new ShinseishoKanriNo(entity.get申請書管理番号()));
         if (null != dbt5105) {
             dbT5105Writer.update(edit.editDbT5105Entity(entity, dbt5105));
+        }
+    }
+    
+    private void syoriDbT5502(TempShinsakaiKekkaEntity entity, DbT5502ShinsakaiWariateJohoEntity dbt5502) {
+        if (null != dbt5502) {
+            dbT5502Writer.update(edit.editDbT5502Entity(entity, dbt5502));
         }
     }
 }

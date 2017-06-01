@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5250002.Nij
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5250002.ValidationHandler;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
+import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -77,7 +77,7 @@ public class NijihanteiKekkaOutput {
         if (!ResponseHolder.isReRequest()) {
             boolean hasFound = createHandlerOf(div).kennsaku(div.getKensakuJoken().getTxtHihokenshaNo().getValue());
             if (!hasFound) {
-                return ResponseData.of(div).addMessage(UrErrorMessages.対象者が存在しない.getMessage()).respond();
+                return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
             }
         }
         return createResponseData(div);

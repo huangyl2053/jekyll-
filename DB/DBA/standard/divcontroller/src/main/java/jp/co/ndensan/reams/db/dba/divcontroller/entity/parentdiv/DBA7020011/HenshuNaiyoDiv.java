@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class HenshuNaiyoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-16_09-04-03">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -42,10 +42,10 @@ public class HenshuNaiyoDiv extends Panel {
     private CheckBoxList chkTaishoGonai;
     @JsonProperty("btnJidoFuban")
     private Button btnJidoFuban;
-    @JsonProperty("ccdBunshoBangoInput")
-    private BunshoBangoInputDiv ccdBunshoBangoInput;
     @JsonProperty("ccdPrintContentsSetting")
     private PrintContentsSettingDiv ccdPrintContentsSetting;
+    @JsonProperty("ccdBunshoBangoInput")
+    private BunshoBangoInputDiv ccdBunshoBangoInput;
     @JsonProperty("異動日")
     private RString 異動日;
     @JsonProperty("枝番")
@@ -206,21 +206,21 @@ public class HenshuNaiyoDiv extends Panel {
     }
 
     /*
-     * getccdBunshoBangoInput
-     * @return ccdBunshoBangoInput
-     */
-    @JsonProperty("ccdBunshoBangoInput")
-    public IBunshoBangoInputDiv getCcdBunshoBangoInput() {
-        return ccdBunshoBangoInput;
-    }
-
-    /*
      * getccdPrintContentsSetting
      * @return ccdPrintContentsSetting
      */
     @JsonProperty("ccdPrintContentsSetting")
     public IPrintContentsSettingDiv getCcdPrintContentsSetting() {
         return ccdPrintContentsSetting;
+    }
+
+    /*
+     * getccdBunshoBangoInput
+     * @return ccdBunshoBangoInput
+     */
+    @JsonProperty("ccdBunshoBangoInput")
+    public IBunshoBangoInputDiv getCcdBunshoBangoInput() {
+        return ccdBunshoBangoInput;
     }
 
     /*

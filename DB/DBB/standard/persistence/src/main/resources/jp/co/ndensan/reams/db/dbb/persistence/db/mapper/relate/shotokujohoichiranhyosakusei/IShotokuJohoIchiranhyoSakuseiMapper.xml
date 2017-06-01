@@ -104,6 +104,16 @@
         B."setaiCode"
         FROM master
         LEFT OUTER JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
+            (
+                SELECT
+                    ARRAY_AGG(CAST (master."shikibetsuCode" AS TEXT))
+                FROM
+                    master
+            )
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
+        AS B
+        <!--
         rgua."UaFt200FindShikibetsuTaisho"('1','','0','DB','0','','','','','','','','','','','0','0','','','','','',
         '','0','0','','','','','','','','','','0','','1','1','1','1','1','1','1','1','1','1','1','','','','','','','',
         '0','0','','','0','0','0','','','','','','','','','','','','','','','','','','', (
@@ -112,6 +122,7 @@
         FROM
         master
         )) AS B
+        -->
         ON master."shikibetsuCode"=B."shikibetsuCode"
         ${出力順} , master."shotokuNendo" ASC
     </select>
@@ -184,6 +195,16 @@
         N."setaiCode"
         FROM master
         LEFT OUTER JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
+            (
+                SELECT
+                    ARRAY_AGG(CAST (master."shikibetsuCode" AS TEXT))
+                FROM
+                    master
+            )
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
+        AS N
+        <!--
         rgua."UaFt200FindShikibetsuTaisho"('1','','0','DB','0','','','','','','','','','','','0','0','','','','','',
         '','0','0','','','','','','','','','','0','','1','1','1','1','1','1','1','1','1','1','1','','','','','','','',
         '0','0','','','0','0','0','','','','','','','','','','','','','','','','','','',                    (
@@ -192,6 +213,7 @@
         FROM
         master
         )) AS N
+        -->
         ON master."shikibetsuCode"=N."shikibetsuCode"
         ORDER BY master."shotokuNendo" ASC, master."rirekiNo" DESC)
         SELECT

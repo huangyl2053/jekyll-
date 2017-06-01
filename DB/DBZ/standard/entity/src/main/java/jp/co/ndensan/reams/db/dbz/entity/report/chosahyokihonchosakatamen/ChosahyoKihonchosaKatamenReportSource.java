@@ -5,10 +5,13 @@
  */
 package jp.co.ndensan.reams.db.dbz.entity.report.chosahyokihonchosakatamen;
 
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.IReportSource;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportExpandedInfo;
 import jp.co.ndensan.reams.uz.uza.report.source.ReportItem;
+import jp.co.ndensan.reams.uz.uza.report.source.ReportPerson;
 
 /**
  * 要介護認定調査票（基本調査）ReportSourceクラスです。
@@ -76,5 +79,9 @@ public class ChosahyoKihonchosaKatamenReportSource implements IReportSource {
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     @ReportItem(name = "layoutIndex")
     public Integer layoutIndex;
+    @ReportPerson(id = "X")
+    public ShikibetsuCode 識別コード;
+    @ReportExpandedInfo(id = "X")
+    public ExpandedInformation 拡張情報;
 // </editor-fold>
 }

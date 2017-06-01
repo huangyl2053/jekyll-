@@ -9,21 +9,20 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.business.core.ShinsakaiChosainJoho;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaItakusakiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.ninteishinseirenrakusakijoho.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.chosajisshishajoho.ChosaJisshishaJohoModel;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosainCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ChosaKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ChosaJisshiBashoCode;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.NinteiChousaIraiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.chosajisshishajoho.ChosaJisshishaJohoParameter;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJisshishaJoho.ChosaJisshishaJoho.ChosaJisshishaJohoDiv;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ChosaJisshishaJoho.ChosaJisshishaJoho.ChosaJisshishaJohoValidationHandler;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.chosajisshishajoho.ChosaJisshishaJohoRelateEntity;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteichosaIraiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.chosajisshishajoho.ChosaJisshishaJohoFinder;
+import jp.co.ndensan.reams.db.dbz.service.core.ninteichosa.NinteichosaContextService;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
@@ -126,12 +125,11 @@ public class ChosaJisshishaJohoHandler {
             }
         }
 
-        NinteichosaIraiJohoManager ninteiChosaIraiJohoManager = NinteichosaIraiJohoManager.createInstance();
-        NinteichosaIraiJoho 認定調査依頼情報 = ninteiChosaIraiJohoManager.get認定調査依頼情報(new ShinseishoKanriNo(key.get申請書管理番号()), key.get認定調査依頼履歴番号());
-        if (認定調査依頼情報 != null) {
-            NinteiChousaIraiKubunCode 認定調査依頼区分 = NinteiChousaIraiKubunCode.toValue(認定調査依頼情報.get認定調査依頼区分コード().getColumnValue());
-            div.getTxtChosaKubun().setValue(認定調査依頼区分.get名称());
-        }
+        div.getTxtChosaKubun().setValue(
+                NinteichosaContextService.createInstance()
+                .findChosaKubun(key.get申請書管理番号(), key.get認定調査依頼履歴番号())
+                .get名称()
+        );
     }
 
     private void setShokai(ChosaJisshishaJohoModel key) {
@@ -166,7 +164,7 @@ public class ChosaJisshishaJohoHandler {
                 = finder.onBlurTxtShozokuKikanCode(new LasdecCode(div.getHdnShichosonCode()), div.getTxtShozokuKikanCode().getText());
         div.getTxtShozokuKikanName().setValue(ninteichosaItakusakiJoho == null ? RString.EMPTY
                 : ninteichosaItakusakiJoho.get事業者名称() == null ? RString.EMPTY
-                : ninteichosaItakusakiJoho.get事業者名称());
+                        : ninteichosaItakusakiJoho.get事業者名称());
     }
 
     private void getKinyushaName() {

@@ -86,7 +86,6 @@ public class KozaJohoProcess extends BatchProcessBase<KozaJohoEntity> {
         RString 業務別主キー = mapper.get業務別主キー(mybatis);
         KozaSearchKeyBuilder searchKey = new KozaSearchKeyBuilder();
         searchKey.set業務コード(GyomuCode.DB介護保険);
-        searchKey.setサブ業務コード(SubGyomuCode.DBC介護給付);
         searchKey.set科目コード(科目コード);
         if (業務別主キー != null) {
             searchKey.set業務別主キー(業務別主キー);

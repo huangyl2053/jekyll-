@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbe.definition.core.dokuji.ShujiiJokyo;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshoshujiiichiran.IkenshoShujiiIchiranRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ShujiiIryokikanShujiiIchiranhyoReportSource;
 import jp.co.ndensan.reams.ur.urz.definition.core.shikibetsutaisho.Gender;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 
@@ -52,7 +53,7 @@ class IkenshoShujiiIchiranBodyEditor implements IkenshoShujiiIchiranEditor {
         source.listIchiranhyoUpper_3 = item.getDaihyoshaNameKana();
         RString yubinNo = item.getYubinNo() == null ? RString.EMPTY : item.getYubinNo().value();
         if (RString.isNullOrEmpty(yubinNo)
-            || item.getYubinNo().value().length() != 数値_7) {
+                || item.getYubinNo().value().length() != 数値_7) {
             source.listIchiranhyoUpper_4 = yubinNo;
         } else {
             RStringBuilder yubinBango = new RStringBuilder();
@@ -64,10 +65,16 @@ class IkenshoShujiiIchiranBodyEditor implements IkenshoShujiiIchiranEditor {
         source.listIchiranhyoUpper_5 = item.getTelNo() == null ? RString.EMPTY : item.getTelNo().value();
         source.listIchiranhyoUpper_7 = item.getShujiiCode();
         source.listIchiranhyoUpper_8 = item.getShujiiKana() == null ? RString.EMPTY : item.getShujiiKana().value();
-        source.listIchiranhyoUpper_9 = item.getSeibetsu() == null ? RString.EMPTY
-                                       : Gender.toValue(item.getSeibetsu().value()).getName().getShortJapanese();
+        RString seibetsuCode = trim(item.getSeibetsu());
+        source.listIchiranhyoUpper_9 = seibetsuCode.isEmpty() ? RString.EMPTY
+                : Gender.toValue(seibetsuCode).getName().getShortJapanese();
         source.listIchiranhyoUpper_6 = IryoKikanJokyo.toValue(item.isIryokikanJokyoFlag()).get名称();
         source.listIchiranhyoUpper_10 = ShujiiJokyo.toValue(item.isShujiiJokyoFlag()).get名称();
         return source;
     }
+
+    private static RString trim(Code code) {
+        return code == null ? RString.EMPTY : RString.isNullOrEmpty(code.value()) ? RString.EMPTY : code.value().trim();
+    }
+
 }

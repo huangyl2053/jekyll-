@@ -6,11 +6,15 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE3100001;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteiresult.IchijiHanteiKekkaResultConveter;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiShoriKekka;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho;
+import jp.co.ndensan.reams.db.dbe.definition.core.util.accesslog.ExpandedInformations;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeInformationMessages;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages;
@@ -33,18 +37,11 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrWarningMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.GyomuCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDescriptor;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFileDirectAccessDownload;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.CopyToSharedFileOpts;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileDescriptor;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.SharedFileEntryDescriptor;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.euc.api.EucOtherInfo;
+import jp.co.ndensan.reams.uz.uza.euc.cooperation.EucDownload;
+import jp.co.ndensan.reams.uz.uza.euc.definition.UzUDE0831EucAccesslogFileType;
 import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
@@ -55,6 +52,8 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
+import jp.co.ndensan.reams.uz.uza.spool.FileSpoolManager;
+import jp.co.ndensan.reams.uz.uza.spool.entities.UzUDE0835SpoolOutputType;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.IDownLoadServletResponse;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -72,7 +71,6 @@ public class KanryoshoriIchijihantei {
     private static final RString CSVファイルID = new RString("DBE310001");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
-    private static final RString ROOTTITLE = new RString("一次判定結果を完了しました。");
 
     /**
      * 画面初期化。(オンロード)<br/>
@@ -195,9 +193,8 @@ public class KanryoshoriIchijihantei {
      */
     public IDownLoadServletResponse onClick_Btndataoutput(KanryoshoriIchijihanteiDiv div, IDownLoadServletResponse response) {
         RString CSVファイル名 = EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, CSVファイルID);
-
-        RString filePath = Path.combinePath(Path.getTmpDirectoryPath(), CSVファイル名);
-        KanryoshoriIchijihanteiHandler handler = getHandler(div);
+        FileSpoolManager fsmanager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, CSVファイルID, UzUDE0831EucAccesslogFileType.Csv);
+        RString filePath = Path.combinePath(fsmanager.getEucOutputDirectry(), CSVファイル名);
         DbAccessLogger accessLog = new DbAccessLogger();
         try (CsvWriter<KanryoshoriCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).
@@ -216,12 +213,8 @@ public class KanryoshoriIchijihantei {
             }
             csvWriter.close();
         }
-        SharedFileDescriptor sfd = new SharedFileDescriptor(GyomuCode.DB介護保険, FilesystemName.fromString(CSVファイル名));
-        sfd = SharedFile.defineSharedFile(sfd);
-        CopyToSharedFileOpts opts = new CopyToSharedFileOpts().isCompressedArchive(false);
-        SharedFileEntryDescriptor entry = SharedFile.copyToSharedFile(sfd, new FilesystemPath(filePath), opts);
-        accessLog.flushBy(AccessLogType.照会);
-        return SharedFileDirectAccessDownload.directAccessDownload(new SharedFileDirectAccessDescriptor(entry, CSVファイル名), response);
+        fsmanager.spool(filePath, accessLog.flushByEUC(UzUDE0835SpoolOutputType.EucOther));
+        return EucDownload.directAccessDownload(SubGyomuCode.DBE認定支援, fsmanager.getSharedFileName(), fsmanager.getSharedFileId(), response);
     }
 
     /**
@@ -264,11 +257,33 @@ public class KanryoshoriIchijihantei {
             List<IchijiHanteiKekkaJoho> torokuTaishoList = new ArrayList<>();
             torokuTaishoList.addAll(要介護認定一次判定結果情報Models.values());
             IChiJiPanTeiSyoRiManager manager = IChiJiPanTeiSyoRiManager.createInstance();
-            manager.save要介護認定一次判定結果情報List(torokuTaishoList);
-
+            Set<IchijiHanteiKekkaJohoIdentifier> updated = manager.save要介護認定一次判定結果情報List(torokuTaishoList);
+            accessLogByUpdating(div, asShinseishoKanriNos(updated));
             return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
         }
         return ResponseData.of(div).respond();
+    }
+
+    private static void accessLogByUpdating(KanryoshoriIchijihanteiDiv div, final Collection<? extends RString> shinseishoKanriNos) {
+        DbAccessLogger logger = new DbAccessLogger();
+        for (dgHanteiTaishosha_Row row : div.getIchijiHanteiShoriTaishoshaIchiran().getDgHanteiTaishosha().getDataSource()) {
+            RString shinseishoKanriNo = row.getShinseishoKanriNo();
+            if (!shinseishoKanriNos.contains(shinseishoKanriNo)) {
+                continue;
+            }
+            logger.store(new ShoKisaiHokenshaNo(row.getShoKisaiHokenshaNo()), row.getHihokenNo(),
+                    ExpandedInformations.fromValue(shinseishoKanriNo)
+            );
+        }
+        logger.flushBy(AccessLogType.更新);
+    }
+
+    private static Set<RString> asShinseishoKanriNos(Iterable<? extends IchijiHanteiKekkaJohoIdentifier> identifiers) {
+        Set<RString> set = new HashSet<>();
+        for (IchijiHanteiKekkaJohoIdentifier i : identifiers) {
+            set.add(i.get申請書管理番号().value());
+        }
+        return set;
     }
 
     /**
@@ -312,13 +327,20 @@ public class KanryoshoriIchijihantei {
                 outputNinteiKanryoJohoList.add(joho.createBuilderForEdit().set要介護認定一次判定完了年月日(nowDate).build());
             }
             ninteiKanryoManager.save要介護認定完了情報List(outputNinteiKanryoJohoList);
-
-            div.getCcdKanryoMessage().setSuccessMessage(new RString("一次判定を完了しました。"));
-
-            div.getCcdKanryoMessage().setMessage(ROOTTITLE, RString.EMPTY, RString.EMPTY, RString.EMPTY, true);
+            accessLogByUpdating(div, asValues(noList));
+            div.getCcdKanryoMessage().setMessage(new RString(DbeInformationMessages.基本運用_完了.getMessage().
+                    replace("基本運用・一次判定").evaluate()), RString.EMPTY, RString.EMPTY, true);
             return ResponseData.of(div).setState(DBE3100001StateName.完了);
         }
         return ResponseData.of(div).respond();
+    }
+
+    private Set<RString> asValues(List<ShinseishoKanriNo> list) {
+        Set<RString> set = new HashSet<>();
+        for (ShinseishoKanriNo no : list) {
+            set.add(no.value());
+        }
+        return set;
     }
 
     private KanryoshoriIchijihanteiHandler getHandler(KanryoshoriIchijihanteiDiv div) {
@@ -328,24 +350,6 @@ public class KanryoshoriIchijihantei {
     private KanryoshoriIchijihanteiValidationHandler getValidationHandler(KanryoshoriIchijihanteiDiv div) {
         return new KanryoshoriIchijihanteiValidationHandler(div);
     }
-
-    /**
-     * グリッド上の照会BTNをクリックした場合の処理です。
-     *
-     * @param div コントロールdiv
-     * @return レスポンスデータ
-     *//*
-     public ResponseData<KanryoshoriIchijihanteiDiv> onBeforeDialog_HanteiKekkaShokai(KanryoshoriIchijihanteiDiv div) {
-
-     dgHanteiTaishosha_Row selectedRow = div.getIchijiHanteiShoriTaishoshaIchiran().getDgHanteiTaishosha().getClickedItem();
-     if (selectedRow == null || RString.isNullOrEmpty(selectedRow.getShinseishoKanriNo())) {
-     return ResponseData.of(div).respond();
-     }
-
-     ShinseishoKanriNo shinseishoKanriNo = new ShinseishoKanriNo(selectedRow.getShinseishoKanriNo());
-     getHandler(div).setClickedIchijiHanteiData(shinseishoKanriNo);
-     return ResponseData.of(div).respond();
-     }*/
 
     /**
      * 一次判定処理前のチェック処理・引数作成処理を行います。

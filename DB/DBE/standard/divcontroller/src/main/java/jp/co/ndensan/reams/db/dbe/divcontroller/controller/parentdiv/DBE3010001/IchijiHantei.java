@@ -32,9 +32,6 @@ import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
-import jp.co.ndensan.reams.uz.uza.exclusion.LockingKey;
-import jp.co.ndensan.reams.uz.uza.exclusion.PessimisticLockingException;
-import jp.co.ndensan.reams.uz.uza.exclusion.RealInitialLocker;
 import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -309,11 +306,6 @@ public class IchijiHantei {
     private ValidationMessageControlPairs 一次判定対象者一覧(IchijiHanteiDiv div, RString menuID, RString hihokenshaNo, ShinseishoKanriNoList shinseishoKanriNoList) {
         List<IChiJiPanTeiSyoRiBusiness> 一次判定対象者一覧List = kenSaKu(div, menuID, hihokenshaNo, shinseishoKanriNoList);
         getHandler(div).対象者一覧の編集(一次判定対象者一覧List);
-        for (IChiJiPanTeiSyoRiBusiness business : 一次判定対象者一覧List) {
-            if (!RealInitialLocker.tryGetLock(new LockingKey(LOCKINGKEY.concat(business.get申請書管理番号().value())))) {
-                throw new PessimisticLockingException();
-            }
-        }
         return getValidatisonHandler(div).データ空のチェック();
     }
 

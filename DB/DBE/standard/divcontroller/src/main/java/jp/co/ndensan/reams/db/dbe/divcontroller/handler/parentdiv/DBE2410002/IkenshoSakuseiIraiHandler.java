@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.EntityDataState;
 
@@ -39,6 +40,8 @@ public class IkenshoSakuseiIraiHandler {
     private static final int 初期履歴番号 = 1;
     private static final int 初期作成回数 = 1;
     private static final int 数字_1 = 1;
+    private static final RString UICONTAINERID_DBEUC24101 = new RString("DBEUC24101");
+    private static final RString 指定医 = new RString("2");
 
     /**
      * コンストラクタです。
@@ -61,11 +64,11 @@ public class IkenshoSakuseiIraiHandler {
         }
         div.setIkenshoIraiRirekiNo(主治医意見書作成依頼.get主治医意見書作成依頼履歴番号());
         if (RString.isNullOrEmpty(主治医意見書作成依頼.get主治医意見書作成依頼履歴番号())) {
-            div.getDdlIraiKubun().setDisabled(false);
+            div.getDdlIraiKubun().setReadOnly(false);
             div.getDdlIraiKubun().setSelectedKey(IkenshoIraiKubun.初回依頼.getコード());
         } else {
-            div.getDdlIraiKubun().setDisabled(true);
-            if (結果データ有無()) {
+            div.getDdlIraiKubun().setReadOnly(true);
+            if (主治医意見書作成依頼.is再調査()) {
                 div.getDdlIraiKubun().setSelectedKey(IkenshoIraiKubun.再意見書.getコード());
             } else {
                 div.getDdlIraiKubun().setSelectedKey(IkenshoIraiKubun.再依頼.getコード());
@@ -74,6 +77,24 @@ public class IkenshoSakuseiIraiHandler {
         if (主治医意見書作成依頼.get主治医意見書作成依頼年月日() != null && !主治医意見書作成依頼.get主治医意見書作成依頼年月日().isEmpty()) {
             div.getTxtSakuseiIraiD().setValue(new RDate(主治医意見書作成依頼.get主治医意見書作成依頼年月日().toString()));
         }
+        if (ResponseHolder.getUIContainerId().equals(UICONTAINERID_DBEUC24101)) {
+            更新項目保持(主治医意見書作成依頼);
+        }
+    }
+
+    private void 更新項目保持(IkenshoirairirekiichiranShudou 主治医意見書作成依頼) {
+        ViewStateHolder.put(ViewStateKeys.主治医医療機関コード, 主治医意見書作成依頼.get主治医医療機関コード());
+        ViewStateHolder.put(ViewStateKeys.主治医コード, 主治医意見書作成依頼.get主治医コード());
+        RString 主治医意見書作成依頼年月日 = RString.EMPTY;
+        if (主治医意見書作成依頼.get主治医意見書作成依頼年月日() != null) {
+            主治医意見書作成依頼年月日 = new RString(主治医意見書作成依頼.get主治医意見書作成依頼年月日().toString());
+        }
+        ViewStateHolder.put(ViewStateKeys.主治医意見書作成依頼年月日, 主治医意見書作成依頼年月日);
+        boolean is指定医 = false;
+        if (主治医意見書作成依頼.get医師区分コード() != null && 指定医.equals(主治医意見書作成依頼.get医師区分コード().value())) {
+            is指定医 = true;
+        }
+        ViewStateHolder.put(ViewStateKeys.指定医フラグ, is指定医);
     }
 
     /**

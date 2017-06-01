@@ -5,6 +5,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.util.DBEImageUtil;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImagekanriJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ShinsakaiWariateHistories;
 import jp.co.ndensan.reams.db.dbe.definition.core.exclusion.LockingKeys;
+import jp.co.ndensan.reams.db.dbe.definition.core.util.accesslog.ExpandedInformations;
 import static jp.co.ndensan.reams.db.dbe.definition.message.DbeInformationMessages.審査会結果登録済み_イメージ削除不可;
 import static jp.co.ndensan.reams.db.dbe.definition.message.DbeQuestionMessages.審査会資料作成済みイメージ_削除確認;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.commonchilddiv.tokkiimages.Operation;
@@ -85,23 +86,22 @@ public class Yokaigoninteiimagekanri {
 
         RString 申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
         div.getCcdNinteiShinseishaKihonInfo().initialize(new ShinseishoKanriNo(申請書管理番号));
+        DbAccessLogger accessLog = new DbAccessLogger();
+        accessLog.store(
+                new ShoKisaiHokenshaNo(div.getCcdNinteiShinseishaKihonInfo().get証記載保険者番号()),
+                div.getCcdNinteiShinseishaKihonInfo().get被保険者番号(),
+                ExpandedInformations.fromValue(申請書管理番号)
+        );
+        accessLog.flushBy(AccessLogType.照会);
+        ImagekanriJoho イメージ管理情報 = finder.getImageJoho(申請書管理番号);
+        present(div, イメージ管理情報);
         if (!RealInitialLocker.tryGetLock(LockingKeys.申請書管理番号.appended(申請書管理番号))) {
-            div.getBtnGaikyoTokki().setDisplayNone(!uses概況特記());
             div.setReadOnly(true);
-            setDisabledCommonBtnField(true);
+            setDisableBtnImageOutput(true);
             return ResponseData.of(div).addMessage(UrErrorMessages.排他_他のユーザが使用中.getMessage()).respond();
         }
-
-        ImagekanriJoho イメージ管理情報 = finder.getImageJoho(申請書管理番号);
         ViewStateHolder.put(ViewStateKeys.イメージ情報, イメージ管理情報);
-
-        ShoKisaiHokenshaNo shoKisaiHokenshaNo = new ShoKisaiHokenshaNo(イメージ管理情報.get証記載保険者番号());
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), イメージ管理情報.get申請書管理番号().value());
-        DbAccessLogger accessLog = new DbAccessLogger();
-        accessLog.store(shoKisaiHokenshaNo, イメージ管理情報.get被保険者番号(), expandedInfo);
-        accessLog.flushBy(AccessLogType.照会);
-
-        return present(div, イメージ管理情報);
+        return ResponseData.of(div).respond();
     }
 
     private ResponseData<YokaigoninteiimagekanriDiv> present(YokaigoninteiimagekanriDiv div, ImagekanriJoho イメージ管理情報) {
@@ -349,7 +349,8 @@ public class Yokaigoninteiimagekanri {
         div.getBtnIkenshoTeikei().setDisabled(true);
         div.getBtnIkenshoTeikeigai().setDisabled(true);
         div.getBtnSonota().setDisabled(true);
-        setDisabledCommonBtnField(true);
+        setDisableBtnImageOutput(true);
+        setDisableBtnImageDelete(true);
     }
 
     private void setBtnControllerDisabled(YokaigoninteiimagekanriDiv div, ReadOnlySharedFileEntryDescriptor ro_sfed) {
@@ -357,35 +358,39 @@ public class Yokaigoninteiimagekanri {
         if (存在したイメージファイル名 != null && !存在したイメージファイル名.isEmpty() && !存在したイメージファイル名.contains(null)) {
             if (getHandler(div).isExistsGaikyoChosaImageFile(存在したイメージファイル名)) {
                 div.getBtnGaikyoChosa().setDisabled(false);
-                setDisabledCommonBtnField(false);
+                setDisableBtnImageOutput(false);
             }
             if (getHandler(div).isExistsChosahyoTokkiImageFile(存在したイメージファイル名)) {
                 div.getBtnChosahyoTokuki().setDisabled(false);
                 div.getBtnTokkiRembanShusei().setDisabled(false);
-                setDisabledCommonBtnField(false);
+                setDisableBtnImageOutput(false);
             }
             if (getHandler(div).isExistsGaikyoTokkiImageFile(存在したイメージファイル名)) {
                 div.getBtnGaikyoTokki().setDisabled(false);
-                setDisabledCommonBtnField(false);
+                setDisableBtnImageOutput(false);
             }
             if (getHandler(div).isExistsOpinionFileTeikeiImageFile(存在したイメージファイル名)) {
                 div.getBtnIkenshoTeikei().setDisabled(false);
-                setDisabledCommonBtnField(false);
+                setDisableBtnImageOutput(false);
             }
             if (getHandler(div).isExistsOpinionFileTeikeigaiImageFile(存在したイメージファイル名)) {
                 div.getBtnIkenshoTeikeigai().setDisabled(false);
-                setDisabledCommonBtnField(false);
+                setDisableBtnImageOutput(false);
             }
             if (getHandler(div).isExistsOtherFileImageFile(存在したイメージファイル名)) {
                 div.getRadSonota().setSelectedIndex(0);
                 div.getBtnSonota().setDisabled(false);
-                setDisabledCommonBtnField(false);
+                setDisableBtnImageOutput(false);
+                setDisableBtnImageDelete(false);
             }
         }
     }
 
-    private void setDisabledCommonBtnField(boolean obj) {
+    private void setDisableBtnImageOutput(boolean obj) {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnImageOutput"), obj);
+    }
+
+    private void setDisableBtnImageDelete(boolean obj) {
         CommonButtonHolder.setDisabledByCommonButtonFieldName(new RString("btnImageDelete"), obj);
     }
 

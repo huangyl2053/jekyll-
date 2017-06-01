@@ -120,9 +120,12 @@
         FROM
         master
         LEFT JOIN 
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" />
+        <!--
         <include refid="tableName_PsmParamClassWithoutShikibetsuCodeList_First"/>    
         '{}'
         <include refid="tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
+        -->     
         AS  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
         ON master."dbT2019TokuchoMidoteiJoho_shikibetsuCode" =
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
@@ -172,10 +175,13 @@
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.columns_ShikibetsuTaisho" />
         FROM
         master
-        LEFT JOIN 
+        LEFT JOIN
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.tableName_PsmParamClassShikibetsuTaisho" /> 
+        <!-- 
         <include refid="tableName_PsmParamClassWithoutShikibetsuCodeList_First"/>    
         '{}'
         <include refid="tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
+        -->
         AS  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
         ON master."dbT2019TokuchoMidoteiJoho_shikibetsuCode" =
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"
@@ -218,9 +224,19 @@
         FROM
         "DbT1001HihokenshaDaicho"
         LEFT JOIN 
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_First" />
+            (
+                SELECT
+                    ARRAY_AGG(CAST ("shikibetsuCode" AS TEXT))
+                FROM
+                    "DbT1001HihokenshaDaicho"
+            )       
+        <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.multi.IUaFt200FindShikibetsuTaishoFunctionMultiParameterMapper.tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />     
+        <!--
         <include refid="tableName_PsmParamClassWithoutShikibetsuCodeList_First"/>    
         (SELECT ARRAY_AGG(CAST ("shikibetsuCode" AS TEXT)) FROM "DbT1001HihokenshaDaicho")
         <include refid="tableName_PsmParamClassWithoutShikibetsuCodeList_Second" />
+        -->
         AS  <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />
         ON "DbT1001HihokenshaDaicho"."shikibetsuCode" =
         <include refid="jp.co.ndensan.reams.ua.uax.persistence.db.mapper.IUaFt200FindShikibetsuTaishoFunctionMapper.as_ShikibetsuTaisho" />."shikibetsuCode"

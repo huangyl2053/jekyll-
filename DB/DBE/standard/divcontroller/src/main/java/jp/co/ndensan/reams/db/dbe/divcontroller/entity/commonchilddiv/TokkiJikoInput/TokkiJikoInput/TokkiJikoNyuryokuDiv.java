@@ -27,6 +27,8 @@ public class TokkiJikoNyuryokuDiv extends Panel {
     private DropDownList ddlTokkiJikoNo;
     @JsonProperty("btnInput")
     private Button btnInput;
+    @JsonProperty("btnAddRemban")
+    private Button btnAddRemban;
     @JsonProperty("txtTokkiJiko")
     private TextBoxMultiLine txtTokkiJiko;
     @JsonProperty("btnSave")
@@ -39,10 +41,10 @@ public class TokkiJikoNyuryokuDiv extends Panel {
     private Button btnDeleteCancel;
     @JsonProperty("dgTokkiJikoJoho")
     private DataGrid<dgTokkiJikoJoho_Row> dgTokkiJikoJoho;
-    @JsonProperty("btnReturn")
-    private Button btnReturn;
-    @JsonProperty("btnUpdateCancel")
-    private Button btnUpdateCancel;
+    @JsonProperty("btnUpdateReturn")
+    private Button btnUpdateReturn;
+    @JsonProperty("btnCancelReturn")
+    private Button btnCancelReturn;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -102,6 +104,24 @@ public class TokkiJikoNyuryokuDiv extends Panel {
     @JsonProperty("btnInput")
     public void setBtnInput(Button btnInput) {
         this.btnInput = btnInput;
+    }
+
+    /*
+     * getbtnAddRemban
+     * @return btnAddRemban
+     */
+    @JsonProperty("btnAddRemban")
+    public Button getBtnAddRemban() {
+        return btnAddRemban;
+    }
+
+    /*
+     * setbtnAddRemban
+     * @param btnAddRemban btnAddRemban
+     */
+    @JsonProperty("btnAddRemban")
+    public void setBtnAddRemban(Button btnAddRemban) {
+        this.btnAddRemban = btnAddRemban;
     }
 
     /*
@@ -213,39 +233,39 @@ public class TokkiJikoNyuryokuDiv extends Panel {
     }
 
     /*
-     * getbtnReturn
-     * @return btnReturn
+     * getbtnUpdateReturn
+     * @return btnUpdateReturn
      */
-    @JsonProperty("btnReturn")
-    public Button getBtnReturn() {
-        return btnReturn;
+    @JsonProperty("btnUpdateReturn")
+    public Button getBtnUpdateReturn() {
+        return btnUpdateReturn;
     }
 
     /*
-     * setbtnReturn
-     * @param btnReturn btnReturn
+     * setbtnUpdateReturn
+     * @param btnUpdateReturn btnUpdateReturn
      */
-    @JsonProperty("btnReturn")
-    public void setBtnReturn(Button btnReturn) {
-        this.btnReturn = btnReturn;
+    @JsonProperty("btnUpdateReturn")
+    public void setBtnUpdateReturn(Button btnUpdateReturn) {
+        this.btnUpdateReturn = btnUpdateReturn;
     }
 
     /*
-     * getbtnUpdateCancel
-     * @return btnUpdateCancel
+     * getbtnCancelReturn
+     * @return btnCancelReturn
      */
-    @JsonProperty("btnUpdateCancel")
-    public Button getBtnUpdateCancel() {
-        return btnUpdateCancel;
+    @JsonProperty("btnCancelReturn")
+    public Button getBtnCancelReturn() {
+        return btnCancelReturn;
     }
 
     /*
-     * setbtnUpdateCancel
-     * @param btnUpdateCancel btnUpdateCancel
+     * setbtnCancelReturn
+     * @param btnCancelReturn btnCancelReturn
      */
-    @JsonProperty("btnUpdateCancel")
-    public void setBtnUpdateCancel(Button btnUpdateCancel) {
-        this.btnUpdateCancel = btnUpdateCancel;
+    @JsonProperty("btnCancelReturn")
+    public void setBtnCancelReturn(Button btnCancelReturn) {
+        this.btnCancelReturn = btnCancelReturn;
     }
 
     // </editor-fold>

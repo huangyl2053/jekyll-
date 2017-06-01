@@ -120,6 +120,15 @@ public class NinteiShinseiJoho
     }
 
     /**
+     * 申請書管理番号を返します。
+     *
+     * @return 申請書管理番号
+     */
+    public ShinseishoKanriNo get申請書管理番号() {
+        return entity.getShinseishoKanriNo();
+    }
+
+    /**
      * 厚労省IF識別コードを返します。
      *
      * @return 厚労省IF識別コード
@@ -832,9 +841,7 @@ public class NinteiShinseiJoho
     @Override
     public NinteiShinseiJoho deleted() {
         DbT5101NinteiShinseiJohoEntity deletedEntity = this.toEntity();
-        if (!deletedEntity.getState().equals(EntityDataState.Added)) {
-            deletedEntity.setState(EntityDataState.Deleted);
-        } else {
+        if (deletedEntity.getState().equals(EntityDataState.Added)) {
             throw new IllegalStateException(UrErrorMessages.不正.toString());
         }
         return new NinteiShinseiJoho(

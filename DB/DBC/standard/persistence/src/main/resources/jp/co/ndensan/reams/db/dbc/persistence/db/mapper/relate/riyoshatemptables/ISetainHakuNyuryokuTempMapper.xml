@@ -10,7 +10,7 @@
         "TmpSetaiHaaku"."shotokuNendo"as "TmpSetaiHaaku_shotokuNendo",
         "TmpSetaiHaaku"."jushochiTokureiFlag"as "TmpSetaiHaaku_jushochiTokureiFlag"
     </sql>
-    <resultMap id="ResultMap_SetaiHaakuEntity" type="jp.co.ndensan.reams.db.dbc.entity.db.relate.riyoshafutanwariaihantei.temptables.SetaiHaakuEntity" autoMapping="true">
+    <resultMap id="ResultMap_SetaiHaakuEntity" type="jp.co.ndensan.reams.db.dbd.entity.db.relate.riyoshafutanwariaihantei.temptables.SetaiHaakuEntity" autoMapping="true">
         <result property="hihokenshaNo" column="TmpSetaiHaaku_hihokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.HihokenshaNoTypeHandler"/>
         <result property="shikibetsuCode" column="TmpSetaiHaaku_shikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>
         <result property="shikibetsuCode2" column="TmpSetaiHaaku_shikibetsuCode2" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.ShikibetsuCodeTypeHandler"/>

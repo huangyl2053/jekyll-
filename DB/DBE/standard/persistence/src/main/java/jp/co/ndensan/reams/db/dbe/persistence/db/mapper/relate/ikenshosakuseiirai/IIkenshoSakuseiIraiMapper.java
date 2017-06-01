@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ikenshosakuseiirai;
 
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikenshosakuseiirai.IkenshoSakuseiIraiMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikensho.ninteishinseijoho.NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshoirairirekiichiran.IkenshoirairirekiIchiranEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshoirairirekiichiran.IkenshoirairirekiichiranShudouEntity;
@@ -22,10 +23,10 @@ public interface IIkenshoSakuseiIraiMapper {
     /**
      * 主治医意見書作成依頼(手動)情報を取得します。
      *
-     * @param 申請書管理番号 申請書管理番号
+     * @param param {@link IkenshoSakuseiIraiMapperParameter}
      * @return 主治医意見書作成依頼(手動)情報リスト
      */
-    IkenshoirairirekiichiranShudouEntity get主治医意見書作成依頼(RString 申請書管理番号);
+    IkenshoirairirekiichiranShudouEntity get主治医意見書作成依頼(IkenshoSakuseiIraiMapperParameter param);
 
     /**
      * 介護認定申請情報を取得します。

@@ -10,6 +10,12 @@ module DBE
             constructor(fieldName: string) {
                 this.fieldName = fieldName;
                 this.controls = new Controls(fieldName);
+                this.controls.txtTokkiJiko()._control.getJQueryElement(true)[0].addEventListener("keypress", function (e) {
+                    if (e.keyCode === 13){
+                    e.preventDefault();
+                    e.stopPropagation();
+                    }
+                }, true);
             }
 
             public Properties() {

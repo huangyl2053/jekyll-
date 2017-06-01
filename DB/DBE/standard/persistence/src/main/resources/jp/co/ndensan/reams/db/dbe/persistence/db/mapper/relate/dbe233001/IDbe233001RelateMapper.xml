@@ -65,8 +65,7 @@
         INNER JOIN (
         SELECT
         DbT5301.*,
-        ROW_NUMBER() OVER (PARTITION BY DbT5301."dbT5301ShujiiIkenshoIraiJoho_shinseishoKanriNo",
-        DbT5301."dbT5301ShujiiIkenshoIraiJoho_ikenshoIraiRirekiNo"
+        ROW_NUMBER() OVER (PARTITION BY DbT5301."dbT5301ShujiiIkenshoIraiJoho_shinseishoKanriNo"
         ORDER BY DbT5301."dbT5301ShujiiIkenshoIraiJoho_ikenshoIraiRirekiNo" DESC) AS "rowNum"
         FROM
         (<include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.noDeleted_DbT5301ShujiiIkenshoIraiJoho" />) AS DbT5301

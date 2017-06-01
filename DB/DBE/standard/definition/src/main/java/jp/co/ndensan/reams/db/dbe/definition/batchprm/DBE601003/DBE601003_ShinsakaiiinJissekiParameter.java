@@ -31,6 +31,7 @@ public class DBE601003_ShinsakaiiinJissekiParameter extends BatchParameterBase {
     private static final String KEY_JOHO = "keyJoho";
     private static final long serialVersionUID = 8362309102168284770L;
     private static final String BATCH_FLAG = "batchFlag";
+    private static final String ISINCLUDEDENTIST = "isIncludeDentist";
 
     @BatchParameter(key = SYOHYO_SYUTURYOKU, name = "帳票出力区分")
     private RString syohyoSyuturyoku;
@@ -42,6 +43,8 @@ public class DBE601003_ShinsakaiiinJissekiParameter extends BatchParameterBase {
     private List<ShinsaiinJissekiIchiranKey> keyJoho;
     @BatchParameter(key = BATCH_FLAG, name = "バッチフラグ")
     private boolean batchFlag;
+    @BatchParameter(key = ISINCLUDEDENTIST, name = "is歯科医師含む")
+    private boolean isIncludeDentist;
 
     /**
      * コンストラクタです。
@@ -57,17 +60,20 @@ public class DBE601003_ShinsakaiiinJissekiParameter extends BatchParameterBase {
      * @param shinsakaijisshibiTo 審査会開催日TO
      * @param keyJoho キー情報Entityリスト
      * @param batchFlag
+     * @param isIncludeDentist boolean
      */
     public DBE601003_ShinsakaiiinJissekiParameter(RString syohyoSyuturyoku,
             FlexibleDate shinsakaijisshibiFrom,
             FlexibleDate shinsakaijisshibiTo,
             List<ShinsaiinJissekiIchiranKey> keyJoho,
-            boolean batchFlag) {
+            boolean batchFlag,
+            boolean isIncludeDentist) {
         this.syohyoSyuturyoku = syohyoSyuturyoku;
         this.shinsakaijisshibiFrom = shinsakaijisshibiFrom;
         this.shinsakaijisshibiTo = shinsakaijisshibiTo;
         this.keyJoho = keyJoho;
         this.batchFlag = batchFlag;
+        this.isIncludeDentist = isIncludeDentist;
     }
 
     /**
@@ -80,7 +86,8 @@ public class DBE601003_ShinsakaiiinJissekiParameter extends BatchParameterBase {
                 shinsakaijisshibiFrom,
                 shinsakaijisshibiTo,
                 keyJoho,
-                batchFlag);
+                batchFlag,
+                isIncludeDentist);
     }
 
 }

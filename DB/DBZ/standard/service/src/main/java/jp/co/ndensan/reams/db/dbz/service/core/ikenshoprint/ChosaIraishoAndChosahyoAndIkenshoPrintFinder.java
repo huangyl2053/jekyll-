@@ -12,9 +12,11 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoIraiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintBusiness;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ShujiiIkenshoHoshuTankaParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.ikenshoprint.ShujiiIkenshoHoshuTankaEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.ikenshoprint.IChosaIraishoAndChosahyoAndIkenshoPrintMapper;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -49,7 +51,8 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ChosaIraishoAndChosahyoAndIkenshoPrintFinder}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ChosaIraishoAndChosahyoAndIkenshoPrintFinder}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link ChosaIraishoAndChosahyoAndIkenshoPrintFinder}のインスタンス
      */
     public static ChosaIraishoAndChosahyoAndIkenshoPrintFinder createInstance() {
         return InstanceProvider.create(ChosaIraishoAndChosahyoAndIkenshoPrintFinder.class);
@@ -273,6 +276,22 @@ public class ChosaIraishoAndChosahyoAndIkenshoPrintFinder {
         }
         list.add(new ChosaIraishoAndChosahyoAndIkenshoPrintBusiness(entity));
         return SearchResult.of(list, list.size(), true);
+    }
+
+    /**
+     * 主治医意見書作成料請求書を返します。
+     *
+     * @param parameter ChosaIraishoAndChosahyoAndIkenshoPrintParameter
+     * @return ChosaIraishoAndChosahyoAndIkenshoPrintBusiness 主治医意見書作成料請求書
+     */
+    @Transaction
+    public List<ShujiiIkenshoHoshuTankaEntity> get主治医意見書作成料報酬単価(ShujiiIkenshoHoshuTankaParameter parameter) {
+        IChosaIraishoAndChosahyoAndIkenshoPrintMapper mapper = mapperProvider.create(IChosaIraishoAndChosahyoAndIkenshoPrintMapper.class);
+        List<ShujiiIkenshoHoshuTankaEntity> entityList = mapper.select主治医意見書作成料報酬単価(parameter);
+        if (entityList == null) {
+            return new ArrayList<>();
+        }
+        return entityList;
     }
 
     /**

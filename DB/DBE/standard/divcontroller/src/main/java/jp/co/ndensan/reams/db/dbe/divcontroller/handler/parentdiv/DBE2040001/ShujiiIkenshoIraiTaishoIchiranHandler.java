@@ -16,6 +16,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2040001.DBE2
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2040001.ShujiiIkenshoIraiTaishoIchiranDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2040001.dgNinteiTaskList_Row;
 import jp.co.ndensan.reams.db.dbe.service.core.ikenshoget.IkenshogetManager;
+import jp.co.ndensan.reams.db.dbe.service.core.ikenshoirai.ShujiiIkenshoIraiManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
@@ -49,6 +50,10 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
+import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 完了処理・主治医意見書依頼のHandlerクラスです。
@@ -95,6 +100,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         set主治医意見書依頼完了対象者一覧データグリッド();
         setButton(stateName);
         set依頼区分ドロップダウンリスト();
+        div.getCcdShujiiInput().setDisabled(true);
         div.getCcdShujiiInput().getTxtIryoKikanCode().setReadOnly(true);
         div.getCcdShujiiInput().getBtnIryokikanGuide().setVisible(true);
     }
@@ -181,24 +187,31 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
      */
     public void set意見書依頼登録パネル() {
         div.getCcdShujiiInput().initialize(new LasdecCode(div.getDgNinteiTaskList().getSelectedItems().get(0).getShichosonCode()),
-                ShinseishoKanriNo.EMPTY, SubGyomuCode.DBE認定支援);
+                new ShinseishoKanriNo(div.getDgNinteiTaskList().getSelectedItems().get(0).getShinseishoKanriNo()), SubGyomuCode.DBE認定支援);
         div.getCcdShujiiInput().setHdnShichosonCode(div.getDgNinteiTaskList().getSelectedItems().get(0).getShichosonCode());
         if (!div.getDgNinteiTaskList().getSelectedItems().isEmpty()) {
             dgNinteiTaskList_Row row = div.getDgNinteiTaskList().getSelectedItems().get(0);
             div.getCcdShujiiInput().getTxtIryoKikanCode().setValue(row.getKonkaiShujiiIryokikanCode());
+            div.getCcdShujiiInput().getTxtIryoKikanCode().setReadOnly(true);
             div.getCcdShujiiInput().getTxtIryoKikanName().setValue(row.getKonkaiShujiiIryokikan());
             div.getCcdShujiiInput().getTxtShujiiCode().setValue(row.getKonkaiShujiiCode());
-            div.getCcdShujiiInput().getTxtShujiiCode().setDisabled(true);
+            div.getCcdShujiiInput().getTxtShujiiCode().setReadOnly(true);
             div.getCcdShujiiInput().getBtnIryokikanGuide().setDisabled(true);
             div.getCcdShujiiInput().getTxtShujiiName().setValue(row.getKonkaiShujii());
             if (row.getIshiKubunCode() != null) {
                 div.getCcdShujiiInput().setShiteii(IshiKubun.指定医.getCode().equals(row.getIshiKubunCode()));
             }
-
+            int 主治医意見書作成依頼履歴番号 = (!row.getIkenshoIraiRirekiNo().equals(new RString("0"))
+                    ? Integer.parseInt(row.getIkenshoIraiRirekiNo().toString()) + 1
+                    : 1);
             div.getDdlIraiKubun().setSelectedKey(
                     (row.getIkenshoIraiKubun() != null && !(row.getIkenshoIraiKubun().trim()).isEmpty())
-                    ? row.getIkenshoIraiKubun()
-                    : IkenshoIraiKubun.初回依頼.getコード());
+                            ? row.getIkenshoIraiKubun()
+                            : 主治医意見書作成依頼履歴番号 == 1
+                                    ? IkenshoIraiKubun.初回依頼.getコード()
+                                    : is再意見書(row.getShinseishoKanriNo())
+                                            ? IkenshoIraiKubun.再意見書.getコード()
+                                            : IkenshoIraiKubun.再依頼.getコード());
             div.getTxtSakuseiIraiYmd().setValue(row.getIkenshoIraiDay().getValue());
         }
     }
@@ -235,6 +248,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         div.getTxtSakuseiIraiYmd().setReadOnly(!is依頼日のみ入力);
         div.getBtnSetteisezuModoru().setDisabled(!is依頼日のみ入力);
         div.getBtnSettei().setDisabled(!is依頼日のみ入力);
+        div.getCcdShujiiInput().setDisabled(true);
     }
 
     /**
@@ -435,7 +449,7 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
         row.setNyushoShisetsu(business.get入所施設() == null ? RString.EMPTY : business.get入所施設().value());
         row.setIkenshoTokusokuHoho(business.get主治医意見書作成督促方法() == null
                 || business.get主治医意見書作成督促方法().trim().isEmpty()
-                ? RString.EMPTY : IkenshoSakuseiTokusokuHoho.toValue(business.get主治医意見書作成督促方法()).get名称());
+                        ? RString.EMPTY : IkenshoSakuseiTokusokuHoho.toValue(business.get主治医意見書作成督促方法()).get名称());
         row.getIkenshoTokusokuCount().setValue(new Decimal(business.get主治医意見書作成督促回数()));
         row.setNyushoShisetsuCode(business.get入所施設コード() == null ? RString.EMPTY : business.get入所施設コード().value());
         row.setShinseishoKanriNo(business.get申請書管理番号() == null ? RString.EMPTY : business.get申請書管理番号().value());
@@ -573,5 +587,23 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
             div.getTxtCompleteCount().setDisplayNone(false);
             div.getTxtTotalCount().setDisplayNone(false);
         }
+    }
+
+    private boolean is再意見書(RString 申請書管理番号) {
+        ShujiiIkenshoIraiManager manager = ShujiiIkenshoIraiManager.createInstance();
+        return manager.is再意見書(申請書管理番号);
+    }
+
+    /**
+     * アクセスログを出力するためのPersonalDataを取得するメソッドです。
+     *
+     * @param 証記載保険者番号 RString
+     * @param 被保険者番号 RString
+     * @param 申請書管理番号 RString
+     * @return PersonalData
+     */
+    public Optional<PersonalData> getPersonalData(RString 証記載保険者番号, RString 被保険者番号, RString 申請書管理番号) {
+        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号);
+        return Optional.of(PersonalData.of(new ShikibetsuCode(証記載保険者番号.substring(0, 5).concat(被保険者番号)), expandedInfo));
     }
 }

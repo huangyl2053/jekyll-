@@ -7,9 +7,11 @@ package jp.co.ndensan.reams.db.dbz.persistence.db.mapper.relate.ikenshoprint;
 
 import java.util.List;
 import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter;
+import jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ShujiiIkenshoHoshuTankaParameter;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5201NinteichosaIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.entity.db.relate.ikenshoprint.ShujiiIkenshoHoshuTankaEntity;
 
 /**
  * 依頼書・認定調査票(OCR)・主治医意見書印刷のマッパーインタフェースです。
@@ -113,6 +115,14 @@ public interface IChosaIraishoAndChosahyoAndIkenshoPrintMapper {
      * @return 主治医意見書作成料請求書
      */
     ChosaIraishoAndChosahyoAndIkenshoPrintEntity select主治医意見書作成料請求書(ChosaIraishoAndChosahyoAndIkenshoPrintParameter parameter);
+
+    /**
+     * 主治医意見書作成料請求書を検索します。
+     *
+     * @param parameter ChosaIraishoAndChosahyoAndIkenshoPrintParameter
+     * @return 主治医意見書作成料請求書
+     */
+    List<ShujiiIkenshoHoshuTankaEntity> select主治医意見書作成料報酬単価(ShujiiIkenshoHoshuTankaParameter parameter);
 
     /**
      * 介護保険診断命令書を検索します。

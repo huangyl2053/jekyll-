@@ -93,27 +93,46 @@ public class ShinsakaiIinJohoTorokuValidationHandler {
     }
 
     private boolean is口座情報あり_必須項目入力あり() {
-        if (!div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().isEmpty()
-                || !div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().isEmpty()
-                || !div.getKozaJoho().getDdlYokinShubetsu().getSelectedValue().isEmpty()
-                || !div.getKozaJoho().getTxtGinkoKozaNo().getValue().isEmpty()
-                || !div.getKozaJoho().getTxtKozaMeiginin().getValue().isEmpty()) {
-            return !div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().isEmpty()
-                    && (!div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().isEmpty()
-                    || (new RString("9900").equals(div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().value())))
-                    && !div.getKozaJoho().getDdlYokinShubetsu().getSelectedValue().isEmpty()
-                    && !div.getKozaJoho().getTxtGinkoKozaNo().getValue().isEmpty()
-                    && !div.getKozaJoho().getTxtKozaMeiginin().getValue().isEmpty();
+        if (div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput() != null) {
+            if (!div.getShinsakaiIinJohoTorokuInput().getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().isゆうちょ銀行()) {
+                if (!div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().isEmpty()
+                        || !div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().isEmpty()
+                        || !div.getKozaJoho().getDdlYokinShubetsu().getSelectedValue().isEmpty()
+                        || !div.getKozaJoho().getTxtGinkoKozaNo().getValue().isEmpty()
+                        || !div.getKozaJoho().getTxtKozaMeiginin().getValue().isEmpty()) {
+                    return !div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().isEmpty()
+                            && (!div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().isEmpty()
+                            || (new RString("9900").equals(div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().value())))
+                            && !div.getKozaJoho().getDdlYokinShubetsu().getSelectedValue().isEmpty()
+                            && !div.getKozaJoho().getTxtGinkoKozaNo().getValue().isEmpty()
+                            && !div.getKozaJoho().getTxtKozaMeiginin().getValue().isEmpty();
+                }
+            } else {
+                if (!div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().isEmpty()
+                        || !div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().isEmpty()
+                        || !div.getKozaJoho().getDdlYokinShubetsu().getSelectedValue().isEmpty()
+                        || !div.getKozaJoho().getTxtGinkoKozaNo().getValue().isEmpty()
+                        || !div.getKozaJoho().getTxtKozaMeiginin().getValue().isEmpty()
+                        || !div.getKozaJoho().getTxtTenBan().getValue().isEmpty()) {
+                    return !div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().isEmpty()
+                            && (!div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanShitenCode().isEmpty()
+                            || (new RString("9900").equals(div.getKozaJoho().getCcdKozaJohoMeisaiKinyuKikanInput().getKinyuKikanCode().value())))
+                            && !div.getKozaJoho().getDdlYokinShubetsu().getSelectedValue().isEmpty()
+                            && !div.getKozaJoho().getTxtGinkoKozaNo().getValue().isEmpty()
+                            && !div.getKozaJoho().getTxtKozaMeiginin().getValue().isEmpty()
+                            && !div.getKozaJoho().getTxtTenBan().getValue().isEmpty()
+                            && !div.getKozaJoho().getTxtTenMei().getValue().isEmpty();
+                }
+            }
         }
         return true;
-
     }
 
     /**
      * 審査会委員開始日・終了日の大小チェック。
      *
      * @return ValidationMessageControlPairs
-     */
+         */
     public ValidationMessageControlPairs 審査会委員開始日終了日の大小チェック() {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         List<ViewControl> shinsaIinYMD = new ArrayList<>();

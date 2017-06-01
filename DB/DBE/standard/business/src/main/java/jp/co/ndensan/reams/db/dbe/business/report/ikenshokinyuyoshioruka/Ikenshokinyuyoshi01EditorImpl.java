@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.ikenshokinyuyoshioruka;
 
+import jp.co.ndensan.reams.db.dbe.business.core.orca.OrcaIkenshoCsv;
 import jp.co.ndensan.reams.db.dbe.definition.core.hoshu.HomonShubetsu;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ikenshokinyuyoshioruka.Ikenshokinyuyoshi01ReportSource;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
@@ -47,14 +48,14 @@ public class Ikenshokinyuyoshi01EditorImpl implements IIkenshokinyuyoshi01Editor
     private static final int LENGTH_11 = 11;
     private static final int LENGTH_12 = 12;
     private static final RString チェック = new RString("✔");
-    private final IkenshokinyuyoshiBusiness business;
+    private final OrcaIkenshoCsv business;
 
     /**
      * インスタンスを生成します。
      *
-     * @param business {@link IkenshokinyuyoshiBusiness}
+     * @param business {@link OrcaIkenshoCsv}
      */
-    protected Ikenshokinyuyoshi01EditorImpl(IkenshokinyuyoshiBusiness business) {
+    protected Ikenshokinyuyoshi01EditorImpl(OrcaIkenshoCsv business) {
         this.business = business;
     }
 
@@ -150,11 +151,11 @@ public class Ikenshokinyuyoshi01EditorImpl implements IIkenshokinyuyoshi01Editor
         }
         source.taSonotakamei = business.getその他の他科名();
         source.shindamName1 = business.get診断名1();
-        source.hasshoYMD1 = パターン12(business.get発症年月日1());
+        source.hasshoYMD1 = Pattern12Converter.convert(business.get発症年月日1());
         source.shindamName2 = business.get診断名2();
-        source.hasshoYMD2 = パターン12(business.get発症年月日2());
+        source.hasshoYMD2 = Pattern12Converter.convert(business.get発症年月日2());
         source.shindamName3 = business.get診断名3();
-        source.hasshoYMD3 = パターン12(business.get発症年月日3());
+        source.hasshoYMD3 = Pattern12Converter.convert(business.get発症年月日3());
         source = set症状安定性(source);
         source.gutaitekiJokyo = business.get症状不安定時の具体的状況();
         return editSource2(source);

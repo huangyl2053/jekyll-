@@ -5,7 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain;
 
+import javax.annotation.CheckForNull;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
+import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -46,6 +48,13 @@ public enum NinteiChousaIraiKubunCode {
     }
 
     /**
+     * @return {@link Code}型に変換したコード
+     */
+    public Code asCode() {
+        return new Code(this.code);
+    }
+
+    /**
      * 認定調査依頼区分コードの名称を返します。
      *
      * @return 認定調査依頼区分コードの名称
@@ -69,4 +78,19 @@ public enum NinteiChousaIraiKubunCode {
         }
         throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("認定調査依頼区分コード"));
     }
+
+    /**
+     * @param displayName 表示名
+     * @return 対応するNinteiChousaIraiKubunCode
+     */
+    @CheckForNull
+    public static NinteiChousaIraiKubunCode toValueFromName(RString displayName) {
+        for (NinteiChousaIraiKubunCode ninteiChousaIraiKubunCode : values()) {
+            if (ninteiChousaIraiKubunCode.get名称().equals(displayName)) {
+                return ninteiChousaIraiKubunCode;
+            }
+        }
+        return null;
+    }
+
 }

@@ -47,5 +47,6 @@ public class IkenSyoNyuSyuRelateEntity {
     private FlexibleDate ikenshoReadYMD;
     private RString iryoKikanMeisho;
     private RString shujiiName;
-    private RString ChoyoID;
+    private RString choyoID_omote;
+    private RString choyoID_ura;
 }

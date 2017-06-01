@@ -50,7 +50,7 @@ public class ShujiiIkenshoSakuseiIraishoEditor implements IShujiiIkenshoSakuseiI
         source.meishoFuyo = item.getMeishoFuyo();
         source.customerBarCode = item.getCustomerBarCode();
         source.sonota = item.getSonota();
-        source.atenaRenban = item.getAtenaRenban();
+        source.atenaRemban = item.getAtenaRemban();
         source.title = item.getTitle();
         source.tsuchibun1 = item.getTsuchibun1();
         source.shinseiKubun = item.getShinseiKubun();
@@ -82,6 +82,8 @@ public class ShujiiIkenshoSakuseiIraishoEditor implements IShujiiIkenshoSakuseiI
         source.tsuchibun2 = item.getTsuchibun2();
         source.remban = item.getRemban();
         source.shoriName = item.getShoriName();
+        source.識別コード = item.get識別コード();
+        source.拡張情報 = item.get拡張情報();
         return source;
     }
 }

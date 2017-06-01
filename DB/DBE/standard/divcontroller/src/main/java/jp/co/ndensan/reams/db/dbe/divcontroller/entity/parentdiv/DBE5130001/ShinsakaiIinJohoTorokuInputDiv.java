@@ -22,7 +22,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class ShinsakaiIinJohoTorokuInputDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-13_05-12-42">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -33,8 +33,6 @@ public class ShinsakaiIinJohoTorokuInputDiv extends Panel {
     private ShinsakaiIinJohoDiv ShinsakaiIinJoho;
     @JsonProperty("RenrakusakiKinyuKikan")
     private RenrakusakiKinyuKikanDiv RenrakusakiKinyuKikan;
-    @JsonProperty("ShozokuKikanIchiran")
-    private ShozokuKikanIchiranDiv ShozokuKikanIchiran;
     @JsonProperty("btnToroku")
     private Button btnToroku;
     @JsonProperty("btnDelete")
@@ -82,24 +80,6 @@ public class ShinsakaiIinJohoTorokuInputDiv extends Panel {
     @JsonProperty("RenrakusakiKinyuKikan")
     public void setRenrakusakiKinyuKikan(RenrakusakiKinyuKikanDiv RenrakusakiKinyuKikan) {
         this.RenrakusakiKinyuKikan = RenrakusakiKinyuKikan;
-    }
-
-    /*
-     * getShozokuKikanIchiran
-     * @return ShozokuKikanIchiran
-     */
-    @JsonProperty("ShozokuKikanIchiran")
-    public ShozokuKikanIchiranDiv getShozokuKikanIchiran() {
-        return ShozokuKikanIchiran;
-    }
-
-    /*
-     * setShozokuKikanIchiran
-     * @param ShozokuKikanIchiran ShozokuKikanIchiran
-     */
-    @JsonProperty("ShozokuKikanIchiran")
-    public void setShozokuKikanIchiran(ShozokuKikanIchiranDiv ShozokuKikanIchiran) {
-        this.ShozokuKikanIchiran = ShozokuKikanIchiran;
     }
 
     /*
@@ -335,28 +315,38 @@ public class ShinsakaiIinJohoTorokuInputDiv extends Panel {
     }
 
     @JsonIgnore
+    public ShozokuKikanIchiranDiv getShozokuKikanIchiran() {
+        return this.getRenrakusakiKinyuKikan().getShozokuKikanIchiran();
+    }
+
+    @JsonIgnore
+    public void  setShozokuKikanIchiran(ShozokuKikanIchiranDiv ShozokuKikanIchiran) {
+        this.getRenrakusakiKinyuKikan().setShozokuKikanIchiran(ShozokuKikanIchiran);
+    }
+
+    @JsonIgnore
     public Button getBtnShozokuKikanAdd() {
-        return this.getShozokuKikanIchiran().getBtnShozokuKikanAdd();
+        return this.getRenrakusakiKinyuKikan().getShozokuKikanIchiran().getBtnShozokuKikanAdd();
     }
 
     @JsonIgnore
     public void  setBtnShozokuKikanAdd(Button btnShozokuKikanAdd) {
-        this.getShozokuKikanIchiran().setBtnShozokuKikanAdd(btnShozokuKikanAdd);
+        this.getRenrakusakiKinyuKikan().getShozokuKikanIchiran().setBtnShozokuKikanAdd(btnShozokuKikanAdd);
     }
 
     @JsonIgnore
     public DataGrid<dgShozokuKikanIchiran_Row> getDgShozokuKikanIchiran() {
-        return this.getShozokuKikanIchiran().getDgShozokuKikanIchiran();
+        return this.getRenrakusakiKinyuKikan().getShozokuKikanIchiran().getDgShozokuKikanIchiran();
     }
 
     @JsonIgnore
     public void  setDgShozokuKikanIchiran(DataGrid<dgShozokuKikanIchiran_Row> dgShozokuKikanIchiran) {
-        this.getShozokuKikanIchiran().setDgShozokuKikanIchiran(dgShozokuKikanIchiran);
+        this.getRenrakusakiKinyuKikan().getShozokuKikanIchiran().setDgShozokuKikanIchiran(dgShozokuKikanIchiran);
     }
 
     @JsonIgnore
     public IHokenshaListDiv getCcdHokenshaDDL() {
-        return this.getShozokuKikanIchiran().getCcdHokenshaDDL();
+        return this.getRenrakusakiKinyuKikan().getShozokuKikanIchiran().getCcdHokenshaDDL();
     }
 
     // </editor-fold>
