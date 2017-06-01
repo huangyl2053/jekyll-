@@ -20,6 +20,8 @@ import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Icon;
+import jp.co.ndensan.reams.uz.uza.ui.binding.IconType;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
@@ -70,8 +72,17 @@ public class GetsureiShoriHandler {
     public void set対象者一覧(SearchResult<GeTuReiSyoRiBusiness> 検索結果) {
         List<dgNinteiTaskList_Row> rowList = new ArrayList<>();
         int completeCount = 0;
+        Icon warningIcon = new Icon();
+        warningIcon.setIcon(IconType.Warning);
+        Icon noIcon = new Icon();
+        noIcon.setVisible(false);
         for (GeTuReiSyoRiBusiness business : 検索結果.records()) {
             dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
+            if (business.is遅延()) {
+                row.setDelay(warningIcon);
+            } else {
+                row.setDelay(noIcon);
+            }
             row.setShoKisaiHokenshaNo(business.get証記載保険者番号().value());
             if (business.getセンター送信情報抽出年月日() != null || !business.getセンター送信情報抽出年月日().isEmpty()) {
                 completeCount++;

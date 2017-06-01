@@ -48,6 +48,8 @@ import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Icon;
+import jp.co.ndensan.reams.uz.uza.ui.binding.IconType;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
@@ -313,6 +315,13 @@ public class NinteichosaIraiHandler {
 
     private dgNinteiTaskList_Row createNinteiTaskList_Row(CyoSaiRaiBusiness business, Map<RString, KoseiShichoson> 構成市町村map) {
         dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
+        Icon icon = new Icon();
+        if (business.is遅延()) {
+            icon.setIcon(IconType.Warning);
+        } else {
+            icon.setVisible(false);
+        }
+        row.setDelay(icon);
         row.setHokenshaCode(business.get保険者コード() == null ? RString.EMPTY : business.get保険者コード());
         row.setHokensha(business.get保険者名() == null ? RString.EMPTY : business.get保険者名());
         row.setHihoNumber(business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号());

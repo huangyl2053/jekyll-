@@ -54,6 +54,8 @@ import jp.co.ndensan.reams.db.dbz.definition.core.util.optional.Optional;
 import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.PersonalData;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Icon;
+import jp.co.ndensan.reams.uz.uza.ui.binding.IconType;
 
 /**
  * 完了処理・主治医意見書依頼のHandlerクラスです。
@@ -425,6 +427,13 @@ public class ShujiiIkenshoIraiTaishoIchiranHandler {
 
     private dgNinteiTaskList_Row createNinteiTaskList_Row(IKnSyoiRaiBusiness business) {
         dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
+        Icon icon = new Icon();
+        if (business.is遅延()) {
+            icon.setIcon(IconType.Warning);
+        } else {
+            icon.setVisible(false);
+        }
+        row.setDelay(icon);
         row.setShoKisaiHokenshaNo(business.get証記載保険者番号().value());
         row.setHokensha(business.get保険者名() == null ? RString.EMPTY : business.get保険者名());
         row.setHihoNumber(business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号());

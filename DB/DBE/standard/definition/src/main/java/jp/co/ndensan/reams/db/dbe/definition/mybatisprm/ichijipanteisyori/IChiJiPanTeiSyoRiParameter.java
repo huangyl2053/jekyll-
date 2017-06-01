@@ -8,6 +8,7 @@ package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ichijipanteisyori;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
@@ -37,6 +38,7 @@ public final class IChiJiPanTeiSyoRiParameter {
     private final boolean メニュー_遷移;
     private final boolean 完了処理一次判定_遷移;
     private final List<RString> 申請書管理番号List;
+    private final RString 処理日;
 
     /**
      * 完了可能区分は、コンフィグの「基本運用_対象者一覧表示区分」に対応（1：未処理、2：完了可能、3：全て）。
@@ -62,7 +64,8 @@ public final class IChiJiPanTeiSyoRiParameter {
             boolean 完了処理一次判定_遷移,
             List<RString> 申請書管理番号List,
             RString 完了可能区分,
-            RString 被保険者番号) {
+            RString 被保険者番号,
+            RString 処理日) {
         this.証記載保険者No = 証記載保険者No;
         this.通常 = 通常;
         this.延期 = 延期;
@@ -77,6 +80,7 @@ public final class IChiJiPanTeiSyoRiParameter {
         this.申請書管理番号List = 申請書管理番号List;
         this.完了可能区分 = 完了可能区分;
         this.被保険者番号 = 被保険者番号;
+        this.処理日 = 処理日;
     }
 
     /**
@@ -120,7 +124,8 @@ public final class IChiJiPanTeiSyoRiParameter {
                 完了処理_一次判定.equals(メニュー),
                 申請書管理番号List,
                 完了可能区分_全て,
-                被保険者番号);
+                被保険者番号,
+                RDate.getNowDate().toDateString());
     }
 
     /**
@@ -163,7 +168,8 @@ public final class IChiJiPanTeiSyoRiParameter {
                 完了処理_一次判定.equals(メニュー),
                 申請書管理番号List,
                 完了可能区分,
-                RString.EMPTY);
+                RString.EMPTY,
+                RDate.getNowDate().toDateString());
     }
 
     /**
@@ -187,6 +193,7 @@ public final class IChiJiPanTeiSyoRiParameter {
                 parameter.完了処理一次判定_遷移,
                 parameter.申請書管理番号List,
                 parameter.完了可能区分,
-                parameter.被保険者番号);
+                parameter.被保険者番号,
+                parameter.処理日);
     }
 }

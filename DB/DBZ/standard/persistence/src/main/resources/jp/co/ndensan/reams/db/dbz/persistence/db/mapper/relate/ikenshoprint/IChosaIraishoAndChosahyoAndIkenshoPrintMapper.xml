@@ -74,6 +74,7 @@
         ,A."seibetsu"
         ,A."ninteiShinseiYMD"
         ,A."shinseishoKanriNo"
+        ,A."shoKisaiHokenshaNo"
         ,B."ninteichosaItakusakiCode"
         ,B."ninteichosaIraiRirekiNo"
         ,C."jigyoshaMeisho"
@@ -117,9 +118,8 @@
             AND A."shoKisaiHokenshaNo" = #{証記載保険者番号}
         </if>
         AND A."logicalDeletedFlag" = FALSE
-        ORDER BY B."ninteiChosainCode"
+        ORDER BY A."shoKisaiHokenshaNo"
         ,A."ninteiShinseiYMD"
-        ,A."hihokenshaName"
         ,A."hihokenshaNo"
     </select>
     <select resultOrdered="true" id="select更新用認定調査依頼情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.ResultMap_DbT5201NinteichosaIraiJohoEntity"
@@ -132,6 +132,9 @@
         (
         SELECT
         A."shinseishoKanriNo"
+        ,A."shoKisaiHokenshaNo"
+        ,A."ninteiShinseiYMD"
+        ,A."hihokenshaNo"
         ,B."ninteichosaIraiRirekiNo"
         FROM
         rgdb."DbT5101NinteiShinseiJoho" AS A
@@ -171,7 +174,9 @@
             AND A."shoKisaiHokenshaNo" = #{証記載保険者番号}
         </if>
         AND A."logicalDeletedFlag" = FALSE
-        ORDER BY A."shinseishoKanriNo"
+        ORDER BY A."shoKisaiHokenshaNo"
+        ,A."ninteiShinseiYMD"
+        ,A."hihokenshaNo"
         )  temp
         ON "DbT5201NinteichosaIraiJoho"."shinseishoKanriNo" = temp."shinseishoKanriNo"
         AND "DbT5201NinteichosaIraiJoho"."ninteichosaIraiRirekiNo" = temp."ninteichosaIraiRirekiNo"
@@ -189,6 +194,7 @@
         ,A."jusho"
         ,A."telNo"
         ,A."yubinNo"
+        ,A."shoKisaiHokenshaNo"
         ,B."shujiiIryokikanCode"
         ,B."ikenshoIraiRirekiNo"
         ,C."iryoKikanMeisho"
@@ -235,7 +241,9 @@
             AND A."shoKisaiHokenshaNo" = #{証記載保険者番号}
         </if>
         AND A."logicalDeletedFlag" = FALSE
-        ORDER BY A."shinseishoKanriNo"
+        ORDER BY A."shoKisaiHokenshaNo"
+        ,A."ninteiShinseiYMD"
+        ,A."hihokenshaNo"
     </select>
     <select resultOrdered="true" id="select更新用主治医意見書依頼情報" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5301ShujiiIkenshoIraiJohoMapper.ResultMap_DbT5301ShujiiIkenshoIraiJohoEntity"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
@@ -247,6 +255,9 @@
         (
         SELECT
         A."shinseishoKanriNo"
+        ,A."shoKisaiHokenshaNo"
+        ,A."ninteiShinseiYMD"
+        ,A."hihokenshaNo"
         ,B."ikenshoIraiRirekiNo"
         FROM
         rgdb."DbT5101NinteiShinseiJoho" AS A      
@@ -283,7 +294,9 @@
             AND A."shoKisaiHokenshaNo" = #{証記載保険者番号}
         </if>
         AND A."logicalDeletedFlag" = FALSE
-        ORDER BY A."shinseishoKanriNo"
+        ORDER BY A."shoKisaiHokenshaNo"
+        ,A."ninteiShinseiYMD"
+        ,A."hihokenshaNo"
         ) temp
         ON "DbT5301ShujiiIkenshoIraiJoho"."shinseishoKanriNo" = temp."shinseishoKanriNo"
         AND "DbT5301ShujiiIkenshoIraiJoho"."ikenshoIraiRirekiNo" = temp."ikenshoIraiRirekiNo"
@@ -402,9 +415,9 @@
         </foreach>
         AND A."logicalDeletedFlag" = FALSE
         ORDER BY
-        A."shichosonCode"
-        ,B."ninteichosaItakusakiCode"
-        ,A."shinseishoKanriNo"
+        A."shoKisaiHokenshaNo"
+        ,A."ninteiShinseiYMD"
+        ,A."hihokenshaNo"
     </select>
     <select resultOrdered="true" id="select認定調査票_概況調査" resultMap="resultMap_select認定調査依頼情報"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.ikenshoprint.ChosaIraishoAndChosahyoAndIkenshoPrintParameter"            fetchSize="500">
@@ -602,6 +615,7 @@
         ,A."jusho"
         ,A."ninteiShinseiYMD"
         ,A."shichosonCode"
+        ,A."shoKisaiHokenshaNo"
         ,B."ikenshoSakuseiIraiYMD"
         ,B."ikenshoSakuseiKigenYMD"
         ,B."shujiiIryokikanCode"
@@ -646,8 +660,9 @@
         </foreach>
         AND A."logicalDeletedFlag" = FALSE
         ORDER BY 
-        A."shichosonCode",
-        A."shinseishoKanriNo"
+        A."shoKisaiHokenshaNo"
+        ,A."ninteiShinseiYMD"
+        ,A."hihokenshaNo"
 
     </select>
 

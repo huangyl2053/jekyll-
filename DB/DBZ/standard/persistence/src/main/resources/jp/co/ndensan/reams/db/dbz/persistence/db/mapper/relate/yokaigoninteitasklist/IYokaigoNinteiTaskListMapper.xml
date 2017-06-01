@@ -36,6 +36,7 @@
                     ofType ="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.CyoSaiRaiRelateEntity"/>
     </resultMap>
     <resultMap id="resultMap_CyoSaiRaiRelateEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.CyoSaiRaiRelateEntity" autoMapping="true">
+        <result property="delay" column="delay" />
         <result property="shinseishoKanriNo" column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hihokenshaName" column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
@@ -73,6 +74,7 @@
         <result property="koroshoIfShikibetsuCode"  column="koroshoIfShikibetsuCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
     </resultMap>
     <resultMap id="resultMap_IKnSyoiRaiRelateEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.IKnSyoiRaiRelateEntity" autoMapping="true">
+        <result property="delay" column="delay" />
         <result property="shinseishoKanriNo"  column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <result property="shoKisaiHokenshaNo"  column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
         <result property="hihokenshaNo"  column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -115,6 +117,7 @@
                     ofType ="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.CyoSaNyuSyuRelateEntity"/>
     </resultMap>
     <resultMap id="resultMap_CyoSaNyuSyuRelateEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.CyoSaNyuSyuRelateEntity" autoMapping="true">
+        <result property="delay" column="delay" />
         <result property="dbt5101ShinseishoKanriNo"  column="DbT5101_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <result property="shoKisaiHokenshaNo"  column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
         <result property="hihokenshaNo"  column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -143,6 +146,7 @@
         <result property="dbt5206ShinseishoKanriNo"  column="DbT5206_shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
     </resultMap>
     <resultMap id="resultMap_IkenSyoNyuSyuRelateEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.IkenSyoNyuSyuRelateEntity" autoMapping="true">
+        <result property="delay" column="delay" />
         <result property="shinseishoKanriNo"  column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <result property="shoKisaiHokenshaNo"  column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
         <result property="hihokenshaNo"  column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -184,6 +188,7 @@
         <result property="kariIchijiHanteiKubun"  column="kariIchijiHanteiKubun" />
     </resultMap>
     <resultMap id="resultMap_MaSuKinGuRelateEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.MaSuKinGuRelateEntity" autoMapping="true">
+        <result property="delay" column="delay" />
         <result property="shinseishoKanriNo"  column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <result property="hihokenshaNo"  column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
         <result property="hihokenshaName"  column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler"/>
@@ -255,6 +260,7 @@
                     ofType ="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.GeTuReiSyoRiRelateEntity"/>
     </resultMap>
     <resultMap id="resultMap_GeTuReiSyoRiRelateEntity" type="jp.co.ndensan.reams.db.dbz.entity.db.relate.yokaigoninteitasklist.GeTuReiSyoRiRelateEntity" autoMapping="true">
+        <result property="delay" column="delay" />
         <result property="shinseishoKanriNo"  column="shinseishoKanriNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShinseishoKanriNoTypeHandler"/>
         <result property="shoKisaiHokenshaNo"  column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
         <result property="hihokenshaNo"  column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler"/>
@@ -293,6 +299,7 @@
         <result property="jusho"  column="jusho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaJushoTypeHandler"/>
         <result property="telNo" column="telNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.TelNoTypeHandler"/>
         <result property="shoKisaiHokenshaNo" column="shoKisaiHokenshaNo" typeHandler="jp.co.ndensan.reams.db.dbx.entity.typehandlers.ShoKisaiHokenshaNoTypeHandler"/>
+        <result property="shichosonCode" column="shichosonCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.LasdecCodeTypeHandler"/>
     </resultMap>
     <select resultOrdered="true" id="get更新対象" resultMap="resultMap_KoShiTaisyoRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
@@ -475,6 +482,11 @@
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
         SELECT
         COUNT(*) OVER () AS "totalCount",
+        CASE WHEN
+            DbT5123."ninteichosaIraiYoteiYMD" <![CDATA[<]]> #{処理日}
+        THEN TRUE
+        ELSE FALSE
+        END AS delay,
         DbT5101."shinseishoKanriNo",
         DbT5101."hihokenshaNo",
         DbT5101."hihokenshaName",
@@ -604,6 +616,8 @@
         ON DbT5913_temp_1_1."ninteiChosaItakusakiCode" = DbT5101_temp1_1."ninteiChosaItakusakiCode"
         AND DbT5913_temp_1_1."ninteiChosainCode" = DbT5101_temp1_1."ninteiChosainCode"
         AND DbT5913_temp_1_1."shichosonCode" = DbT5101."shichosonCode"
+        LEFT JOIN rgdb."DbT5123NinteiKeikakuJoho" DbT5123
+        ON DbT5101."shinseishoKanriNo" = DbT5123."shinseishoKanriNo"
         WHERE
         DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
         AND DbT5101."logicalDeletedFlag" = FALSE
@@ -848,6 +862,11 @@
     <select resultOrdered="true" id="get意見書依頼" resultMap="resultMap_IKnSyoiRaiRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
         SELECT
+        CASE WHEN 
+        DbT5123."ikenshoSakuseiIraiYoteiYMD" <![CDATA[<]]> #{処理日}
+        THEN TRUE
+        ELSE FALSE
+        END AS delay,
         DbT5101."shinseishoKanriNo",
         DbT5101."shoKisaiHokenshaNo",
         DbT5101."hihokenshaNo",
@@ -978,6 +997,8 @@
         ON DbT5912_temp_1_1."shujiiIryokikanCode" = DbT5101_temo_1_1."shujiiIryokikanCode"
         AND DbT5912_temp_1_1."shujiiCode" = DbT5101_temo_1_1."shujiiCode"
         AND DbT5912_temp_1_1."shichosonCode" = DbT5101."shichosonCode"
+        LEFT JOIN rgdb."DbT5123NinteiKeikakuJoho" DbT5123
+        ON DbT5101."shinseishoKanriNo" = DbT5123."shinseishoKanriNo"
         WHERE
         DbT5101."shoriJotaiKubun" in (#{通常},#{延期})
         AND DbT5101."logicalDeletedFlag" = FALSE
@@ -1036,6 +1057,11 @@
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
         SELECT DISTINCT
         -1 + DENSE_RANK() OVER(ORDER BY DbT5101."shinseishoKanriNo" ASC) + DENSE_RANK() OVER(ORDER BY DbT5101."shinseishoKanriNo" DESC) AS "totalCount",
+        CASE WHEN 
+        DbT5123."ninteichosaYoteiYMD" <![CDATA[<]]> #{処理日}
+        THEN TRUE
+        ELSE FALSE
+        END AS delay,
         DbT5101."shinseishoKanriNo" AS "DbT5101_shinseishoKanriNo",
         DbT5101."shoKisaiHokenshaNo",
         DbT5101."hihokenshaNo",
@@ -1105,6 +1131,8 @@
         LEFT JOIN rgdb."DbT5206GaikyoTokki" DbT5206
         ON DbT5206."shinseishoKanriNo" = DbT5202."shinseishoKanriNo"
         AND DbT5206."ninteichosaRirekiNo" = DbT5202."ninteichosaRirekiNo"
+        LEFT JOIN rgdb."DbT5123NinteiKeikakuJoho" DbT5123
+        ON DbT5101."shinseishoKanriNo" = DbT5123."shinseishoKanriNo"
         WHERE DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
         AND DbT5105."ninteiShinsakaiWariateKanryoYMD" IS NULL
@@ -1177,6 +1205,11 @@
     <select resultOrdered="true" id="get意見書入手" resultMap="resultMap_IkenSyoNyuSyuRelateEntity"
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
         SELECT
+        CASE WHEN 
+        DbT5123."ikenshoTorokuYoteiYMD" <![CDATA[<]]> #{処理日}
+        THEN TRUE
+        ELSE FALSE
+        END AS delay,
         DbT5101."shinseishoKanriNo",
         DbT5101."shoKisaiHokenshaNo",
         DbT5101."hihokenshaNo",
@@ -1250,6 +1283,8 @@
         ON DbT5305_ura."shinseishoKanriNo" = DbT5301."shinseishoKanriNo"
         AND DbT5305_ura."iraiRirekiNo" = DbT5301."ikenshoIraiRirekiNo"
         AND DbT5305_ura."ChoyoID" IN ('702','778')
+        LEFT JOIN rgdb."DbT5123NinteiKeikakuJoho" DbT5123
+        ON DbT5101."shinseishoKanriNo" = DbT5123."shinseishoKanriNo"
         WHERE
         DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND DbT5105."ikenshoSakuseiIraiKanryoYMD" IS NOT NULL
@@ -1482,6 +1517,11 @@
         FROM
         (
         SELECT
+        CASE WHEN 
+        DbT5123."ninteiShinsakaiWariateYoteiYMD" <![CDATA[<]]> #{処理日}
+        THEN TRUE
+        ELSE FALSE
+        END AS delay,
         DbT5101."shinseishoKanriNo",
         DbT5101."hihokenshaNo",
         DbT5101."hihokenshaName",
@@ -1670,6 +1710,8 @@
         AND T5213b."shinseishoKanriNo" = T5213."shinseishoKanriNo"
         )
         AND DbT5101."shinseishoKanriNo" = T5213."shinseishoKanriNo"
+        LEFT JOIN rgdb."DbT5123NinteiKeikakuJoho" DbT5123
+        ON DbT5101."shinseishoKanriNo" = DbT5123."shinseishoKanriNo"
         <if test = "市町村コード.toString() != ''.toString()">
             WHERE
             DbT7051."shichosonCode" = #{市町村コード}
@@ -2072,6 +2114,11 @@
             parameterType="jp.co.ndensan.reams.db.dbz.definition.mybatisprm.yokaigoninteitasklist.YokaigoNinteiTaskListParameter" fetchSize="500">
         SELECT
         COUNT(*) OVER () AS "totalCount",
+        CASE WHEN 
+        DbT5123."centerSoshinYoteiYMD" <![CDATA[<]]> #{処理日}
+        THEN TRUE
+        ELSE FALSE
+        END AS delay,
         DbT5101."shinseishoKanriNo",
         DbT5101."shoKisaiHokenshaNo",
         DbT5101."hihokenshaNo",
@@ -2097,6 +2144,8 @@
         ON  DbT5105."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
         LEFT JOIN  rgdb."DbT7211GaibuRenkeiDataoutputJoho" DbT7211
         ON  DbT5101."shinseishoKanriNo" = DbT7211."shinseishoKanriNo"
+        LEFT JOIN rgdb."DbT5123NinteiKeikakuJoho" DbT5123
+        ON DbT5101."shinseishoKanriNo" = DbT5123."shinseishoKanriNo"
         <where>
             AND DbT5101."logicalDeletedFlag" = FALSE
             AND DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
@@ -2200,7 +2249,8 @@
         DbT5101."telNo",
         DbT7051."shichosonMeisho",
         DbT5105."ninteiShinseiJohoTorokuKanryoYMD",
-        DbT5101."shoKisaiHokenshaNo"
+        DbT5101."shoKisaiHokenshaNo",
+        DbT5101."shichosonCode"
         FROM
         rgdb."DbT5101NinteiShinseiJoho" DbT5101
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" DbT7051

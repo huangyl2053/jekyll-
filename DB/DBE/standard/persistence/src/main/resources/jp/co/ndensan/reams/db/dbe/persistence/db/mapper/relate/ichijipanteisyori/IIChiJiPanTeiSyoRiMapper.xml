@@ -9,6 +9,7 @@
                type="jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijipanteisyori.IChiJiPanTeiSyoRiRelateEntity" autoMapping="true">
 
         <result property="shichosonMeisho" column="shichosonMeisho" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="delay" column="delay" />
         <result property="hihokenshaNo" column="hihokenshaNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="hihokenshaName" column="hihokenshaName" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.AtenaMeishoTypeHandler" />
         <result property="ninteiShinseiYMD" column="ninteiShinseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler" />
@@ -51,6 +52,11 @@
             resultOrdered="true" fetchSize="500">
         SELECT
         DbT7051."shichosonMeisho"
+        ,CASE WHEN
+        DbT5123."ichijiHanteiYoteiYMD" <![CDATA[<]]> #{処理日}
+        THEN TRUE
+        ELSE FALSE
+        END AS delay
         ,DbT5101."hihokenshaNo"
         ,DbT5101."hihokenshaName"
         ,DbT5101."ninteiShinseiYMD"
@@ -86,7 +92,10 @@
         ,DbT5105."ikenshoSakuseiIraiKanryoYMD"
         ,DbT5105."ikenshoTorokuKanryoYMD"
         FROM
-        <include refid="検索条件" />
+        <include refid="FROM句" />
+        LEFT JOIN rgdb."DbT5123NinteiKeikakuJoho" DbT5123
+        ON DbT5101."shinseishoKanriNo" = DbT5123."shinseishoKanriNo"
+        <include refid="WHERE句" />
         <include refid="ソート条件_対象者一覧" />
     </select>
 
@@ -154,6 +163,11 @@
     </select>
 
     <sql id="検索条件">
+        <include refid="FROM句" />
+        <include refid="WHERE句" />
+    </sql>
+    
+    <sql id="FROM句">
         rgdb."DbT5101NinteiShinseiJoho" DbT5101
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" DbT7051
         ON DbT7051."shoKisaiHokenshaNo" = DbT5101."shoKisaiHokenshaNo"
@@ -183,6 +197,9 @@
         DbT5302S."shinseishoKanriNo" = DbT5302."shinseishoKanriNo")
         INNER JOIN rgdb."DbT5105NinteiKanryoJoho" DbT5105
         ON DbT5105."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+    </sql>
+    
+    <sql id="WHERE句">
         WHERE
         DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
         AND DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL

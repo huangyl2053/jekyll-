@@ -33,6 +33,8 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Icon;
+import jp.co.ndensan.reams.uz.uza.ui.binding.IconType;
 
 /**
  * 完了処理・マスキングのHandlerクラスです。
@@ -95,9 +97,18 @@ public class MaskingHandler {
         List<dgYokaigoNinteiTaskList_Row> rowList = new ArrayList<>();
         int completeCount = 0;
         int mishoriCount = 0;
+        Icon warningIcon = new Icon();
+        warningIcon.setIcon(IconType.Warning);
+        Icon noIcon = new Icon();
+        noIcon.setVisible(false);
         for (MaSuKinGuBusiness business : マスキングList) {
             if (is対象データ(business.has意見書マスク())) {
                 dgYokaigoNinteiTaskList_Row row = new dgYokaigoNinteiTaskList_Row();
+                if (business.is遅延()) {
+                    row.setDelay(warningIcon);
+                } else {
+                    row.setDelay(noIcon);
+                }
                 row.setHokensha(business.get保険者() == null ? RString.EMPTY : business.get保険者());
                 row.setHihoNumber(business.get被保険者番号() == null ? RString.EMPTY : business.get被保険者番号());
                 row.setHihoShimei(business.get被保険者氏名() == null ? RString.EMPTY : business.get被保険者氏名().value());

@@ -49,6 +49,8 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridButtonState;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Icon;
+import jp.co.ndensan.reams.uz.uza.ui.binding.IconType;
 import jp.co.ndensan.reams.uz.uza.ui.binding.RowState;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
@@ -265,6 +267,13 @@ public class KanryoshoriIchijihanteiHandler {
     }
 
     private dgHanteiTaishosha_Row setRowData(dgHanteiTaishosha_Row row, IChiJiPanTeiSyoRiBusiness business) {
+        Icon icon = new Icon();
+        if (business.is遅延()) {
+            icon.setIcon(IconType.Warning);
+        } else {
+            icon.setVisible(false);
+        }
+        row.setDelay(icon);
         row.setCancelButtonState(DataGridButtonState.Disabled);
         row.setRowState(RowState.Unchanged);
         row.setColumnState(RString.EMPTY);

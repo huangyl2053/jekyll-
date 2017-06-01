@@ -8,7 +8,9 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE2310001
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import jp.co.ndensan.reams.db.dbe.business.core.ichijihanteiresult.IchijiHanteiKekkaResultConveter;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.ninteishinseijoho.NinteiShinseiJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoikenitem.ShujiiIkenshoIkenItemIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoiraijoho.ShujiiIkenshoIraiJoho;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshoiraijoho.ShujiiIkenshoIraiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbe.business.core.ikensho.shujiiikenshojoho.ShujiiIkenshoJoho;
@@ -18,7 +20,6 @@ import jp.co.ndensan.reams.db.dbe.business.core.shujiiikenshotoroku.ShujiiIkensh
 import jp.co.ndensan.reams.db.dbe.business.core.util.DBEImageUtil;
 import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImagekanriJoho;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
-import jp.co.ndensan.reams.db.dbe.definition.message.DbeInformationMessages;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ikensho.ninteishinseijoho.NinteiShinseiJohoMapperParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiiikenshotoroku.ShujiiIkenshoTorokuMapperParameter;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shujiijoho.ShujiiMasterSearchParameter;
@@ -73,15 +74,14 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
-import jp.co.ndensan.reams.db.dbe.service.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJohoManager;
-import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiKekkaJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.ninteishinseijoho.ichijihanteikekkajoho.IchijiHanteiShoriKekka;
+import jp.co.ndensan.reams.db.dbe.service.core.ichijihanteikekkajohosearch.IchijiHanteiKekkaJohoSearchManager;
 import jp.co.ndensan.reams.db.dbe.service.core.kekkatoroku.KekkaTorokuUtil;
 import jp.co.ndensan.reams.db.dbe.service.core.kekkatoroku.KekkaTorokuUtil.CheckEditableResult;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
 
 /**
  * 主治医意見書登録のコントローラです。
@@ -120,6 +120,11 @@ public class ShujiiIkenshoTorokuTotal {
     private static final RString 厚労省IF識別番号_09B = new RString("09B");
     private final ShujiiIryokikanAndShujiiGuideFinder finder;
     private static final RString 保存するボタン = new RString("btnIkenshoSave");
+    private static final int 項番_認知高齢者の日常生活自立度 = 14;
+    private static final int 項番_短期記憶 = 15;
+    private static final int 項番_認知能力 = 16;
+    private static final int 項番_伝達能力 = 17;
+    private static final int 項番_食事行為 = 69;
 
     /**
      * コンストラクタです。
@@ -695,9 +700,57 @@ public class ShujiiIkenshoTorokuTotal {
      * @return ResponseData<ShujiiIkenshoTorokuTotalDiv>
      */
     public ResponseData<ShujiiIkenshoTorokuTotalDiv> onClick_btnIkenshoSave(ShujiiIkenshoTorokuTotalDiv div) {
-        RString state = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
-        ShinseishoKanriNo 管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 一次判定処理前のチェック処理・引数作成処理を行います。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShujiiIkenshoTorokuTotalDiv> onClick_btnIchijiHanteiValidate(ShujiiIkenshoTorokuTotalDiv div) {
+        IchijiHanteiKekkaJohoSearchManager manager = IchijiHanteiKekkaJohoSearchManager.createIntance();
+
+        ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
         int 履歴番号 = Integer.parseInt(ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class).toString());
+        NinteiShinseiJoho ninteiShinseiJoho = ViewStateHolder.get(ViewStateKeys.意見書情報, NinteiShinseiJoho.class);
+        ShujiiIkenshoIraiJoho shujiiIkenshoIraiJoho = ninteiShinseiJoho.getShujiiIkenshoIraiJoho(
+                new ShujiiIkenshoIraiJohoIdentifier(申請書管理番号, 履歴番号));
+        ShujiiIkenshoJoho shujiiIkenshoJoho = shujiiIkenshoIraiJoho.getSeishinTechoNini(new ShujiiIkenshoJohoIdentifier(申請書管理番号, 履歴番号));
+        RString 認知高齢者の日常生活自立度 = shujiiIkenshoJoho.getShujiiIkenshoIkenItem(
+                new ShujiiIkenshoIkenItemIdentifier(申請書管理番号, 履歴番号, 項番_認知高齢者の日常生活自立度)).get意見項目();
+        RString 短期記憶 = shujiiIkenshoJoho.getShujiiIkenshoIkenItem(new ShujiiIkenshoIkenItemIdentifier(申請書管理番号, 履歴番号, 項番_短期記憶)).get意見項目();
+        RString 認知能力 = shujiiIkenshoJoho.getShujiiIkenshoIkenItem(new ShujiiIkenshoIkenItemIdentifier(申請書管理番号, 履歴番号, 項番_認知能力)).get意見項目();
+        RString 伝達能力 = shujiiIkenshoJoho.getShujiiIkenshoIkenItem(new ShujiiIkenshoIkenItemIdentifier(申請書管理番号, 履歴番号, 項番_伝達能力)).get意見項目();
+        RString 食事行為 = shujiiIkenshoJoho.getShujiiIkenshoIkenItem(new ShujiiIkenshoIkenItemIdentifier(申請書管理番号, 履歴番号, 項番_食事行為)).get意見項目();
+        RString hanteiArgument = manager.get一次判定引数(申請書管理番号, 認知高齢者の日常生活自立度, 短期記憶, 認知能力, 伝達能力, 食事行為);
+
+        div.setIchijiHanteiArgument(hanteiArgument);
+        return ResponseData.of(div).respond();
+    }
+
+    /**
+     * 調査結果および一次判定処理結果を保存する処理を行います。
+     *
+     * @param div コントロールdiv
+     * @return レスポンスデータ
+     */
+    public ResponseData<ShujiiIkenshoTorokuTotalDiv> onClick_btnHanteishoriAto(ShujiiIkenshoTorokuTotalDiv div) {
+
+        RString state = ViewStateHolder.get(ViewStateKeys.状態, RString.class);
+        ShinseishoKanriNo 申請書管理番号 = new ShinseishoKanriNo(ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class));
+        int 履歴番号 = Integer.parseInt(ViewStateHolder.get(ViewStateKeys.主治医意見書作成依頼履歴番号, RString.class).toString());
+        RString result = div.getIchijiHanteiResult();
+        if (RString.isNullOrEmpty(result)) {
+            return ResponseData.of(div).addMessage(DbeErrorMessages.一次判定失敗.getMessage()).respond();
+        }
+        IchijiHanteiKekkaResultConveter converter = new IchijiHanteiKekkaResultConveter(申請書管理番号, result);
+        List<IchijiHanteiShoriKekka> kekkaList = converter.convert();
+
+        if (kekkaList == null || kekkaList.isEmpty()) {
+            return ResponseData.of(div).addMessage(DbeErrorMessages.一次判定失敗.getMessage()).respond();
+        }
         if (!ResponseHolder.isReRequest()) {
             if (div.getRadJotaiKubun().getSelectedKey().equals(登録_修正)) {
                 ValidationMessageControlPairs canSave = getValidationHandler(div).validateCanSave();
@@ -708,23 +761,17 @@ public class ShujiiIkenshoTorokuTotal {
             } else if (div.getRadJotaiKubun().getSelectedKey().equals(削除)) {
                 return ResponseData.of(div).addMessage(UrQuestionMessages.削除の確認.getMessage()).respond();
             }
-            setShujiiIkenshoJoho(state, 管理番号, 履歴番号, div);
         }
 
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            setShujiiIkenshoJoho(state, 管理番号, 履歴番号, div);
+            setShujiiIkenshoJoho(state, 申請書管理番号, 履歴番号, div, kekkaList);
             if (UrControlDataFactory.createInstance().getUIContainerId().equals(UIContainerID_主治医意見書入手)) {
                 RStringBuilder 前排他制御開催番号 = new RStringBuilder();
                 前排他制御開催番号.append("DBEShinseishoKanriNo");
-                前排他制御開催番号.append(管理番号);
+                前排他制御開催番号.append(申請書管理番号);
                 前排他キーの解除(前排他制御開催番号.toRString());
                 return ResponseData.of(div).addMessage(UrInformationMessages.保存終了.getMessage()).respond();
-            }
-            IchijiHanteiKekkaJohoManager ichijiHanteiKekkaJohoManager = InstanceProvider.create(IchijiHanteiKekkaJohoManager.class);
-            IchijiHanteiKekkaJoho 一次判定結果情報 = ichijiHanteiKekkaJohoManager.get要介護認定一次判定結果情報(管理番号);
-            if (!ResponseHolder.isReRequest() && 一次判定結果情報 != null && !一次判定結果情報.get仮一次判定区分()) {
-                return ResponseData.of(div).addMessage(DbeInformationMessages.一次判定再処理.getMessage()).respond();
             }
             getEndMessage(div);
             return ResponseData.of(div).setState(DBE2310001StateName.完了状態);
@@ -732,23 +779,14 @@ public class ShujiiIkenshoTorokuTotal {
 
         if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
-            setShujiiIkenshoJoho(state, 管理番号, 履歴番号, div);
+            setShujiiIkenshoJoho(state, 申請書管理番号, 履歴番号, div, kekkaList);
             div.getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.削除終了.getMessage().evaluate()), RString.EMPTY, RString.EMPTY, true);
             RStringBuilder 前排他制御開催番号 = new RStringBuilder();
             前排他制御開催番号.append("DBEShinseishoKanriNo");
-            前排他制御開催番号.append(管理番号);
+            前排他制御開催番号.append(申請書管理番号);
             前排他キーの解除(前排他制御開催番号.toRString());
             return ResponseData.of(div).setState(DBE2310001StateName.完了状態);
         }
-
-        if (new RString(DbeInformationMessages.一次判定再処理.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
-            if (!(ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes)) {
-                return ResponseData.of(div).setState(DBE2310001StateName.初期表示);
-            } else {
-                return ResponseData.of(div).setState(DBE2310001StateName.完了状態);
-            }
-        }
-
         if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
             return ResponseData.of(div).respond();
@@ -765,7 +803,8 @@ public class ShujiiIkenshoTorokuTotal {
             RString flag,
             ShinseishoKanriNo 管理番号,
             int 履歴番号,
-            ShujiiIkenshoTorokuTotalDiv div) {
+            ShujiiIkenshoTorokuTotalDiv div,
+            List<IchijiHanteiShoriKekka> kekkaList) {
 
         NinteiShinseiJoho ninteiShinseiJoho = ViewStateHolder.get(ViewStateKeys.意見書情報, NinteiShinseiJoho.class);
         ShujiiIkenshoIraiJoho shujiiIkenshoIraiJoho = ninteiShinseiJoho.getShujiiIkenshoIraiJoho(
@@ -800,8 +839,12 @@ public class ShujiiIkenshoTorokuTotal {
         }
         shujiiIkenshoIraiJoho = shujiiIkenshoIraiJoho.createBuilderForEdit().setShujiiIkenshoJoho(shujiiIkenshoJoho).build();
 
+        NinteiKanryoJoho ninteiKanryoJoho = NinteiKanryoJohoManager.createInstance().get要介護認定完了情報(管理番号);
         if (div.getRadJotaiKubun().getSelectedKey().equals(登録_修正)) {
             ninteiShinseiJoho = ninteiShinseiJoho.createBuilderForEdit().setShujiiIkenshoIraiJoho(shujiiIkenshoIraiJoho).build();
+            if (ninteiKanryoJoho.get要介護認定一次判定完了年月日() != null && !ninteiKanryoJoho.get要介護認定一次判定完了年月日().isEmpty()) {
+                getHandler(div).updateGridAndViewStateData(kekkaList);
+            }
         } else if (div.getRadJotaiKubun().getSelectedKey().equals(削除)) {
             ImagekanriJoho イメージ管理情報 = YokaigoninteiimagekanriFinder.createInstance().getImageJoho(管理番号.value());
             if (イメージ管理情報.get証記載保険者番号() == null
@@ -822,7 +865,6 @@ public class ShujiiIkenshoTorokuTotal {
             service.updateOrDelete(イメージ管理情報);
 
             ninteiShinseiJoho = ninteiShinseiJoho.createBuilderForEdit().setShujiiIkenshoIraiJoho(shujiiIkenshoIraiJoho).build().deleted();
-            NinteiKanryoJoho ninteiKanryoJoho = NinteiKanryoJohoManager.createInstance().get要介護認定完了情報(管理番号);
             getHandler(div).要介護認定完了情報更新(ninteiKanryoJoho);
         }
         ninteiManager.save(ninteiShinseiJoho);

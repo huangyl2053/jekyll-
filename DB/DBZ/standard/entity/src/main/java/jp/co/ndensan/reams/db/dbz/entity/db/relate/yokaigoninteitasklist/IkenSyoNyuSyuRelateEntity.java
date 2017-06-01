@@ -26,6 +26,7 @@ import lombok.Setter;
 public class IkenSyoNyuSyuRelateEntity {
 
     private RString jyotai;
+    private boolean delay;
     private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     private ShinseishoKanriNo shinseishoKanriNo;
     private RString hihokenshaNo;

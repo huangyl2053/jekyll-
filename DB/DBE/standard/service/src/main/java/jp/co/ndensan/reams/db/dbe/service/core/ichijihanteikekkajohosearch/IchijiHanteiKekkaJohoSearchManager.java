@@ -138,6 +138,65 @@ public class IchijiHanteiKekkaJohoSearchManager {
         return builder.toRString();
     }
 
+    /**
+     * 一次判定処理に必要な、引数の作成を行います。このメソッドは１人１人一次判定を行いたい場合に使用します。<br/>
+     * ただし、申請書管理番号が正しく渡せていなかったり、引数の作成できないデータ（厚労省IF識別コードが過去のもの）が渡された場合、
+     * EMPTYを返します。
+     *
+     * @param 申請書管理番号 ShinseishoKanriNo
+     * @param 認知高齢者の日常生活自立度
+     * @param 短期記憶
+     * @param 認知能力
+     * @param 伝達能力
+     * @param 食事行為
+     * @return 一次判定DLLに渡す引数。もしくはEMPTY
+     */
+    @Transaction
+    public RString get一次判定引数(ShinseishoKanriNo 申請書管理番号, RString 認知高齢者の日常生活自立度,
+            RString 短期記憶, RString 認知能力, RString 伝達能力, RString 食事行為) {
+        if (null == 申請書管理番号 || 申請書管理番号.isEmpty()) {
+            return RString.EMPTY;
+        }
+        Code 厚労省IF識別コード = get厚労省IF識別コード(申請書管理番号);
+        if (!KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード.value())
+                && !KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コード.value())) {
+            return RString.EMPTY;
+        }
+
+        List<RString> 基本調査項目List = get基本調査項目(申請書管理番号);
+        List<RString> 主治医意見書項目List = new ArrayList<>();
+        主治医意見書項目List.add(短期記憶);
+        主治医意見書項目List.add(認知能力);
+        主治医意見書項目List.add(伝達能力);
+        主治医意見書項目List.add(食事行為);
+
+        RString 基本調査項目 = join(基本調査項目List);
+        RString 主治医意見書項目 = join(主治医意見書項目List);
+
+        DbT4203NinteichosahyoKihonChosaEntity 認定調査票_基本調査 = get認定調査票_基本調査(申請書管理番号);
+        RString 障害高齢者自立度 = RString.EMPTY;
+        RString 認知症高齢者自立度 = RString.EMPTY;
+        if (認定調査票_基本調査 != null) {
+            Code 障害高齢者自立度コード = 認定調査票_基本調査.getShogaiNichijoSeikatsuJiritsudoCode();
+            Code 認知症高齢者自立度コード = 認定調査票_基本調査.getNinchishoNichijoSeikatsuJiritsudoCode();
+            障害高齢者自立度 = 障害高齢者自立度コード == null ? RString.EMPTY : 障害高齢者自立度コード.getColumnValue();
+            認知症高齢者自立度 = 認知症高齢者自立度コード == null ? RString.EMPTY : 認知症高齢者自立度コード.getColumnValue();
+        }
+
+        RStringBuilder builder = new RStringBuilder();
+        builder.append(基本調査項目);
+        builder.append(DATA_SPLIT_STR);
+        builder.append(主治医意見書項目);
+        builder.append(DATA_SPLIT_STR);
+        builder.append(障害高齢者自立度);
+        builder.append(DATA_SPLIT_STR);
+        builder.append(認知症高齢者自立度);
+        builder.append(DATA_SPLIT_STR);
+        builder.append(認知高齢者の日常生活自立度);
+
+        return builder.toRString();
+    }
+
     private RString join(List<RString> list) {
         if (list == null) {
             return RString.EMPTY;
