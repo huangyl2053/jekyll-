@@ -40,42 +40,43 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public class DBE561001_CenterTransmission extends BatchFlowBase<DBE561001_CenterTransmissionParameter> {
 
-    private static final String 送信データ作成対象者一覧一時テーブル = "SoshinDataSakuseiTaishoshaTempTableSakusei";
-    private static final String 送信データ作成対象者抽出 = "SoshinDataSakuseiTaishoshaChushutsu";
-    private static final String 調査票概況調査サービスの状況一時テーブル = "NinteichosahyoServiceJokyoTempTableSakusei";
-    private static final String 前回調査票概況調査サービスの状況一時テーブル = "ZenkaiNinteichosahyoServiceJokyoTempTableSakusei";
-    private static final String 要介護認定主治医意見書意見項目一時テーブル = "ShujiiIkenshoIkenItemTempTableSakusei";
-    private static final String 認定調査票基本調査調査項目一時テーブル = "NinteichosahyoChosaItemTempTableSakusei";
-    private static final String 前回調査票基本調査調査項目一時テーブル = "ZenkaiNinteichosahyoChosaItemTempTableSakusei";
-    private static final String センター送信データ作成ファイル出力 = "CenterTransmissionProcessFileSyuturyoku";
-    private static final String DB出力要介護認定申請情報 = "UpdateDbT5101NinteiShinseiJoho";
-    private static final String DB出力外部連携データ抽出情報 = "UpdateDbT7211GaibuRenkeiDataoutputJoho";
-    private static final String DB出力要介護認定完了情報 = "UpdateDbT5105NinteiKanryoJoho";
+    private static final String STEP01_送信データ作成対象者一覧一時テーブル = "SoshinDataSakuseiTaishoshaTempTableSakusei";
+    private static final String STEP02_送信データ作成対象者抽出 = "SoshinDataSakuseiTaishoshaChushutsu";
+    private static final String STEP03_調査票概況調査サービスの状況一時テーブル = "NinteichosahyoServiceJokyoTempTableSakusei";
+    private static final String STEP04_前回調査票概況調査サービスの状況一時テーブル = "ZenkaiNinteichosahyoServiceJokyoTempTableSakusei";
+    private static final String STEP05_要介護認定主治医意見書意見項目一時テーブル = "ShujiiIkenshoIkenItemTempTableSakusei";
+    private static final String STEP06_認定調査票基本調査調査項目一時テーブル = "NinteichosahyoChosaItemTempTableSakusei";
+    private static final String STEP07_前回調査票基本調査調査項目一時テーブル = "ZenkaiNinteichosahyoChosaItemTempTableSakusei";
+    private static final String STEP08_センター送信データ作成ファイル出力 = "CenterTransmissionProcessFileSyuturyoku";
+    private static final String STEP09_DB出力要介護認定申請情報 = "UpdateDbT5101NinteiShinseiJoho";
+    private static final String STEP10_DB出力外部連携データ抽出情報 = "UpdateDbT7211GaibuRenkeiDataoutputJoho";
+    private static final String STEP11_DB出力要介護認定完了情報 = "UpdateDbT5105NinteiKanryoJoho";
+    private static final RString バッチ実行時 = new RString("1");
     private List<RString> 出力された申請書管理番号;
 
     @Override
     protected void defineFlow() {
-        executeStep(送信データ作成対象者一覧一時テーブル);
-        executeStep(送信データ作成対象者抽出);
-        executeStep(調査票概況調査サービスの状況一時テーブル);
-        executeStep(前回調査票概況調査サービスの状況一時テーブル);
-        executeStep(要介護認定主治医意見書意見項目一時テーブル);
-        executeStep(認定調査票基本調査調査項目一時テーブル);
-        executeStep(前回調査票基本調査調査項目一時テーブル);
-        executeStep(センター送信データ作成ファイル出力);
-        出力された申請書管理番号 = getResult(List.class, new RString(センター送信データ作成ファイル出力),
+        executeStep(STEP01_送信データ作成対象者一覧一時テーブル);
+        executeStep(STEP02_送信データ作成対象者抽出);
+        executeStep(STEP03_調査票概況調査サービスの状況一時テーブル);
+        executeStep(STEP04_前回調査票概況調査サービスの状況一時テーブル);
+        executeStep(STEP05_要介護認定主治医意見書意見項目一時テーブル);
+        executeStep(STEP06_認定調査票基本調査調査項目一時テーブル);
+        executeStep(STEP07_前回調査票基本調査調査項目一時テーブル);
+        executeStep(STEP08_センター送信データ作成ファイル出力);
+        出力された申請書管理番号 = getResult(List.class, new RString(STEP08_センター送信データ作成ファイル出力),
                 CenterTransmissionProcess.OUTPUTSHINSEISHOKANRINO);
         if (!出力された申請書管理番号.isEmpty()) {
-            executeStep(DB出力要介護認定申請情報);
-            executeStep(DB出力外部連携データ抽出情報);
+            executeStep(STEP09_DB出力要介護認定申請情報);
+            executeStep(STEP10_DB出力外部連携データ抽出情報);
             RString 登録方法 = DbBusinessConfig.get(ConfigNameDBE.センター送信_完了日登録方法, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-            if (new RString("1").equals(登録方法)) {
-                executeStep(DB出力要介護認定完了情報);
+            if (バッチ実行時.equals(登録方法)) {
+                executeStep(STEP11_DB出力要介護認定完了情報);
             }
         }
     }
 
-    @Step(送信データ作成対象者一覧一時テーブル)
+    @Step(STEP01_送信データ作成対象者一覧一時テーブル)
     IBatchFlowCommand createSoshinDataSakuseiTaishoshaTempTable() {
         PKColumn primaryKey = new PKColumn(PrimaryKey.Name, PrimaryKey.Column);
         NewTempTableCreateOption option = new NewTempTableCreateOption().primaryKey(primaryKey);
@@ -85,9 +86,11 @@ public class DBE561001_CenterTransmission extends BatchFlowBase<DBE561001_Center
     /**
      * 画面で指定された条件に該当する対象者を抽出します。
      *
+     * 抽出した対象者をSTEP1で作成した SoshinDataSakuseiTaishoshaTemp へ更新します。
+     *
      * @return バッチコマンド
      */
-    @Step(送信データ作成対象者抽出)
+    @Step(STEP02_送信データ作成対象者抽出)
     IBatchFlowCommand insertSoshinDataSakuseiTaishoshaTempTable() {
         return loopBatch(SoshinDataSakuseiTaishoshaChushutsuProcess.class)
                 .arguments(getParameter().toCenterTransmissionProcessParameter()).define();
@@ -98,7 +101,7 @@ public class DBE561001_CenterTransmission extends BatchFlowBase<DBE561001_Center
      *
      * @return バッチコマンド
      */
-    @Step(調査票概況調査サービスの状況一時テーブル)
+    @Step(STEP03_調査票概況調査サービスの状況一時テーブル)
     IBatchFlowCommand createServiceJokyoTempTable() {
         return loopBatch(ServiceJokyoTempTableSakuseiProcess.class)
                 .arguments(getParameter().toCenterTransmissionProcessParameter()).define();
@@ -109,7 +112,7 @@ public class DBE561001_CenterTransmission extends BatchFlowBase<DBE561001_Center
      *
      * @return バッチコマンド
      */
-    @Step(前回調査票概況調査サービスの状況一時テーブル)
+    @Step(STEP04_前回調査票概況調査サービスの状況一時テーブル)
     IBatchFlowCommand createZenkaiServiceJokyoTempTable() {
         return loopBatch(ZenkaiServiceJokyoTempTableSakuseiProcess.class)
                 .arguments(getParameter().toCenterTransmissionProcessParameter()).define();
@@ -120,7 +123,7 @@ public class DBE561001_CenterTransmission extends BatchFlowBase<DBE561001_Center
      *
      * @return バッチコマンド
      */
-    @Step(要介護認定主治医意見書意見項目一時テーブル)
+    @Step(STEP05_要介護認定主治医意見書意見項目一時テーブル)
     IBatchFlowCommand createShujiiIkenshoIkenItemTempTable() {
         return loopBatch(IkenItemTempTableSakuseiProcess.class)
                 .arguments(getParameter().toCenterTransmissionProcessParameter()).define();
@@ -131,7 +134,7 @@ public class DBE561001_CenterTransmission extends BatchFlowBase<DBE561001_Center
      *
      * @return バッチコマンド
      */
-    @Step(認定調査票基本調査調査項目一時テーブル)
+    @Step(STEP06_認定調査票基本調査調査項目一時テーブル)
     IBatchFlowCommand createNinteichosahyoChosaItemTempTable() {
         return loopBatch(ChosaItemTempTableSakuseiProcess.class)
                 .arguments(getParameter().toCenterTransmissionProcessParameter()).define();
@@ -142,7 +145,7 @@ public class DBE561001_CenterTransmission extends BatchFlowBase<DBE561001_Center
      *
      * @return バッチコマンド
      */
-    @Step(前回調査票基本調査調査項目一時テーブル)
+    @Step(STEP07_前回調査票基本調査調査項目一時テーブル)
     IBatchFlowCommand createZenkaiNinteichosahyoChosaItemTempTable() {
         return loopBatch(ZenkaiChosaItemTempTableSakuseiProcess.class)
                 .arguments(getParameter().toCenterTransmissionProcessParameter()).define();
@@ -153,7 +156,7 @@ public class DBE561001_CenterTransmission extends BatchFlowBase<DBE561001_Center
      *
      * @return バッチコマンド
      */
-    @Step(センター送信データ作成ファイル出力)
+    @Step(STEP08_センター送信データ作成ファイル出力)
     IBatchFlowCommand createCenterTransmission() {
         return loopBatch(CenterTransmissionProcess.class)
                 .arguments(getParameter().toCenterTransmissionProcessParameter()).define();
@@ -164,7 +167,7 @@ public class DBE561001_CenterTransmission extends BatchFlowBase<DBE561001_Center
      *
      * @return バッチコマンド
      */
-    @Step(DB出力要介護認定申請情報)
+    @Step(STEP09_DB出力要介護認定申請情報)
     IBatchFlowCommand updateNinteiShinseiJoho() {
         return loopBatch(UpdateNinteiShinseiJohoProcess.class)
                 .arguments(new CenterTransmissionUpdateProcessParameter(出力された申請書管理番号)).define();
@@ -175,7 +178,7 @@ public class DBE561001_CenterTransmission extends BatchFlowBase<DBE561001_Center
      *
      * @return バッチコマンド
      */
-    @Step(DB出力外部連携データ抽出情報)
+    @Step(STEP10_DB出力外部連携データ抽出情報)
     IBatchFlowCommand updateGaibuRenkeiDataoutputJoho() {
         return loopBatch(UpdateGaibuRenkeiDataoutputJohoProcess.class)
                 .arguments(new UpdateGaibuRenkeiDataoutputJohoProcessParameter(
@@ -191,7 +194,7 @@ public class DBE561001_CenterTransmission extends BatchFlowBase<DBE561001_Center
      *
      * @return バッチコマンド
      */
-    @Step(DB出力要介護認定完了情報)
+    @Step(STEP11_DB出力要介護認定完了情報)
     IBatchFlowCommand updateNinteiKanryoJoho() {
         return loopBatch(UpdateNinteiKanryoJohoProcess.class)
                 .arguments(getParameter().toCenterTransmissionProcessParameter()).define();

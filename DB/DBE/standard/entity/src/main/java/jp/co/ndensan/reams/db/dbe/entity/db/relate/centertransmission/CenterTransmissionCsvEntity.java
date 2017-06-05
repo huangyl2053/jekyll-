@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission;
 
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvField;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import lombok.AccessLevel;
 
 /**
  * センター送信データ出力CSVEntityクラスです。
@@ -14,7 +15,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  * @reamsid_L DBE-1520-020 wangxiaodong
  */
 @lombok.Getter
-@lombok.Setter
+@lombok.Setter(AccessLevel.PACKAGE)
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class CenterTransmissionCsvEntity {
 
