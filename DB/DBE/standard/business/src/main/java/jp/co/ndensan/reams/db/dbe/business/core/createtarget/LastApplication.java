@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-1680-010 zhangzhiming
  */
-public class CreateCsvDataBusiness {
+public class LastApplication {
 
     private final CreateTargetCsvRelateEntity entity;
 
@@ -22,7 +22,7 @@ public class CreateCsvDataBusiness {
      *
      * @param entity Csvデータ出力情報
      */
-    public CreateCsvDataBusiness(CreateTargetCsvRelateEntity entity) {
+    public LastApplication(CreateTargetCsvRelateEntity entity) {
         this.entity = entity;
     }
 

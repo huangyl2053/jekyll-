@@ -6,12 +6,10 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.controller.parentdiv.DBE5090001;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import jp.co.ndensan.reams.db.dbe.business.core.createtarget.CreateTargetBusiness;
-import jp.co.ndensan.reams.db.dbe.business.core.createtarget.CreateTargetCsvBusiness;
-import jp.co.ndensan.reams.db.dbe.business.core.createtarget.CreateTargetDataBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.createtarget.ExaminationsPartialResult;
+import jp.co.ndensan.reams.db.dbe.business.core.createtarget.CenterTransmissionRecord;
+import jp.co.ndensan.reams.db.dbe.business.core.createtarget.CenterTransmissionRecords;
 import jp.co.ndensan.reams.db.dbe.definition.message.DbeErrorMessages;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.createtarget.CreateTargetMapperParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5090001.CreateTargetCsvEntity;
@@ -228,7 +226,7 @@ public class CreateTarget {
             return ResponseData.of(div).addValidationMessages(validPair).respond();
         }
         CreateTargetMapperParameter param = getHandler(div).createParam();
-        SearchResult<CreateTargetBusiness> business = CreateTargetManager.createInstance().get対象者一覧情報(param);
+        SearchResult<ExaminationsPartialResult> business = CreateTargetManager.createInstance().get対象者一覧情報(param);
         if (!ResponseHolder.isReRequest() && business.records().isEmpty()) {
             return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
         }
@@ -254,67 +252,20 @@ public class CreateTarget {
      * @return ResponseData<CreateTargetDiv>
      */
     public IDownLoadServletResponse onClick_btnOutputCsv(CreateTargetDiv div, IDownLoadServletResponse response) {
+        CenterTransmissionRecords csvBusiness = CreateTargetManager.createInstance()
+                .getCsv出力用データ(CreateTargetMapperParameter.createCsvDataParam(
+                                findShinseishoKanriNosSelected(div.getDgCreateTargetSummary().getDataSource())
+                        ));
         FileSpoolManager manager = new FileSpoolManager(UzUDE0835SpoolOutputType.EucOther, new RString("DBE509001"), UzUDE0831EucAccesslogFileType.Csv);
-        List<PersonalData> personalDataList = new ArrayList<>();
         RString ファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定支援センター送信ファイル名,
                 RDate.getNowDate(), SubGyomuCode.DBE認定支援);
-        List<dgCreateTargetSummary_Row> rowList = div.getDgCreateTargetSummary().getDataSource();
-        List<RString> shinsei = new ArrayList();
-        for (dgCreateTargetSummary_Row row : rowList) {
-            if (row.getSelected()) {
-                shinsei.add(row.getShinseishokanrino());
-            }
-        }
-        int 連番 = 1;
-        CreateTargetMapperParameter param = CreateTargetMapperParameter.createCsvDataParam(shinsei);
-        List<CreateTargetCsvBusiness> csvBusiness = CreateTargetManager.createInstance().getCsv出力用データ(param).records();
-        List<CreateTargetBusiness> 主治医意見書 = CreateTargetManager.createInstance().get主治医意見書意見項目(param).records();
-        List<CreateTargetBusiness> サービスの状況 = CreateTargetManager.createInstance().getサービスの状況(param).records();
-        List<CreateTargetBusiness> 調査票調査項目 = CreateTargetManager.createInstance().get調査票調査項目(param).records();
-        List<CreateTargetBusiness> 前回調査票調査項目 = CreateTargetManager.createInstance().get前回調査票調査項目(param).records();
-        List<CreateTargetBusiness> 前回サービスの状況 = CreateTargetManager.createInstance().get前回サービスの状況(param).records();
-
-        Map<RString, CreateTargetDataBusiness> dataMap = new HashMap<>();
-        for (CreateTargetCsvBusiness entity : csvBusiness) {
-            CreateTargetDataBusiness dataBusiness = new CreateTargetDataBusiness();
-            List<CreateTargetBusiness> 主治医意見書Business = new ArrayList<>();
-            List<CreateTargetBusiness> サービス状況Business = new ArrayList<>();
-            List<CreateTargetBusiness> 調査項目Business = new ArrayList<>();
-            List<CreateTargetBusiness> 前回サービス状況Business = new ArrayList<>();
-            List<CreateTargetBusiness> 前回調査項目Business = new ArrayList<>();
-            dataBusiness.setCsvBusiness(entity);
-            dataBusiness.set主治医意見書(主治医意見書Business);
-            dataBusiness.setサービスの状況(サービス状況Business);
-            dataBusiness.set調査票調査項目(調査項目Business);
-            dataBusiness.set前回サービスの状況(前回サービス状況Business);
-            dataBusiness.set前回調査票調査項目(前回調査項目Business);
-            dataMap.put(entity.get申請書管理番号(), dataBusiness);
-        }
-        for (CreateTargetBusiness 主治医項目 : 主治医意見書) {
-            List<CreateTargetBusiness> 主治医意見書List = dataMap.get(主治医項目.get申請書管理番号()).get主治医意見書();
-            主治医意見書List.add(主治医項目);
-        }
-        for (CreateTargetBusiness サービス項目 : サービスの状況) {
-            List<CreateTargetBusiness> サービス状況List = dataMap.get(サービス項目.get申請書管理番号()).getサービスの状況();
-            サービス状況List.add(サービス項目);
-        }
-        for (CreateTargetBusiness 調査項目 : 調査票調査項目) {
-            List<CreateTargetBusiness> 調査項目List = dataMap.get(調査項目.get申請書管理番号()).get調査票調査項目();
-            調査項目List.add(調査項目);
-        }
-        for (CreateTargetBusiness 前回調査項目 : 前回調査票調査項目) {
-            List<CreateTargetBusiness> 前回調査項目List = dataMap.get(前回調査項目.get申請書管理番号()).get前回調査票調査項目();
-            前回調査項目List.add(前回調査項目);
-        }
-        for (CreateTargetBusiness 前回サービス項目 : 前回サービスの状況) {
-            List<CreateTargetBusiness> 前回サービス項目List = dataMap.get(前回サービス項目.get申請書管理番号()).get前回サービスの状況();
-            前回サービス項目List.add(前回サービス項目);
-        }
         RString filePath = Path.combinePath(manager.getEucOutputDirectry(), ファイル名);
+        int 連番 = 1;
+        List<PersonalData> personalDataList = new ArrayList<>();
         try (CsvWriter<CreateTargetCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(false).build()) {
-            for (CreateTargetDataBusiness business : dataMap.values()) {
+            for (CenterTransmissionRecord business : csvBusiness) {
                 csvWriter.writeLine(getCsvData(business, 連番));
                 連番 = 連番 + 1;
                 CreateTargetManager.createInstance().update(business.getCsvBusiness().get申請書管理番号());
@@ -334,7 +285,17 @@ public class CreateTarget {
         return EucDownload.directAccessDownload(SubGyomuCode.DBE認定支援, manager.getSharedFileName(), manager.getSharedFileId(), response);
     }
 
-    private PersonalData toPersonalData(RString 証記載保険者番号, RString 被保険者番号, RString 申請書管理番号) {
+    private static List<RString> findShinseishoKanriNosSelected(List<dgCreateTargetSummary_Row> rowList) {
+        List<RString> list = new ArrayList();
+        for (dgCreateTargetSummary_Row row : rowList) {
+            if (row.getSelected()) {
+                list.add(row.getShinseishokanrino());
+            }
+        }
+        return list;
+    }
+
+    private static PersonalData toPersonalData(RString 証記載保険者番号, RString 被保険者番号, RString 申請書管理番号) {
         ShikibetsuCode shikibetsuCode = new ShikibetsuCode(証記載保険者番号.substring(0, 5).concat(被保険者番号));
         ExpandedInformation expandedInformation = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号);
         return PersonalData.of(shikibetsuCode, expandedInformation);
@@ -352,7 +313,7 @@ public class CreateTarget {
 
     }
 
-    private CreateTargetCsvEntity get主治医意見書(CreateTargetDataBusiness business, CreateTargetCsvEntity data) {
+    private CreateTargetCsvEntity get主治医意見書(CenterTransmissionRecord business, CreateTargetCsvEntity data) {
         if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(business.getCsvBusiness().get識別コード())
                 || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(business.getCsvBusiness().get識別コード())) {
             data.set意見書短期記憶(get意見書項目(business.get主治医意見書(), 連番16));
@@ -370,8 +331,8 @@ public class CreateTarget {
         return data;
     }
 
-    private RString get意見書項目(List<CreateTargetBusiness> business, int 連番) {
-        for (CreateTargetBusiness item : business) {
+    private RString get意見書項目(List<ExaminationsPartialResult> business, int 連番) {
+        for (ExaminationsPartialResult item : business) {
             if (連番 == item.get連番()) {
                 return item.get項目();
             }
@@ -379,7 +340,7 @@ public class CreateTarget {
         return RString.EMPTY;
     }
 
-    private CreateTargetCsvEntity getサービスの状況(CreateTargetDataBusiness business, CreateTargetCsvEntity data) {
+    private CreateTargetCsvEntity getサービスの状況(CenterTransmissionRecord business, CreateTargetCsvEntity data) {
         setサービスの状況初期化(data);
         if (ServiceKubunCode.介護給付サービス.getコード().equals(business.getCsvBusiness().get現在のサービス区分コード())) {
             data.set訪問介護ホームヘルプサービス(getサービス状況項目(business.getサービスの状況(), 連番0));
@@ -462,14 +423,14 @@ public class CreateTarget {
         return data;
     }
 
-    private RString getサービス状況項目(List<CreateTargetBusiness> business, int 連番) {
+    private RString getサービス状況項目(List<ExaminationsPartialResult> business, int 連番) {
         if (連番 < business.size()) {
             return editNullToZero(business.get(連番).get項目());
         }
         return Zero;
     }
 
-    private CreateTargetCsvEntity get調査票調査項目(CreateTargetDataBusiness business, CreateTargetCsvEntity data) {
+    private CreateTargetCsvEntity get調査票調査項目(CenterTransmissionRecord business, CreateTargetCsvEntity data) {
         data.set麻痺左上肢(get調査票項目(business.get調査票調査項目(), 連番0));
         data.set麻痺右上肢(get調査票項目(business.get調査票調査項目(), 連番1));
         data.set麻痺左下肢(get調査票項目(business.get調査票調査項目(), 連番2));
@@ -569,7 +530,7 @@ public class CreateTarget {
         return data;
     }
 
-    private CreateTargetCsvEntity get調査票調査項目01(CreateTargetDataBusiness business, CreateTargetCsvEntity data) {
+    private CreateTargetCsvEntity get調査票調査項目01(CenterTransmissionRecord business, CreateTargetCsvEntity data) {
         if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(business.getCsvBusiness().get識別コード())
                 || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(business.getCsvBusiness().get識別コード())) {
             data.set両足での立位(get調査票項目(business.get調査票調査項目(), 連番14));
@@ -688,14 +649,14 @@ public class CreateTarget {
         return data;
     }
 
-    private RString get調査票項目(List<CreateTargetBusiness> business, int 連番) {
+    private RString get調査票項目(List<ExaminationsPartialResult> business, int 連番) {
         if (連番 < business.size()) {
             return business.get(連番).get項目();
         }
         return RString.EMPTY;
     }
 
-    private CreateTargetCsvEntity get前回調査票調査項目01(CreateTargetDataBusiness business, CreateTargetCsvEntity data) {
+    private CreateTargetCsvEntity get前回調査票調査項目01(CenterTransmissionRecord business, CreateTargetCsvEntity data) {
         if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(business.getCsvBusiness().getCreateCsvDataBusiness().get前回識別コード())
                 || KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード()
                 .equals(business.getCsvBusiness().getCreateCsvDataBusiness().get前回識別コード())) {
@@ -816,7 +777,7 @@ public class CreateTarget {
         return data;
     }
 
-    private CreateTargetCsvEntity get前回調査票調査項目(CreateTargetDataBusiness business, CreateTargetCsvEntity data) {
+    private CreateTargetCsvEntity get前回調査票調査項目(CenterTransmissionRecord business, CreateTargetCsvEntity data) {
         data.set前回結果_麻痺左上肢(get前回調査票項目(business.get前回調査票調査項目(), 連番0));
         data.set前回結果_麻痺右上肢(get前回調査票項目(business.get前回調査票調査項目(), 連番1));
         data.set前回結果_麻痺左下肢(get前回調査票項目(business.get前回調査票調査項目(), 連番2));
@@ -917,14 +878,14 @@ public class CreateTarget {
         return data;
     }
 
-    private RString get前回調査票項目(List<CreateTargetBusiness> business, int 連番) {
+    private RString get前回調査票項目(List<ExaminationsPartialResult> business, int 連番) {
         if (連番 < business.size()) {
             return business.get(連番).get項目();
         }
         return RString.EMPTY;
     }
 
-    private CreateTargetCsvEntity get前回サービスの状況(CreateTargetDataBusiness business, CreateTargetCsvEntity data) {
+    private CreateTargetCsvEntity get前回サービスの状況(CenterTransmissionRecord business, CreateTargetCsvEntity data) {
         set前回サービスの状況初期化(business, data);
         if (ServiceKubunCode.介護給付サービス.getコード().equals(business.getCsvBusiness().getCreateCsvDataBusiness()
                 .get前回結果_現在のサービス区分コード())) {
@@ -1003,14 +964,14 @@ public class CreateTarget {
         return data;
     }
 
-    private RString get前回サービス状況項目(List<CreateTargetBusiness> business, int 連番) {
+    private RString get前回サービス状況項目(List<ExaminationsPartialResult> business, int 連番) {
         if (連番 < business.size()) {
             return editNullToZero(business.get(連番).get項目());
         }
         return Zero;
     }
 
-    private CreateTargetCsvEntity getCsvData(CreateTargetDataBusiness business, int 連番) {
+    private CreateTargetCsvEntity getCsvData(CenterTransmissionRecord business, int 連番) {
         CreateTargetCsvEntity data = new CreateTargetCsvEntity();
         get主治医意見書(business, data);
         getサービスの状況(business, data);
@@ -1197,7 +1158,7 @@ public class CreateTarget {
         data.set介護予防認知症対応型共同生活介護グループホーム(Zero);
     }
 
-    private void set前回サービスの状況初期化(CreateTargetDataBusiness business, CreateTargetCsvEntity data) {
+    private void set前回サービスの状況初期化(CenterTransmissionRecord business, CreateTargetCsvEntity data) {
         if (has前回結果(business)) {
             data.set前回結果_訪問介護ホームヘルプサービス(Zero);
             data.set前回結果_訪問入浴介護(Zero);
@@ -1243,7 +1204,7 @@ public class CreateTarget {
         return RString.isNullOrEmpty(現在の状況) ? 現在の状況初期値 : 現在の状況;
     }
 
-    private RString edit前回結果_現在の状況(CreateTargetDataBusiness business) {
+    private RString edit前回結果_現在の状況(CenterTransmissionRecord business) {
         if (RString.isNullOrEmpty(business.getCsvBusiness().getCreateCsvDataBusiness().get前回結果_申請日())) {
             return RString.EMPTY;
         } else {
@@ -1252,11 +1213,11 @@ public class CreateTarget {
         }
     }
 
-    private boolean has前回結果(CreateTargetDataBusiness business) {
+    private boolean has前回結果(CenterTransmissionRecord business) {
         return !RString.isNullOrEmpty(business.getCsvBusiness().getCreateCsvDataBusiness().get前回結果_申請日());
     }
 
-    private RString edit前回の認定審査会結果(CreateTargetDataBusiness business) {
+    private RString edit前回の認定審査会結果(CenterTransmissionRecord business) {
         if (RString.isNullOrEmpty(business.getCsvBusiness().get前回の認定審査会結果())) {
             return 前回の認定審査会結果初期値;
         }

@@ -13,12 +13,12 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-1680-010 zhangzhiming
  */
-public class CreateTargetCsvBusiness {
+public class ApplicationsResultMain {
 
     private static final int GOGITAI_CD_LENGTH = 6;
     private static final RString DEFAULT_GOGITAI_CD = RString.EMPTY.padZeroToLeft(GOGITAI_CD_LENGTH);
     private final CreateTargetCsvRelateEntity entity;
-    private final CreateCsvDataBusiness createBusiness;
+    private final LastApplication createBusiness;
 
     /**
      * コンストラクタです。
@@ -26,7 +26,7 @@ public class CreateTargetCsvBusiness {
      * @param entity Csvデータ出力情報
      * @param createBusiness Csvデータ出力情報
      */
-    public CreateTargetCsvBusiness(CreateTargetCsvRelateEntity entity, CreateCsvDataBusiness createBusiness) {
+    public ApplicationsResultMain(CreateTargetCsvRelateEntity entity, LastApplication createBusiness) {
         this.entity = entity;
         this.createBusiness = createBusiness;
     }
@@ -37,8 +37,8 @@ public class CreateTargetCsvBusiness {
      * @param entity Csvデータ出力情報
      * @return Csvデータ出力情報
      */
-    public static CreateTargetCsvBusiness creatCreateTargetCsvBusiness(CreateTargetCsvRelateEntity entity) {
-        return new CreateTargetCsvBusiness(entity, new CreateCsvDataBusiness(entity));
+    public static ApplicationsResultMain creatCreateTargetCsvBusiness(CreateTargetCsvRelateEntity entity) {
+        return new ApplicationsResultMain(entity, new LastApplication(entity));
     }
 
     /**
@@ -46,7 +46,7 @@ public class CreateTargetCsvBusiness {
      *
      * @return 申請書管理番号
      */
-    public CreateCsvDataBusiness getCreateCsvDataBusiness() {
+    public LastApplication getCreateCsvDataBusiness() {
         return createBusiness;
     }
 

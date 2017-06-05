@@ -8,8 +8,10 @@ package jp.co.ndensan.reams.db.dbe.service.core.createtarget;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.createtarget.CreateTargetBusiness;
-import jp.co.ndensan.reams.db.dbe.business.core.createtarget.CreateTargetCsvBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.createtarget.ExaminationsPartialResult;
+import jp.co.ndensan.reams.db.dbe.business.core.createtarget.ApplicationsResultMain;
+import jp.co.ndensan.reams.db.dbe.business.core.createtarget.CenterTransmissionRecords;
+import jp.co.ndensan.reams.db.dbe.business.core.createtarget.CenterTransmissionRecords.CenterTransmissionRecordsBuilder;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.createtarget.CreateTargetMapperParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.createtarget.CreateTargetCsvRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.createtarget.CreateTargetRelateEntity;
@@ -77,138 +79,148 @@ public class CreateTargetManager {
      * @return SearchResult<CreateTargetBusiness> 対象者一覧情報
      */
     @Transaction
-    public SearchResult<CreateTargetBusiness> get対象者一覧情報(CreateTargetMapperParameter param) {
-        List<CreateTargetBusiness> resultList = new ArrayList<>();
+    public SearchResult<ExaminationsPartialResult> get対象者一覧情報(CreateTargetMapperParameter param) {
+        List<ExaminationsPartialResult> resultList = new ArrayList<>();
         ICreateTargetMapper mapper = mapperProvider.create(ICreateTargetMapper.class);
         List<CreateTargetRelateEntity> entityList = mapper.getTaishouJouhou(param);
         if (entityList == null || entityList.isEmpty()) {
-            return SearchResult.of(Collections.<CreateTargetBusiness>emptyList(), 0, false);
+            return SearchResult.of(Collections.<ExaminationsPartialResult>emptyList(), 0, false);
         }
         int totalcount = entityList.get(0).getTotalCount();
         for (CreateTargetRelateEntity entity : entityList) {
-            resultList.add(new CreateTargetBusiness(entity));
+            resultList.add(new ExaminationsPartialResult(entity));
         }
         return SearchResult.of(resultList, totalcount, param.get件数() < totalcount);
+    }
+
+    /**
+     * @param param {@link CreateTargetMapperParameter}
+     * @return センター送信用データ出力対象
+     */
+    public CenterTransmissionRecords getCsv出力用データ(CreateTargetMapperParameter param) {
+        return new CenterTransmissionRecordsBuilder()
+                .setMain(getMain(param))
+                .setIkensho(get主治医意見書意見項目(param))
+                .setServiceJokyo(getサービスの状況(param))
+                .setKihonChosa(get調査票調査項目(param))
+                .setLastServiceJokyo(get前回サービスの状況(param))
+                .setLastKihonChosa(get前回調査票調査項目(param))
+                .build();
     }
 
     /**
      * CSVファイル出力用データの抽出情報を検索します。
      *
      * @param param センター送信データ
-     * @return SearchResult<CreateTargetCsvBusiness> CSVファイル出力用データ
+     * @return CSVファイル出力用データ
      */
-    @Transaction
-    public SearchResult<CreateTargetCsvBusiness> getCsv出力用データ(CreateTargetMapperParameter param) {
-        List<CreateTargetCsvBusiness> resultList = new ArrayList<>();
+    private List<ApplicationsResultMain> getMain(CreateTargetMapperParameter param) {
+        List<ApplicationsResultMain> resultList = new ArrayList<>();
         ICreateTargetMapper mapper = mapperProvider.create(ICreateTargetMapper.class);
         List<CreateTargetCsvRelateEntity> entityList = mapper.getCsvData(param);
         if (entityList == null || entityList.isEmpty()) {
-            return SearchResult.of(Collections.<CreateTargetCsvBusiness>emptyList(), 0, false);
+            return Collections.<ApplicationsResultMain>emptyList();
         }
         for (CreateTargetCsvRelateEntity entity : entityList) {
-            resultList.add(CreateTargetCsvBusiness.creatCreateTargetCsvBusiness(entity));
+            resultList.add(ApplicationsResultMain.creatCreateTargetCsvBusiness(entity));
         }
-        return SearchResult.of(resultList, 0, false);
+        return resultList;
     }
 
     /**
      * 検索条件に従い、主治医意見書意見項目を検索します。
      *
      * @param param センター送信データ
-     * @return SearchResult<CreateTargetBusiness> 主治医意見書情報
+     * @return 主治医意見書情報
      */
-    @Transaction
-    public SearchResult<CreateTargetBusiness> get主治医意見書意見項目(CreateTargetMapperParameter param) {
-        List<CreateTargetBusiness> resultList = new ArrayList<>();
+    private List<ExaminationsPartialResult> get主治医意見書意見項目(CreateTargetMapperParameter param) {
+        List<ExaminationsPartialResult> resultList = new ArrayList<>();
         ICreateTargetMapper mapper = mapperProvider.create(ICreateTargetMapper.class);
         List<CreateTargetRelateEntity> entityList = mapper.get主治医意見書意見項目(param);
         if (entityList == null || entityList.isEmpty()) {
-            return SearchResult.of(Collections.<CreateTargetBusiness>emptyList(), 0, false);
+            return Collections.<ExaminationsPartialResult>emptyList();
         }
         for (CreateTargetRelateEntity entity : entityList) {
-            resultList.add(new CreateTargetBusiness(entity));
+            resultList.add(new ExaminationsPartialResult(entity));
         }
-        return SearchResult.of(resultList, 0, false);
+        return resultList;
     }
 
     /**
      * 検索条件に従い、サービスの状況を検索します。
      *
      * @param param センター送信データ
-     * @return SearchResult<CreateTargetBusiness> サービスの状況情報
+     * @return サービスの状況情報
      */
-    @Transaction
-    public SearchResult<CreateTargetBusiness> getサービスの状況(CreateTargetMapperParameter param) {
-        List<CreateTargetBusiness> resultList = new ArrayList<>();
+    private List<ExaminationsPartialResult> getサービスの状況(CreateTargetMapperParameter param) {
+        List<ExaminationsPartialResult> resultList = new ArrayList<>();
         ICreateTargetMapper mapper = mapperProvider.create(ICreateTargetMapper.class);
         List<CreateTargetRelateEntity> entityList = mapper.getサービスの状況(param);
         if (entityList == null || entityList.isEmpty()) {
-            return SearchResult.of(Collections.<CreateTargetBusiness>emptyList(), 0, false);
+            return Collections.<ExaminationsPartialResult>emptyList();
         }
         for (CreateTargetRelateEntity entity : entityList) {
-            resultList.add(new CreateTargetBusiness(entity));
+            resultList.add(new ExaminationsPartialResult(entity));
         }
-        return SearchResult.of(resultList, 0, false);
+        return resultList;
     }
 
     /**
      * 検索条件に従い、調査票調査項目を検索します。
      *
      * @param param センター送信データ
-     * @return SearchResult<CreateTargetBusiness> 調査票調査項目情報
+     * @return 調査票調査項目情報
      */
-    @Transaction
-    public SearchResult<CreateTargetBusiness> get調査票調査項目(CreateTargetMapperParameter param) {
-        List<CreateTargetBusiness> resultList = new ArrayList<>();
+    private List<ExaminationsPartialResult> get調査票調査項目(CreateTargetMapperParameter param) {
+        List<ExaminationsPartialResult> resultList = new ArrayList<>();
         ICreateTargetMapper mapper = mapperProvider.create(ICreateTargetMapper.class);
         List<CreateTargetRelateEntity> entityList = mapper.get調査票調査項目(param);
         if (entityList == null || entityList.isEmpty()) {
-            return SearchResult.of(Collections.<CreateTargetBusiness>emptyList(), 0, false);
+            return Collections.<ExaminationsPartialResult>emptyList();
         }
         for (CreateTargetRelateEntity entity : entityList) {
-            resultList.add(new CreateTargetBusiness(entity));
+            resultList.add(new ExaminationsPartialResult(entity));
         }
-        return SearchResult.of(resultList, 0, false);
-    }
-
-    /**
-     * 検索条件に従い、前回調査票調査項目を検索します。
-     *
-     * @param param センター送信データ
-     * @return SearchResult<CreateTargetBusiness> 前回調査票調査項目情報
-     */
-    @Transaction
-    public SearchResult<CreateTargetBusiness> get前回調査票調査項目(CreateTargetMapperParameter param) {
-        List<CreateTargetBusiness> resultList = new ArrayList<>();
-        ICreateTargetMapper mapper = mapperProvider.create(ICreateTargetMapper.class);
-        List<CreateTargetRelateEntity> entityList = mapper.get前回調査票調査項目(param);
-        if (entityList == null || entityList.isEmpty()) {
-            return SearchResult.of(Collections.<CreateTargetBusiness>emptyList(), 0, false);
-        }
-        for (CreateTargetRelateEntity entity : entityList) {
-            resultList.add(new CreateTargetBusiness(entity));
-        }
-        return SearchResult.of(resultList, 0, false);
+        return resultList;
     }
 
     /**
      * 検索条件に従い、前回サービスの状況を検索します。
      *
      * @param param センター送信データ
-     * @return SearchResult<CreateTargetBusiness> 前回サービスの状況情報
+     * @return 前回サービスの状況情報
      */
-    @Transaction
-    public SearchResult<CreateTargetBusiness> get前回サービスの状況(CreateTargetMapperParameter param) {
-        List<CreateTargetBusiness> resultList = new ArrayList<>();
+    private List<ExaminationsPartialResult> get前回サービスの状況(CreateTargetMapperParameter param) {
+        List<ExaminationsPartialResult> resultList = new ArrayList<>();
         ICreateTargetMapper mapper = mapperProvider.create(ICreateTargetMapper.class);
         List<CreateTargetRelateEntity> entityList = mapper.get前回サービスの状況(param);
         if (entityList == null || entityList.isEmpty()) {
-            return SearchResult.of(Collections.<CreateTargetBusiness>emptyList(), 0, false);
+            return Collections.<ExaminationsPartialResult>emptyList();
         }
         for (CreateTargetRelateEntity entity : entityList) {
-            resultList.add(new CreateTargetBusiness(entity));
+            resultList.add(new ExaminationsPartialResult(entity));
         }
-        return SearchResult.of(resultList, 0, false);
+        return resultList;
+    }
+
+    /**
+     * 検索条件に従い、前回調査票調査項目を検索します。
+     *
+     * @param param センター送信データ
+     * @return 前回調査票調査項目情報
+     */
+    @Transaction
+    public List<ExaminationsPartialResult> get前回調査票調査項目(CreateTargetMapperParameter param) {
+        List<ExaminationsPartialResult> resultList = new ArrayList<>();
+        ICreateTargetMapper mapper = mapperProvider.create(ICreateTargetMapper.class);
+        List<CreateTargetRelateEntity> entityList = mapper.get前回調査票調査項目(param);
+        if (entityList == null || entityList.isEmpty()) {
+            return Collections.<ExaminationsPartialResult>emptyList();
+        }
+        for (CreateTargetRelateEntity entity : entityList) {
+            resultList.add(new ExaminationsPartialResult(entity));
+        }
+        return resultList;
     }
 
     /**
