@@ -10,7 +10,7 @@ import java.util.Objects;
 /**
  * NCI認定情報のキーです。
  */
-final class NCINinteiKey {
+public final class NCINinteiKey {
 
     private static final int MIN_EDABAN = 0;
     private static final int MAX_EDABAN = 9;
@@ -26,7 +26,7 @@ final class NCINinteiKey {
      * @param subKey {@link NCINinteiSubKey}
      * @return 最初のキー
      */
-    public static NCINinteiKey first(NCINinteiSubKey subKey) {
+    static NCINinteiKey first(NCINinteiSubKey subKey) {
         return new NCINinteiKey(subKey);
     }
 
@@ -43,10 +43,10 @@ final class NCINinteiKey {
     }
 
     /**
-     * @return キーが不正の場合、{@code true}
+     * @return 正常なキーである場合、{@code true}.
      */
-    public boolean inValid() {
-        return MAX_EDABAN < this.枝番;
+    public boolean isValid() {
+        return MIN_EDABAN <= this.枝番 && this.枝番 <= MAX_EDABAN;
     }
 
     /**

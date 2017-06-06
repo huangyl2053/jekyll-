@@ -263,7 +263,7 @@ public class CreateTarget {
      * @return ResponseData<CreateTargetDiv>
      */
     public IDownLoadServletResponse onClick_btnOutputCsv(CreateTargetDiv div, IDownLoadServletResponse response) {
-        CenterTransmissionRecords csvBusiness = CreateTargetManager.createInstance()
+        CenterTransmissionRecords rocords = CreateTargetManager.createInstance()
                 .getCsv出力用データ(CreateTargetMapperParameter.createCsvDataParam(
                                 findShinseishoKanriNosSelected(div.getDgCreateTargetSummary().getDataSource())
                         ));
@@ -276,14 +276,14 @@ public class CreateTarget {
         try (CsvWriter<CreateTargetCsvEntity> csvWriter
                 = new CsvWriter.InstanceBuilder(filePath).canAppend(false).setDelimiter(CSV_WRITER_DELIMITER).setEncode(Encode.SJIS).
                 setEnclosure(RString.EMPTY).setNewLine(NewLine.CRLF).hasHeader(false).build()) {
-            for (CenterTransmissionRecord business : csvBusiness) {
-                csvWriter.writeLine(getCsvData(business, 連番));
+            for (CenterTransmissionRecord record : rocords) {
+                csvWriter.writeLine(getCsvData(record, 連番));
                 連番 = 連番 + 1;
-                CreateTargetManager.createInstance().update(business.getCsvBusiness().get申請書管理番号());
-                CreateTargetManager.createInstance().insertUpdate(business.getCsvBusiness().get申請書管理番号());
+                CreateTargetManager.createInstance().update(record.getCsvBusiness().get申請書管理番号());
+                CreateTargetManager.createInstance().insertUpdate(record.getCsvBusiness().get申請書管理番号());
 
-                personalDataList.add(toPersonalData(business.getCsvBusiness().get保険者番号(),
-                        business.getCsvBusiness().get被保険者番号(), business.getCsvBusiness().get申請書管理番号()));
+                personalDataList.add(toPersonalData(record.getCsvBusiness().get保険者番号(),
+                        record.getCsvBusiness().get被保険者番号(), record.getCsvBusiness().get申請書管理番号()));
             }
             csvWriter.close();
         }

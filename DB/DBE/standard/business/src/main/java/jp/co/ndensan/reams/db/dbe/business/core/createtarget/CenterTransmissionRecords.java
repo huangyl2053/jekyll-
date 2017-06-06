@@ -22,18 +22,13 @@ public class CenterTransmissionRecords implements Iterable<CenterTransmissionRec
     private final Map<RString, CenterTransmissionRecord> elements;
 
     private CenterTransmissionRecords(CenterTransmissionRecordsBuilder builder) {
-        Map<NCINinteiSubKey, LinkedList<NCINinteiKey>> keys = new HashMap<>();
+        NCINinteiKeys keys = new NCINinteiKeys();
         Map<RString, CenterTransmissionRecord> map = new HashMap<>();
         for (ApplicationsResultMain entity : builder.申請結果Main) {
-            NCINinteiSubKey subKey = new NCINinteiSubKey(entity.get保険者番号(), entity.get被保険者番号(), entity.get認定申請日());
-            NCINinteiKey key = findKey(subKey, keys);
-            if (key.inValid()) {
+            NCINinteiKey key = keys.generateKey(entity.get保険者番号(), entity.get被保険者番号(), entity.get認定申請日());
+            if (!key.isValid()) {
                 continue;
             }
-            if (!keys.containsKey(subKey)) {
-                keys.put(subKey, new LinkedList<NCINinteiKey>());
-            }
-            keys.get(subKey).addLast(key);
             map.put(entity.get申請書管理番号(), new CenterTransmissionRecord(entity, key.edaban()));
         }
         for (ExaminationsPartialResult 主治医項目 : builder.主治医意見書) {
@@ -52,10 +47,6 @@ public class CenterTransmissionRecords implements Iterable<CenterTransmissionRec
             map.get(前回サービス項目.get申請書管理番号()).get前回サービスの状況().add(前回サービス項目);
         }
         this.elements = Collections.unmodifiableMap(map);
-    }
-
-    private static NCINinteiKey findKey(NCINinteiSubKey subKey, Map<NCINinteiSubKey, LinkedList<NCINinteiKey>> keys) {
-        return keys.containsKey(subKey) ? keys.get(subKey).getLast().next() : NCINinteiKey.first(subKey);
     }
 
     /**
