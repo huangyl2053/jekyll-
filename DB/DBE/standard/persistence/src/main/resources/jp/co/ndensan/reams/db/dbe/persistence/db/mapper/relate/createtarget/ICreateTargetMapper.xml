@@ -167,15 +167,15 @@
         <result property="前回の認定審査会結果"   column="A_zenYokaigoKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="前回の認定有効期間開始"   column="A_zenkaiYukoKikanStart" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="前回の認定有効期間終了"   column="A_zenkaiYukoKikanEnd" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="主治医医療機関番号"   column="A_shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="主治医番号"   column="A_shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="主治医医療機関番号"   column="shujiiIryokikanCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="主治医番号"   column="shujiiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="意見書依頼日"   column="D_ikenshoSakuseiIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="意見書入手日"   column="E_ikenshoJuryoYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="調査依頼日"  column="G_ninteichosaIraiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="調査実施日"  column="H_ninteichosaJisshiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="指定居宅介護支援事業者等番号"  column="I_ninteichosaItakusakiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="委託区分"  column="I_chosaItakuKubun" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="認定調査員番号"  column="G_ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定調査員番号"  column="ninteiChosainCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="認定調査員資格コード"  column="J_chosainShikaku" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="一次判定日"  column="K_ichijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="一次判定結果"  column="K_ichijiHanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -199,7 +199,7 @@
         <result property="状態の安定性"  column="K_jotaiAnteiseiCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="認知症自立度Ⅱ以上の蓋然性"  column="K_ninchishoJiritsudoIIijoNoGaizensei" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="認知機能及び状態安定性から推定される給付区分"  column="K_suiteiKyufuKubunCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
-        <result property="認定審査会資料作成日"  column="M_shinsakaiShiryoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
+        <result property="認定審査会資料作成日"  column="shinsakaiShiryoSakuseiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="認定審査会予定日"  column="M_shinsakaiKaisaiYoteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="合議体番号"  column="M_gogitaiNo" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
         <result property="二次判定日"  column="N_nijiHanteiYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.RStringTypeHandler" />
@@ -250,7 +250,7 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.createtarget.CreateTargetMapperParameter"
             resultMap="resultMap_CreateTargetCsvRelateEntity" fetchSize="500">
         SELECT
-            A."shinseishoKanriNo"                      AS "A_shinseishoKanriNo"
+              A."shinseishoKanriNo"                      AS "A_shinseishoKanriNo"
             , A."koroshoIfShikibetsuCode"                AS "A_koroshoIfShikibetsuCode"
             , A."shoKisaiHokenshaNo"                     AS "A_shoKisaiHokenshaNo"
             , A."hihokenshaNo"                           AS "A_hihokenshaNo"
@@ -274,15 +274,15 @@
             , A."zenYokaigoKubunCode"                    AS "A_zenYokaigoKubunCode"
             , A."zenkaiYukoKikanStart"                   AS "A_zenkaiYukoKikanStart"
             , A."zenkaiYukoKikanEnd"                     AS "A_zenkaiYukoKikanEnd"
-            , A."shujiiIryokikanCode"                    AS "A_shujiiIryokikanCode"
-            , A."shujiiCode"                             AS "A_shujiiCode"
+            , E."shujiiIryoKikanCode"                    AS "shujiiIryokikanCode"
+            , E."shujiiCode"                             AS "shujiiCode"
             , D."ikenshoSakuseiIraiYMD"                  AS "D_ikenshoSakuseiIraiYMD"
             , E."ikenshoJuryoYMD"                        AS "E_ikenshoJuryoYMD"
-            , G."iraishoShutsuryokuYMD"                  AS "G_ninteichosaIraiYMD"
+            , G."ninteichosaIraiYMD"                     AS "G_ninteichosaIraiYMD"
             , H."ninteichosaJisshiYMD"                   AS "H_ninteichosaJisshiYMD"
             , I."ninteichosaItakusakiCode"               AS "I_ninteichosaItakusakiCode"
             , I."chosaItakuKubun"                        AS "I_chosaItakuKubun"
-            , G."ninteiChosainCode"                      AS "G_ninteiChosainCode"
+            , J."ninteiChosainCode"                      AS "ninteiChosainCode"
             , J."chosainShikaku"                         AS "J_chosainShikaku"
             , K."ichijiHanteiYMD"                        AS "K_ichijiHanteiYMD"
             , K."ichijiHanteiKekkaCode"                  AS "K_ichijiHanteiKekkaCode"
@@ -306,7 +306,7 @@
             , K."jotaiAnteiseiCode"                      AS "K_jotaiAnteiseiCode"
             , K."ninchishoJiritsudoIIijoNoGaizensei"     AS "K_ninchishoJiritsudoIIijoNoGaizensei"
             , K."suiteiKyufuKubunCode"                   AS "K_suiteiKyufuKubunCode"
-            , M."shinsakaiShiryoSakuseiYMD"              AS "M_shinsakaiShiryoSakuseiYMD"
+            , L."shinsakaiShiryoSakuseiYMD"              AS "shinsakaiShiryoSakuseiYMD"
             , M."shinsakaiKaisaiYoteiYMD"                AS "M_shinsakaiKaisaiYoteiYMD"
             , M."gogitaiNo"                              AS "M_gogitaiNo"
             , N."nijiHanteiYMD"                          AS "N_nijiHanteiYMD"
