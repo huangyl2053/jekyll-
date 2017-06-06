@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -21,9 +22,19 @@ public class CenterTransmissionRecords implements Iterable<CenterTransmissionRec
     private final Map<RString, CenterTransmissionRecord> elements;
 
     private CenterTransmissionRecords(CenterTransmissionRecordsBuilder builder) {
+        Map<NCINinteiSubKey, LinkedList<NCINinteiKey>> keys = new HashMap<>();
         Map<RString, CenterTransmissionRecord> map = new HashMap<>();
         for (ApplicationsResultMain entity : builder.申請結果Main) {
-            map.put(entity.get申請書管理番号(), new CenterTransmissionRecord(entity));
+            NCINinteiSubKey subKey = new NCINinteiSubKey(entity.get保険者番号(), entity.get被保険者番号(), entity.get認定申請日());
+            NCINinteiKey key = findKey(subKey, keys);
+            if (key.inValid()) {
+                continue;
+            }
+            if (!keys.containsKey(subKey)) {
+                keys.put(subKey, new LinkedList<NCINinteiKey>());
+            }
+            keys.get(subKey).addLast(key);
+            map.put(entity.get申請書管理番号(), new CenterTransmissionRecord(entity, key.edaban()));
         }
         for (ExaminationsPartialResult 主治医項目 : builder.主治医意見書) {
             map.get(主治医項目.get申請書管理番号()).get主治医意見書().add(主治医項目);
@@ -41,6 +52,20 @@ public class CenterTransmissionRecords implements Iterable<CenterTransmissionRec
             map.get(前回サービス項目.get申請書管理番号()).get前回サービスの状況().add(前回サービス項目);
         }
         this.elements = Collections.unmodifiableMap(map);
+    }
+
+    private static NCINinteiKey findKey(NCINinteiSubKey subKey, Map<NCINinteiSubKey, LinkedList<NCINinteiKey>> keys) {
+        return keys.containsKey(subKey) ? keys.get(subKey).getLast().next() : NCINinteiKey.first(subKey);
+    }
+
+    /**
+     * テスト用。指定の申請書管理番号に該当する要素を返します。
+     *
+     * @param 申請書管理番号 申請書管理番号
+     * @return 指定の申請書管理番号に該当する要素
+     */
+    CenterTransmissionRecord get(RString 申請書管理番号) {
+        return this.elements.get(申請書管理番号);
     }
 
     @Override
@@ -64,6 +89,11 @@ public class CenterTransmissionRecords implements Iterable<CenterTransmissionRec
          * インスタンスを生成します。
          */
         public CenterTransmissionRecordsBuilder() {
+            this.主治医意見書 = new ArrayList<>();
+            this.サービスの状況 = new ArrayList<>();
+            this.調査票調査項目 = new ArrayList<>();
+            this.前回調査票調査項目 = new ArrayList<>();
+            this.前回サービスの状況 = new ArrayList<>();
         }
 
         /**

@@ -398,7 +398,11 @@ public class ApplicationsResultMain {
      * @return 委託区分
      */
     public RString get委託区分() {
-        return entity.get委託区分();
+        return trim(entity.get委託区分());
+    }
+
+    private static RString trim(RString rStr) {
+        return RString.isNullOrEmpty(rStr) ? RString.EMPTY : rStr.trim();
     }
 
     /**
