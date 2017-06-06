@@ -994,6 +994,11 @@
           <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5502ShinsakaiWariateJohoMapper.allColumns_DbT5502ShinsakaiWariateJoho" />
         FROM
           rgdb."DbT5502ShinsakaiWariateJoho" AS "DbT5502ShinsakaiWariateJoho"
+        INNER JOIN
+            rgdb."DbT5101NinteiShinseiJoho" AS dbT5101
+          ON dbT5101."shinseishoKanriNo" = "DbT5502ShinsakaiWariateJoho"."shinseishoKanriNo"
+         AND dbT5101."shoriJotaiKubun" IN ('0', '3')
+         AND dbt5101."logicalDeletedFlag" = FALSE
         WHERE
           "DbT5502ShinsakaiWariateJoho"."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
         <if test="isSakuseiJokenHani">
@@ -1011,6 +1016,11 @@
           <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5504ShinsakaiWariateJohoKenshuMapper.allColumns_DbT5504ShinsakaiWariateJohoKenshu" />
         FROM
           rgdb."DbT5504ShinsakaiWariateJohoKenshu" AS "DbT5504ShinsakaiWariateJohoKenshu"
+        INNER JOIN
+            rgdb."DbT5101NinteiShinseiJoho" AS dbT5101
+          ON dbT5101."shinseishoKanriNo" = "DbT5504ShinsakaiWariateJohoKenshu"."shinseishoKanriNo"
+         AND dbT5101."shoriJotaiKubun" IN ('0', '3')
+         AND dbt5101."logicalDeletedFlag" = FALSE
         WHERE
           "DbT5504ShinsakaiWariateJohoKenshu"."shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
         <if test="isSakuseiJokenHani">
