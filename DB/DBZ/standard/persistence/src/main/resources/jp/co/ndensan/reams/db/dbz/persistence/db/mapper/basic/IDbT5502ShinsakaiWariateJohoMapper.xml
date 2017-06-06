@@ -4,7 +4,7 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5502ShinsakaiWariateJohoMapper">
-    
+
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT5502ShinsakaiWariateJoho">
      SELECT
@@ -58,10 +58,30 @@
         <result property="shinsakaiShiryoSofuYMD" column="dbT5502ShinsakaiWariateJoho_shinsakaiShiryoSofuYMD" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.FlexibleDateTypeHandler"/>
         <result property="hanteiKekkaCode" column="dbT5502ShinsakaiWariateJoho_hanteiKekkaCode" typeHandler="jp.co.ndensan.reams.uz.uza.util.db.typehandlers.CodeTypeHandler"/>
     </resultMap>
+
    <select resultOrdered="true" id="getEntity" resultMap="ResultMap_DbT5502ShinsakaiWariateJohoEntity">
         SELECT
         <include refid="allColumns_DbT5502ShinsakaiWariateJoho"/>
         FROM
         rgdb."DbT5502ShinsakaiWariateJoho"
     </select>
+
+    <select id="findEffective"  resultMap="ResultMap_DbT5502ShinsakaiWariateJohoEntity" parameterType="jp.co.ndensan.reams.uz.uza.lang.RString">
+        SELECT
+            <include refid="allColumns_DbT5502ShinsakaiWariateJoho"/>
+        FROM (
+            SELECT
+               *
+            FROM
+                rgdb."DbT5502ShinsakaiWariateJoho"
+            WHERE
+                "shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
+        ) AS "DbT5502ShinsakaiWariateJoho"
+        INNER JOIN
+            rgdb."DbT5101NinteiShinseiJoho" AS dbT5101
+          ON dbT5101."shinseishoKanriNo" = "DbT5502ShinsakaiWariateJoho"."shinseishoKanriNo"
+         AND dbT5101."shoriJotaiKubun" IN ('0', '3')
+         AND dbt5101."logicalDeletedFlag" = FALSE
+    </select>
+
 </mapper>
