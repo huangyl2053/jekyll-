@@ -11,6 +11,9 @@ import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5123NinteiKeikakuJohoEntity
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5129TennyuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5130ShiboEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5101RelateEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbz.business.config.FourMasterConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5102NinteiKekkaJohoEntity;
@@ -22,6 +25,9 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
+import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -41,6 +47,9 @@ public class DbT5101DensanInsertProcess extends BatchProcessBase<DbT5101RelateEn
     private static final RString 登録 = new RString("3");
     private RenkeiDataTorikomiBusiness business;
     private RenkeiDataTorikomiProcessParamter processParamter;
+    private RString 四マスタ管理方法;
+    private RString 広域保険者市町村コード;
+    private static final RString 四マスタ管理方法_構成市町村 = new RString("1");
     @BatchWriter
     BatchPermanentTableWriter<DbT5101NinteiShinseiJohoEntity> dbT5101Writer;
     @BatchWriter
@@ -60,6 +69,8 @@ public class DbT5101DensanInsertProcess extends BatchProcessBase<DbT5101RelateEn
 
     @Override
     protected void initialize() {
+        四マスタ管理方法 = new FourMasterConfig().get四マスタ管理方法();
+        広域保険者市町村コード = DbBusinessConfig.get(ConfigNameDBE.広域保険者市町村コード, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         business = new RenkeiDataTorikomiBusiness();
     }
 
@@ -89,6 +100,9 @@ public class DbT5101DensanInsertProcess extends BatchProcessBase<DbT5101RelateEn
 
     @Override
     protected void process(DbT5101RelateEntity entity) {
+        if (!四マスタ管理方法_構成市町村.equals(四マスタ管理方法)) {
+            entity.getDbT7051Entity().setShichosonCode(new LasdecCode(広域保険者市町村コード));
+        }
         dbT5101Writer.insert(business.setDbt5101Entity(entity, 登録, processParamter));
         dbT5123Writer.insert(business.getDbT5123Entity(entity, 登録));
         dbT5121Writer.insert(business.getDbT5121Entity(entity));
