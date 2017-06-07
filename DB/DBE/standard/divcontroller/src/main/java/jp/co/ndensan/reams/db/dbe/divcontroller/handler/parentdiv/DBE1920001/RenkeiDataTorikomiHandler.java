@@ -18,6 +18,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1920001.dgto
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbz.business.config.FourMasterConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
@@ -75,6 +76,7 @@ public class RenkeiDataTorikomiHandler {
     private static RString 要介護認定申請連携データ取込みファイル名;
     private final RenkeiDataTorikomiDiv div;
     private final RDate 基準日;
+    private static final RString 四マスタ管理方法_構成市町村 = new RString("1");
 
     /**
      * コンストラクタです。
@@ -106,13 +108,13 @@ public class RenkeiDataTorikomiHandler {
         div.getRenkeiDataTorikomiBatchParameter().getRadHoKaisei().setDisabled(true);
         div.getUploadArea().getBtnDataTorikomi().setDisabled(true);
         div.getDgTorikomiTaisho().setReadOnly(true);
-        initDgTorikomiTaisho(path, 要介護認定申請連携データ取込み_ファイル名, 認定調査委託先データ取込み_ファイル名, 
+        initDgTorikomiTaisho(path, 要介護認定申請連携データ取込み_ファイル名, 認定調査委託先データ取込み_ファイル名,
                 認定調査員データ取込み_ファイル名, 主治医医療機関データ取込み_ファイル名, 主治医データ取込み_ファイル名, 市町村コード);
     }
-    
+
     /**
      * 取込対象データグリッドを初期化
-     * 
+     *
      * @param path path
      * @param 要介護認定申請連携データ取込み_ファイル名 要介護認定申請連携データ取込み_ファイル名
      * @param 認定調査委託先データ取込み_ファイル名 認定調査委託先データ取込み_ファイル名
@@ -156,7 +158,7 @@ public class RenkeiDataTorikomiHandler {
 
     /**
      * 取込みファイルデータを取得します。
-     * 
+     *
      * @param 市町村コード 市町村コード
      */
     public void getFileData(RString 市町村コード) {
@@ -214,13 +216,19 @@ public class RenkeiDataTorikomiHandler {
      */
     public DBE192001_NnteiShinseiInfoUploadParameter setBatchParameter() {
         DBE192001_NnteiShinseiInfoUploadParameter batchParameter = new DBE192001_NnteiShinseiInfoUploadParameter();
+        RString 四マスタ管理方法 = new FourMasterConfig().get四マスタ管理方法();
+        RString 広域保険者市町村コード = DbBusinessConfig.get(ConfigNameDBE.広域保険者市町村コード, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         List<RString> list = new ArrayList<>();
         List<ShiseiDataParameter> parameterList = new ArrayList<>();
-        RString 市町村コード = div.getRenkeiDataTorikomiBatchParameter().getListHokennsha().getSelectedItem().get市町村コード().value();
-        if (RString.isNullOrEmpty(市町村コード)) {
-            batchParameter.set市町村コード(new RString("000000"));
+        if (!四マスタ管理方法_構成市町村.equals(四マスタ管理方法)) {
+            batchParameter.set市町村コード(広域保険者市町村コード);
         } else {
-            batchParameter.set市町村コード(市町村コード);
+            RString 市町村コード = div.getRenkeiDataTorikomiBatchParameter().getListHokennsha().getSelectedItem().get市町村コード().value();
+            if (RString.isNullOrEmpty(市町村コード)) {
+                batchParameter.set市町村コード(new RString("000000"));
+            } else {
+                batchParameter.set市町村コード(市町村コード);
+            }
         }
         for (dgTorikomiTaisho_Row row : div.getRenkeiDataTorikomiBatchParameter().getDgTorikomiTaisho().getSelectedItems()) {
             list.add(row.getFileName());

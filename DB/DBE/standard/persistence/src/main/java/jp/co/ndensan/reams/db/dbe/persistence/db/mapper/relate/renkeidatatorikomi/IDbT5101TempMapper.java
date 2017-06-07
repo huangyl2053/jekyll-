@@ -49,22 +49,25 @@ public interface IDbT5101TempMapper {
     /**
      * 要介護認定申請電算版情報一時テーブルキー項目ある情報を取得します。
      *
+     * @param param
      * @return List<DbT5101RelateEntity>
      */
-    List<DbT5101RelateEntity> get更新対象情報_電算版();
+    List<DbT5101RelateEntity> get更新対象情報_電算版(RenkeiDataTorikomiMybitisParamter param);
 
     /**
      * 要介護認定申請東芝版情報一時テーブルキー項目ある情報を取得します。
      *
+     * @param parameter
      * @return List<DbT5101RelateEntity>
      */
-    List<DbT5101RelateEntity> get更新対象情報_東芝版();
+    List<DbT5101RelateEntity> get更新対象情報_東芝版(RenkeiDataTorikomiMybitisParamter parameter);
 
     /**
      * 要介護認定申請厚労省情報一時テーブルキー項目ある情報を取得します。
      *
+     * @param parameter
      * @return List<DbT5101RelateEntity>
      */
-    List<DbT5101RelateEntity> get更新対象情報_厚労省();
+    List<DbT5101RelateEntity> get更新対象情報_厚労省(RenkeiDataTorikomiMybitisParamter parameter);
 
 }
