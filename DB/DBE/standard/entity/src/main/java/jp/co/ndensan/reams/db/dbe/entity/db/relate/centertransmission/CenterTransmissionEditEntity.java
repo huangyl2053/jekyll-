@@ -5,12 +5,14 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission;
 
+import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ChoiceResultItem;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.GenzainoJokyoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.IsJutakuKaishu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
@@ -157,7 +159,7 @@ public class CenterTransmissionEditEntity {
             return;
         }
         csvEntity.set現在のサービス区分コード(getValue(entity.getServiceKubunCode()));
-        csvEntity.set現在の状況(entity.getRemban());
+        csvEntity.set現在の状況(to現在の状況(entity.getRemban()));
         initializeサービスの状況(csvEntity);
         if (ServiceKubunCode.介護給付サービス == ServiceKubunCode.toValue(サービス区分コード.value())) {
             csvEntity.set訪問介護ホームヘルプサービス(entity.getServiceJokyoKoban1());
@@ -223,6 +225,10 @@ public class CenterTransmissionEditEntity {
         csvEntity.set障害高齢者自立度(getValue(entity.getShogaiNichijoSeikatsuJiritsudoCode()));
         csvEntity.set認知症高齢者自立度(getValue(entity.getNinchishoNichijoSeikatsuJiritsudoCode()));
         set今回調査項目(csvEntity);
+    }
+
+    private RString to現在の状況(RString remban) {
+        return RString.isNullOrEmpty(remban) ? GenzainoJokyoCode.居宅_施設利用なし.getコード() : remban;
     }
 
     private void initializeサービスの状況(CenterTransmissionCsvEntity csvEntity) {
@@ -441,7 +447,7 @@ public class CenterTransmissionEditEntity {
             return;
         }
         csvEntity.set前回結果_現在のサービス区分コード(getValue(entity.getZenkaiServiceKubunCode()));
-        csvEntity.set前回結果_現在の状況(entity.getZenkaiRemban());
+        csvEntity.set前回結果_現在の状況(to現在の状況(entity.getZenkaiRemban()));
         initialize前回サービスの状況(csvEntity);
         if (ServiceKubunCode.介護給付サービス == ServiceKubunCode.toValue(サービス区分コード.value())) {
             csvEntity.set前回結果_訪問介護ホームヘルプサービス(entity.getZenkaiServiceJokyoKoban1());
