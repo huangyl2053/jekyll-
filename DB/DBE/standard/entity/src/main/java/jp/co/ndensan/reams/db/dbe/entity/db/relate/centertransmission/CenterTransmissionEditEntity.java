@@ -99,8 +99,14 @@ public class CenterTransmissionEditEntity {
         csvEntity.set前回の認定有効期間終了(getValue(entity.getZenkaiYukoKikanEnd()));
         csvEntity.set主治医医療機関番号(get番号(entity.getShujiiIryokikanCode()));
         csvEntity.set主治医番号(get番号(entity.getShujiiCode()));
-        csvEntity.set意見書依頼日(getValue(entity.getIkenshoSakuseiIraiYMD()));
-        csvEntity.set意見書入手日(getValue(entity.getIkenshoJuryoYMD()));
+        if (isValid(entity.getIkenshoSakuseiIraiYMD()) && isValid(entity.getIkenshoJuryoYMD())
+                && entity.getIkenshoJuryoYMD().isBefore(entity.getIkenshoSakuseiIraiYMD())) {
+            csvEntity.set意見書依頼日(getValue(entity.getIkenshoSakuseiIraiYMD()));
+            csvEntity.set意見書入手日(getValue(entity.getIkenshoSakuseiIraiYMD()));
+        } else {
+            csvEntity.set意見書依頼日(getValue(entity.getIkenshoSakuseiIraiYMD()));
+            csvEntity.set意見書入手日(getValue(entity.getIkenshoJuryoYMD()));
+        }
         csvEntity.set意見書短期記憶(get項目By厚労省99Aと02A(entity.getKoroshoIfShikibetsuCode(),
                 entity.getIkenItemKoban16(), entity.getIkenItemKoban15()));
         csvEntity.set意見書認知能力(get項目By厚労省99Aと02A(entity.getKoroshoIfShikibetsuCode(),
@@ -111,8 +117,14 @@ public class CenterTransmissionEditEntity {
                 entity.getIkenItemKoban19(), entity.getIkenItemKoban69()));
         csvEntity.set意見書認知症高齢者の日常生活自立度(get項目By厚労省99Aと02A(entity.getKoroshoIfShikibetsuCode(),
                 entity.getIkenItemKoban15(), entity.getIkenItemKoban14()));
-        csvEntity.set調査依頼日(getValue(entity.getNinteichosaIraiYMD()));
-        csvEntity.set調査実施日(getValue(entity.getNinteichosaJisshiYMD()));
+        if (isValid(entity.getNinteichosaIraiYMD()) && isValid(entity.getNinteichosaJisshiYMD())
+                && entity.getNinteichosaJisshiYMD().isBefore(entity.getNinteichosaIraiYMD())) {
+            csvEntity.set調査依頼日(getValue(entity.getNinteichosaIraiYMD()));
+            csvEntity.set調査実施日(getValue(entity.getNinteichosaIraiYMD()));
+        } else {
+            csvEntity.set調査依頼日(getValue(entity.getNinteichosaIraiYMD()));
+            csvEntity.set調査実施日(getValue(entity.getNinteichosaJisshiYMD()));
+        }
         csvEntity.set指定居宅介護支援事業者等番号(entity.getNinteichosaItakusakiCode());
         csvEntity.set委託区分(trim(entity.getChosaItakuKubun()));
         csvEntity.set認定調査員番号(entity.getNinteiChosainCode());
@@ -123,6 +135,10 @@ public class CenterTransmissionEditEntity {
 
     private static RString trim(RString rStr) {
         return RString.isNullOrEmpty(rStr) ? RString.EMPTY : rStr.trim();
+    }
+
+    private static boolean isValid(FlexibleDate fDate) {
+        return fDate != null && fDate.isValid();
     }
 
     private void set今回項目(CenterTransmissionCsvEntity csvEntity) {

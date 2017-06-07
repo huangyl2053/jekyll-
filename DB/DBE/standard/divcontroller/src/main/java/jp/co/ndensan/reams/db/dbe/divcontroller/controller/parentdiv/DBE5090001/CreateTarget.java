@@ -43,6 +43,7 @@ import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogger;
@@ -326,6 +327,14 @@ public class CreateTarget {
         return data;
     }
 
+    private static boolean isValid(FlexibleDate fDate) {
+        return fDate != null && fDate.isValid();
+    }
+
+    private static FlexibleDate toFlexibleDate(RString rStr) {
+        return rStr == null ? FlexibleDate.EMPTY : new FlexibleDate(rStr);
+    }
+
     //<editor-fold defaultstate="collapsed" desc="edit共通項目Of(){...}">
     private static void edit共通項目Of(CreateTargetCsvEntity data, CenterTransmissionRecord business, int 連番) {
         data.setシーケンシャル番号(new RString(連番).padZeroToLeft(連番6));
@@ -355,11 +364,27 @@ public class CreateTarget {
         data.set前回の認定有効期間終了(business.getCsvBusiness().get前回の認定有効期間終了());
         data.set主治医医療機関番号(business.getCsvBusiness().get主治医医療機関番号());
         data.set主治医番号(business.getCsvBusiness().get主治医番号());
-        data.set意見書依頼日(business.getCsvBusiness().get意見書依頼日());
-        data.set意見書入手日(business.getCsvBusiness().get意見書入手日());
+        FlexibleDate ikenshoIraiYMD = toFlexibleDate(business.getCsvBusiness().get意見書依頼日());
+        FlexibleDate ikenshoNyushuYMD = toFlexibleDate(business.getCsvBusiness().get意見書入手日());
+        if (isValid(ikenshoIraiYMD) && isValid(ikenshoNyushuYMD)
+                && ikenshoNyushuYMD.isBefore(ikenshoIraiYMD)) {
+            data.set意見書依頼日(business.getCsvBusiness().get意見書依頼日());
+            data.set意見書入手日(business.getCsvBusiness().get意見書依頼日());
+        } else {
+            data.set意見書依頼日(business.getCsvBusiness().get意見書依頼日());
+            data.set意見書入手日(business.getCsvBusiness().get意見書入手日());
+        }
         edit主治医意見書Of(data, business);
-        data.set調査依頼日(business.getCsvBusiness().get調査依頼日());
-        data.set調査実施日(business.getCsvBusiness().get調査実施日());
+        FlexibleDate chosaIraiYMD = toFlexibleDate(business.getCsvBusiness().get調査依頼日());
+        FlexibleDate chosaJissiYMD = toFlexibleDate(business.getCsvBusiness().get調査実施日());
+        if (isValid(chosaIraiYMD) && isValid(chosaJissiYMD)
+                && chosaJissiYMD.isBefore(chosaIraiYMD)) {
+            data.set調査依頼日(business.getCsvBusiness().get調査依頼日());
+            data.set調査実施日(business.getCsvBusiness().get調査依頼日());
+        } else {
+            data.set調査依頼日(business.getCsvBusiness().get調査依頼日());
+            data.set調査実施日(business.getCsvBusiness().get調査実施日());
+        }
         data.set指定居宅介護支援事業者等番号(business.getCsvBusiness().get指定居宅介護支援事業者等番号());
         data.set委託区分(business.getCsvBusiness().get委託区分());
         data.set認定調査員番号(business.getCsvBusiness().get認定調査員番号());
