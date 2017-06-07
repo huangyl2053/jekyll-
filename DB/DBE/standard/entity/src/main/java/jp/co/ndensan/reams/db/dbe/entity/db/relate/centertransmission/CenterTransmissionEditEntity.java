@@ -9,6 +9,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.IsJutakuKaishu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
@@ -86,7 +87,7 @@ public class CenterTransmissionEditEntity {
         csvEntity.set電話番号(entity.getTelNo().value());
         csvEntity.set病院施設等の名称(get名称(entity.getJigyoshaName()));
         csvEntity.set病院施設等の所在地(get名称(entity.getJigyoshaAddress()));
-        csvEntity.set前回の認定審査会結果(getValue(entity.getZenYokaigoKubunCode()));
+        csvEntity.set前回の認定審査会結果(to前回審査結果(entity.getZenYokaigoKubunCode()));
         csvEntity.set前回の認定有効期間開始(getValue(entity.getZenkaiYukoKikanStart()));
         csvEntity.set前回の認定有効期間終了(getValue(entity.getZenkaiYukoKikanEnd()));
         csvEntity.set主治医医療機関番号(get番号(entity.getShujiiIryokikanCode()));
@@ -692,6 +693,13 @@ public class CenterTransmissionEditEntity {
                 entity.getZenkaiChosaItemKoban84(), entity.getZenkaiChosaItemKoban78(), entity.getZenkaiChosaItemKoban73()));
         csvEntity.set前回結果_カテーテル(get項目By厚労省99ABy02Aと06A(entity.getZenkaiKoroshoIfShikibetsuCode(),
                 entity.getZenkaiChosaItemKoban85(), entity.getZenkaiChosaItemKoban79(), entity.getZenkaiChosaItemKoban74()));
+    }
+
+    private RString to前回審査結果(Code code) {
+        if (code == null || RString.isNullOrEmpty(code.value())) {
+            return YokaigoJotaiKubun.なし.getCode();
+        }
+        return code.value();
     }
 
     private RString getValue(Code code) {

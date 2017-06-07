@@ -21,6 +21,7 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5090001.Cre
 import jp.co.ndensan.reams.db.dbe.service.core.createtarget.CreateTargetManager;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -154,7 +155,7 @@ public class CreateTarget {
     private static final RString 偽 = new RString("2");
     private static final RString Zero = new RString("0");
     private static final RString 現在の状況初期値 = new RString("1");
-    private static final RString 前回の認定審査会結果初期値 = RString.EMPTY;
+    private static final RString 前回の認定審査会結果初期値 = YokaigoJotaiKubun.なし.getCode();
 
     /**
      * 画面初期化処理です。
