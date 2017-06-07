@@ -316,6 +316,9 @@ public class CreateTarget {
     private CreateTargetCsvEntity getCsvData(CenterTransmissionRecord business, int 連番) {
         CreateTargetCsvEntity data = new CreateTargetCsvEntity();
         edit共通項目Of(data, business, 連番);
+        if (business.is転入申請()) {
+            data.set前回結果_二次判定日(business.getCsvBusiness().getCreateCsvDataBusiness().get前回結果_二次判定日());
+        }
         edit今回項目Of(data, business);
         if (business.has前回結果()) {
             edit前回項目Of(data, business);

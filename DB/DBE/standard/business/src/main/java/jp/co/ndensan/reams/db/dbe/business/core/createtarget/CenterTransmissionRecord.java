@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.createtarget;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 import lombok.Setter;
@@ -69,6 +70,13 @@ public class CenterTransmissionRecord {
      */
     public boolean has前回調査結果() {
         return !RString.isNullOrEmpty(getCsvBusiness().getCreateCsvDataBusiness().get前回結果_現在のサービス区分コード());
+    }
+
+    /**
+     * @return 転入申請の場合、{@code true}.
+     */
+    public boolean is転入申請() {
+        return java.util.Objects.equals(NinteiShinseiShinseijiKubunCode.転入申請.getコード(), getCsvBusiness().get申請区分申請時コード());
     }
 
 }

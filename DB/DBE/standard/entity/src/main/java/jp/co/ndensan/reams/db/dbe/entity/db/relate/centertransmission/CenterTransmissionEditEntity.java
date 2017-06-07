@@ -5,7 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.entity.db.relate.centertransmission;
 
-import jp.co.ndensan.reams.db.dbe.definition.core.enumeratedtype.core.ChoiceResultItem;
+import java.util.Objects;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiCode;
@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibe
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.GenzainoJokyoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.IsJutakuKaishu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
@@ -59,6 +60,9 @@ public class CenterTransmissionEditEntity {
         CenterTransmissionCsvEntity csvEntity = new CenterTransmissionCsvEntity();
         ShinseishoKanriNo 前回申請書管理番号 = entity.getZenkaiShinseishoKanriNo();
         set共通項目(csvEntity);
+        if (Objects.equals(NinteiShinseiShinseijiKubunCode.転入申請.getコード(), entity.getNinteiShinseiShinseijiKubunCode().value())) {
+            csvEntity.set前回結果_二次判定日(getValue(entity.getZenkaiNijiHanteiYMD()));
+        }
         set今回項目(csvEntity);
         if (前回申請書管理番号 != null && !前回申請書管理番号.isEmpty() && !EMPTY_申請書管理番号.equals(前回申請書管理番号)) {
             set前回項目(csvEntity);

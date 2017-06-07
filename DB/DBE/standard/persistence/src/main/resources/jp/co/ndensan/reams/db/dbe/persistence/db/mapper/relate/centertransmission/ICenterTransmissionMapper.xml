@@ -546,7 +546,10 @@
             , V."ninchishoJiritsudoIIijoNoGaizensei" AS zenkaiNinchishoJiritsudoIIijoNoGaizensei
             , V."suiteiKyufuKubunCode" AS zenkaiSuiteiKyufuKubunCode
             , A2."ninteiShinseiYMD" AS zenkaiNinteiShinseiYMD
-            , W."nijiHanteiYMD" AS zenkaiNijiHanteiYMD
+            , CASE A."ninteiShinseiShinseijiKubunCode"
+                WHEN '5' THEN A."zenkaiNinteiYMD"
+                ELSE W."nijiHanteiYMD"
+              END AS zenkaiNijiHanteiYMD
             , X."serviceKubunCode" AS zenkaiServiceKubunCode
             , P02."remban" AS zenkaiRemban
             , Y."koban1" AS zenkaiServiceJokyoKoban1
