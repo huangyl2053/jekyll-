@@ -7,6 +7,7 @@ package jp.co.ndensan.reams.db.dbe.business.core.createtarget;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.createtarget.CreateTargetCsvRelateEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * センター送信Csvデータ出力情報ビジネスクラスです。
@@ -626,7 +627,12 @@ public class LastApplication {
      * @return 前回結果_認知症自立度Ⅱ以上の蓋然性
      */
     public RString get前回結果_認知症自立度Ⅱ以上の蓋然性() {
-        return entity.get前回結果_認知症自立度Ⅱ以上の蓋然性();
+        return RString.isNullOrEmpty(entity.get前回結果_認知症自立度Ⅱ以上の蓋然性())
+                ? RString.EMPTY
+                : new RString(
+                        new Decimal(entity.get前回結果_認知症自立度Ⅱ以上の蓋然性().toString())
+                        .roundHalfUpTo(0).toString()
+                );
     }
 
     /**

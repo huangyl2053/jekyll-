@@ -15,6 +15,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibe
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.GenzainoJokyoCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.IsJutakuKaishu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.ServiceKubunCode;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaJusho;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
@@ -145,7 +146,7 @@ public class CenterTransmissionEditEntity {
         csvEntity.set中間評価項目得点第５群(entity.getChukanHyokaKomoku5gun());
         csvEntity.set一次判定警告配列コード(entity.getIchijiHnateiKeikokuCode());
         csvEntity.set状態の安定性(getValue(entity.getJotaiAnteiseiCode()));
-        csvEntity.set認知症自立度Ⅱ以上の蓋然性(getValue(entity.getNinchishoJiritsudoIIijoNoGaizensei()));
+        csvEntity.set認知症自立度Ⅱ以上の蓋然性(to認知症自立度Ⅱ以上の蓋然性(entity.getNinchishoJiritsudoIIijoNoGaizensei()));
         csvEntity.set認知機能及び状態安定性から推定される給付区分(getValue(entity.getSuiteiKyufuKubunCode()));
         csvEntity.set認定審査会資料作成日(getValue(entity.getShinsakaiShiryoSakuseiYMD()));
         csvEntity.set認定審査会予定日(getValue(entity.getShinsakaiKaisaiYoteiYMD()));
@@ -156,7 +157,9 @@ public class CenterTransmissionEditEntity {
         csvEntity.set二次判定結果(getValue(entity.getNijiHanteiYokaigoJotaiKubunCode()));
         csvEntity.set認定有効期間開始(getValue(entity.getNijiHanteiNinteiYukoKaishiYMD()));
         csvEntity.set認定有効期間終了(getValue(entity.getNijiHanteiNinteiYukoShuryoYMD()));
-        csvEntity.set特定疾病コード(getValue(entity.getNigoTokuteiShippeiCode()));
+        if (HihokenshaKubunCode.第２号被保険者.getコード().equals(entity.getHihokenshaKubunCode())) {
+            csvEntity.set特定疾病コード(getValue(entity.getNigoTokuteiShippeiCode()));
+        }
         csvEntity.set要介護１の場合の状態像(getValue(entity.getYokaigoJotaizoReiCode()));
         Code サービス区分コード = entity.getServiceKubunCode();
         if (サービス区分コード == null || RString.isNullOrEmpty(サービス区分コード.value())) {
@@ -229,6 +232,13 @@ public class CenterTransmissionEditEntity {
         csvEntity.set障害高齢者自立度(getValue(entity.getShogaiNichijoSeikatsuJiritsudoCode()));
         csvEntity.set認知症高齢者自立度(getValue(entity.getNinchishoNichijoSeikatsuJiritsudoCode()));
         set今回調査項目(csvEntity);
+    }
+
+    private RString to認知症自立度Ⅱ以上の蓋然性(Decimal data) {
+        if (data == null) {
+            return RString.EMPTY;
+        }
+        return new RString(data.roundHalfUpTo(0).toString());
     }
 
     private RString to現在の状況(RString remban) {
@@ -441,7 +451,7 @@ public class CenterTransmissionEditEntity {
         csvEntity.set前回結果_中間評価項目得点第５群(entity.getZenkaiChukanHyokaKomoku5gun());
         csvEntity.set前回結果_一次判定警告コード(entity.getZenkaiChijiHnateiKeikokuCode());
         csvEntity.set前回結果_状態の安定性(getValue(entity.getZenkaiJotaiAnteiseiCode()));
-        csvEntity.set前回結果_認知症自立度Ⅱ以上の蓋然性(getValue(entity.getZenkaiNinchishoJiritsudoIIijoNoGaizensei()));
+        csvEntity.set前回結果_認知症自立度Ⅱ以上の蓋然性(to認知症自立度Ⅱ以上の蓋然性(entity.getZenkaiNinchishoJiritsudoIIijoNoGaizensei()));
         csvEntity.set前回結果_認知機能及び状態安定性から推定される給付区分(getValue(entity.getZenkaiSuiteiKyufuKubunCode()));
         csvEntity.set前回結果_申請日(getValue(entity.getZenkaiNinteiShinseiYMD()));
         csvEntity.set前回結果_二次判定日(getValue(entity.getZenkaiNijiHanteiYMD()));
@@ -726,13 +736,6 @@ public class CenterTransmissionEditEntity {
         return new RString(date.toString());
     }
 
-    private RString getValue(Decimal data) {
-        if (data == null) {
-            return RString.EMPTY;
-        }
-        return new RString(data.toString());
-    }
-
     private RString get番号(ShujiiIryokikanCode code) {
         if (code == null) {
             return RString.EMPTY;
@@ -742,13 +745,6 @@ public class CenterTransmissionEditEntity {
 
     private RString get番号(ShujiiCode code) {
         if (code == null) {
-            return RString.EMPTY;
-        }
-        return code.value();
-    }
-
-    private RString get番号(JigyoshaNo code) {
-        if (code == null || code.isEmpty()) {
             return RString.EMPTY;
         }
         return code.value();

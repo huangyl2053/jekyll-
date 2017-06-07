@@ -6,7 +6,9 @@
 package jp.co.ndensan.reams.db.dbe.business.core.createtarget;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.createtarget.CreateTargetCsvRelateEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * センター送信Csvデータ出力情報ビジネスクラスです。
@@ -609,7 +611,12 @@ public class ApplicationsResultMain {
      * @return 認知症自立度Ⅱ以上の蓋然性
      */
     public RString get認知症自立度Ⅱ以上の蓋然性() {
-        return entity.get認知症自立度Ⅱ以上の蓋然性();
+        return RString.isNullOrEmpty(entity.get認知症自立度Ⅱ以上の蓋然性())
+                ? RString.EMPTY
+                : new RString(
+                        new Decimal(entity.get認知症自立度Ⅱ以上の蓋然性().toString())
+                        .roundHalfUpTo(0).toString()
+                );
     }
 
     /**
@@ -701,7 +708,9 @@ public class ApplicationsResultMain {
      * @return 特定疾病コード
      */
     public RString get特定疾病コード() {
-        return entity.get特定疾病コード();
+        return HihokenshaKubunCode.第２号被保険者.getコード().equals(get被保険者区分コード())
+                ? entity.get特定疾病コード()
+                : RString.EMPTY;
     }
 
     /**
