@@ -1255,8 +1255,11 @@
         <if test="!isGogitaiDummyFlag">
             rgdb."DbT5502ShinsakaiWariateJoho" AS dbt5502
         </if>
-        INNER JOIN rgdb."DbT5101NinteiShinseiJoho" dbt5101
-        ON dbt5101."shinseishoKanriNo" = dbt5502."shinseishoKanriNo"
+        INNER JOIN
+            rgdb."DbT5101NinteiShinseiJoho" dbt5101
+          ON dbt5101."shinseishoKanriNo" = dbt5502."shinseishoKanriNo"
+         AND dbt5101."shoriJotaiKubun" IN (#{shoriJotaiKubun0}, #{shoriJotaiKubun3})
+         AND dbt5101."logicalDeletedFlag" = FALSE
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS dbt7051
         ON dbt7051."shoKisaiHokenshaNo" = dbt5101."shoKisaiHokenshaNo"
         INNER JOIN rgdb."DbT5201NinteichosaIraiJoho" dbt5201
@@ -1355,8 +1358,11 @@
         <if test="!isGogitaiDummyFlag">
             rgdb."DbT5502ShinsakaiWariateJoho" AS dbt5502
         </if>
-        INNER JOIN rgdb."DbT5101NinteiShinseiJoho" dbt5101
-        ON dbt5101."shinseishoKanriNo" = dbt5502."shinseishoKanriNo"
+        INNER JOIN
+            rgdb."DbT5101NinteiShinseiJoho" dbt5101
+          ON dbt5101."shinseishoKanriNo" = dbt5502."shinseishoKanriNo"
+         AND dbt5101."shoriJotaiKubun" IN (#{shoriJotaiKubun0}, #{shoriJotaiKubun3})
+         AND dbt5101."logicalDeletedFlag" = FALSE
         INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS dbt7051
         ON dbt7051."shoKisaiHokenshaNo" = dbt5101."shoKisaiHokenshaNo"
         INNER JOIN rgdb."DbT5201NinteichosaIraiJoho" dbt5201

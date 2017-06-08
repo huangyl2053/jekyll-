@@ -9,9 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 import static java.util.Objects.requireNonNull;
 import jp.co.ndensan.reams.db.dbe.business.core.basic.ShinsakaiWariateJoho;
+import jp.co.ndensan.reams.db.dbe.persistence.db.util.MapperProvider;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5502ShinsakaiWariateJohoEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5502ShinsakaiWariateJohoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5502ShinsakaiWariateJohoMapper;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -25,12 +27,14 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 public class ShinsakaiWariateJohoManager {
 
     private final DbT5502ShinsakaiWariateJohoDac dac;
+    private final MapperProvider mp;
 
     /**
      * コンストラクタです。
      */
     public ShinsakaiWariateJohoManager() {
         dac = InstanceProvider.create(DbT5502ShinsakaiWariateJohoDac.class);
+        mp = InstanceProvider.create(MapperProvider.class);
     }
 
     /**
@@ -40,6 +44,7 @@ public class ShinsakaiWariateJohoManager {
      */
     ShinsakaiWariateJohoManager(DbT5502ShinsakaiWariateJohoDac dac) {
         this.dac = dac;
+        this.mp = null;
     }
 
     /**
@@ -77,7 +82,8 @@ public class ShinsakaiWariateJohoManager {
         requireNonNull(介護認定審査会開催番号, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催番号"));
 
         List<ShinsakaiWariateJoho> businessList = new ArrayList<>();
-        List<DbT5502ShinsakaiWariateJohoEntity> entityList = dac.selectByShinsakaiKaisaiNo(介護認定審査会開催番号);
+        List<DbT5502ShinsakaiWariateJohoEntity> entityList = mp.create(IDbT5502ShinsakaiWariateJohoMapper.class)
+                .findEffective(介護認定審査会開催番号);
 
         for (DbT5502ShinsakaiWariateJohoEntity entity : entityList) {
             entity.initializeMd5();

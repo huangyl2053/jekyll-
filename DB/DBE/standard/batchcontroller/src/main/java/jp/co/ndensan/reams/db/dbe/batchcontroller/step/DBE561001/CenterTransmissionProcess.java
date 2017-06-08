@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.DBE561001;
 
 import java.util.ArrayList;
 import java.util.List;
+import jp.co.ndensan.reams.db.dbe.business.core.createtarget.NCINinteiKey;
+import jp.co.ndensan.reams.db.dbe.business.core.createtarget.NCINinteiKeys;
 import jp.co.ndensan.reams.db.dbe.business.report.centersoshintaishoshaichiran.CenterSoshinTaishoshaIchiranReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.centertransmission.CenterTransmissionMybitisParamter;
@@ -78,6 +80,15 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId(new RString("DBE561001"));
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("");
+    private static final RString 出力する = new RString("出力する");
+    private static final RString 出力しない = new RString("出力しない");
+    private static final RString 未出力のみ = new RString("未出力のみ");
+    private static final RString 出力済みも含む = new RString("出力済みも含む");
+    private static final RString DATE_時 = new RString("時");
+    private static final RString DATE_分 = new RString("分");
+    private static final RString DATE_秒 = new RString("秒");
+    private static final RString DATE_作成 = new RString("作成");
+    private static final RString DATE_ヶ月 = new RString("ヶ月");
 
     private CenterTransmissionProcessParameter parameter;
     private CenterTransmissionMybitisParamter mybitisParamter;
@@ -90,18 +101,10 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
     @BatchWriter
     private BatchReportWriter<CenterSoshinTaishoshaIchiranReportSource> batchWrite;
     private ReportSourceWriter<CenterSoshinTaishoshaIchiranReportSource> reportSourceWriter;
-    private static final RString 出力する = new RString("出力する");
-    private static final RString 出力しない = new RString("出力しない");
-    private static final RString 未出力のみ = new RString("未出力のみ");
-    private static final RString 出力済みも含む = new RString("出力済みも含む");
-    private static final RString DATE_時 = new RString("時");
-    private static final RString DATE_分 = new RString("分");
-    private static final RString DATE_秒 = new RString("秒");
-    private static final RString DATE_作成 = new RString("作成");
-    private static final RString DATE_ヶ月 = new RString("ヶ月");
     private CenterSoshinTaishoshaIchiranEntity centerSoshinTaishoshaIchiranEntity;
     private RString printTimeStamp;
     private final List<PersonalData> personalDataList = new ArrayList<>();
+    private final NCINinteiKeys keys = new NCINinteiKeys();
 
     /**
      * データ有無の判定です。
@@ -159,13 +162,17 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
 
     @Override
     protected void process(CenterTransmissionEntity currentEntity) {
-        int 連番 = 0;
+        NCINinteiKey key = this.keys.generateKey(
+                currentEntity.getShoKisaiHokenshaNo(),
+                currentEntity.getHihokenshaNo(),
+                currentEntity.getNinteiShinseiYMD()
+        );
+        if (!key.isValid()) {
+            return;
+        }
         シーケンシャル番号 = シーケンシャル番号 + 1;
         出力データ件数 = 出力データ件数 + 1;
-        if (is死亡データ(beforeEntity, currentEntity)) {
-            連番 = 1;
-        }
-        csvWriterCenterTransmission.writeLine(new CenterTransmissionEditEntity(currentEntity, シーケンシャル番号, 連番).getファイル出力項目());
+        csvWriterCenterTransmission.writeLine(new CenterTransmissionEditEntity(currentEntity, シーケンシャル番号, key.edaban()).getファイル出力項目());
         beforeEntity = currentEntity;
         RString 申請書管理番号 = currentEntity.getShinseishoKanriNo().value();
         if (!出力された申請書管理番号.contains(申請書管理番号)) {
@@ -179,17 +186,6 @@ public class CenterTransmissionProcess extends BatchProcessBase<CenterTransmissi
         ShikibetsuCode shikibetsuCode = new ShikibetsuCode(証記載保険者番号.substring(0, 5).concat(被保険者番号));
         ExpandedInformation expandedInformation = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), 申請書管理番号);
         return PersonalData.of(shikibetsuCode, expandedInformation);
-    }
-
-    private boolean is死亡データ(CenterTransmissionEntity before, CenterTransmissionEntity current) {
-
-        if (before == null) {
-            return false;
-        } else {
-            return before.getNinteiShinseiYMD().equals(current.getNinteiShinseiYMD())
-                    && before.getShoKisaiHokenshaNo().equals(current.getShoKisaiHokenshaNo())
-                    && before.getHihokenshaNo().equals(current.getHihokenshaNo());
-        }
     }
 
     @Override

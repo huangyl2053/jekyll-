@@ -7,7 +7,7 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5090001;
 
 import java.util.ArrayList;
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.createtarget.CreateTargetBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.createtarget.ExaminationsPartialResult;
 import jp.co.ndensan.reams.db.dbe.definition.mybatisprm.createtarget.CreateTargetMapperParameter;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5090001.CreateTargetDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5090001.dgCreateTargetSummary_Row;
@@ -86,9 +86,9 @@ public class CreateTargetHandler {
      *
      * @param business 対象者一覧情報
      */
-    public void onClick_btnKensaku(SearchResult<CreateTargetBusiness> business) {
+    public void onClick_btnKensaku(SearchResult<ExaminationsPartialResult> business) {
         List<dgCreateTargetSummary_Row> rowList = new ArrayList<>();
-        for (CreateTargetBusiness list : business.records()) {
+        for (ExaminationsPartialResult list : business.records()) {
             dgCreateTargetSummary_Row row = new dgCreateTargetSummary_Row();
             row.setHokenshano(list.get証記載保険者番号());
             row.setHokensha(list.get市町村名称());

@@ -5,7 +5,6 @@
  */
 package jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain;
 
-import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -16,29 +15,40 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public enum IsJutakuKaishu {
 
     /**
-     * コード:True 名称:あり 略称:定義なし
+     * コード:1 True 名称:あり 略称:定義なし
      */
-    あり(true, "あり"),
+    あり(true, "あり", "1"),
     /**
-     * コード:False 名称:なし 略称:定義なし
+     * コード:2 False 名称:なし 略称:定義なし
      */
-    なし(false, "なし");
+    なし(false, "なし", "2");
 
-    private final boolean code;
+    private final boolean booleanValue;
     private final RString fullName;
+    private final RString theCode;
 
-    private IsJutakuKaishu(boolean code, String fullname) {
-        this.code = code;
+    private IsJutakuKaishu(boolean booleanValue, String fullname, String code) {
+        this.booleanValue = booleanValue;
         this.fullName = new RString(fullname);
+        this.theCode = new RString(code);
     }
 
     /**
-     * 住宅改修のコードを返します。
+     * 住宅改修コード（NCIフォーマット）を返します。
      *
-     * @return 住宅改修のコード
+     * @return 住宅改修コード（NCIフォーマット）
+     */
+    public RString code() {
+        return this.theCode;
+    }
+
+    /**
+     * 住宅改修の有無をbooleanで返します。
+     *
+     * @return 住宅改修の有無
      */
     public boolean isあり() {
-        return code;
+        return booleanValue;
     }
 
     /**
@@ -53,15 +63,11 @@ public enum IsJutakuKaishu {
     /**
      * 住宅改修のコードと一致する内容を探します。
      *
-     * @param code 住宅改修のコード
+     * @param booleanValue 住宅改修のコード
      * @return {@code code} に対応する住宅改修
      */
-    public static IsJutakuKaishu toValue(boolean code) {
-        for (IsJutakuKaishu isJutakuKaishu : IsJutakuKaishu.values()) {
-            if (isJutakuKaishu.code == code) {
-                return isJutakuKaishu;
-            }
-        }
-        throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("住宅改修"));
+    public static IsJutakuKaishu toValue(boolean booleanValue) {
+        return booleanValue ? あり : なし;
     }
+
 }
