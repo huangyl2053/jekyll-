@@ -1630,7 +1630,7 @@
              )
             LEFT JOIN
                 rgdb."DbT5205NinteichosahyoTokkijiko" T5205
-              ON T5205."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+              ON T5205."shinseishoKanriNo" = T5201."shinseishoKanriNo"
              AND T5205."ninteichosaRirekiNo" = T5201."ninteichosaIraiRirekiNo"
              AND T5205."genponMaskKubun" = '2'
              AND NOT EXISTS	(
@@ -1645,14 +1645,14 @@
              )
             LEFT JOIN
                 rgdb."DbT5305IkenshoImageJoho" T5305
-              ON T5305."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+              ON T5305."shinseishoKanriNo" = T5301."shinseishoKanriNo"
              AND T5305."iraiRirekiNo" = T5301."ikenshoIraiRirekiNo"
              AND T5305."genponMaskKubun" = '2'
              AND T5305."remban" = '1'
              AND (T5305."ChoyoID" = '701' OR T5305."ChoyoID" = '777')
             LEFT JOIN
                 rgdb."DbT5213GaikyoChosaTokkiMask" T5213
-              ON T5213."shinseishoKanriNo" = DbT5101."shinseishoKanriNo"
+              ON T5213."shinseishoKanriNo" = T5201."shinseishoKanriNo"
              AND T5213."ninteichosaRirekiNo" = T5201."ninteichosaIraiRirekiNo"
              AND NOT EXISTS	(
                 SELECT
