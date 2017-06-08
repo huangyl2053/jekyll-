@@ -83,8 +83,8 @@ public class IchijiHanteiExecuter {
      * @return ResponseData
      */
     public ResponseData<IchijiHanteiExecuterDiv> onClick_backSearchResult(IchijiHanteiExecuterDiv div) {
-        ViewStateHolder.remove(ViewStateKeys.申請書管理番号);
         前排他キーの解除();
+        ViewStateHolder.remove(ViewStateKeys.申請書管理番号);
         return executeTransition(div, DBE3010002TransitionEventName.検索結果一覧に戻る);
     }
 

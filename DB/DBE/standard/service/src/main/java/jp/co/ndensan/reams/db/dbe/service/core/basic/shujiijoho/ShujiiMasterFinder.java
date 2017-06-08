@@ -26,7 +26,7 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
 /**
  * 主治医情報クラスです。
  *
- * @reamsid_L DBE-0250-010  suguangjun
+ * @reamsid_L DBE-0250-010 suguangjun
  */
 public class ShujiiMasterFinder {
 
@@ -51,7 +51,8 @@ public class ShujiiMasterFinder {
     /**
      * {@link InstanceProvider#create}にて生成した{@link ShujiiMasterFinder}のインスタンスを返します。
      *
-     * @return {@link InstanceProvider#create}にて生成した{@link ShujiiMasterFinder}のインスタンス
+     * @return
+     * {@link InstanceProvider#create}にて生成した{@link ShujiiMasterFinder}のインスタンス
      */
     public static ShujiiMasterFinder createInstance() {
         return InstanceProvider.create(ShujiiMasterFinder.class);
@@ -67,6 +68,7 @@ public class ShujiiMasterFinder {
     public SearchResult<ShujiiMaster> getShujiiIchiranList(ShujiiMasterMapperParameter 主治医情報検索条件) {
         requireNonNull(主治医情報検索条件, UrSystemErrorMessages.値がnull.getReplacedMessage("主治医情報検索条件"));
         IShujiiMasterJohoMapper mapper = mapperProvider.create(IShujiiMasterJohoMapper.class);
+        int 該当件数 = mapper.countShujiiJoho(主治医情報検索条件);
         List<ShujiiMasterRelateEntity> relateEntityList = mapper.selectShujiiIchiranList(主治医情報検索条件);
         if (relateEntityList.isEmpty()) {
             return SearchResult.of(Collections.<ShujiiMaster>emptyList(), 0, false);
@@ -75,7 +77,7 @@ public class ShujiiMasterFinder {
         for (ShujiiMasterRelateEntity entity : relateEntityList) {
             主治医情報List.add(new ShujiiMaster(entity));
         }
-        return SearchResult.of(主治医情報List, 0, false);
+        return SearchResult.of(主治医情報List, 該当件数, 該当件数 > 主治医情報List.size());
     }
 
     /**
