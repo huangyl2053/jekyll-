@@ -37,7 +37,6 @@ public class ShujiiIryokikanAndShujiiGuide {
     private static final RString 状況フラグ_有効 = new RString("有効");
     private final ShujiiIryokikanAndShujiiGuideFinder finder;
     private static final RString 状況フラグ無効可 = new RString("状況フラグ無効可");
-    private static final RString 四マスタ管理方法_構成市町村 = new RString("1");
 
     /**
      * コンストラクタです。
@@ -62,16 +61,13 @@ public class ShujiiIryokikanAndShujiiGuide {
         ShujiiIryokikanandshujiiDataPassModel dataPassModel = DataPassingConverter.deserialize(
                 div.getHdnDataPass(), ShujiiIryokikanandshujiiDataPassModel.class);
         if (dataPassModel != null) {
-            if (四マスタ管理方法_構成市町村.equals(new FourMasterConfig().get四マスタ管理方法())) {
+            if (new FourMasterConfig().get管理方法().is構成市町村ごと()) {
                 if (!RString.isNullOrEmpty(dataPassModel.get市町村コード())) {
                     LasdecCode 市町村コード = new LasdecCode(dataPassModel.get市町村コード());
-                    if (!new RString("209732").equals(dataPassModel.get市町村コード())) {
-                        div.getHokenshaList().loadHokenshaList(GyomuBunrui.介護認定, 市町村コード);
-                    }
-                    div.getHokenshaList().setSelectedShichosonIfExist(市町村コード);
+                    div.getHokenshaList().loadHokenshaList(GyomuBunrui.介護認定, 市町村コード);
                 }
             } else {
-                div.getHokenshaList().loadHokenshaList(GyomuBunrui.介護認定, HokenshaDDLPattem.広域保険者のみ);
+                div.getHokenshaList().setDisplayNone(true);
             }
             div.getTxtIryoKikanCodeFrom().setValue(RString.EMPTY);
             div.getTxtIryoKikanCodeTo().setValue(RString.EMPTY);
@@ -88,7 +84,7 @@ public class ShujiiIryokikanAndShujiiGuide {
                     div.getRadShujiiJokyo().setDisabled(false);
                 }
             }
-            search主治医医療機関and主治医(div, dataPassModel, div.getHokenshaList().getSelectedItem().get市町村コード().value());
+            search主治医医療機関and主治医(div, dataPassModel, dataPassModel.get市町村コード());
         }
         return ResponseData.of(div).respond();
     }
@@ -164,7 +160,9 @@ public class ShujiiIryokikanAndShujiiGuide {
         );
 
         if (dataPassModel != null) {
-            RString 市町村コード = div.getHokenshaList().getSelectedItem().get市町村コード().value();
+            RString 市町村コード = div.getHokenshaList().isDisplayNone()
+                    ? RString.EMPTY
+                    : div.getHokenshaList().getSelectedItem().get市町村コード().value();
             search主治医医療機関and主治医(div, dataPassModel, 市町村コード);
         }
         return ResponseData.of(div).respond();

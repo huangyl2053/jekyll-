@@ -8,7 +8,6 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.controller.commonchilddiv.Chosa
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
-import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.HokenshaDDLPattem;
 import jp.co.ndensan.reams.db.dbz.business.config.FourMasterConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjoho;
 import jp.co.ndensan.reams.db.dbz.business.core.inkijuntsukishichosonjoho.KijuntsukiShichosonjohoiDataPassModel;
@@ -36,13 +35,7 @@ import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 public class ChosaItakusakiAndChosainGuide {
 
     private final KijuntsukiShichosonjohoFinder finder;
-    private RString 市町村コード;
-    private RString 調査委託先コードFrom = RString.EMPTY;
-    private RString 調査委託先コードTo = RString.EMPTY;
-    private RString 調査員コードFrom = RString.EMPTY;
-    private RString 調査員コードTo = RString.EMPTY;
     private static final RString 状況フラグ無効可 = new RString("状況フラグ無効可");
-    private static final RString 四マスタ管理方法_構成市町村 = new RString("1");
 
     /**
      * コンストラクタです。
@@ -67,16 +60,13 @@ public class ChosaItakusakiAndChosainGuide {
         KijuntsukiShichosonjohoiDataPassModel dataPassModel = DataPassingConverter.deserialize(
                 div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
         if (dataPassModel != null) {
-            if (四マスタ管理方法_構成市町村.equals(new FourMasterConfig().get四マスタ管理方法())) {
+            if (new FourMasterConfig().get管理方法().is構成市町村ごと()) {
                 if (!RString.isNullOrEmpty(dataPassModel.get市町村コード())) {
                     LasdecCode 市町村code = new LasdecCode(dataPassModel.get市町村コード());
-                    if (!new RString("209732").equals(dataPassModel.get市町村コード())) {
-                        div.getHokensha().loadHokenshaList(GyomuBunrui.介護認定, 市町村code);
-                    }
-                    div.getHokensha().setSelectedShichosonIfExist(市町村code);
+                    div.getHokensha().loadHokenshaList(GyomuBunrui.介護認定, 市町村code);
                 }
             } else {
-                div.getHokensha().loadHokenshaList(GyomuBunrui.介護認定, HokenshaDDLPattem.広域保険者のみ);
+                div.getHokensha().setDisplayNone(true);
             }
             div.getTxtChosaItakusakiCodeFrom().setValue(RString.EMPTY);
             div.getTxtChosaItakuaskiCodeTo().setValue(RString.EMPTY);
@@ -178,6 +168,7 @@ public class ChosaItakusakiAndChosainGuide {
     }
 
     private ChosaItakusakiAndChosainGuideParameter createParam(ChosaItakusakiAndChosainGuideDiv div) {
+        RString 調査委託先コードFrom, 調査委託先コードTo;
         if (!RString.isNullOrEmpty(div.getTxtChosaItakusakiCodeFrom().getText())
                 && !RString.isNullOrEmpty(div.getTxtChosaItakuaskiCodeTo().getText())) {
             if (Long.valueOf(div.getTxtChosaItakusakiCodeFrom().getText().toString())
@@ -192,6 +183,8 @@ public class ChosaItakusakiAndChosainGuide {
             調査委託先コードFrom = div.getTxtChosaItakusakiCodeFrom().getText();
             調査委託先コードTo = div.getTxtChosaItakuaskiCodeTo().getText();
         }
+
+        RString 調査員コードFrom, 調査員コードTo;
         if (!RString.isNullOrEmpty(div.getTxtChosainCodeFrom().getText())
                 && !RString.isNullOrEmpty(div.getTxtChosainCodeTo().getText())) {
             if (Long.valueOf(div.getTxtChosainCodeFrom().getText().toString())
@@ -206,7 +199,6 @@ public class ChosaItakusakiAndChosainGuide {
             調査員コードFrom = div.getTxtChosainCodeFrom().getText();
             調査員コードTo = div.getTxtChosainCodeTo().getText();
         }
-        市町村コード = div.getHokensha().getSelectedItem().get市町村コード().value();
         return ChosaItakusakiAndChosainGuideParameter.createParam(
                 調査委託先コードFrom,
                 調査委託先コードTo,
@@ -219,7 +211,7 @@ public class ChosaItakusakiAndChosainGuide {
                 div.getTxtChosainName().getValue(),
                 div.getTxtChosainKanaShimei().getValue(),
                 null,
-                市町村コード,
+                div.getHokensha().isDisplayNone() ? RString.EMPTY : div.getHokensha().getSelectedItem().get市町村コード().value(),
                 ControlDataHolder.getSubGyomuCD().value(),
                 div.getTxtChikuCode().getDomain().value(),
                 div.getDdlChosaItakusakiKubun().getSelectedKey());

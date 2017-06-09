@@ -44,4 +44,53 @@ public class FourMasterConfig {
     public RString get四マスタ管理方法() {
         return configs.get(ConfigKeysFourMaster.四マスタ管理方法);
     }
+
+    /**
+     * @return 四マスタの管理方法
+     */
+    public FourMastersManagementSystem get管理方法() {
+        return FourMastersManagementSystem.toValue(get四マスタ管理方法());
+    }
+
+    /**
+     * 四マスタの管理方法を表します。
+     */
+    public enum FourMastersManagementSystem {
+
+        /**
+         * 構成市町村ごとに管理します。
+         */
+        構成市町村("1"),
+        /**
+         * 広域保険者で管理します。
+         */
+        広域保険者("2"),
+        /**
+         * 本来ありえない不正な値です。
+         */
+        NULLVALUE("");
+
+        private final RString theCode;
+
+        private FourMastersManagementSystem(String code) {
+            this.theCode = new RString(code);
+        }
+
+        /**
+         * @return 四マスタを構成市町村ごとに管理する場合、{[@code true}.
+         */
+        public boolean is構成市町村ごと() {
+            return this == 構成市町村;
+        }
+
+        private static FourMastersManagementSystem toValue(RString code) {
+            for (FourMastersManagementSystem v : values()) {
+                if (java.util.Objects.equals(v.theCode, code)) {
+                    return v;
+                }
+            }
+            return NULLVALUE;
+        }
+
+    }
 }
