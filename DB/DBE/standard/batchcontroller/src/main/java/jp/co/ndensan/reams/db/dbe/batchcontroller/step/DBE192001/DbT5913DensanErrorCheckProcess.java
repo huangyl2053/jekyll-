@@ -48,7 +48,7 @@ public class DbT5913DensanErrorCheckProcess extends BatchProcessBase<DbT5913Rela
 
     @Override
     protected void process(DbT5913RelateEntity entity) {
-        DbT5913ErrorTempEntity dbT5913ErrorTempEntity = new NinteiShinseirenkeiDataInsert().getDbT5913ErrorTempEntity(entity);
+        DbT5913ErrorTempEntity dbT5913ErrorTempEntity = new NinteiShinseirenkeiDataInsert().getDbT5913ErrorTempEntity(entity, processParamter);
         if (dbT5913ErrorTempEntity != null) {
             dbT5913ErrorTemp.insert(dbT5913ErrorTempEntity);
             dbT5913Temp.delete(entity.getDbt5913TempEntity());

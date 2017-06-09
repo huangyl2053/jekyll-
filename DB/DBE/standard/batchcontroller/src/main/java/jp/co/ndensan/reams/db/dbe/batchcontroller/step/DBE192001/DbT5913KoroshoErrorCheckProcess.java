@@ -48,7 +48,7 @@ public class DbT5913KoroshoErrorCheckProcess extends BatchProcessBase<DbT5913Rel
 
     @Override
     protected void process(DbT5913RelateEntity entity) {
-        DbT5913KoroshoErrorTempEntity dbT5913KoroshoErrorTempEntity = new NinteiShinseirenkeiDataInsert().getDbT5913KoroshoErrorTempEntity(entity);
+        DbT5913KoroshoErrorTempEntity dbT5913KoroshoErrorTempEntity = new NinteiShinseirenkeiDataInsert().getDbT5913KoroshoErrorTempEntity(entity, processParamter);
         if (dbT5913KoroshoErrorTempEntity != null) {
             dbT5913KoroshoErrorTemp.insert(dbT5913KoroshoErrorTempEntity);
             dbT5913KoroshoTemp.delete(entity.getDbt5913TempEntity());

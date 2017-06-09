@@ -692,7 +692,8 @@
         <association property="dbT5912Entity" resultMap="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5912ShujiiJohoMapper.ResultMap_DbT5912ShujiiJohoEntity"/>
     </resultMap>
 
-    <select resultOrdered="true" id="get更新対象情報_電算版" resultMap="ResultMap_DbT5101NinteiShinseiJoho" fetchSize="500">
+    <select resultOrdered="true" id="get更新対象情報_電算版" resultMap="ResultMap_DbT5101NinteiShinseiJoho" 
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.renkeidatatorikomi.RenkeiDataTorikomiMybitisParamter" fetchSize="500">
         SELECT
             <include refid="allColumns_DbT5101Temp" />,
             <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho" />,
@@ -729,18 +730,19 @@
             LEFT JOIN rgdb."DbT7051KoseiShichosonMaster"
                 ON "DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo" = temp."保険者番号"
             LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho"
-                ON "DbT7051KoseiShichosonMaster"."shichosonCode" = "DbT5910NinteichosaItakusakiJoho"."shichosonCode"
+                ON #{市町村コード} = "DbT5910NinteichosaItakusakiJoho"."shichosonCode"
                 AND temp."調査委託先コード" = "DbT5910NinteichosaItakusakiJoho"."ninteichosaItakusakiCode"
             LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho"
-                ON "DbT7051KoseiShichosonMaster"."shichosonCode" = "DbT5911ShujiiIryoKikanJoho"."shichosonCode"
+                ON #{市町村コード} = "DbT5911ShujiiIryoKikanJoho"."shichosonCode"
                 AND temp."主治医医療機関コード" = "DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode"
             LEFT JOIN rgdb."DbT5912ShujiiJoho"
-                ON "DbT7051KoseiShichosonMaster"."shichosonCode" = "DbT5912ShujiiJoho"."shichosonCode"
+                ON #{市町村コード} = "DbT5912ShujiiJoho"."shichosonCode"
                 AND temp."主治医医療機関コード" = "DbT5912ShujiiJoho"."shujiiIryokikanCode"
                 AND temp."主治医番号" = "DbT5912ShujiiJoho"."shujiiCode"
     </select>
 
-    <select resultOrdered="true" id="get更新対象情報_東芝版" resultMap="ResultMap_DbT5101NinteiShinseiJoho" fetchSize="500">
+    <select resultOrdered="true" id="get更新対象情報_東芝版" resultMap="ResultMap_DbT5101NinteiShinseiJoho"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.renkeidatatorikomi.RenkeiDataTorikomiMybitisParamter" fetchSize="500">
         SELECT
             <include refid="allColumns_DbT5101Temp" />,
             <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho" />,
@@ -770,15 +772,16 @@
             LEFT JOIN rgdb."DbT7051KoseiShichosonMaster"
                 ON "DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo" = temp."保険者番号"
             LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho"
-                ON "DbT7051KoseiShichosonMaster"."shichosonCode" = "DbT5911ShujiiIryoKikanJoho"."shichosonCode"
+                ON #{市町村コード} = "DbT5911ShujiiIryoKikanJoho"."shichosonCode"
                 AND temp."主治医医療機関コード" = "DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode"
             LEFT JOIN rgdb."DbT5912ShujiiJoho"
-                ON "DbT7051KoseiShichosonMaster"."shichosonCode" = "DbT5912ShujiiJoho"."shichosonCode"
+                ON #{市町村コード} = "DbT5912ShujiiJoho"."shichosonCode"
                 AND temp."主治医医療機関コード" = "DbT5912ShujiiJoho"."shujiiIryokikanCode"
                 AND temp."主治医番号" = "DbT5912ShujiiJoho"."shujiiCode"
     </select>
 
-    <select resultOrdered="true" id="get更新対象情報_厚労省" resultMap="ResultMap_DbT5101NinteiShinseiJoho" fetchSize="500">
+    <select resultOrdered="true" id="get更新対象情報_厚労省" resultMap="ResultMap_DbT5101NinteiShinseiJoho"
+            parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.renkeidatatorikomi.RenkeiDataTorikomiMybitisParamter" fetchSize="500">
         SELECT
             <include refid="allColumns_DbT5101KoroshoTemp" />,
             <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5101NinteiShinseiJohoMapper.allColumns_DbT5101NinteiShinseiJoho" />,
@@ -808,10 +811,10 @@
             LEFT JOIN rgdb."DbT7051KoseiShichosonMaster"
                 ON "DbT7051KoseiShichosonMaster"."shoKisaiHokenshaNo" = temp."保険者番号"
             LEFT JOIN rgdb."DbT5911ShujiiIryoKikanJoho"
-                ON "DbT7051KoseiShichosonMaster"."shichosonCode" = "DbT5911ShujiiIryoKikanJoho"."shichosonCode"
+                ON #{市町村コード} = "DbT5911ShujiiIryoKikanJoho"."shichosonCode"
                 AND temp."主治医医療機関コード" = "DbT5911ShujiiIryoKikanJoho"."shujiiIryokikanCode"
             LEFT JOIN rgdb."DbT5912ShujiiJoho"
-                ON "DbT7051KoseiShichosonMaster"."shichosonCode" = "DbT5912ShujiiJoho"."shichosonCode"
+                ON #{市町村コード} = "DbT5912ShujiiJoho"."shichosonCode"
                 AND temp."主治医医療機関コード" = "DbT5912ShujiiJoho"."shujiiIryokikanCode"
                 AND temp."主治医番号" = "DbT5912ShujiiJoho"."shujiiCode"
     </select>

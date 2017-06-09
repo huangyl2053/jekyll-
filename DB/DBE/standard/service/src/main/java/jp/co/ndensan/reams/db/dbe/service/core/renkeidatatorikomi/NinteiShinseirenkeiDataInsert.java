@@ -37,6 +37,7 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.Torisage
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5910NinteichosaItakusakiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5911ShujiiIryoKikanJohoDac;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
@@ -51,15 +52,17 @@ public class NinteiShinseirenkeiDataInsert {
 
     private static final int INT10 = 10;
     private static final int INT24 = 24;
+    private static final RString 四マスタ管理方法_構成市町村 = new RString("1");
 
     /**
      * DbT5912KoroshoErrorTempEntityの設定メッソドです。
      *
      * @param entity DbT5912RelateEntity
+     * @param processParamter
      * @return DbT5912KoroshoErrorTempEntity
      */
-    public DbT5912KoroshoErrorTempEntity getDbT5912KoroshoErrorTempEntity(DbT5912RelateEntity entity) {
-        RString error = check主治医一時テーブル電算(entity);
+    public DbT5912KoroshoErrorTempEntity getDbT5912KoroshoErrorTempEntity(DbT5912RelateEntity entity, RenkeiDataTorikomiProcessParamter processParamter) {
+        RString error = check主治医一時テーブル電算(entity, processParamter);
         if (!RString.isNullOrEmpty(error)) {
             DbT5912KoroshoErrorTempEntity errorEntity = new DbT5912KoroshoErrorTempEntity();
             errorEntity.setシーケンシャル番号(entity.getDbt5912TempEntity().getシーケンシャル番号());
@@ -85,10 +88,11 @@ public class NinteiShinseirenkeiDataInsert {
      * DbT5912ErrorTempEntityの設定メッソドです。
      *
      * @param entity DbT5912RelateEntity
+     * @param processParamter
      * @return DbT5912ErrorTempEntity
      */
-    public DbT5912ErrorTempEntity getDbT5912ErrorTempEntity(DbT5912RelateEntity entity) {
-        RString error = check主治医一時テーブル電算(entity);
+    public DbT5912ErrorTempEntity getDbT5912ErrorTempEntity(DbT5912RelateEntity entity, RenkeiDataTorikomiProcessParamter processParamter) {
+        RString error = check主治医一時テーブル電算(entity, processParamter);
         if (!RString.isNullOrEmpty(error)) {
             DbT5912ErrorTempEntity errorEntity = new DbT5912ErrorTempEntity();
             errorEntity.setシーケンシャル番号(entity.getDbt5912TempEntity().getシーケンシャル番号());
@@ -111,14 +115,13 @@ public class NinteiShinseirenkeiDataInsert {
         return null;
     }
 
-    private RString check主治医一時テーブル電算(DbT5912RelateEntity entity) {
+    private RString check主治医一時テーブル電算(DbT5912RelateEntity entity, RenkeiDataTorikomiProcessParamter processParamter) {
         RStringBuilder errorBuilder = new RStringBuilder();
         DbT5911ShujiiIryoKikanJohoDac dac = InstanceProvider.create(DbT5911ShujiiIryoKikanJohoDac.class);
         if (RString.isNullOrEmpty(entity.getDbt5912TempEntity().get医療機関コード())) {
             errorBuilder.append(new RString("医療機関コードが未入力です;"));
         }
-        if (dac.selectBy主治医医療機関コード(new ShujiiIryokikanCode(entity.getDbt5912TempEntity().get医療機関コード())) == null
-                || dac.selectBy主治医医療機関コード(new ShujiiIryokikanCode(entity.getDbt5912TempEntity().get医療機関コード())).isEmpty()) {
+        if (dac.selectByKey(new LasdecCode(processParamter.get市町村コード()), new ShujiiIryokikanCode(entity.getDbt5912TempEntity().get医療機関コード())) == null) {
             errorBuilder.append(new RString("医療機関コードが不正です;"));
         }
         if (RString.isNullOrEmpty(entity.getDbt5912TempEntity().get主治医コード())) {
@@ -203,10 +206,11 @@ public class NinteiShinseirenkeiDataInsert {
      * DbT5913KoroshoErrorTempEntityの設定メッソドです。
      *
      * @param entity DbT5913RelateEntity
+     * @param processParamter
      * @return DbT5913KoroshoErrorTempEntity
      */
-    public DbT5913KoroshoErrorTempEntity getDbT5913KoroshoErrorTempEntity(DbT5913RelateEntity entity) {
-        RString error = check調査員一時テーブル電算(entity);
+    public DbT5913KoroshoErrorTempEntity getDbT5913KoroshoErrorTempEntity(DbT5913RelateEntity entity, RenkeiDataTorikomiProcessParamter processParamter) {
+        RString error = check調査員一時テーブル電算(entity, processParamter);
         if (!RString.isNullOrEmpty(error)) {
             DbT5913KoroshoErrorTempEntity errorEntity = new DbT5913KoroshoErrorTempEntity();
             errorEntity.setシーケンシャル番号(entity.getDbt5913TempEntity().getシーケンシャル番号());
@@ -233,10 +237,11 @@ public class NinteiShinseirenkeiDataInsert {
      * DbT5913ErrorTempEntityの設定メッソドです。
      *
      * @param entity DbT5913RelateEntity
+     * @param processParamter
      * @return DbT5913ErrorTempEntity
      */
-    public DbT5913ErrorTempEntity getDbT5913ErrorTempEntity(DbT5913RelateEntity entity) {
-        RString error = check調査員一時テーブル電算(entity);
+    public DbT5913ErrorTempEntity getDbT5913ErrorTempEntity(DbT5913RelateEntity entity, RenkeiDataTorikomiProcessParamter processParamter) {
+        RString error = check調査員一時テーブル電算(entity, processParamter);
         if (!RString.isNullOrEmpty(error)) {
             DbT5913ErrorTempEntity errorEntity = new DbT5913ErrorTempEntity();
             errorEntity.setシーケンシャル番号(entity.getDbt5913TempEntity().getシーケンシャル番号());
@@ -260,14 +265,13 @@ public class NinteiShinseirenkeiDataInsert {
         return null;
     }
 
-    private RString check調査員一時テーブル電算(DbT5913RelateEntity entity) {
+    private RString check調査員一時テーブル電算(DbT5913RelateEntity entity, RenkeiDataTorikomiProcessParamter processParamter) {
         RStringBuilder errorBuilder = new RStringBuilder();
         if (RString.isNullOrEmpty(entity.getDbt5913TempEntity().get委託先コード())) {
             errorBuilder.append(new RString("調査機関コードが未入力です;"));
         }
         DbT5910NinteichosaItakusakiJohoDac dac = InstanceProvider.create(DbT5910NinteichosaItakusakiJohoDac.class);
-        if (dac.selectBy認定調査委託先コード(entity.getDbt5913TempEntity().get委託先コード()) == null
-                || dac.selectBy認定調査委託先コード(entity.getDbt5913TempEntity().get委託先コード()).isEmpty()) {
+        if (dac.selectByKey(new LasdecCode(processParamter.get市町村コード()), entity.getDbt5913TempEntity().get委託先コード()) == null) {
             errorBuilder.append(new RString("調査機関コードが不正です;"));
         }
         if (RString.isNullOrEmpty(entity.getDbt5913TempEntity().get調査員コード())) {
@@ -360,14 +364,15 @@ public class NinteiShinseirenkeiDataInsert {
      *
      * @param entity DbT5101RelateEntity
      * @param processParamter RenkeiDataTorikomiProcessParamter
+     * @param 四マスタ管理方法
      * @return DbT5101ErrorTempEntity
      */
-    public DbT5101ErrorTempEntity getDbT5101ErrorTempEntity(DbT5101RelateEntity entity, RenkeiDataTorikomiProcessParamter processParamter) {
+    public DbT5101ErrorTempEntity getDbT5101ErrorTempEntity(DbT5101RelateEntity entity, RenkeiDataTorikomiProcessParamter processParamter, RString 四マスタ管理方法) {
         RString error;
         if (processParamter.is東芝版フラグ()) {
             error = check申請情報一時テーブル_東芝版(entity);
         } else {
-            error = check申請情報一時テーブル電算(entity, processParamter);
+            error = check申請情報一時テーブル電算(entity, processParamter, 四マスタ管理方法);
         }
         if (!RString.isNullOrEmpty(error)) {
             DbT5101ErrorTempEntity errorEntity = new DbT5101ErrorTempEntity();
@@ -401,13 +406,15 @@ public class NinteiShinseirenkeiDataInsert {
 
     }
 
-    private RString check申請情報一時テーブル電算(DbT5101RelateEntity entity, RenkeiDataTorikomiProcessParamter processParamter) {
+    private RString check申請情報一時テーブル電算(DbT5101RelateEntity entity, RenkeiDataTorikomiProcessParamter processParamter, RString 四マスタ管理方法) {
         RStringBuilder errorBuilder = new RStringBuilder();
         checkDbT5101同情報(entity, errorBuilder);
         nullCheck申請区分(entity.getDbt5101TempEntity().get申請区分_申請時コード(), errorBuilder);
-        if (!RString.isNullOrEmpty(processParamter.get市町村コード())
-                && processParamter.get市町村コード().equals(entity.getDbt5101TempEntity().get市町村コード())) {
-            errorBuilder.append(new RString("市町村コードが不正です;"));
+        if (四マスタ管理方法_構成市町村.equals(四マスタ管理方法)) {
+            if (!RString.isNullOrEmpty(processParamter.get市町村コード())
+                    && !processParamter.get市町村コード().equals(entity.getDbt5101TempEntity().get市町村コード())) {
+                errorBuilder.append(new RString("市町村コードが不正です;"));
+            }
         }
         check申請区分不正(entity.getDbt5101TempEntity().get申請区分_申請時コード(), errorBuilder);
         if (RString.isNullOrEmpty(entity.getDbt5101TempEntity().get認定申請日()) || new RString("00000000").equals(entity.getDbt5101TempEntity().get認定申請日())) {

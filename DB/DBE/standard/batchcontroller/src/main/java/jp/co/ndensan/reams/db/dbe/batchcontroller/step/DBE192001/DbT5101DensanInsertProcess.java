@@ -11,6 +11,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5123NinteiKeikakuJohoEntity
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5129TennyuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.basic.DbT5130ShiboEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5101RelateEntity;
+import jp.co.ndensan.reams.db.dbz.business.config.FourMasterConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5102NinteiKekkaJohoEntity;
@@ -22,6 +23,7 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchPermanentTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -41,6 +43,8 @@ public class DbT5101DensanInsertProcess extends BatchProcessBase<DbT5101RelateEn
     private static final RString 登録 = new RString("3");
     private RenkeiDataTorikomiBusiness business;
     private RenkeiDataTorikomiProcessParamter processParamter;
+    private RString 四マスタ管理方法;
+    private static final RString 四マスタ管理方法_構成市町村 = new RString("1");
     @BatchWriter
     BatchPermanentTableWriter<DbT5101NinteiShinseiJohoEntity> dbT5101Writer;
     @BatchWriter
@@ -60,6 +64,7 @@ public class DbT5101DensanInsertProcess extends BatchProcessBase<DbT5101RelateEn
 
     @Override
     protected void initialize() {
+        四マスタ管理方法 = new FourMasterConfig().get四マスタ管理方法();
         business = new RenkeiDataTorikomiBusiness();
     }
 
@@ -78,17 +83,20 @@ public class DbT5101DensanInsertProcess extends BatchProcessBase<DbT5101RelateEn
     @Override
     protected IBatchReader createReader() {
         if (processParamter.is厚労省フラグ()) {
-            return new BatchDbReader(更新対象情報_厚労省);
+            return new BatchDbReader(更新対象情報_厚労省, processParamter.toRenkeiDataTorikomiMybitisParamter());
         } else if (processParamter.is東芝版フラグ()) {
-            return new BatchDbReader(更新対象情報_東芝版);
+            return new BatchDbReader(更新対象情報_東芝版, processParamter.toRenkeiDataTorikomiMybitisParamter());
         } else {
-            return new BatchDbReader(更新対象情報_電算版);
+            return new BatchDbReader(更新対象情報_電算版, processParamter.toRenkeiDataTorikomiMybitisParamter());
         }
 
     }
 
     @Override
     protected void process(DbT5101RelateEntity entity) {
+        if (!四マスタ管理方法_構成市町村.equals(四マスタ管理方法)) {
+            entity.getDbT7051Entity().setShichosonCode(new LasdecCode(processParamter.get市町村コード()));
+        }
         dbT5101Writer.insert(business.setDbt5101Entity(entity, 登録, processParamter));
         dbT5123Writer.insert(business.getDbT5123Entity(entity, 登録));
         dbT5121Writer.insert(business.getDbT5121Entity(entity));

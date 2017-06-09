@@ -10,6 +10,7 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5101Err
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5101RelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.renkeidatatorikomi.DbT5101TempEntity;
 import jp.co.ndensan.reams.db.dbe.service.core.renkeidatatorikomi.NinteiShinseirenkeiDataInsert;
+import jp.co.ndensan.reams.db.dbz.business.config.FourMasterConfig;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchEntityCreatedTempTableWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -32,10 +33,16 @@ public class DbT5101DensanErrorCheckProcess extends BatchProcessBase<DbT5101Rela
     private static final RString 申請一時厚労省情報 = new RString(
             "jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.renkeidatatorikomi.IDbT5101TempMapper.get更新対象情報_厚労省");
     private RenkeiDataTorikomiProcessParamter processParamter;
+    private RString 四マスタ管理方法;
     @BatchWriter
     BatchEntityCreatedTempTableWriter dbT5101Temp;
     @BatchWriter
     BatchEntityCreatedTempTableWriter dbT5101ErrorTemp;
+
+    @Override
+    protected void initialize() {
+        四マスタ管理方法 = new FourMasterConfig().get四マスタ管理方法();
+    }
 
     @Override
     protected void createWriter() {
@@ -48,17 +55,17 @@ public class DbT5101DensanErrorCheckProcess extends BatchProcessBase<DbT5101Rela
     @Override
     protected IBatchReader createReader() {
         if (processParamter.is厚労省フラグ()) {
-            return new BatchDbReader(申請一時厚労省情報);
+            return new BatchDbReader(申請一時厚労省情報, processParamter.toRenkeiDataTorikomiMybitisParamter());
         } else if (processParamter.is東芝版フラグ()) {
-            return new BatchDbReader(申請一時東芝情報);
+            return new BatchDbReader(申請一時東芝情報, processParamter.toRenkeiDataTorikomiMybitisParamter());
         } else {
-            return new BatchDbReader(申請一時電算情報);
+            return new BatchDbReader(申請一時電算情報, processParamter.toRenkeiDataTorikomiMybitisParamter());
         }
     }
 
     @Override
     protected void process(DbT5101RelateEntity entity) {
-        DbT5101ErrorTempEntity errorEntity = new NinteiShinseirenkeiDataInsert().getDbT5101ErrorTempEntity(entity, processParamter);
+        DbT5101ErrorTempEntity errorEntity = new NinteiShinseirenkeiDataInsert().getDbT5101ErrorTempEntity(entity, processParamter, 四マスタ管理方法);
         if (errorEntity != null) {
             dbT5101ErrorTemp.insert(errorEntity);
             dbT5101Temp.delete(entity.getDbt5101TempEntity());
