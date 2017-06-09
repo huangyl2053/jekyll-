@@ -12,39 +12,46 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.centertransmission.CenterTransmissionMybitisParamter"
             fetchSize="500">
         SELECT
-        A."shinseishoKanriNo"
-        , A."koroshoIfShikibetsuCode"
-        , A."remban"
-        , A."serviceJokyo"
+              A."shinseishoKanriNo"
+            , A."koroshoIfShikibetsuCode"
+            , A."remban"
+            , A."serviceJokyo"
         FROM
-        "SoshinDataSakuseiTaishoshaTemp"
-        INNER JOIN rgdb."DbT5207NinteichosahyoServiceJokyo" A
-        ON "SoshinDataSakuseiTaishoshaTemp"."shinseishoKanriNo" = A."shinseishoKanriNo"
-        LEFT JOIN  rgdb."DbT5101NinteiShinseiJoho" dbT5101
-        ON dbT5101."shinseishoKanriNo" = A."shinseishoKanriNo"
-        AND "logicalDeletedFlag" = FALSE
-        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" DbT7051
-        ON DbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo"
+            "SoshinDataSakuseiTaishoshaTemp"
+        INNER JOIN
+            rgdb."DbT5201NinteichosaIraiJoho" AS dbt5201
+          ON dbt5201."shinseishoKanriNo"  = "SoshinDataSakuseiTaishoshaTemp"."shinseishoKanriNo"
+         AND dbt5201."logicalDeletedFlag" = FALSE
+         AND NOT EXISTS (
+            SELECT *
+            FROM
+                rgdb."DbT5201NinteichosaIraiJoho" AS dbt5201b
+            WHERE
+                 dbt5201b."shinseishoKanriNo"  = dbt5201."shinseishoKanriNo"
+             AND dbt5201b."logicalDeletedFlag" = dbt5201."logicalDeletedFlag"
+             AND dbt5201b."ninteichosaIraiRirekiNo" <![CDATA[>]]> dbt5201."ninteichosaIraiRirekiNo"
+         )
+        INNER JOIN
+            rgdb."DbT5207NinteichosahyoServiceJokyo" A
+          ON A."shinseishoKanriNo"   = dbt5201."shinseishoKanriNo"
+         AND A."ninteichosaRirekiNo" = dbt5201."ninteichosaIraiRirekiNo"
+        LEFT JOIN
+            rgdb."DbT5101NinteiShinseiJoho" dbT5101
+          ON dbT5101."shinseishoKanriNo"  = A."shinseishoKanriNo"
+         AND dbT5101."logicalDeletedFlag" = FALSE
+        INNER JOIN
+            rgdb."DbT7051KoseiShichosonMaster" DbT7051
+          ON DbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo"
         WHERE
-        NOT EXISTS (
-        SELECT
-        'X'
-        FROM
-        rgdb."DbT5207NinteichosahyoServiceJokyo" A1
-        WHERE
-        A."shinseishoKanriNo" = A1."shinseishoKanriNo"
-        AND A."ninteichosaRirekiNo" <![CDATA[<]]> A1."ninteichosaRirekiNo"
-        )
-        AND 1 <![CDATA[<=]]> A."remban"
-        AND A."remban" <![CDATA[<=]]> 20
-        AND A."koroshoIfShikibetsuCode" = dbT5101."koroshoIfShikibetsuCode"
-        <if test="市町村コード.toString() != ''.toString()">
+             1 <![CDATA[<=]]> A."remban"
+         AND A."remban" <![CDATA[<=]]> 20
+         <if test="市町村コード.toString() != ''.toString()">
             AND DbT7051."shichosonCode" = #{市町村コード}
-        </if>
+         </if>
         ORDER BY
-        A."shinseishoKanriNo"
-        , A."koroshoIfShikibetsuCode"
-        , A."remban"
+            A."shinseishoKanriNo",
+            A."koroshoIfShikibetsuCode",
+            A."remban"
     </select>
 
     <select id="getNinteichosahyoChosaItem"
@@ -53,39 +60,46 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.centertransmission.CenterTransmissionMybitisParamter"
             fetchSize="500">
         SELECT
-        A."shinseishoKanriNo"
-        , A."koroshoIfShikibetsuCode"
-        , A."remban"
-        , A."researchItem"
+              A."shinseishoKanriNo"
+            , A."koroshoIfShikibetsuCode"
+            , A."remban"
+            , A."researchItem"
         FROM
-        "SoshinDataSakuseiTaishoshaTemp"
-        INNER JOIN rgdb."DbT5211NinteichosahyoChosaItem" A
-        ON "SoshinDataSakuseiTaishoshaTemp"."shinseishoKanriNo" = A."shinseishoKanriNo"
-        LEFT JOIN  rgdb."DbT5101NinteiShinseiJoho" dbT5101
-        ON dbT5101."shinseishoKanriNo" = A."shinseishoKanriNo"
-        AND "logicalDeletedFlag" = FALSE
-        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" DbT7051
-        ON DbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo"
+            "SoshinDataSakuseiTaishoshaTemp"
+        INNER JOIN
+            rgdb."DbT5201NinteichosaIraiJoho" AS dbt5201
+          ON dbt5201."shinseishoKanriNo"  = "SoshinDataSakuseiTaishoshaTemp"."shinseishoKanriNo"
+         AND dbt5201."logicalDeletedFlag" = FALSE
+         AND NOT EXISTS (
+            SELECT *
+            FROM
+                rgdb."DbT5201NinteichosaIraiJoho" AS dbt5201b
+            WHERE
+                 dbt5201b."shinseishoKanriNo"  = dbt5201."shinseishoKanriNo"
+             AND dbt5201b."logicalDeletedFlag" = dbt5201."logicalDeletedFlag"
+             AND dbt5201b."ninteichosaIraiRirekiNo" <![CDATA[>]]> dbt5201."ninteichosaIraiRirekiNo"
+         )
+        INNER JOIN
+            rgdb."DbT5211NinteichosahyoChosaItem" A
+          ON A."shinseishoKanriNo"   = dbt5201."shinseishoKanriNo"
+         AND A."ninteichosaRirekiNo" = dbt5201."ninteichosaIraiRirekiNo"
+        LEFT JOIN
+            rgdb."DbT5101NinteiShinseiJoho" dbT5101
+          ON dbT5101."shinseishoKanriNo"  = A."shinseishoKanriNo"
+         AND dbT5101."logicalDeletedFlag" = FALSE
+        INNER JOIN
+            rgdb."DbT7051KoseiShichosonMaster" DbT7051
+          ON DbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo"
         WHERE
-        NOT EXISTS (
-        SELECT
-        'X'
-        FROM
-        rgdb."DbT5211NinteichosahyoChosaItem" A1
-        WHERE
-        A."shinseishoKanriNo" = A1."shinseishoKanriNo"
-        AND A."ninteichosaRirekiNo" <![CDATA[<]]> A1."ninteichosaRirekiNo"
-        )
-        AND 1 <![CDATA[<=]]> A."remban"
-        AND A."remban" <![CDATA[<=]]> 85
-        AND A."koroshoIfShikibetsuCode" = dbT5101."koroshoIfShikibetsuCode"
-        <if test="市町村コード.toString() != ''.toString()">
+             1 <![CDATA[<=]]> A."remban"
+         AND A."remban" <![CDATA[<=]]> 85
+         <if test="市町村コード.toString() != ''.toString()">
             AND DbT7051."shichosonCode" = #{市町村コード}
-        </if>
+         </if>
         ORDER BY
-        A."shinseishoKanriNo"
-        , A."koroshoIfShikibetsuCode"
-        , A."remban"
+            A."shinseishoKanriNo",
+            A."koroshoIfShikibetsuCode",
+            A."remban"
     </select>
 
     <select id="getShujiiIkenshoIkenItem"
@@ -94,38 +108,45 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.centertransmission.CenterTransmissionMybitisParamter"
             fetchSize="500">
         SELECT
-        A."shinseishoKanriNo"
-        , A."koroshoIfShikibetsuCode"
-        , A."remban"
-        , A."ikenItem"
+            A."shinseishoKanriNo"
+            , A."koroshoIfShikibetsuCode"
+            , A."remban"
+            , A."ikenItem"
         FROM
-        "SoshinDataSakuseiTaishoshaTemp"
-        INNER JOIN rgdb."DbT5304ShujiiIkenshoIkenItem" A
-        ON "SoshinDataSakuseiTaishoshaTemp"."shinseishoKanriNo" = A."shinseishoKanriNo"
-        LEFT JOIN  rgdb."DbT5101NinteiShinseiJoho" dbT5101
-        ON dbT5101."shinseishoKanriNo" = A."shinseishoKanriNo"
-        AND "logicalDeletedFlag" = FALSE
-        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" DbT7051
-        ON DbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo"
+            "SoshinDataSakuseiTaishoshaTemp"
+        INNER JOIN
+            rgdb."DbT5301ShujiiIkenshoIraiJoho" AS dbt5301
+          ON dbt5301."shinseishoKanriNo"  = "SoshinDataSakuseiTaishoshaTemp"."shinseishoKanriNo"
+         AND dbt5301."logicalDeletedFlag" = FALSE
+         AND NOT EXISTS (
+            SELECT *
+            FROM
+                rgdb."DbT5301ShujiiIkenshoIraiJoho" AS dbt5301b
+            WHERE
+                 dbt5301b."shinseishoKanriNo"  = dbt5301."shinseishoKanriNo"
+             AND dbt5301b."logicalDeletedFlag" = dbt5301."logicalDeletedFlag"
+             AND dbt5301b."ikenshoIraiRirekiNo" <![CDATA[>]]> dbt5301."ikenshoIraiRirekiNo"
+         )
+        INNER JOIN
+            rgdb."DbT5304ShujiiIkenshoIkenItem" A
+           ON A."shinseishoKanriNo"   = dbt5301."shinseishoKanriNo"
+          AND A."ikenshoIraiRirekiNo" = dbt5301."ikenshoIraiRirekiNo"
+        LEFT JOIN
+            rgdb."DbT5101NinteiShinseiJoho" dbT5101
+          ON dbT5101."shinseishoKanriNo" = A."shinseishoKanriNo"
+         AND dbT5101."logicalDeletedFlag" = FALSE
+        INNER JOIN
+            rgdb."DbT7051KoseiShichosonMaster" DbT7051
+          ON DbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo"
         WHERE
-        NOT EXISTS (
-        SELECT
-        'X'
-        FROM
-        rgdb."DbT5304ShujiiIkenshoIkenItem" A1
-        WHERE
-        A."shinseishoKanriNo" = A1."shinseishoKanriNo"
-        AND A."ikenshoIraiRirekiNo" <![CDATA[<]]> A1."ikenshoIraiRirekiNo"
-        )
-        AND A."remban" IN (14, 15, 16, 17, 18, 19, 69)
-        AND A."koroshoIfShikibetsuCode" = dbT5101."koroshoIfShikibetsuCode"
-        <if test="市町村コード.toString() != ''.toString()">
+             A."remban" IN (14, 15, 16, 17, 18, 19, 69)
+         <if test="市町村コード.toString() != ''.toString()">
             AND DbT7051."shichosonCode" = #{市町村コード}
-        </if>
+         </if>
         ORDER BY
-        A."shinseishoKanriNo"
-        , A."koroshoIfShikibetsuCode"
-        , A."remban"
+            A."shinseishoKanriNo",
+            A."koroshoIfShikibetsuCode",
+            A."remban"
     </select>
 
     <select id="getZenkaiNinteichosahyoServiceJokyo"
@@ -134,39 +155,47 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.centertransmission.CenterTransmissionMybitisParamter"
             fetchSize="500">
         SELECT
-        "SoshinDataSakuseiTaishoshaTemp"."shinseishoKanriNo"
-        , "SoshinDataSakuseiTaishoshaTemp"."zenkaiShinseishoKanriNo"
-        , B."koroshoIfShikibetsuCode"
-        , B."remban"
-        , B."serviceJokyo"
+              "SoshinDataSakuseiTaishoshaTemp"."shinseishoKanriNo"
+            , "SoshinDataSakuseiTaishoshaTemp"."zenkaiShinseishoKanriNo"
+            , B."koroshoIfShikibetsuCode"
+            , B."remban"
+            , B."serviceJokyo"
         FROM
-        "SoshinDataSakuseiTaishoshaTemp"
-        INNER JOIN rgdb."DbT5207NinteichosahyoServiceJokyo" B
-        ON "SoshinDataSakuseiTaishoshaTemp"."zenkaiShinseishoKanriNo" = B."shinseishoKanriNo"
-        LEFT JOIN  rgdb."DbT5101NinteiShinseiJoho" dbT5101
-        ON dbT5101."shinseishoKanriNo" = "SoshinDataSakuseiTaishoshaTemp"."zenkaiShinseishoKanriNo"
-        AND "logicalDeletedFlag" = FALSE
-        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" DbT7051
-        ON DbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo"
-        AND NOT EXISTS (
-        SELECT
-        'X'
-        FROM
-        rgdb."DbT5207NinteichosahyoServiceJokyo" B1
+            "SoshinDataSakuseiTaishoshaTemp"
+        INNER JOIN
+            rgdb."DbT5201NinteichosaIraiJoho" AS dbt5201
+          ON dbt5201."shinseishoKanriNo"  = "SoshinDataSakuseiTaishoshaTemp"."zenkaiShinseishoKanriNo"
+         AND dbt5201."logicalDeletedFlag" = FALSE
+         AND NOT EXISTS (
+            SELECT *
+            FROM
+                rgdb."DbT5201NinteichosaIraiJoho" AS dbt5201b
+            WHERE
+                 dbt5201b."shinseishoKanriNo"  = dbt5201."shinseishoKanriNo"
+             AND dbt5201b."logicalDeletedFlag" = dbt5201."logicalDeletedFlag"
+             AND dbt5201b."ninteichosaIraiRirekiNo" <![CDATA[>]]> dbt5201."ninteichosaIraiRirekiNo"
+         )
+        INNER JOIN
+            rgdb."DbT5207NinteichosahyoServiceJokyo" B
+          ON B."shinseishoKanriNo"   = dbt5201."shinseishoKanriNo"
+         AND B."ninteichosaRirekiNo" = dbt5201."ninteichosaIraiRirekiNo"
+        LEFT JOIN
+            rgdb."DbT5101NinteiShinseiJoho" dbT5101
+          ON dbT5101."shinseishoKanriNo"  = B."shinseishoKanriNo"
+         AND dbT5101."logicalDeletedFlag" = FALSE
+        INNER JOIN
+            rgdb."DbT7051KoseiShichosonMaster" DbT7051
+          ON DbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo"
         WHERE
-        B."shinseishoKanriNo" = B1."shinseishoKanriNo"
-        AND B."ninteichosaRirekiNo" <![CDATA[<]]> B1."ninteichosaRirekiNo"
-        )
-        AND 1 <![CDATA[<=]]> B."remban"
-        AND B."remban" <![CDATA[<=]]> 20
-        AND B."koroshoIfShikibetsuCode" = dbT5101."koroshoIfShikibetsuCode"
-        <if test="市町村コード.toString() != ''.toString()">
+             1 <![CDATA[<=]]> B."remban"
+         AND B."remban" <![CDATA[<=]]> 20
+         <if test="市町村コード.toString() != ''.toString()">
             AND DbT7051."shichosonCode" = #{市町村コード}
-        </if>
+         </if>
         ORDER BY
-        "SoshinDataSakuseiTaishoshaTemp"."shinseishoKanriNo"
-        , B."koroshoIfShikibetsuCode"
-        , B."remban"
+            "SoshinDataSakuseiTaishoshaTemp"."shinseishoKanriNo"
+            , B."koroshoIfShikibetsuCode"
+            , B."remban"
     </select>
 
     <select id="getZenkaiNinteichosahyoChosaItem"
@@ -175,39 +204,47 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.centertransmission.CenterTransmissionMybitisParamter"
             fetchSize="500">
         SELECT
-        "SoshinDataSakuseiTaishoshaTemp"."shinseishoKanriNo"
-        , "SoshinDataSakuseiTaishoshaTemp"."zenkaiShinseishoKanriNo"
-        , B."koroshoIfShikibetsuCode"
-        , B."remban"
-        , B."researchItem"
+              "SoshinDataSakuseiTaishoshaTemp"."shinseishoKanriNo"
+            , "SoshinDataSakuseiTaishoshaTemp"."zenkaiShinseishoKanriNo"
+            , B."koroshoIfShikibetsuCode"
+            , B."remban"
+            , B."researchItem"
         FROM
-        "SoshinDataSakuseiTaishoshaTemp"
-        INNER JOIN rgdb."DbT5211NinteichosahyoChosaItem" B
-        ON "SoshinDataSakuseiTaishoshaTemp"."zenkaiShinseishoKanriNo" = B."shinseishoKanriNo"
-        LEFT JOIN  rgdb."DbT5101NinteiShinseiJoho" dbT5101
-        ON dbT5101."shinseishoKanriNo" = "SoshinDataSakuseiTaishoshaTemp"."zenkaiShinseishoKanriNo"
-        AND "logicalDeletedFlag" = FALSE
-        INNER JOIN rgdb."DbT7051KoseiShichosonMaster" DbT7051
-        ON DbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo"
-        AND NOT EXISTS (
-        SELECT
-        'X'
-        FROM
-        rgdb."DbT5211NinteichosahyoChosaItem" B1
+            "SoshinDataSakuseiTaishoshaTemp"
+        INNER JOIN
+            rgdb."DbT5201NinteichosaIraiJoho" AS dbt5201
+          ON dbt5201."shinseishoKanriNo"  = "SoshinDataSakuseiTaishoshaTemp"."zenkaiShinseishoKanriNo"
+         AND dbt5201."logicalDeletedFlag" = FALSE
+         AND NOT EXISTS (
+            SELECT *
+            FROM
+                rgdb."DbT5201NinteichosaIraiJoho" AS dbt5201b
+            WHERE
+                 dbt5201b."shinseishoKanriNo"  = dbt5201."shinseishoKanriNo"
+             AND dbt5201b."logicalDeletedFlag" = dbt5201."logicalDeletedFlag"
+             AND dbt5201b."ninteichosaIraiRirekiNo" <![CDATA[>]]> dbt5201."ninteichosaIraiRirekiNo"
+         )
+        INNER JOIN
+            rgdb."DbT5211NinteichosahyoChosaItem" B
+          ON B."shinseishoKanriNo"   = dbt5201."shinseishoKanriNo"
+         AND B."ninteichosaRirekiNo" = dbt5201."ninteichosaIraiRirekiNo"
+        LEFT JOIN
+            rgdb."DbT5101NinteiShinseiJoho" dbT5101
+          ON dbT5101."shinseishoKanriNo" = B."shinseishoKanriNo"
+         AND dbT5101."logicalDeletedFlag" = FALSE
+        INNER JOIN
+            rgdb."DbT7051KoseiShichosonMaster" DbT7051
+          ON DbT7051."shoKisaiHokenshaNo" = dbT5101."shoKisaiHokenshaNo"
         WHERE
-        B."shinseishoKanriNo" = B1."shinseishoKanriNo"
-        AND B."ninteichosaRirekiNo" <![CDATA[<]]> B1."ninteichosaRirekiNo"
-        )
-        AND 1 <![CDATA[<=]]> B."remban"
-        AND B."remban" <![CDATA[<=]]> 85
-        AND B."koroshoIfShikibetsuCode" = dbT5101."koroshoIfShikibetsuCode"
-        <if test="市町村コード.toString() != ''.toString()">
+             1 <![CDATA[<=]]> B."remban"
+         AND B."remban" <![CDATA[<=]]> 85
+         <if test="市町村コード.toString() != ''.toString()">
             AND DbT7051."shichosonCode" = #{市町村コード}
-        </if>
+         </if>
         ORDER BY
-        "SoshinDataSakuseiTaishoshaTemp"."shinseishoKanriNo"
-        , B."koroshoIfShikibetsuCode"
-        , B."remban"
+            "SoshinDataSakuseiTaishoshaTemp"."shinseishoKanriNo"
+            , B."koroshoIfShikibetsuCode"
+            , B."remban"
     </select>
 
     <select id="getCenterTransmissionData"
@@ -216,561 +253,564 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.centertransmission.CenterTransmissionMybitisParamter"
             fetchSize="500">
         SELECT
-        "SoshinDataSakuseiTaishoshaTemp"."shinseishoKanriNo"
-        , "SoshinDataSakuseiTaishoshaTemp"."zenkaiShinseishoKanriNo"
-        , A."koroshoIfShikibetsuCode"
-        , A."shoKisaiHokenshaNo"
-        , A."hihokenshaNo"
-        , A."ninteiShinseiYMD"
-        , A."ninteiShinseiEdabanCode"
-        , A."ninteiShinseiHoreiKubunCode"
-        , A."ninteiShinseiShinseijiKubunCode"
-        , A."torisageKubunCode"
-        , A."hihokenshaKubunCode"
-        , B."shinseiTodokedeDaikoKubunCode"
-        , A."seinengappiYMD"
-        , A."age"
-        , A."seibetsu"
-        , A."hihokenshaKana"
-        , A."hihokenshaName"
-        , A."yubinNo"
-        , A."jusho"
-        , A."telNo"
-        , C."jigyoshaName"
-        , C."jigyoshaAddress"
-        , A."zenYokaigoKubunCode"
-        , A."zenkaiYukoKikanStart"
-        , A."zenkaiYukoKikanEnd"
-        , A."shujiiIryokikanCode"
-        , A."shujiiCode"
-        , D."ikenshoSakuseiIraiYMD"
-        , E."ikenshoJuryoYMD"
-        , F."koban14" AS ikenItemKoban14
-        , F."koban15" AS ikenItemKoban15
-        , F."koban16" AS ikenItemKoban16
-        , F."koban17" AS ikenItemKoban17
-        , F."koban18" AS ikenItemKoban18
-        , F."koban19" AS ikenItemKoban19
-        , F."koban69" AS ikenItemKoban69
-        , G."ninteichosaIraiYMD"
-        , H."ninteichosaJisshiYMD"
-        , I."ninteichosaItakusakiCode"
-        , I."chosaItakuKubun"
-        , G."ninteiChosainCode"
-        , J."chosainShikaku"
-        , K."ichijiHanteiYMD"
-        , K."ichijiHanteiKekkaCode"
-        , K."ichijiHanteiKekkaNinchishoKasanCode"
-        , K."kijunJikan"
-        , K."kijunJikanShokuji"
-        , K."kijunJikanHaisetsu"
-        , K."kijunJikanIdo"
-        , K."kijunJikanSeiketsuHoji"
-        , K."kijunJikanKansetsuCare"
-        , K."kijunJikanBPSDKanren"
-        , K."kijunJikanKinoKunren"
-        , K."kijunJikanIryoKanren"
-        , K."kijunJikanNinchishoKasan"
-        , K."chukanHyokaKomoku1gun"
-        , K."chukanHyokaKomoku2gun"
-        , K."chukanHyokaKomoku3gun"
-        , K."chukanHyokaKomoku4gun"
-        , K."chukanHyokaKomoku5gun"
-        , K."ichijiHnateiKeikokuCode"
-        , K."jotaiAnteiseiCode"
-        , K."ninchishoJiritsudoIIijoNoGaizensei"
-        , K."suiteiKyufuKubunCode"
-        , M."shinsakaiShiryoSakuseiYMD"
-        , M."shinsakaiKaisaiYoteiYMD"
-        , M."gogitaiNo"
-        , N."nijiHanteiYMD"
-        , N."nijiHanteiYokaigoJotaiKubunCode"
-        , N."nijiHanteiNinteiYukoKikan"
-        , N."nijiHanteiNinteiYukoKaishiYMD"
-        , N."nijiHanteiNinteiYukoShuryoYMD"
-        , A."nigoTokuteiShippeiCode"
-        , N."yokaigoJotaizoReiCode"
-        , H."serviceKubunCode"
-        , P01."remban"
-        , O."koban1" AS serviceJokyoKoban1
-        , O."koban2" AS serviceJokyoKoban2
-        , O."koban3" AS serviceJokyoKoban3
-        , O."koban4" AS serviceJokyoKoban4
-        , O."koban5" AS serviceJokyoKoban5
-        , O."koban6" AS serviceJokyoKoban6
-        , O."koban7" AS serviceJokyoKoban7
-        , O."koban8" AS serviceJokyoKoban8
-        , O."koban9" AS serviceJokyoKoban9
-        , O."koban10" AS serviceJokyoKoban10
-        , O."koban11" AS serviceJokyoKoban11
-        , O."koban12" AS serviceJokyoKoban12
-        , O."koban13" AS serviceJokyoKoban13
-        , O."koban14" AS serviceJokyoKoban14
-        , O."koban15" AS serviceJokyoKoban15
-        , O."koban16" AS serviceJokyoKoban16
-        , O."koban17" AS serviceJokyoKoban17
-        , O."koban18" AS serviceJokyoKoban18
-        , O."koban19" AS serviceJokyoKoban19
-        , O."koban20" AS serviceJokyoKoban20
-        , P."serviceJokyoFlag"
-        , Q."koban1" AS chosaItemKoban1
-        , Q."koban2" AS chosaItemKoban2
-        , Q."koban3" AS chosaItemKoban3
-        , Q."koban4" AS chosaItemKoban4
-        , Q."koban5" AS chosaItemKoban5
-        , Q."koban6" AS chosaItemKoban6
-        , Q."koban7" AS chosaItemKoban7
-        , Q."koban8" AS chosaItemKoban8
-        , Q."koban9" AS chosaItemKoban9
-        , Q."koban10" AS chosaItemKoban10
-        , Q."koban11" AS chosaItemKoban11
-        , Q."koban12" AS chosaItemKoban12
-        , Q."koban13" AS chosaItemKoban13
-        , Q."koban14" AS chosaItemKoban14
-        , Q."koban15" AS chosaItemKoban15
-        , Q."koban16" AS chosaItemKoban16
-        , Q."koban17" AS chosaItemKoban17
-        , Q."koban18" AS chosaItemKoban18
-        , Q."koban19" AS chosaItemKoban19
-        , Q."koban20" AS chosaItemKoban20
-        , Q."koban21" AS chosaItemKoban21
-        , Q."koban22" AS chosaItemKoban22
-        , Q."koban23" AS chosaItemKoban23
-        , Q."koban24" AS chosaItemKoban24
-        , Q."koban25" AS chosaItemKoban25
-        , Q."koban26" AS chosaItemKoban26
-        , Q."koban27" AS chosaItemKoban27
-        , Q."koban28" AS chosaItemKoban28
-        , Q."koban29" AS chosaItemKoban29
-        , Q."koban30" AS chosaItemKoban30
-        , Q."koban31" AS chosaItemKoban31
-        , Q."koban32" AS chosaItemKoban32
-        , Q."koban33" AS chosaItemKoban33
-        , Q."koban34" AS chosaItemKoban34
-        , Q."koban35" AS chosaItemKoban35
-        , Q."koban36" AS chosaItemKoban36
-        , Q."koban37" AS chosaItemKoban37
-        , Q."koban38" AS chosaItemKoban38
-        , Q."koban39" AS chosaItemKoban39
-        , Q."koban40" AS chosaItemKoban40
-        , Q."koban41" AS chosaItemKoban41
-        , Q."koban42" AS chosaItemKoban42
-        , Q."koban43" AS chosaItemKoban43
-        , Q."koban44" AS chosaItemKoban44
-        , Q."koban45" AS chosaItemKoban45
-        , Q."koban46" AS chosaItemKoban46
-        , Q."koban47" AS chosaItemKoban47
-        , Q."koban48" AS chosaItemKoban48
-        , Q."koban49" AS chosaItemKoban49
-        , Q."koban50" AS chosaItemKoban50
-        , Q."koban51" AS chosaItemKoban51
-        , Q."koban52" AS chosaItemKoban52
-        , Q."koban53" AS chosaItemKoban53
-        , Q."koban54" AS chosaItemKoban54
-        , Q."koban55" AS chosaItemKoban55
-        , Q."koban56" AS chosaItemKoban56
-        , Q."koban57" AS chosaItemKoban57
-        , Q."koban58" AS chosaItemKoban58
-        , Q."koban59" AS chosaItemKoban59
-        , Q."koban60" AS chosaItemKoban60
-        , Q."koban61" AS chosaItemKoban61
-        , Q."koban62" AS chosaItemKoban62
-        , Q."koban63" AS chosaItemKoban63
-        , Q."koban64" AS chosaItemKoban64
-        , Q."koban65" AS chosaItemKoban65
-        , Q."koban66" AS chosaItemKoban66
-        , Q."koban67" AS chosaItemKoban67
-        , Q."koban68" AS chosaItemKoban68
-        , Q."koban69" AS chosaItemKoban69
-        , Q."koban70" AS chosaItemKoban70
-        , Q."koban71" AS chosaItemKoban71
-        , Q."koban72" AS chosaItemKoban72
-        , Q."koban73" AS chosaItemKoban73
-        , Q."koban74" AS chosaItemKoban74
-        , Q."koban75" AS chosaItemKoban75
-        , Q."koban76" AS chosaItemKoban76
-        , Q."koban77" AS chosaItemKoban77
-        , Q."koban78" AS chosaItemKoban78
-        , Q."koban79" AS chosaItemKoban79
-        , Q."koban80" AS chosaItemKoban80
-        , Q."koban81" AS chosaItemKoban81
-        , Q."koban82" AS chosaItemKoban82
-        , Q."koban83" AS chosaItemKoban83
-        , Q."koban84" AS chosaItemKoban84
-        , Q."koban85" AS chosaItemKoban85
-        , R."ninchishoNichijoSeikatsuJiritsudoCode"
-        , R."shogaiNichijoSeikatsuJiritsudoCode"
-        , S."koban1" AS zenkaiChosaItemKoban1
-        , S."koban2" AS zenkaiChosaItemKoban2
-        , S."koban3" AS zenkaiChosaItemKoban3
-        , S."koban4" AS zenkaiChosaItemKoban4
-        , S."koban5" AS zenkaiChosaItemKoban5
-        , S."koban6" AS zenkaiChosaItemKoban6
-        , S."koban7" AS zenkaiChosaItemKoban7
-        , S."koban8" AS zenkaiChosaItemKoban8
-        , S."koban9" AS zenkaiChosaItemKoban9
-        , S."koban10" AS zenkaiChosaItemKoban10
-        , S."koban11" AS zenkaiChosaItemKoban11
-        , S."koban12" AS zenkaiChosaItemKoban12
-        , S."koban13" AS zenkaiChosaItemKoban13
-        , S."koban14" AS zenkaiChosaItemKoban14
-        , S."koban15" AS zenkaiChosaItemKoban15
-        , S."koban16" AS zenkaiChosaItemKoban16
-        , S."koban17" AS zenkaiChosaItemKoban17
-        , S."koban18" AS zenkaiChosaItemKoban18
-        , S."koban19" AS zenkaiChosaItemKoban19
-        , S."koban20" AS zenkaiChosaItemKoban20
-        , S."koban21" AS zenkaiChosaItemKoban21
-        , S."koban22" AS zenkaiChosaItemKoban22
-        , S."koban23" AS zenkaiChosaItemKoban23
-        , S."koban24" AS zenkaiChosaItemKoban24
-        , S."koban25" AS zenkaiChosaItemKoban25
-        , S."koban26" AS zenkaiChosaItemKoban26
-        , S."koban27" AS zenkaiChosaItemKoban27
-        , S."koban28" AS zenkaiChosaItemKoban28
-        , S."koban29" AS zenkaiChosaItemKoban29
-        , S."koban30" AS zenkaiChosaItemKoban30
-        , S."koban31" AS zenkaiChosaItemKoban31
-        , S."koban32" AS zenkaiChosaItemKoban32
-        , S."koban33" AS zenkaiChosaItemKoban33
-        , S."koban34" AS zenkaiChosaItemKoban34
-        , S."koban35" AS zenkaiChosaItemKoban35
-        , S."koban36" AS zenkaiChosaItemKoban36
-        , S."koban37" AS zenkaiChosaItemKoban37
-        , S."koban38" AS zenkaiChosaItemKoban38
-        , S."koban39" AS zenkaiChosaItemKoban39
-        , S."koban40" AS zenkaiChosaItemKoban40
-        , S."koban41" AS zenkaiChosaItemKoban41
-        , S."koban42" AS zenkaiChosaItemKoban42
-        , S."koban43" AS zenkaiChosaItemKoban43
-        , S."koban44" AS zenkaiChosaItemKoban44
-        , S."koban45" AS zenkaiChosaItemKoban45
-        , S."koban46" AS zenkaiChosaItemKoban46
-        , S."koban47" AS zenkaiChosaItemKoban47
-        , S."koban48" AS zenkaiChosaItemKoban48
-        , S."koban49" AS zenkaiChosaItemKoban49
-        , S."koban50" AS zenkaiChosaItemKoban50
-        , S."koban51" AS zenkaiChosaItemKoban51
-        , S."koban52" AS zenkaiChosaItemKoban52
-        , S."koban53" AS zenkaiChosaItemKoban53
-        , S."koban54" AS zenkaiChosaItemKoban54
-        , S."koban55" AS zenkaiChosaItemKoban55
-        , S."koban56" AS zenkaiChosaItemKoban56
-        , S."koban57" AS zenkaiChosaItemKoban57
-        , S."koban58" AS zenkaiChosaItemKoban58
-        , S."koban59" AS zenkaiChosaItemKoban59
-        , S."koban60" AS zenkaiChosaItemKoban60
-        , S."koban61" AS zenkaiChosaItemKoban61
-        , S."koban62" AS zenkaiChosaItemKoban62
-        , S."koban63" AS zenkaiChosaItemKoban63
-        , S."koban64" AS zenkaiChosaItemKoban64
-        , S."koban65" AS zenkaiChosaItemKoban65
-        , S."koban66" AS zenkaiChosaItemKoban66
-        , S."koban67" AS zenkaiChosaItemKoban67
-        , S."koban68" AS zenkaiChosaItemKoban68
-        , S."koban69" AS zenkaiChosaItemKoban69
-        , S."koban70" AS zenkaiChosaItemKoban70
-        , S."koban71" AS zenkaiChosaItemKoban71
-        , S."koban72" AS zenkaiChosaItemKoban72
-        , S."koban73" AS zenkaiChosaItemKoban73
-        , S."koban74" AS zenkaiChosaItemKoban74
-        , S."koban75" AS zenkaiChosaItemKoban75
-        , S."koban76" AS zenkaiChosaItemKoban76
-        , S."koban77" AS zenkaiChosaItemKoban77
-        , S."koban78" AS zenkaiChosaItemKoban78
-        , S."koban79" AS zenkaiChosaItemKoban79
-        , S."koban80" AS zenkaiChosaItemKoban80
-        , S."koban81" AS zenkaiChosaItemKoban81
-        , S."koban82" AS zenkaiChosaItemKoban82
-        , S."koban83" AS zenkaiChosaItemKoban83
-        , S."koban84" AS zenkaiChosaItemKoban84
-        , S."koban85" AS zenkaiChosaItemKoban85
-        , U."ninchishoNichijoSeikatsuJiritsudoCode" AS zenkaiNinchishoNichijoSeikatsuJiritsudoCode
-        , U."shogaiNichijoSeikatsuJiritsudoCode" AS zenkaiShogaiNichijoSeikatsuJiritsudoCode
-        , V."ichijiHanteiKekkaCode" AS zenkaiIchijiHanteiKekkaCode
-        , V."ichijiHanteiKekkaNinchishoKasanCode" AS zenkaiIchijiHanteiKekkaNinchishoKasanCode
-        , V."kijunJikan" AS zenkaiKijunJikan
-        , V."kijunJikanShokuji" AS zenkaiKijunJikanShokuji
-        , V."kijunJikanHaisetsu" AS zenkaiKijunJikanHaisetsu
-        , V."kijunJikanIdo" AS zenkaiKijunJikanIdo
-        , V."kijunJikanSeiketsuHoji" AS zenkaiKijunJikanSeiketsuHoji
-        , V."kijunJikanKansetsuCare" AS zenkaiKijunJikanKansetsuCare
-        , V."kijunJikanBPSDKanren" AS zenkaiKijunJikanBPSDKanren
-        , V."kijunJikanKinoKunren" AS zenkaiKijunJikanKinoKunren
-        , V."kijunJikanIryoKanren" AS zenkaiKijunJikanIryoKanren
-        , V."kijunJikanNinchishoKasan" AS zenkaiKijunJikanNinchishoKasan
-        , V."chukanHyokaKomoku1gun" AS zenkaiChukanHyokaKomoku1gun
-        , V."chukanHyokaKomoku2gun" AS zenkaiChukanHyokaKomoku2gun
-        , V."chukanHyokaKomoku3gun" AS zenkaiChukanHyokaKomoku3gun
-        , V."chukanHyokaKomoku4gun" AS zenkaiChukanHyokaKomoku4gun
-        , V."chukanHyokaKomoku5gun" AS zenkaiChukanHyokaKomoku5gun
-        , V."ichijiHnateiKeikokuCode" AS zenkaiChijiHnateiKeikokuCode
-        , V."jotaiAnteiseiCode" AS zenkaiJotaiAnteiseiCode
-        , V."ninchishoJiritsudoIIijoNoGaizensei" AS zenkaiNinchishoJiritsudoIIijoNoGaizensei
-        , V."suiteiKyufuKubunCode" AS zenkaiSuiteiKyufuKubunCode
-        , A2."ninteiShinseiYMD" AS zenkaiNinteiShinseiYMD
-        , W."nijiHanteiYMD" AS zenkaiNijiHanteiYMD
-        , X."serviceKubunCode" AS zenkaiServiceKubunCode
-        , P02."remban" AS zenkaiRemban
-        , Y."koban1" AS zenkaiServiceJokyoKoban1
-        , Y."koban2" AS zenkaiServiceJokyoKoban2
-        , Y."koban3" AS zenkaiServiceJokyoKoban3
-        , Y."koban4" AS zenkaiServiceJokyoKoban4
-        , Y."koban5" AS zenkaiServiceJokyoKoban5
-        , Y."koban6" AS zenkaiServiceJokyoKoban6
-        , Y."koban7" AS zenkaiServiceJokyoKoban7
-        , Y."koban8" AS zenkaiServiceJokyoKoban8
-        , Y."koban9" AS zenkaiServiceJokyoKoban9
-        , Y."koban10" AS zenkaiServiceJokyoKoban10
-        , Y."koban11" AS zenkaiServiceJokyoKoban11
-        , Y."koban12" AS zenkaiServiceJokyoKoban12
-        , Y."koban13" AS zenkaiServiceJokyoKoban13
-        , Y."koban14" AS zenkaiServiceJokyoKoban14
-        , Y."koban15" AS zenkaiServiceJokyoKoban15
-        , Y."koban16" AS zenkaiServiceJokyoKoban16
-        , Y."koban17" AS zenkaiServiceJokyoKoban17
-        , Y."koban18" AS zenkaiServiceJokyoKoban18
-        , Y."koban19" AS zenkaiServiceJokyoKoban19
-        , Y."koban20" AS zenkaiServiceJokyoKoban20
-        , Z."serviceJokyoFlag" AS zenkaiServiceJokyoFlag
-        , A2."koroshoIfShikibetsuCode" AS zenkaiKoroshoIfShikibetsuCode
-        , N."shinsakaiIken"
-        , N."shinsakaiMemo"
-        , DbT7051KoseiShichosonMaster."shichosonMeisho"
+             "SoshinDataSakuseiTaishoshaTemp"."shinseishoKanriNo"
+            , "SoshinDataSakuseiTaishoshaTemp"."zenkaiShinseishoKanriNo"
+            , A."koroshoIfShikibetsuCode"
+            , A."shoKisaiHokenshaNo"
+            , A."hihokenshaNo"
+            , A."ninteiShinseiYMD"
+            , A."ninteiShinseiEdabanCode"
+            , A."ninteiShinseiHoreiKubunCode"
+            , A."ninteiShinseiShinseijiKubunCode"
+            , A."torisageKubunCode"
+            , A."hihokenshaKubunCode"
+            , B."shinseiTodokedeDaikoKubunCode"
+            , A."seinengappiYMD"
+            , A."age"
+            , A."seibetsu"
+            , A."hihokenshaKana"
+            , A."hihokenshaName"
+            , A."yubinNo"
+            , A."jusho"
+            , A."telNo"
+            , C."jigyoshaName"
+            , C."jigyoshaAddress"
+            , A."zenYokaigoKubunCode"
+            , A."zenkaiYukoKikanStart"
+            , A."zenkaiYukoKikanEnd"
+            , E."shujiiIryoKikanCode" AS "shujiiIryokikanCode"
+            , E."shujiiCode"
+            , D."ikenshoSakuseiIraiYMD"
+            , E."ikenshoJuryoYMD"
+            , F."koban14" AS ikenItemKoban14
+            , F."koban15" AS ikenItemKoban15
+            , F."koban16" AS ikenItemKoban16
+            , F."koban17" AS ikenItemKoban17
+            , F."koban18" AS ikenItemKoban18
+            , F."koban19" AS ikenItemKoban19
+            , F."koban69" AS ikenItemKoban69
+            , G."ninteichosaIraiYMD"
+            , H."ninteichosaJisshiYMD"
+            , I."ninteichosaItakusakiCode"
+            , I."chosaItakuKubun"
+            , J."ninteiChosainCode"
+            , J."chosainShikaku"
+            , K."ichijiHanteiYMD"
+            , K."ichijiHanteiKekkaCode"
+            , K."ichijiHanteiKekkaNinchishoKasanCode"
+            , K."kijunJikan"
+            , K."kijunJikanShokuji"
+            , K."kijunJikanHaisetsu"
+            , K."kijunJikanIdo"
+            , K."kijunJikanSeiketsuHoji"
+            , K."kijunJikanKansetsuCare"
+            , K."kijunJikanBPSDKanren"
+            , K."kijunJikanKinoKunren"
+            , K."kijunJikanIryoKanren"
+            , K."kijunJikanNinchishoKasan"
+            , K."chukanHyokaKomoku1gun"
+            , K."chukanHyokaKomoku2gun"
+            , K."chukanHyokaKomoku3gun"
+            , K."chukanHyokaKomoku4gun"
+            , K."chukanHyokaKomoku5gun"
+            , K."ichijiHnateiKeikokuCode"
+            , K."jotaiAnteiseiCode"
+            , K."ninchishoJiritsudoIIijoNoGaizensei"
+            , K."suiteiKyufuKubunCode"
+            , L."shinsakaiShiryoSakuseiYMD"
+            , M."shinsakaiKaisaiYoteiYMD"
+            , M."gogitaiNo"
+            , N."nijiHanteiYMD"
+            , N."nijiHanteiYokaigoJotaiKubunCode"
+            , N."nijiHanteiNinteiYukoKikan"
+            , N."nijiHanteiNinteiYukoKaishiYMD"
+            , N."nijiHanteiNinteiYukoShuryoYMD"
+            , A."nigoTokuteiShippeiCode"
+            , N."yokaigoJotaizoReiCode"
+            , H."serviceKubunCode"
+            , P01."remban"
+            , O."koban1" AS serviceJokyoKoban1
+            , O."koban2" AS serviceJokyoKoban2
+            , O."koban3" AS serviceJokyoKoban3
+            , O."koban4" AS serviceJokyoKoban4
+            , O."koban5" AS serviceJokyoKoban5
+            , O."koban6" AS serviceJokyoKoban6
+            , O."koban7" AS serviceJokyoKoban7
+            , O."koban8" AS serviceJokyoKoban8
+            , O."koban9" AS serviceJokyoKoban9
+            , O."koban10" AS serviceJokyoKoban10
+            , O."koban11" AS serviceJokyoKoban11
+            , O."koban12" AS serviceJokyoKoban12
+            , O."koban13" AS serviceJokyoKoban13
+            , O."koban14" AS serviceJokyoKoban14
+            , O."koban15" AS serviceJokyoKoban15
+            , O."koban16" AS serviceJokyoKoban16
+            , O."koban17" AS serviceJokyoKoban17
+            , O."koban18" AS serviceJokyoKoban18
+            , O."koban19" AS serviceJokyoKoban19
+            , O."koban20" AS serviceJokyoKoban20
+            , P."serviceJokyoFlag"
+            , Q."koban1" AS chosaItemKoban1
+            , Q."koban2" AS chosaItemKoban2
+            , Q."koban3" AS chosaItemKoban3
+            , Q."koban4" AS chosaItemKoban4
+            , Q."koban5" AS chosaItemKoban5
+            , Q."koban6" AS chosaItemKoban6
+            , Q."koban7" AS chosaItemKoban7
+            , Q."koban8" AS chosaItemKoban8
+            , Q."koban9" AS chosaItemKoban9
+            , Q."koban10" AS chosaItemKoban10
+            , Q."koban11" AS chosaItemKoban11
+            , Q."koban12" AS chosaItemKoban12
+            , Q."koban13" AS chosaItemKoban13
+            , Q."koban14" AS chosaItemKoban14
+            , Q."koban15" AS chosaItemKoban15
+            , Q."koban16" AS chosaItemKoban16
+            , Q."koban17" AS chosaItemKoban17
+            , Q."koban18" AS chosaItemKoban18
+            , Q."koban19" AS chosaItemKoban19
+            , Q."koban20" AS chosaItemKoban20
+            , Q."koban21" AS chosaItemKoban21
+            , Q."koban22" AS chosaItemKoban22
+            , Q."koban23" AS chosaItemKoban23
+            , Q."koban24" AS chosaItemKoban24
+            , Q."koban25" AS chosaItemKoban25
+            , Q."koban26" AS chosaItemKoban26
+            , Q."koban27" AS chosaItemKoban27
+            , Q."koban28" AS chosaItemKoban28
+            , Q."koban29" AS chosaItemKoban29
+            , Q."koban30" AS chosaItemKoban30
+            , Q."koban31" AS chosaItemKoban31
+            , Q."koban32" AS chosaItemKoban32
+            , Q."koban33" AS chosaItemKoban33
+            , Q."koban34" AS chosaItemKoban34
+            , Q."koban35" AS chosaItemKoban35
+            , Q."koban36" AS chosaItemKoban36
+            , Q."koban37" AS chosaItemKoban37
+            , Q."koban38" AS chosaItemKoban38
+            , Q."koban39" AS chosaItemKoban39
+            , Q."koban40" AS chosaItemKoban40
+            , Q."koban41" AS chosaItemKoban41
+            , Q."koban42" AS chosaItemKoban42
+            , Q."koban43" AS chosaItemKoban43
+            , Q."koban44" AS chosaItemKoban44
+            , Q."koban45" AS chosaItemKoban45
+            , Q."koban46" AS chosaItemKoban46
+            , Q."koban47" AS chosaItemKoban47
+            , Q."koban48" AS chosaItemKoban48
+            , Q."koban49" AS chosaItemKoban49
+            , Q."koban50" AS chosaItemKoban50
+            , Q."koban51" AS chosaItemKoban51
+            , Q."koban52" AS chosaItemKoban52
+            , Q."koban53" AS chosaItemKoban53
+            , Q."koban54" AS chosaItemKoban54
+            , Q."koban55" AS chosaItemKoban55
+            , Q."koban56" AS chosaItemKoban56
+            , Q."koban57" AS chosaItemKoban57
+            , Q."koban58" AS chosaItemKoban58
+            , Q."koban59" AS chosaItemKoban59
+            , Q."koban60" AS chosaItemKoban60
+            , Q."koban61" AS chosaItemKoban61
+            , Q."koban62" AS chosaItemKoban62
+            , Q."koban63" AS chosaItemKoban63
+            , Q."koban64" AS chosaItemKoban64
+            , Q."koban65" AS chosaItemKoban65
+            , Q."koban66" AS chosaItemKoban66
+            , Q."koban67" AS chosaItemKoban67
+            , Q."koban68" AS chosaItemKoban68
+            , Q."koban69" AS chosaItemKoban69
+            , Q."koban70" AS chosaItemKoban70
+            , Q."koban71" AS chosaItemKoban71
+            , Q."koban72" AS chosaItemKoban72
+            , Q."koban73" AS chosaItemKoban73
+            , Q."koban74" AS chosaItemKoban74
+            , Q."koban75" AS chosaItemKoban75
+            , Q."koban76" AS chosaItemKoban76
+            , Q."koban77" AS chosaItemKoban77
+            , Q."koban78" AS chosaItemKoban78
+            , Q."koban79" AS chosaItemKoban79
+            , Q."koban80" AS chosaItemKoban80
+            , Q."koban81" AS chosaItemKoban81
+            , Q."koban82" AS chosaItemKoban82
+            , Q."koban83" AS chosaItemKoban83
+            , Q."koban84" AS chosaItemKoban84
+            , Q."koban85" AS chosaItemKoban85
+            , R."ninchishoNichijoSeikatsuJiritsudoCode"
+            , R."shogaiNichijoSeikatsuJiritsudoCode"
+            , S."koban1" AS zenkaiChosaItemKoban1
+            , S."koban2" AS zenkaiChosaItemKoban2
+            , S."koban3" AS zenkaiChosaItemKoban3
+            , S."koban4" AS zenkaiChosaItemKoban4
+            , S."koban5" AS zenkaiChosaItemKoban5
+            , S."koban6" AS zenkaiChosaItemKoban6
+            , S."koban7" AS zenkaiChosaItemKoban7
+            , S."koban8" AS zenkaiChosaItemKoban8
+            , S."koban9" AS zenkaiChosaItemKoban9
+            , S."koban10" AS zenkaiChosaItemKoban10
+            , S."koban11" AS zenkaiChosaItemKoban11
+            , S."koban12" AS zenkaiChosaItemKoban12
+            , S."koban13" AS zenkaiChosaItemKoban13
+            , S."koban14" AS zenkaiChosaItemKoban14
+            , S."koban15" AS zenkaiChosaItemKoban15
+            , S."koban16" AS zenkaiChosaItemKoban16
+            , S."koban17" AS zenkaiChosaItemKoban17
+            , S."koban18" AS zenkaiChosaItemKoban18
+            , S."koban19" AS zenkaiChosaItemKoban19
+            , S."koban20" AS zenkaiChosaItemKoban20
+            , S."koban21" AS zenkaiChosaItemKoban21
+            , S."koban22" AS zenkaiChosaItemKoban22
+            , S."koban23" AS zenkaiChosaItemKoban23
+            , S."koban24" AS zenkaiChosaItemKoban24
+            , S."koban25" AS zenkaiChosaItemKoban25
+            , S."koban26" AS zenkaiChosaItemKoban26
+            , S."koban27" AS zenkaiChosaItemKoban27
+            , S."koban28" AS zenkaiChosaItemKoban28
+            , S."koban29" AS zenkaiChosaItemKoban29
+            , S."koban30" AS zenkaiChosaItemKoban30
+            , S."koban31" AS zenkaiChosaItemKoban31
+            , S."koban32" AS zenkaiChosaItemKoban32
+            , S."koban33" AS zenkaiChosaItemKoban33
+            , S."koban34" AS zenkaiChosaItemKoban34
+            , S."koban35" AS zenkaiChosaItemKoban35
+            , S."koban36" AS zenkaiChosaItemKoban36
+            , S."koban37" AS zenkaiChosaItemKoban37
+            , S."koban38" AS zenkaiChosaItemKoban38
+            , S."koban39" AS zenkaiChosaItemKoban39
+            , S."koban40" AS zenkaiChosaItemKoban40
+            , S."koban41" AS zenkaiChosaItemKoban41
+            , S."koban42" AS zenkaiChosaItemKoban42
+            , S."koban43" AS zenkaiChosaItemKoban43
+            , S."koban44" AS zenkaiChosaItemKoban44
+            , S."koban45" AS zenkaiChosaItemKoban45
+            , S."koban46" AS zenkaiChosaItemKoban46
+            , S."koban47" AS zenkaiChosaItemKoban47
+            , S."koban48" AS zenkaiChosaItemKoban48
+            , S."koban49" AS zenkaiChosaItemKoban49
+            , S."koban50" AS zenkaiChosaItemKoban50
+            , S."koban51" AS zenkaiChosaItemKoban51
+            , S."koban52" AS zenkaiChosaItemKoban52
+            , S."koban53" AS zenkaiChosaItemKoban53
+            , S."koban54" AS zenkaiChosaItemKoban54
+            , S."koban55" AS zenkaiChosaItemKoban55
+            , S."koban56" AS zenkaiChosaItemKoban56
+            , S."koban57" AS zenkaiChosaItemKoban57
+            , S."koban58" AS zenkaiChosaItemKoban58
+            , S."koban59" AS zenkaiChosaItemKoban59
+            , S."koban60" AS zenkaiChosaItemKoban60
+            , S."koban61" AS zenkaiChosaItemKoban61
+            , S."koban62" AS zenkaiChosaItemKoban62
+            , S."koban63" AS zenkaiChosaItemKoban63
+            , S."koban64" AS zenkaiChosaItemKoban64
+            , S."koban65" AS zenkaiChosaItemKoban65
+            , S."koban66" AS zenkaiChosaItemKoban66
+            , S."koban67" AS zenkaiChosaItemKoban67
+            , S."koban68" AS zenkaiChosaItemKoban68
+            , S."koban69" AS zenkaiChosaItemKoban69
+            , S."koban70" AS zenkaiChosaItemKoban70
+            , S."koban71" AS zenkaiChosaItemKoban71
+            , S."koban72" AS zenkaiChosaItemKoban72
+            , S."koban73" AS zenkaiChosaItemKoban73
+            , S."koban74" AS zenkaiChosaItemKoban74
+            , S."koban75" AS zenkaiChosaItemKoban75
+            , S."koban76" AS zenkaiChosaItemKoban76
+            , S."koban77" AS zenkaiChosaItemKoban77
+            , S."koban78" AS zenkaiChosaItemKoban78
+            , S."koban79" AS zenkaiChosaItemKoban79
+            , S."koban80" AS zenkaiChosaItemKoban80
+            , S."koban81" AS zenkaiChosaItemKoban81
+            , S."koban82" AS zenkaiChosaItemKoban82
+            , S."koban83" AS zenkaiChosaItemKoban83
+            , S."koban84" AS zenkaiChosaItemKoban84
+            , S."koban85" AS zenkaiChosaItemKoban85
+            , U."ninchishoNichijoSeikatsuJiritsudoCode" AS zenkaiNinchishoNichijoSeikatsuJiritsudoCode
+            , U."shogaiNichijoSeikatsuJiritsudoCode" AS zenkaiShogaiNichijoSeikatsuJiritsudoCode
+            , V."ichijiHanteiKekkaCode" AS zenkaiIchijiHanteiKekkaCode
+            , V."ichijiHanteiKekkaNinchishoKasanCode" AS zenkaiIchijiHanteiKekkaNinchishoKasanCode
+            , V."kijunJikan" AS zenkaiKijunJikan
+            , V."kijunJikanShokuji" AS zenkaiKijunJikanShokuji
+            , V."kijunJikanHaisetsu" AS zenkaiKijunJikanHaisetsu
+            , V."kijunJikanIdo" AS zenkaiKijunJikanIdo
+            , V."kijunJikanSeiketsuHoji" AS zenkaiKijunJikanSeiketsuHoji
+            , V."kijunJikanKansetsuCare" AS zenkaiKijunJikanKansetsuCare
+            , V."kijunJikanBPSDKanren" AS zenkaiKijunJikanBPSDKanren
+            , V."kijunJikanKinoKunren" AS zenkaiKijunJikanKinoKunren
+            , V."kijunJikanIryoKanren" AS zenkaiKijunJikanIryoKanren
+            , V."kijunJikanNinchishoKasan" AS zenkaiKijunJikanNinchishoKasan
+            , V."chukanHyokaKomoku1gun" AS zenkaiChukanHyokaKomoku1gun
+            , V."chukanHyokaKomoku2gun" AS zenkaiChukanHyokaKomoku2gun
+            , V."chukanHyokaKomoku3gun" AS zenkaiChukanHyokaKomoku3gun
+            , V."chukanHyokaKomoku4gun" AS zenkaiChukanHyokaKomoku4gun
+            , V."chukanHyokaKomoku5gun" AS zenkaiChukanHyokaKomoku5gun
+            , V."ichijiHnateiKeikokuCode" AS zenkaiChijiHnateiKeikokuCode
+            , V."jotaiAnteiseiCode" AS zenkaiJotaiAnteiseiCode
+            , V."ninchishoJiritsudoIIijoNoGaizensei" AS zenkaiNinchishoJiritsudoIIijoNoGaizensei
+            , V."suiteiKyufuKubunCode" AS zenkaiSuiteiKyufuKubunCode
+            , A2."ninteiShinseiYMD" AS zenkaiNinteiShinseiYMD
+            , CASE A."ninteiShinseiShinseijiKubunCode"
+                WHEN '5' THEN A."zenkaiNinteiYMD"
+                ELSE W."nijiHanteiYMD"
+              END AS zenkaiNijiHanteiYMD
+            , X."serviceKubunCode" AS zenkaiServiceKubunCode
+            , P02."remban" AS zenkaiRemban
+            , Y."koban1" AS zenkaiServiceJokyoKoban1
+            , Y."koban2" AS zenkaiServiceJokyoKoban2
+            , Y."koban3" AS zenkaiServiceJokyoKoban3
+            , Y."koban4" AS zenkaiServiceJokyoKoban4
+            , Y."koban5" AS zenkaiServiceJokyoKoban5
+            , Y."koban6" AS zenkaiServiceJokyoKoban6
+            , Y."koban7" AS zenkaiServiceJokyoKoban7
+            , Y."koban8" AS zenkaiServiceJokyoKoban8
+            , Y."koban9" AS zenkaiServiceJokyoKoban9
+            , Y."koban10" AS zenkaiServiceJokyoKoban10
+            , Y."koban11" AS zenkaiServiceJokyoKoban11
+            , Y."koban12" AS zenkaiServiceJokyoKoban12
+            , Y."koban13" AS zenkaiServiceJokyoKoban13
+            , Y."koban14" AS zenkaiServiceJokyoKoban14
+            , Y."koban15" AS zenkaiServiceJokyoKoban15
+            , Y."koban16" AS zenkaiServiceJokyoKoban16
+            , Y."koban17" AS zenkaiServiceJokyoKoban17
+            , Y."koban18" AS zenkaiServiceJokyoKoban18
+            , Y."koban19" AS zenkaiServiceJokyoKoban19
+            , Y."koban20" AS zenkaiServiceJokyoKoban20
+            , Z."serviceJokyoFlag" AS zenkaiServiceJokyoFlag
+            , A2."koroshoIfShikibetsuCode" AS zenkaiKoroshoIfShikibetsuCode
+            , N."shinsakaiIken"
+            , N."shinsakaiMemo"
+            , DbT7051KoseiShichosonMaster."shichosonMeisho"
         FROM
-        "SoshinDataSakuseiTaishoshaTemp"
+            "SoshinDataSakuseiTaishoshaTemp"
         INNER JOIN
-        rgdb."DbT5101NinteiShinseiJoho" A
-        ON "SoshinDataSakuseiTaishoshaTemp"."shinseishoKanriNo" = A."shinseishoKanriNo"
+            rgdb."DbT5101NinteiShinseiJoho" A
+          ON A."shinseishoKanriNo" = "SoshinDataSakuseiTaishoshaTemp"."shinseishoKanriNo"
         INNER JOIN
-        rgdb."DbT7051KoseiShichosonMaster" DbT7051KoseiShichosonMaster
-        ON DbT7051KoseiShichosonMaster."shoKisaiHokenshaNo" = A."shoKisaiHokenshaNo"
-        LEFT JOIN rgdb."DbT7211GaibuRenkeiDataoutputJoho" dbT7211
-        ON A."shinseishoKanriNo" = dbT7211."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5120ShinseitodokedeJoho" B
-        ON A."shinseishoKanriNo" = B."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT7060KaigoJigyosha" C
-        ON A."nyushoShisetsuCode" = C."jigyoshaNo"
-        AND NOT EXISTS (
-        SELECT
-        'X'
-        FROM
-        rgdb."DbT7060KaigoJigyosha" C1
-        WHERE
-        C."jigyoshaNo" = C1."jigyoshaNo"
-        AND C."yukoKaishiYMD" <![CDATA[<]]> C1."yukoKaishiYMD"
-        )
-        LEFT JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" D
-        ON A."shinseishoKanriNo" = D."shinseishoKanriNo"
-        AND A."koroshoIfShikibetsuCode" = D."koroshoIfShikibetsuCode"
-        AND D."logicalDeletedFlag" = FALSE
-        AND NOT EXISTS (
-        SELECT
-        'X'
-        FROM
-        rgdb."DbT5301ShujiiIkenshoIraiJoho" D1
-        WHERE
-        D."shinseishoKanriNo" = D1."shinseishoKanriNo"
-        AND D1."logicalDeletedFlag" = FALSE
-        AND A."koroshoIfShikibetsuCode" = D1."koroshoIfShikibetsuCode"
-        AND D."ikenshoIraiRirekiNo" <![CDATA[<]]> D1."ikenshoIraiRirekiNo"
-        )
-        LEFT JOIN rgdb."DbT5302ShujiiIkenshoJoho" E
-        ON A."shinseishoKanriNo" = E."shinseishoKanriNo"
-        AND A."koroshoIfShikibetsuCode" = E."koroshoIfShikibetsuCode"
-        AND NOT EXISTS (
-        SELECT
-        'X'
-        FROM
-        rgdb."DbT5302ShujiiIkenshoJoho" E1
-        WHERE
-        E."shinseishoKanriNo" = E1."shinseishoKanriNo"
-        AND A."koroshoIfShikibetsuCode" = E1."koroshoIfShikibetsuCode"
-        AND E."ikenshoIraiRirekiNo" <![CDATA[<]]> E1."ikenshoIraiRirekiNo"
-        )
-        LEFT JOIN "ShujiiIkenshoIkenItemTemp" F
-        ON A."shinseishoKanriNo" = F."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5201NinteichosaIraiJoho" G
-        ON A."shinseishoKanriNo" = G."shinseishoKanriNo"
-        AND A."koroshoIfShikibetsuCode" = G."koroshoIfShikibetsuCode"
-        AND G."logicalDeletedFlag" = FALSE
-        AND NOT EXISTS (
-        SELECT
-        'X'
-        FROM
-        rgdb."DbT5201NinteichosaIraiJoho" G1
-        WHERE
-        G."shinseishoKanriNo" = G1."shinseishoKanriNo"
-        AND G1."logicalDeletedFlag" = FALSE
-        AND A."koroshoIfShikibetsuCode" = G1."koroshoIfShikibetsuCode"
-        AND G."ninteichosaIraiRirekiNo" <![CDATA[<]]> G1."ninteichosaIraiRirekiNo"
-        )
-        LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS H 
-        ON A."shinseishoKanriNo" = H."shinseishoKanriNo" 
-        AND G."ninteichosaIraiRirekiNo" = H."ninteichosaRirekiNo"
-        AND NOT EXISTS ( 
-        SELECT
-        'X' 
-        FROM
-        rgdb."DbT5202NinteichosahyoGaikyoChosa" AS H1 
-        WHERE
-        H."shinseishoKanriNo" = H1."shinseishoKanriNo" 
-        AND H."ninteichosaRirekiNo" = H1."ninteichosaRirekiNo"
-        AND H."gaikyoChosaTextImageKubun" <![CDATA[<]]> H1."gaikyoChosaTextImageKubun"
-        ) 
-        LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" I
-        ON H."chosaItakusakiCode" = I."ninteichosaItakusakiCode"
-        AND I."shichosonCode" = A."shichosonCode"
-        AND I."jokyoFlag" = TRUE
-        LEFT JOIN rgdb."DbT5913ChosainJoho" J
-        ON G."ninteichosaItakusakiCode" = J."ninteiChosaItakusakiCode"
-        AND G."ninteiChosainCode" = J."ninteiChosainCode"
-        AND J."shichosonCode" = A."shichosonCode"
-        AND J."jokyoFlag" = TRUE
-        LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" K
-        ON A."shinseishoKanriNo" = K."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5502ShinsakaiWariateJoho" L
-        ON A."shinseishoKanriNo" = L."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" M
-        ON L."shinsakaiKaisaiNo" = M."shinsakaiKaisaiNo"
-        LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" N
-        ON A."shinseishoKanriNo" = N."shinseishoKanriNo"
-        LEFT JOIN "NinteichosahyoServiceJokyoTemp" O
-        ON A."shinseishoKanriNo" = O."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5208NinteichosahyoServiceJokyoFlag" P
-        ON A."shinseishoKanriNo" = P."shinseishoKanriNo"
-        AND NOT EXISTS (
-        SELECT
-        'X'
-        FROM
-        rgdb."DbT5208NinteichosahyoServiceJokyoFlag" P1
-        WHERE
-        P."shinseishoKanriNo" = P1."shinseishoKanriNo"
-        AND P."ninteichosaRirekiNo" <![CDATA[<]]> P1."ninteichosaRirekiNo"
-        )
-        AND P."remban" = 1
-        AND P."koroshoIfShikibetsuCode" = A."koroshoIfShikibetsuCode"
+            rgdb."DbT7051KoseiShichosonMaster" DbT7051KoseiShichosonMaster
+          ON DbT7051KoseiShichosonMaster."shoKisaiHokenshaNo" = A."shoKisaiHokenshaNo"
+        LEFT JOIN
+            rgdb."DbT7211GaibuRenkeiDataoutputJoho" dbT7211
+          ON dbT7211."shinseishoKanriNo" = A."shinseishoKanriNo"
+        LEFT JOIN
+            rgdb."DbT5120ShinseitodokedeJoho" B
+          ON B."shinseishoKanriNo" = A."shinseishoKanriNo"
+        LEFT JOIN
+            rgdb."DbT7060KaigoJigyosha" C
+          ON C."jigyoshaNo" = A."nyushoShisetsuCode"
+         AND NOT EXISTS (
+            SELECT
+                'X'
+            FROM
+                rgdb."DbT7060KaigoJigyosha" C1
+            WHERE
+                C."jigyoshaNo" = C1."jigyoshaNo"
+            AND C."yukoKaishiYMD" <![CDATA[<]]> C1."yukoKaishiYMD"
+         )
+        LEFT JOIN
+            rgdb."DbT5301ShujiiIkenshoIraiJoho" D
+          ON D."shinseishoKanriNo" = A."shinseishoKanriNo"
+         AND D."logicalDeletedFlag" = FALSE
+         AND NOT EXISTS (
+            SELECT
+                'X'
+            FROM
+                rgdb."DbT5301ShujiiIkenshoIraiJoho" D1
+            WHERE
+                D1."shinseishoKanriNo" = D."shinseishoKanriNo"
+            AND D1."logicalDeletedFlag" = D."logicalDeletedFlag"
+            AND D."ikenshoIraiRirekiNo" <![CDATA[<]]> D1."ikenshoIraiRirekiNo"
+         )
+        LEFT JOIN
+            rgdb."DbT5302ShujiiIkenshoJoho" E
+          ON E."shinseishoKanriNo" = D."shinseishoKanriNo"
+         AND E."ikenshoIraiRirekiNo" = D."ikenshoIraiRirekiNo"
+        LEFT JOIN
+            "ShujiiIkenshoIkenItemTemp" F
+          ON F."shinseishoKanriNo" = A."shinseishoKanriNo"
+        LEFT JOIN
+            rgdb."DbT5201NinteichosaIraiJoho" G
+          ON G."shinseishoKanriNo" = A."shinseishoKanriNo"
+         AND G."logicalDeletedFlag" = FALSE
+         AND NOT EXISTS (
+            SELECT
+                'X'
+            FROM
+                rgdb."DbT5201NinteichosaIraiJoho" G1
+            WHERE
+                G1."shinseishoKanriNo" = G."shinseishoKanriNo"
+            AND G1."logicalDeletedFlag" = G."logicalDeletedFlag"
+            AND G."ninteichosaIraiRirekiNo" <![CDATA[<]]> G1."ninteichosaIraiRirekiNo"
+         )
+        LEFT JOIN
+            rgdb."DbT5202NinteichosahyoGaikyoChosa" AS H
+          ON H."shinseishoKanriNo" = G."shinseishoKanriNo"
+         AND H."ninteichosaRirekiNo" = G."ninteichosaIraiRirekiNo"
+         AND NOT EXISTS (
+            SELECT
+                'X'
+            FROM
+                rgdb."DbT5202NinteichosahyoGaikyoChosa" AS H1
+            WHERE
+                H1."shinseishoKanriNo" = H."shinseishoKanriNo"
+            AND H1."ninteichosaRirekiNo" = H."ninteichosaRirekiNo"
+            AND H."gaikyoChosaTextImageKubun" <![CDATA[<]]> H1."gaikyoChosaTextImageKubun"
+         )
+        LEFT JOIN
+            rgdb."DbT5910NinteichosaItakusakiJoho" I
+          ON I."ninteichosaItakusakiCode" = H."chosaItakusakiCode"
+         AND I."shichosonCode" = A."shichosonCode"
+         AND I."jokyoFlag" = TRUE
+        LEFT JOIN
+            rgdb."DbT5913ChosainJoho" J
+          ON J."ninteiChosaItakusakiCode" = H."chosaItakusakiCode"
+         AND J."ninteiChosainCode" = H."chosainCode"
+         AND J."shichosonCode" = A."shichosonCode"
+         AND J."jokyoFlag" = TRUE
+        LEFT JOIN
+            rgdb."DbT5116IchijiHanteiKekkaJoho" K
+          ON K."shinseishoKanriNo" = A."shinseishoKanriNo"
+        LEFT JOIN
+            rgdb."DbT5502ShinsakaiWariateJoho" L
+          ON L."shinseishoKanriNo" = A."shinseishoKanriNo"
+         AND NOT EXISTS (
+            SELECT *
+            FROM
+                rgdb."DbT5502ShinsakaiWariateJoho" L1
+            WHERE
+                L1."shinseishoKanriNo" = L."shinseishoKanriNo"
+            AND L1."shinsakaiWariateYMD" <![CDATA[>]]> L."shinsakaiWariateYMD"
+         )
+        LEFT JOIN
+            rgdb."DbT5501ShinsakaiKaisaiYoteiJoho" M
+          ON M."shinsakaiKaisaiNo" = L."shinsakaiKaisaiNo"
+        LEFT JOIN
+            rgdb."DbT5102NinteiKekkaJoho" N
+          ON N."shinseishoKanriNo" = A."shinseishoKanriNo"
+        LEFT JOIN
+            "NinteichosahyoServiceJokyoTemp" O
+          ON O."shinseishoKanriNo" = A."shinseishoKanriNo"
+        LEFT JOIN
+            rgdb."DbT5208NinteichosahyoServiceJokyoFlag" P
+          ON P."shinseishoKanriNo" = G."shinseishoKanriNo"
+         AND P."ninteichosaRirekiNo" = G."ninteichosaIraiRirekiNo"
+         AND P."remban" = 1
         LEFT JOIN (
-        SELECT DISTINCT
-        ON (
-        P001."shinseishoKanriNo"
-        , P001."koroshoIfShikibetsuCode"
-        ) P001."shinseishoKanriNo"
-        , P001."remban"
-        , P001."koroshoIfShikibetsuCode"
-        FROM
-        rgdb."DbT5210NinteichosahyoShisetsuRiyo" P001
-        WHERE
-        P001."shisetsuRiyoFlag" = TRUE
-        ORDER BY
-        P001."shinseishoKanriNo"
-        , P001."koroshoIfShikibetsuCode" ASC
-        , P001."ninteichosaRirekiNo" DESC
-        , P001."remban" DESC
-        ) P01
-        ON A."shinseishoKanriNo" = P01."shinseishoKanriNo"
-        AND A."koroshoIfShikibetsuCode" = P01."koroshoIfShikibetsuCode"
-        LEFT JOIN "NinteichosahyoChosaItemTemp" Q
-        ON A."shinseishoKanriNo" = Q."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5203NinteichosahyoKihonChosa" R
-        ON A."shinseishoKanriNo" = R."shinseishoKanriNo"
-        AND NOT EXISTS (
-        SELECT
-        'X'
-        FROM
-        rgdb."DbT5203NinteichosahyoKihonChosa" R1
-        WHERE
-        R."shinseishoKanriNo" = R1."shinseishoKanriNo"
-        AND R."ninteichosaRirekiNo" <![CDATA[<]]> R1."ninteichosaRirekiNo"
-        )
-        AND R."koroshoIfShikibetsuCode" = A."koroshoIfShikibetsuCode"
-        LEFT JOIN "ZenkaiNinteichosahyoChosaItemTemp" S
-        ON "SoshinDataSakuseiTaishoshaTemp"."zenkaiShinseishoKanriNo" = S."zenkaiShinseishoKanriNo"
+            SELECT DISTINCT
+                ON (
+                      P001."shinseishoKanriNo"
+                    , P001."ninteichosaRirekiNo"
+                )
+                  P001."shinseishoKanriNo"
+                , P001."ninteichosaRirekiNo"
+                , P001."remban"
+            FROM
+                rgdb."DbT5210NinteichosahyoShisetsuRiyo" P001
+            WHERE
+                P001."shisetsuRiyoFlag" = TRUE
+            ORDER BY
+                P001."shinseishoKanriNo"
+              , P001."ninteichosaRirekiNo" DESC
+              , P001."remban" DESC
+         ) P01
+          ON P01."shinseishoKanriNo" = G."shinseishoKanriNo"
+         AND P01."ninteichosaRirekiNo" = G."ninteichosaIraiRirekiNo"
+        LEFT JOIN
+            "NinteichosahyoChosaItemTemp" Q
+          ON Q."shinseishoKanriNo" = A."shinseishoKanriNo"
+        LEFT JOIN
+            rgdb."DbT5203NinteichosahyoKihonChosa" R
+          ON R."shinseishoKanriNo" = G."shinseishoKanriNo"
+         AND R."ninteichosaRirekiNo" = G."ninteichosaIraiRirekiNo"
+
+        LEFT JOIN
+            "ZenkaiNinteichosahyoChosaItemTemp" S
+          ON S."zenkaiShinseishoKanriNo" = "SoshinDataSakuseiTaishoshaTemp"."zenkaiShinseishoKanriNo"
         LEFT JOIN (
-        SELECT
-        dbT5101."shinseishoKanriNo"
-        , dbT5101."ninteiShinseiYMD"
-        , dbT5101."koroshoIfShikibetsuCode"
-        FROM
-        rgdb."DbT5101NinteiShinseiJoho" dbT5101
-        WHERE
-        dbT5101."logicalDeletedFlag" = FALSE
-        ORDER BY
-        dbT5101."shinseishoKanriNo"
-        ) AS A2
-        ON "SoshinDataSakuseiTaishoshaTemp"."zenkaiShinseishoKanriNo" = A2."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5203NinteichosahyoKihonChosa" U
-        ON "SoshinDataSakuseiTaishoshaTemp"."zenkaiShinseishoKanriNo" = U."shinseishoKanriNo"
-        AND NOT EXISTS (
-        SELECT
-        'X'
-        FROM
-        rgdb."DbT5203NinteichosahyoKihonChosa" U1
-        WHERE
-        U."shinseishoKanriNo" = U1."shinseishoKanriNo"
-        AND U."ninteichosaRirekiNo" <![CDATA[<]]> U1."ninteichosaRirekiNo"
-        )
-        AND A2."koroshoIfShikibetsuCode" = U."koroshoIfShikibetsuCode"
-        LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho" V
-        ON "SoshinDataSakuseiTaishoshaTemp"."zenkaiShinseishoKanriNo" = V."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5102NinteiKekkaJoho" W
-        ON "SoshinDataSakuseiTaishoshaTemp"."zenkaiShinseishoKanriNo" = W."shinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" X
-        ON "SoshinDataSakuseiTaishoshaTemp"."zenkaiShinseishoKanriNo" = X."shinseishoKanriNo"
-        AND NOT EXISTS (
-        SELECT
-        'X'
-        FROM
-        rgdb."DbT5202NinteichosahyoGaikyoChosa" X1
-        WHERE
-        X."shinseishoKanriNo" = X1."shinseishoKanriNo"
-        AND X."ninteichosaRirekiNo" <![CDATA[<]]> X1."ninteichosaRirekiNo"
-        )
-        AND X."gaikyoChosaTextImageKubun" = #{gaikyoChosaTextImageKubun}
+            SELECT
+                  dbT5101."shinseishoKanriNo"
+                , dbT5101."ninteiShinseiYMD"
+                , dbT5101."koroshoIfShikibetsuCode"
+            FROM
+                rgdb."DbT5101NinteiShinseiJoho" dbT5101
+            WHERE
+                dbT5101."logicalDeletedFlag" = FALSE
+            ORDER BY
+                dbT5101."shinseishoKanriNo"
+         ) AS A2
+          ON A2."shinseishoKanriNo" = S."zenkaiShinseishoKanriNo"
+        LEFT JOIN
+            rgdb."DbT5201NinteichosaIraiJoho" ZG
+          ON ZG."shinseishoKanriNo" = A2."shinseishoKanriNo"
+         AND ZG."logicalDeletedFlag" = FALSE
+         AND NOT EXISTS (
+            SELECT
+                'X'
+            FROM
+                rgdb."DbT5201NinteichosaIraiJoho" ZG1
+            WHERE
+                ZG1."shinseishoKanriNo"  = ZG."shinseishoKanriNo"
+            AND ZG1."logicalDeletedFlag" = ZG."logicalDeletedFlag"
+            AND ZG1."ninteichosaIraiRirekiNo" <![CDATA[>]]> ZG."ninteichosaIraiRirekiNo"
+         )
+        LEFT JOIN
+            rgdb."DbT5203NinteichosahyoKihonChosa" U
+          ON U."shinseishoKanriNo" = ZG."shinseishoKanriNo"
+         AND U."ninteichosaRirekiNo" = ZG."ninteichosaIraiRirekiNo"
+        LEFT JOIN
+            rgdb."DbT5116IchijiHanteiKekkaJoho" V
+          ON V."shinseishoKanriNo" = A2."shinseishoKanriNo"
+        LEFT JOIN
+            rgdb."DbT5102NinteiKekkaJoho" W
+          ON W."shinseishoKanriNo" = A2."shinseishoKanriNo"
+        LEFT JOIN
+            rgdb."DbT5202NinteichosahyoGaikyoChosa" X
+          ON X."shinseishoKanriNo" = ZG."shinseishoKanriNo"
+         AND X."ninteichosaRirekiNo" = ZG."ninteichosaIraiRirekiNo"
+         AND NOT EXISTS (
+            SELECT
+                'X'
+            FROM
+                rgdb."DbT5202NinteichosahyoGaikyoChosa" X1
+            WHERE
+                X1."shinseishoKanriNo" = X."shinseishoKanriNo"
+            AND X1."ninteichosaRirekiNo" = X."ninteichosaRirekiNo"
+            AND X1."gaikyoChosaTextImageKubun" <![CDATA[>]]> X."gaikyoChosaTextImageKubun"
+         )
         LEFT JOIN (
-        SELECT DISTINCT
-        ON (
-        P002."shinseishoKanriNo"
-        , P002."koroshoIfShikibetsuCode"
-        ) P002."shinseishoKanriNo"
-        , P002."remban"
-        , P002."koroshoIfShikibetsuCode"
-        FROM
-        rgdb."DbT5210NinteichosahyoShisetsuRiyo" P002
+            SELECT DISTINCT
+                ON (
+                    P002."shinseishoKanriNo"
+                  , P002."ninteichosaRirekiNo"
+                )
+                  P002."shinseishoKanriNo"
+                , P002."ninteichosaRirekiNo"
+                , P002."remban"
+            FROM
+                rgdb."DbT5210NinteichosahyoShisetsuRiyo" P002
+            WHERE
+                P002."shisetsuRiyoFlag" = TRUE
+            ORDER BY
+                P002."shinseishoKanriNo"
+                , P002."ninteichosaRirekiNo" DESC
+                , P002."remban" DESC
+         ) P02
+          ON P02."shinseishoKanriNo" = ZG."shinseishoKanriNo"
+         AND P02."ninteichosaRirekiNo" = ZG."ninteichosaIraiRirekiNo"
+        LEFT JOIN
+            "ZenkaiChosahyoServiceJokyoTemp" Y
+          ON Y."zenkaiShinseishoKanriNo" = A2."shinseishoKanriNo"
+        LEFT JOIN
+            rgdb."DbT5208NinteichosahyoServiceJokyoFlag" Z
+          ON Z."shinseishoKanriNo" = ZG."shinseishoKanriNo"
+         AND Z."ninteichosaRirekiNo" = ZG."ninteichosaIraiRirekiNo"
+         AND Z."remban" = 1
+
         WHERE
-        P002."shisetsuRiyoFlag" = TRUE
-        ORDER BY
-        P002."shinseishoKanriNo"
-        , P002."koroshoIfShikibetsuCode" ASC
-        , P002."ninteichosaRirekiNo" DESC
-        , P002."remban" DESC
-        ) P02
-        ON "SoshinDataSakuseiTaishoshaTemp"."zenkaiShinseishoKanriNo" = P02."shinseishoKanriNo"
-        AND A2."koroshoIfShikibetsuCode" = P02."koroshoIfShikibetsuCode"
-        LEFT JOIN "ZenkaiChosahyoServiceJokyoTemp" Y
-        ON "SoshinDataSakuseiTaishoshaTemp"."zenkaiShinseishoKanriNo" = Y."zenkaiShinseishoKanriNo"
-        LEFT JOIN rgdb."DbT5208NinteichosahyoServiceJokyoFlag" Z
-        ON "SoshinDataSakuseiTaishoshaTemp"."zenkaiShinseishoKanriNo" = Z."shinseishoKanriNo"
-        AND NOT EXISTS (
-        SELECT
-        'X'
-        FROM
-        rgdb."DbT5208NinteichosahyoServiceJokyoFlag" Z1
-        WHERE
-        Z."shinseishoKanriNo" = Z1."shinseishoKanriNo"
-        AND Z."ninteichosaRirekiNo" <![CDATA[<]]> Z1."ninteichosaRirekiNo"
-        )
-        AND Z."remban" = 1
-        AND Z."koroshoIfShikibetsuCode" = A2."koroshoIfShikibetsuCode"
-        WHERE
-        A."koroshoIfShikibetsuCode" NOT IN ('02A', '06A', '09A', '99A')
-        <if test="市町村コード.toString() != ''.toString()">
+            A."koroshoIfShikibetsuCode" NOT IN ('02A', '06A', '09A', '99A')
+         <if test="市町村コード.toString() != ''.toString()">
             AND DbT7051KoseiShichosonMaster."shichosonCode" = #{市町村コード}
-        </if>
+         </if>
         ORDER BY
-        A."ninteiShinseiYMD"
-        , A."shoKisaiHokenshaNo"
-        , A."hihokenshaNo"
+              A."ninteiShinseiYMD"
+            , A."shoKisaiHokenshaNo"
+            , A."hihokenshaNo"
     </select>
 
     <sql id="selectSoshonDataSakuseiTaishosha">

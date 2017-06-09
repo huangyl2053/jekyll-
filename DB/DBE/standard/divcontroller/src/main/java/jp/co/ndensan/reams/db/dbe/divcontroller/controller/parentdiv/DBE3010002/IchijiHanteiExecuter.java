@@ -77,7 +77,7 @@ public class IchijiHanteiExecuter {
     }
 
     /**
-     * 検索結果一覧へ簿t何をクリックした場合の処理を定義します。遷移元画面の、検索結果一覧が表示されている状態へ遷移します。
+     * 検索結果一覧へボタンをクリックした場合の処理を定義します。遷移元画面の、検索結果一覧が表示されている状態へ遷移します。
      *
      * @param div 一次判定実行Div
      * @return ResponseData
@@ -214,8 +214,8 @@ public class IchijiHanteiExecuter {
 
     private void 前排他キーの解除() {
         RString temp_申請書管理番号 = ViewStateHolder.get(ViewStateKeys.申請書管理番号, RString.class);
-        LockingKey 排他キー = new LockingKey(SubGyomuCode.DBE認定支援.getGyomuCode().getColumnValue().concat(new RString("ShinseishoKanriNo"))
-                .concat(temp_申請書管理番号));
+        LockingKey 排他キー = new LockingKey(SubGyomuCode.DBE認定支援.getGyomuCode().getColumnValue()
+                .concat(new RString("ShinseishoKanriNo")).concat(temp_申請書管理番号));
         RealInitialLocker.release(排他キー);
     }
 }

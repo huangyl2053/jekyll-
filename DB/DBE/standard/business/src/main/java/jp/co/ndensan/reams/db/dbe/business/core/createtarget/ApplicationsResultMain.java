@@ -6,19 +6,21 @@
 package jp.co.ndensan.reams.db.dbe.business.core.createtarget;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.createtarget.CreateTargetCsvRelateEntity;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.HihokenshaKubunCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * センター送信Csvデータ出力情報ビジネスクラスです。
  *
  * @reamsid_L DBE-1680-010 zhangzhiming
  */
-public class CreateTargetCsvBusiness {
+public class ApplicationsResultMain {
 
     private static final int GOGITAI_CD_LENGTH = 6;
     private static final RString DEFAULT_GOGITAI_CD = RString.EMPTY.padZeroToLeft(GOGITAI_CD_LENGTH);
     private final CreateTargetCsvRelateEntity entity;
-    private final CreateCsvDataBusiness createBusiness;
+    private final LastApplication createBusiness;
 
     /**
      * コンストラクタです。
@@ -26,7 +28,7 @@ public class CreateTargetCsvBusiness {
      * @param entity Csvデータ出力情報
      * @param createBusiness Csvデータ出力情報
      */
-    public CreateTargetCsvBusiness(CreateTargetCsvRelateEntity entity, CreateCsvDataBusiness createBusiness) {
+    public ApplicationsResultMain(CreateTargetCsvRelateEntity entity, LastApplication createBusiness) {
         this.entity = entity;
         this.createBusiness = createBusiness;
     }
@@ -37,8 +39,8 @@ public class CreateTargetCsvBusiness {
      * @param entity Csvデータ出力情報
      * @return Csvデータ出力情報
      */
-    public static CreateTargetCsvBusiness creatCreateTargetCsvBusiness(CreateTargetCsvRelateEntity entity) {
-        return new CreateTargetCsvBusiness(entity, new CreateCsvDataBusiness(entity));
+    public static ApplicationsResultMain creatCreateTargetCsvBusiness(CreateTargetCsvRelateEntity entity) {
+        return new ApplicationsResultMain(entity, new LastApplication(entity));
     }
 
     /**
@@ -46,7 +48,7 @@ public class CreateTargetCsvBusiness {
      *
      * @return 申請書管理番号
      */
-    public CreateCsvDataBusiness getCreateCsvDataBusiness() {
+    public LastApplication getCreateCsvDataBusiness() {
         return createBusiness;
     }
 
@@ -398,7 +400,11 @@ public class CreateTargetCsvBusiness {
      * @return 委託区分
      */
     public RString get委託区分() {
-        return entity.get委託区分();
+        return trim(entity.get委託区分());
+    }
+
+    private static RString trim(RString rStr) {
+        return RString.isNullOrEmpty(rStr) ? RString.EMPTY : rStr.trim();
     }
 
     /**
@@ -605,7 +611,12 @@ public class CreateTargetCsvBusiness {
      * @return 認知症自立度Ⅱ以上の蓋然性
      */
     public RString get認知症自立度Ⅱ以上の蓋然性() {
-        return entity.get認知症自立度Ⅱ以上の蓋然性();
+        return RString.isNullOrEmpty(entity.get認知症自立度Ⅱ以上の蓋然性())
+                ? RString.EMPTY
+                : new RString(
+                        new Decimal(entity.get認知症自立度Ⅱ以上の蓋然性().toString())
+                        .roundHalfUpTo(0).toString()
+                );
     }
 
     /**
@@ -697,7 +708,9 @@ public class CreateTargetCsvBusiness {
      * @return 特定疾病コード
      */
     public RString get特定疾病コード() {
-        return entity.get特定疾病コード();
+        return HihokenshaKubunCode.第２号被保険者.getコード().equals(get被保険者区分コード())
+                ? entity.get特定疾病コード()
+                : RString.EMPTY;
     }
 
     /**

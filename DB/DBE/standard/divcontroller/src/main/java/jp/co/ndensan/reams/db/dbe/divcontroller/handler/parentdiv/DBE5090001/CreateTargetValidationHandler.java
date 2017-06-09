@@ -6,7 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5090001;
 
 import java.util.List;
-import jp.co.ndensan.reams.db.dbe.business.core.createtarget.CreateTargetBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.createtarget.ExaminationsPartialResult;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5090001.CreateTargetDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE5090001.dgCreateTargetSummary_Row;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -57,7 +57,7 @@ public class CreateTargetValidationHandler {
      * @param business 対象者一覧情報
      * @return ValidationMessageControlPairs
      */
-    public ValidationMessageControlPairs データチェック(List<CreateTargetBusiness> business) {
+    public ValidationMessageControlPairs データチェック(List<ExaminationsPartialResult> business) {
         ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
         if (business == null || business.isEmpty()) {
             validationMessages.add(new ValidationMessageControlPair(

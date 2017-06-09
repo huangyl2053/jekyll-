@@ -6,6 +6,7 @@
 package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE5230001;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import jp.co.ndensan.reams.db.dbe.business.core.shinsakaikekkatoroku.ShinsakaiKekkaTorokuBusiness;
@@ -223,11 +224,11 @@ public class ShinsakaiKekkaTorokuHandler {
     public void displayTo個別表示欄(dgTaishoshaIchiran_Row row, OperationMode mode) {
         reflectClickedRowTo個別事項表示欄(row);
         if (mode == OperationMode.更新
-            && RString.isNullOrEmpty(div.getKobetsuHyojiArea().getTxtNijiHanteiDay().getText())) {
+                && RString.isNullOrEmpty(div.getKobetsuHyojiArea().getTxtNijiHanteiDay().getText())) {
             if (!div.getKyotsuHyojiArea().getTxtKaisaiNichiji().getValue().isEmpty()) {
                 div.getKobetsuHyojiArea().getTxtNijiHanteiDay().setValue(new RDate(div.getKyotsuHyojiArea().getTxtKaisaiNichiji().getValue().toString()));
             }
-                
+
         }
         setInputable個別事項表示欄By(mode);
         if (mode != OperationMode.更新) {
@@ -677,7 +678,7 @@ public class ShinsakaiKekkaTorokuHandler {
     //<editor-fold defaultstate="collapsed" desc="ドロップダウンリストの初期化">
     private void set状態像コードドロップダウン() {
         List<KeyValueDataSource> 状態像コードリスト = new ArrayList();
-        for (YokaigoJotaizoReiCode v : YokaigoJotaizoReiCode.values()) {
+        for (YokaigoJotaizoReiCode v : Arrays.asList(YokaigoJotaizoReiCode.認知機能の低下等, YokaigoJotaizoReiCode.不安定な状態)) {
             状態像コードリスト.add(new KeyValueDataSource(v.getコード(), v.get名称()));
         }
         div.getKobetsuHyojiArea().getDdlJotaiZo().setDataSource(状態像コードリスト);

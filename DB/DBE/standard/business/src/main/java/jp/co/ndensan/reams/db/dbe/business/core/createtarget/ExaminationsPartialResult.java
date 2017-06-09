@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBE-1680-010 zhangzhiming
  */
-public class CreateTargetBusiness {
+public class ExaminationsPartialResult {
 
     private final CreateTargetRelateEntity entity;
 
@@ -29,7 +29,7 @@ public class CreateTargetBusiness {
      *
      * @param entity センター送信情報Entityクラスです。
      */
-    public CreateTargetBusiness(CreateTargetRelateEntity entity) {
+    public ExaminationsPartialResult(CreateTargetRelateEntity entity) {
         requireNonNull(entity, UrSystemErrorMessages.値がnull.getReplacedMessage("センター送信情報Entity"));
         this.entity = entity;
     }

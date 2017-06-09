@@ -4,7 +4,7 @@
 
 <!-- どのマッパーインターフェースと対応するかを指定する -->
 <mapper namespace="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5504ShinsakaiWariateJohoKenshuMapper">
-    
+
     <!-- 概要： 削除されたデータ以外を全件取得するSQLです。 -->
     <sql id="noDeleted_DbT5504ShinsakaiWariateJohoKenshu">
      SELECT
@@ -63,6 +63,24 @@
         <include refid="allColumns_DbT5504ShinsakaiWariateJohoKenshu"/>
         FROM
         rgdb."DbT5504ShinsakaiWariateJohoKenshu"
+    </select>
+
+    <select id="findEffective"  resultMap="ResultMap_DbT5504ShinsakaiWariateJohoKenshuEntity" parameterType="jp.co.ndensan.reams.uz.uza.lang.RString">
+        SELECT
+               <include refid="allColumns_DbT5504ShinsakaiWariateJohoKenshu"/>
+        FROM (
+            SELECT
+               *
+            FROM
+                 rgdb."DbT5504ShinsakaiWariateJohoKenshu"
+            WHERE
+                "shinsakaiKaisaiNo" = #{shinsakaiKaisaiNo}
+        ) AS "DbT5504ShinsakaiWariateJohoKenshu"
+        INNER JOIN
+            rgdb."DbT5101NinteiShinseiJoho" AS dbT5101
+          ON dbT5101."shinseishoKanriNo" = "DbT5504ShinsakaiWariateJohoKenshu"."shinseishoKanriNo"
+         AND dbT5101."shoriJotaiKubun" IN ('0', '3')
+         AND dbt5101."logicalDeletedFlag" = FALSE
     </select>
 
 </mapper>

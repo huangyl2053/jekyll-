@@ -7,13 +7,14 @@ package jp.co.ndensan.reams.db.dbe.business.core.createtarget;
 
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.createtarget.CreateTargetCsvRelateEntity;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * センター送信Csvデータ出力情報ビジネスクラスです。
  *
  * @reamsid_L DBE-1680-010 zhangzhiming
  */
-public class CreateCsvDataBusiness {
+public class LastApplication {
 
     private final CreateTargetCsvRelateEntity entity;
 
@@ -22,7 +23,7 @@ public class CreateCsvDataBusiness {
      *
      * @param entity Csvデータ出力情報
      */
-    public CreateCsvDataBusiness(CreateTargetCsvRelateEntity entity) {
+    public LastApplication(CreateTargetCsvRelateEntity entity) {
         this.entity = entity;
     }
 
@@ -626,7 +627,12 @@ public class CreateCsvDataBusiness {
      * @return 前回結果_認知症自立度Ⅱ以上の蓋然性
      */
     public RString get前回結果_認知症自立度Ⅱ以上の蓋然性() {
-        return entity.get前回結果_認知症自立度Ⅱ以上の蓋然性();
+        return RString.isNullOrEmpty(entity.get前回結果_認知症自立度Ⅱ以上の蓋然性())
+                ? RString.EMPTY
+                : new RString(
+                        new Decimal(entity.get前回結果_認知症自立度Ⅱ以上の蓋然性().toString())
+                        .roundHalfUpTo(0).toString()
+                );
     }
 
     /**

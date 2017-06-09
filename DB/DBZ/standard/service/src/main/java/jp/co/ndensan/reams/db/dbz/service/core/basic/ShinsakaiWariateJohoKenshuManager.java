@@ -12,6 +12,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoK
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShinsakaiWariateJohoKenshu;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5504ShinsakaiWariateJohoKenshuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5504ShinsakaiWariateJohoKenshuDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5504ShinsakaiWariateJohoKenshuMapper;
+import jp.co.ndensan.reams.db.dbz.service.core.MapperProvider;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
@@ -23,13 +25,15 @@ import jp.co.ndensan.reams.uz.uza.util.di.Transaction;
  */
 public class ShinsakaiWariateJohoKenshuManager {
 
-    private DbT5504ShinsakaiWariateJohoKenshuDac dac;
+    private final DbT5504ShinsakaiWariateJohoKenshuDac dac;
+    private final MapperProvider mp;
 
     /**
      * コンストラクタです。
      */
     public ShinsakaiWariateJohoKenshuManager() {
         dac = InstanceProvider.create(DbT5504ShinsakaiWariateJohoKenshuDac.class);
+        mp = InstanceProvider.create(MapperProvider.class);
     }
 
     /**
@@ -39,6 +43,7 @@ public class ShinsakaiWariateJohoKenshuManager {
      */
     ShinsakaiWariateJohoKenshuManager(DbT5504ShinsakaiWariateJohoKenshuDac dac) {
         this.dac = dac;
+        this.mp = null;
     }
 
     /**
@@ -66,7 +71,7 @@ public class ShinsakaiWariateJohoKenshuManager {
 
     /**
      * 審査会開催番号に合致する介護認定審査会割当情報研修のリストを返します。
-     * 
+     *
      * @param 介護認定審査会開催番号 介護認定審査会開催番号
      * @return List<ShinsakaiWariateJohoKenshu>
      */
@@ -75,13 +80,14 @@ public class ShinsakaiWariateJohoKenshuManager {
         requireNonNull(介護認定審査会開催番号, UrSystemErrorMessages.値がnull.getReplacedMessage("介護認定審査会開催番号"));
 
         List<ShinsakaiWariateJohoKenshu> businessList = new ArrayList<>();
-        List<DbT5504ShinsakaiWariateJohoKenshuEntity> entities = dac.selectByShinsakaiKaisaiNo(介護認定審査会開催番号);
-        
+        List<DbT5504ShinsakaiWariateJohoKenshuEntity> entities = mp.create(IDbT5504ShinsakaiWariateJohoKenshuMapper.class)
+                .findEffective(介護認定審査会開催番号);
+
         for (DbT5504ShinsakaiWariateJohoKenshuEntity entity : entities) {
             entity.initializeMd5();
             businessList.add(new ShinsakaiWariateJohoKenshu(entity));
         }
-        
+
         return businessList;
     }
 

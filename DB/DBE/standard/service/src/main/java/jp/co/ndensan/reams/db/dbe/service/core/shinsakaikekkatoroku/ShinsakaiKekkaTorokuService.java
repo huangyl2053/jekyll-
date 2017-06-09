@@ -29,6 +29,8 @@ import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5502ShinsakaiWariateJohoEnt
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5504ShinsakaiWariateJohoKenshuEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5504ShinsakaiWariateJohoKenshuDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5502ShinsakaiWariateJohoDac;
+import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5502ShinsakaiWariateJohoMapper;
+import jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5504ShinsakaiWariateJohoKenshuMapper;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
@@ -269,7 +271,8 @@ public class ShinsakaiKekkaTorokuService {
     @Transaction
     public List<DbT5504ShinsakaiWariateJohoKenshuEntity> select介護認定審査会割当研修情報(RString 開催番号) {
         requireNonNull(開催番号, UrSystemErrorMessages.値がnull.getReplacedMessage("開催番号"));
-        List<DbT5504ShinsakaiWariateJohoKenshuEntity> relateEntity = 介護認定審査会割当研修情報Dac.selectByShinsakaiKaisaiNo(開催番号);
+        List<DbT5504ShinsakaiWariateJohoKenshuEntity> relateEntity = this.mapperProvider.create(IDbT5504ShinsakaiWariateJohoKenshuMapper.class)
+                .findEffective(開催番号);
         if (relateEntity == null) {
             return null;
         }
@@ -285,7 +288,8 @@ public class ShinsakaiKekkaTorokuService {
     @Transaction
     public List<DbT5502ShinsakaiWariateJohoEntity> select介護認定審査会割当情報(RString 開催番号) {
         requireNonNull(開催番号, UrSystemErrorMessages.値がnull.getReplacedMessage("開催番号"));
-        List<DbT5502ShinsakaiWariateJohoEntity> relateEntity = 介護認定審査会割当情報Dac.selectByShinsakaiKaisaiNo(開催番号);
+        List<DbT5502ShinsakaiWariateJohoEntity> relateEntity = this.mapperProvider.create(IDbT5502ShinsakaiWariateJohoMapper.class)
+                .findEffective(開催番号);
         if (relateEntity == null) {
             return null;
         }
