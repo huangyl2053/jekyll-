@@ -28,7 +28,7 @@ public class loginController {
 		if (psd != null && psd.equals(getPSD())) {
 			return "main";
 		}
-		return "index.jsp";
+		return "WEB-INF/main.jsp";
 	}
 
 	// 获取密码

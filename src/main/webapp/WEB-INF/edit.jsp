@@ -1,18 +1,22 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>main view</title>
+<link rel="stylesheet" type="text/css" href="css/main.css"/>
+<link rel="stylesheet" type="text/css" href="css/edit.css"/>
 </head>
 <body>
-	<button type="button" name="edit" onclick="edit()">编辑</button>
-	<p>welcom</p>
+	<br />
+	<br />
+	<br />
+	<form method="post" action="save" id="center">
+		标题：<input type="text" name="title" id="title" />
+		 <br />
+		  内容：<textarea name="content" id="content"></textarea>
+		<br /> <input type="submit">
+	</form>
 </body>
-<script language="javascript" type="text/javascript"> 
-function edit(){
-window.location.href="edit"; 
-}
-</script>
 </html>
