@@ -1,0 +1,9 @@
+body{
+	background-color: 	#F0F0F0;
+	line-height: 2;
+	font-family: "Microsoft Yahei";
+}
+#center{
+	text-align:center;
+	margin:0px auto;
+}

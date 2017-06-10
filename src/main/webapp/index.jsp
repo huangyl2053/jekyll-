@@ -1,12 +1,14 @@
-<!Doctype html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
-<%@ page language="java" pageEncoding="utf-8"%>
+	<title>main view</title>
 </head>
 <body>
-	<form method="post" action="login">
-		<input type="text" name="psd" /> <span class="help-block">身份验证</span>
-		<button class="btn" type="submit">确认</button>
-	</form>
+<form method="post" action="login">
+<input type="text" name="psd">
+<button type="submit">please input psd.</button>
+</form>
 </body>
 </html>
