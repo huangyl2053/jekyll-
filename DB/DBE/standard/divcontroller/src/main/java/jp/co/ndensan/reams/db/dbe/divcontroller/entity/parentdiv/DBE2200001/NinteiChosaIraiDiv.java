@@ -21,7 +21,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class NinteiChosaIraiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-06-01_23-02-42">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -255,6 +255,16 @@ public class NinteiChosaIraiDiv extends Panel {
     }
 
     @JsonIgnore
+    public TextBoxNum getTxtWaritsukeTeiin() {
+        return this.getChosaItakusakiAndChosainKihonJoho().getTxtWaritsukeTeiin();
+    }
+
+    @JsonIgnore
+    public void  setTxtWaritsukeTeiin(TextBoxNum txtWaritsukeTeiin) {
+        this.getChosaItakusakiAndChosainKihonJoho().setTxtWaritsukeTeiin(txtWaritsukeTeiin);
+    }
+
+    @JsonIgnore
     public TextBoxCode getTxtChosainCode() {
         return this.getChosaItakusakiAndChosainKihonJoho().getTxtChosainCode();
     }
@@ -282,6 +292,16 @@ public class NinteiChosaIraiDiv extends Panel {
     @JsonIgnore
     public void  setTxtChosainChiku(TextBox txtChosainChiku) {
         this.getChosaItakusakiAndChosainKihonJoho().setTxtChosainChiku(txtChosainChiku);
+    }
+
+    @JsonIgnore
+    public TextBoxNum getTxtChosaKanoNinzuPerMonth() {
+        return this.getChosaItakusakiAndChosainKihonJoho().getTxtChosaKanoNinzuPerMonth();
+    }
+
+    @JsonIgnore
+    public void  setTxtChosaKanoNinzuPerMonth(TextBoxNum txtChosaKanoNinzuPerMonth) {
+        this.getChosaItakusakiAndChosainKihonJoho().setTxtChosaKanoNinzuPerMonth(txtChosaKanoNinzuPerMonth);
     }
 
     @JsonIgnore

@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ChosaItakusakiAndChosainKihonJohoDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-01-10_09-26-16">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-06-01_23-02-42">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,12 +27,16 @@ public class ChosaItakusakiAndChosainKihonJohoDiv extends Panel {
     private TextBox txtChosaItakusakiMeisho;
     @JsonProperty("txtChosaItakusakiChiku")
     private TextBox txtChosaItakusakiChiku;
+    @JsonProperty("txtWaritsukeTeiin")
+    private TextBoxNum txtWaritsukeTeiin;
     @JsonProperty("txtChosainCode")
     private TextBoxCode txtChosainCode;
     @JsonProperty("txtChosainShimei")
     private TextBox txtChosainShimei;
     @JsonProperty("txtChosainChiku")
     private TextBox txtChosainChiku;
+    @JsonProperty("txtChosaKanoNinzuPerMonth")
+    private TextBoxNum txtChosaKanoNinzuPerMonth;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -95,6 +99,24 @@ public class ChosaItakusakiAndChosainKihonJohoDiv extends Panel {
     }
 
     /*
+     * gettxtWaritsukeTeiin
+     * @return txtWaritsukeTeiin
+     */
+    @JsonProperty("txtWaritsukeTeiin")
+    public TextBoxNum getTxtWaritsukeTeiin() {
+        return txtWaritsukeTeiin;
+    }
+
+    /*
+     * settxtWaritsukeTeiin
+     * @param txtWaritsukeTeiin txtWaritsukeTeiin
+     */
+    @JsonProperty("txtWaritsukeTeiin")
+    public void setTxtWaritsukeTeiin(TextBoxNum txtWaritsukeTeiin) {
+        this.txtWaritsukeTeiin = txtWaritsukeTeiin;
+    }
+
+    /*
      * gettxtChosainCode
      * @return txtChosainCode
      */
@@ -146,6 +168,24 @@ public class ChosaItakusakiAndChosainKihonJohoDiv extends Panel {
     @JsonProperty("txtChosainChiku")
     public void setTxtChosainChiku(TextBox txtChosainChiku) {
         this.txtChosainChiku = txtChosainChiku;
+    }
+
+    /*
+     * gettxtChosaKanoNinzuPerMonth
+     * @return txtChosaKanoNinzuPerMonth
+     */
+    @JsonProperty("txtChosaKanoNinzuPerMonth")
+    public TextBoxNum getTxtChosaKanoNinzuPerMonth() {
+        return txtChosaKanoNinzuPerMonth;
+    }
+
+    /*
+     * settxtChosaKanoNinzuPerMonth
+     * @param txtChosaKanoNinzuPerMonth txtChosaKanoNinzuPerMonth
+     */
+    @JsonProperty("txtChosaKanoNinzuPerMonth")
+    public void setTxtChosaKanoNinzuPerMonth(TextBoxNum txtChosaKanoNinzuPerMonth) {
+        this.txtChosaKanoNinzuPerMonth = txtChosaKanoNinzuPerMonth;
     }
 
     // </editor-fold>

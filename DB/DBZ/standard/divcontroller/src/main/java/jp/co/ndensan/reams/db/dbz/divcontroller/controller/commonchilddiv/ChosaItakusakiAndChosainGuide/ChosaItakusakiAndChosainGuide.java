@@ -87,18 +87,19 @@ public class ChosaItakusakiAndChosainGuide {
             if (validPairs.iterator().hasNext()) {
                 return ResponseData.of(div).addValidationMessages(validPairs).respond();
             }
-            search認定調査委託先and調査員(div, dataPassModel);
+            search認定調査委託先and調査員(div, dataPassModel, dataPassModel.get市町村コード());
         }
         return ResponseData.of(div).respond();
     }
 
-    private ResponseData<ChosaItakusakiAndChosainGuideDiv> search認定調査委託先and調査員(ChosaItakusakiAndChosainGuideDiv div, KijuntsukiShichosonjohoiDataPassModel dataPassModel) {
+    private ResponseData<ChosaItakusakiAndChosainGuideDiv> search認定調査委託先and調査員(
+            ChosaItakusakiAndChosainGuideDiv div, KijuntsukiShichosonjohoiDataPassModel dataPassModel, RString 市町村コード) {
         List<KijuntsukiShichosonjoho> list = new ArrayList<>();
         if (dataPassModel.get対象モード().toString().equals(TaishoMode.Itakusaki.name())) {
-            list = finder.getChosaItakusaki(createParam(div)).records();
+            list = finder.getChosaItakusaki(createParam(div, 市町村コード)).records();
         }
         if (dataPassModel.get対象モード().toString().equals(TaishoMode.Chosain.name())) {
-            list = finder.getKojinJokyoShokai(createParam(div)).records();
+            list = finder.getKojinJokyoShokai(createParam(div, 市町村コード)).records();
         }
         if (!list.isEmpty()) {
             getHandler(div).setDataGrid(list, dataPassModel.get対象モード());
@@ -126,7 +127,10 @@ public class ChosaItakusakiAndChosainGuide {
         KijuntsukiShichosonjohoiDataPassModel dataPassModel = DataPassingConverter.deserialize(
                 div.getHdnDataPass(), KijuntsukiShichosonjohoiDataPassModel.class);
         if (dataPassModel != null) {
-            search認定調査委託先and調査員(div, dataPassModel);
+            RString 市町村コード = div.getHokensha().isDisplayNone()
+                    ? RString.EMPTY
+                    : div.getHokensha().getSelectedItem().get市町村コード().value();
+            search認定調査委託先and調査員(div, dataPassModel, 市町村コード);
         }
         return ResponseData.of(div).respond();
     }
@@ -167,7 +171,7 @@ public class ChosaItakusakiAndChosainGuide {
         return new ChosaItakusakiAndChosainGuideHandler(div);
     }
 
-    private ChosaItakusakiAndChosainGuideParameter createParam(ChosaItakusakiAndChosainGuideDiv div) {
+    private ChosaItakusakiAndChosainGuideParameter createParam(ChosaItakusakiAndChosainGuideDiv div, RString 市町村コード) {
         RString 調査委託先コードFrom, 調査委託先コードTo;
         if (!RString.isNullOrEmpty(div.getTxtChosaItakusakiCodeFrom().getText())
                 && !RString.isNullOrEmpty(div.getTxtChosaItakuaskiCodeTo().getText())) {
@@ -211,7 +215,7 @@ public class ChosaItakusakiAndChosainGuide {
                 div.getTxtChosainName().getValue(),
                 div.getTxtChosainKanaShimei().getValue(),
                 null,
-                div.getHokensha().isDisplayNone() ? RString.EMPTY : div.getHokensha().getSelectedItem().get市町村コード().value(),
+                市町村コード,
                 ControlDataHolder.getSubGyomuCD().value(),
                 div.getTxtChikuCode().getDomain().value(),
                 div.getDdlChosaItakusakiKubun().getSelectedKey());

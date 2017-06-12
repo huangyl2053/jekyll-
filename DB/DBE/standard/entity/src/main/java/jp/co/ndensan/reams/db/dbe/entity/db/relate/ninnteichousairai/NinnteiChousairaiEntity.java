@@ -41,4 +41,5 @@ public class NinnteiChousairaiEntity {
     private int chosaKanoNinzuPerMonth;
     private RString shichosonMeisho;
     private RString shoKisaiHokenshaNo;
+    private int totalCount;
 }
