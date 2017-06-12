@@ -139,6 +139,16 @@
         LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS DbT5202NinteichosahyoGaikyoChosa
         ON DbT5202NinteichosahyoGaikyoChosa."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"
         AND DbT5202NinteichosahyoGaikyoChosa."ninteichosaRirekiNo" = DbT5201NinteichosaIraiJoho."ninteichosaIraiRirekiNo"
+        AND NOT EXISTS	(
+        SELECT
+        *
+        FROM
+        rgdb."DbT5202NinteichosahyoGaikyoChosa" slv
+        WHERE
+        DbT5202NinteichosahyoGaikyoChosa."shinseishoKanriNo" = slv."shinseishoKanriNo"
+        AND DbT5202NinteichosahyoGaikyoChosa."ninteichosaRirekiNo" = slv."ninteichosaRirekiNo"
+        AND DbT5202NinteichosahyoGaikyoChosa."gaikyoChosaTextImageKubun" <![CDATA[<]]> slv."gaikyoChosaTextImageKubun"
+        )
         LEFT JOIN rgdb."DbT5301ShujiiIkenshoIraiJoho" AS DbT5301ShujiiIkenshoIraiJoho
         ON DbT5301ShujiiIkenshoIraiJoho."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo"
         AND DbT5301ShujiiIkenshoIraiJoho."ikenshoIraiRirekiNo" = (
