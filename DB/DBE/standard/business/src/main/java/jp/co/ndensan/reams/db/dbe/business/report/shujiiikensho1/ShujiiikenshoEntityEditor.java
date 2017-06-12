@@ -5,14 +5,12 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.shujiiikensho1;
 
-import java.util.List;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujikensho.ShujiiikenshoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.yokaigoninteijohoteikyo.YokaigoNinteiJohoTeikyoEntity;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
 import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
 import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
 import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
-import jp.co.ndensan.reams.uz.uza.cooperation.entity.SharedFileEntryInfoEntity;
 import jp.co.ndensan.reams.uz.uza.io.Directory;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
@@ -105,43 +103,37 @@ public final class ShujiiikenshoEntityEditor {
         if (イメージ共有ファイルID != null) {
             ReadOnlySharedFileEntryDescriptor descriptor = get共有ファイルエントリ情報(共有フォルダ名, イメージ共有ファイルID);
             RString path = copySharedFiles(descriptor);
-            shujiEntity.setイメージファイル1(get表面イメージファイルパス(descriptor, path, 主治医意見書マスキング区分));
-            shujiEntity.setイメージファイル2(get裏面イメージファイルパス(descriptor, path, 主治医意見書マスキング区分));
+            shujiEntity.setイメージファイル1(get表面イメージファイルパス(path, 主治医意見書マスキング区分));
+            shujiEntity.setイメージファイル2(get裏面イメージファイルパス(path, 主治医意見書マスキング区分));
         }
         return shujiEntity;
     }
 
-    private static RString get表面イメージファイルパス(ReadOnlySharedFileEntryDescriptor descriptor,
-            RString path, RString 主治医意見書マスキング区分) {
+    private static RString get表面イメージファイルパス(RString path, RString 主治医意見書マスキング区分) {
         if (マスキングあり.equals(主治医意見書マスキング区分)) {
             RString fineFullPath = getFilePath(path, FILENAME);
             return (!RString.isNullOrEmpty(fineFullPath)) ? fineFullPath : RString.EMPTY;
         } else {
-            List<SharedFileEntryInfoEntity> entryInfoList = SharedFile.getEntryInfo(descriptor);
-            RString ファイル名 = (existマスキングファイル(entryInfoList, FILENAME_BAK)) ? FILENAME_BAK : FILENAME;
+            RString ファイル名 = (existマスキングファイル(path, FILENAME_BAK)) ? FILENAME_BAK : FILENAME;
             RString fineFullPath = getFilePath(path, ファイル名);
             return (!RString.isNullOrEmpty(fineFullPath)) ? fineFullPath : RString.EMPTY;
         }
     }
 
-    private static RString get裏面イメージファイルパス(ReadOnlySharedFileEntryDescriptor descriptor,
-            RString path, RString 主治医意見書マスキング区分) {
+    private static RString get裏面イメージファイルパス(RString path, RString 主治医意見書マスキング区分) {
         if (マスキングあり.equals(主治医意見書マスキング区分)) {
             RString fineFullPath = getFilePath(path, FILENAME02);
             return (!RString.isNullOrEmpty(fineFullPath)) ? fineFullPath : RString.EMPTY;
         } else {
-            List<SharedFileEntryInfoEntity> entryInfoList = SharedFile.getEntryInfo(descriptor);
-            RString ファイル名 = (existマスキングファイル(entryInfoList, FILENAME_BAK02)) ? FILENAME_BAK02 : FILENAME02;
+            RString ファイル名 = (existマスキングファイル(path, FILENAME_BAK02)) ? FILENAME_BAK02 : FILENAME02;
             RString fineFullPath = getFilePath(path, ファイル名);
             return (!RString.isNullOrEmpty(fineFullPath)) ? fineFullPath : RString.EMPTY;
         }
     }
 
-    private static boolean existマスキングファイル(List<SharedFileEntryInfoEntity> entryInfoList, RString ファイル名) {
-        for (SharedFileEntryInfoEntity entryInfo : entryInfoList) {
-            if (entryInfo.getFilesEntity().getPathname().endsWith(ファイル名)) {
-                return true;
-            }
+    private static boolean existマスキングファイル(RString 出力イメージフォルダパス, RString ファイル名) {
+        if (Directory.exists(Path.combinePath(出力イメージフォルダパス, SEPARATOR, ファイル名))) {
+            return true;
         }
         return false;
     }
