@@ -22,6 +22,12 @@ public final class NinteichosaKomokus {
      * @return 該当する認定調査項目. 存在しない場合は、{@link NinteichosaKomokuDummy#EMPTY}.
      */
     public static INinteichosaKomoku toValueFromTokkiJikoNo(RString 厚労省IF識別コード, RString 特記事項項目番号) {
+        if (NinteichosaKomokuDummy.概況特記.get特記事項番号().equals(特記事項項目番号)) {
+            return NinteichosaKomokuDummy.概況特記;
+        }
+        if (RString.isNullOrEmpty(特記事項項目番号)) {
+            return NinteichosaKomokuDummy.EMPTY;
+        }
         if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コード)) {
             return NinteichosaKomoku09B.getAllBy調査特記事項番(特記事項項目番号);
         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード)) {
@@ -33,7 +39,7 @@ public final class NinteichosaKomokus {
         } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(厚労省IF識別コード)) {
             return NinteichosaKomoku99A.getAllBy調査特記事項番(特記事項項目番号);
         }
-        return NinteichosaKomokuDummy.toValueFromTokkiJikoNo(特記事項項目番号);
+        return NinteichosaKomokuDummy.EMPTY;
     }
 
 }
