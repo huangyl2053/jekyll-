@@ -613,7 +613,7 @@ public class IraishoIkkatsuHakkoHandler {
     }
 
     public void setShujiiParam(DBE220010_IraishoIkkatuParameter param) {
-
+        param.setSeikyushoHakkobiInjiumu(true);
         if (div.getChkShujiiikenshoSakuseiIrai().getSelectedKeys().size() == 2) {
             param.setShujiiikenshoSakuseiIrai(PRINT_AND_NOPRINT);
         } else {
@@ -665,6 +665,11 @@ public class IraishoIkkatsuHakkoHandler {
         if (!div.getChkIkenshoSeikyusho().isDisplayNone()) {
             List<RString> 請求書選択selectedKeys = div.getChkIkenshoSeikyusho().getSelectedKeys();
             param.setIkenshoSakuseiSeikyusho(請求書選択selectedKeys.contains(意見書チェックボックス_請求書));
+            if (請求書選択selectedKeys.contains(意見書チェックボックス_請求書)) {
+                RString 発行日印字有無 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成料請求書_発行日_印字有無, RDate.getNowDate(), SubGyomuCode.DBE認定支援,
+                        div.getCcdNinteiChosaHokensha().getSelectedItem().get市町村コード().value());
+                param.setSeikyushoHakkobiInjiumu(発行日印字有無.equals(CONFIGVALUE1));
+            }
         } else {
             param.setIkenshoSakuseiSeikyusho(false);
         }

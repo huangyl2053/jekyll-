@@ -60,6 +60,7 @@ public class DBE220010_IraishoIkkatuParameter extends BatchParameterBase {
     private static final String IS_NINTEI_CHOSA_CHECK_HYO = "isNinteiChosaCheckHyo";
     private static final String IS_TOKKI_HAS_CHOSAGUN = "isTokkiHasChosagun";
     private static final String IS_TOKKI_FREE_TYPE = "isTokkiFreeType";
+    private static final String IS_SEIKYUSHO_HAKKOBI_INJIUMU = "isSeikyushoHakkobiInjiumu";
 
     @BatchParameter(key = NINTEIO_CHOSA_IRAISHO, name = "認定調査依頼書印刷区分")
     private RString ninteioChosaIraisho;
@@ -133,6 +134,9 @@ public class DBE220010_IraishoIkkatuParameter extends BatchParameterBase {
     private RString shoKisaiHokenshaNo;
     @BatchParameter(key = 保険者名称, name = "保険者名称")
     private RString hokenshaName;
+    
+    @BatchParameter(key = IS_SEIKYUSHO_HAKKOBI_INJIUMU, name = "主治医意見書作成料請求書発行日印字有無")
+    private boolean isSeikyushoHakkobiInjiumu;
 
     /**
      * 主治医意見書作成依頼発行一覧表ですためのprocessのパラメータを生成します。
@@ -219,6 +223,7 @@ public class DBE220010_IraishoIkkatuParameter extends BatchParameterBase {
                 bunshoNo,
                 shichosonCode,
                 shoKisaiHokenshaNo,
-                hokenshaName);
+                hokenshaName,
+                isSeikyushoHakkobiInjiumu);
     }
 }
