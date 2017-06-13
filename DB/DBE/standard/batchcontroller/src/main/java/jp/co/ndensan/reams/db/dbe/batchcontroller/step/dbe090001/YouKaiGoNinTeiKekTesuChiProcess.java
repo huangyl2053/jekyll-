@@ -20,9 +20,12 @@ import jp.co.ndensan.reams.db.dbe.entity.report.johoteikyoshiryo.JohoTeikyoShiry
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.youkaigoninteikekktesuchi.IYouKaiGoNinTeiKekTesuChiMapper;
 import jp.co.ndensan.reams.db.dbe.service.core.shujiiikenshosakuseiirai.ShujiiIkenshoSakuseiIraiManager;
 import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoDonyuKeitai;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
+import jp.co.ndensan.reams.db.dbz.business.config.FourMasterConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.kyotsu.NinshoshaDenshikoinshubetsuCode;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5301ShujiiIkenshoIraiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.service.core.kaigiatesakijushosettei.KaigoAtesakiJushoSetteiFinder;
@@ -42,6 +45,7 @@ import jp.co.ndensan.reams.uz.uza.biz.KamokuCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
@@ -65,6 +69,7 @@ public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNi
     private static final int 通知文1 = 1;
     private static final int 主治医コードSTART = 10;
     private static final int 主治医コードEND = 18;
+    private static final RString 四マスタ管理方法_構成市町村 = new RString("1");
 
     private YouKaiGoNinTeiKekTesuChiProcessParemeter paramter;
     private static final ReportId REPORT_ID = ReportIdDBE.DBE090001.getReportId();
@@ -75,6 +80,7 @@ public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNi
     private Map<Integer, RString> 通知文;
     private RString 文書番号;
     private NinshoshaSource 認証者情報;
+    private RString 四マスタ_市町村コード;
 
     static {
         OUT_DATA_LIST = new RString("outDataList");
@@ -133,6 +139,13 @@ public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNi
         }
         int 通知書定型文パターン番号 = RString.isNullOrEmpty(paramter.getShichosonCode()) ? 1 : Integer.parseInt(paramter.getShichosonCode().toString());
         通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, REPORT_ID, KamokuCode.EMPTY, 通知書定型文パターン番号);
+        RString 四マスタ管理方法 = new FourMasterConfig().get四マスタ管理方法();
+        RString 広域保険者市町村コード = DbBusinessConfig.get(ConfigNameDBE.広域保険者市町村コード, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        if (!四マスタ管理方法_構成市町村.equals(四マスタ管理方法)) {
+            四マスタ_市町村コード = 広域保険者市町村コード;
+        } else {
+            四マスタ_市町村コード = paramter.getShichosonCode();
+        }
         文書番号 = paramter.getBunshoNo();
     }
 
@@ -161,7 +174,7 @@ public class YouKaiGoNinTeiKekTesuChiProcess extends BatchProcessBase<YouKaiGoNi
     private ShujiiIraiAtenaJoho get宛先() {
         ShujiiIkenshoSakuseiIraiManager manager = ShujiiIkenshoSakuseiIraiManager.createInstance();
         ShujiiIraiAtenaJohoParameter parameter = new ShujiiIraiAtenaJohoParameter();
-        parameter.setShichosonCode(paramter.getShichosonCode());
+        parameter.setShichosonCode(四マスタ_市町村コード);
         parameter.setShujiiCode(paramter.getShuJiiJyouHou().substring(主治医コードSTART, 主治医コードEND));
         parameter.setShujiiIryokikanCode(paramter.getShuJiiJyouHou().substring(0, 主治医コードSTART));
         return manager.get宛先情報(parameter);
