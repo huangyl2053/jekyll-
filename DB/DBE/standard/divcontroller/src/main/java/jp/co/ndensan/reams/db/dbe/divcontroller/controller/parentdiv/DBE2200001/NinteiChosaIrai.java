@@ -343,7 +343,7 @@ public class NinteiChosaIrai {
         }
         IkenshoPrintParameterModel model = new IkenshoPrintParameterModel();
         model.set申請書管理番号リスト(getHandler(div).getSelected申請書管理番号リスト());
-        model.set市町村コード(div.getCcdHokenshaList().getSelectedItem().get市町村コード());
+        model.set市町村コード(ChosaItakusakiChosainKey.get().getShichosonCode());
         model.set遷移元画面区分(GamenSeniKbn.認定調査依頼);
         div.setHiddenIuputModel(DataPassingConverter.serialize(model));
         return ResponseData.of(div).respond();
