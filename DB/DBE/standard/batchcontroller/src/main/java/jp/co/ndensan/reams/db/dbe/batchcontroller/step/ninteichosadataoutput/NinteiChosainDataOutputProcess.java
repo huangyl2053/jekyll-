@@ -9,6 +9,9 @@ import jp.co.ndensan.reams.db.dbe.business.core.ninteichosadataoutput.NinteiChos
 import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosadataoutput.NinteiChosaDataOutputProcessParamter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosainDataRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosadataoutput.NinteiChosainOutputEucCsvEntity;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
+import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbz.business.config.FourMasterConfig;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchDbReader;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchProcessBase;
@@ -22,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.io.Encode;
 import jp.co.ndensan.reams.uz.uza.io.NewLine;
 import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.io.csv.CsvWriter;
+import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 
 /**
@@ -37,6 +41,9 @@ public class NinteiChosainDataOutputProcess extends BatchProcessBase<NinteiChosa
     private static final EucEntityId EUC_ENTITY_ID = new EucEntityId("DBE224002");
     private static final RString EUC_WRITER_DELIMITER = new RString(",");
     private static final RString EUC_WRITER_ENCLOSURE = new RString("\"");
+    private static final RString 四マスタ管理方法_構成市町村 = new RString("1");
+    private RString 四マスタ管理方法;
+    private RString 広域保険者市町村コード;
     private NinteiChosaDataOutputProcessParamter processParamter;
     private RString eucFilePath;
     @BatchWriter
@@ -45,11 +52,17 @@ public class NinteiChosainDataOutputProcess extends BatchProcessBase<NinteiChosa
     @Override
     protected void initialize() {
         eucFilePath = Path.combinePath(processParamter.getTempFilePath(), EucOtherInfo.getDisplayName(SubGyomuCode.DBE認定支援, EUC_ENTITY_ID.toRString()));
+        四マスタ管理方法 = new FourMasterConfig().get四マスタ管理方法();
+        広域保険者市町村コード = DbBusinessConfig.get(ConfigNameDBE.広域保険者市町村コード, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
     }
 
     @Override
     protected IBatchReader createReader() {
-        return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.to認定調査員取得Parameter());
+        if (四マスタ管理方法_構成市町村.equals(四マスタ管理方法)) {
+            return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.to認定調査員取得Parameter());
+        } else {
+            return new BatchDbReader(MYBATIS_SELECT_ID, processParamter.to認定調査員取得Parameter(広域保険者市町村コード));
+        }
     }
 
     @Override

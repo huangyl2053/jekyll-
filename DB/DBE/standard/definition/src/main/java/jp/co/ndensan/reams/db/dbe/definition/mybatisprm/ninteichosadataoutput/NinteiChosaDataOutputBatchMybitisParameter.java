@@ -37,6 +37,8 @@ public final class NinteiChosaDataOutputBatchMybitisParameter implements IMyBati
     private final boolean isNinteiChosainCode;
     private final boolean isShichoson;
     private final RString csvTempTableName;
+    private final boolean isKoikiKanri;
+    private final RString koikiHokenshaShichosonCode;
 
     /**
      * コンストラクタです。
@@ -68,6 +70,43 @@ public final class NinteiChosaDataOutputBatchMybitisParameter implements IMyBati
         this.isNinteiChosainCode = is認定調査員コード;
         this.isShichoson = is全市町村;
         this.csvTempTableName = csvTempTableName;
+        this.isKoikiKanri = false;
+        this.koikiHokenshaShichosonCode = null;
+    }
+
+    /**
+     * コンストラクタです。
+     *
+     * @param 認定調査委託先コード 認定調査委託先コード
+     * @param 認定調査員コード 認定調査員コード
+     * @param 申請書管理番号リスト 申請書管理番号リスト
+     * @param 市町村コード 市町村コード
+     * @param is認定調査委託先コード is認定調査委託先コード
+     * @param is認定調査委託先コード is認定調査委託先コード
+     * @param is認定調査員コード is認定調査員コード
+     * @param csvTempTableName CSV一時テーブル名
+     */
+    private NinteiChosaDataOutputBatchMybitisParameter(RString 認定調査委託先コード,
+            RString 認定調査員コード,
+            List<RString> 申請書管理番号リスト,
+            RString 市町村コード,
+            boolean isShinseishoKanriNo,
+            boolean is認定調査委託先コード,
+            boolean is認定調査員コード,
+            boolean is全市町村,
+            RString csvTempTableName,
+            RString 広域保険者市町村コード) {
+        this.ninteichosaItakusakiCode = 認定調査委託先コード;
+        this.ninteiChosainCode = 認定調査員コード;
+        this.shinseishoKanriNoList = 申請書管理番号リスト;
+        this.shichosonCode = 市町村コード;
+        this.isShinseishoKanriNo = isShinseishoKanriNo;
+        this.isNinteichosaItakusakiCode = is認定調査委託先コード;
+        this.isNinteiChosainCode = is認定調査員コード;
+        this.isShichoson = is全市町村;
+        this.csvTempTableName = csvTempTableName;
+        this.isKoikiKanri = true;
+        this.koikiHokenshaShichosonCode = 広域保険者市町村コード;
     }
 
     /**
@@ -111,5 +150,51 @@ public final class NinteiChosaDataOutputBatchMybitisParameter implements IMyBati
                 is認定調査員コード,
                 is全市町村,
                 csvTempTableName);
+    }
+
+    /**
+     * コンストラクタです。
+     *
+     * @param 認定調査委託先コード 認定調査委託先コード
+     * @param 認定調査員コード 認定調査員コード
+     * @param 申請書管理番号リスト 申請書管理番号リスト
+     * @param 市町村コード 市町村コード
+     * @param csvTempTableName CSV一時テーブル名
+     * @param 広域保険者市町村コード
+     * @return ShujiiIkenshoSakuseiMybitisParamter
+     */
+    public static NinteiChosaDataOutputBatchMybitisParameter createSelectByKeyParam(
+            RString 認定調査委託先コード,
+            RString 認定調査員コード,
+            List<RString> 申請書管理番号リスト,
+            RString 市町村コード,
+            RString csvTempTableName,
+            RString 広域保険者市町村コード) {
+        boolean is認定調査委託先コード = false;
+        boolean is認定調査員コード = false;
+        boolean is全市町村 = false;
+        if (!RString.isNullOrEmpty(認定調査委託先コード)) {
+            is認定調査委託先コード = true;
+        }
+        if (!RString.isNullOrEmpty(認定調査委託先コード) && !RString.isNullOrEmpty(認定調査員コード)) {
+            is認定調査員コード = true;
+        }
+        boolean is申請書管理番号フラグ = false;
+        if (申請書管理番号リスト != null && !申請書管理番号リスト.isEmpty()) {
+            is申請書管理番号フラグ = true;
+        }
+        if (RString.isNullOrEmpty(市町村コード)) {
+            is全市町村 = true;
+        }
+        return new NinteiChosaDataOutputBatchMybitisParameter(認定調査委託先コード,
+                認定調査員コード,
+                申請書管理番号リスト,
+                市町村コード,
+                is申請書管理番号フラグ,
+                is認定調査委託先コード,
+                is認定調査員コード,
+                is全市町村,
+                csvTempTableName,
+                広域保険者市町村コード);
     }
 }
