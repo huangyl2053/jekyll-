@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBD-9999-023 wangchao
  */
-public enum NinteichosaKomoku99A {
+public enum NinteichosaKomoku99A implements INinteichosaKomoku {
 
     /**
      * 特記事項番号:1-1 群番号:1 群内順序:1 調査特記事項番号:101 前回基本調査項目コード:001 名称:麻痺等の有無
@@ -358,6 +358,7 @@ public enum NinteichosaKomoku99A {
      *
      * @return 認定調査特記事項マッピングのコード
      */
+    @Override
     public RString get特記事項番号() {
         return 特記事項番号;
     }
@@ -403,6 +404,7 @@ public enum NinteichosaKomoku99A {
      *
      * @return 認定調査特記事項マッピングの名称
      */
+    @Override
     public RString get名称() {
         return 名称;
     }
