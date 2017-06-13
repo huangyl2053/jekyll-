@@ -136,6 +136,7 @@ class TokkiText1A4Builder implements ITokkiText1A4Builder {
             source.tokkiText14 = getイメージ04(entity.get特記事項リスト(), (count / 30) * 15 + 連番_13);
             source.tokkiText15 = getイメージ04(entity.get特記事項リスト(), (count / 30) * 15 + 連番_14);
         }
+        source.shinseishoKanriNo = entity.getTemp_被保険者番号();
         source.識別コード = new ShikibetsuCode(entity.getTemp_保険者番号().substring(0, 5).concat(entity.getTemp_被保険者番号()));
         source.拡張情報 = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.getTemp_申請書管理番号());
         return source;
@@ -171,12 +172,12 @@ class TokkiText1A4Builder implements ITokkiText1A4Builder {
             builder.append(entity.get特記事項リスト().get(index).get特記事項());
             builder.append(System.lineSeparator());
         }
-        source.recordCount = count;
-        if (count == 0) {
-            source.layoutBreakItem = 1;
-        } else {
-            source.layoutBreakItem = 2;
-        }
+//        source.recordCount = count;
+//        if (count == 0) {
+//            source.layoutBreakItem = 1;
+//        } else {
+//            source.layoutBreakItem = 2;
+//        }
         source.tokkiText = builder.toRString();
     }
 
