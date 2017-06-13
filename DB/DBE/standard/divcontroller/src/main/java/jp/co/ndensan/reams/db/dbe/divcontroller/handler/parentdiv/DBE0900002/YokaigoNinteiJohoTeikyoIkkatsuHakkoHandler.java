@@ -100,6 +100,7 @@ public class YokaigoNinteiJohoTeikyoIkkatsuHakkoHandler {
             row.setShujiiDoi(申請.get主治医の同意());
             row.setShinseishoKanriNo(申請.get申請書管理番号());
             row.setSelectable(申請.get被保険者の同意());
+            row.getNinteiShinsakaiKanryoYMD().setValue(申請.get認定審査会完了年月日());
             dataSource.add(row);
         }
         div.getDgShinseiList().setDataSource(dataSource);
