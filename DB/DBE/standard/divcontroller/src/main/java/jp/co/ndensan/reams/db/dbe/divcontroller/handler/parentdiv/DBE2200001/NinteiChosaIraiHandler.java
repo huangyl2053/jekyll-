@@ -71,7 +71,6 @@ public class NinteiChosaIraiHandler {
         RString 最大取得件数上限 = DbBusinessConfig.get(ConfigNameDBU.検索制御_最大取得件数上限, RDate.getNowDate(), SubGyomuCode.DBU介護統計報告);
         div.getTxtSaidaiHyojiKensu().setValue(new Decimal(最大取得件数.toString()));
         div.getTxtSaidaiHyojiKensu().setMaxValue(new Decimal(最大取得件数上限.toString()));
-        div.getCcdHokenshaList().setDisplayNone(!new FourMasterConfig().get管理方法().is構成市町村ごと());
     }
 
     /**

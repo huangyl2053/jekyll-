@@ -30,6 +30,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.JigyoshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
+import jp.co.ndensan.reams.db.dbz.business.config.FourMasterConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteichosaIraiJoho;
@@ -92,7 +93,7 @@ public class NinteiChosaIrai {
     }
 
     private static LasdecCode findLasdecCode(NinteiChosaIraiDiv div) {
-        return div.getCcdHokenshaList().isDisplayNone()
+        return !new FourMasterConfig().get管理方法().is構成市町村ごと()
                 ? LasdecCode.EMPTY
                 : div.getCcdHokenshaList().getSelectedItem().get市町村コード();
     }

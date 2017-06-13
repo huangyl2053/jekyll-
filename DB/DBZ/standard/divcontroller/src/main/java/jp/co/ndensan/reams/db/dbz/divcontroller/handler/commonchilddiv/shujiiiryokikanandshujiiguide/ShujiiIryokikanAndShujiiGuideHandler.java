@@ -18,6 +18,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuide.ShujiiIryokikanAndShujiiGuideDiv.TaishoMode;
+import jp.co.ndensan.reams.uz.uza.log.applog._Logger;
+import jp.co.ndensan.reams.uz.uza.log.applog.gyomu._GyomuLogData;
 import jp.co.ndensan.reams.uz.uza.util.serialization.DataPassingConverter;
 
 /**
@@ -136,6 +138,7 @@ public class ShujiiIryokikanAndShujiiGuideHandler {
         }
         ShujiiIryokikanandshujiiDataPassModel newDataPassModel = new ShujiiIryokikanandshujiiDataPassModel();
         newDataPassModel.set市町村コード(市町村コード);
+        newDataPassModel.set医療機関市町村コード(div.getDgKensakuKekkaIchiran().getClickedItem().getShujiiShichosonCode());
         newDataPassModel.setサブ業務コード(nullToEmpty(div.getHdnDatabaseSubGyomuCode()));
         if (ShujiiIryokikanAndShujiiGuideDiv.TaishoMode.IryoKikanMode.toString().equals(model.toString())) {
             newDataPassModel.set主治医医療機関コード(nullToEmpty(div.getDgKensakuKekkaIchiran().getClickedItem().getIryoKikancode().getValue()));

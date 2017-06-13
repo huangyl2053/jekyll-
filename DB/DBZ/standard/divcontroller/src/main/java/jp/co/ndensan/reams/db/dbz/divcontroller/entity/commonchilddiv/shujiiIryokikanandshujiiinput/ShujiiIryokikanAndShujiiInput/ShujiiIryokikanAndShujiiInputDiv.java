@@ -4,6 +4,7 @@ package jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.shujiiIry
  * このファイルへの変更は、再生成時には損失するため
  * 不正な動作の原因になります。
  */
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
@@ -31,13 +32,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
  * @reamsid_L DBZ-1300-140 chengsanyuan
  */
 public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIryokikanAndShujiiInputDiv {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-13_05-12-42">
+
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-06-01_23-02-42">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+
     @JsonProperty("txtIryoKikanCode")
     private TextBoxCode txtIryoKikanCode;
     @JsonProperty("btnIryokikanGuide")
@@ -72,6 +75,8 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
     private RString hdnSubGyomuModel;
     @JsonProperty("hdnIsJokyo")
     private RString hdnIsJokyo;
+    @JsonProperty("hdnSelectedShichosonCode")
+    private RString hdnSelectedShichosonCode;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -386,6 +391,24 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
     }
 
     /*
+     * gethdnSelectedShichosonCode
+     * @return hdnSelectedShichosonCode
+     */
+    @JsonProperty("hdnSelectedShichosonCode")
+    public RString getHdnSelectedShichosonCode() {
+        return hdnSelectedShichosonCode;
+    }
+
+    /*
+     * sethdnSelectedShichosonCode
+     * @param hdnSelectedShichosonCode hdnSelectedShichosonCode
+     */
+    @JsonProperty("hdnSelectedShichosonCode")
+    public void setHdnSelectedShichosonCode(RString hdnSelectedShichosonCode) {
+        this.hdnSelectedShichosonCode = hdnSelectedShichosonCode;
+    }
+
+    /*
      * [共有子DIVモード]
      */
     @JsonProperty("modes")
@@ -412,7 +435,7 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
             ShoriType[] enumArray = ShoriType.values();
 
             for (ShoriType enumStr : enumArray) {
-                if (str.equals(enumStr.name.toString())) { 
+                if (str.equals(enumStr.name.toString())) {
                     return enumStr;
                 }
             }
@@ -427,11 +450,11 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
     }
 
     public ShoriType getMode_ShoriType() {
-        return (ShoriType) _CommonChildDivModeUtil.getMode( this.modes, ShoriType.class );
+        return (ShoriType) _CommonChildDivModeUtil.getMode(this.modes, ShoriType.class);
     }
 
-    public void setMode_ShoriType( ShoriType value ) {
-        _CommonChildDivModeUtil.setMode( this.modes, ShoriType.class , value );
+    public void setMode_ShoriType(ShoriType value) {
+        _CommonChildDivModeUtil.setMode(this.modes, ShoriType.class, value);
     }
 
     // </editor-fold>
@@ -502,4 +525,10 @@ public class ShujiiIryokikanAndShujiiInputDiv extends Panel implements IShujiiIr
     public void clear() {
         createHandler().clear();
     }
+
+    @Override
+    public RString getSelectedShichosonCode() {
+        return getHdnSelectedShichosonCode() == null ? RString.EMPTY : getHdnSelectedShichosonCode();
+    }
+
 }

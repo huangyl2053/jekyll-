@@ -41,6 +41,11 @@ public interface IShujiiIryokikanAndShujiiInputDiv extends ICommonChildDivBasePr
             RString iryoKikanMeisho, RString shujiiCode, RString shujiiName);
 
     /**
+     * @return 選択中の医療機関・主治医が属する市町村コード. ただし、コードの入力途中においては、一致しないことがあり得る.
+     */
+    RString getSelectedShichosonCode();
+
+    /**
      * 主治医コードを取得します
      *
      * @return RString
@@ -187,7 +192,6 @@ public interface IShujiiIryokikanAndShujiiInputDiv extends ICommonChildDivBasePr
      * @param ButtonDialog btnShujiiGuide
      */
     public void setBtnShujiiGuide(ButtonDialog btnShujiiGuide);
-
 
     /**
      * setHdnShichosonCode
