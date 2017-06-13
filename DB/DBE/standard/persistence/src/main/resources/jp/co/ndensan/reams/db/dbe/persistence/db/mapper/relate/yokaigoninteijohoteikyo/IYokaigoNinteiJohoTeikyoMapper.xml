@@ -705,9 +705,16 @@
         ON DbT7051KoseiShichosonMaster."shoKisaiHokenshaNo"=DbT5101NinteiShinseiJoho."shoKisaiHokenshaNo"
         LEFT JOIN rgdb."DbT5202NinteichosahyoGaikyoChosa" AS DbT5202NinteichosahyoGaikyoChosa
         ON DbT5202NinteichosahyoGaikyoChosa."shinseishoKanriNo"=DbT5101NinteiShinseiJoho."shinseishoKanriNo"
-        AND DbT5202NinteichosahyoGaikyoChosa."ninteichosaRirekiNo" = (SELECT MAX(DbT5202Nintei."ninteichosaRirekiNo")
-        FROM   rgdb."DbT5202NinteichosahyoGaikyoChosa" AS DbT5202Nintei
-        WHERE  DbT5202Nintei."shinseishoKanriNo" = DbT5101NinteiShinseiJoho."shinseishoKanriNo")
+        AND NOT EXISTS	(
+        SELECT
+        *
+        FROM
+        rgdb."DbT5202NinteichosahyoGaikyoChosa" slv
+        WHERE
+        DbT5202NinteichosahyoGaikyoChosa."shinseishoKanriNo" = slv."shinseishoKanriNo"
+        AND DbT5202NinteichosahyoGaikyoChosa."ninteichosaRirekiNo"||DbT5202NinteichosahyoGaikyoChosa."gaikyoChosaTextImageKubun" 
+	<![CDATA[<]]> slv."ninteichosaRirekiNo"||slv."gaikyoChosaTextImageKubun"
+        )
         LEFT JOIN rgdb."DbT5910NinteichosaItakusakiJoho" AS DbT5910NinteichosaItakusakiJoho
         ON DbT5910NinteichosaItakusakiJoho."shichosonCode"=DbT5101NinteiShinseiJoho."shichosonCode"
         AND DbT5910NinteichosaItakusakiJoho."ninteichosaItakusakiCode"=DbT5202NinteichosahyoGaikyoChosa."chosaItakusakiCode"

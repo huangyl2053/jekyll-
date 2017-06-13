@@ -139,15 +139,15 @@ public class TokkiText1ReportSource implements IReportSource {
     public ExpandedInformation 拡張情報;
     @ReportItem(name = "layoutBreakItem", length = 10, order = 999)
     public int layoutBreakItem;
-    @ReportItem(name = "recordCount", length = 10, order = 998)
-    public int recordCount;
+    @ReportItem(name = "shinseishoKanriNo", length = 10, order = 998)
+    public RString shinseishoKanriNo;
     public static final RString LAYOUTBREAKITEM;
     public static final RString TOKKIIMG;
-    public static final RString RECORDCOUNT;
+    public static final RString SHINSEISHOKANRINO;
 
     static {
         LAYOUTBREAKITEM = new RString("layoutBreakItem");
         TOKKIIMG = new RString("tokkiImg");
-        RECORDCOUNT = new RString("recordCount");
+        SHINSEISHOKANRINO = new RString("shinseishoKanriNo");
     }
 }
