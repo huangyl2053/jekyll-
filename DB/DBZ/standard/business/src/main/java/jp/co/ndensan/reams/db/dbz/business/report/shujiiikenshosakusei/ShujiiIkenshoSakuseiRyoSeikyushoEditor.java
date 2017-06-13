@@ -6,13 +6,8 @@
 package jp.co.ndensan.reams.db.dbz.business.report.shujiiikenshosakusei;
 
 import jp.co.ndensan.reams.db.dbz.entity.report.shujiiikenshosakusei.ShujiiIkenshoSakuseiRyoSeikyushoReportSource;
-import jp.co.ndensan.reams.uz.uza.lang.EraType;
-import jp.co.ndensan.reams.uz.uza.lang.FillType;
-import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
-import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.lang.Separator;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
@@ -43,13 +38,7 @@ public class ShujiiIkenshoSakuseiRyoSeikyushoEditor implements IShujiiIkenshoSak
      */
     @Override
     public ShujiiIkenshoSakuseiRyoSeikyushoReportSource edit(ShujiiIkenshoSakuseiRyoSeikyushoReportSource source) {
-        if (item.getGengo() != null) {
-            source.gengo = new RDate(item.getGengo().toString()).wareki()
-                    .eraType(EraType.KANJI)
-                    .firstYear(FirstYear.GAN_NEN)
-                    .separator(Separator.JAPANESE)
-                    .fillType(FillType.BLANK).toDateString();
-        }
+        source.gengo = item.getGengo();
         source.atesakiHokenshaName = item.getAtesakiHokenshaName();
         source.shinkiZaitakuKingaku = new Decimal(item.getShinkiZaitakuKingaku().toString());
         source.shinkiShisetsuKingaku = new Decimal(item.getShinkiShisetsuKingaku().toString());

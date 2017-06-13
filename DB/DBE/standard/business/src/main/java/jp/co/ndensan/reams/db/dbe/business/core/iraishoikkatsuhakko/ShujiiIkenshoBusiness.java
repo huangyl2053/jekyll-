@@ -99,6 +99,10 @@ public class ShujiiIkenshoBusiness {
     private final ShujiiIkenshoTeishutsuIraishoHakkoRelateEntity entity;
     private final ShujiiIkenshoProcessParamter processParamter;
     private final RDate 基準日;
+    private static final RString 半角空欄_2 = new RString("  ");
+    private static final RString 年 = new RString("年");
+    private static final RString 月 = new RString("月");
+    private static final RString 日 = new RString("日");
 
     /**
      * コンストラクタです。
@@ -283,7 +287,20 @@ public class ShujiiIkenshoBusiness {
         RString 作成料印字 = DbBusinessConfig.get(ConfigNameDBE.主治医意見書作成料請求書_作成料_印字有無, RDate.getNowDate(),
                 SubGyomuCode.DBE認定支援, processParamter.getShichosonCode());
         ShujiiIkenshoSakuseiRyoSeikyushoItem item = new ShujiiIkenshoSakuseiRyoSeikyushoItem();
-        item.setGengo(get和暦(processParamter.getHakkobi(), true));
+        RString 和暦 = RString.EMPTY;
+        if (!RString.isNullOrEmpty(processParamter.getHakkobi())) {
+            FlexibleDate flexibleDate = new FlexibleDate(processParamter.getHakkobi());
+            if (processParamter.isHakkobiInjiumu()) {
+                和暦 = flexibleDate.wareki().eraType(EraType.KANJI).firstYear(FirstYear.GAN_NEN).
+                        separator(Separator.JAPANESE).fillType(FillType.BLANK).toDateString();
+            } else {
+                RStringBuilder 発行日 = new RStringBuilder();
+                発行日.append(flexibleDate.wareki().eraType(EraType.KANJI).getEra());
+                発行日.append(半角空欄_2).append(年).append(半角空欄_2).append(月).append(半角空欄_2).append(日);
+                和暦 = 発行日.toRString();
+            }
+        }
+        item.setGengo(和暦);
         item.setAtesakiHokenshaName(entity.get保険者名());
         for (ShujiiIkenshoHoshuTankaEntity 意見書作成料 : 意見書作成料リスト) {
             if (new Code("1").equals(意見書作成料.getZaitakuShisetsuKubun())) {
