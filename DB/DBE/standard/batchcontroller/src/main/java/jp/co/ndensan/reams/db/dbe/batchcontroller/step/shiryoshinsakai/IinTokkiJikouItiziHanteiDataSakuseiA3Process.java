@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.IchijihanteikekkahyoA3Business;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.IchijihanteikekkahyoItemSetteiA3;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.ShinsakaiShiryoContext;
 import jp.co.ndensan.reams.db.dbe.business.report.iintokkitext.IinTokkiTextA3Report;
 import jp.co.ndensan.reams.db.dbe.business.report.jimutokkitext.HanteiKekkaHyoA3ReportFormGroupIndex;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
@@ -66,6 +67,7 @@ public class IinTokkiJikouItiziHanteiDataSakuseiA3Process extends BatchKeyBreakB
     private IShiryoShinsakaiIinMapper mapper;
     private List<ShinsakaiSiryoKyotsuEntity> 共通情報;
     private IchijihanteikekkahyoA3Business item;
+    private ShinsakaiShiryoContext context;
     private int データ件数;
     private int 審査番号;
 
@@ -85,6 +87,7 @@ public class IinTokkiJikouItiziHanteiDataSakuseiA3Process extends BatchKeyBreakB
         共通情報 = mapper.getShinsakaiSiryoKyotsu(myBatisParameter);
         データ件数 = mapper.getTokkiJikouItiziHanteiCount(myBatisParameter);
         審査番号 = 1;
+        context = new ShinsakaiShiryoContext();
     }
 
     @Override
@@ -154,11 +157,11 @@ public class IinTokkiJikouItiziHanteiDataSakuseiA3Process extends BatchKeyBreakB
         List<DbT5304ShujiiIkenshoIkenItemEntity> 前回主治医意見書 = mapper.getZenkaiIkenshoIkenItem(myBatisParameter);
         List<TokkijikoIchiranJohoRelateEntity> 特記情報 = get特記情報(get共通情報(共通情報, entity.getShinseishoKanriNo()));
         IchijihanteikekkahyoA3Entity ichijiHanteiEntity = new IchijihanteikekkahyoItemSetteiA3().set項目(entity,
-                調査票調査項目, 
+                調査票調査項目,
                 前回調査票調査項目,
                 主治医意見書,
                 前回主治医意見書,
-                予防給付サービス利用状況, 
+                予防給付サービス利用状況,
                 介護給付サービス利用状況,
                 サービス状況フラグ,
                 データ件数,
@@ -166,7 +169,8 @@ public class IinTokkiJikouItiziHanteiDataSakuseiA3Process extends BatchKeyBreakB
                 主治医意見書,
                 new RString(paramter.getGogitaiNo()),
                 特記情報,
-                batchWriteA3.getImageFolderPath());
+                batchWriteA3.getImageFolderPath(),
+                context);
         ichijiHanteiEntity.setServiceKubunCode(entity.getServiceKubunCode());
         ichijiHanteiEntity.set審査番号(審査番号);
         item = new IchijihanteikekkahyoA3Business(ichijiHanteiEntity, false);

@@ -14,6 +14,7 @@ import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.Ichijihanteikekk
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuShinsakaishiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.JimuTuikaSiryoBusiness;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.KumiawaseCommonBusiness;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.ShinsakaiShiryoContext;
 import jp.co.ndensan.reams.db.dbe.business.report.iinshinsakaishiryoa3.IinShinsakaishiryoA3Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.core.shinsakai.ShinsakaiOrderKakuteiFlg;
@@ -78,6 +79,7 @@ public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase
     private boolean is審査会対象一覧印刷済み;
     private List<ShinsakaiTaiyosyaJohoEntity> 委員審査会追加資料A3リスト;
     private KumiawaseCommonBusiness kumiawaseCommonBusiness;
+    private ShinsakaiShiryoContext context;
 
     @BatchWriter
     private BatchReportWriter<IinShinsakaishiryoA3ReportSource> batchReportWriter;
@@ -105,6 +107,7 @@ public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase
         is審査会対象一覧印刷済み = false;
         get審査対象者一覧表情報();
         kumiawaseCommonBusiness = new KumiawaseCommonBusiness(shinsakaiIinJohoList, 共通情報, 委員審査会追加資料A3リスト, count);
+        context = new ShinsakaiShiryoContext();
     }
 
     @Override
@@ -234,7 +237,8 @@ public class IinShinsakaiSiryouKumiawaseA3Process extends SimpleBatchProcessBase
                         主治医意見書,
                         new RString(paramter.getGogitaiNo()),
                         特記情報,
-                        batchReportWriter.getImageFolderPath());
+                        batchReportWriter.getImageFolderPath(),
+                        context);
                 return new IchijihanteikekkahyoA3Business(一次判定結果票Entity, false);
             }
         }

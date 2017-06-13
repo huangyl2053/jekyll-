@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.IchijihanteikekkahyoA3Business;
 import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.IchijihanteikekkahyoItemSetteiA3;
+import jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai.ShinsakaiShiryoContext;
 import jp.co.ndensan.reams.db.dbe.business.report.jimutokkitext.HanteiKekkaHyoA3ReportFormGroupIndex;
 import jp.co.ndensan.reams.db.dbe.business.report.jimutokkitext.JimuTokkiTextA3Report;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
@@ -67,6 +68,7 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
     private IJimuShiryoShinsakaiIinMapper mapper;
     private JimuShinsakaiIinJohoMyBatisParameter myBatisParameter;
     private List<ShinsakaiSiryoKyotsuEntity> 共通情報;
+    private ShinsakaiShiryoContext context;
     private int データ件数 = 0;
     private int 審査番号;
     @BatchWriter
@@ -83,6 +85,7 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
         データ件数 = mapper.get事務局一次判定件数(myBatisParameter);
         共通情報 = mapper.get共通情報(myBatisParameter);
         審査番号 = 1;
+        context = new ShinsakaiShiryoContext();
     }
 
     @Override
@@ -132,7 +135,8 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
                 主治医意見書,
                 new RString(myBatisParameter.getGogitaiNo()),
                 特記情報,
-                batchWriteA3.getImageFolderPath());
+                batchWriteA3.getImageFolderPath(),
+                context);
         ichijiHanteiEntity.setServiceKubunCode(entity.getServiceKubunCode());
         ichijiHanteiEntity.set審査番号(審査番号);
         item = new IchijihanteikekkahyoA3Business(ichijiHanteiEntity, true);
@@ -154,12 +158,11 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
         int formGroupIndex = HanteiKekkaHyoA3ReportFormGroupIndex.getFormGroupIndex(null,
                 get特記事項テキストイメージ区分(特記情報),
                 DbBusinessConfig.get(ConfigNameDBE.審査会資料調査特記パターン, RDate.getNowDate(), SubGyomuCode.DBE認定支援));
-        
+
         batchWriteA3 = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517081.getReportId().value())
                 .setStartFormGroup(formGroupIndex)
                 .addBreak(new BreakerCatalog<IchijihanteikekkahyoA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A3))
                 .addBreak(new BreakerCatalog<JimuTokkiTextA3ReportSource>().new SimpleLayoutBreaker(
-
                     JimuTokkiTextA3ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<JimuTokkiTextA3ReportSource> occuredBreak(
@@ -208,7 +211,7 @@ public class JimuItiziHanteiDataSakuseiA3Process extends BatchKeyBreakBase<Itizi
         myBatisParameter.setNinteichosaRirekiNoList(認定調査依頼履歴番号リスト);
         return mapper.get事務局特記情報(myBatisParameter);
     }
-    
+
     private RString get特記事項テキストイメージ区分(List<TokkijikoIchiranJohoRelateEntity> 特記情報List) {
         for (TokkijikoIchiranJohoRelateEntity 特記情報 : 特記情報List) {
             if (TokkijikoTextImageKubun.イメージ.getコード().equals(特記情報.get認定調査票特記事項Entity().getTokkijikoTextImageKubun())) {

@@ -94,6 +94,7 @@ public class IchijihanteikekkahyoItemSetteiA3 {
      * @param 合議体番号 合議体番号
      * @param 特記情報 特記情報
      * @param ファイルパス ファイルパス
+     * @param context context
      * @return 事務局一次判定結果票のEntity
      */
     public IchijihanteikekkahyoA3Entity set項目(ItiziHanteiEntity entity, List<DbT5211NinteichosahyoChosaItemEntity> 調査票調査項目,
@@ -101,7 +102,7 @@ public class IchijihanteikekkahyoItemSetteiA3 {
             List<DbT5304ShujiiIkenshoIkenItemEntity> 前主治医意見書項目情報, List<DbT5207NinteichosahyoServiceJokyoEntity> 予防給付,
             List<DbT5207NinteichosahyoServiceJokyoEntity> 介護給付, DbT5208NinteichosahyoServiceJokyoFlagEntity サービス状況フラグ,
             int データ件数, ShinsakaiSiryoKyotsuEntity 共通情報, List<DbT5304ShujiiIkenshoIkenItemEntity> 主治医意見書項目, RString 合議体番号,
-            List<TokkijikoIchiranJohoRelateEntity> 特記情報, RString ファイルパス) {
+            List<TokkijikoIchiranJohoRelateEntity> 特記情報, RString ファイルパス, ShinsakaiShiryoContext context) {
         RDate 日期 = RDate.getNowDate();
         if (印字する.equals(DbBusinessConfig.get(ConfigNameDBE.今回基本調査項目結果の正常選択肢印刷有無, 日期, SubGyomuCode.DBE認定支援))) {
             is今回結果正常値印字 = true;
@@ -127,6 +128,9 @@ public class IchijihanteikekkahyoItemSetteiA3 {
         if (共通情報.isJimukyoku()) {
             項目.set概況特記のテキスト(ObjectUtil.defaultIfNull(共通情報.getTokki(), RString.EMPTY));
             項目.set概況特記のイメージ(DBEImageUtil.getOriginalImageFilePath(path, IMAGEFILENAME_概況調査特記));
+        } else if (context.prints委員用概況特記()) {
+            項目.set概況特記のテキスト(ObjectUtil.defaultIfNull(共通情報.getMaskedTokki(), RString.EMPTY));
+            項目.set概況特記のイメージ(DBEImageUtil.getMaskOrOriginalImageFilePath(path, IMAGEFILENAME_概況調査特記));
         } else {
             項目.set概況特記のテキスト(RString.EMPTY);
             項目.set概況特記のイメージ(RString.EMPTY);
