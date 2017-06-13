@@ -12,7 +12,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  */
 public enum NinteichosaKomokuDummy implements INinteichosaKomoku {
 
-    概況特記("999", "概況特記"),
+    概況特記("999", "その他"),
     EMPTY("", "");
 
     private final RString theTokkiJikoNo;
