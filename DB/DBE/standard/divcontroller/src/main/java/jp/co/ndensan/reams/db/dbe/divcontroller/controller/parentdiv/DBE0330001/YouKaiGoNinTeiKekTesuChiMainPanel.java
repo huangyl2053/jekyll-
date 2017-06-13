@@ -17,12 +17,14 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE0330001.dgRe
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE0330001.MainPanelHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.youkaigoninteikekktesuchi.YouKaiGoNinTeiKekTesuChiFinder;
 import jp.co.ndensan.reams.db.dbx.business.core.hokenshalist.HokenshaSummary;
+import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.HokenshaDDLPattem;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbz.business.config.FourMasterConfig;
 import jp.co.ndensan.reams.db.dbz.service.core.shishosecurityjoho.ShishoSecurityJoho;
 import jp.co.ndensan.reams.ur.urz.business.UrControlDataFactory;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
@@ -47,6 +49,7 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
     private static final RString 未出力のみフラグ = new RString("1");
     private static final RString 未出力のみ以外 = new RString("2");
     private static final RString 希望のみ = new RString("key0");
+    private static final RString 四マスタ管理方法_構成市町村 = new RString("1");
 
     /**
      * 要介護認定結果通知（主治医）の初期処理を表示します。
@@ -281,7 +284,14 @@ public class YouKaiGoNinTeiKekTesuChiMainPanel {
         }
         System.out.println(市町村セキュリティ情報.get市町村情報().get市町村識別ID());
         param.setUseShoKisaiHokenshaNo(!市町村セキュリティ情報.get市町村情報().get市町村識別ID().equals(new RString("00")));
-        param.setShichosonCode(div.getDoctorSelectionPanel().getDgDoctorSelection().getActiveRow().getShichosonCode());
+        RString 市町村コード;
+        RString 四マスタ管理方法 = new FourMasterConfig().get四マスタ管理方法();
+        if (!四マスタ管理方法_構成市町村.equals(四マスタ管理方法)) {
+            市町村コード = DbBusinessConfig.get(ConfigNameDBE.広域保険者市町村コード, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        } else {
+            市町村コード = div.getDoctorSelectionPanel().getDgDoctorSelection().getActiveRow().getShichosonCode();
+        }
+        param.setShichosonCode(市町村コード);
         param.setShishoCode(支所コード);
         param.setShoKisaiHokenshaNo(市町村セキュリティ情報.get市町村情報().get証記載保険者番号().value());
         param.setBunshoNo(div.getCcdBunshoNo().get文書番号());
