@@ -20,6 +20,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
 import jp.co.ndensan.reams.db.dbx.definition.core.koseishichoson.ShichosonShikibetsuID;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.definition.message.DbxErrorMessages;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
 import jp.co.ndensan.reams.db.dbz.business.config.FourMasterConfig;
@@ -36,7 +37,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.FileData;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
-import jp.co.ndensan.reams.uz.uza.util.di.InstanceProvider;
+import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 
 /**
  * 要介護認定申請連携データ取込のコントローラです。
@@ -64,6 +65,7 @@ public class RenkeiDataTorikomi {
     public ResponseData<RenkeiDataTorikomiDiv> onLoad(RenkeiDataTorikomiDiv div) {
         RDate 基準日 = RDate.getNowDate();
         RString 市町村コード = find市町村コード();
+        ViewStateHolder.put(ViewStateKeys.市町村コード, 市町村コード);
         try {
             path = DbBusinessConfig.get(ConfigNameDBE.認定申請連携データ出力先, RDate.getNowDate(), SubGyomuCode.DBE認定支援, 市町村コード);
         } catch (SystemException e) {
@@ -146,7 +148,7 @@ public class RenkeiDataTorikomi {
         RStringBuilder buider = new RStringBuilder();
         if (RString.isNullOrEmpty(error) && RString.isNullOrEmpty(不正ファイル名)) {
             for (FileData file : files) {
-                getHandler(div).upLoadFile(file, buider, 市町村コード);
+                getHandler(div).upLoadFile(file, buider, ViewStateHolder.get(ViewStateKeys.市町村コード, RString.class));
             }
         }
         boolean flag = false;
@@ -179,7 +181,7 @@ public class RenkeiDataTorikomi {
      * @return ResponseData<ShinsakaiIinWaritsukeDiv>
      */
     public ResponseData<RenkeiDataTorikomiDiv> onClick_SetItiran(RenkeiDataTorikomiDiv div) {
-        getHandler(div).getFileData(市町村コード);
+        getHandler(div).getFileData(ViewStateHolder.get(ViewStateKeys.市町村コード, RString.class));
         return ResponseData.of(div).setState(DBE1920001StateName.一覧表示);
     }
 
@@ -277,6 +279,7 @@ public class RenkeiDataTorikomi {
     public ResponseData<RenkeiDataTorikomiDiv> onChange_radHokaisei(RenkeiDataTorikomiDiv div) {
         RDate 基準日 = RDate.getNowDate();
         RString 市町村コード = find市町村コード();
+        ViewStateHolder.put(ViewStateKeys.市町村コード, 市町村コード);
         if (div.getRenkeiDataTorikomiBatchParameter().getRadHoKaisei().getSelectedKey().equals(法改正前)) {
             要介護認定申請連携データ取込みファイル名 = DbBusinessConfig.get(ConfigNameDBE.要介護認定申請連携データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援, 市町村コード);
             認定調査委託先データ取込みファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定調査委託先データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援, 市町村コード);
