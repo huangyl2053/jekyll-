@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbx.definition.core.koseishichoson.ShichosonShikib
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.message.DbxErrorMessages;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurity.ShichosonSecurityJohoFinder;
+import jp.co.ndensan.reams.db.dbz.business.config.FourMasterConfig;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -53,8 +54,6 @@ public class RenkeiDataTorikomi {
     private static RString 主治医データ取込みファイル名;
     private static RString path;
     private static boolean 前回認定申請情報ファイルチェックフラグ;
-    private static final int なし = 0;
-    private static RString 市町村コード;
 
     /**
      * 初期化の設定します。
@@ -64,14 +63,7 @@ public class RenkeiDataTorikomi {
      */
     public ResponseData<RenkeiDataTorikomiDiv> onLoad(RenkeiDataTorikomiDiv div) {
         RDate 基準日 = RDate.getNowDate();
-        市町村コード = RString.EMPTY;
-        ShichosonSecurityJohoFinder finder = InstanceProvider.create(ShichosonSecurityJohoFinder.class);
-        ShichosonSecurityJoho 市町村セキュリティ情報 = finder.getShichosonSecurityJoho(GyomuBunrui.介護認定);
-        if (市町村セキュリティ情報 != null) {
-            if (!市町村セキュリティ情報.get市町村情報().get市町村識別ID().equals(new ShichosonShikibetsuID("00"))) {
-                市町村コード = 市町村セキュリティ情報.get市町村情報().get市町村コード().value();
-            }
-        }
+        RString 市町村コード = find市町村コード();
         try {
             path = DbBusinessConfig.get(ConfigNameDBE.認定申請連携データ出力先, RDate.getNowDate(), SubGyomuCode.DBE認定支援, 市町村コード);
         } catch (SystemException e) {
@@ -106,6 +98,20 @@ public class RenkeiDataTorikomi {
             row.setSelectable(Boolean.FALSE);
         }
         return ResponseData.of(div).setState(DBE1920001StateName.初期表示);
+    }
+
+    private static RString find市町村コード() {
+        if (!new FourMasterConfig().get管理方法().is構成市町村ごと()) {
+            return DbBusinessConfig.get(ConfigNameDBE.広域保険者市町村コード, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
+        }
+        ShichosonSecurityJoho 市町村セキュリティ情報 = ShichosonSecurityJohoFinder.createInstance()
+                .getShichosonSecurityJoho(GyomuBunrui.介護認定);
+        if (市町村セキュリティ情報 != null) {
+            if (!市町村セキュリティ情報.get市町村情報().get市町村識別ID().equals(new ShichosonShikibetsuID("00"))) {
+                return 市町村セキュリティ情報.get市町村情報().get市町村コード().value();
+            }
+        }
+        return RString.EMPTY;
     }
 
     /**
@@ -270,14 +276,7 @@ public class RenkeiDataTorikomi {
      */
     public ResponseData<RenkeiDataTorikomiDiv> onChange_radHokaisei(RenkeiDataTorikomiDiv div) {
         RDate 基準日 = RDate.getNowDate();
-        市町村コード = RString.EMPTY;
-        ShichosonSecurityJohoFinder finder = InstanceProvider.create(ShichosonSecurityJohoFinder.class);
-        ShichosonSecurityJoho 市町村セキュリティ情報 = finder.getShichosonSecurityJoho(GyomuBunrui.介護認定);
-        if (市町村セキュリティ情報 != null) {
-            if (!市町村セキュリティ情報.get市町村情報().get市町村識別ID().equals(new ShichosonShikibetsuID("00"))) {
-                市町村コード = 市町村セキュリティ情報.get市町村情報().get市町村コード().value();
-            }
-        }
+        RString 市町村コード = find市町村コード();
         if (div.getRenkeiDataTorikomiBatchParameter().getRadHoKaisei().getSelectedKey().equals(法改正前)) {
             要介護認定申請連携データ取込みファイル名 = DbBusinessConfig.get(ConfigNameDBE.要介護認定申請連携データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援, 市町村コード);
             認定調査委託先データ取込みファイル名 = DbBusinessConfig.get(ConfigNameDBE.認定調査委託先データ取込みファイル名, 基準日, SubGyomuCode.DBE認定支援, 市町村コード);
