@@ -79,7 +79,7 @@ public class HanteiKekkaIchiranProcess extends BatchProcessBase<HanteiKekkaIchir
         RString 導入形態コード = shichosonSecurityJoho.get導入形態コード().value();
         if (DonyuKeitaiCode.認定広域.getCode().equals(導入形態コード)) {
             RString 市町村識別ID = shichosonSecurityJoho.get市町村情報().get市町村識別ID();
-            if (広域保険者ID.equals(市町村識別ID)) {
+            if (!広域保険者ID.equals(市町村識別ID)) {
                 processParameter.setShoKisaiHokenshaNo(shichosonSecurityJoho.get市町村情報().get証記載保険者番号().value());
             }
             出力対象 = DbBusinessConfig.get(ConfigNameDBE.広域連合名称, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
