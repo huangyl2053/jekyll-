@@ -5,6 +5,7 @@
  */
 package jp.co.ndensan.reams.db.dbe.business.report.hanteikekkakagami;
 
+import jp.co.ndensan.reams.db.dbe.business.core.shucho.Shuchos;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkakagami.HanteikekkaKagamiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.hanteikekkakagami.HanteikekkaKagamiReportSource;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
@@ -26,15 +27,18 @@ import jp.co.ndensan.reams.uz.uza.lang.Separator;
 public class HanteikekkaKagamiEditor implements IHanteikekkaKagamiEditor {
 
     private final HanteikekkaKagamiEntity item;
+    private final Shuchos shuchos;
     private final RString 名称付与 = new RString("様");
 
     /**
      * インスタンスを生成します。
      *
      * @param item {@link HanteikekkaKagamiEntity}
+     * @param shuchos 構成市町村の全首長
      */
-    protected HanteikekkaKagamiEditor(HanteikekkaKagamiEntity item) {
+    protected HanteikekkaKagamiEditor(HanteikekkaKagamiEntity item, Shuchos shuchos) {
         this.item = item;
+        this.shuchos = shuchos;
     }
 
     @Override
@@ -48,7 +52,7 @@ public class HanteikekkaKagamiEditor implements IHanteikekkaKagamiEditor {
                     .firstYear(FirstYear.GAN_NEN)
                     .separator(Separator.JAPANESE)
                     .fillType(FillType.BLANK).toDateString();
-            source.shimeiText = ZanteiAtenaText.toValue(item.getShoKisaiHokenshaNo().value()).首長宛名文字列;
+            source.shimeiText = this.shuchos.getNameBy証記載保険者番号(item.getShoKisaiHokenshaNo().value());
             source.meishoFuyo = 名称付与;
             source.shinsakaiKaisaiNo = item.getShinsakaiKaisaiNo();
             source.tsuchibun1 = item.getTsuchibun1();
@@ -74,58 +78,4 @@ public class HanteikekkaKagamiEditor implements IHanteikekkaKagamiEditor {
         }
     }
 
-    /**
-     * TODO 構成市町村の首長名等を管理する方法を検討中であるため、
-     * 20161228現在は北信広域連合向けの暫定対応として当列挙型により首長の宛名を管理する。
-     */
-    public enum ZanteiAtenaText {
-
-        中野市長(new RString("202119"), new RString("中野市長　池田　茂")),
-        飯山市長(new RString("202135"), new RString("飯山市長　足立　正則")),
-        山ノ内町長(new RString("205617"), new RString("山ノ内町長　竹節　義孝")),
-        木島平村長(new RString("205625"), new RString("木島平村長　日䑓　正博")),
-        野沢温泉村長(new RString("205633"), new RString("野沢温泉村長　富井　俊雄")),
-        栄村長(new RString("206029"), new RString("栄村長　森川　浩市"));
-        private final RString 証記載保険者番号;
-        private final RString 首長宛名文字列;
-
-        private ZanteiAtenaText(RString 証記載保険者番号, RString 首長宛名文字列) {
-            this.証記載保険者番号 = 証記載保険者番号;
-            this.首長宛名文字列 = 首長宛名文字列;
-        }
-
-        /**
-         * 証記載保険者番号を返します。
-         *
-         * @return 証記載保険者番号
-         */
-        public RString get証記載保険者番号() {
-            return 証記載保険者番号;
-        }
-
-        /**
-         * 首長宛名文字列を返します。
-         *
-         * @return 首長宛名文字列
-         */
-        public RString get首長宛名文字列() {
-            return 首長宛名文字列;
-        }
-
-        /**
-         * 証記載保険者番号のコードと一致する内容を探します。
-         *
-         * @param 証記載保険者番号 証記載保険者番号
-         * @return 構成市町村の首長名
-         */
-        public static ZanteiAtenaText toValue(RString 証記載保険者番号) {
-
-            for (ZanteiAtenaText zanteiAtenaText : ZanteiAtenaText.values()) {
-                if (zanteiAtenaText.証記載保険者番号.equals(証記載保険者番号)) {
-                    return zanteiAtenaText;
-                }
-            }
-            throw new IllegalArgumentException(UrSystemErrorMessages.変換不可.getReplacedMessage("証記載保険者番号"));
-        }
-    }
 }
