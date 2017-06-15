@@ -19,7 +19,7 @@
             <goal>versions:set</goal>
         </goals>
         <properties>
-            <newVersion>1.18.3-SNAPSHOT</newVersion>
+            <newVersion>1.18.3</newVersion>
         </properties>
     </action>
 </actions>
