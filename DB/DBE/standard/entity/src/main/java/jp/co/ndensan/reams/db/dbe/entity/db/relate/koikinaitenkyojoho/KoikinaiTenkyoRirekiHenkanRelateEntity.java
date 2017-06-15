@@ -57,4 +57,5 @@ public class KoikinaiTenkyoRirekiHenkanRelateEntity implements Serializable {
     private RString shinsakaiKaisaiNo;
     private FlexibleDate shinsakaiKaisaiYMD;
     private FlexibleDate shinsakaiKaisaiYoteiYMD;
+    private int totalCount;
 }

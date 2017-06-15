@@ -12,6 +12,9 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1720001.Koik
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1720001.dgShinseishaIchiran_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBU;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
+import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.HokenshaDDLPattem;
+import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
@@ -22,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.KeyValueDataSource;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 画面設計_DBE1720001_広域内転居Handlerクラスです
@@ -68,10 +72,10 @@ public class KoikinaiTenkyoRirekiHenkanHandler {
         div.getTxtHihokenshaNumber().clearValue();
         div.getTxtHihokenshaNameJyouken().clearValue();
         div.getChkMinashiFlag().setSelectedItemsByKey(isselect);
-        div.getTxtNinteiShinseiDateFrom().clearValue();
-        div.getTxtNinteiShinseiDateTo().clearValue();
-        div.getTxtBirthDateFrom().clearValue();
-        div.getTxtBirthDateTo().clearValue();
+        div.getTxtNinteiShinseiDateRange().clearFromValue();
+        div.getTxtNinteiShinseiDateRange().clearToValue();
+        div.getTxtBirthDateRange().clearFromValue();
+        div.getTxtBirthDateRange().clearToValue();
         div.getDdlHihokenshaNameMatchType().setSelectedIndex(DROPDOWNLIST_BLANK);
         div.getDdlShinseijiShinseiKubun().setSelectedIndex(DROPDOWNLIST_BLANK);
         div.getChkSeibetsu().setSelectedItemsByKey(isselect);
@@ -85,9 +89,9 @@ public class KoikinaiTenkyoRirekiHenkanHandler {
      *
      * @param shinseisyaList 申請者一覧情報List
      */
-    public void setShinseisyaitiran(List<KoikinaiTenkyoRirekiHenkan> shinseisyaList) {
+    public void setShinseisyaitiran(SearchResult<KoikinaiTenkyoRirekiHenkan> shinseisyaList) {
         List<dgShinseishaIchiran_Row> dataGridList = new ArrayList<>();
-        for (KoikinaiTenkyoRirekiHenkan shinseisya : shinseisyaList) {
+        for (KoikinaiTenkyoRirekiHenkan shinseisya : shinseisyaList.records()) {
             dataGridList.add(creatDgShinseishaIchiranRow(
                     RString.EMPTY,
                     null == shinseisya.get申請書管理番号() ? RString.EMPTY : shinseisya.get申請書管理番号().getColumnValue(),
@@ -120,6 +124,8 @@ public class KoikinaiTenkyoRirekiHenkanHandler {
         }
         div.getShinseishaIchiran().getDgShinseishaIchiran().getDataSource().clear();
         div.getShinseishaIchiran().getDgShinseishaIchiran().setDataSource(dataGridList);
+        div.getShinseishaIchiran().getDgShinseishaIchiran().getGridSetting().setLimitRowCount(div.getTextBoxNum().getValue().intValue());
+        div.getShinseishaIchiran().getDgShinseishaIchiran().getGridSetting().setSelectedRowCount(shinseisyaList.totalCount());
     }
 
     /**
@@ -128,7 +134,7 @@ public class KoikinaiTenkyoRirekiHenkanHandler {
      * @param list List<KeyValueDataSource>
      */
     public void onClick_btnSentaku(List<KeyValueDataSource> list) {
-        div.getDdlShokisaiHokenshaNoSaki().getDataSource().clear();
+        div.getDdlHokenshaList().loadHokenshaList(GyomuBunrui.介護認定, HokenshaDDLPattem.全市町村以外);
         dgShinseishaIchiran_Row row = div.getDgShinseishaIchiran().getActiveRow();
         div.getKoikinaiTenkyoTenkyomae().getTxtShokisaiHokenshaNo().setValue(row.getShoKisaiHokenshaNo());
         div.getTxtShokisaiHokensha().setValue(row.getShokisaiHokensha());
@@ -139,16 +145,11 @@ public class KoikinaiTenkyoRirekiHenkanHandler {
         if (row.getBirthYMD() != null && !row.getBirthYMD().isEmpty()) {
             div.getTxtBirthYMD().setValue(new RDate(row.getBirthYMD().toString()));
         }
-        div.getTxtAge().setValue(row.getAge());
+        div.getTxtAge().setValue(row.getAge().getText());
         div.getTxtTelNo().setValue(row.getTelNo());
         div.getTxtYubinNo().setValue(row.getYubinNo());
         setSentaku(row);
-        List<KeyValueDataSource> shokisaihokensha = new ArrayList<>();
-        shokisaihokensha.add(new KeyValueDataSource(RString.EMPTY, row.getShoKisaiHokenshaNo()));
-        shokisaihokensha.addAll(list);
-        div.getDdlShokisaiHokenshaNoSaki().getDataSource().clear();
-        div.getDdlShokisaiHokenshaNoSaki().getDataSource().addAll(shokisaihokensha);
-        div.getTxtShokisaiHokenshaSaki().setValue(row.getShokisaiHokensha());
+        div.getDdlHokenshaList().setSelectedShoKisaiHokenshaNoIfExist(new ShoKisaiHokenshaNo(row.getShoKisaiHokenshaNo()));
     }
 
     private void setSentaku(dgShinseishaIchiran_Row row) {
@@ -178,13 +179,10 @@ public class KoikinaiTenkyoRirekiHenkanHandler {
      */
     public void onClick_btnTouroku() {
         dgShinseishaIchiran_Row row = div.getDgShinseishaIchiran().getActiveRow();
-        if (!div.getTxtShokisaiHokenshaNo().getValue().equals(div.getKoikinaiTenkyoTenkyosaki().getDdlShokisaiHokenshaNoSaki().getSelectedValue())) {
+        if (!div.getTxtShokisaiHokenshaNo().getValue().equals(div.getDdlHokenshaList().getSelectedItem().get証記載保険者番号().getColumnValue())) {
             row.setColumnState(new RString("更新"));
-            List<KeyValueDataSource> datasource = div.getKoikinaiTenkyoTenkyosaki().getDdlShokisaiHokenshaNoSaki().getDataSource();
-            int index = div.getKoikinaiTenkyoTenkyosaki().getDdlShokisaiHokenshaNoSaki().getSelectedIndex();
-            int position = datasource.get(index).getValue().indexOf(RString.HALF_SPACE);
-            row.setShoKisaiHokenshaNo(datasource.get(index).getKey());
-            row.setShokisaiHokensha(datasource.get(index).getValue().substring(position + 1));
+            row.setShoKisaiHokenshaNo(div.getDdlHokenshaList().getSelectedItem().get証記載保険者番号().getColumnValue());
+            row.setShokisaiHokensha(div.getDdlHokenshaList().getSelectedItem().get市町村名称());
         }
     }
 
@@ -271,7 +269,7 @@ public class KoikinaiTenkyoRirekiHenkanHandler {
         row.setHihokenshaName(hihokenshaName);
         row.setSex(sex);
         row.setBirthYMD(dateFormat(new FlexibleDate(birthYMD)));
-        row.setAge(age);
+        row.getAge().setValue(new Decimal(Integer.parseInt(age.toString())));
         row.setJusho(jusho);
         row.setYubinNo(yubinNo);
         row.setTelNo(telNo);

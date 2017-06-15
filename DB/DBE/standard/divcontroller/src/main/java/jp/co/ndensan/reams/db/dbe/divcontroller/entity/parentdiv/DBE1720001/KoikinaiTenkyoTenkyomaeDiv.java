@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KoikinaiTenkyoTenkyomaeDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -29,6 +29,8 @@ public class KoikinaiTenkyoTenkyomaeDiv extends Panel {
     private TextBox txtHihokenshaName;
     @JsonProperty("txtHihokenshaNo")
     private TextBox txtHihokenshaNo;
+    @JsonProperty("txtYubinNo")
+    private TextBox txtYubinNo;
     @JsonProperty("txtJusho")
     private TextBox txtJusho;
     @JsonProperty("txtSex")
@@ -39,8 +41,6 @@ public class KoikinaiTenkyoTenkyomaeDiv extends Panel {
     private TextBox txtAge;
     @JsonProperty("txtTelNo")
     private TextBox txtTelNo;
-    @JsonProperty("txtYubinNo")
-    private TextBox txtYubinNo;
     @JsonProperty("txtNijiHanteiKekka")
     private TextBox txtNijiHanteiKekka;
     @JsonProperty("txtNijiHanteibi")
@@ -141,6 +141,24 @@ public class KoikinaiTenkyoTenkyomaeDiv extends Panel {
     }
 
     /*
+     * gettxtYubinNo
+     * @return txtYubinNo
+     */
+    @JsonProperty("txtYubinNo")
+    public TextBox getTxtYubinNo() {
+        return txtYubinNo;
+    }
+
+    /*
+     * settxtYubinNo
+     * @param txtYubinNo txtYubinNo
+     */
+    @JsonProperty("txtYubinNo")
+    public void setTxtYubinNo(TextBox txtYubinNo) {
+        this.txtYubinNo = txtYubinNo;
+    }
+
+    /*
      * gettxtJusho
      * @return txtJusho
      */
@@ -228,24 +246,6 @@ public class KoikinaiTenkyoTenkyomaeDiv extends Panel {
     @JsonProperty("txtTelNo")
     public void setTxtTelNo(TextBox txtTelNo) {
         this.txtTelNo = txtTelNo;
-    }
-
-    /*
-     * gettxtYubinNo
-     * @return txtYubinNo
-     */
-    @JsonProperty("txtYubinNo")
-    public TextBox getTxtYubinNo() {
-        return txtYubinNo;
-    }
-
-    /*
-     * settxtYubinNo
-     * @param txtYubinNo txtYubinNo
-     */
-    @JsonProperty("txtYubinNo")
-    public void setTxtYubinNo(TextBox txtYubinNo) {
-        this.txtYubinNo = txtYubinNo;
     }
 
     /*

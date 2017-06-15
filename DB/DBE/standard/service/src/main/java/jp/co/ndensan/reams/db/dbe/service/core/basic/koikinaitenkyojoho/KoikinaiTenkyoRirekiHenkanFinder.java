@@ -95,8 +95,14 @@ public class KoikinaiTenkyoRirekiHenkanFinder {
             ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.getShinseishoKanriNo().value());
             accessLog.store(shoKisaiHokenshaNo, entity.getHihokenshaNo(), expandedInfo);
         }
+        int totalcount;
+        if (relateEntity.isEmpty()) {
+            totalcount = 0;
+        } else {
+            totalcount = relateEntity.get(0).getTotalCount();
+        }
         accessLog.flushBy(AccessLogType.照会);
-        return SearchResult.of(申請者一覧情報List, 0, false);
+        return SearchResult.of(申請者一覧情報List, totalcount, Integer.parseInt(検索条件.get最大表示件数().toString()) < totalcount);
     }
 
     /**

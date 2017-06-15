@@ -7,7 +7,6 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1720001;
 
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1720001.KoikinaiTenkyoRirekiHenkanDiv;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.message.IMessageGettable;
 import jp.co.ndensan.reams.uz.uza.message.IValidationMessage;
 import jp.co.ndensan.reams.uz.uza.message.Message;
@@ -33,34 +32,13 @@ public class KoikinaiTenkyoRirekiValidationHandler {
     }
 
     /**
-     * 認定申請日_終了日が開始日以前チェックです
-     *
-     * @param validPairs ValidationMessageControlPairs
-     * @return ValidationMessageControlPairs
-     */
-    public ValidationMessageControlPairs 認定申請日範囲チェック(ValidationMessageControlPairs validPairs) {
-        FlexibleDate shinnseikafrom = div.getTxtNinteiShinseiDateFrom().getValue();
-        FlexibleDate shinnseikato = div.getTxtNinteiShinseiDateTo().getValue();
-        if (shinnseikafrom.isEmpty()) {
-            shinnseikafrom = FlexibleDate.MIN;
-        }
-        if (shinnseikato.isEmpty()) {
-            shinnseikato = FlexibleDate.MAX;
-        }
-        if (shinnseikato.isBefore(shinnseikafrom)) {
-            validPairs.add(new ValidationMessageControlPair(KoikinaiTenkyoRirekiMessages.認定申請日範囲チェック));
-        }
-        return validPairs;
-    }
-
-    /**
      * 証記載保険者番号チェックです
      *
      * @param validPairs ValidationMessageControlPairs
      * @return ValidationMessageControlPairs
      */
     public ValidationMessageControlPairs 証記載保険者番号チェック(ValidationMessageControlPairs validPairs) {
-        if (div.getTxtShokisaiHokenshaNo().getValue().equals(div.getKoikinaiTenkyoTenkyosaki().getDdlShokisaiHokenshaNoSaki().getSelectedValue())) {
+        if (div.getTxtShokisaiHokenshaNo().getValue().equals(div.getDdlHokenshaList().getSelectedItem().get証記載保険者番号().getColumnValue())) {
             validPairs.add(new ValidationMessageControlPair(KoikinaiTenkyoRirekiMessages.証記載保険者番号チェック));
         }
         return validPairs;
@@ -68,8 +46,7 @@ public class KoikinaiTenkyoRirekiValidationHandler {
 
     private static enum KoikinaiTenkyoRirekiMessages implements IValidationMessage {
 
-        証記載保険者番号チェック(UrErrorMessages.更新不可, "（転居先）証記載保険者番号"),
-        認定申請日範囲チェック(UrErrorMessages.終了日が開始日以前);
+        証記載保険者番号チェック(UrErrorMessages.更新不可, "（転居先）証記載保険者番号");
         private final Message message;
 
         private KoikinaiTenkyoRirekiMessages(IMessageGettable message, String... replacements) {

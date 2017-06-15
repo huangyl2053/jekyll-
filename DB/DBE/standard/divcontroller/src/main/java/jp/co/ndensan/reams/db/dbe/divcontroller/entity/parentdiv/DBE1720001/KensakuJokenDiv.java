@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KensakuJokenDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -22,7 +22,7 @@ public class KensakuJokenDiv extends Panel {
      * private + コントロール名 + フィールド名 の文字列を作成
      */
     @JsonProperty("txtHihokenshaNumber")
-    private TextBox txtHihokenshaNumber;
+    private TextBoxCode txtHihokenshaNumber;
     @JsonProperty("spaceName")
     private HorizontalLine spaceName;
     @JsonProperty("txtHihokenshaNameJyouken")
@@ -31,18 +31,10 @@ public class KensakuJokenDiv extends Panel {
     private DropDownList ddlHihokenshaNameMatchType;
     @JsonProperty("chkMinashiFlag")
     private CheckBoxList chkMinashiFlag;
-    @JsonProperty("txtNinteiShinseiDateFrom")
-    private TextBoxFlexibleDate txtNinteiShinseiDateFrom;
-    @JsonProperty("lblNinteiShinseiDate")
-    private Label lblNinteiShinseiDate;
-    @JsonProperty("txtNinteiShinseiDateTo")
-    private TextBoxFlexibleDate txtNinteiShinseiDateTo;
-    @JsonProperty("txtBirthDateFrom")
-    private TextBoxFlexibleDate txtBirthDateFrom;
-    @JsonProperty("lblBirthDate")
-    private Label lblBirthDate;
-    @JsonProperty("txtBirthDateTo")
-    private TextBoxFlexibleDate txtBirthDateTo;
+    @JsonProperty("txtNinteiShinseiDateRange")
+    private TextBoxDateRange txtNinteiShinseiDateRange;
+    @JsonProperty("txtBirthDateRange")
+    private TextBoxDateRange txtBirthDateRange;
     @JsonProperty("ddlShinseijiShinseiKubun")
     private DropDownList ddlShinseijiShinseiKubun;
     @JsonProperty("chkSeibetsu")
@@ -65,7 +57,7 @@ public class KensakuJokenDiv extends Panel {
      * @return txtHihokenshaNumber
      */
     @JsonProperty("txtHihokenshaNumber")
-    public TextBox getTxtHihokenshaNumber() {
+    public TextBoxCode getTxtHihokenshaNumber() {
         return txtHihokenshaNumber;
     }
 
@@ -74,7 +66,7 @@ public class KensakuJokenDiv extends Panel {
      * @param txtHihokenshaNumber txtHihokenshaNumber
      */
     @JsonProperty("txtHihokenshaNumber")
-    public void setTxtHihokenshaNumber(TextBox txtHihokenshaNumber) {
+    public void setTxtHihokenshaNumber(TextBoxCode txtHihokenshaNumber) {
         this.txtHihokenshaNumber = txtHihokenshaNumber;
     }
 
@@ -151,111 +143,39 @@ public class KensakuJokenDiv extends Panel {
     }
 
     /*
-     * gettxtNinteiShinseiDateFrom
-     * @return txtNinteiShinseiDateFrom
+     * gettxtNinteiShinseiDateRange
+     * @return txtNinteiShinseiDateRange
      */
-    @JsonProperty("txtNinteiShinseiDateFrom")
-    public TextBoxFlexibleDate getTxtNinteiShinseiDateFrom() {
-        return txtNinteiShinseiDateFrom;
+    @JsonProperty("txtNinteiShinseiDateRange")
+    public TextBoxDateRange getTxtNinteiShinseiDateRange() {
+        return txtNinteiShinseiDateRange;
     }
 
     /*
-     * settxtNinteiShinseiDateFrom
-     * @param txtNinteiShinseiDateFrom txtNinteiShinseiDateFrom
+     * settxtNinteiShinseiDateRange
+     * @param txtNinteiShinseiDateRange txtNinteiShinseiDateRange
      */
-    @JsonProperty("txtNinteiShinseiDateFrom")
-    public void setTxtNinteiShinseiDateFrom(TextBoxFlexibleDate txtNinteiShinseiDateFrom) {
-        this.txtNinteiShinseiDateFrom = txtNinteiShinseiDateFrom;
+    @JsonProperty("txtNinteiShinseiDateRange")
+    public void setTxtNinteiShinseiDateRange(TextBoxDateRange txtNinteiShinseiDateRange) {
+        this.txtNinteiShinseiDateRange = txtNinteiShinseiDateRange;
     }
 
     /*
-     * getlblNinteiShinseiDate
-     * @return lblNinteiShinseiDate
+     * gettxtBirthDateRange
+     * @return txtBirthDateRange
      */
-    @JsonProperty("lblNinteiShinseiDate")
-    public Label getLblNinteiShinseiDate() {
-        return lblNinteiShinseiDate;
+    @JsonProperty("txtBirthDateRange")
+    public TextBoxDateRange getTxtBirthDateRange() {
+        return txtBirthDateRange;
     }
 
     /*
-     * setlblNinteiShinseiDate
-     * @param lblNinteiShinseiDate lblNinteiShinseiDate
+     * settxtBirthDateRange
+     * @param txtBirthDateRange txtBirthDateRange
      */
-    @JsonProperty("lblNinteiShinseiDate")
-    public void setLblNinteiShinseiDate(Label lblNinteiShinseiDate) {
-        this.lblNinteiShinseiDate = lblNinteiShinseiDate;
-    }
-
-    /*
-     * gettxtNinteiShinseiDateTo
-     * @return txtNinteiShinseiDateTo
-     */
-    @JsonProperty("txtNinteiShinseiDateTo")
-    public TextBoxFlexibleDate getTxtNinteiShinseiDateTo() {
-        return txtNinteiShinseiDateTo;
-    }
-
-    /*
-     * settxtNinteiShinseiDateTo
-     * @param txtNinteiShinseiDateTo txtNinteiShinseiDateTo
-     */
-    @JsonProperty("txtNinteiShinseiDateTo")
-    public void setTxtNinteiShinseiDateTo(TextBoxFlexibleDate txtNinteiShinseiDateTo) {
-        this.txtNinteiShinseiDateTo = txtNinteiShinseiDateTo;
-    }
-
-    /*
-     * gettxtBirthDateFrom
-     * @return txtBirthDateFrom
-     */
-    @JsonProperty("txtBirthDateFrom")
-    public TextBoxFlexibleDate getTxtBirthDateFrom() {
-        return txtBirthDateFrom;
-    }
-
-    /*
-     * settxtBirthDateFrom
-     * @param txtBirthDateFrom txtBirthDateFrom
-     */
-    @JsonProperty("txtBirthDateFrom")
-    public void setTxtBirthDateFrom(TextBoxFlexibleDate txtBirthDateFrom) {
-        this.txtBirthDateFrom = txtBirthDateFrom;
-    }
-
-    /*
-     * getlblBirthDate
-     * @return lblBirthDate
-     */
-    @JsonProperty("lblBirthDate")
-    public Label getLblBirthDate() {
-        return lblBirthDate;
-    }
-
-    /*
-     * setlblBirthDate
-     * @param lblBirthDate lblBirthDate
-     */
-    @JsonProperty("lblBirthDate")
-    public void setLblBirthDate(Label lblBirthDate) {
-        this.lblBirthDate = lblBirthDate;
-    }
-
-    /*
-     * gettxtBirthDateTo
-     * @return txtBirthDateTo
-     */
-    @JsonProperty("txtBirthDateTo")
-    public TextBoxFlexibleDate getTxtBirthDateTo() {
-        return txtBirthDateTo;
-    }
-
-    /*
-     * settxtBirthDateTo
-     * @param txtBirthDateTo txtBirthDateTo
-     */
-    @JsonProperty("txtBirthDateTo")
-    public void setTxtBirthDateTo(TextBoxFlexibleDate txtBirthDateTo) {
-        this.txtBirthDateTo = txtBirthDateTo;
+    @JsonProperty("txtBirthDateRange")
+    public void setTxtBirthDateRange(TextBoxDateRange txtBirthDateRange) {
+        this.txtBirthDateRange = txtBirthDateRange;
     }
 
     /*

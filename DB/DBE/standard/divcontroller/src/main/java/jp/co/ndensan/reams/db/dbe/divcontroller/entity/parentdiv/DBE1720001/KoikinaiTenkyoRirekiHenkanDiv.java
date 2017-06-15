@@ -7,6 +7,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1720001;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.*;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
@@ -16,7 +18,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KoikinaiTenkyoRirekiHenkanDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-05-30_13-18-33">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -114,12 +116,12 @@ public class KoikinaiTenkyoRirekiHenkanDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
-    public TextBox getTxtHihokenshaNumber() {
+    public TextBoxCode getTxtHihokenshaNumber() {
         return this.getKensakuJoken().getTxtHihokenshaNumber();
     }
 
     @JsonIgnore
-    public void  setTxtHihokenshaNumber(TextBox txtHihokenshaNumber) {
+    public void  setTxtHihokenshaNumber(TextBoxCode txtHihokenshaNumber) {
         this.getKensakuJoken().setTxtHihokenshaNumber(txtHihokenshaNumber);
     }
 
@@ -164,63 +166,23 @@ public class KoikinaiTenkyoRirekiHenkanDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxFlexibleDate getTxtNinteiShinseiDateFrom() {
-        return this.getKensakuJoken().getTxtNinteiShinseiDateFrom();
+    public TextBoxDateRange getTxtNinteiShinseiDateRange() {
+        return this.getKensakuJoken().getTxtNinteiShinseiDateRange();
     }
 
     @JsonIgnore
-    public void  setTxtNinteiShinseiDateFrom(TextBoxFlexibleDate txtNinteiShinseiDateFrom) {
-        this.getKensakuJoken().setTxtNinteiShinseiDateFrom(txtNinteiShinseiDateFrom);
+    public void  setTxtNinteiShinseiDateRange(TextBoxDateRange txtNinteiShinseiDateRange) {
+        this.getKensakuJoken().setTxtNinteiShinseiDateRange(txtNinteiShinseiDateRange);
     }
 
     @JsonIgnore
-    public Label getLblNinteiShinseiDate() {
-        return this.getKensakuJoken().getLblNinteiShinseiDate();
+    public TextBoxDateRange getTxtBirthDateRange() {
+        return this.getKensakuJoken().getTxtBirthDateRange();
     }
 
     @JsonIgnore
-    public void  setLblNinteiShinseiDate(Label lblNinteiShinseiDate) {
-        this.getKensakuJoken().setLblNinteiShinseiDate(lblNinteiShinseiDate);
-    }
-
-    @JsonIgnore
-    public TextBoxFlexibleDate getTxtNinteiShinseiDateTo() {
-        return this.getKensakuJoken().getTxtNinteiShinseiDateTo();
-    }
-
-    @JsonIgnore
-    public void  setTxtNinteiShinseiDateTo(TextBoxFlexibleDate txtNinteiShinseiDateTo) {
-        this.getKensakuJoken().setTxtNinteiShinseiDateTo(txtNinteiShinseiDateTo);
-    }
-
-    @JsonIgnore
-    public TextBoxFlexibleDate getTxtBirthDateFrom() {
-        return this.getKensakuJoken().getTxtBirthDateFrom();
-    }
-
-    @JsonIgnore
-    public void  setTxtBirthDateFrom(TextBoxFlexibleDate txtBirthDateFrom) {
-        this.getKensakuJoken().setTxtBirthDateFrom(txtBirthDateFrom);
-    }
-
-    @JsonIgnore
-    public Label getLblBirthDate() {
-        return this.getKensakuJoken().getLblBirthDate();
-    }
-
-    @JsonIgnore
-    public void  setLblBirthDate(Label lblBirthDate) {
-        this.getKensakuJoken().setLblBirthDate(lblBirthDate);
-    }
-
-    @JsonIgnore
-    public TextBoxFlexibleDate getTxtBirthDateTo() {
-        return this.getKensakuJoken().getTxtBirthDateTo();
-    }
-
-    @JsonIgnore
-    public void  setTxtBirthDateTo(TextBoxFlexibleDate txtBirthDateTo) {
-        this.getKensakuJoken().setTxtBirthDateTo(txtBirthDateTo);
+    public void  setTxtBirthDateRange(TextBoxDateRange txtBirthDateRange) {
+        this.getKensakuJoken().setTxtBirthDateRange(txtBirthDateRange);
     }
 
     @JsonIgnore
@@ -334,6 +296,16 @@ public class KoikinaiTenkyoRirekiHenkanDiv extends Panel {
     }
 
     @JsonIgnore
+    public TextBox getTxtYubinNo() {
+        return this.getKoikinaiTenkyo().getKoikinaiTenkyoTenkyomae().getTxtYubinNo();
+    }
+
+    @JsonIgnore
+    public void  setTxtYubinNo(TextBox txtYubinNo) {
+        this.getKoikinaiTenkyo().getKoikinaiTenkyoTenkyomae().setTxtYubinNo(txtYubinNo);
+    }
+
+    @JsonIgnore
     public TextBox getTxtJusho() {
         return this.getKoikinaiTenkyo().getKoikinaiTenkyoTenkyomae().getTxtJusho();
     }
@@ -381,16 +353,6 @@ public class KoikinaiTenkyoRirekiHenkanDiv extends Panel {
     @JsonIgnore
     public void  setTxtTelNo(TextBox txtTelNo) {
         this.getKoikinaiTenkyo().getKoikinaiTenkyoTenkyomae().setTxtTelNo(txtTelNo);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtYubinNo() {
-        return this.getKoikinaiTenkyo().getKoikinaiTenkyoTenkyomae().getTxtYubinNo();
-    }
-
-    @JsonIgnore
-    public void  setTxtYubinNo(TextBox txtYubinNo) {
-        this.getKoikinaiTenkyo().getKoikinaiTenkyoTenkyomae().setTxtYubinNo(txtYubinNo);
     }
 
     @JsonIgnore
@@ -504,23 +466,8 @@ public class KoikinaiTenkyoRirekiHenkanDiv extends Panel {
     }
 
     @JsonIgnore
-    public DropDownList getDdlShokisaiHokenshaNoSaki() {
-        return this.getKoikinaiTenkyo().getKoikinaiTenkyoTenkyosaki().getDdlShokisaiHokenshaNoSaki();
-    }
-
-    @JsonIgnore
-    public void  setDdlShokisaiHokenshaNoSaki(DropDownList ddlShokisaiHokenshaNoSaki) {
-        this.getKoikinaiTenkyo().getKoikinaiTenkyoTenkyosaki().setDdlShokisaiHokenshaNoSaki(ddlShokisaiHokenshaNoSaki);
-    }
-
-    @JsonIgnore
-    public TextBox getTxtShokisaiHokenshaSaki() {
-        return this.getKoikinaiTenkyo().getKoikinaiTenkyoTenkyosaki().getTxtShokisaiHokenshaSaki();
-    }
-
-    @JsonIgnore
-    public void  setTxtShokisaiHokenshaSaki(TextBox txtShokisaiHokenshaSaki) {
-        this.getKoikinaiTenkyo().getKoikinaiTenkyoTenkyosaki().setTxtShokisaiHokenshaSaki(txtShokisaiHokenshaSaki);
+    public IHokenshaListDiv getDdlHokenshaList() {
+        return this.getKoikinaiTenkyo().getKoikinaiTenkyoTenkyosaki().getDdlHokenshaList();
     }
 
     @JsonIgnore
