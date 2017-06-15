@@ -21,7 +21,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
 import jp.co.ndensan.reams.db.dbz.definition.core.tokuteishippei.TokuteiShippei;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotaiKubun09;
-import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ichijihantei.IchijiHanteiKekkaCode09;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiHoreiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
@@ -56,6 +55,7 @@ public class HanteiKekkaIchiranProcess extends BatchProcessBase<HanteiKekkaIchir
     private RString 出力対象;
     private int 総ページ数;
     private int index;
+    private static final RString 広域保険者ID = new RString("00");
     private HanteiKekkaJohoShuturyokuMybatisParameter mybatisParameter;
 
     @BatchWriter
@@ -78,6 +78,10 @@ public class HanteiKekkaIchiranProcess extends BatchProcessBase<HanteiKekkaIchir
                 = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定, processParameter.getUserId());
         RString 導入形態コード = shichosonSecurityJoho.get導入形態コード().value();
         if (DonyuKeitaiCode.認定広域.getCode().equals(導入形態コード)) {
+            RString 市町村識別ID = shichosonSecurityJoho.get市町村情報().get市町村識別ID();
+            if (!広域保険者ID.equals(市町村識別ID)) {
+                processParameter.setShoKisaiHokenshaNo(shichosonSecurityJoho.get市町村情報().get証記載保険者番号().value());
+            }
             出力対象 = DbBusinessConfig.get(ConfigNameDBE.広域連合名称, RDate.getNowDate(), SubGyomuCode.DBE認定支援);
         }
         if (DonyuKeitaiCode.認定単一.getCode().equals(導入形態コード)) {

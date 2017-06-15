@@ -46,6 +46,8 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.DataGridCellBgColor;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Icon;
+import jp.co.ndensan.reams.uz.uza.ui.binding.IconType;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.CommonButtonHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
@@ -301,9 +303,18 @@ public class ShinsaKaiKekkaTorokuHandler {
         int completeCount = 0;
         int notCount = 0;
         int i = 0;
+        Icon warningIcon = new Icon();
+        warningIcon.setIcon(IconType.Warning);
+        Icon noIcon = new Icon();
+        noIcon.setVisible(false);
         for (NiJiHanTeiBusiness business : 二次判定List) {
             if (i < div.getTxtMaxKensu().getValue().intValue()) {
                 dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
+                if (business.is遅延()) {
+                    row.setDelay(warningIcon);
+                } else {
+                    row.setDelay(noIcon);
+                }
                 row.setShoKisaiHokenshaNo(business.get証記載保険者番号().value());
                 if (business.get二次判定結果入力年月日() == null) {
                     row.setJotai(未処理);

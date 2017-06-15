@@ -127,8 +127,9 @@ public class TokkiJikoPrintProcess extends BatchProcessBase<YokaigoNinteiJohoTei
                             }
                 }).create();
         tokkiImage1A4SeparateReportSourceWriter = new ReportSourceWriter(tokkiImage1A4SeparateReportWriter);
+
         tokkiText1A4AllReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517131.getReportId().value())
-                .addBreak(new BreakerCatalog<TokkiText1ReportSource>().simplePageBreaker(TokkiText1ReportSource.RECORDCOUNT))
+                .addBreak(new BreakerCatalog<TokkiText1ReportSource>().simplePageBreaker(TokkiText1ReportSource.SHINSEISHOKANRINO))
                 .addBreak(new BreakerCatalog<TokkiText1ReportSource>().new SimpleLayoutBreaker(
                     TokkiText1ReportSource.LAYOUTBREAKITEM) {
                     @Override
@@ -147,7 +148,7 @@ public class TokkiJikoPrintProcess extends BatchProcessBase<YokaigoNinteiJohoTei
         tokkiText1A4AllReportSourceWriter = new ReportSourceWriter(tokkiText1A4AllReportWriter);
 
         tokkiText1A4SeparateReportWriter = BatchReportFactory.createBatchReportWriter(ReportIdDBE.DBE517132.getReportId().value())
-                .addBreak(new BreakerCatalog<TokkiText1ReportSource>().simplePageBreaker(TokkiText1ReportSource.RECORDCOUNT))
+                .addBreak(new BreakerCatalog<TokkiText1ReportSource>().simplePageBreaker(TokkiText1ReportSource.SHINSEISHOKANRINO))
                 .addBreak(new BreakerCatalog<TokkiText1ReportSource>().new SimpleLayoutBreaker(
                     TokkiText1ReportSource.LAYOUTBREAKITEM) {
                     @Override

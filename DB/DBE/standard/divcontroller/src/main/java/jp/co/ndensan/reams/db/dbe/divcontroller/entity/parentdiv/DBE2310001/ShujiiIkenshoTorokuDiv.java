@@ -19,7 +19,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.domain.*;
  * @author 自動生成
  */
 public class ShujiiIkenshoTorokuDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-06_05-07-20">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-04-17_13-55-22">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -28,6 +28,10 @@ public class ShujiiIkenshoTorokuDiv extends Panel {
      */
     @JsonProperty("radJotaiKubun")
     private RadioButton radJotaiKubun;
+    @JsonProperty("btnIchijiHanteiValidate")
+    private Button btnIchijiHanteiValidate;
+    @JsonProperty("btnHanteishoriAto")
+    private Button btnHanteishoriAto;
     @JsonProperty("shinseishaJoho")
     private shinseishaJohoDiv shinseishaJoho;
     @JsonProperty("btnShobyoGuide")
@@ -69,6 +73,42 @@ public class ShujiiIkenshoTorokuDiv extends Panel {
     @JsonProperty("radJotaiKubun")
     public void setRadJotaiKubun(RadioButton radJotaiKubun) {
         this.radJotaiKubun = radJotaiKubun;
+    }
+
+    /*
+     * getbtnIchijiHanteiValidate
+     * @return btnIchijiHanteiValidate
+     */
+    @JsonProperty("btnIchijiHanteiValidate")
+    public Button getBtnIchijiHanteiValidate() {
+        return btnIchijiHanteiValidate;
+    }
+
+    /*
+     * setbtnIchijiHanteiValidate
+     * @param btnIchijiHanteiValidate btnIchijiHanteiValidate
+     */
+    @JsonProperty("btnIchijiHanteiValidate")
+    public void setBtnIchijiHanteiValidate(Button btnIchijiHanteiValidate) {
+        this.btnIchijiHanteiValidate = btnIchijiHanteiValidate;
+    }
+
+    /*
+     * getbtnHanteishoriAto
+     * @return btnHanteishoriAto
+     */
+    @JsonProperty("btnHanteishoriAto")
+    public Button getBtnHanteishoriAto() {
+        return btnHanteishoriAto;
+    }
+
+    /*
+     * setbtnHanteishoriAto
+     * @param btnHanteishoriAto btnHanteishoriAto
+     */
+    @JsonProperty("btnHanteishoriAto")
+    public void setBtnHanteishoriAto(Button btnHanteishoriAto) {
+        this.btnHanteishoriAto = btnHanteishoriAto;
     }
 
     /*

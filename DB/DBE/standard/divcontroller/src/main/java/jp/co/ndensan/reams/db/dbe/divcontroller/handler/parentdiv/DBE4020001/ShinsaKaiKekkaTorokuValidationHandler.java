@@ -59,6 +59,19 @@ public class ShinsaKaiKekkaTorokuValidationHandler {
         }
         return validPairs;
     }
+    
+    /**
+     * 個別登録件数チェックを行う。
+     * 
+     * @return バリデーション結果
+     */
+    public ValidationMessageControlPairs 個別登録件数チェック() {
+        ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+        if (div.getDgNinteiTaskList().getSelectedItems().size() > 1) {
+            validPairs.add(new ValidationMessageControlPair(RRVMessages.個別登録件数チェック));
+        }
+        return validPairs;
+    }
 
     /**
      * 完了処理事前チェックを行う。
@@ -81,6 +94,7 @@ public class ShinsaKaiKekkaTorokuValidationHandler {
 
         存在チェック(UrErrorMessages.該当データなし),
         対象行を選択チェック(UrErrorMessages.対象行を選択),
+        個別登録件数チェック(DbzErrorMessages.審査結果個別登録_複数),
         完了処理事前チェック(DbzErrorMessages.理由付き完了不可, "審査会結果未確定");
         private final Message message;
 

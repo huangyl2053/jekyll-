@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.db.dbx.entity.db.basic.DbT7051KoseiShichosonMasterEntity;
+import jp.co.ndensan.reams.db.dbz.business.config.FourMasterConfig;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ChohyoSeigyoKyotsu;
 import jp.co.ndensan.reams.db.dbz.entity.db.relate.shutsuryokujun.ShutsuryokujunRelateEntity;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.KoseiShichosonMasterDac;
@@ -71,6 +72,7 @@ public final class ReportUtil {
     private static final RString 首長名印字位置 = new RString("1");
     private static final RString 汎用キー_文書番号 = new RString("文書番号");
     private static final RString underscore = new RString("_");
+    private static final RString 四マスタ管理方法_構成市町村 = new RString("1");
     private static final int INT3 = 3;
     private static final int INT4 = 4;
     private static final int INT5 = 5;
@@ -136,6 +138,9 @@ public final class ReportUtil {
             KenmeiFuyoKubunType kenmeiFuyoKubunType,
             ReportSourceWriter reportSourceWriter,
             ShoKisaiHokenshaNo shoKisaiHokenshaNo) {
+        if (!四マスタ管理方法_構成市町村.equals(new FourMasterConfig().get四マスタ管理方法())) {
+            return get認証者情報(subGyomuCode, reportId, kaisiYMD, denshikoinshubetsuCode, kenmeiFuyoKubunType, reportSourceWriter);
+        }
         ChohyoSeigyoKyotsuManager chohyoSeigyoKyotsuManager = new ChohyoSeigyoKyotsuManager();
         ChohyoSeigyoKyotsu chohyoSeigyoKyotsu = chohyoSeigyoKyotsuManager.get帳票制御共通(subGyomuCode, reportId);
         INinshoshaManager ninshoshaManager = NinshoshaFinderFactory.createInstance();

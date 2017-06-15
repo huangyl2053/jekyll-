@@ -24,7 +24,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.RadioButton;
  * @reamsid_L DBE-3000-093 wangjie2
  */
 public class KihonChosaInput4Div extends Panel implements IKihonChosaInput4Div {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-20_05-03-35">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-04-17_13-55-22">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

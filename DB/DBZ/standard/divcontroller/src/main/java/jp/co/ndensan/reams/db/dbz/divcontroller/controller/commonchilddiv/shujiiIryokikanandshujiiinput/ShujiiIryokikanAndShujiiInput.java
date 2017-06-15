@@ -57,7 +57,7 @@ public class ShujiiIryokikanAndShujiiInput {
         createHandler(div).setIryoKikanName(RString.EMPTY);
         div.getTxtShujiiCode().setValue(RString.EMPTY);
         createHandler(div).setShujiiName(RString.EMPTY);
-        
+
         if (RString.isNullOrEmpty(div.getIryoKikanCode())) {
             return ResponseData.of(div).respond();
         }
@@ -79,6 +79,7 @@ public class ShujiiIryokikanAndShujiiInput {
                         1)).records();
         if (!list.isEmpty()) {
             createHandler(div).setIryoKikanName(list.get(0).get主治医医療機関名称());
+            div.setHdnSelectedShichosonCode(div.getHdnShichosonCode());
         }
         ValidationMessageControlPairs validationResult = createValidationHandler(div).validate医療機関コード();
         if (validationResult.iterator().hasNext()) {
@@ -123,6 +124,7 @@ public class ShujiiIryokikanAndShujiiInput {
         if (!list.isEmpty()) {
             createHandler(div).setShujiiName(list.get(0).get主治医氏名());
             createHandler(div).setChkShiteii(new LasdecCode(div.getHdnShichosonCode()), list.get(0).get医療機関コード(), list.get(0).get主治医コード());
+            div.setHdnSelectedShichosonCode(div.getHdnShichosonCode());
         }
         ValidationMessageControlPairs validationResult = createValidationHandler(div).validate主治医コード();
         if (validationResult.iterator().hasNext()) {
@@ -142,6 +144,7 @@ public class ShujiiIryokikanAndShujiiInput {
                 new ShinseishoKanriNo(div.getHdnShinseishoKanriNo()),
                 new LasdecCode(div.getHdnShichosonCode()));
         createHandler(div).setZenkaiIrokikanJoho(前回申請情報);
+        div.setHdnSelectedShichosonCode(div.getHdnShichosonCode());
         return ResponseData.of(div).respond();
     }
 
@@ -171,6 +174,7 @@ public class ShujiiIryokikanAndShujiiInput {
         modle.set主治医医療機関名称(div.getTxtIryoKikanName().getValue());
         modle.set対象モード(new RString(TaishoMode.ShujiiMode.toString()));
         div.setHdnDataPass(DataPassingConverter.serialize(modle));
+        div.setHdnSelectedShichosonCode(RString.EMPTY);
         return ResponseData.of(div).respond();
     }
 
@@ -186,6 +190,7 @@ public class ShujiiIryokikanAndShujiiInput {
         modle.setサブ業務コード(div.getHdnSubGyomuModel());
         modle.set対象モード(new RString(TaishoMode.IryoKikanMode.toString()));
         div.setHdnDataPass(DataPassingConverter.serialize(modle));
+        div.setHdnSelectedShichosonCode(RString.EMPTY);
         return ResponseData.of(div).respond();
     }
 
@@ -199,6 +204,7 @@ public class ShujiiIryokikanAndShujiiInput {
         ShujiiIryokikanandshujiiDataPassModel modle = DataPassingConverter.deserialize(div.getHdnDataPass(), ShujiiIryokikanandshujiiDataPassModel.class);
         div.getTxtShujiiCode().setValue(modle.get主治医コード());
         div.getTxtShujiiName().setValue(modle.get主治医氏名());
+        div.setHdnSelectedShichosonCode(modle.get医療機関市町村コード());
         div.getTxtIryoKikanCode().setValue(modle.get主治医医療機関コード());
         div.getTxtIryoKikanName().setValue(modle.get主治医医療機関名称());
         createHandler(div).setChkShiteii(new LasdecCode(modle.get市町村コード()), modle.get主治医医療機関コード(), modle.get主治医コード());
@@ -215,6 +221,7 @@ public class ShujiiIryokikanAndShujiiInput {
         ShujiiIryokikanandshujiiDataPassModel modle = DataPassingConverter.deserialize(div.getHdnDataPass(), ShujiiIryokikanandshujiiDataPassModel.class);
         div.getTxtIryoKikanCode().setValue(modle.get主治医医療機関コード());
         div.getTxtIryoKikanName().setValue(modle.get主治医医療機関名称());
+        div.setHdnSelectedShichosonCode(modle.get医療機関市町村コード());
         div.getTxtShujiiCode().clearValue();
         div.getTxtShujiiName().clearValue();
         createHandler(div).setChkShiteii(new LasdecCode(modle.get市町村コード()), modle.get主治医医療機関コード(), modle.get主治医コード());

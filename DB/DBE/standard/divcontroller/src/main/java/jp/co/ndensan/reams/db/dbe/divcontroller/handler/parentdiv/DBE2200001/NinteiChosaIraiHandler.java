@@ -20,8 +20,8 @@ import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiC
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbx.service.core.shichosonsecurityjoho.ShichosonSecurityJoho;
+import jp.co.ndensan.reams.db.dbz.business.config.FourMasterConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ChosaItakusakiCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.Sikaku;
@@ -39,7 +39,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
-import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
@@ -85,21 +84,18 @@ public class NinteiChosaIraiHandler {
     /**
      * 調査委託先取得パラメータを作成します。
      *
-     * @param 保険者番号 ShoKisaiHokenshaNo
-     * @param 支所コード RString
      * @param 市町村コード LasdecCode
      * @return NinnteiChousairaiParameter
      */
-    public NinnteiChousairaiParameter create調査委託先取得パラメータ(ShoKisaiHokenshaNo 保険者番号,
-            RString 支所コード, LasdecCode 市町村コード) {
+    public NinnteiChousairaiParameter create調査委託先取得パラメータ(LasdecCode 市町村コード) {
         ChosaItakusakiCode 調査委託先コード
-                = (div.getTxtChosaItakusaki().getValue() != null && !div.getTxtChosaItakusaki().getValue().equals(RString.EMPTY))
-                ? new ChosaItakusakiCode(div.getTxtChosaItakusaki().getValue())
-                : null;
+                = !RString.isNullOrEmpty(div.getTxtChosaItakusaki().getValue())
+                        ? new ChosaItakusakiCode(div.getTxtChosaItakusaki().getValue())
+                        : null;
         int 依頼件数集計月数 = Integer.parseInt(DbBusinessConfig.get(
                 ConfigNameDBE.認定調査依頼_依頼件数集計月数, RDate.getNowDate(), SubGyomuCode.DBE認定支援).toString());
         RDate 依頼件数集計開始日 = RDate.getNowDate().minusMonth(依頼件数集計月数);
-        return NinnteiChousairaiParameter.createParam調査委託先(保険者番号, 支所コード, 市町村コード, 調査委託先コード,
+        return NinnteiChousairaiParameter.createParam調査委託先(市町村コード, 調査委託先コード,
                 依頼件数集計開始日, RDate.getNowDate(), div.getTxtSaidaiHyojiKensu().getValue().intValue());
     }
 
@@ -158,8 +154,6 @@ public class NinteiChosaIraiHandler {
      */
     public void set調査員情報一覧(List<NinnteiChousairaiBusiness> 調査員List) {
         List<dgchosainIchiran_Row> dataSource = new ArrayList<>();
-        ShoKisaiHokenshaNo 証記載保険者番号 = ViewStateHolder.get(ViewStateKeys.証記載保険者番号, ShoKisaiHokenshaNo.class);
-        RString 保険者名称 = ViewStateHolder.get(ViewStateKeys.保険者名称, RString.class);
         for (NinnteiChousairaiBusiness 調査員 : 調査員List) {
             dgchosainIchiran_Row row = new dgchosainIchiran_Row();
             row.getChosainCode().setValue(nullToEmpty(調査員.getNinteiChosainNo()));
@@ -185,8 +179,8 @@ public class NinteiChosaIraiHandler {
                 row.setChosainShikaku(Sikaku.toValue(調査員.getChosainShikaku()).get名称());
             }
             row.setChosaKanoNinzuPerMonth(new RString(調査員.getChosaKanoNinzuPerMonth()));
-            row.setHokenshaCode(nullToEmpty(証記載保険者番号.value()));
-            row.setHokenshaName(nullToEmpty(保険者名称));
+            row.setHokenshaCode(nullToEmpty(調査員.getShichosonCode().value()));
+            row.setHokenshaName(nullToEmpty(調査員.getShichosonMeisho()));
             dataSource.add(row);
         }
         div.getDgchosainIchiran().getFilterList().clear();
@@ -199,7 +193,7 @@ public class NinteiChosaIraiHandler {
      * @param 未割付申請者List 未割付一覧検索結果
      * @param hokenshaName 保険者名称
      */
-    public void set未割付申請者一覧(List<WaritsukeBusiness> 未割付申請者List, RString hokenshaName) {
+    public void set未割付申請者一覧(List<WaritsukeBusiness> 未割付申請者List) {
         List<dgMiwaritsukeShinseishaIchiran_Row> dataSource = new ArrayList<>();
         int number = 1;
         for (WaritsukeBusiness 未割付申請者 : 未割付申請者List) {
@@ -230,7 +224,7 @@ public class NinteiChosaIraiHandler {
             }
             row.setZenkaiChosaItakusaki(nullToEmpty(未割付申請者.getTemp_jigyoshaMeisho()));
             row.setZenkaiNinteiChosainShimei(nullToEmpty(未割付申請者.getTemp_chosainShimei()));
-            row.setHokensha(nullToEmpty(hokenshaName));
+            row.setHokensha(nullToEmpty(未割付申請者.getHokenshaName()));
             row.setChosaKubun(NinteiChousaIraiKubunCode.toValue(未割付申請者.getChosaKubun().value()).get名称());
             if (未割付申請者.getJusho() != null) {
                 row.setJusho(未割付申請者.getJusho().value());
@@ -344,9 +338,8 @@ public class NinteiChosaIraiHandler {
      * 割付済み申請者一覧Gridに検索結果を設定します。
      *
      * @param 割付済み申請者List 割付済み申請者一覧検索結果
-     * @param hokenshaName 保険者名称
      */
-    public void set割付済み申請者一覧(List<WaritsukeBusiness> 割付済み申請者List, RString hokenshaName) {
+    public void set割付済み申請者一覧(List<WaritsukeBusiness> 割付済み申請者List) {
         List<dgWaritsukeZumiShinseishaIchiran_Row> dataSource = new ArrayList<>();
         int number = 1;
         for (WaritsukeBusiness 割付済み申請者 : 割付済み申請者List) {
@@ -376,7 +369,7 @@ public class NinteiChosaIraiHandler {
                 row.setChosaIraiDay(割付済み申請者.getNinteichosaIraiYMD().wareki().toDateString());
             }
             row.setChosaKubun(NinteiChousaIraiKubunCode.toValue(割付済み申請者.getChosaKubun().value()).get名称());
-            row.setHokensha(nullToEmpty(hokenshaName));
+            row.setHokensha(nullToEmpty(割付済み申請者.getHokenshaName()));
             if (割付済み申請者.getJusho() != null) {
                 row.setJusho(割付済み申請者.getJusho().value());
             }
@@ -525,9 +518,11 @@ public class NinteiChosaIraiHandler {
         div.getTxtChosaItakusakiCode().setValue(row.getChosaItakusakiCode().getValue());
         div.getTxtChosaItakusakiMeisho().setValue(row.getChosaItakusakiMeisho());
         div.getTxtChosaItakusakiChiku().setValue(row.getChosaChiku());
+        div.getTxtWaritsukeTeiin().setValue(row.getWaritsukeTeiin().getValue());
         div.getTxtChosainCode().clearValue();
         div.getTxtChosainShimei().clearValue();
         div.getTxtChosainChiku().clearValue();
+        div.getTxtChosaKanoNinzuPerMonth().clearValue();
     }
 
     /**
@@ -539,6 +534,11 @@ public class NinteiChosaIraiHandler {
         div.getTxtChosainCode().setValue(row.getChosainCode().getValue());
         div.getTxtChosainShimei().setValue(row.getChosainShimei());
         div.getTxtChosainChiku().setValue(row.getChosaChiku());
+        if (!RString.isNullOrEmpty(row.getChosaKanoNinzuPerMonth())) {
+            div.getTxtChosaKanoNinzuPerMonth().setValue(new Decimal(row.getChosaKanoNinzuPerMonth().toString()));
+        } else {
+            div.getTxtChosaKanoNinzuPerMonth().clearValue();
+        }
     }
 
     /**
@@ -549,6 +549,7 @@ public class NinteiChosaIraiHandler {
         div.getTxtChosainCode().clearValue();
         div.getTxtChosainShimei().clearValue();
         div.getTxtChosainChiku().clearValue();
+        div.getTxtChosaKanoNinzuPerMonth().clearValue();
     }
 
     /**
@@ -603,4 +604,5 @@ public class NinteiChosaIraiHandler {
     private RString nullToEmpty(RString obj) {
         return (obj != null) ? obj : RString.EMPTY;
     }
+
 }

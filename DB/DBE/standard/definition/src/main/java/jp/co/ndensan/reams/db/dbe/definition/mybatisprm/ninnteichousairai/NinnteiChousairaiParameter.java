@@ -45,8 +45,6 @@ public final class NinnteiChousairaiParameter {
             LasdecCode 市町村コード,
             ChosaItakusakiCode 認定調査委託先コード,
             ChosainCode 認定調査員コード,
-            boolean uses支所コード,
-            boolean uses調査員コード,
             RString 依頼件数集計開始日,
             RString 依頼件数集計終了日,
             int 最大表示件数) {
@@ -55,8 +53,8 @@ public final class NinnteiChousairaiParameter {
         this.市町村コード = 市町村コード;
         this.認定調査委託先コード = 認定調査委託先コード;
         this.認定調査員コード = 認定調査員コード;
-        this.uses支所コード = uses支所コード;
-        this.uses調査員コード = uses調査員コード;
+        this.uses支所コード = !RString.isNullOrEmpty(支所コード);
+        this.uses調査員コード = (認定調査員コード != null && !RString.isNullOrEmpty(認定調査員コード.value()));
         this.依頼件数集計開始日 = 依頼件数集計開始日;
         this.依頼件数集計終了日 = 依頼件数集計終了日;
         this.最大表示件数 = 最大表示件数;
@@ -65,8 +63,6 @@ public final class NinnteiChousairaiParameter {
     /**
      * 認定調査委託先のパラメータを生成します。
      *
-     * @param 証記載保険者番号 証記載保険者番号
-     * @param 支所コード 支所コード
      * @param 市町村コード 市町村コード
      * @param 認定調査委託先コード 認定調査委託先コード
      * @param 依頼件数集計開始日 依頼件数集計開始日
@@ -75,16 +71,13 @@ public final class NinnteiChousairaiParameter {
      * @return 認定調査委託先情報パラメータ
      */
     public static NinnteiChousairaiParameter createParam調査委託先(
-            ShoKisaiHokenshaNo 証記載保険者番号,
-            RString 支所コード,
             LasdecCode 市町村コード,
             ChosaItakusakiCode 認定調査委託先コード,
             RDate 依頼件数集計開始日,
             RDate 依頼件数集計終了日,
             int 最大表示件数) {
-        boolean uses支所コード = (支所コード != null && !支所コード.isEmpty());
-        return new NinnteiChousairaiParameter(証記載保険者番号, 支所コード, 市町村コード, 認定調査委託先コード, ChosainCode.EMPTY,
-                uses支所コード, false, 依頼件数集計開始日.toDateString(), 依頼件数集計終了日.toDateString(), 最大表示件数);
+        return new NinnteiChousairaiParameter(ShoKisaiHokenshaNo.EMPTY, RString.EMPTY, 市町村コード, 認定調査委託先コード, ChosainCode.EMPTY,
+                依頼件数集計開始日.toDateString(), 依頼件数集計終了日.toDateString(), 最大表示件数);
     }
 
     /**
@@ -92,31 +85,29 @@ public final class NinnteiChousairaiParameter {
      *
      * @param 証記載保険者番号 証記載保険者番号
      * @param 支所コード 支所コード
+     * @param 市町村コード 市町村コード
      * @return 認定調査委託先情報パラメータ
      */
     public static NinnteiChousairaiParameter createParam未割付申請者(
             ShoKisaiHokenshaNo 証記載保険者番号,
-            RString 支所コード) {
-        boolean uses支所コード = (支所コード != null && !支所コード.isEmpty());
-        return new NinnteiChousairaiParameter(証記載保険者番号, 支所コード, LasdecCode.EMPTY,
-                ChosaItakusakiCode.EMPTY, ChosainCode.EMPTY, uses支所コード, false, RString.EMPTY, RString.EMPTY, 0);
+            RString 支所コード,
+            LasdecCode 市町村コード) {
+        return new NinnteiChousairaiParameter(証記載保険者番号, 支所コード, 市町村コード,
+                ChosaItakusakiCode.EMPTY, ChosainCode.EMPTY, RString.EMPTY, RString.EMPTY, 0);
     }
 
     /**
      * 調査員情報のパラメータを生成します。
      *
-     * @param 証記載保険者番号 証記載保険者番号
-     * @param 支所コード 支所コード
+     * @param 市町村コード 市町村コード
      * @param 認定調査委託先コード 認定調査委託先コード
      * @return 調査員情報パラメータ
      */
     public static NinnteiChousairaiParameter createParamfor調査員情報(
-            ShoKisaiHokenshaNo 証記載保険者番号,
-            RString 支所コード,
+            LasdecCode 市町村コード,
             ChosaItakusakiCode 認定調査委託先コード) {
-        boolean uses支所コード = (支所コード != null && !支所コード.isEmpty());
-        return new NinnteiChousairaiParameter(証記載保険者番号, 支所コード, LasdecCode.EMPTY, 認定調査委託先コード,
-                ChosainCode.EMPTY, uses支所コード, false, RString.EMPTY, RString.EMPTY, 0);
+        return new NinnteiChousairaiParameter(ShoKisaiHokenshaNo.EMPTY, RString.EMPTY, 市町村コード, 認定調査委託先コード,
+                ChosainCode.EMPTY, RString.EMPTY, RString.EMPTY, 0);
     }
 
     /**
@@ -124,6 +115,7 @@ public final class NinnteiChousairaiParameter {
      *
      * @param 証記載保険者番号 証記載保険者番号
      * @param 支所コード 支所コード
+     * @param 市町村コード 市町村コード
      * @param 認定調査委託先コード 認定調査委託先コード
      * @param 認定調査員コード 認定調査員コード
      * @return 割付済み申請者一覧パラメータ
@@ -131,11 +123,11 @@ public final class NinnteiChousairaiParameter {
     public static NinnteiChousairaiParameter createParamfor割付済み申請者一覧(
             ShoKisaiHokenshaNo 証記載保険者番号,
             RString 支所コード,
+            LasdecCode 市町村コード,
             ChosaItakusakiCode 認定調査委託先コード,
             ChosainCode 認定調査員コード) {
-        boolean uses支所コード = (支所コード != null && !支所コード.isEmpty());
-        boolean uses調査員コード = (認定調査員コード != null && 認定調査員コード.value() != null);
-        return new NinnteiChousairaiParameter(証記載保険者番号, 支所コード, LasdecCode.EMPTY, 認定調査委託先コード,
-                認定調査員コード, uses支所コード, uses調査員コード, RString.EMPTY, RString.EMPTY, 0);
+        return new NinnteiChousairaiParameter(証記載保険者番号, 支所コード, 市町村コード, 認定調査委託先コード,
+                認定調査員コード, RString.EMPTY, RString.EMPTY, 0);
     }
+
 }

@@ -28,6 +28,7 @@ public class ShujiiIkenshoSakuseiIraiParameter {
     );
     private final ShoKisaiHokenshaNo 証記載保険者番号;
     private final RString 支所コード;
+    private final RString 市町村コード;
     private final ShujiiIryokikanCode 主治医医療機関コード;
     private final ShujiiCode 主治医コード;
     private final boolean uses支所コード;
@@ -36,16 +37,17 @@ public class ShujiiIkenshoSakuseiIraiParameter {
     private ShujiiIkenshoSakuseiIraiParameter(
             ShoKisaiHokenshaNo 証記載保険者番号,
             RString 支所コード,
+            RString 市町村コード,
             ShujiiIryokikanCode 主治医医療機関コード,
-            ShujiiCode 主治医コード,
-            boolean uses支所コード,
-            boolean uses主治医コード) {
+            ShujiiCode 主治医コード
+    ) {
         this.証記載保険者番号 = 証記載保険者番号;
         this.支所コード = 支所コード;
+        this.市町村コード = 市町村コード;
         this.主治医医療機関コード = 主治医医療機関コード;
         this.主治医コード = 主治医コード;
-        this.uses支所コード = uses支所コード;
-        this.uses主治医コード = uses主治医コード;
+        this.uses支所コード = (支所コード != null && !支所コード.isEmpty());
+        this.uses主治医コード = (主治医医療機関コード != null && 主治医医療機関コード.value() != null);
     }
 
     /**
@@ -53,29 +55,14 @@ public class ShujiiIkenshoSakuseiIraiParameter {
      *
      * @param 証記載保険者番号 証記載保険者番号
      * @param 支所コード 支所コード
+     * @param 市町村コード 市町村コード
      * @return 主治医委託先情報パラメータ
      */
     public static ShujiiIkenshoSakuseiIraiParameter createParam主治医医療機関Or未割付申請者(
             ShoKisaiHokenshaNo 証記載保険者番号,
-            RString 支所コード) {
-        boolean uses支所コード = (支所コード != null && !支所コード.isEmpty());
-        return new ShujiiIkenshoSakuseiIraiParameter(証記載保険者番号, 支所コード, ShujiiIryokikanCode.EMPTY, ShujiiCode.EMPTY, uses支所コード, false);
-    }
-
-    /**
-     * 調査員情報のパラメータを生成します。
-     *
-     * @param 証記載保険者番号 証記載保険者番号
-     * @param 支所コード 支所コード
-     * @param 主治医委託先コード 認定調査委託先コード
-     * @return 調査員情報パラメータ
-     */
-    public static ShujiiIkenshoSakuseiIraiParameter createParamfor主治医情報(
-            ShoKisaiHokenshaNo 証記載保険者番号,
             RString 支所コード,
-            ShujiiIryokikanCode 主治医委託先コード) {
-        boolean uses支所コード = (支所コード != null && !支所コード.isEmpty());
-        return new ShujiiIkenshoSakuseiIraiParameter(証記載保険者番号, 支所コード, 主治医委託先コード, ShujiiCode.EMPTY, uses支所コード, false);
+            RString 市町村コード) {
+        return new ShujiiIkenshoSakuseiIraiParameter(証記載保険者番号, 支所コード, 市町村コード, ShujiiIryokikanCode.EMPTY, ShujiiCode.EMPTY);
     }
 
     /**
@@ -83,17 +70,17 @@ public class ShujiiIkenshoSakuseiIraiParameter {
      *
      * @param 証記載保険者番号 証記載保険者番号
      * @param 支所コード 支所コード
-     * @param 主治医委託先コード 主治医委託先コード
+     * @param 市町村コード 市町村コード
+     * @param 主治医医療機関コード 主治医医療機関コード
      * @param 主治医コード 主治医コード
      * @return 割付済み申請者一覧パラメータ
      */
     public static ShujiiIkenshoSakuseiIraiParameter createParamfor割付済み申請者一覧(
             ShoKisaiHokenshaNo 証記載保険者番号,
             RString 支所コード,
-            ShujiiIryokikanCode 主治医委託先コード,
+            RString 市町村コード,
+            ShujiiIryokikanCode 主治医医療機関コード,
             ShujiiCode 主治医コード) {
-        boolean uses支所コード = (支所コード != null && !支所コード.isEmpty());
-        boolean uses調査員コード = (主治医委託先コード != null && 主治医委託先コード.value() != null);
-        return new ShujiiIkenshoSakuseiIraiParameter(証記載保険者番号, 支所コード, 主治医委託先コード, 主治医コード, uses支所コード, uses調査員コード);
+        return new ShujiiIkenshoSakuseiIraiParameter(証記載保険者番号, 支所コード, 市町村コード, 主治医医療機関コード, 主治医コード);
     }
 }

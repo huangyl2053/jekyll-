@@ -26,6 +26,7 @@ public class ShujiiIryokikanandshujiiDataPassModel implements Serializable {
     private RString 主治医医療機関コード;
     private RString 主治医コード;
     private RString 市町村コード;
+    private RString 医療機関市町村コード;
     private RString サブ業務コード;
     private RString 対象モード;
     private RString 郵便番号;
@@ -41,26 +42,26 @@ public class ShujiiIryokikanandshujiiDataPassModel implements Serializable {
     public AtenaJusho get住所AsAtenaJusho() {
         return this.住所 == null ? AtenaJusho.EMPTY : new AtenaJusho(this.住所);
     }
-    
+
     @Nonnull
-    public AtenaJusho get医療機関住所AsAtenaJusho(){
+    public AtenaJusho get医療機関住所AsAtenaJusho() {
         return this.医療機関住所 == null ? AtenaJusho.EMPTY : new AtenaJusho(this.医療機関住所);
     }
 
     public TelNo get電話番号AsTelNo() {
         return this.電話番号 == null ? TelNo.EMPTY : new TelNo(this.電話番号);
     }
-    
-    public TelNo get医療機関電話番号AsTelNo(){
+
+    public TelNo get医療機関電話番号AsTelNo() {
         return this.医療機関電話番号 == null ? TelNo.EMPTY : new TelNo(this.医療機関電話番号);
     }
 
     public TelNo getFAX番号AsTelNo() {
         return this.FAX番号 == null ? TelNo.EMPTY : new TelNo(this.FAX番号);
     }
-    
-    public TelNo get医療機関FAX番号AsTelNo(){
+
+    public TelNo get医療機関FAX番号AsTelNo() {
         return this.医療機関FAX番号 == null ? TelNo.EMPTY : new TelNo(this.医療機関FAX番号);
     }
-    
+
 }

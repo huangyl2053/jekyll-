@@ -23,7 +23,6 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 public class ShujiiIryokikanAndShujiiInputHandler {
 
     private final ShujiiIryokikanAndShujiiInputDiv div;
-    private static final RString KEY0 = new RString("key0");
 
     /**
      * コンストラクタです。
@@ -44,6 +43,7 @@ public class ShujiiIryokikanAndShujiiInputHandler {
     public void initialize(LasdecCode shichosonCode, ShinseishoKanriNo shinseishoKanriNo, SubGyomuCode gyomuCode) {
         div.getTxtIryoKikanCode().clearValue();
         div.getTxtIryoKikanName().clearValue();
+        div.setHdnSelectedShichosonCode(RString.EMPTY);
         div.getTxtShujiiCode().clearValue();
         div.getTxtShujiiName().clearValue();
         div.getChkShiteii().setSelectedItemsByKey(new ArrayList<RString>());
@@ -81,6 +81,7 @@ public class ShujiiIryokikanAndShujiiInputHandler {
             RString iryoKikanMeisho, RString shujiiCode, RString shujiiName) {
         div.getTxtIryoKikanCode().setValue(shujiiIryokikanCode);
         div.getTxtIryoKikanName().setValue(iryoKikanMeisho);
+        div.setHdnSelectedShichosonCode(RString.EMPTY);
         div.getTxtShujiiCode().setValue(shujiiCode);
         div.getTxtShujiiName().setValue(shujiiName);
         setChkShiteii(shichosonCode, shujiiIryokikanCode, shujiiCode);
@@ -135,6 +136,7 @@ public class ShujiiIryokikanAndShujiiInputHandler {
     public void clear() {
         div.getTxtIryoKikanCode().clearValue();
         div.getTxtIryoKikanName().clearValue();
+        div.setHdnSelectedShichosonCode(RString.EMPTY);
         div.getTxtShujiiCode().clearValue();
         div.getTxtShujiiName().clearValue();
         div.getChkShiteii().setSelectedItemsByKey(new ArrayList<RString>());

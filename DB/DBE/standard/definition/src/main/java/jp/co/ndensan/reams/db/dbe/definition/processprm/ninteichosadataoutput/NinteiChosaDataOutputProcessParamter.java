@@ -107,4 +107,19 @@ public class NinteiChosaDataOutputProcessParamter implements IBatchProcessParame
                 shichosonCode,
                 null);
     }
+
+    /**
+     * mybatisのパラメータを生成します。
+     *
+     * @param 広域保険者市町村コード
+     * @return NinteiChosaDataOutputBatchMybitisParameter
+     */
+    public NinteiChosaDataOutputBatchMybitisParameter to認定調査員取得Parameter(RString 広域保険者市町村コード) {
+        return NinteiChosaDataOutputBatchMybitisParameter.createSelectByKeyParam(ninteichosaItakusakiCode,
+                null,
+                null,
+                shichosonCode,
+                null,
+                広域保険者市町村コード);
+    }
 }

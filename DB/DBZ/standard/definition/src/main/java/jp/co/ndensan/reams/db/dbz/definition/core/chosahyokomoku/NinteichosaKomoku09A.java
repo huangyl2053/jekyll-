@@ -13,7 +13,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
  *
  * @reamsid_L DBD-9999-023 wangchao
  */
-public enum NinteichosaKomoku09A {
+public enum NinteichosaKomoku09A implements INinteichosaKomoku {
 
     /**
      * 特記事項番号:1-1 群番号:1 群内順序:1 調査特記事項番号:101 前回基本調査項目コード:001 名称:麻痺等の有無
@@ -284,7 +284,8 @@ public enum NinteichosaKomoku09A {
      */
     カテーテル("6-12", "6", "12", "612", "067", "カテーテル", "カテーテル"),
     /**
-     * 特記事項番号:7-1 群番号:7 群内順序:1 調査特記事項番号:701 前回基本調査項目コード:068 名称:障害高齢者の日常自立度（寝たきり度）
+     * 特記事項番号:7-1 群番号:7 群内順序:1 調査特記事項番号:701 前回基本調査項目コード:068
+     * 名称:障害高齢者の日常自立度（寝たきり度）
      */
     障害高齢者自立度("7-1", "7", "1", "701", "068", "障害高齢者の日常自立度（寝たきり度）", "調寝たきり度"),
     /**
@@ -320,6 +321,7 @@ public enum NinteichosaKomoku09A {
      *
      * @return 認定調査特記事項マッピングのコード
      */
+    @Override
     public RString get特記事項番号() {
         return 特記事項番号;
     }
@@ -365,6 +367,7 @@ public enum NinteichosaKomoku09A {
      *
      * @return 認定調査特記事項マッピングの名称
      */
+    @Override
     public RString get名称() {
         return 名称;
     }

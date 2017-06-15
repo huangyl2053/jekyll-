@@ -387,6 +387,13 @@ public class WaritsukeBusiness {
     }
 
     /**
+     * @return 保険者名
+     */
+    public RString getHokenshaName() {
+        return entity.getHokenshaName();
+    }
+
+    /**
      * 認定調査委託先コードを返します。
      *
      * @return 認定調査委託先コード

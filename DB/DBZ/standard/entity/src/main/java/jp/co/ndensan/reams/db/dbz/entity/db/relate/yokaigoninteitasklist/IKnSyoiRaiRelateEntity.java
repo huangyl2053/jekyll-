@@ -29,6 +29,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class IKnSyoiRaiRelateEntity implements Serializable {
 
+    private boolean delay;
     private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     private ShinseishoKanriNo shinseishoKanriNo;
     private RString hihokenshaNo;

@@ -31,7 +31,16 @@ public class ShinsakaiTorokuBusiness {
     public ShinsakaiTorokuBusiness(ShinsakaiTorokuRelateEntity entity) {
         this.entity = entity;
     }
-
+    
+    /**
+     * 遅延の有無を返します。
+     * 
+     * @return boolean true:遅延 false:遅延なし
+     */
+    public boolean is遅延() {
+        return entity.isDelay();
+    }
+    
     /**
      * 認定完了情報を返します。
      *

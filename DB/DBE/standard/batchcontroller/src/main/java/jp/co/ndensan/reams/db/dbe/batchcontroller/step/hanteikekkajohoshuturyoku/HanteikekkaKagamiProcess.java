@@ -7,12 +7,14 @@ package jp.co.ndensan.reams.db.dbe.batchcontroller.step.hanteikekkajohoshuturyok
 
 import java.util.List;
 import java.util.Map;
+import jp.co.ndensan.reams.db.dbe.business.core.shucho.Shuchos;
 import jp.co.ndensan.reams.db.dbe.business.report.hanteikekkakagami.HanteikekkaKagamiReport;
 import jp.co.ndensan.reams.db.dbe.definition.core.reportid.ReportIdDBE;
 import jp.co.ndensan.reams.db.dbe.definition.processprm.hanteikekkajohoshuturyoku.HanteiKekkaJohoShuturyokuProcessParameter;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.hanteikekkakagami.HanteikekkaKagamiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.kekkatsuchiichiranhyo.KekkatsuchiIchiranhyoEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.hanteikekkakagami.HanteikekkaKagamiReportSource;
+import jp.co.ndensan.reams.db.dbe.service.core.shucho.ShuchoService;
 import jp.co.ndensan.reams.db.dbx.business.core.basic.KaigoDonyuKeitai;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.DonyuKeitaiCode;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
@@ -54,6 +56,7 @@ public class HanteikekkaKagamiProcess extends BatchKeyBreakBase<KekkatsuchiIchir
     private Map<Integer, RString> 通知文;
     private boolean 初回判定フラグ;
     private boolean is認定広域 = false;
+    private Shuchos 首長s;
     NinshoshaSource ninshoshaSource;
 
     @BatchWriter
@@ -64,6 +67,7 @@ public class HanteikekkaKagamiProcess extends BatchKeyBreakBase<KekkatsuchiIchir
     protected void initialize() {
         初回判定フラグ = true;
         システム時刻 = RDateTime.now();
+        首長s = ShuchoService.findShuchosAt(システム時刻.getDate());
         通知文 = ReportUtil.get通知文(SubGyomuCode.DBE認定支援, ID, KamokuCode.EMPTY, パターン番号);
     }
 
@@ -126,7 +130,7 @@ public class HanteikekkaKagamiProcess extends BatchKeyBreakBase<KekkatsuchiIchir
         hanteikekkaKagamiEntity.setTsuchibun1(通知文.get(INDEX_1));
         hanteikekkaKagamiEntity.setTsuchibun2(通知文.get(INDEX_2));
         hanteikekkaKagamiEntity.setShoKisaiHokenshaNo(entity.getShoKisaiHokenshaNo());
-        HanteikekkaKagamiReport report = new HanteikekkaKagamiReport(hanteikekkaKagamiEntity);
+        HanteikekkaKagamiReport report = new HanteikekkaKagamiReport(hanteikekkaKagamiEntity, 首長s);
         report.writeBy(reportSourceWriter);
     }
 

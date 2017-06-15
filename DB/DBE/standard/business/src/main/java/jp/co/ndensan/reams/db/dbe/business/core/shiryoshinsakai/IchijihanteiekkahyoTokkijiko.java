@@ -8,35 +8,22 @@ package jp.co.ndensan.reams.db.dbe.business.core.shiryoshinsakai;
 import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.util.DBEImageUtil;
-import jp.co.ndensan.reams.db.dbe.business.core.yokaigoninteiimagekanri.ImageFileItem;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ichijihanteikekkahyo.TokkiJikou;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.ShinsakaiSiryoKyotsuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.TokkijikoIchiranJohoRelateEntity;
 import jp.co.ndensan.reams.db.dbx.definition.core.configkeys.ConfigNameDBE;
 import jp.co.ndensan.reams.db.dbx.definition.core.dbbusinessconfig.DbBusinessConfig;
-import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku02A;
-import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku06A;
-import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku09A;
-import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku09B;
-import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomoku99A;
+import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.INinteichosaKomoku;
+import jp.co.ndensan.reams.db.dbz.definition.core.chosahyokomoku.NinteichosaKomokus;
 import jp.co.ndensan.reams.db.dbz.definition.core.ninteichosatokkijikou.NinteiChosaTokkiJikou;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.chosain.TokkijikoTextImageKubun;
-import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5205NinteichosahyoTokkijikoEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemName;
-import jp.co.ndensan.reams.uz.uza.cooperation.FilesystemPath;
-import jp.co.ndensan.reams.uz.uza.cooperation.SharedFile;
-import jp.co.ndensan.reams.uz.uza.cooperation.descriptor.ReadOnlySharedFileEntryDescriptor;
-import jp.co.ndensan.reams.uz.uza.io.Directory;
-import jp.co.ndensan.reams.uz.uza.io.Path;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
-import jp.co.ndensan.reams.uz.uza.lang.RDateTime;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.math.Decimal;
 
 /**
  * 事務局特記事項のEntityの編集クラスです。
@@ -284,91 +271,39 @@ public class IchijihanteiekkahyoTokkijiko {
     }
 
     private RString get特記事項テキスト(Code 厚労省IF識別コード, RString 調査特記事項番号, int 特記事項連番) {
-        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(厚労省IF識別コード.value())) {
-            RStringBuilder builder = new RStringBuilder();
-            NinteichosaKomoku99A 調査特記事項 = NinteichosaKomoku99A.getAllBy調査特記事項番(調査特記事項番号);
-            builder.append(調査特記事項.get特記事項番号());
-            builder.append(ハイフン);
-            builder.append(特記事項連番);
-            builder.append(RString.FULL_SPACE);
-            builder.append(調査特記事項.get名称());
-            return builder.append(RString.FULL_SPACE).toRString();
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(厚労省IF識別コード.value())) {
-            RStringBuilder builder = new RStringBuilder();
-            NinteichosaKomoku02A 調査特記事項 = NinteichosaKomoku02A.getAllBy調査特記事項番(調査特記事項番号);
-            builder.append(調査特記事項.get特記事項番号());
-            builder.append(ハイフン);
-            builder.append(特記事項連番);
-            builder.append(RString.FULL_SPACE);
-            builder.append(調査特記事項.get名称());
-            return builder.append(RString.FULL_SPACE).toRString();
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(厚労省IF識別コード.value())) {
-            RStringBuilder builder = new RStringBuilder();
-            NinteichosaKomoku06A 調査特記事項 = NinteichosaKomoku06A.getAllBy調査特記事項番(調査特記事項番号);
-            builder.append(調査特記事項.get特記事項番号());
-            builder.append(ハイフン);
-            builder.append(特記事項連番);
-            builder.append(RString.FULL_SPACE);
-            builder.append(調査特記事項.get名称());
-            return builder.append(RString.FULL_SPACE).toRString();
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード.value())) {
-            RStringBuilder builder = new RStringBuilder();
-            NinteichosaKomoku09A 調査特記事項 = NinteichosaKomoku09A.getAllBy調査特記事項番(調査特記事項番号);
-            builder.append(調査特記事項.get特記事項番号());
-            builder.append(ハイフン);
-            builder.append(特記事項連番);
-            builder.append(RString.FULL_SPACE);
-            builder.append(調査特記事項.get名称());
-            return builder.append(RString.FULL_SPACE).toRString();
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コード.value())) {
-            RStringBuilder builder = new RStringBuilder();
-            NinteichosaKomoku09B 調査特記事項 = NinteichosaKomoku09B.getAllBy調査特記事項番(調査特記事項番号);
-            builder.append(調査特記事項.get特記事項番号());
-            builder.append(ハイフン);
-            builder.append(特記事項連番);
-            builder.append(RString.FULL_SPACE);
-            builder.append(調査特記事項.get名称());
-            return builder.append(RString.FULL_SPACE).toRString();
+        if (!KoroshoIfShikibetsuCode.existsCode(厚労省IF識別コード.value())) {
+            return RString.EMPTY;
         }
-        return RString.EMPTY;
+        RStringBuilder builder = new RStringBuilder();
+        INinteichosaKomoku 調査特記事項 = NinteichosaKomokus.toValueFromTokkiJikoNo(厚労省IF識別コード.value(), 調査特記事項番号);
+        builder.append(調査特記事項.get特記事項番号());
+        builder.append(ハイフン);
+        builder.append(特記事項連番);
+        builder.append(RString.FULL_SPACE);
+        builder.append(調査特記事項.get名称());
+        return builder.append(RString.FULL_SPACE).toRString();
     }
 
     private RString get項目名称(Code 厚労省IF識別コード, TokkijikoIchiranJohoRelateEntity 特記事項一覧情報Entity, boolean is項目名印字する) {
-        RString 調査特記事項番号 = 特記事項一覧情報Entity.get認定調査票特記事項Entity().getNinteichosaTokkijikoNo();
         if (特記事項一覧情報Entity.get認定調査票特記事項Entity().getNinteichosaTokkijikoRemban() == 特記事項連番_1 || is項目名印字する) {
-            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(厚労省IF識別コード.value())) {
-                return NinteichosaKomoku99A.getAllBy調査特記事項番(調査特記事項番号).get名称();
-            }
-            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(厚労省IF識別コード.value())) {
-                return NinteichosaKomoku02A.getAllBy調査特記事項番(調査特記事項番号).get名称();
-            }
-            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(厚労省IF識別コード.value())) {
-                return NinteichosaKomoku06A.getAllBy調査特記事項番(調査特記事項番号).get名称();
-            }
-            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード.value())) {
-                return NinteichosaKomoku09A.getAllBy調査特記事項番(調査特記事項番号).get名称();
-            }
-            if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コード.value())) {
-                return NinteichosaKomoku09B.getAllBy調査特記事項番(調査特記事項番号).get名称();
-            }
+            return NinteichosaKomokus.toValueFromTokkiJikoNo(
+                    厚労省IF識別コード.value(),
+                    特記事項一覧情報Entity.get認定調査票特記事項Entity()
+                    .getNinteichosaTokkijikoNo()
+            ).get名称();
         }
         return RString.EMPTY;
     }
 
     private RString get項目番号(Code 厚労省IF識別コード, TokkijikoIchiranJohoRelateEntity 特記事項一覧情報Entity) {
         RStringBuilder 項目番号 = new RStringBuilder();
-        RString 調査特記事項番号 = 特記事項一覧情報Entity.get認定調査票特記事項Entity().getNinteichosaTokkijikoNo();
-        if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ99.getコード().equals(厚労省IF識別コード.value())) {
-            項目番号.append(NinteichosaKomoku99A.getAllBy調査特記事項番(調査特記事項番号).get特記事項番号());
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2002.getコード().equals(厚労省IF識別コード.value())) {
-            項目番号.append(NinteichosaKomoku02A.getAllBy調査特記事項番(調査特記事項番号).get特記事項番号());
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2006_新要介護認定適用区分が未適用.getコード().equals(厚労省IF識別コード.value())) {
-            項目番号.append(NinteichosaKomoku06A.getAllBy調査特記事項番(調査特記事項番号).get特記事項番号());
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009.getコード().equals(厚労省IF識別コード.value())) {
-            項目番号.append(NinteichosaKomoku09A.getAllBy調査特記事項番(調査特記事項番号).get特記事項番号());
-        } else if (KoroshoIfShikibetsuCode.認定ｿﾌﾄ2009_SP3.getコード().equals(厚労省IF識別コード.value())) {
-            項目番号.append(NinteichosaKomoku09B.getAllBy調査特記事項番(調査特記事項番号).get特記事項番号());
-        }
+        項目番号.append(
+                NinteichosaKomokus.toValueFromTokkiJikoNo(
+                        厚労省IF識別コード.value(),
+                        特記事項一覧情報Entity.get認定調査票特記事項Entity()
+                        .getNinteichosaTokkijikoNo()
+                ).get特記事項番号()
+        );
         if (!RString.isNullOrEmpty(項目番号.toRString())) {
             if (特記事項一覧情報Entity.getMaxRemban() != 特記事項連番_1) {
                 項目番号.append(ハイフン);

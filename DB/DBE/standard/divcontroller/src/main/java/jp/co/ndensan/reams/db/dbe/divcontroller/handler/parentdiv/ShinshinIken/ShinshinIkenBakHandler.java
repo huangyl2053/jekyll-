@@ -130,19 +130,19 @@ public class ShinshinIkenBakHandler {
     }
 
     private NinteiShinseiJoho set呼び出し元画面への戻り値() {
-        
+
         ShujiiIkenshoIraiJohoIdentifier 主治医意見書作成依頼情報Key = new ShujiiIkenshoIraiJohoIdentifier(new ShinseishoKanriNo(管理番号),
                 Integer.valueOf(履歴番号.toString()));
         ShujiiIkenshoJohoIdentifier 要介護認定主治医意見書情報Key = new ShujiiIkenshoJohoIdentifier(new ShinseishoKanriNo(管理番号),
                 Integer.valueOf(履歴番号.toString()));
-            ShujiiIkenshoJoho 要介護認定主治医意見書情報 = 要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key).
-                    getSeishinTechoNini(要介護認定主治医意見書情報Key);
-            
+        ShujiiIkenshoJoho 要介護認定主治医意見書情報 = 要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key).
+                getSeishinTechoNini(要介護認定主治医意見書情報Key);
+
         KeyToIkenKomoku keyToIkenKomoku = new KeyToIkenKomoku();
 
         set意見項目Emtpy(要介護認定主治医意見書情報, 寝たきり度);
-        set意見項目(要介護認定主治医意見書情報, 寝たきり度,  keyToIkenKomoku.ikenKomoku02KeyToItem(div.getRadShogaiKoreishaNichijoSeikatsuJiritsudo().getSelectedKey()));
-        
+        set意見項目(要介護認定主治医意見書情報, 寝たきり度, keyToIkenKomoku.ikenKomoku02KeyToItem(div.getRadShogaiKoreishaNichijoSeikatsuJiritsudo().getSelectedKey()));
+
         set意見項目Emtpy(要介護認定主治医意見書情報, 認知症高齢者の日常生活自立度);
         set意見項目(要介護認定主治医意見書情報, 認知症高齢者の日常生活自立度, keyToIkenKomoku.ikenKomoku03KeyToItem(div.getRadNinchishoKoreishaJiritsu().getSelectedKey()));
 
@@ -151,7 +151,7 @@ public class ShinshinIkenBakHandler {
         set意見項目(要介護認定主治医意見書情報, 伝達能力, keyToIkenKomoku.ikenKomoku06KeyToItem(div.getRadIshiDentatsuNoryoku().getSelectedKey()));
         set意見項目Emtpy(要介護認定主治医意見書情報, 認知症の周辺症状);
         set意見項目(要介護認定主治医意見書情報, 認知症の周辺症状, keyToIkenKomoku.ikenKomoku07KeyToItem(div.getRadNinchishoShuhenShojoUmu().getSelectedKey()));
-        
+
         if (div.getChkNinchishoShuhenShojo().getSelectedKeys().contains(KEY_0)) {
             set意見項目(要介護認定主治医意見書情報, 幻視幻聴, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_2));
         } else {
@@ -208,9 +208,9 @@ public class ShinshinIkenBakHandler {
             set意見項目(要介護認定主治医意見書情報, 性的問題行動, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_1));
         }
         if (div.getChkNinchishoShuhenShojoSonota().getSelectedKeys().contains(KEY_0)) {
-           set意見項目(要介護認定主治医意見書情報, その他, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_2)); 
-        }else{
-            set意見項目(要介護認定主治医意見書情報, その他, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_1)); 
+            set意見項目(要介護認定主治医意見書情報, その他, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_2));
+        } else {
+            set意見項目(要介護認定主治医意見書情報, その他, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_1));
         }
         set記入項目(要介護認定主治医意見書情報, その他_記入項目, div.getTxtSonotaKinyu().getValue());
         set意見項目Emtpy(要介護認定主治医意見書情報, その他の精神神経症状);
@@ -228,7 +228,7 @@ public class ShinshinIkenBakHandler {
         set記入項目(要介護認定主治医意見書情報, 体重_記入項目, div.getTxtTaiju().getValue());
         set意見項目Emtpy(要介護認定主治医意見書情報, 過去6カ月の体重の変化);
         set意見項目(要介護認定主治医意見書情報, 過去6カ月の体重の変化, keyToIkenKomoku.ikenKomoku09KeyToItem(div.getRadKakoTaijuHenka().getSelectedKey()));
-        
+
         return set呼び出し元画面への戻り値_下();
     }
 
@@ -241,49 +241,49 @@ public class ShinshinIkenBakHandler {
                 getSeishinTechoNini(要介護認定主治医意見書情報Key);
 
         KeyToIkenKomoku keyToIkenKomoku = new KeyToIkenKomoku();
-        
+
         if (div.getChkShishiKesson().getSelectedKeys().contains(KEY_0)) {
-             set意見項目(要介護認定主治医意見書情報, 四肢欠損, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_2));
-        }else{
+            set意見項目(要介護認定主治医意見書情報, 四肢欠損, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_2));
+        } else {
             set意見項目(要介護認定主治医意見書情報, 四肢欠損, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_1));
         }
         set記入項目(要介護認定主治医意見書情報, 四肢欠損_記入項目, div.getTxtShishiKessonBui().getValue());
         if (div.getChkMahi().getSelectedKeys().contains(KEY_0)) {
             set意見項目(要介護認定主治医意見書情報, 麻痺, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_2));
-        }else{
+        } else {
             set意見項目(要介護認定主治医意見書情報, 麻痺, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_1));
         }
         if (div.getChkMigiJoshiMahi().getSelectedKeys().contains(KEY_0)) {
             set意見項目(要介護認定主治医意見書情報, 麻痺_右上肢, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_2));
-        }else{
+        } else {
             set意見項目(要介護認定主治医意見書情報, 麻痺_右上肢, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_1));
         }
         set意見項目Emtpy(要介護認定主治医意見書情報, 麻痺_右上肢_程度);
         set意見項目(要介護認定主治医意見書情報, 麻痺_右上肢_程度, keyToIkenKomoku.ikenKomoku10KeyToItem(div.getRadMigiJoshiMahiTeido().getSelectedKey()));
         if (div.getChkHidariJoshiMahi().getSelectedKeys().contains(KEY_0)) {
             set意見項目(要介護認定主治医意見書情報, 麻痺_左上肢, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_2));
-        }else{
+        } else {
             set意見項目(要介護認定主治医意見書情報, 麻痺_左上肢, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_1));
         }
         set意見項目Emtpy(要介護認定主治医意見書情報, 麻痺_左上肢_程度);
         set意見項目(要介護認定主治医意見書情報, 麻痺_左上肢_程度, keyToIkenKomoku.ikenKomoku10KeyToItem(div.getRadHidariJoshiMahiTeido().getSelectedKey()));
         if (div.getChkMigiKashiMahi().getSelectedKeys().contains(KEY_0)) {
-            set意見項目(要介護認定主治医意見書情報, 麻痺_右下肢, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_2));        
-        }else{
+            set意見項目(要介護認定主治医意見書情報, 麻痺_右下肢, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_2));
+        } else {
             set意見項目(要介護認定主治医意見書情報, 麻痺_右下肢, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_1));
         }
         set意見項目Emtpy(要介護認定主治医意見書情報, 麻痺_右下肢_程度);
         set意見項目(要介護認定主治医意見書情報, 麻痺_右下肢_程度, keyToIkenKomoku.ikenKomoku10KeyToItem(div.getRadMigiKashiMahiTeido().getSelectedKey()));
         if (div.getChkHidariKashiMahi().getSelectedKeys().contains(KEY_0)) {
             set意見項目(要介護認定主治医意見書情報, 麻痺_左下肢, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_2));
-        }else{
+        } else {
             set意見項目(要介護認定主治医意見書情報, 麻痺_左下肢, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_1));
         }
         set意見項目Emtpy(要介護認定主治医意見書情報, 麻痺_左下肢_程度);
         set意見項目(要介護認定主治医意見書情報, 麻痺_左下肢_程度, keyToIkenKomoku.ikenKomoku10KeyToItem(div.getRadHidariKashiMahiTeido().getSelectedKey()));
         if (div.getChkSonotaMahi().getSelectedKeys().contains(KEY_0)) {
             set意見項目(要介護認定主治医意見書情報, 麻痺_その他, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_2));
-        }else{
+        } else {
             set意見項目(要介護認定主治医意見書情報, 麻痺_その他, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_1));
         }
         set記入項目(要介護認定主治医意見書情報, 麻痺_その他_記入項目, div.getTxtSonotaMahiBui().getValue());
@@ -291,7 +291,7 @@ public class ShinshinIkenBakHandler {
         set意見項目(要介護認定主治医意見書情報, 麻痺_その他_程度, keyToIkenKomoku.ikenKomoku10KeyToItem(div.getRadSonotaMahiTeido().getSelectedKey()));
         if (div.getChkKinryokuTeika().getSelectedKeys().contains(KEY_0)) {
             set意見項目(要介護認定主治医意見書情報, 筋力の低下, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_2));
-        }else{
+        } else {
             set意見項目(要介護認定主治医意見書情報, 筋力の低下, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_1));
         }
         set記入項目(要介護認定主治医意見書情報, 筋力の低下_記入項目, div.getTxtKinryokuTeikaBui().getValue());
@@ -299,7 +299,7 @@ public class ShinshinIkenBakHandler {
         set意見項目(要介護認定主治医意見書情報, 筋力の低下_程度, keyToIkenKomoku.ikenKomoku10KeyToItem(div.getRadKinryokuTeikaTeido().getSelectedKey()));
         if (div.getChkKansetsuKoshuku().getSelectedKeys().contains(KEY_0)) {
             set意見項目(要介護認定主治医意見書情報, 関節の拘縮, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_2));
-        }else{
+        } else {
             set意見項目(要介護認定主治医意見書情報, 関節の拘縮, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_1));
         }
         set記入項目(要介護認定主治医意見書情報, 関節の拘縮_記入項目, div.getTxtKansetsuKoshukuBui().getValue());
@@ -307,7 +307,7 @@ public class ShinshinIkenBakHandler {
         set意見項目(要介護認定主治医意見書情報, 関節の拘縮_程度, keyToIkenKomoku.ikenKomoku10KeyToItem(div.getRadKansetsuKoshukuTeido().getSelectedKey()));
         if (div.getChkKansetsuItami().getSelectedKeys().contains(KEY_0)) {
             set意見項目(要介護認定主治医意見書情報, 関節の痛み, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_2));
-        }else{
+        } else {
             set意見項目(要介護認定主治医意見書情報, 関節の痛み, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_1));
         }
         set記入項目(要介護認定主治医意見書情報, 関節の痛み_記入項目, div.getTxtKansetsuItamiBui().getValue());
@@ -315,56 +315,56 @@ public class ShinshinIkenBakHandler {
         set意見項目(要介護認定主治医意見書情報, 関節の痛み_程度, keyToIkenKomoku.ikenKomoku10KeyToItem(div.getRadKansetsuItamiTeido().getSelectedKey()));
         if (div.getChkShicchoFuzuii().getSelectedKeys().contains(KEY_0)) {
             set意見項目(要介護認定主治医意見書情報, 失調_不随意運動, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_2));
-        }else{
+        } else {
             set意見項目(要介護認定主治医意見書情報, 失調_不随意運動, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_1));
         }
         if (div.getChkFuzuiiJoshi().getSelectedKeys().contains(KEY_0)) {
             set意見項目(要介護認定主治医意見書情報, 失調_不随意運動_上肢_右, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_2));
-        }else{
+        } else {
             set意見項目(要介護認定主治医意見書情報, 失調_不随意運動_上肢_右, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_1));
         }
         if (div.getChkFuzuiiJoshi().getSelectedKeys().contains(KEY_1)) {
             set意見項目(要介護認定主治医意見書情報, 失調_不随意運動_上肢_左, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_2));
-        }else{
+        } else {
             set意見項目(要介護認定主治医意見書情報, 失調_不随意運動_上肢_左, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_1));
         }
         if (div.getChkFuzuiiKashi().getSelectedKeys().contains(KEY_0)) {
             set意見項目(要介護認定主治医意見書情報, 失調_不随意運動_下肢_右, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_2));
-        }else{
+        } else {
             set意見項目(要介護認定主治医意見書情報, 失調_不随意運動_下肢_右, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_1));
         }
         if (div.getChkFuzuiiKashi().getSelectedKeys().contains(KEY_1)) {
             set意見項目(要介護認定主治医意見書情報, 失調_不随意運動_下肢_左, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_2));
-        }else{
+        } else {
             set意見項目(要介護認定主治医意見書情報, 失調_不随意運動_下肢_左, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_1));
         }
         if (div.getChkTaikan().getSelectedKeys().contains(KEY_0)) {
             set意見項目(要介護認定主治医意見書情報, 失調_不随意運動_体幹_右, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_2));
-        }else{
+        } else {
             set意見項目(要介護認定主治医意見書情報, 失調_不随意運動_体幹_右, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_1));
         }
         if (div.getChkTaikan().getSelectedKeys().contains(KEY_1)) {
             set意見項目(要介護認定主治医意見書情報, 失調_不随意運動_体幹_左, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_2));
-        }else{
+        } else {
             set意見項目(要介護認定主治医意見書情報, 失調_不随意運動_体幹_左, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_1));
         }
         if (div.getChkJokuso().getSelectedKeys().contains(KEY_0)) {
             set意見項目(要介護認定主治医意見書情報, じょくそう, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_2));
-        }else{
-           set意見項目(要介護認定主治医意見書情報, じょくそう, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_1)); 
+        } else {
+            set意見項目(要介護認定主治医意見書情報, じょくそう, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_1));
         }
         set記入項目(要介護認定主治医意見書情報, じょくそう_記入項目, div.getTxtJokusoBui().getValue());
         set意見項目Emtpy(要介護認定主治医意見書情報, じょくそう_程度);
         set意見項目(要介護認定主治医意見書情報, じょくそう_程度, keyToIkenKomoku.ikenKomoku10KeyToItem(div.getRadJokusoTeido().getSelectedKey()));
         if (div.getChkSonotaHifuShikkan().getSelectedKeys().contains(KEY_0)) {
             set意見項目(要介護認定主治医意見書情報, その他の皮膚疾患, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_2));
-        }else{
+        } else {
             set意見項目(要介護認定主治医意見書情報, その他の皮膚疾患, keyToIkenKomoku.ikenKomoku01KeyToItem(KEY_1));
         }
         set記入項目(要介護認定主治医意見書情報, その他の皮膚疾患_記入項目, div.getTxtSonotaHifuShikkanBui().getValue());
         set意見項目Emtpy(要介護認定主治医意見書情報, その他の皮膚疾患_程度);
         set意見項目(要介護認定主治医意見書情報, その他の皮膚疾患_程度, keyToIkenKomoku.ikenKomoku01KeyToItem(div.getRadSonotaHifuShikkanTeido().getSelectedKey()));
-        
+
         要介護認定申請情報.createBuilderForEdit().setShujiiIkenshoIraiJoho(要介護認定申請情報.getShujiiIkenshoIraiJoho(主治医意見書作成依頼情報Key)
                 .createBuilderForEdit().setShujiiIkenshoJoho(要介護認定主治医意見書情報).build());
         return 要介護認定申請情報;

@@ -27,6 +27,7 @@ import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
 import jp.co.ndensan.reams.uz.uza.math.Decimal;
 import jp.co.ndensan.reams.uz.uza.ui.binding.TextBoxCode;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 主治医マスタ画面のハンドラークラスです。
@@ -96,9 +97,9 @@ public class ShujiiMasterHandler {
      *
      * @param shujiiMasterList 主治医一覧List
      */
-    public void setShujiiIchiran(List<ShujiiMaster> shujiiMasterList) {
+    public void setShujiiIchiran(SearchResult<ShujiiMaster> shujiiMasterList) {
         List<dgShujiiIchiran_Row> dataGridList = new ArrayList<>();
-        for (ShujiiMaster shujiiMaster : shujiiMasterList) {
+        for (ShujiiMaster shujiiMaster : shujiiMasterList.records()) {
             if (shujiiMaster.get主治医コード() != null && !shujiiMaster.get主治医コード().isEmpty()) {
                 dataGridList.add(createDgShujiiIchiranRow(
                         RString.EMPTY,
@@ -123,6 +124,8 @@ public class ShujiiMasterHandler {
             }
         }
         div.getShujiiIchiran().getDgShujiiIchiran().setDataSource(dataGridList);
+        div.getShujiiIchiran().getDgShujiiIchiran().getGridSetting().setLimitRowCount(div.getTxtSaidaiHyojiKensu().getValue().intValue());
+        div.getShujiiIchiran().getDgShujiiIchiran().getGridSetting().setSelectedRowCount(shujiiMasterList.totalCount());
     }
 
     private dgShujiiIchiran_Row createDgShujiiIchiranRow(

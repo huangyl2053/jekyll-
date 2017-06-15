@@ -186,6 +186,9 @@ public class IraishoIkkatsuHakko {
             param.setIraiToYMD(div.getTxtNinteiChosaIraibi().getToValue() == null
                     ? RString.EMPTY : div.getTxtNinteiChosaIraibi().getToValue().toDateString());
             getHandler(div).setNinteParam(param);
+            param.setShichosonCode(div.getCcdNinteiChosaHokensha().getSelectedItem().get市町村コード().value());
+            param.setShoKisaiHokenshaNo(div.getCcdNinteiChosaHokensha().getSelectedItem().get証記載保険者番号().value());
+            param.setHokenshaName(div.getCcdNinteiChosaHokensha().getSelectedItem().get市町村名称());
         }
         if (new RString(DBE2400001StateName.主治医意見書作成依頼_検索結果.name()).equals(ResponseHolder.getState())) {
             param.setIraiFromYMD(div.getTxtShujiiIkenshoSakuseiIraibi().getFromValue() == null
@@ -193,6 +196,9 @@ public class IraishoIkkatsuHakko {
             param.setIraiToYMD(div.getTxtShujiiIkenshoSakuseiIraibi().getToValue() == null
                     ? RString.EMPTY : div.getTxtShujiiIkenshoSakuseiIraibi().getToValue().toDateString());
             getHandler(div).setShujiiParam(param);
+            param.setShichosonCode(div.getCcdShujiiIkenshoHokensha().getSelectedItem().get市町村コード().value());
+            param.setShoKisaiHokenshaNo(div.getCcdShujiiIkenshoHokensha().getSelectedItem().get証記載保険者番号().value());
+            param.setHokenshaName(div.getCcdShujiiIkenshoHokensha().getSelectedItem().get市町村名称());
         }
         param.setHakkobi(div.getTxtHakkobi().getValue() == null
                 ? RString.EMPTY : div.getTxtHakkobi().getValue().toDateString());
@@ -211,9 +217,6 @@ public class IraishoIkkatsuHakko {
             param.setKyotsuHizuke(RString.EMPTY);
         }
         param.setBunshoNo(div.getCcdBunshoNo().get文書番号());
-        param.setShichosonCode(div.getCcdNinteiChosaHokensha().getSelectedItem().get市町村コード().value());
-        param.setShoKisaiHokenshaNo(div.getCcdNinteiChosaHokensha().getSelectedItem().get証記載保険者番号().value());
-        param.setHokenshaName(div.getCcdNinteiChosaHokensha().getSelectedItem().get市町村名称());
         return ResponseData.of(param).respond();
     }
 

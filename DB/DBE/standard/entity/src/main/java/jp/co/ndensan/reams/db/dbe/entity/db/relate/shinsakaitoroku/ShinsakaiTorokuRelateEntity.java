@@ -25,6 +25,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShinsakaiTorokuRelateEntity {
 
+    private boolean delay;
     private ShinseishoKanriNo shinseishoKanriNo;
     private ShoKisaiHokenshaNo shoKisaiHokenshaNo;
     private RString hihokenshaNo;

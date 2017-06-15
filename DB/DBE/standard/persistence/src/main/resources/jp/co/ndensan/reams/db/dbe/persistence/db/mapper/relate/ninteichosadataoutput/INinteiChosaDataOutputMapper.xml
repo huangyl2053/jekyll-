@@ -66,8 +66,13 @@
         ON DbT5913."shichosonCode" = DbT7051."shichosonCode"
         AND DbT5910."shichosonCode" = DbT7051."shichosonCode"
         <where>
-            <if test="!isShichoson">
-                AND DbT7051."shichosonCode" = #{shichosonCode}
+            <if test="isKoikiKanri">
+                AND DbT7051."shichosonCode" = #{koikiHokenshaShichosonCode}
+            </if>
+            <if test="!isKoikiKanri">
+                <if test="!isShichoson">
+                    AND DbT7051."shichosonCode" = #{shichosonCode}
+                </if>
             </if>
             <if test="isNinteichosaItakusakiCode">
                 AND DbT5913."ninteiChosaItakusakiCode" = #{ninteichosaItakusakiCode}

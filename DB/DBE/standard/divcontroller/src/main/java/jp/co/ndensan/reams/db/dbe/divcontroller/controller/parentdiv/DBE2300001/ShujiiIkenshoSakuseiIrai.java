@@ -25,7 +25,6 @@ import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHok
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.NinteiKanryoJohoIdentifier;
-import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoIraiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShujiiIkenshoIraiJohoIdentifier;
 import jp.co.ndensan.reams.db.dbz.business.core.ikenshoprint.IkenshoPrintParameterModel;
@@ -34,7 +33,6 @@ import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.Shuj
 import jp.co.ndensan.reams.db.dbz.definition.core.valueobject.ninteishinsei.ShujiiIryokikanCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoIraiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IshiKubunCode;
-import jp.co.ndensan.reams.db.dbz.service.core.basic.NinteiShinseiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.basic.ShujiiIkenshoIraiJohoManager;
 import jp.co.ndensan.reams.db.dbz.service.core.shishosecurityjoho.ShishoSecurityJoho;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrErrorMessages;
@@ -42,6 +40,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrInformationMessages;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.ControlDataHolder;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
 import jp.co.ndensan.reams.uz.uza.lang.ApplicationException;
@@ -205,7 +204,7 @@ public class ShujiiIkenshoSakuseiIrai {
             }
         }
         model.set申請書管理番号リスト(list);
-        model.set市町村コード(div.getCcdHokenshaList().getSelectedItem().get市町村コード());
+        model.set市町村コード(new LasdecCode(div.getCcdShujiiIryoKikanAndShujiiInput().getSelectedShichosonCode()));
         model.set遷移元画面区分(GamenSeniKbn.主治医意見書依頼);
         div.setHiddenIuputModel(DataPassingConverter.serialize(model));
         return ResponseData.of(div).respond();
@@ -310,7 +309,8 @@ public class ShujiiIkenshoSakuseiIrai {
         RString 支所コード = ViewStateHolder.get(ViewStateKeys.支所コード, RString.class);
 
         ShujiiIkenshoSakuseiIraiParameter parameter
-                = ShujiiIkenshoSakuseiIraiParameter.createParamfor割付済み申請者一覧(証記載保険者番号, 支所コード, 主治医医療機関コード, 主治医コード);
+                = ShujiiIkenshoSakuseiIraiParameter.createParamfor割付済み申請者一覧(証記載保険者番号, 支所コード,
+                        div.getCcdShujiiIryoKikanAndShujiiInput().getSelectedShichosonCode(), 主治医医療機関コード, 主治医コード);
         List<WaritsukeBusiness> 割付済み申請者一覧 = ShujiiIkenshoSakuseiIraiManager.createInstance().get割付済み申請者情報(parameter);
         createHandler(div).set割付済み申請者一覧(割付済み申請者一覧, 保険者名称);
 
@@ -331,7 +331,8 @@ public class ShujiiIkenshoSakuseiIrai {
         RString 保険者名称 = div.getCcdHokenshaList().getSelectedItem().get市町村名称();
         RString 支所コード = ViewStateHolder.get(ViewStateKeys.支所コード, RString.class);
 
-        ShujiiIkenshoSakuseiIraiParameter parameter = ShujiiIkenshoSakuseiIraiParameter.createParam主治医医療機関Or未割付申請者(証記載保険者番号, 支所コード);
+        ShujiiIkenshoSakuseiIraiParameter parameter = ShujiiIkenshoSakuseiIraiParameter.createParam主治医医療機関Or未割付申請者(
+                証記載保険者番号, 支所コード, div.getCcdShujiiIryoKikanAndShujiiInput().getSelectedShichosonCode());
         List<WaritsukeBusiness> 未割付申請者一覧 = ShujiiIkenshoSakuseiIraiManager.createInstance().get未割付申請者情報(parameter);
         createHandler(div).set未割付申請者一覧(未割付申請者一覧, 保険者名称);
     }
@@ -381,7 +382,6 @@ public class ShujiiIkenshoSakuseiIrai {
                         .set論理削除フラグ(false)
                         .build();
                 shujiiIkenshoIraiJohoManager.save主治医意見書作成依頼情報(shujiiIkenshoIraiJoho);
-                update要介護認定申請情報(申請書管理番号, 主治医コード, 主治医医療機関コード, row, div.getCcdShujiiIryoKikanAndShujiiInput().hasShiteii());
             }
         }
         div.getDgWaritsukeZumiShinseishaIchiran().setDataSource(割付済み申請者List);
@@ -390,18 +390,6 @@ public class ShujiiIkenshoSakuseiIrai {
     private static IkenshoIraiKubun toIkenshoIraiKubun(RString displayName) {
         IkenshoIraiKubun i = IkenshoIraiKubun.toValueFromName(displayName);
         return i == null ? IkenshoIraiKubun.初回依頼 : i;
-    }
-
-    private void update要介護認定申請情報(ShinseishoKanriNo 申請書管理番号, RString 主治医コード,
-            RString 主治医医療機関コード, dgWaritsukeZumiShinseishaIchiran_Row row, boolean 指定医フラグ) {
-        NinteiShinseiJohoManager manager = NinteiShinseiJohoManager.createInstance();
-        NinteiShinseiJoho ninteiShinseiJoho = manager.get要介護認定申請情報(申請書管理番号);
-        ninteiShinseiJoho = ninteiShinseiJoho.createBuilderForEdit()
-                .set主治医医療機関コード(主治医医療機関コード)
-                .set主治医コード(主治医コード)
-                .set指定医フラグ(指定医フラグ)
-                .build();
-        manager.save要介護認定申請情報(ninteiShinseiJoho.modifiedModel());
     }
 
     private void update主治医意見書作成依頼情報(ShujiiIkenshoSakuseiIraiDiv div) {

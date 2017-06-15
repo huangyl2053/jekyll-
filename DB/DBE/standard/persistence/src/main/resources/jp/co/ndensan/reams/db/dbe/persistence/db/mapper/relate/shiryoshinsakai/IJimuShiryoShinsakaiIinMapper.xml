@@ -504,8 +504,9 @@
         )
         AND "DbT5205NinteichosahyoTokkijiko"."genponMaskKubun" = #{genponMaskKubun}
         ORDER BY
-        "DbT5205NinteichosahyoTokkijiko"."ninteichosaTokkijikoNo",
-        "DbT5205NinteichosahyoTokkijiko"."ninteichosaTokkijikoRemban"
+            "DbT5205NinteichosahyoTokkijiko"."ninteichosaTokkijikoNo" = '999' DESC,
+            "DbT5205NinteichosahyoTokkijiko"."ninteichosaTokkijikoNo",
+            "DbT5205NinteichosahyoTokkijiko"."ninteichosaTokkijikoRemban"
     </select>
 
     <resultMap id="Result_事務局特記情報" type="jp.co.ndensan.reams.db.dbe.entity.db.relate.shiryoshinsakai.TokkijikoIchiranJohoRelateEntity" autoMapping="true">

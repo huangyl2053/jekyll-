@@ -100,7 +100,17 @@ public class DeletePanel {
         if (ExclusiveLock.isLocked(ResponseHolder.getUIContainerId())) {
             throw new ApplicationException(DbeErrorMessages.バッチとの機能間排他.getMessage());
         }
+        ImagekanriJoho imageKanriJoho = ViewStateHolder.get(ViewStateKeys.イメージ情報, ImagekanriJoho.class);
+        OperationTargets targets = getMapper(div).toOperationTargets();
         if (!ResponseHolder.isReRequest()) {
+            ValidationMessageControlPairs controlPairs = getValidationHandler(div).validateInput();
+            if (controlPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(controlPairs).respond();
+            }
+            ValidationMessageControlPairs イメージ削除チェック = getValidationHandler(div).validateDeletable(targets, imageKanriJoho);
+            if (イメージ削除チェック.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(イメージ削除チェック).respond();
+            }
             QuestionMessage message = new QuestionMessage(UrQuestionMessages.削除の確認.getMessage().getCode(),
                     UrQuestionMessages.削除の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
@@ -121,17 +131,6 @@ public class DeletePanel {
         if (new RString(UrQuestionMessages.削除の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
             if (ResponseHolder.getButtonType() == MessageDialogSelectedResult.No) {
                 return ResponseData.of(div).respond();
-            }
-
-            ValidationMessageControlPairs controlPairs = getValidationHandler(div).validateInput();
-            if (controlPairs.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(controlPairs).respond();
-            }
-            ImagekanriJoho imageKanriJoho = ViewStateHolder.get(ViewStateKeys.イメージ情報, ImagekanriJoho.class);
-            OperationTargets targets = getMapper(div).toOperationTargets();
-            ValidationMessageControlPairs イメージ削除チェック = getValidationHandler(div).validateDeletable(targets, imageKanriJoho);
-            if (イメージ削除チェック.iterator().hasNext()) {
-                return ResponseData.of(div).addValidationMessages(イメージ削除チェック).respond();
             }
             ImageDeletor.deleteImageFiles(imageKanriJoho, targets);
             YokaigoninteiimagesakujoManager.createInstance().updateOrDelete(imageKanriJoho, targets);

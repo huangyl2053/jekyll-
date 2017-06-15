@@ -76,12 +76,12 @@ public class NinnteiChousairaiFinder {
     @Transaction
     public SearchResult<NinnteiChousairaiBusiness> get認定調査委託先(NinnteiChousairaiParameter parametere) {
         INinnteiChousairaiMapper mapper = mapperProvider.create(INinnteiChousairaiMapper.class);
-        int 該当件数 = mapper.select認定調査委託先件数(parametere);
         List<NinnteiChousairaiEntity> entityList = mapper.select認定調査委託先情報(parametere);
         List<NinnteiChousairaiBusiness> 認定調査委託先List = new ArrayList<>();
         for (NinnteiChousairaiEntity entity : entityList) {
             認定調査委託先List.add(new NinnteiChousairaiBusiness(entity));
         }
+        int 該当件数 = entityList.isEmpty() ? 0 : entityList.get(0).getTotalCount();
         return SearchResult.of(認定調査委託先List, 該当件数, 該当件数 > 認定調査委託先List.size());
     }
 

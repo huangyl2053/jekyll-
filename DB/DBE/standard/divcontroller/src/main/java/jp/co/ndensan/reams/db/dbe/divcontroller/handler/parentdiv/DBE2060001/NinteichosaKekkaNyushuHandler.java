@@ -51,6 +51,8 @@ import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
 import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
+import jp.co.ndensan.reams.uz.uza.ui.binding.Icon;
+import jp.co.ndensan.reams.uz.uza.ui.binding.IconType;
 
 /**
  * 完了処理・認定調査結果入手のHandlerクラスです。
@@ -217,11 +219,20 @@ public class NinteichosaKekkaNyushuHandler {
         List<dgNinteiTaskList_Row> rowList = new ArrayList<>();
         int mishoriCount = 0;
         int kanryoKanoCount = 0;
+        Icon warningIcon = new Icon();
+        warningIcon.setIcon(IconType.Warning);
+        Icon noIcon = new Icon();
+        noIcon.setVisible(false);
         for (CyoSaNyuSyuBusiness business : searchResult.records()) {
 //            if (!isDisplay(business.get認定調査実施年月日())) {
 //                continue;
 //            }
             dgNinteiTaskList_Row row = new dgNinteiTaskList_Row();
+            if (business.is遅延()) {
+                row.setDelay(warningIcon);
+            } else {
+                row.setDelay(noIcon);
+            }
             row.setShoKisaiHokenshaNo(business.get証記載保険者番号().value());
             row.setHokensha(RString.isNullOrEmpty(business.get保険者名()) ? RString.EMPTY : business.get保険者名());
             row.getNinteiShinseiYMD().setValue(toRDate(business.get認定申請年月日()));

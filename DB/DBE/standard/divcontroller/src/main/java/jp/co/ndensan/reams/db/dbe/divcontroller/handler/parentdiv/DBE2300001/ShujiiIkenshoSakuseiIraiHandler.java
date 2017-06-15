@@ -12,19 +12,15 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2300001.Shuj
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2300001.dgMiwaritsukeShinseishaIchiran_Row;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2300001.dgWaritsukeZumiShinseishaIchiran_Row;
 import jp.co.ndensan.reams.db.dbx.definition.core.NinteiShinseiKubunShinsei;
-import jp.co.ndensan.reams.db.dbx.definition.core.codeshubetsu.DBECodeShubetsu;
 import jp.co.ndensan.reams.db.dbx.definition.core.shichosonsecurity.GyomuBunrui;
 import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
+import jp.co.ndensan.reams.db.dbz.business.config.FourMasterConfig;
 import jp.co.ndensan.reams.db.dbz.definition.core.seibetsu.Seibetsu;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.IkenshoIraiKubun;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.ikensho.SakuseiryoSeikyuKubun;
 import jp.co.ndensan.reams.db.dbz.service.core.sakuseiryoSeikyuKubun.SakuseiryoSeikyuKubunFinder;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
-import jp.co.ndensan.reams.uz.uza.biz.SubGyomuCode;
-import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
-import jp.co.ndensan.reams.uz.uza.util.code.CodeMaster;
 
 /**
  * 主治医意見書作成依頼のHandlerクラスです。
@@ -72,18 +68,6 @@ public class ShujiiIkenshoSakuseiIraiHandler {
                 row.setSeibetsu(Seibetsu.toValue(割付済み申請者.getSeibetsu().value()).get名称());
             }
             setNinteiShinseiJoho(割付済み申請者, row);
-            if (割付済み申請者.getChikuCode() != null) {
-                RString codeName = CodeMaster.getCodeMeisho(
-                        SubGyomuCode.DBE認定支援,
-                        DBECodeShubetsu.調査地区コード.getコード(),
-                        new Code(割付済み申請者.getChikuCode().value()),
-                        FlexibleDate.getNowDate());
-                if (codeName != null) {
-                    row.setChiku(codeName);
-                }
-            }
-            row.setZenkaiChosaItakusaki(nullToEmpty(割付済み申請者.getTemp_jigyoshaMeisho()));
-            row.setZenkaiChosain(nullToEmpty(割付済み申請者.getTemp_chosainShimei()));
 
             if (割付済み申請者.getIkenshoSakuseiIraiYMD() != null && !割付済み申請者.getIkenshoSakuseiIraiYMD().isEmpty()) {
                 row.setIkenshoSakuseiIraiDay(割付済み申請者.getIkenshoSakuseiIraiYMD().wareki().toDateString());
@@ -154,16 +138,6 @@ public class ShujiiIkenshoSakuseiIraiHandler {
             if (未割付申請者.getNinteiShinseiKubunCode() != null && !RString.isNullOrEmpty(未割付申請者.getNinteiShinseiKubunCode().value())) {
                 int ninteiShinseiKubun = Integer.parseInt(未割付申請者.getNinteiShinseiKubunCode().getColumnValue().toString());
                 row.setShinseiKubunShinseiji(new RString(NinteiShinseiKubunShinsei.toValue(ninteiShinseiKubun).name()));
-            }
-            if (未割付申請者.getChikuCode() != null) {
-                RString codeName = CodeMaster.getCodeMeisho(
-                        SubGyomuCode.DBE認定支援,
-                        DBECodeShubetsu.調査地区コード.getコード(),
-                        new Code(未割付申請者.getChikuCode().value()),
-                        FlexibleDate.getNowDate());
-                if (codeName != null) {
-                    row.setChiku(codeName);
-                }
             }
             row.setZenkaiChosaItakusaki(nullToEmpty(未割付申請者.getTemp_jigyoshaMeisho()));
             row.setZenkaiNinteiChosainShimei(nullToEmpty(未割付申請者.getTemp_chosainShimei()));

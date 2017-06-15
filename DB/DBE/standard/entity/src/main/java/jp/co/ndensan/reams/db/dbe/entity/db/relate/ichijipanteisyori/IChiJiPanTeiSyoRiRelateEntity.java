@@ -25,6 +25,7 @@ import jp.co.ndensan.reams.uz.uza.math.Decimal;
 public class IChiJiPanTeiSyoRiRelateEntity implements Serializable {
 
     private RString shichosonMeisho;
+    private boolean delay;
     private RString hihokenshaNo;
     private AtenaMeisho hihokenshaName;
     private FlexibleDate ninteiShinseiYMD;
