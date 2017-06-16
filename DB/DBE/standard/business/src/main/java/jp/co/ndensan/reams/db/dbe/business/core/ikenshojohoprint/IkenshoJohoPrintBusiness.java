@@ -13,7 +13,9 @@ import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshomiirai.ShujiiIke
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshomiteishutsu.ShujiiIkenshoMiteishutsuEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshoseikyuichiran.ShujiiIkenshoSeikyuIchiranEntity;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -37,6 +39,7 @@ public class IkenshoJohoPrintBusiness {
      */
     public ShujiiIkenshoMiIraiEntity toShujiiIkenshoMiIraiEntity(IkenshoJohoPrintRelateEntity entity) {
         ShujiiIkenshoMiIraiEntity shujiiIkenshoMiIraiEntity = new ShujiiIkenshoMiIraiEntity();
+        shujiiIkenshoMiIraiEntity.set申請書管理番号(entity.getShinseishoKanriNo().value());
         shujiiIkenshoMiIraiEntity.set保険者番号(entity.getShoKisaiHokenshaNo());
         shujiiIkenshoMiIraiEntity.set保険者名(entity.getShichosonMeisho());
         shujiiIkenshoMiIraiEntity.set氏名(entity.getHihokenshaName());
@@ -66,6 +69,7 @@ public class IkenshoJohoPrintBusiness {
     public ShijiiIkenshoIraiHenko toShijiiIkenshoIraiHenko(IkenshoJohoPrintRelateEntity before,
             IkenshoJohoPrintRelateEntity entity, int 変更回数) {
         shijiiIkenshoIraiHenko = new ShijiiIkenshoIraiHenko();
+        shijiiIkenshoIraiHenko.set申請書管理番号(entity.getShinseishoKanriNo().value());
         shijiiIkenshoIraiHenko.set保険者番号(entity.getShoKisaiHokenshaNo());
         shijiiIkenshoIraiHenko.set保険者名(entity.getShichosonMeisho());
         shijiiIkenshoIraiHenko.set氏名(entity.getHihokenshaName());
@@ -92,6 +96,7 @@ public class IkenshoJohoPrintBusiness {
      */
     public ShujiiIkenshoMiteishutsuEntity toShujiiIkenshoMiteishutsuEntity(IkenshoJohoPrintRelateEntity entity) {
         ShujiiIkenshoMiteishutsuEntity shujiiIkenshoMiteishutsuEntity = new ShujiiIkenshoMiteishutsuEntity();
+        shujiiIkenshoMiteishutsuEntity.set申請書管理番号(entity.getShinseishoKanriNo().value());
         shujiiIkenshoMiteishutsuEntity.set保険者番号(entity.getShoKisaiHokenshaNo());
         shujiiIkenshoMiteishutsuEntity.set保険者名(entity.getShichosonMeisho());
         shujiiIkenshoMiteishutsuEntity.set氏名(entity.getHihokenshaName());
@@ -120,6 +125,7 @@ public class IkenshoJohoPrintBusiness {
      */
     public ShujiiIkenshoIraiSumiEntity toShujiiIkenshoIraiSumiEntity(IkenshoJohoPrintRelateEntity entity) {
         ShujiiIkenshoIraiSumiEntity shujiiIkenshoIraiSumiEntity = new ShujiiIkenshoIraiSumiEntity();
+        shujiiIkenshoIraiSumiEntity.set申請書管理番号(entity.getShinseishoKanriNo().value());
         shujiiIkenshoIraiSumiEntity.set保険者番号(entity.getShoKisaiHokenshaNo());
         shujiiIkenshoIraiSumiEntity.set保険者名(entity.getShichosonMeisho());
         shujiiIkenshoIraiSumiEntity.set氏名(entity.getHihokenshaName());
@@ -147,6 +153,7 @@ public class IkenshoJohoPrintBusiness {
      */
     public ShujiiIkensho5komokuEntity toShujiiIkensho5komokuEntity(IkenshoJohoPrintRelateEntity entity) {
         ShujiiIkensho5komokuEntity shujiiIkensho5komokuEntity = new ShujiiIkensho5komokuEntity();
+        shujiiIkensho5komokuEntity.set申請書管理番号(entity.getShinseishoKanriNo().value());
         shujiiIkensho5komokuEntity.set保険者番号(entity.getShoKisaiHokenshaNo());
         shujiiIkensho5komokuEntity.set保険者名(entity.getShichosonMeisho());
         shujiiIkensho5komokuEntity.set氏名(entity.getHihokenshaName());
@@ -175,6 +182,8 @@ public class IkenshoJohoPrintBusiness {
      */
     public ShujiiIkenshoSeikyuIchiranEntity toShujiiIkenshoSeikyuIchiranEntity(IkenshoJohoPrintRelateEntity entity) {
         ShujiiIkenshoSeikyuIchiranEntity shujiiIkenshoSeikyuEntity = new ShujiiIkenshoSeikyuIchiranEntity();
+        shujiiIkenshoSeikyuEntity.set識別コード(new ShikibetsuCode(entity.getShoKisaiHokenshaNo().substring(0, 5).concat(entity.getHihokenshaNo())));
+        shujiiIkenshoSeikyuEntity.set拡張情報(new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), entity.getShinseishoKanriNo().value()));
         shujiiIkenshoSeikyuEntity.set保険者番号(entity.getShoKisaiHokenshaNo());
         shujiiIkenshoSeikyuEntity.set保険者名(entity.getShichosonMeisho());
         shujiiIkenshoSeikyuEntity.set氏名(entity.getHihokenshaName());

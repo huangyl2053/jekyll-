@@ -71,6 +71,8 @@ public class ChosahyoIkenshoCheckListData {
      * @return 帳票データ
      */
     public ChosahyoIkenshoCheckListReportEntity get帳票データ(ChosahyoIkenshoCheckListReportEntity data) {
+        data.setShinseishoKanriNo(item.getDbT5101_shinseishoKanriNo().value());
+        data.setShoKisaiHokenshaNo(item.getDbT5101_shoKisaiHokenshaNo());
         data.setHihokenshaNo(item.getDbT5101_hihokenshaNo());
         data.setHihokenshaName(item.getDbT5101_hihokenshaName() == null ? RString.EMPTY : item.getDbT5101_hihokenshaName().value());
         data.setZenkaiIchijiHanteiKekka(codeTORString(item.getDbT5116Zenkai_ichijiHanteiKekkaCode()));

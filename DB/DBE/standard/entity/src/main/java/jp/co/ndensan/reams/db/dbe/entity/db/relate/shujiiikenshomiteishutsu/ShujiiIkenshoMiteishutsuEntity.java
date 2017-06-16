@@ -20,6 +20,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ShujiiIkenshoMiteishutsuEntity {
 
+    private RString 申請書管理番号;
     private RString 保険者番号;
     private RString 保険者名;
     private RString 氏名;

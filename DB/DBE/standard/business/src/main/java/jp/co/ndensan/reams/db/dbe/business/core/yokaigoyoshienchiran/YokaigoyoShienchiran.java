@@ -55,6 +55,7 @@ public class YokaigoyoShienchiran {
         item.setChosainShimei(entity.get調査員氏名());
         item.setIryoKikanMeisho(entity.get医療機関名());
         item.setShujiiName(entity.get主治医氏名());
+        item.setShinseishoKanriNo(entity.get申請書管理番号());
         return item;
     }
 

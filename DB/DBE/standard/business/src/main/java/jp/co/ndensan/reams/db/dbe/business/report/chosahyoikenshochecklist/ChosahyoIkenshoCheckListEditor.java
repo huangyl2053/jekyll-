@@ -181,12 +181,8 @@ public class ChosahyoIkenshoCheckListEditor implements IChosahyoIkenshoCheckList
         source.konkaiIkensho9 = item.getKonkaiIkensho9();
         source.flag9 = item.getFlag9();
         source.konkaiChosahyo41 = item.getKonkaiChosahyo41();
-        RString 被保険者番号 = RString.EMPTY;
-        source.shikibetuCode = ShikibetsuCode.EMPTY;
-        if (!RString.isNullOrEmpty(source.hihokenshaNo)) {
-            被保険者番号 = source.hihokenshaNo;
-        }
-        source.hihokenshaNoAcc = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), 被保険者番号);
+        source.識別コード = new ShikibetsuCode(item.getShoKisaiHokenshaNo().substring(0, 5).concat(item.getHihokenshaNo()));
+        source.拡張情報 = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.getShinseishoKanriNo());
         return source;
     }
 

@@ -14,12 +14,14 @@ import jp.co.ndensan.reams.db.dbz.definition.core.yokaigojotaikubun.YokaigoJotai
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.KoroshoIfShikibetsuCode;
 import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.NinteiShinseiShinseijiKubunCode;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
+import jp.co.ndensan.reams.uz.uza.biz.ShikibetsuCode;
 import jp.co.ndensan.reams.uz.uza.lang.EraType;
 import jp.co.ndensan.reams.uz.uza.lang.FillType;
 import jp.co.ndensan.reams.uz.uza.lang.FirstYear;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.Separator;
+import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 
 /**
  * 要介護認定・要支援認定等申請者一覧表Editorです。
@@ -98,6 +100,8 @@ public class YokaigoYoshienShinseiIchiranEditorImpl implements IYokaigoYoshienSh
         reportSource.listShinseiIchiran_15 = item.getChosainShimei();
         reportSource.listShinseiIchiran_16 = item.getIryoKikanMeisho();
         reportSource.listShinseiIchiran_17 = item.getShujiiName();
+        reportSource.識別コード = new ShikibetsuCode(item.getShoKisaiHokenshaNo().substring(0, 5).concat(item.getHihokenshaNo()));
+        reportSource.拡張情報 = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.getShinseishoKanriNo());
         return reportSource;
     }
 
