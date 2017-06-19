@@ -413,7 +413,7 @@ public class NinteiShinseirenkeiDataInsert {
         nullCheck申請区分(entity.getDbt5101TempEntity().get申請区分_申請時コード(), errorBuilder);
         if (四マスタ管理方法_構成市町村.equals(四マスタ管理方法)) {
             if (!RString.isNullOrEmpty(processParamter.get市町村コード())
-                    && !processParamter.get市町村コード()
+                    && !processParamter.get市町村コード().substringReturnAsPossible(0, SHICHOSON_CODE_LENGTH)
                     .equals(entity.getDbt5101TempEntity().get市町村コード().substringReturnAsPossible(0, SHICHOSON_CODE_LENGTH))) {
                 errorBuilder.append(new RString("市町村コードが不正です;"));
             }
