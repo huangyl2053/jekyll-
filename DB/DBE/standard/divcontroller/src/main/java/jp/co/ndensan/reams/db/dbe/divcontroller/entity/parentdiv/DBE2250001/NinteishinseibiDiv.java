@@ -147,6 +147,16 @@ public class NinteishinseibiDiv extends Panel {
      * [ ショートカットの作成 ]
      */
     @JsonIgnore
+    public RadioButton getRadIchijiHanteiZumi() {
+        return this.getFileTorikomi().getRadIchijiHanteiZumi();
+    }
+
+    @JsonIgnore
+    public void  setRadIchijiHanteiZumi(RadioButton radIchijiHanteiZumi) {
+        this.getFileTorikomi().setRadIchijiHanteiZumi(radIchijiHanteiZumi);
+    }
+
+    @JsonIgnore
     public UploadPanel getUplFileTorikomi() {
         return this.getFileTorikomi().getUplFileTorikomi();
     }

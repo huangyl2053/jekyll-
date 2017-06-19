@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jp.co.ndensan.reams.db.dbe.business.core.ninteichosadatatorikomi.NinteiChosaDataTorikomiRelate;
+import jp.co.ndensan.reams.db.dbe.definition.core.ocr.TreatmentWhenIchijiHanteiZumi;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2250001.ChosaKekkaNyuryokuCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2250001.ChosaKekkaNyuryokuGaikyoTokkiCsvEntity;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE2250001.ChosaKekkaNyuryokuTokkiCsvEntity;
@@ -52,6 +53,7 @@ public class NinteishinseibiHandler {
     private static final RString 必須調査票_パターン2 = new RString("2");
     private static final RString 必須調査票_パターン3 = new RString("3");
     private static final RString CSV_WRITER_DELIMITER = new RString(",");
+    private static final RString KEY_一次判定済みの申請者_エラーとする = new RString("1");
     private final NinteishinseibiDiv div;
 
     /**
@@ -69,6 +71,7 @@ public class NinteishinseibiHandler {
     public void initialize() {
         div.getDgNinteiChosaData().setDataSource(new ArrayList<dgNinteiChosaData_Row>());
         div.getBtnErrorListOutput().setDisabled(true);
+        div.getRadIchijiHanteiZumi().setSelectedKey(KEY_一次判定済みの申請者_エラーとする);
     }
 
     /**
@@ -544,7 +547,8 @@ public class NinteishinseibiHandler {
             row.setErrorJiyu(依頼未完了);
             div.getBtnErrorListOutput().setDisabled(false);
         } else if (認定調査情報.get認定調査依頼完了日() != null
-                && 認定調査情報.exist本判定一次判定データ()) {
+                && 認定調査情報.exist本判定一次判定データ()
+                && div.getRadIchijiHanteiZumi().getSelectedKey().equals(TreatmentWhenIchijiHanteiZumi.エラーとする.code())) {
             row.setJyotai(状態_NG);
             row.setErrorJiyu(一次判定済み);
             div.getBtnErrorListOutput().setDisabled(false);
