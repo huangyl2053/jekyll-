@@ -436,7 +436,7 @@ public class ShujiiMaster {
                         div.getShujiiJohoInput().getTxtShujiiCode().getValue()));
         getValidationHandler(div).validateForKakutei(イベント状態, shujiiJohoCount);
         ValidationMessageControlPairs validationMessages
-                = getValidationHandler(div).validateForRadioButton(イベント状態);
+                = getValidationHandler(div).validateInputShujiiInfo(イベント状態);
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }

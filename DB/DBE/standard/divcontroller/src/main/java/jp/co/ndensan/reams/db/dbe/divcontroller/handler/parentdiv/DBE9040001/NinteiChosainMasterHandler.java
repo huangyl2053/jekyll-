@@ -344,7 +344,7 @@ public class NinteiChosainMasterHandler {
             調査可能人数_月 = chosaKanoNinzu.intValue();
         }
         RString chosainShikaku = div.getChosainJohoInput().getDdlChosainShikaku().getSelectedKey();
-        if (chosainShikaku.isNullOrEmpty()) {
+        if (RString.isNullOrEmpty(chosainShikaku)) {
             chosainShikaku = null;
         }
         return chosainJoho.createBuilderForEdit().set調査員氏名(div.getChosainJohoInput().getTxtChosainShimei().getValue())

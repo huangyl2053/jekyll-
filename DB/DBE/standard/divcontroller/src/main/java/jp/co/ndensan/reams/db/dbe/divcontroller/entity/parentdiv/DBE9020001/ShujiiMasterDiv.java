@@ -20,7 +20,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShujiiMasterDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-15_05-21-09">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-06-01_23-02-42">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -189,26 +189,6 @@ public class ShujiiMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxCode getTxtSearchShujiiCodeFrom() {
-        return this.getShujiiSearch().getTxtSearchShujiiCodeFrom();
-    }
-
-    @JsonIgnore
-    public void  setTxtSearchShujiiCodeFrom(TextBoxCode txtSearchShujiiCodeFrom) {
-        this.getShujiiSearch().setTxtSearchShujiiCodeFrom(txtSearchShujiiCodeFrom);
-    }
-
-    @JsonIgnore
-    public TextBoxCode getTxtSearchShujiiCodeTo() {
-        return this.getShujiiSearch().getTxtSearchShujiiCodeTo();
-    }
-
-    @JsonIgnore
-    public void  setTxtSearchShujiiCodeTo(TextBoxCode txtSearchShujiiCodeTo) {
-        this.getShujiiSearch().setTxtSearchShujiiCodeTo(txtSearchShujiiCodeTo);
-    }
-
-    @JsonIgnore
     public TextBox getTxtSearchShujiiIryokikanMeisho() {
         return this.getShujiiSearch().getTxtSearchShujiiIryokikanMeisho();
     }
@@ -246,6 +226,26 @@ public class ShujiiMasterDiv extends Panel {
     @JsonIgnore
     public void  setDdlKikanKanaMeisho(DropDownList ddlKikanKanaMeisho) {
         this.getShujiiSearch().setDdlKikanKanaMeisho(ddlKikanKanaMeisho);
+    }
+
+    @JsonIgnore
+    public TextBoxCode getTxtSearchShujiiCodeFrom() {
+        return this.getShujiiSearch().getTxtSearchShujiiCodeFrom();
+    }
+
+    @JsonIgnore
+    public void  setTxtSearchShujiiCodeFrom(TextBoxCode txtSearchShujiiCodeFrom) {
+        this.getShujiiSearch().setTxtSearchShujiiCodeFrom(txtSearchShujiiCodeFrom);
+    }
+
+    @JsonIgnore
+    public TextBoxCode getTxtSearchShujiiCodeTo() {
+        return this.getShujiiSearch().getTxtSearchShujiiCodeTo();
+    }
+
+    @JsonIgnore
+    public void  setTxtSearchShujiiCodeTo(TextBoxCode txtSearchShujiiCodeTo) {
+        this.getShujiiSearch().setTxtSearchShujiiCodeTo(txtSearchShujiiCodeTo);
     }
 
     @JsonIgnore
@@ -299,16 +299,6 @@ public class ShujiiMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public TextBoxNum getTxtSaidaiHyojiKensu() {
-        return this.getShujiiSearch().getTxtSaidaiHyojiKensu();
-    }
-
-    @JsonIgnore
-    public void  setTxtSaidaiHyojiKensu(TextBoxNum txtSaidaiHyojiKensu) {
-        this.getShujiiSearch().setTxtSaidaiHyojiKensu(txtSaidaiHyojiKensu);
-    }
-
-    @JsonIgnore
     public Button getBtnClearKensakuJoken() {
         return this.getShujiiSearch().getBtnClearKensakuJoken();
     }
@@ -319,13 +309,13 @@ public class ShujiiMasterDiv extends Panel {
     }
 
     @JsonIgnore
-    public Button getBtnSearch() {
-        return this.getShujiiSearch().getBtnSearch();
+    public TextBoxNum getTxtSaidaiHyojiKensu() {
+        return this.getShujiiSearch().getTxtSaidaiHyojiKensu();
     }
 
     @JsonIgnore
-    public void  setBtnSearch(Button btnSearch) {
-        this.getShujiiSearch().setBtnSearch(btnSearch);
+    public void  setTxtSaidaiHyojiKensu(TextBoxNum txtSaidaiHyojiKensu) {
+        this.getShujiiSearch().setTxtSaidaiHyojiKensu(txtSaidaiHyojiKensu);
     }
 
     @JsonIgnore

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import jp.co.ndensan.reams.db.dbe.business.core.shujiijoho.ShujiiMaster;
 import jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiijoho.ShujiiJoho;
+import jp.co.ndensan.reams.db.dbe.business.core.syujii.shujiijoho.ShujiiJohoBuilder;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9020001.ShujiiJohoInputDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9020001.ShujiiMasterDiv;
 import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE9020001.dgShujiiIchiran_Row;
@@ -118,8 +119,8 @@ public class ShujiiMasterHandler {
                         shujiiMaster.get電話番号(),
                         shujiiMaster.getFAX番号(),
                         shujiiMaster.get性別() != null
-                        ? shujiiMaster.get性別()
-                        : RString.EMPTY
+                                ? shujiiMaster.get性別()
+                                : RString.EMPTY
                 ));
             }
         }
@@ -308,8 +309,7 @@ public class ShujiiMasterHandler {
     public ShujiiJoho editShujiiJoho(ShujiiJoho shujiiJoho) {
         return shujiiJoho.createBuilderForEdit().set主治医氏名(div.getShujiiJohoInput().getTxtShujiiShimei().getValue())
                 .set主治医カナ(new AtenaKanaMeisho(div.getShujiiJohoInput().getTxtShujiiKanaShimei().getValue()))
-                .set性別(new Code(CODE_MAN.equals(div.getShujiiJohoInput().
-                                        getRadSeibetsu().getSelectedKey()) ? CODE_M : CODE_W))
+                .set性別(edit性別(div))
                 .set指定医フラグ(指定医_可能.equals(div.getShujiiJohoInput().getRadShiteiiFlag().getSelectedKey()))
                 .set診療科名称(div.getShujiiJohoInput().getTxtShinryokaMei().getValue())
                 .set郵便番号(div.getShujiiJohoInput().getTxtYubinNo().getValue())
@@ -317,6 +317,14 @@ public class ShujiiMasterHandler {
                 .set電話番号(div.getShujiiJohoInput().getTxtTelNo().getDomain())
                 .setFAX番号(div.getShujiiJohoInput().getTxtFaxNo().getDomain())
                 .set状況フラグ(CODE_有効.equals(div.getShujiiJohoInput().getRadJokyoFlag().getSelectedKey())).build();
+    }
+
+    private static Code edit性別(ShujiiMasterDiv div) {
+        RString selectedSeibetsuKey = div.getShujiiJohoInput().getRadSeibetsu().getSelectedKey();
+        if (RString.isNullOrEmpty(selectedSeibetsuKey)) {
+            return null;
+        }
+        return new Code(CODE_MAN.equals(selectedSeibetsuKey) ? CODE_M : CODE_W);
     }
 
     /**
