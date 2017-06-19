@@ -72,8 +72,10 @@ public class ShijiiIkenshoIraiHenkoEditor implements IShijiiIkenshoIraiHenkoEdit
         source.listIkenshohenko_13 = item.get変更後医療機関();
         source.listIkenshohenko_14 = item.get変更後主治医();
         source.listIkenshohenko_15 = dateFormat(item.get変更日());
-        source.識別コード = new ShikibetsuCode(item.get保険者番号().substring(0, 5).concat(item.get被保険者番号()));
-        source.拡張情報 = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.get申請書管理番号());
+        if (!item.get氏名().equals(new RString("該当データがありません"))) {
+            source.識別コード = new ShikibetsuCode(item.get保険者番号().substring(0, 5).concat(item.get被保険者番号()));
+            source.拡張情報 = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.get申請書管理番号());
+        }
         return source;
     }
 

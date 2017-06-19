@@ -100,8 +100,10 @@ public class YokaigoYoshienShinseiIchiranEditorImpl implements IYokaigoYoshienSh
         reportSource.listShinseiIchiran_15 = item.getChosainShimei();
         reportSource.listShinseiIchiran_16 = item.getIryoKikanMeisho();
         reportSource.listShinseiIchiran_17 = item.getShujiiName();
-        reportSource.識別コード = new ShikibetsuCode(item.getShoKisaiHokenshaNo().substring(0, 5).concat(item.getHihokenshaNo()));
-        reportSource.拡張情報 = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.getShinseishoKanriNo());
+        if (!item.getHihokenshaName().equals(new RString("該当データがありません"))) {
+            reportSource.識別コード = new ShikibetsuCode(item.getShoKisaiHokenshaNo().substring(0, 5).concat(item.getHihokenshaNo()));
+            reportSource.拡張情報 = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.getShinseishoKanriNo());
+        }
         return reportSource;
     }
 

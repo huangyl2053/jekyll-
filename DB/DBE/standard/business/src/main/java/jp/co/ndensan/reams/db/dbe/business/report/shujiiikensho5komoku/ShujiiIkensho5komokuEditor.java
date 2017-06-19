@@ -92,8 +92,10 @@ public class ShujiiIkensho5komokuEditor implements IShujiiIkensho5komokuEditor {
             source.listIkengokomoku_14 = get食事行為(item.get食事行為());
         }
         source.listIkengokomoku_15 = get記載有無(source);
-        source.識別コード = new ShikibetsuCode(item.get保険者番号().substring(0, 5).concat(item.get被保険者番号()));
-        source.拡張情報 = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.get申請書管理番号());
+        if (!item.get氏名().equals(new RString("該当データがありません"))) {
+            source.識別コード = new ShikibetsuCode(item.get保険者番号().substring(0, 5).concat(item.get被保険者番号()));
+            source.拡張情報 = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.get申請書管理番号());
+        }
         return source;
     }
 

@@ -79,8 +79,10 @@ public class ShinseiMonitorEditor implements IShinseiMonitorEditor {
         source.listShinseimonita_14 = get死亡転出区分(item.get住民状態コード());
         source.listShinseimonita_15 = dateFormat(item.get消除異動年月日());
         source.listShinseimonita_16 = RString.EMPTY;
-        source.識別コード = new ShikibetsuCode(item.get保険者番号().substring(0, 5).concat(item.get被保険者番号()));
-        source.拡張情報 = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.get申請書管理番号());
+        if (!item.get氏名().equals(new RString("該当データがありません"))) {
+            source.識別コード = new ShikibetsuCode(item.get保険者番号().substring(0, 5).concat(item.get被保険者番号()));
+            source.拡張情報 = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.get申請書管理番号());
+        }
         return source;
     }
 
