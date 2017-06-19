@@ -181,8 +181,10 @@ public class ChosahyoIkenshoCheckListEditor implements IChosahyoIkenshoCheckList
         source.konkaiIkensho9 = item.getKonkaiIkensho9();
         source.flag9 = item.getFlag9();
         source.konkaiChosahyo41 = item.getKonkaiChosahyo41();
-        source.識別コード = new ShikibetsuCode(item.getShoKisaiHokenshaNo().substring(0, 5).concat(item.getHihokenshaNo()));
-        source.拡張情報 = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.getShinseishoKanriNo());
+        if (!item.getHihokenshaName().equals(new RString("該当データがありません"))) {
+            source.識別コード = new ShikibetsuCode(item.getShoKisaiHokenshaNo().substring(0, 5).concat(item.getHihokenshaNo()));
+            source.拡張情報 = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.getShinseishoKanriNo());
+        }
         return source;
     }
 
