@@ -178,11 +178,11 @@ public class NinteiShinseiToroku {
         this.dbt5121Manager = new ShinseiRirekiJohoManager();
         ninteiTandokuDounyuFlag = Boolean.FALSE;
         ShichosonSecurityJoho security = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護事務);
-        if (security.get導入形態コード().equals(new Code("111"))) {
+        if (new Code("111").equals(security.get導入形態コード())) {
             ninteiTandokuDounyuFlag = Boolean.TRUE;
         } else {
             security = ShichosonSecurityJoho.getShichosonSecurityJoho(GyomuBunrui.介護認定);
-            if (security.get導入形態コード().equals(new Code("211"))) {
+            if (new Code("211").equals(security.get導入形態コード())) {
                 ninteiTandokuDounyuFlag = Boolean.TRUE;
             }
         }
