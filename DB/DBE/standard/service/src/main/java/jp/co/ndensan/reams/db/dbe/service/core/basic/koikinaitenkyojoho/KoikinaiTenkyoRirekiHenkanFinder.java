@@ -22,6 +22,7 @@ import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.ShinseiRirekiJoho;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5101NinteiShinseiJohoEntity;
 import jp.co.ndensan.reams.db.dbz.entity.db.basic.DbT5121ShinseiRirekiJohoEntity;
+import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5101NinteiShinseiJohoDac;
 import jp.co.ndensan.reams.db.dbz.persistence.db.basic.DbT5121ShinseiRirekiJohoDac;
 import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.ur.urz.definition.message.UrSystemErrorMessages;
@@ -43,6 +44,7 @@ public class KoikinaiTenkyoRirekiHenkanFinder {
 
     private final DbT7051KoseiShichosonMasterDac dac;
     private final DbT5121ShinseiRirekiJohoDac dacDbT5121;
+    private final DbT5101NinteiShinseiJohoDac dacDbT5101;
     private final MapperProvider mapperProvider;
 
     /**
@@ -51,6 +53,7 @@ public class KoikinaiTenkyoRirekiHenkanFinder {
     KoikinaiTenkyoRirekiHenkanFinder() {
         this.dac = InstanceProvider.create(DbT7051KoseiShichosonMasterDac.class);
         this.dacDbT5121 = InstanceProvider.create(DbT5121ShinseiRirekiJohoDac.class);
+        this.dacDbT5101 = InstanceProvider.create(DbT5101NinteiShinseiJohoDac.class);
         this.mapperProvider = InstanceProvider.create(MapperProvider.class);
     }
 
@@ -59,9 +62,11 @@ public class KoikinaiTenkyoRirekiHenkanFinder {
      *
      * @param MapperProvider {@link mapperProvider}
      */
-    KoikinaiTenkyoRirekiHenkanFinder(DbT7051KoseiShichosonMasterDac dac, DbT5121ShinseiRirekiJohoDac dacDbT5121, MapperProvider mapperProvider) {
+    KoikinaiTenkyoRirekiHenkanFinder(DbT7051KoseiShichosonMasterDac dac, DbT5121ShinseiRirekiJohoDac dacDbT5121,
+            DbT5101NinteiShinseiJohoDac dacDbT5101, MapperProvider mapperProvider) {
         this.dac = dac;
         this.dacDbT5121 = dacDbT5121;
+        this.dacDbT5101 = dacDbT5101;
         this.mapperProvider = mapperProvider;
     }
 
@@ -168,5 +173,15 @@ public class KoikinaiTenkyoRirekiHenkanFinder {
         }
         ShinseiRirekiJoho shinseirireki = new ShinseiRirekiJoho(entity);
         return shinseirireki.get前回申請管理番号();
+    }
+    
+    public List<NinteiShinseiJoho> get要介護認定申請情報BY証記載保険者番号AND被保険者番号(RString 証記載保険者番号, RString 被保険者番号) {
+        List<DbT5101NinteiShinseiJohoEntity> entityList = dacDbT5101.get要介護認定申請情報BY証記載保険者番号AND被保険者番号(証記載保険者番号, 被保険者番号);
+        List<NinteiShinseiJoho> businessList = new ArrayList<>();
+        for (DbT5101NinteiShinseiJohoEntity entity : entityList) {
+            entity.initializeMd5();
+            businessList.add(new NinteiShinseiJoho(entity));
+        }
+        return businessList;
     }
 }

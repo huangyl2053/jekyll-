@@ -166,6 +166,16 @@ public class KoikinaiTenkyoRirekiHenkanDiv extends Panel {
     }
 
     @JsonIgnore
+    public CheckBoxList getChkKoikinaiTenkyoKubunFlag() {
+        return this.getKensakuJoken().getChkKoikinaiTenkyoKubunFlag();
+    }
+
+    @JsonIgnore
+    public void  setChkKoikinaiTenkyoKubunFlag(CheckBoxList chkKoikinaiTenkyoKubunFlag) {
+        this.getKensakuJoken().setChkKoikinaiTenkyoKubunFlag(chkKoikinaiTenkyoKubunFlag);
+    }
+
+    @JsonIgnore
     public TextBoxDateRange getTxtNinteiShinseiDateRange() {
         return this.getKensakuJoken().getTxtNinteiShinseiDateRange();
     }

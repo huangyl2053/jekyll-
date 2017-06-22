@@ -31,6 +31,8 @@ public class KensakuJokenDiv extends Panel {
     private DropDownList ddlHihokenshaNameMatchType;
     @JsonProperty("chkMinashiFlag")
     private CheckBoxList chkMinashiFlag;
+    @JsonProperty("chkKoikinaiTenkyoKubunFlag")
+    private CheckBoxList chkKoikinaiTenkyoKubunFlag;
     @JsonProperty("txtNinteiShinseiDateRange")
     private TextBoxDateRange txtNinteiShinseiDateRange;
     @JsonProperty("txtBirthDateRange")
@@ -140,6 +142,24 @@ public class KensakuJokenDiv extends Panel {
     @JsonProperty("chkMinashiFlag")
     public void setChkMinashiFlag(CheckBoxList chkMinashiFlag) {
         this.chkMinashiFlag = chkMinashiFlag;
+    }
+
+    /*
+     * getchkKoikinaiTenkyoKubunFlag
+     * @return chkKoikinaiTenkyoKubunFlag
+     */
+    @JsonProperty("chkKoikinaiTenkyoKubunFlag")
+    public CheckBoxList getChkKoikinaiTenkyoKubunFlag() {
+        return chkKoikinaiTenkyoKubunFlag;
+    }
+
+    /*
+     * setchkKoikinaiTenkyoKubunFlag
+     * @param chkKoikinaiTenkyoKubunFlag chkKoikinaiTenkyoKubunFlag
+     */
+    @JsonProperty("chkKoikinaiTenkyoKubunFlag")
+    public void setChkKoikinaiTenkyoKubunFlag(CheckBoxList chkKoikinaiTenkyoKubunFlag) {
+        this.chkKoikinaiTenkyoKubunFlag = chkKoikinaiTenkyoKubunFlag;
     }
 
     /*

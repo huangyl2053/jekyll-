@@ -96,6 +96,7 @@ public class KoikinaiTenkyoRirekiHenkanHandler {
                     RString.EMPTY,
                     null == shinseisya.get申請書管理番号() ? RString.EMPTY : shinseisya.get申請書管理番号().getColumnValue(),
                     shinseisya.get証記載保険者番号(),
+                    shinseisya.get証記載保険者番号(),
                     shinseisya.get市町村名称(),
                     shinseisya.get被保険者番号(),
                     null == shinseisya.get被保険者氏名() ? RString.EMPTY : shinseisya.get被保険者氏名().getColumnValue(),
@@ -236,6 +237,7 @@ public class KoikinaiTenkyoRirekiHenkanHandler {
     private dgShinseishaIchiran_Row creatDgShinseishaIchiranRow(
             RString columnState,
             RString shinseishoKanriNo,
+            RString koshinmaeShoKisaiHokenshaNo,
             RString shoKisaiHokenshaNo,
             RString shokisaiHokensha,
             RString hihokenshaNo,
@@ -263,6 +265,7 @@ public class KoikinaiTenkyoRirekiHenkanHandler {
             dgShinseishaIchiran_Row row) {
         row.setColumnState(columnState);
         row.setShinseishoKanriNo(shinseishoKanriNo);
+        row.setKoshinmaeShoKisaiHokenshaNo(koshinmaeShoKisaiHokenshaNo);
         row.setShoKisaiHokenshaNo(shoKisaiHokenshaNo);
         row.setShokisaiHokensha(shokisaiHokensha);
         row.setHihokenshaNo(hihokenshaNo);

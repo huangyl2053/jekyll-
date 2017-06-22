@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1720001.dgSh
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1720001.KoikinaiTenkyoRirekiHenkanHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1720001.KoikinaiTenkyoRirekiValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.koikinaitenkyojoho.KoikinaiTenkyoRirekiHenkanFinder;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoIdentifier;
@@ -53,6 +52,7 @@ public class KoikinaiTenkyoRirekiHenkan {
      */
     public ResponseData<KoikinaiTenkyoRirekiHenkanDiv> onLoad(KoikinaiTenkyoRirekiHenkanDiv div) {
         getHandler(div).setOnLoad();
+        setHihokenshaNumberRequired(div);
         return ResponseData.of(div).respond();
     }
 
@@ -64,6 +64,14 @@ public class KoikinaiTenkyoRirekiHenkan {
      */
     public ResponseData<KoikinaiTenkyoRirekiHenkanDiv> onClick_Kensaku(KoikinaiTenkyoRirekiHenkanDiv div) {
         if (!ResponseHolder.isReRequest()) {
+            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+            ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+            if (!div.getChkKoikinaiTenkyoKubunFlag().isAllSelected()) {
+                validPairs = getValidationHandler(div).被保険者番号チェック(validationMessages);
+            }
+            if (validPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
             List<dgShinseishaIchiran_Row> dataGridList = div.getDgShinseishaIchiran().getDataSource();
             for (dgShinseishaIchiran_Row row : dataGridList) {
                 RString state = row.getColumnState();
@@ -148,6 +156,25 @@ public class KoikinaiTenkyoRirekiHenkan {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 条件をクリアするボタン処理です。
+     *
+     * @param div 画面情報
+     * @return <KoikinaiTenkyoRirekiHenkanDiv>
+     */
+    public ResponseData<KoikinaiTenkyoRirekiHenkanDiv> onClick_ChkKoikinaiTenkyoKubunFlag(KoikinaiTenkyoRirekiHenkanDiv div) {
+        setHihokenshaNumberRequired(div);
+        return ResponseData.of(div).respond();
+    }
+
+    private void setHihokenshaNumberRequired(KoikinaiTenkyoRirekiHenkanDiv div) {
+        if (div.getChkKoikinaiTenkyoKubunFlag().isAllSelected()) {
+            div.getTxtHihokenshaNumber().setRequired(false);
+        } else {
+            div.getTxtHihokenshaNumber().setRequired(true);
+        }
+    }
+
     private int searchShinseisyaInfo(KoikinaiTenkyoRirekiHenkanDiv div) {
         KoikinaiTenkyoRirekiHenkanMapperParameter parameter = KoikinaiTenkyoRirekiHenkanMapperParameter.createSelectByKeyParam(
                 div.getTxtHihokenshaNumber().getValue(),
@@ -167,6 +194,7 @@ public class KoikinaiTenkyoRirekiHenkan {
                 div.getChkSeibetsu().getSelectedKeys(),
                 ShoriJotaiKubun.通常.getコード(),
                 ShoriJotaiKubun.延期.getコード(),
+                div.getChkKoikinaiTenkyoKubunFlag().isAllSelected(),
                 div.getTextBoxNum().getValue()
         );
         KoikinaiTenkyoRirekiHenkanFinder koikinaitenkyofinder = KoikinaiTenkyoRirekiHenkanFinder.createInstance();
@@ -201,39 +229,21 @@ public class KoikinaiTenkyoRirekiHenkan {
         List<dgShinseishaIchiran_Row> dataGridList = div.getDgShinseishaIchiran().getDataSource();
         for (int index = 0; index < div.getDgShinseishaIchiran().getTotalRecords(); index++) {
             RString state = dataGridList.get(index).getColumnState();
-            // TODO 過去の認定情報データの更新扱いについて確認後実装してください。更新データについては以下が考えられる
-            // 過去データ全て更新・有効な過去データ更新・該当データと1個前データ更新・該当データ更新
-//            KoikinaiTenkyoRirekiHenkanFinder finder = KoikinaiTenkyoRirekiHenkanFinder.createInstance();
-            ShinseishoKanriNo shinseishoKanriNo = new ShinseishoKanriNo(
-                    dataGridList.get(index).getShinseishoKanriNo());
             RString shokisaihokenshaNo = dataGridList.get(index).getShoKisaiHokenshaNo();
-//            boolean flag = true;
-//            if (finder.getZenkaiShinseishoKanriNo(shinseishoKanriNo) == null) {
-//                flag = false;
-//            }
             if (状態_更新.equals(state)) {
-                upDateNinteiShinseiJoho(shinseishoKanriNo, shokisaihokenshaNo, false);
-//                if (flag) {
-//                    upDateNinteiShinseiJoho(finder.getZenkaiShinseishoKanriNo(shinseishoKanriNo), shokisaihokenshaNo, flag);
-//                }
+                KoikinaiTenkyoRirekiHenkanFinder finder = KoikinaiTenkyoRirekiHenkanFinder.createInstance();
+                List<NinteiShinseiJoho> ninteiShinseiJohoList = finder.get要介護認定申請情報BY証記載保険者番号AND被保険者番号(
+                        dataGridList.get(index).getKoshinmaeShoKisaiHokenshaNo(), dataGridList.get(index).getHihokenshaNo());
+                for (NinteiShinseiJoho ninteiShinseiJoho : ninteiShinseiJohoList) {
+                    upDateNinteiShinseiJoho(ninteiShinseiJoho, shokisaihokenshaNo);
+                }
             }
         }
     }
 
-    private void upDateNinteiShinseiJoho(ShinseishoKanriNo shinseishoKanriNo, RString shokisaihokenshaNo, boolean flag) {
-        Models<NinteiShinseiJohoIdentifier, NinteiShinseiJoho> models
-                = ViewStateHolder.get(ViewStateKeys.要介護認定申請情報, Models.class);
+    private void upDateNinteiShinseiJoho(NinteiShinseiJoho ninteiShinseiJoho, RString shokisaihokenshaNo) {
         NinteiShinseiJohoManager manager = NinteiShinseiJohoManager.createInstance();
-        if (flag) {
-            NinteiShinseiJoho ninteiShinseiJoho = manager.get要介護認定申請情報(shinseishoKanriNo);
-            ninteiShinseiJoho = ninteiShinseiJoho.createBuilderForEdit().set証記載保険者番号(shokisaihokenshaNo).build();
-            manager.save要介護認定申請情報(ninteiShinseiJoho);
-        } else {
-            for (NinteiShinseiJoho ninteiShinseiJoho : models) {
-                if (ninteiShinseiJoho.get申請書管理番号().equals(shinseishoKanriNo)) {
-                    manager.save要介護認定申請情報(ninteiShinseiJoho.createBuilderForEdit().set証記載保険者番号(shokisaihokenshaNo).build().modifiedModel());
-                }
-            }
-        }
+        ninteiShinseiJoho = ninteiShinseiJoho.createBuilderForEdit().set証記載保険者番号(shokisaihokenshaNo).build();
+        manager.save要介護認定申請情報(ninteiShinseiJoho);
     }
 }

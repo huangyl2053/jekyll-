@@ -90,7 +90,16 @@
     
     <sql id="kyotsuFromAndWhere">
             FROM
-                    rgdb."DbT5101NinteiShinseiJoho" AS DbT5101
+                    (SELECT *
+                    FROM rgdb."DbT5101NinteiShinseiJoho" AS "mst"
+                    WHERE
+                    "mst"."logicalDeletedFlag" = FALSE
+                    AND NOT EXISTS (SELECT 'X'
+                        FROM rgdb."DbT5101NinteiShinseiJoho" AS "slv"
+                        WHERE "mst"."shoKisaiHokenshaNo" = "slv"."shoKisaiHokenshaNo"
+                        AND "mst"."hihokenshaNo" = "slv"."hihokenshaNo"
+                        AND "slv"."logicalDeletedFlag" = FALSE
+                        AND "mst"."ninteiShinseiYMD" <![CDATA[<]]> "slv"."ninteiShinseiYMD")) AS DbT5101
                     INNER JOIN rgdb."DbT5102NinteiKekkaJoho" AS DbT5102
                             ON	DbT5101."shinseishoKanriNo" = DbT5102."shinseishoKanriNo"
                     INNER JOIN rgdb."DbT7051KoseiShichosonMaster" AS DbT7051
@@ -146,7 +155,10 @@
                     INNER JOIN rgdb."DbT5511ShinsakaiKaisaiKekkaJoho" AS DbT5511
                             ON	DbT5511."shinsakaiKaisaiNo" = DbT5501."shinsakaiKaisaiNo"
             WHERE
-                    DbT5101."koikinaiTenkyoKubun" = '1'
+                    1 = 1
+                    <if test="広域内転居区分フラグ">
+                        AND DbT5101."koikinaiTenkyoKubun" = '1'
+                    </if>
                     AND	(DbT5105."ninteiShinseiJohoTorokuKanryoYMD" IS NOT NULL
                     OR DbT5105."ninteiShinseiJohoTorokuKanryoYMD" <![CDATA[<>]]> '')
                     AND	(DbT5105."ninteichosaIraiKanryoYMD" IS NOT NULL
