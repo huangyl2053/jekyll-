@@ -11,7 +11,7 @@ Uz.GyomuJSHelper.registOriginalEvent("onclick_btnChosaKekkaUpdate", function () 
     validateButton.getJQueryElement(true).click();
 
     Uz._ViewControlUtil.waitGrayOutLoadingOverlay().done(function () {
-        if (!Uz._ViewControlUtil.isValidateError("server")) {
+        if (!Uz._ViewControlUtil.isValidateError("")) {
             arg = div.hiddenInput[0].value;
             div.hiddenInput[1].value = "";
 
@@ -26,7 +26,7 @@ Uz.GyomuJSHelper.registOriginalEvent("onclick_btnChosaKekkaUpdate", function () 
                     if (executeNum != argList.length) {
                         div.hiddenInput[1].value += "\|";
                     } else if (executeNum == argList.length) {
-                     Uz._ViewControlUtil.deleteGrayOutLoadingOverlay("newExecuteIchijiHantei");
+                        Uz._ViewControlUtil.deleteGrayOutLoadingOverlay("newExecuteIchijiHantei");
 
                         var validateButton = Uz.JSControlUtil.getJSControl("btnHanteishoriAto");
                         validateButton.getJQueryElement(true).click();

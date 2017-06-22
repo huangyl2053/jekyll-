@@ -17,7 +17,7 @@ Uz.GyomuJSHelper.registOriginalEvent("onClick_btnIkenshoSave", function () {
 
     Uz._ViewControlUtil.waitGrayOutLoadingOverlay().done(function () {
 
-        if (!Uz._ViewControlUtil.isValidateError("server")) {
+        if (!Uz._ViewControlUtil.isValidateError("")) {
 
             arg = div.hiddenInput[0].value;
             div.hiddenInput[1].value = "";
