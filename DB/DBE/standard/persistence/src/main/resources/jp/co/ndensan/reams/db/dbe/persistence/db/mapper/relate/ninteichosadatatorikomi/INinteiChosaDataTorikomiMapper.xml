@@ -14,9 +14,9 @@
             <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5201NinteichosaIraiJohoMapper.allColumns_DbT5201NinteichosaIraiJoho" />
         FROM
             rgdb."DbT5101NinteiShinseiJoho"
-            LEFT JOIN rgdb."DbT5105NinteiKanryoJoho"
+            INNER JOIN rgdb."DbT5105NinteiKanryoJoho"
                 ON "DbT5105NinteiKanryoJoho"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
-               AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiKanryoYMD" IS NOT NULL
+               AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiKanryoYMD" IS NULL
             LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho"
                 ON "DbT5116IchijiHanteiKekkaJoho"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
             LEFT JOIN (SELECT *
@@ -35,6 +35,11 @@
             "DbT5101NinteiShinseiJoho"."shoKisaiHokenshaNo" = #{証記載保険者番号}
             AND "DbT5101NinteiShinseiJoho"."hihokenshaNo" = #{被保険者番号}
             AND "DbT5101NinteiShinseiJoho"."ninteiShinseiYMD" = #{認定申請日}
+            AND "DbT5101NinteiShinseiJoho"."shoriJotaiKubun" IN
+                <foreach open="(" item="code" separator="," close=")" collection="有効処理状態区分">
+                    #{code}
+                </foreach>
+            AND "DbT5101NinteiShinseiJoho"."logicalDeletedFlag" = FALSE
     </select>
 
     <resultMap id="resultMap_NinteiChosaJoho"
