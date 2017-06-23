@@ -16,13 +16,17 @@
             rgdb."DbT5101NinteiShinseiJoho"
             LEFT JOIN rgdb."DbT5105NinteiKanryoJoho"
                 ON "DbT5105NinteiKanryoJoho"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
+               AND "DbT5105NinteiKanryoJoho"."ninteiShinsakaiKanryoYMD" IS NOT NULL
             LEFT JOIN rgdb."DbT5116IchijiHanteiKekkaJoho"
                 ON "DbT5116IchijiHanteiKekkaJoho"."shinseishoKanriNo" = "DbT5101NinteiShinseiJoho"."shinseishoKanriNo"
             LEFT JOIN (SELECT *
                        FROM rgdb."DbT5201NinteichosaIraiJoho" AS "mst"
-                       WHERE NOT EXISTS (SELECT 'X'
+                       WHERE
+                            "mst"."logicalDeletedFlag" = FALSE
+                         AND NOT EXISTS (SELECT 'X'
                                          FROM rgdb."DbT5201NinteichosaIraiJoho" AS "slv"
                                          WHERE "mst"."shinseishoKanriNo" = "slv"."shinseishoKanriNo"
+                                               AND "mst"."logicalDeletedFlag" = "slv"."logicalDeletedFlag"
                                                AND "mst"."ninteichosaIraiRirekiNo" <![CDATA[<]]> "slv"."ninteichosaIraiRirekiNo"
                                         )
                       ) AS "DbT5201NinteichosaIraiJoho"
