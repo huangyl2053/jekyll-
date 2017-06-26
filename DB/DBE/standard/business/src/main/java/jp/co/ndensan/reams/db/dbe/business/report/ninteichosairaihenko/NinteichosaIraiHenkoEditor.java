@@ -74,9 +74,10 @@ public class NinteichosaIraiHenkoEditor implements INinteichosaIraiHenkoEditor {
         source.listChosaIraihenko_14 = item.get変更後調査員();
         source.listChosaIraihenko_15 = dateFormat(item.get変更日());
         source.printTimeStamp = get作成年月日時();
-        source.shikibetuCode = ShikibetsuCode.EMPTY;
-        source.hokenshaNo = new ExpandedInformation(new Code("100"), new RString("保険者番号"), item.get保険者番号());
-        source.hihokenshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), item.get被保険者番号());
+        if (!source.listChosaIraihenko_4.equals(new RString("該当データがありません"))) {
+            source.識別コード = new ShikibetsuCode(item.get保険者番号().substring(0, 5).concat(item.get被保険者番号()));
+            source.拡張情報 = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.get申請書管理番号());
+        }
         return source;
     }
 

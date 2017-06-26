@@ -71,7 +71,6 @@ public class ShujiiJohoBuilder {
      * @return {@link ShujiiJohoBuilder}
      */
     public ShujiiJohoBuilder set性別(Code 性別) {
-        requireNonNull(性別, UrSystemErrorMessages.値がnull.getReplacedMessage("性別"));
         entity.setSeibetsu(性別);
         return this;
     }

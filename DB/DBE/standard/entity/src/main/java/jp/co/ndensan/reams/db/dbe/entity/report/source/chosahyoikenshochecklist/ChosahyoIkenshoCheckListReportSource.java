@@ -289,9 +289,9 @@ public class ChosahyoIkenshoCheckListReportSource implements IReportSource {
     @ReportItem(name = "konkaiChosahyo41", length = 64, order = 136)
     public RString konkaiChosahyo41;
     @ReportExpandedInfo(id = "X")
-    public ExpandedInformation hihokenshaNoAcc;
+    public ExpandedInformation 拡張情報;
     @ReportPerson(id = "X")
-    public ShikibetsuCode shikibetuCode;
+    public ShikibetsuCode 識別コード;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

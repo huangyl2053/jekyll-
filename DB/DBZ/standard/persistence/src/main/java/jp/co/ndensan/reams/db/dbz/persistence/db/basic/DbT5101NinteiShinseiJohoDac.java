@@ -190,4 +190,25 @@ public class DbT5101NinteiShinseiJohoDac implements ISaveable<DbT5101NinteiShins
                 limit(1).
                 toObject(DbT5101NinteiShinseiJohoEntity.class);
     }
+
+    /**
+     * 「証記載保険者番号、被保険者番号」を指定し、要介護認定申請情報を取得します。
+     *
+     * @param 証記載保険者番号 証記載保険者番号
+     * @param 被保険者番号 被保険者番号
+     * @return DbT5101NinteiShinseiJohoEntity
+     */
+    @Transaction
+    public List<DbT5101NinteiShinseiJohoEntity> get要介護認定申請情報BY証記載保険者番号AND被保険者番号(RString 証記載保険者番号, RString 被保険者番号) {
+        requireNonNull(証記載保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("証記載保険者番号"));
+        requireNonNull(被保険者番号, UrSystemErrorMessages.値がnull.getReplacedMessage("被保険者番号"));
+        DbAccessorNormalType accessor = new DbAccessorNormalType(session);
+
+        return accessor.select().
+                table(DbT5101NinteiShinseiJoho.class).
+                where(and(
+                                eq(shoKisaiHokenshaNo, 証記載保険者番号),
+                                eq(hihokenshaNo, 被保険者番号))).
+                toList(DbT5101NinteiShinseiJohoEntity.class);
+    }
 }

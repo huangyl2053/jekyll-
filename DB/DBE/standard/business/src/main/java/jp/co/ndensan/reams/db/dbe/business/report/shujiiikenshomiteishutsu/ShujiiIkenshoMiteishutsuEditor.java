@@ -72,16 +72,9 @@ public class ShujiiIkenshoMiteishutsuEditor implements IShujiiIkenshoMiteishutsu
         source.listIkemmiteishutsu_13 = dateFormat(item.get入手予定日());
         source.listIkemmiteishutsu_14 = dateFormat(item.get直近督促日());
         source.listIkemmiteishutsu_15 = new RString(item.get督促回数());
-        source.shikibetuCode = ShikibetsuCode.EMPTY;
-        if (item.get保険者番号() == null) {
-            source.hokenshaNo = null;
-        } else {
-            source.hokenshaNo = new ExpandedInformation(new Code("100"), new RString("保険者番号"), item.get保険者番号());
-        }
-        if (item.get被保険者番号() == null) {
-            source.hokenshaNo = null;
-        } else {
-            source.hihokenshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), item.get被保険者番号());
+        if (!item.get氏名().equals(new RString("該当データがありません"))) {
+            source.識別コード = new ShikibetsuCode(item.get保険者番号().substring(0, 5).concat(item.get被保険者番号()));
+            source.拡張情報 = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.get申請書管理番号());
         }
         return source;
     }

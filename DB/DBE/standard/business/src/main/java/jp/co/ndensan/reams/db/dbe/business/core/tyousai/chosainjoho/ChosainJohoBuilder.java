@@ -70,7 +70,6 @@ public class ChosainJohoBuilder {
      * @return {@link ChosainJohoBuilder}
      */
     public ChosainJohoBuilder set性別(RString 性別) {
-        requireNonNull(性別, UrSystemErrorMessages.値がnull.getReplacedMessage("性別"));
         entity.setSeibetsu(性別);
         return this;
     }
@@ -82,7 +81,7 @@ public class ChosainJohoBuilder {
      * @return {@link ChosainJohoBuilder}
      */
     public ChosainJohoBuilder set調査員資格(RString 調査員資格) {
-       // requireNonNull(調査員資格, UrSystemErrorMessages.値がnull.getReplacedMessage("調査員資格"));
+        // requireNonNull(調査員資格, UrSystemErrorMessages.値がnull.getReplacedMessage("調査員資格"));
         entity.setChosainShikaku(調査員資格);
         return this;
     }

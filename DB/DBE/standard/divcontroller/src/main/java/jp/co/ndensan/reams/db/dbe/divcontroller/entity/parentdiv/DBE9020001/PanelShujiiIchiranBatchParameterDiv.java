@@ -14,7 +14,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.PanelBatchParameter;
  * @author 自動生成
  */
 public class PanelShujiiIchiranBatchParameterDiv extends PanelBatchParameter {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-15_05-21-09">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-06-01_23-02-42">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い

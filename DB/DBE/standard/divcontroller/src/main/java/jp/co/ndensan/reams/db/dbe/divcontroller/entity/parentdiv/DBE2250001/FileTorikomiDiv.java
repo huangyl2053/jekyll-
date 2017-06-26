@@ -21,6 +21,8 @@ public class FileTorikomiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
+    @JsonProperty("radIchijiHanteiZumi")
+    private RadioButton radIchijiHanteiZumi;
     @JsonProperty("uplFileTorikomi")
     private UploadPanel uplFileTorikomi;
     @JsonProperty("btnUpload")
@@ -32,6 +34,24 @@ public class FileTorikomiDiv extends Panel {
      * コントロール名とフィールド名を取得する
      * フィールド名のGetterとSetter を作成
      */
+    /*
+     * getradIchijiHanteiZumi
+     * @return radIchijiHanteiZumi
+     */
+    @JsonProperty("radIchijiHanteiZumi")
+    public RadioButton getRadIchijiHanteiZumi() {
+        return radIchijiHanteiZumi;
+    }
+
+    /*
+     * setradIchijiHanteiZumi
+     * @param radIchijiHanteiZumi radIchijiHanteiZumi
+     */
+    @JsonProperty("radIchijiHanteiZumi")
+    public void setRadIchijiHanteiZumi(RadioButton radIchijiHanteiZumi) {
+        this.radIchijiHanteiZumi = radIchijiHanteiZumi;
+    }
+
     /*
      * getuplFileTorikomi
      * @return uplFileTorikomi

@@ -417,7 +417,7 @@ public class NinteiChosainMaster {
                 new ChosainCode(div.getChosainJohoInput().getTxtChosainCode().getValue())));
         getValidationHandler(div).validateForKakutei(イベント状態, chosainJohoCount);
         ValidationMessageControlPairs validationMessages
-                = getValidationHandler(div).validateForSeibetsu(イベント状態);
+                = getValidationHandler(div).validateInputChosainInfo(イベント状態);
         if (validationMessages.iterator().hasNext()) {
             return ResponseData.of(div).addValidationMessages(validationMessages).respond();
         }

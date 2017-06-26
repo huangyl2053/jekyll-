@@ -19,6 +19,8 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public class ChosahyoIkenshoCheckListReportEntity {
 
+    private RString shinseishoKanriNo;
+    private RString shoKisaiHokenshaNo;
     private RString printTimeStamp;
     private RString hihokenshaNo;
     private RString hihokenshaName;

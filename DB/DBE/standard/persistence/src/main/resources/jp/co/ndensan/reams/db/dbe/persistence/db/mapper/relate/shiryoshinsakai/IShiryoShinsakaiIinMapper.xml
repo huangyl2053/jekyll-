@@ -292,52 +292,72 @@
             parameterType="jp.co.ndensan.reams.db.dbe.definition.mybatisprm.shiryoshinsakai.IinTokkiJikouItiziHanteiMyBatisParameter"
             fetchSize="500"
             resultOrdered="true">
+        WITH target AS (
+            SELECT
+                 dbt5205."shinseishoKanriNo"       AS "shinseishoKanriNo",
+                 dbt5205."ninteichosaRirekiNo"     AS "ninteichosaRirekiNo",
+                 dbt5205."tokkijikoTextImageKubun" AS "tokkijikoTextImageKubun"
+            FROM
+                rgdb."DbT5205NinteichosahyoTokkijiko" AS dbt5205
+            WHERE
+                dbt5205."shinseishoKanriNo" IN
+                    <foreach open="(" item="shinseishoKanriNo" separator="," close=")" collection="shinseishoKanriNoList">#{shinseishoKanriNo}</foreach>
+                AND dbt5205."ninteichosaRirekiNo" IN
+                    <foreach open="(" item="ninteichosaRirekiNo" separator="," close=")" collection="ninteichosaRirekiNoList">#{ninteichosaRirekiNo}</foreach>
+            ORDER BY
+                dbt5205."tokkijikoTextImageKubun" DESC
+            LIMIT 1
+        ), filterd AS (
+            SELECT
+              "DbT5205NinteichosahyoTokkijiko".*
+            FROM
+                target AS target
+            INNER JOIN
+            rgdb."DbT5205NinteichosahyoTokkijiko" AS "DbT5205NinteichosahyoTokkijiko"
+                ON "DbT5205NinteichosahyoTokkijiko"."shinseishoKanriNo"       = target."shinseishoKanriNo"
+                AND "DbT5205NinteichosahyoTokkijiko"."ninteichosaRirekiNo"     = target."ninteichosaRirekiNo"
+                AND "DbT5205NinteichosahyoTokkijiko"."tokkijikoTextImageKubun" = target."tokkijikoTextImageKubun"
+        )
         SELECT
-        dbt5205_MaxRemban.maxRemban as maxRemban,
-        <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5205NinteichosahyoTokkijikoMapper.allColumns_DbT5205NinteichosahyoTokkijiko"/>
-        FROM rgdb."DbT5205NinteichosahyoTokkijiko"
+            dbt5205_MaxRemban.maxRemban as maxRemban,
+            <include refid="jp.co.ndensan.reams.db.dbz.persistence.db.mapper.basic.IDbT5205NinteichosahyoTokkijikoMapper.allColumns_DbT5205NinteichosahyoTokkijiko"/>
+        FROM
+            filterd AS "DbT5205NinteichosahyoTokkijiko"
         LEFT JOIN (
-          SELECT "shinseishoKanriNo"
-          ,"ninteichosaRirekiNo"
-          , "ninteichosaTokkijikoNo"
-          , "tokkijikoTextImageKubun"
-          , "genponMaskKubun"
-          , MAX("ninteichosaTokkijikoRemban") as maxRemban
-          FROM rgdb."DbT5205NinteichosahyoTokkijiko"
-          GROUP BY "shinseishoKanriNo"
-          , "ninteichosaRirekiNo"
-          , "ninteichosaTokkijikoNo"
-          , "tokkijikoTextImageKubun"
-          , "genponMaskKubun"
+            SELECT
+                dbT5205."shinseishoKanriNo",
+                dbT5205."ninteichosaRirekiNo",
+                dbT5205."ninteichosaTokkijikoNo",
+                dbT5205."tokkijikoTextImageKubun",
+                dbT5205."genponMaskKubun",
+                MAX(dbT5205."ninteichosaTokkijikoRemban") AS maxRemban
+            FROM
+                filterd AS dbT5205
+            GROUP BY
+                dbT5205."shinseishoKanriNo",
+                dbT5205."ninteichosaRirekiNo",
+                dbT5205."ninteichosaTokkijikoNo",
+                dbT5205."tokkijikoTextImageKubun",
+                dbT5205."genponMaskKubun"
         ) dbt5205_MaxRemban
-        ON dbt5205_MaxRemban."shinseishoKanriNo" = "DbT5205NinteichosahyoTokkijiko"."shinseishoKanriNo"
-        AND dbt5205_MaxRemban."ninteichosaRirekiNo" = "DbT5205NinteichosahyoTokkijiko"."ninteichosaRirekiNo"
-        AND dbt5205_MaxRemban."ninteichosaTokkijikoNo" = "DbT5205NinteichosahyoTokkijiko"."ninteichosaTokkijikoNo"
-        AND dbt5205_MaxRemban."tokkijikoTextImageKubun" = "DbT5205NinteichosahyoTokkijiko"."tokkijikoTextImageKubun"
-        AND dbt5205_MaxRemban."genponMaskKubun" = "DbT5205NinteichosahyoTokkijiko"."genponMaskKubun"
-        WHERE "DbT5205NinteichosahyoTokkijiko"."shinseishoKanriNo" IN
-        <foreach collection="shinseishoKanriNoList" item="shinseishoKanriNo" open="(" separator="," close=")">#{shinseishoKanriNo}</foreach>
-        AND "DbT5205NinteichosahyoTokkijiko"."ninteichosaRirekiNo" IN
-        <foreach collection="ninteichosaRirekiNoList" item="ninteichosaRirekiNo" open="(" separator="," close=")">#{ninteichosaRirekiNo}</foreach>
-        AND NOT EXISTS (
-          SELECT 'X'
-          FROM rgdb."DbT5205NinteichosahyoTokkijiko" A1
-          WHERE A1."shinseishoKanriNo" = "DbT5205NinteichosahyoTokkijiko"."shinseishoKanriNo"
-          AND A1."ninteichosaRirekiNo" = "DbT5205NinteichosahyoTokkijiko"."ninteichosaRirekiNo"
-          AND "DbT5205NinteichosahyoTokkijiko"."ninteichosaTokkijikoNo" = A1."ninteichosaTokkijikoNo"
-          AND "DbT5205NinteichosahyoTokkijiko"."ninteichosaTokkijikoRemban" = A1."ninteichosaTokkijikoRemban"
-          AND "DbT5205NinteichosahyoTokkijiko"."ninteichosaRirekiNo" <![CDATA[<]]> A1."ninteichosaRirekiNo"
-        )
-        AND NOT EXISTS (
-          SELECT 'X'
-          FROM rgdb."DbT5205NinteichosahyoTokkijiko" A2
-          WHERE A2."shinseishoKanriNo" = "DbT5205NinteichosahyoTokkijiko"."shinseishoKanriNo"
-          AND A2."ninteichosaRirekiNo" = "DbT5205NinteichosahyoTokkijiko"."ninteichosaRirekiNo"
-          AND "DbT5205NinteichosahyoTokkijiko"."ninteichosaTokkijikoNo" = A2."ninteichosaTokkijikoNo"
-          AND "DbT5205NinteichosahyoTokkijiko"."ninteichosaTokkijikoRemban" = A2."ninteichosaTokkijikoRemban"
-          AND "DbT5205NinteichosahyoTokkijiko"."tokkijikoTextImageKubun" = A2."tokkijikoTextImageKubun"
-          AND "DbT5205NinteichosahyoTokkijiko"."genponMaskKubun" <![CDATA[<]]> A2."genponMaskKubun"
-        )
+            ON dbt5205_MaxRemban."shinseishoKanriNo" = "DbT5205NinteichosahyoTokkijiko"."shinseishoKanriNo"
+            AND dbt5205_MaxRemban."ninteichosaRirekiNo" = "DbT5205NinteichosahyoTokkijiko"."ninteichosaRirekiNo"
+            AND dbt5205_MaxRemban."ninteichosaTokkijikoNo" = "DbT5205NinteichosahyoTokkijiko"."ninteichosaTokkijikoNo"
+            AND dbt5205_MaxRemban."tokkijikoTextImageKubun" = "DbT5205NinteichosahyoTokkijiko"."tokkijikoTextImageKubun"
+            AND dbt5205_MaxRemban."genponMaskKubun" = "DbT5205NinteichosahyoTokkijiko"."genponMaskKubun"
+        WHERE
+            NOT EXISTS (
+                SELECT 'X'
+                FROM
+                    rgdb."DbT5205NinteichosahyoTokkijiko" A2
+                WHERE
+                     A2."shinseishoKanriNo" = "DbT5205NinteichosahyoTokkijiko"."shinseishoKanriNo"
+                 AND A2."ninteichosaRirekiNo" = "DbT5205NinteichosahyoTokkijiko"."ninteichosaRirekiNo"
+                 AND A2."ninteichosaTokkijikoNo" = "DbT5205NinteichosahyoTokkijiko"."ninteichosaTokkijikoNo"
+                 AND A2."ninteichosaTokkijikoRemban" = "DbT5205NinteichosahyoTokkijiko"."ninteichosaTokkijikoRemban"
+                 AND A2."tokkijikoTextImageKubun" = "DbT5205NinteichosahyoTokkijiko"."tokkijikoTextImageKubun"
+                 AND A2."genponMaskKubun" <![CDATA[>]]> "DbT5205NinteichosahyoTokkijiko"."genponMaskKubun"
+            )
         ORDER BY
               "DbT5205NinteichosahyoTokkijiko"."ninteichosaTokkijikoNo" = '999' DESC
             , "DbT5205NinteichosahyoTokkijiko"."ninteichosaTokkijikoNo"

@@ -5,7 +5,8 @@ package jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1720001;
  * 不正な動作の原因になります。
  */
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jp.co.ndensan.reams.uz.uza.ui.binding.*;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.HokenshaListDiv;
+import jp.co.ndensan.reams.db.dbz.divcontroller.entity.commonchilddiv.hokenshalist.HokenshaList.IHokenshaListDiv;
 import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
 
 /**
@@ -14,17 +15,15 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class KoikinaiTenkyoTenkyosakiDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2016-03-22_14-06-37">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-03-02_13-24-25">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
      * コントロール名とフィールド名を取得する
      * private + コントロール名 + フィールド名 の文字列を作成
      */
-    @JsonProperty("ddlShokisaiHokenshaNoSaki")
-    private DropDownList ddlShokisaiHokenshaNoSaki;
-    @JsonProperty("txtShokisaiHokenshaSaki")
-    private TextBox txtShokisaiHokenshaSaki;
+    @JsonProperty("ddlHokenshaList")
+    private HokenshaListDiv ddlHokenshaList;
 
     /*
      * [ GetterとSetterの作成 ]
@@ -33,39 +32,12 @@ public class KoikinaiTenkyoTenkyosakiDiv extends Panel {
      * フィールド名のGetterとSetter を作成
      */
     /*
-     * getddlShokisaiHokenshaNoSaki
-     * @return ddlShokisaiHokenshaNoSaki
+     * getddlHokenshaList
+     * @return ddlHokenshaList
      */
-    @JsonProperty("ddlShokisaiHokenshaNoSaki")
-    public DropDownList getDdlShokisaiHokenshaNoSaki() {
-        return ddlShokisaiHokenshaNoSaki;
-    }
-
-    /*
-     * setddlShokisaiHokenshaNoSaki
-     * @param ddlShokisaiHokenshaNoSaki ddlShokisaiHokenshaNoSaki
-     */
-    @JsonProperty("ddlShokisaiHokenshaNoSaki")
-    public void setDdlShokisaiHokenshaNoSaki(DropDownList ddlShokisaiHokenshaNoSaki) {
-        this.ddlShokisaiHokenshaNoSaki = ddlShokisaiHokenshaNoSaki;
-    }
-
-    /*
-     * gettxtShokisaiHokenshaSaki
-     * @return txtShokisaiHokenshaSaki
-     */
-    @JsonProperty("txtShokisaiHokenshaSaki")
-    public TextBox getTxtShokisaiHokenshaSaki() {
-        return txtShokisaiHokenshaSaki;
-    }
-
-    /*
-     * settxtShokisaiHokenshaSaki
-     * @param txtShokisaiHokenshaSaki txtShokisaiHokenshaSaki
-     */
-    @JsonProperty("txtShokisaiHokenshaSaki")
-    public void setTxtShokisaiHokenshaSaki(TextBox txtShokisaiHokenshaSaki) {
-        this.txtShokisaiHokenshaSaki = txtShokisaiHokenshaSaki;
+    @JsonProperty("ddlHokenshaList")
+    public IHokenshaListDiv getDdlHokenshaList() {
+        return ddlHokenshaList;
     }
 
     // </editor-fold>

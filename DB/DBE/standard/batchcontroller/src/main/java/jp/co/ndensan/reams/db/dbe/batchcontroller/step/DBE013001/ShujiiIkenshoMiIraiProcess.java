@@ -16,8 +16,6 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.ikenshojohoprint.Ikensho
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ikenshojohoprint.IkenshoJohoPrintRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.shujiiikenshomiirai.ShujiiIkenshoMiIraiEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.shujiiikenshomiirai.ShujiiIkenshoMiIraiReportSource;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -30,14 +28,11 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportFactory;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -61,7 +56,6 @@ public class ShujiiIkenshoMiIraiProcess extends BatchProcessBase<IkenshoJohoPrin
     private final IkenshoJohoPrintBusiness business = new IkenshoJohoPrintBusiness();
     private static final RString 全市町村 = new RString("全市町村");
     private static final RString 保険者タイトル = new RString("保険者：");
-    private DbAccessLogger accessLog;
 
     @BatchWriter
     private BatchReportWriter<ShujiiIkenshoMiIraiReportSource> batchWrite;
@@ -76,7 +70,6 @@ public class ShujiiIkenshoMiIraiProcess extends BatchProcessBase<IkenshoJohoPrin
         Association 導入団体クラス = AssociationFinderFactory.createInstance().getAssociation();
         導入団体コード = 導入団体クラス.getLasdecCode_().value();
         市町村名 = 導入団体クラス.get市町村名();
-        accessLog = new DbAccessLogger();
     }
 
     @Override
@@ -94,9 +87,6 @@ public class ShujiiIkenshoMiIraiProcess extends BatchProcessBase<IkenshoJohoPrin
 
     @Override
     protected void process(IkenshoJohoPrintRelateEntity relateEntity) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
-                relateEntity.getShinseishoKanriNo().value());
-        accessLog.store(new ShoKisaiHokenshaNo(relateEntity.getShoKisaiHokenshaNo()), relateEntity.getHihokenshaNo(), expandedInfo);
         ShujiiIkenshoMiIraiEntity entity = business.toShujiiIkenshoMiIraiEntity(relateEntity);
         ShujiiIkenshoMiIraiReport report = new ShujiiIkenshoMiIraiReport(entity, index_tmp);
         report.writeBy(reportSourceWriter);
@@ -112,7 +102,6 @@ public class ShujiiIkenshoMiIraiProcess extends BatchProcessBase<IkenshoJohoPrin
             report.writeBy(reportSourceWriter);
         }
         バッチ出力条件リストの出力();
-        accessLog.flushBy(AccessLogType.照会);
     }
 
     private void バッチ出力条件リストの出力() {
@@ -155,16 +144,6 @@ public class ShujiiIkenshoMiIraiProcess extends BatchProcessBase<IkenshoJohoPrin
             return RString.EMPTY;
         }
         return date.wareki().toDateString();
-    }
-
-    private RString set主治医意見書依頼未処理者一覧表作成条件(RString 作成条件) {
-        RString 一覧作成条件 = RString.EMPTY;
-        if (未依頼.equals(作成条件)) {
-            一覧作成条件 = new RString("未依頼");
-        } else if (申請日範囲指定.equals(作成条件)) {
-            一覧作成条件 = new RString("申請日範囲指定");
-        }
-        return 一覧作成条件;
     }
 
     private RString get保険者(RString 保険者) {

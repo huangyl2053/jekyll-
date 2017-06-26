@@ -5,6 +5,9 @@
  */
 package jp.co.ndensan.reams.db.dbe.definition.mybatisprm.ninteichosadatatorikomi;
 
+import java.util.Arrays;
+import java.util.List;
+import jp.co.ndensan.reams.db.dbz.definition.core.yokaigonintei.shinsei.ShoriJotaiKubun;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import lombok.Getter;
 
@@ -20,11 +23,14 @@ public class NinteiChosaDataTorikomiMapperParameter {
     private final RString 証記載保険者番号;
     private final RString 被保険者番号;
     private final RString 認定申請日;
+    private final List<RString> 有効処理状態区分;
 
     public NinteiChosaDataTorikomiMapperParameter(RString 証記載保険者番号,
             RString 被保険者番号, RString 認定申請日) {
         this.証記載保険者番号 = 証記載保険者番号;
         this.被保険者番号 = 被保険者番号;
         this.認定申請日 = 認定申請日;
+        this.有効処理状態区分 = Arrays.asList(ShoriJotaiKubun.通常.getコード(), ShoriJotaiKubun.延期.getコード());
     }
+
 }

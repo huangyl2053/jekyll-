@@ -55,6 +55,7 @@ public final class KoikinaiTenkyoRirekiHenkanMapperParameter {
     private final RString 処理状態区分_通常;
     private final RString 処理状態区分_延期;
     private final boolean 性別フラグ;
+    private final boolean 広域内転居区分フラグ;
     private final Decimal 最大表示件数;
 
     private KoikinaiTenkyoRirekiHenkanMapperParameter(
@@ -85,6 +86,7 @@ public final class KoikinaiTenkyoRirekiHenkanMapperParameter {
             RString 処理状態区分_通常,
             RString 処理状態区分_延期,
             boolean 性別フラグ,
+            boolean 広域内転居区分フラグ,
             boolean is最大表示件数) {
         this.被保険者番号フラグ = is被保険者番号;
         this.前方一致フラグ = is前方一致;
@@ -114,6 +116,7 @@ public final class KoikinaiTenkyoRirekiHenkanMapperParameter {
         this.処理状態区分_通常 = 処理状態区分_通常;
         this.処理状態区分_延期 = 処理状態区分_延期;
         this.性別フラグ = 性別フラグ;
+        this.広域内転居区分フラグ = 広域内転居区分フラグ;
         this.最大表示件数フラグ = is最大表示件数;
     }
 
@@ -133,6 +136,7 @@ public final class KoikinaiTenkyoRirekiHenkanMapperParameter {
      * @param 性別キー 性別キー
      * @param 処理状態区分_通常 処理状態区分_通常
      * @param 処理状態区分_延期 処理状態区分_通常
+     * @param 広域内転居区分フラグ
      * @param 最大表示件数 最大表示件数
      * @return 広域内転居使用ことのパラメータ
      */
@@ -150,6 +154,7 @@ public final class KoikinaiTenkyoRirekiHenkanMapperParameter {
             List<RString> 性別キー,
             RString 処理状態区分_通常,
             RString 処理状態区分_延期,
+            boolean 広域内転居区分フラグ,
             Decimal 最大表示件数) {
         boolean 男 = false;
         boolean 女 = false;
@@ -192,6 +197,7 @@ public final class KoikinaiTenkyoRirekiHenkanMapperParameter {
                 処理状態区分_通常,
                 処理状態区分_延期,
                 性別,
+                広域内転居区分フラグ,
                 最大表示件数 != null
         );
     }
