@@ -17,7 +17,7 @@ Uz.GyomuJSHelper.registOriginalEvent("onClick_BtnIchijiHantei", () => {
     
     Uz._ViewControlUtil.waitGrayOutLoadingOverlay().done(() => {
     
-        if (!Uz._ViewControlUtil.isValidateError("server")) {
+        if (!Uz._ViewControlUtil.isValidateError("")) {
         
             arg = div.hiddenInput[0].value;
             div.hiddenInput[1].value = "";

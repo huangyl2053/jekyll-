@@ -40,6 +40,7 @@ public final class NinteichosaIraiHenkoDataChange {
             if (nowEntity.getNinteichosaIraiRirekiNo() > 1) {
                 indexTmp++;
                 data = new NinteichosaIraiHenkoData(nowEntity.getShinseishoKanriNo().value(),
+                        nowEntity.getShoKisaiHokenshaNo(),
                         nowEntity.getHihokenshaNo(),
                         nowEntity.getHihokenshaKana(),
                         nowEntity.getHihokenshaName(),

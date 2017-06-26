@@ -40,4 +40,5 @@ public class YokaigoYoshienShinseiIchiranItem {
     private RString iryoKikanMeisho;
     private RString shujiiName;
     private Code zenkaiKoroshoIfShikibetsuCode;
+    private RString shinseishoKanriNo;
 }

@@ -16,7 +16,7 @@ import jp.co.ndensan.reams.uz.uza.ui.binding.Panel;
  * @author 自動生成
  */
 public class ShujiiSearchDiv extends Panel {
-    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-02-15_05-21-09">
+    // <editor-fold defaultstate="collapsed" desc="Created By UIDesigner ver：UZ-deploy-2017-06-01_23-02-42">
     /*
      * [ private の作成 ]
      * クライアント側から取得した情報を元にを検索を行い
@@ -27,10 +27,6 @@ public class ShujiiSearchDiv extends Panel {
     private TextBoxCode txtSearchShujiiIryokikanCodeFrom;
     @JsonProperty("txtSearchShujiiIryokikanCodeTo")
     private TextBoxCode txtSearchShujiiIryokikanCodeTo;
-    @JsonProperty("txtSearchShujiiCodeFrom")
-    private TextBoxCode txtSearchShujiiCodeFrom;
-    @JsonProperty("txtSearchShujiiCodeTo")
-    private TextBoxCode txtSearchShujiiCodeTo;
     @JsonProperty("txtSearchShujiiIryokikanMeisho")
     private TextBox txtSearchShujiiIryokikanMeisho;
     @JsonProperty("ddlKikanMeisho")
@@ -39,6 +35,10 @@ public class ShujiiSearchDiv extends Panel {
     private TextBoxKana txtSearchShujiiIryokikanKanaMeisho;
     @JsonProperty("ddlKikanKanaMeisho")
     private DropDownList ddlKikanKanaMeisho;
+    @JsonProperty("txtSearchShujiiCodeFrom")
+    private TextBoxCode txtSearchShujiiCodeFrom;
+    @JsonProperty("txtSearchShujiiCodeTo")
+    private TextBoxCode txtSearchShujiiCodeTo;
     @JsonProperty("txtSearchShujiiShimei")
     private TextBox txtSearchShujiiShimei;
     @JsonProperty("ddlShujiiMeisho")
@@ -49,12 +49,10 @@ public class ShujiiSearchDiv extends Panel {
     private DropDownList ddlShujiiKanaMeisho;
     @JsonProperty("radSearchJokyoFlag")
     private RadioButton radSearchJokyoFlag;
-    @JsonProperty("txtSaidaiHyojiKensu")
-    private TextBoxNum txtSaidaiHyojiKensu;
     @JsonProperty("btnClearKensakuJoken")
     private Button btnClearKensakuJoken;
-    @JsonProperty("btnSearch")
-    private Button btnSearch;
+    @JsonProperty("txtSaidaiHyojiKensu")
+    private TextBoxNum txtSaidaiHyojiKensu;
     @JsonProperty("ccdHokenshaList")
     private HokenshaListDiv ccdHokenshaList;
 
@@ -98,42 +96,6 @@ public class ShujiiSearchDiv extends Panel {
     @JsonProperty("txtSearchShujiiIryokikanCodeTo")
     public void setTxtSearchShujiiIryokikanCodeTo(TextBoxCode txtSearchShujiiIryokikanCodeTo) {
         this.txtSearchShujiiIryokikanCodeTo = txtSearchShujiiIryokikanCodeTo;
-    }
-
-    /*
-     * gettxtSearchShujiiCodeFrom
-     * @return txtSearchShujiiCodeFrom
-     */
-    @JsonProperty("txtSearchShujiiCodeFrom")
-    public TextBoxCode getTxtSearchShujiiCodeFrom() {
-        return txtSearchShujiiCodeFrom;
-    }
-
-    /*
-     * settxtSearchShujiiCodeFrom
-     * @param txtSearchShujiiCodeFrom txtSearchShujiiCodeFrom
-     */
-    @JsonProperty("txtSearchShujiiCodeFrom")
-    public void setTxtSearchShujiiCodeFrom(TextBoxCode txtSearchShujiiCodeFrom) {
-        this.txtSearchShujiiCodeFrom = txtSearchShujiiCodeFrom;
-    }
-
-    /*
-     * gettxtSearchShujiiCodeTo
-     * @return txtSearchShujiiCodeTo
-     */
-    @JsonProperty("txtSearchShujiiCodeTo")
-    public TextBoxCode getTxtSearchShujiiCodeTo() {
-        return txtSearchShujiiCodeTo;
-    }
-
-    /*
-     * settxtSearchShujiiCodeTo
-     * @param txtSearchShujiiCodeTo txtSearchShujiiCodeTo
-     */
-    @JsonProperty("txtSearchShujiiCodeTo")
-    public void setTxtSearchShujiiCodeTo(TextBoxCode txtSearchShujiiCodeTo) {
-        this.txtSearchShujiiCodeTo = txtSearchShujiiCodeTo;
     }
 
     /*
@@ -206,6 +168,42 @@ public class ShujiiSearchDiv extends Panel {
     @JsonProperty("ddlKikanKanaMeisho")
     public void setDdlKikanKanaMeisho(DropDownList ddlKikanKanaMeisho) {
         this.ddlKikanKanaMeisho = ddlKikanKanaMeisho;
+    }
+
+    /*
+     * gettxtSearchShujiiCodeFrom
+     * @return txtSearchShujiiCodeFrom
+     */
+    @JsonProperty("txtSearchShujiiCodeFrom")
+    public TextBoxCode getTxtSearchShujiiCodeFrom() {
+        return txtSearchShujiiCodeFrom;
+    }
+
+    /*
+     * settxtSearchShujiiCodeFrom
+     * @param txtSearchShujiiCodeFrom txtSearchShujiiCodeFrom
+     */
+    @JsonProperty("txtSearchShujiiCodeFrom")
+    public void setTxtSearchShujiiCodeFrom(TextBoxCode txtSearchShujiiCodeFrom) {
+        this.txtSearchShujiiCodeFrom = txtSearchShujiiCodeFrom;
+    }
+
+    /*
+     * gettxtSearchShujiiCodeTo
+     * @return txtSearchShujiiCodeTo
+     */
+    @JsonProperty("txtSearchShujiiCodeTo")
+    public TextBoxCode getTxtSearchShujiiCodeTo() {
+        return txtSearchShujiiCodeTo;
+    }
+
+    /*
+     * settxtSearchShujiiCodeTo
+     * @param txtSearchShujiiCodeTo txtSearchShujiiCodeTo
+     */
+    @JsonProperty("txtSearchShujiiCodeTo")
+    public void setTxtSearchShujiiCodeTo(TextBoxCode txtSearchShujiiCodeTo) {
+        this.txtSearchShujiiCodeTo = txtSearchShujiiCodeTo;
     }
 
     /*
@@ -299,24 +297,6 @@ public class ShujiiSearchDiv extends Panel {
     }
 
     /*
-     * gettxtSaidaiHyojiKensu
-     * @return txtSaidaiHyojiKensu
-     */
-    @JsonProperty("txtSaidaiHyojiKensu")
-    public TextBoxNum getTxtSaidaiHyojiKensu() {
-        return txtSaidaiHyojiKensu;
-    }
-
-    /*
-     * settxtSaidaiHyojiKensu
-     * @param txtSaidaiHyojiKensu txtSaidaiHyojiKensu
-     */
-    @JsonProperty("txtSaidaiHyojiKensu")
-    public void setTxtSaidaiHyojiKensu(TextBoxNum txtSaidaiHyojiKensu) {
-        this.txtSaidaiHyojiKensu = txtSaidaiHyojiKensu;
-    }
-
-    /*
      * getbtnClearKensakuJoken
      * @return btnClearKensakuJoken
      */
@@ -335,21 +315,21 @@ public class ShujiiSearchDiv extends Panel {
     }
 
     /*
-     * getbtnSearch
-     * @return btnSearch
+     * gettxtSaidaiHyojiKensu
+     * @return txtSaidaiHyojiKensu
      */
-    @JsonProperty("btnSearch")
-    public Button getBtnSearch() {
-        return btnSearch;
+    @JsonProperty("txtSaidaiHyojiKensu")
+    public TextBoxNum getTxtSaidaiHyojiKensu() {
+        return txtSaidaiHyojiKensu;
     }
 
     /*
-     * setbtnSearch
-     * @param btnSearch btnSearch
+     * settxtSaidaiHyojiKensu
+     * @param txtSaidaiHyojiKensu txtSaidaiHyojiKensu
      */
-    @JsonProperty("btnSearch")
-    public void setBtnSearch(Button btnSearch) {
-        this.btnSearch = btnSearch;
+    @JsonProperty("txtSaidaiHyojiKensu")
+    public void setTxtSaidaiHyojiKensu(TextBoxNum txtSaidaiHyojiKensu) {
+        this.txtSaidaiHyojiKensu = txtSaidaiHyojiKensu;
     }
 
     /*

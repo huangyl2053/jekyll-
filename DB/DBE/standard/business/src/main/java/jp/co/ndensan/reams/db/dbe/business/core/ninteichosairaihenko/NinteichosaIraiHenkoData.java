@@ -23,6 +23,7 @@ import lombok.Setter;
 @SuppressWarnings("PMD.UnusedPrivateField")
 public final class NinteichosaIraiHenkoData {
 
+    private final RString 申請書管理番号;
     private final RString 保険者番号;
     private final RString 被保険者番号;
     private final AtenaKanaMeisho 被保険者氏名カナ;
@@ -42,6 +43,7 @@ public final class NinteichosaIraiHenkoData {
     /**
      * コンストラクタです。
      *
+     * @param 申請書管理番号
      * @param 保険者番号 保険者番号
      * @param 被保険者番号 被保険者番号
      * @param 被保険者氏名カナ 被保険者氏名カナ
@@ -58,7 +60,8 @@ public final class NinteichosaIraiHenkoData {
      * @param 変更後調査員 変更後調査員
      * @param 変更回数 変更回数
      */
-    public NinteichosaIraiHenkoData(RString 保険者番号,
+    public NinteichosaIraiHenkoData(RString 申請書管理番号,
+            RString 保険者番号,
             RString 被保険者番号,
             AtenaKanaMeisho 被保険者氏名カナ,
             AtenaMeisho 氏名,
@@ -73,6 +76,7 @@ public final class NinteichosaIraiHenkoData {
             RString 変更後調査事業所,
             RString 変更後調査員,
             RString 変更回数) {
+        this.申請書管理番号 = 申請書管理番号;
         this.保険者番号 = 保険者番号;
         this.被保険者番号 = 被保険者番号;
         this.被保険者氏名カナ = 被保険者氏名カナ;

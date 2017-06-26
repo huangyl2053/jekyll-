@@ -13,7 +13,6 @@ import jp.co.ndensan.reams.db.dbe.divcontroller.entity.parentdiv.DBE1720001.dgSh
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1720001.KoikinaiTenkyoRirekiHenkanHandler;
 import jp.co.ndensan.reams.db.dbe.divcontroller.handler.parentdiv.DBE1720001.KoikinaiTenkyoRirekiValidationHandler;
 import jp.co.ndensan.reams.db.dbe.service.core.basic.koikinaitenkyojoho.KoikinaiTenkyoRirekiHenkanFinder;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShinseishoKanriNo;
 import jp.co.ndensan.reams.db.dbx.definition.core.viewstate.ViewStateKeys;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJoho;
 import jp.co.ndensan.reams.db.dbz.business.core.basic.NinteiShinseiJohoIdentifier;
@@ -24,6 +23,7 @@ import jp.co.ndensan.reams.ur.urz.definition.message.UrQuestionMessages;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
 import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.core.ui.response.ResponseData;
+import jp.co.ndensan.reams.uz.uza.lang.FlexibleDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.message.MessageDialogSelectedResult;
 import jp.co.ndensan.reams.uz.uza.message.QuestionMessage;
@@ -32,6 +32,7 @@ import jp.co.ndensan.reams.uz.uza.ui.servlets.ResponseHolder;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ValidationMessageControlPairs;
 import jp.co.ndensan.reams.uz.uza.ui.servlets.ViewStateHolder;
 import jp.co.ndensan.reams.uz.uza.util.Models;
+import jp.co.ndensan.reams.uz.uza.util.db.SearchResult;
 
 /**
  * 画面設計_DBE1720001_広域内転居画面クラスです
@@ -51,6 +52,7 @@ public class KoikinaiTenkyoRirekiHenkan {
      */
     public ResponseData<KoikinaiTenkyoRirekiHenkanDiv> onLoad(KoikinaiTenkyoRirekiHenkanDiv div) {
         getHandler(div).setOnLoad();
+        setHihokenshaNumberRequired(div);
         return ResponseData.of(div).respond();
     }
 
@@ -61,18 +63,37 @@ public class KoikinaiTenkyoRirekiHenkan {
      * @return ResponseData<KoikinaiTenkyoRirekiHenkanDiv>
      */
     public ResponseData<KoikinaiTenkyoRirekiHenkanDiv> onClick_Kensaku(KoikinaiTenkyoRirekiHenkanDiv div) {
-        if (ResponseHolder.isReRequest()) {
-            return ResponseData.of(div).respond();
+        if (!ResponseHolder.isReRequest()) {
+            ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
+            ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
+            if (!div.getChkKoikinaiTenkyoKubunFlag().isAllSelected()) {
+                validPairs = getValidationHandler(div).被保険者番号チェック(validationMessages);
+            }
+            if (validPairs.iterator().hasNext()) {
+                return ResponseData.of(div).addValidationMessages(validPairs).respond();
+            }
+            List<dgShinseishaIchiran_Row> dataGridList = div.getDgShinseishaIchiran().getDataSource();
+            for (dgShinseishaIchiran_Row row : dataGridList) {
+                RString state = row.getColumnState();
+                if (状態_更新.equals(state)) {
+                    QuestionMessage message = new QuestionMessage(UrQuestionMessages.入力内容の破棄.getMessage().getCode(),
+                            UrQuestionMessages.入力内容の破棄.getMessage().evaluate());
+                    return ResponseData.of(div).addMessage(message).respond();
+                }
+            }
         }
-        ValidationMessageControlPairs validationMessages = new ValidationMessageControlPairs();
-        ValidationMessageControlPairs validPairs = getValidationHandler(div).認定申請日範囲チェック(validationMessages);
-        if (validPairs.iterator().hasNext()) {
-            return ResponseData.of(div).addValidationMessages(validPairs).respond();
+        if (new RString(UrQuestionMessages.入力内容の破棄.getMessage().getCode())
+                .equals(ResponseHolder.getMessageCode()) && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes
+                || !ResponseHolder.isReRequest()) {
+            if (0 == searchShinseisyaInfo(div)) {
+                return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
+            }
         }
-        if (0 == searchShinseisyaInfo(div)) {
-            return ResponseData.of(div).addMessage(UrInformationMessages.該当データなし.getMessage()).respond();
+        if (new RString(UrInformationMessages.該当データなし.getMessage().getCode()).equals(ResponseHolder.getMessageCode())) {
+            div.getShinseishaIchiran().getDgShinseishaIchiran().getDataSource().clear();
+            return ResponseData.of(div).setState(DBE1720001StateName.初期表示);
         }
-        return ResponseData.of(div).respond();
+        return ResponseData.of(div).setState(DBE1720001StateName.申請者一覧);
     }
 
     /**
@@ -110,11 +131,11 @@ public class KoikinaiTenkyoRirekiHenkan {
      */
     public ResponseData<KoikinaiTenkyoRirekiHenkanDiv> onClick_Hozon(KoikinaiTenkyoRirekiHenkanDiv div) {
         if (!ResponseHolder.isReRequest()) {
-            QuestionMessage message = new QuestionMessage(UrQuestionMessages.処理実行の確認.getMessage().getCode(),
-                    UrQuestionMessages.処理実行の確認.getMessage().evaluate());
+            QuestionMessage message = new QuestionMessage(UrQuestionMessages.保存の確認.getMessage().getCode(),
+                    UrQuestionMessages.保存の確認.getMessage().evaluate());
             return ResponseData.of(div).addMessage(message).respond();
         }
-        if (new RString(UrQuestionMessages.処理実行の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
+        if (new RString(UrQuestionMessages.保存の確認.getMessage().getCode()).equals(ResponseHolder.getMessageCode())
                 && ResponseHolder.getButtonType() == MessageDialogSelectedResult.Yes) {
             updateDbT5101NinteiShinseiJoho(div);
             div.getShinsakaiMessage().getCcdKaigoKanryoMessage().setMessage(new RString(UrInformationMessages.正常終了.getMessage()
@@ -135,14 +156,37 @@ public class KoikinaiTenkyoRirekiHenkan {
         return ResponseData.of(div).respond();
     }
 
+    /**
+     * 条件をクリアするボタン処理です。
+     *
+     * @param div 画面情報
+     * @return <KoikinaiTenkyoRirekiHenkanDiv>
+     */
+    public ResponseData<KoikinaiTenkyoRirekiHenkanDiv> onClick_ChkKoikinaiTenkyoKubunFlag(KoikinaiTenkyoRirekiHenkanDiv div) {
+        setHihokenshaNumberRequired(div);
+        return ResponseData.of(div).respond();
+    }
+
+    private void setHihokenshaNumberRequired(KoikinaiTenkyoRirekiHenkanDiv div) {
+        if (div.getChkKoikinaiTenkyoKubunFlag().isAllSelected()) {
+            div.getTxtHihokenshaNumber().setRequired(false);
+        } else {
+            div.getTxtHihokenshaNumber().setRequired(true);
+        }
+    }
+
     private int searchShinseisyaInfo(KoikinaiTenkyoRirekiHenkanDiv div) {
         KoikinaiTenkyoRirekiHenkanMapperParameter parameter = KoikinaiTenkyoRirekiHenkanMapperParameter.createSelectByKeyParam(
                 div.getTxtHihokenshaNumber().getValue(),
                 new AtenaMeisho(div.getTxtHihokenshaNameJyouken().getValue()),
-                div.getTxtNinteiShinseiDateFrom().getValue(),
-                div.getTxtNinteiShinseiDateTo().getValue(),
-                div.getTxtBirthDateFrom().getValue(),
-                div.getTxtBirthDateTo().getValue(),
+                div.getTxtNinteiShinseiDateRange().getFromValue() == null ? FlexibleDate.EMPTY
+                : new FlexibleDate(div.getTxtNinteiShinseiDateRange().getFromValue().toString()),
+                div.getTxtNinteiShinseiDateRange().getToValue() == null ? FlexibleDate.EMPTY
+                : new FlexibleDate(div.getTxtNinteiShinseiDateRange().getToValue().toString()),
+                div.getTxtBirthDateRange().getFromValue() == null ? FlexibleDate.EMPTY
+                : new FlexibleDate(div.getTxtBirthDateRange().getFromValue().toString()),
+                div.getTxtBirthDateRange().getToValue() == null ? FlexibleDate.EMPTY
+                : new FlexibleDate(div.getTxtBirthDateRange().getToValue().toString()),
                 new Code(div.getDdlShinseijiShinseiKubun().getSelectedKey()),
                 div.getDdlHihokenshaNameMatchType().getSelectedKey(),
                 div.getChkMinashiFlag().getSelectedKeys().contains(TRUE),
@@ -150,18 +194,19 @@ public class KoikinaiTenkyoRirekiHenkan {
                 div.getChkSeibetsu().getSelectedKeys(),
                 ShoriJotaiKubun.通常.getコード(),
                 ShoriJotaiKubun.延期.getコード(),
+                div.getChkKoikinaiTenkyoKubunFlag().isAllSelected(),
                 div.getTextBoxNum().getValue()
         );
         KoikinaiTenkyoRirekiHenkanFinder koikinaitenkyofinder = KoikinaiTenkyoRirekiHenkanFinder.createInstance();
-        List<jp.co.ndensan.reams.db.dbe.business.core.basic.koikinaitenkyojoho.KoikinaiTenkyoRirekiHenkan> 申請者一覧情報List
-                = koikinaitenkyofinder.getKoikinaiTenkyoList(parameter).records();
+        SearchResult<jp.co.ndensan.reams.db.dbe.business.core.basic.koikinaitenkyojoho.KoikinaiTenkyoRirekiHenkan> 申請者一覧情報List
+                = koikinaitenkyofinder.getKoikinaiTenkyoList(parameter);
         List<NinteiShinseiJoho> 一覧情報 = koikinaitenkyofinder.getUpdateDataList(parameter).records();
-        Models<NinteiShinseiJohoIdentifier, NinteiShinseiJoho> ninteiShinseiJoho
-                = Models.create(一覧情報);
-        ViewStateHolder.put(ViewStateKeys.要介護認定申請情報, ninteiShinseiJoho);
-        getHandler(div).setShinseisyaitiran(申請者一覧情報List);
-        if (null != 申請者一覧情報List) {
-            return 申請者一覧情報List.size();
+        if (null != 申請者一覧情報List.records() && !申請者一覧情報List.records().isEmpty()) {
+            Models<NinteiShinseiJohoIdentifier, NinteiShinseiJoho> ninteiShinseiJoho
+                    = Models.create(一覧情報);
+            ViewStateHolder.put(ViewStateKeys.要介護認定申請情報, ninteiShinseiJoho);
+            getHandler(div).setShinseisyaitiran(申請者一覧情報List);
+            return 申請者一覧情報List.records().size();
         } else {
             return 0;
         }
@@ -184,37 +229,21 @@ public class KoikinaiTenkyoRirekiHenkan {
         List<dgShinseishaIchiran_Row> dataGridList = div.getDgShinseishaIchiran().getDataSource();
         for (int index = 0; index < div.getDgShinseishaIchiran().getTotalRecords(); index++) {
             RString state = dataGridList.get(index).getColumnState();
-            KoikinaiTenkyoRirekiHenkanFinder finder = KoikinaiTenkyoRirekiHenkanFinder.createInstance();
-            ShinseishoKanriNo shinseishoKanriNo = new ShinseishoKanriNo(
-                    dataGridList.get(index).getShinseishoKanriNo());
             RString shokisaihokenshaNo = dataGridList.get(index).getShoKisaiHokenshaNo();
-            boolean flag = true;
-            if (finder.getZenkaiShinseishoKanriNo(shinseishoKanriNo) == null) {
-                flag = false;
-            }
             if (状態_更新.equals(state)) {
-                upDateNinteiShinseiJoho(shinseishoKanriNo, shokisaihokenshaNo, false);
-                if (flag) {
-                    upDateNinteiShinseiJoho(finder.getZenkaiShinseishoKanriNo(shinseishoKanriNo), shokisaihokenshaNo, flag);
+                KoikinaiTenkyoRirekiHenkanFinder finder = KoikinaiTenkyoRirekiHenkanFinder.createInstance();
+                List<NinteiShinseiJoho> ninteiShinseiJohoList = finder.get要介護認定申請情報BY証記載保険者番号AND被保険者番号(
+                        dataGridList.get(index).getKoshinmaeShoKisaiHokenshaNo(), dataGridList.get(index).getHihokenshaNo());
+                for (NinteiShinseiJoho ninteiShinseiJoho : ninteiShinseiJohoList) {
+                    upDateNinteiShinseiJoho(ninteiShinseiJoho, shokisaihokenshaNo);
                 }
             }
         }
     }
 
-    private void upDateNinteiShinseiJoho(ShinseishoKanriNo shinseishoKanriNo, RString shokisaihokenshaNo, boolean flag) {
-        Models<NinteiShinseiJohoIdentifier, NinteiShinseiJoho> models
-                = ViewStateHolder.get(ViewStateKeys.要介護認定申請情報, Models.class);
+    private void upDateNinteiShinseiJoho(NinteiShinseiJoho ninteiShinseiJoho, RString shokisaihokenshaNo) {
         NinteiShinseiJohoManager manager = NinteiShinseiJohoManager.createInstance();
-        if (flag) {
-            NinteiShinseiJoho ninteiShinseiJoho = manager.get要介護認定申請情報(shinseishoKanriNo);
-            ninteiShinseiJoho = ninteiShinseiJoho.createBuilderForEdit().set証記載保険者番号(shokisaihokenshaNo).build();
-            manager.save要介護認定申請情報(ninteiShinseiJoho);
-        } else {
-            for (NinteiShinseiJoho ninteiShinseiJoho : models) {
-                if (ninteiShinseiJoho.get申請書管理番号().equals(shinseishoKanriNo)) {
-                    manager.save要介護認定申請情報(ninteiShinseiJoho.createBuilderForEdit().set証記載保険者番号(shokisaihokenshaNo).build().modifiedModel());
-                }
-            }
-        }
+        ninteiShinseiJoho = ninteiShinseiJoho.createBuilderForEdit().set証記載保険者番号(shokisaihokenshaNo).build();
+        manager.save要介護認定申請情報(ninteiShinseiJoho);
     }
 }

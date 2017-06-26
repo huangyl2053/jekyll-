@@ -53,11 +53,9 @@ public class ShijiiIkenshoIraiHenkoReportSource implements IReportSource {
     @ReportItem(name = "listIkenshohenko_15", length = 9, order = 18)
     public RString listIkenshohenko_15;
     @ReportPerson(id = "X")
-    public ShikibetsuCode shikibetuCode;
+    public ShikibetsuCode 識別コード;
     @ReportExpandedInfo(id = "X")
-    public ExpandedInformation hokenshaNo;
-    @ReportExpandedInfo(id = "X")
-    public ExpandedInformation hihokenshaNo;
+    public ExpandedInformation 拡張情報;
 // </editor-fold>
 // <editor-fold defaultstate="collapsed" desc="User Customize Area">
     //追加コードは以下（「User Customize Area」内）に記述してください。

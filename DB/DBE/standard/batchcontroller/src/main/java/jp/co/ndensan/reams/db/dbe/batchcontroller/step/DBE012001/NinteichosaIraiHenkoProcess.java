@@ -17,8 +17,6 @@ import jp.co.ndensan.reams.db.dbe.definition.processprm.ninteichosayoteimitei.Ni
 import jp.co.ndensan.reams.db.dbe.entity.db.relate.ninteichosairaihenko.NinteichosaIraiHenkoRelateEntity;
 import jp.co.ndensan.reams.db.dbe.entity.report.source.ninteichosairaihenko.NinteichosaIraiHenkoReportSource;
 import jp.co.ndensan.reams.db.dbe.persistence.db.mapper.relate.ninteichosayoteimitei.INinteichosaYoteiMiteiMapper;
-import jp.co.ndensan.reams.db.dbx.definition.core.valueobject.domain.ShoKisaiHokenshaNo;
-import jp.co.ndensan.reams.db.dbz.service.core.DbAccessLogger;
 import jp.co.ndensan.reams.ur.urz.business.core.association.Association;
 import jp.co.ndensan.reams.ur.urz.business.report.outputjokenhyo.ReportOutputJokenhyoItem;
 import jp.co.ndensan.reams.ur.urz.service.core.association.AssociationFinderFactory;
@@ -32,14 +30,11 @@ import jp.co.ndensan.reams.uz.uza.batch.process.BatchReportWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.BatchWriter;
 import jp.co.ndensan.reams.uz.uza.batch.process.IBatchReader;
 import jp.co.ndensan.reams.uz.uza.biz.AtenaMeisho;
-import jp.co.ndensan.reams.uz.uza.biz.Code;
 import jp.co.ndensan.reams.uz.uza.biz.LasdecCode;
 import jp.co.ndensan.reams.uz.uza.biz.ReportId;
 import jp.co.ndensan.reams.uz.uza.lang.RDate;
 import jp.co.ndensan.reams.uz.uza.lang.RString;
 import jp.co.ndensan.reams.uz.uza.lang.RStringBuilder;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.AccessLogType;
-import jp.co.ndensan.reams.uz.uza.log.accesslog.core.ExpandedInformation;
 import jp.co.ndensan.reams.uz.uza.report.BreakerCatalog;
 import jp.co.ndensan.reams.uz.uza.report.ReportSourceWriter;
 
@@ -69,7 +64,6 @@ public class NinteichosaIraiHenkoProcess extends BatchKeyBreakBase<NinteichosaIr
     private RString 導入団体コード;
     private RString 市町村名;
     private int countData;
-    private DbAccessLogger accessLog;
 
     @Override
     protected void beforeExecute() {
@@ -78,7 +72,6 @@ public class NinteichosaIraiHenkoProcess extends BatchKeyBreakBase<NinteichosaIr
         導入団体コード = 導入団体クラス.getLasdecCode_().value();
         市町村名 = 導入団体クラス.get市町村名();
         countData = getMapper(INinteichosaYoteiMiteiMapper.class).getCount(paramter.toMybitisParamter());
-        accessLog = new DbAccessLogger();
     }
 
     @Override
@@ -98,6 +91,7 @@ public class NinteichosaIraiHenkoProcess extends BatchKeyBreakBase<NinteichosaIr
     protected void afterExecute() {
         if (index_tmp == 0) {
             NinteichosaIraiHenkoData data = new NinteichosaIraiHenkoData(MIDDLELINE,
+                    MIDDLELINE,
                     MIDDLELINE,
                     null,
                     new AtenaMeisho("該当データがありません"),
@@ -124,15 +118,11 @@ public class NinteichosaIraiHenkoProcess extends BatchKeyBreakBase<NinteichosaIr
             }
         }
         バッチ出力条件リストの出力();
-        accessLog.flushBy(AccessLogType.照会);
     }
 
     @Override
     protected void keyBreakProcess(NinteichosaIraiHenkoRelateEntity current) {
         if (hasBrek(getBefore(), current)) {
-            ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
-                    current.getShinseishoKanriNo().value());
-            accessLog.store(new ShoKisaiHokenshaNo(current.getShoKisaiHokenshaNo()), current.getHihokenshaNo(), expandedInfo);
             NinteichosaIraiHenkoData data = NinteichosaIraiHenkoDataChange.createEdit(getBefore(), current, countData);
             if (data != null) {
                 NinteichosaIraiHenkoReport report = new NinteichosaIraiHenkoReport(data, index_tmp);
@@ -148,9 +138,6 @@ public class NinteichosaIraiHenkoProcess extends BatchKeyBreakBase<NinteichosaIr
 
     @Override
     protected void usualProcess(NinteichosaIraiHenkoRelateEntity entity) {
-        ExpandedInformation expandedInfo = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"),
-                entity.getShinseishoKanriNo().value());
-        accessLog.store(new ShoKisaiHokenshaNo(entity.getShoKisaiHokenshaNo()), entity.getHihokenshaNo(), expandedInfo);
         NinteichosaIraiHenkoData data = NinteichosaIraiHenkoDataChange.createEdit(getBefore(), entity, countData);
         if (data != null) {
             NinteichosaIraiHenkoReport report = new NinteichosaIraiHenkoReport(data, index_tmp);

@@ -90,20 +90,16 @@ public class NinteiChosainMasterValidationHandler {
     }
 
     /**
-     * 確定するボタンを押下するとき、性別チェックを行う。
+     * 確定するボタンを押下するとき、入力された調査員情報のチェックを行う。
+     *
+     * ※2017/6/19 時点では検査項目なし。
      *
      * @param 状態　状態
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs validateForSeibetsu(RString 状態) {
+    public ValidationMessageControlPairs validateInputChosainInfo(RString 状態) {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (状態_追加.equals(状態) || 状態_修正.equals(状態)) {
-            if (!div.getChosainJohoInput().getRadSeibetsu().getSelectedKey().equals(CODE_MAN)
-                    && !div.getChosainJohoInput().getRadSeibetsu().getSelectedKey().equals(CODE_WOMAN)) {
-                validPairs.add(new ValidationMessageControlPair(new NinteiChosainMasterValidationHandler.IdocheckMessages(
-                        UrErrorMessages.必須項目_追加メッセージあり, "性別"),
-                        div.getChosainJohoInput().getRadSeibetsu()));
-            }
         }
         return validPairs;
     }

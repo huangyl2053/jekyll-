@@ -113,6 +113,7 @@ public class IinTokkiJikouItiziHanteiDataSakuseiA3Process extends BatchKeyBreakB
                 .setStartFormGroup(formGroupIndex)
                 .addBreak(new BreakerCatalog<IinTokkiTextA3ReportSource>().simplePageBreaker(PAGE_BREAK_KEYS_A3))
                 .addBreak(new BreakerCatalog<IinTokkiTextA3ReportSource>().new SimpleLayoutBreaker(
+
                     IinTokkiTextA3ReportSource.LAYOUT_BREAK_KEYS) {
                     @Override
                     public ReportLineRecord<IinTokkiTextA3ReportSource> occuredBreak(ReportLineRecord<IinTokkiTextA3ReportSource> currentRecord,
@@ -150,7 +151,6 @@ public class IinTokkiJikouItiziHanteiDataSakuseiA3Process extends BatchKeyBreakB
         } else {
             サービス状況フラグ = mapper.getServiceJokyoFlag(myBatisParameter);
         }
-        List<DbT5205NinteichosahyoTokkijikoEntity> 特記事項 = mapper.getTokkijiko(myBatisParameter);
         List<DbT5304ShujiiIkenshoIkenItemEntity> 主治医意見書 = mapper.getIkenshoIkenItem(myBatisParameter);
         List<DbT5211NinteichosahyoChosaItemEntity> 調査票調査項目 = mapper.getChosahyoChosaItem(myBatisParameter);
         List<DbT5211NinteichosahyoChosaItemEntity> 前回調査票調査項目 = mapper.getZenkaiChosahyoChosaItem(myBatisParameter);

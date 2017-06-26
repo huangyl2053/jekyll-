@@ -74,15 +74,10 @@ public class NinteichosaYoteiMiteiEditor implements INinteichosaYoteiMiteiEditor
         source.listChosaYoteimitei_13 = item.getDbT5913_Zenkai_chosainShimei();
         source.listChosaYoteimitei_14 = item.getDbT5910_jigyoshaMeisho();
         source.listChosaYoteimitei_15 = item.getDbT5913_chosainShimei();
-        source.shikibetuCode = ShikibetsuCode.EMPTY;
-        RString 保険者番号 = RString.EMPTY;
-        RString 被保険者番号 = RString.EMPTY;
-        if (!RString.isNullOrEmpty(item.getDbT5101_shoKisaiHokenshaNo())) {
-            保険者番号 = item.getDbT5101_shoKisaiHokenshaNo();
-            被保険者番号 = item.getDbT5101_hihokenshaNo();
+        if (!source.listChosaYoteimitei_4.equals(new RString("該当データがありません"))) {
+            source.識別コード = new ShikibetsuCode(item.getDbT5101_shoKisaiHokenshaNo().substring(0, 5).concat(item.getDbT5101_hihokenshaNo()));
+            source.拡張情報 = new ExpandedInformation(new Code("0001"), new RString("申請書管理番号"), item.getDbT5101_shinseishoKanriNo().getColumnValue());
         }
-        source.hokenshaNo = new ExpandedInformation(new Code("100"), new RString("保険者番号"), 保険者番号);
-        source.hihokenshaNo = new ExpandedInformation(new Code("100"), new RString("被保険者番号"), 被保険者番号);
         return source;
     }
 

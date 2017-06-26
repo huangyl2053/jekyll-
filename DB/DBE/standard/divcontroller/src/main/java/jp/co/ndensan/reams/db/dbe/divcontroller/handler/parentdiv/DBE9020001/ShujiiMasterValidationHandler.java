@@ -86,20 +86,14 @@ public class ShujiiMasterValidationHandler {
     }
 
     /**
-     * 確定するボタンを押下するとき、性別，指定医フラグチェックを行う。
+     * 確定するボタンを押下するとき、入力された主治医情報のチェックを行う。
      *
      * @param 状態　状態
      * @return バリデーション結果
      */
-    public ValidationMessageControlPairs validateForRadioButton(RString 状態) {
+    public ValidationMessageControlPairs validateInputShujiiInfo(RString 状態) {
         ValidationMessageControlPairs validPairs = new ValidationMessageControlPairs();
         if (状態_追加.equals(状態) || 状態_修正.equals(状態)) {
-            if (!div.getShujiiJohoInput().getRadSeibetsu().getSelectedKey().equals(CODE_MAN)
-                    && !div.getShujiiJohoInput().getRadSeibetsu().getSelectedKey().equals(CODE_WOMAN)) {
-                validPairs.add(new ValidationMessageControlPair(new ShujiiMasterValidationHandler.IdocheckMessages(
-                        UrErrorMessages.必須項目_追加メッセージあり, "性別"),
-                        div.getShujiiJohoInput().getRadSeibetsu()));
-            }
             if (!div.getShujiiJohoInput().getRadShiteiiFlag().getSelectedKey().equals(指定医_可)
                     && !div.getShujiiJohoInput().getRadShiteiiFlag().getSelectedKey().equals(指定医_不可)) {
                 validPairs.add(new ValidationMessageControlPair(new ShujiiMasterValidationHandler.IdocheckMessages(
